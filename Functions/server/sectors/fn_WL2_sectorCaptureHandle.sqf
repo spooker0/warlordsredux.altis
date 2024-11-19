@@ -25,6 +25,11 @@ while { !BIS_WL_missionEnd } do {
 	if (_winningScore == 0) then {
 		_winner = _originalOwner;
 	};
+	
+	if ((_winner == _originalOwner) && (_captureProgress <= 0) || ((_originalOwner != independent) && _winner == independent)) then {
+		sleep 2;
+		continue;
+	};
 
 	if ((_winner == _originalOwner) && (_captureProgress <= 0) || ((_originalOwner != independent) && _winner == independent)) then {
 		sleep 2;
