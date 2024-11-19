@@ -39,6 +39,10 @@ private _turretOverridesForVehicle = _turretOverrides getOrDefault [_class, []];
 	} forEach _addWeapons;
 } forEach _turretOverridesForVehicle;
 
+private _defaultMags = magazinesAllTurrets _asset;
+_asset setVariable ["BIS_WL_defaultMagazines", _defaultMags, true];
+_asset setVariable ["WLM_savedDefaultMags", _defaultMags, true];
+
 _asset enableWeaponDisassembly false;
 
 private _smallFlareMags = (_asset magazinesTurret [-1]) select {_x == "120Rnd_CMFlare_Chaff_Magazine"};
@@ -50,6 +54,7 @@ if (count _smallFlareMags == 1) then {
 _owner = owner _sender;
 _asset setVariable ["BIS_WL_ownerAsset", (getPlayerUID _sender), [2, _owner]];
 _asset setVariable ["BIS_WL_lastActive", 0, _owner];
+
 [_asset] call BIS_fnc_WL2_lastHitHandler;
 [_asset, _sender] remoteExec ["BIS_fnc_WL2_newAssetHandle", _owner];
 _sender setVariable ["BIS_WL_isOrdering", false, [2, _owner]];

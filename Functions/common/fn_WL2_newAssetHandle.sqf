@@ -30,9 +30,6 @@ if (isPlayer _owner) then {
 		_asset setVariable ["BIS_WL_nextRepair", 0];
 		_asset setVariable ["BIS_WL_ownerAssetSide", _side, true];
 
-		private _defaultMags = magazinesAllTurrets _asset;
-		_asset setVariable ["BIS_WL_defaultMagazines", _defaultMags, true];
-		_asset setVariable ["WLM_savedDefaultMags", _defaultMags, true];
 		_var = format ["BIS_WL_ownedVehicles_%1", getPlayerUID player];
 		_vehicles = missionNamespace getVariable [_var, []];
 		_vehicles pushBack _asset;
