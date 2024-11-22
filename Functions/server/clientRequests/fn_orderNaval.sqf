@@ -6,6 +6,10 @@ private _class = missionNamespace getVariable ["WL2_spawnClass", createHashMap] 
 
 _asset = createVehicle [_class, (_pos vectorAdd [0,0,3]), [], 0, "CAN_COLLIDE"];
 
+private _defaultMags = magazinesAllTurrets _asset;
+_asset setVariable ["BIS_WL_defaultMagazines", _defaultMags, true];
+_asset setVariable ["WLM_savedDefaultMags", _defaultMags, true];
+
 _owner = owner _sender;
 _asset setVariable ["BIS_WL_ownerAsset", (getPlayerUID _sender), [2, _owner]];
 [_asset] call BIS_fnc_WL2_lastHitHandler;
