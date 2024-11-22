@@ -17,7 +17,7 @@ while { !BIS_WL_missionEnd } do {
 
 	private _info = _sector call BIS_fnc_WL2_getCapValues;
 	private _sortedInfo = [_info, [], { _x # 1 }, "DESCEND"] call BIS_fnc_sortBy;
-	
+
 	private _topEntry = _sortedInfo # 0;
 	private _winner = _topEntry # 0;
 	private _winningScore = _topEntry # 1;
@@ -26,6 +26,11 @@ while { !BIS_WL_missionEnd } do {
 		_winner = _originalOwner;
 	};
 	
+	if ((_winner == _originalOwner) && (_captureProgress <= 0) || ((_originalOwner != independent) && _winner == independent)) then {
+		sleep 2;
+		continue;
+	};
+
 	if ((_winner == _originalOwner) && (_captureProgress <= 0) || ((_originalOwner != independent) && _winner == independent)) then {
 		sleep 2;
 		continue;

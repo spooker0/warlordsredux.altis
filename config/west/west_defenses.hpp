@@ -249,6 +249,10 @@ class Defences {
         offset[] = {0, 9, 0};
         rearm = 2700;
         killReward = 600;
+
+        disallowMagazines[] = {
+            "magazine_ShipCannon_120mm_HE_cluster_shells_x2"
+        };
     }; // "MK45 Hammer"
 
     class B_Radar_System_01_F {
