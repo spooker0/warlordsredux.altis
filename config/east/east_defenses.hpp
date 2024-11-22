@@ -208,6 +208,33 @@ class Defences {
         };
     };  // "Static Titan Launcher (AA) [CSAT]"
 
+    class O_static_AA_UP_F {
+        name = "Static AA Launcher (UP)";
+        spawn = "O_static_AA_F";
+        cost = 600;
+        requirements[] = {};
+        rearm = 300;
+        killReward = 200;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {
+                "1Rnd_GAA_missiles"
+            };
+            removeWeapons[] = {
+                "missiles_titan_static"
+            };
+            addMagazines[] = {
+                "4Rnd_70mm_SAAMI_missiles",
+                "4Rnd_70mm_SAAMI_missiles",
+                "4Rnd_70mm_SAAMI_missiles"
+            };
+            addWeapons[] = {
+                "missiles_SAAMI"
+            };
+        };
+    };
+
     class O_Mortar_01_F {
         cost = 4000;
         requirements[] = {};
@@ -239,11 +266,77 @@ class Defences {
         killReward = 100;
     };  // "UGAV rcws"
 
+    class O_UGV_01_rcws_up_F {
+        name = "UGV Stomper UP";
+        spawn = "O_UGV_01_rcws_F";
+        cost = 1500;
+        requirements[] = {};
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        killReward = 300;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {
+                "96Rnd_40mm_G_belt"
+            };
+            removeWeapons[] = {
+                "GMG_40mm"
+            };
+            addMagazines[] = {
+                "140Rnd_30mm_MP_shells_Tracer_Red",
+                "60Rnd_30mm_APFSDS_shells_Tracer_Red"
+            };
+            addWeapons[] = {
+                "autocannon_30mm_CTWS"
+            };
+        };
+    };
+
     class O_UAV_01_F {
         cost = 500;
         requirements[] = {};
         killReward = 100;
     };  // "AR-2"
+
+    class O_UAV_01_UP_F {
+        name = "AR-2 Darter UP";
+        spawn = "O_UAV_01_F";
+        cost = 1200;
+        requirements[] = {};
+        killReward = 200;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {};
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
+                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow"
+            };
+            addWeapons[] = {
+                "SMG_01_F"
+            };
+        };
+    };
 
     class O_UAV_06_F {
         cost = 1000;
