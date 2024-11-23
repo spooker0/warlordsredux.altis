@@ -335,20 +335,17 @@ class Vehicles {
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
             removeMagazines[] = {
-                "4Rnd_Titan_long_missiles_O",
-                "680Rnd_35mm_AA_shells_Tracer_Green"
+                "4Rnd_Titan_long_missiles_O"
             };
             removeWeapons[] = {
-                "missiles_titan_AA",
-                "autocannon_35mm"
+                "missiles_titan_AA"
             };
             addMagazines[] = {
                 "magazine_Missile_s750_x4",
-                "magazine_Cannon_Phalanx_x1550"
+                "680Rnd_35mm_AA_shells_Tracer_Green"
             };
             addWeapons[] = {
-                "weapon_s750Launcher",
-                "weapon_Cannon_Phalanx"
+                "weapon_s750Launcher"
             };
         };
     };
