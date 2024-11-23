@@ -100,8 +100,13 @@ class INDEPENDENT {
             aps = 1;
         };
 
+        class I_E_SAM_System_03_F {
+            killReward = 300;
+        };
+
         class I_LT_01_scout_F {
             killReward = 240;
+            vehicleSpawn = 1;
             capValue = 4;
         };
 
