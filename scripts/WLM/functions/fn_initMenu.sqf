@@ -251,6 +251,26 @@ _camoSelectControl ctrlAddEventHandler ["LBSelChanged", {
         private _texture = _textureList select _forEachIndex;
         _asset setObjectTextureGlobal [_forEachIndex, _texture];
     } forEach _textureSlots;
+
+    // Colored turret texture
+    // private _orderedClass = _asset getVariable ["WL2_orderedClass", typeOf _asset];
+    // if (typeof _asset != _orderedClass) then {
+    //     private _textures = getObjectTextures _asset;
+    //     private _side = _asset getVariable ["BIS_WL_ownerAssetSide", sideUnknown];
+    //     private _sideColor = if (_side == west) then {
+    //         "#(argb,8,8,3)color(0,0.1,0.2,1)"
+    //     } else {
+    //         "#(argb,8,8,3)color(0.2,0.1,0,1)"
+    //     };
+
+    //     {
+    //         // if the string includes texture
+    //         private _isTurret = ["turret", _x] call BIS_fnc_inString || ["tow", _x] call BIS_fnc_inString;
+    //         if (_isTurret) then {
+    //             _asset setObjectTextureGlobal [_forEachIndex, _sideColor];
+    //         };
+    //     } forEach _textures;
+    // };
 }];
 
 private _customizationSelectControl = _display displayCtrl WLM_CUSTOMIZATION_SELECT;

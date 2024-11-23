@@ -270,8 +270,8 @@ if (_action == "fundsTransfer") exitWith {
 		_uid = getPlayerUID _param2;
 		if !(_uid in _incomeBlocked) then {
 			_param1 call BIS_fnc_WL2_fundsDatabaseWrite;
-      private _oldTransfer = serverNamespace getVariable [format ["BIS_WL_WLAC_%1", _uid], 0];
-		  serverNamespace setVariable [format ["BIS_WL_WLAC_%1", _uid], _oldTransfer + _param1];
+      		private _oldTransfer = serverNamespace getVariable [format ["BIS_WL_WLAC_%1", _uid], 0];
+		  	serverNamespace setVariable [format ["BIS_WL_WLAC_%1", _uid], _oldTransfer + _param1];
 			_uid = getPlayerUID _sender;
 			(-_param1) call BIS_fnc_WL2_fundsDatabaseWrite;
 			serverNamespace setVariable [format ["BIS_WL_isTransferring_%1", _uid], false];

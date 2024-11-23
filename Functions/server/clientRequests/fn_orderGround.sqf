@@ -11,6 +11,25 @@ private _asset = if (_isUav) then {
 	[_class, _pos, _direction] call BIS_fnc_WL2_createVehicleCorrectly;
 };
 
+// Colored turret texture
+// if (_class != _orderedClass) then {
+// 	private _textures = getObjectTextures _asset;
+// 	private _side = side group _sender;
+// 	private _sideColor = if (_side == west) then {
+// 		"#(argb,8,8,3)color(0,0.1,0.2,1)"
+// 	} else {
+// 		"#(argb,8,8,3)color(0.2,0.1,0,1)"
+// 	};
+
+// 	{
+// 		// if the string includes texture
+// 		private _isTurret = ["turret", _x] call BIS_fnc_inString || ["tow", _x] call BIS_fnc_inString;
+// 		if (_isTurret) then {
+// 			_asset setObjectTextureGlobal [_forEachIndex, _sideColor];
+// 		};
+// 	} forEach _textures;
+// };
+
 waitUntil {sleep 0.1; !(isNull _asset)};
 
 private _turretOverrides = missionNamespace getVariable ["WL2_turretOverrides", createHashMap];

@@ -18,7 +18,6 @@ private _previousPos = getPosWorld _projectile;
 private _safeMaxDistSqr = _maxDistSqr;
 
 private _unitSide = side group _unit;
-private _apsType = missionNamespace getVariable ["WL2_aps", createHashMap];
 
 private _continue = alive _projectile;
 while {_continue && alive _projectile} do {
@@ -40,7 +39,7 @@ while {_continue && alive _projectile} do {
 		private _ownerSide = _x getVariable ["BIS_WL_ownerAssetSide", sideUnknown];
 		private _isFriendly = _unitSide == _ownerSide;
 		if (_isFriendly) then {	// if friendly, disable insurance measures
-			(_x distance _firedPosition) < _radius;
+			(_x distanceSqr _firedPosition) > _minDistSqr;
 		} else {
 			true;
 		};
@@ -48,7 +47,7 @@ while {_continue && alive _projectile} do {
 
 	_sortedEligibleList = [_eligibleNearbyVehicles, [_projectile], { _input0 distance _x }, "ASCEND"] call BIS_fnc_sortBy;
 	{
-		if (!alive _projectile || {!_continue}) exitWith {
+		if (!alive _projectile || !_continue) exitWith {
 			_continue = false;
 		};
 
