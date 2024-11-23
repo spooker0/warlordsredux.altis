@@ -3,6 +3,8 @@ comment "Magazine Repack";
 // This script has been taken and modified from MAZ_Enhacement_Pack_Core to fit in to the usecase of WL Redux thus none of the original names have been onCommandModeChanged
 // Feel free to use this in your usecase as well
 
+uiNamespace setVariable ["WL2_canRepack", true];
+
 ["MAZ_inventoryUIOpened", "onEachFrame", {
     if (!isNull (findDisplay 602)) then {
         ["inventoryOpened"] call MAZ_fnc_initializeUI;
@@ -19,9 +21,9 @@ MAZ_fnc_initializeUI = {
             private _repackButton = (findDisplay 602) ctrlCreate ["RscButtonMenu", 1600];
             _repackButton ctrlSetBackgroundColor [0, 0, 0, 0.6];
             _repackButton ctrlSetPosition [
-                0.433069 * safeZoneW + safeZoneX, 
-                0.7545 * safeZoneH + safeZoneY, 
-                0.3025 * safeZoneW, 
+                0.433069 * safeZoneW + safeZoneX,
+                0.7545 * safeZoneH + safeZoneY,
+                0.3025 * safeZoneW,
                 0.027 * safeZoneH
             ];
             _repackButton ctrlSetEventHandler ["ButtonClick", "0 spawn MAZ_fnc_repackMagazines"];
@@ -35,6 +37,8 @@ MAZ_fnc_initializeUI = {
 };
 
 MAZ_fnc_repackMagazines = {
+	if !(uiNamespace getVariable ["WL2_canRepack", false]) exitWith {};
+
 	private _allMags = magazinesAmmoFull player;
 	private _primWep = primaryWeapon player;
 	private _primWepCompatMags = [_primWep] call BIS_fnc_compatibleMagazines;
@@ -122,6 +126,8 @@ MAZ_fnc_repackLoadingBar = {
 	(findDisplay 602) closeDisplay 2;
 
 	disableSerialization;
+	uiNamespace setVariable ["WL2_canRepack", false];
+	MAZ_magRepackDone = false;
 	with uiNamespace do {
 		display = findDisplay 46;
 
@@ -154,7 +160,6 @@ MAZ_fnc_repackLoadingBar = {
 		uiSleep 1;
 	};
 
-	MAZ_magRepackDone = false;
 	0 spawn MAZ_fnc_repackAnimation;
 
 	with uiNamespace do {
@@ -185,6 +190,8 @@ MAZ_fnc_repackLoadingBar = {
 		ctrlDelete progressBarBackground;
 		ctrlDelete progressBarForeground;
 		ctrlDelete progressBarText;
+
+		uiNamespace setVariable ["WL2_canRepack", true];
 	};
 };
 
