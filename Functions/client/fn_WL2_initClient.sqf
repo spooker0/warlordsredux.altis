@@ -75,6 +75,7 @@ BIS_fnc_WL2_sub_arsenalSetup = compileFinal preprocessFileLineNumbers "Functions
 BIS_fnc_WL2_sub_dazzlerAction = compileFinal preprocessFileLineNumbers "Functions\subroutines\fn_WL2_sub_dazzlerAction.sqf";
 BIS_fnc_WL2_sub_demolish = compileFinal preprocessFileLineNumbers "Functions\subroutines\fn_WL2_sub_demolish.sqf";
 BIS_fnc_WL2_sub_deployableAddAction = compileFinal preprocessFileLineNumbers "Functions\subroutines\fn_WL2_sub_deployableAddAction.sqf";
+BIS_fnc_WL2_sub_deployableEligibility = compileFinal preprocessFileLineNumbers "Functions\subroutines\fn_WL2_sub_deployableEligibility.sqf";
 BIS_fnc_WL2_sub_jammerAction = compileFinal preprocessFileLineNumbers "Functions\subroutines\fn_WL2_sub_jammerAction.sqf";
 BIS_fnc_WL2_sub_logisticsAddAction = compileFinal preprocessFileLineNumbers "Functions\subroutines\fn_WL2_sub_logisticsAddAction.sqf";
 BIS_fnc_WL2_sub_purchaseMenuAssetAvailability = compileFinal preprocessFileLineNumbers "Functions\subroutines\fn_WL2_sub_purchaseMenuAssetAvailability.sqf";
@@ -427,10 +428,10 @@ missionNamespace setVariable [format ["BIS_WL2_minesDB_%1", getPlayerUID player]
 		["DemoCharge_Remote_Ammo", [5, []]]
 		// ***Blacklisted***/
 		/*
-			["APERSMineDispenser_Mine_Ammo", [0, []]], 
-			["IEDUrbanSmall_Remote_Ammo", [0, []]], 
-			["IEDLandSmall_Remote_Ammo", [0, []]], 
-			["IEDUrbanBig_Remote_Ammo", [0, []]], 
+			["APERSMineDispenser_Mine_Ammo", [0, []]],
+			["IEDUrbanSmall_Remote_Ammo", [0, []]],
+			["IEDLandSmall_Remote_Ammo", [0, []]],
+			["IEDUrbanBig_Remote_Ammo", [0, []]],
 			["IEDLandBig_Remote_Ammo", [0, []]]
 		*/
 	],

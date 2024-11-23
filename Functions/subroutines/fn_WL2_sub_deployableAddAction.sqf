@@ -9,12 +9,12 @@ private _deployActionId = _asset addAction [
 
         private _assetLoadedItem = _asset getVariable ["WL2_loadedItem", objNull];
         if (isNull _assetLoadedItem) then {
-            private _nearEntities = _asset nearEntities 30;
+            private _nearLoadableEntities = (_asset nearEntities 30) select {isNull attachedTo _x};
             private _loadableHashmap = missionNamespace getVariable ["WL2_loadable", createHashMap];
-            private _nearEntitiesLoadable = _nearEntities select {typeOf _x in _loadableHashmap};
+            private _nearLoadable = _nearLoadableEntities select {typeOf _x in _loadableHashmap};
 
-            if (count _nearEntitiesLoadable > 0) then {
-                private _assetToLoad = _nearEntitiesLoadable select 0;
+            if (count _nearLoadable > 0) then {
+                private _assetToLoad = _nearLoadable select 0;
                 _assetToLoad attachTo [_asset, [0, 0, 1], "proxy:\a3\data_f\proxies\truck_01\cargo.001"];
                 _assetToLoad setVehicleLock "LOCKED";
                 {
@@ -43,21 +43,29 @@ private _deployActionId = _asset addAction [
 	false,
 	false,
 	"",
-	"alive _target && {getPlayerUID _this == (_target getVariable ['BIS_WL_ownerAsset', '123'])}",
+	"[_target, _this] call BIS_fnc_WL2_sub_deployableEligibility",
 	30,
 	false
 ];
 
-private _addActionText = if (isNull (_asset getVariable ["WL2_loadedItem", objNull])) then {
-    "Load deployable"
-} else {
-    "Unload deployable"
-};
+[_asset, _deployActionId] spawn {
+    params ["_asset", "_deployActionId"];
+    while { alive _asset } do {
+        private _hasLoad = !isNull (_asset getVariable ["WL2_loadedItem", objNull]);
 
-private _addActionIcon = if (isNull (_asset getVariable ["WL2_loadedItem", objNull])) then {
-    '\A3\ui_f\data\map\markers\handdrawn\start_CA.paa'
-} else {
-    '\A3\ui_f\data\map\markers\handdrawn\end_CA.paa'
-};
+        private _actionText = if (_hasLoad) then {
+            "Unload deployable";
+        } else {
+            "Load deployable";
+        };
 
-_asset setUserActionText [_deployActionId, _addActionText, format ["<img size='2' image='%1'/>", _addActionIcon]];
+        private _actionIcon = if (isNull (_asset getVariable ["WL2_loadedItem", objNull])) then {
+            '\A3\ui_f\data\map\markers\handdrawn\start_CA.paa'
+        } else {
+            '\A3\ui_f\data\map\markers\handdrawn\end_CA.paa'
+        };
+
+        _asset setUserActionText [_deployActionId, _actionText, format ["<img size='3' image='%1'/>", _actionIcon]];
+        sleep 1;
+    };
+};
