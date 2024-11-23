@@ -23,6 +23,32 @@ class Aircraft {
         killReward = 100;
     }; // "Mi-290 Taru (Medical)"
 
+    class O_Plane_Caeser_Armed_01_F {
+        name = "Caesar BTT (Armed)";
+        spawn = "C_Plane_Civil_01_F";
+        cost = 1500;
+
+        requirements[] = {"A"};
+        killReward = 300;
+        class Gunner: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {};
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "500Rnd_127x99_mag_Tracer_Yellow",
+                "500Rnd_127x99_mag_Tracer_Yellow",
+                "96Rnd_40mm_G_belt",
+                "96Rnd_40mm_G_belt",
+                "240Rnd_CMFlare_Chaff_Magazine"
+            };
+            addWeapons[] = {
+                "HMG_127",
+                "GMG_40mm",
+                "CMFlareLauncher"
+            };
+        };
+    }; // "Caesar BTT (Armed)"
+
     class O_Heli_Light_02_dynamicLoadout_F {
         cost = 4000;
         requirements[] = {"H"};

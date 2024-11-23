@@ -49,6 +49,34 @@ _asset setVehicleReportRemoteTargets true;
 _asset setVehicleReceiveRemoteTargets true;
 _asset setVehicleReportOwnPosition true;
 
+private _turretOverrides = missionNamespace getVariable ["WL2_turretOverrides", createHashMap];
+private _turretOverridesForVehicle = _turretOverrides getOrDefault [_orderedClass, []];
+
+{
+	private _turretOverride = _x;
+	private _turret = getArray (_turretOverride >> "turret");
+	private _removeMagazines = getArray (_turretOverride >> "removeMagazines");
+	private _removeWeapons = getArray (_turretOverride >> "removeWeapons");
+	private _addMagazines = getArray (_turretOverride >> "addMagazines");
+	private _addWeapons = getArray (_turretOverride >> "addWeapons");
+
+	{
+		_asset removeMagazinesTurret [_x, _turret];
+	} forEach _removeMagazines;
+
+	{
+		_asset removeWeaponTurret [_x, _turret];
+	} forEach _removeWeapons;
+
+	{
+		_asset addMagazineTurret [_x, _turret];
+	} forEach _addMagazines;
+
+	{
+		_asset addWeaponTurret [_x, _turret];
+	} forEach _addWeapons;
+} forEach _turretOverridesForVehicle;
+
 private _smallFlareMags = (_asset magazinesTurret [-1]) select {_x == "120Rnd_CMFlare_Chaff_Magazine"};
 if (count _smallFlareMags == 1) then {
 	_asset removeMagazineTurret ["120Rnd_CMFlare_Chaff_Magazine", [-1]];
