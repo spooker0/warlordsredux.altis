@@ -4,6 +4,7 @@ _sector setVariable ["BIS_WL_owner", _owner, true];
 [_sector] remoteExec ["BIS_fnc_WL2_sectorOwnershipHandleClient", [0, -2] select isDedicated];
 
 private _previousOwners = _sector getVariable "BIS_WL_previousOwners";
+private _isNeutralSector = count _previousOwners == 0;
 if !(_owner in _previousOwners) then {
 	_previousOwners pushBack _owner;
 	if (serverTime > 0 && {count _previousOwners == 1}) then {
@@ -37,7 +38,7 @@ if (_sector == (missionNamespace getVariable format ["BIS_WL_currentTarget_%1", 
 _side = [west, east];
 _side deleteAt (_side find _owner);
 private _enemySide = _side # 0;
-if (isNull (missionNamespace getVariable format ["BIS_WL_currentTarget_%1", _enemySide])) then {
+if (isNull (missionNamespace getVariable format ["BIS_WL_currentTarget_%1", _enemySide]) && !_isNeutralSector) then {
 	missionNamespace setVariable [format ["BIS_WL_resetTargetSelection_server_%1", _enemySide], true];
 	BIS_WL_resetTargetSelection_client = true;
 	{
