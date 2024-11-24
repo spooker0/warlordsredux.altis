@@ -1,4 +1,4 @@
-params ["_unit", "_reward", ["_customText", ""], ["_customColor", "#228b22"]];
+params ["_unit", "_reward", ["_customText", ""], ["_customColor", "#228b22"], ["_unitTypeName", ""]];
 
 disableSerialization;
 
@@ -15,7 +15,18 @@ if (_customText != "") then {
 	if (_unit isKindOf "Man") then {
 		_displayText = "Enemy killed %2%3";
 	} else {
-		_displayName = getText (configFile >> "CfgVehicles" >> (typeOf _unit) >> "displayName");
+		private _unitType = if (typeOf _unit == "") then {
+			_unitTypeName
+		} else {
+			typeOf _unit
+		};
+
+		private _nameOverrides = missionNamespace getVariable ["WL2_nameOverrides", []];
+		private _assetActualType = _unit getVariable ["WL2_orderedClass", _unitType];
+
+		_displayName = _nameOverrides getOrDefault [_assetActualType, getText (configFile >> "CfgVehicles" >> _assetActualType >> "displayName")];
+
+
 		_displayText = "%1 destroyed %2%3";
 	};
 	_displayText = format [_displayText, _displayName, [_side] call BIS_fnc_WL2_getMoneySign, _reward];

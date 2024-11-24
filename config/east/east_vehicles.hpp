@@ -6,51 +6,6 @@ class Vehicles {
         capValue = 1;
     }; // "Quad Bike"
 
-    class O_MRAP_02_F {
-        cost = 300;
-        requirements[] = {};
-        killReward = 70;
-        capValue = 1;
-    }; // "Ifrit"
-
-    class O_Truck_03_transport_F {
-        cost = 200;
-        requirements[] = {};
-        killReward = 80;
-        capValue = 1;
-    }; // "Tempest Transport"
-
-    class O_Truck_03_Fuel_F {
-        cost = 1000;
-        requirements[] = {};
-        killReward = 80;
-        capValue = 1;
-    }; // "Tempest Fuel"
-
-    class O_LSV_02_armed_F {
-        cost = 200;
-        requirements[] = {};
-        rearm = 120;
-        killReward = 150;
-        capValue = 1;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {
-                "LMG_Minigun_Transport"
-            };
-            addMagazines[] = {
-                "500Rnd_65x39_Belt_Tracer_Green_Splash",
-                "500Rnd_65x39_Belt_Tracer_Green_Splash",
-                "500Rnd_65x39_Belt_Tracer_Green_Splash"
-            };
-            addWeapons[] = {
-                "LMG_Minigun_Transport"
-            };
-        };
-    }; // "Qilin (Minigun)"
-
     class O_G_Offroad_01_armed_F {
         cost = 150;
         requirements[] = {};
@@ -76,30 +31,72 @@ class Vehicles {
         };
     }; // "Offroad (HMG)"
 
-    class O_LSV_02_AT_F {
-        cost = 750;
+    class O_LSV_02_armed_F {
+        cost = 200;
         requirements[] = {};
-        rearm = 200;
-        killReward = 200;
+        rearm = 120;
+        killReward = 150;
         capValue = 1;
 
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
             removeMagazines[] = {};
             removeWeapons[] = {
-                "missiles_Vorona"
+                "LMG_Minigun_Transport"
             };
             addMagazines[] = {
-                "Vorona_HEAT",
-                "Vorona_HEAT",
-                "Vorona_HEAT",
-                "Vorona_HEAT"
+                "500Rnd_65x39_Belt_Tracer_Green_Splash",
+                "500Rnd_65x39_Belt_Tracer_Green_Splash",
+                "500Rnd_65x39_Belt_Tracer_Green_Splash"
             };
             addWeapons[] = {
-                "missiles_Vorona"
+                "LMG_Minigun_Transport"
             };
         };
-    }; // "Qilin (AT)"
+    }; // "Qilin (Minigun)"
+
+    class O_Truck_03_transport_F {
+        cost = 200;
+        requirements[] = {};
+        killReward = 80;
+        capValue = 1;
+    }; // "Tempest Transport"
+
+    class O_MRAP_02_F {
+        cost = 300;
+        requirements[] = {};
+        killReward = 70;
+        capValue = 1;
+    }; // "Ifrit"
+
+    class B_Truck_01_flatbed_F {
+        cost = 500;
+        requirements[] = {};
+        killReward = 80;
+        capValue = 1;
+    }; // "HEMTT Flatbed"
+
+    class O_G_Offroad_01_AT_F {
+        cost = 500;
+        requirements[] = {};
+        rearm = 180;
+        killReward = 180;
+        capValue = 1;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {};
+            removeWeapons[] = {
+                "launcher_SPG9"
+            };
+            addMagazines[] = {
+                "12Rnd_SPG9_HEAT"
+            };
+            addWeapons[] = {
+                "launcher_SPG9"
+            };
+        };
+    }; // "Offroad (AT)"
 
     class O_LSV_02_AT_M_F {
         name = "Qilin (AT-M)";
@@ -130,34 +127,30 @@ class Vehicles {
         };
     };
 
-    class O_G_Offroad_01_AT_F {
-        cost = 500;
+    class O_LSV_02_AT_F {
+        cost = 750;
         requirements[] = {};
-        rearm = 180;
-        killReward = 180;
+        rearm = 200;
+        killReward = 200;
         capValue = 1;
 
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
             removeMagazines[] = {};
             removeWeapons[] = {
-                "launcher_SPG9"
+                "missiles_Vorona"
             };
             addMagazines[] = {
-                "12Rnd_SPG9_HEAT"
+                "Vorona_HEAT",
+                "Vorona_HEAT",
+                "Vorona_HEAT",
+                "Vorona_HEAT"
             };
             addWeapons[] = {
-                "launcher_SPG9"
+                "missiles_Vorona"
             };
         };
-    }; // "Offroad (AT)"
-
-    class B_Truck_01_flatbed_F {
-        cost = 500;
-        requirements[] = {};
-        killReward = 80;
-        capValue = 1;
-    }; // "HEMTT Flatbed"
+    }; // "Qilin (AT)"
 
     class O_MRAP_02_hmg_F {
         cost = 900;
@@ -168,6 +161,27 @@ class Vehicles {
         aps = 1;
     }; // "Ifrit HMG"
 
+    class O_Truck_03_ammo_F {
+        cost = 1000;
+        requirements[] = {};
+        killReward = 80;
+        capValue = 1;
+    }; // "Tempest Ammo"
+
+    class O_Truck_03_Fuel_F {
+        cost = 1000;
+        requirements[] = {};
+        killReward = 80;
+        capValue = 1;
+    }; // "Tempest Fuel"
+
+    class O_Truck_03_Repair_F {
+        cost = 1000;
+        requirements[] = {};
+        killReward = 80;
+        capValue = 1;
+    }; // "Tempest Repair"
+
     class O_MRAP_02_gmg_F {
         cost = 1250;
         requirements[] = {};
@@ -176,6 +190,23 @@ class Vehicles {
         capValue = 2;
         aps = 1;
     }; // "Ifrit GMG"
+
+    class O_APC_Wheeled_02_rcws_v2_F {
+        cost = 1500;
+        requirements[] = {};
+        rearm = 400;
+        killReward = 300;
+        capValue = 2;
+        aps = 2;
+    }; // "MSE-3 Marid"
+
+    class O_Truck_03_device_F {
+        cost = 1500;
+        requirements[] = {};
+        killReward = 200;
+        capValue = 1;
+        aps = 4;
+    }; // "Tempest Device"
 
     class O_MRAP_02_gmg_m_F {
         name = "Ifrit-M Autocannon";
@@ -211,41 +242,10 @@ class Vehicles {
         };
     };
 
-    class O_Truck_03_Repair_F {
-        cost = 1000;
-        requirements[] = {};
-        killReward = 80;
-        capValue = 1;
-    }; // "Tempest Repair"
-
-    class O_Truck_03_device_F {
-        cost = 1500;
-        requirements[] = {};
-        killReward = 200;
-        capValue = 1;
-        aps = 4;
-    }; // "Tempest Device"
-
-    class O_Truck_03_ammo_F {
-        cost = 1000;
-        requirements[] = {};
-        killReward = 80;
-        capValue = 1;
-    }; // "Tempest Ammo"
-
-    class O_APC_Wheeled_02_rcws_v2_F {
-        cost = 1500;
-        requirements[] = {};
-        rearm = 400;
-        killReward = 300;
-        capValue = 2;
-        aps = 2;
-    }; // "MSE-3 Marid"
-
     class O_APC_Wheeled_02_rcws_v2_m_F {
         name = "MSE-3M Marid Autocannon";
         spawn = "O_APC_Wheeled_02_rcws_v2_F";
-        cost = 3700;
+        cost = 2600;
         requirements[] = {};
         rearm = 500;
         killReward = 300;
@@ -326,6 +326,15 @@ class Vehicles {
         };
     }; // "ZSU-39 Tigris"
 
+    class O_MBT_02_cannon_F {
+        cost = 7500;
+        requirements[] = {};
+        rearm = 600;
+        killReward = 500;
+        capValue = 4;
+        aps = 3;
+    }; // "T-100 Varsuk"
+
     class O_APC_Tracked_02_AA_M_F {
         name = "ZSU-49 Euphrates";
         spawn = "O_APC_Tracked_02_AA_F";
@@ -354,15 +363,6 @@ class Vehicles {
         };
     };
 
-    class O_MBT_02_cannon_F {
-        cost = 7500;
-        requirements[] = {};
-        rearm = 600;
-        killReward = 500;
-        capValue = 4;
-        aps = 3;
-    }; // "T-100 Varsuk"
-
     class O_MBT_04_cannon_F {
         cost = 11000;
         requirements[] = {};
@@ -380,28 +380,15 @@ class Vehicles {
         capValue = 4;
         aps = 3;
     }; // "T-140K Angara"
-/* Disabled as it is broken since disabling SETWEAPONRELOADINGTIME
-    class O_MBT_02_railgun_F {
-        cost = 15000;
-        requirements[] = {};
-        rearm = 600;
-        killReward = 500;
-        capValue = 4;
-        aps = 3;
-    }; // "T-100 Futura"
-*/
-    class O_MBT_02_arty_F {
-        cost = 20000;
-        requirements[] = {};
-        rearm = 1800;
-        killReward = 600;
-        capValue = 4;
-        aps = 1;
-        disallowMagazines[] = {
-            "2Rnd_155mm_Mo_Cluster",
-            "2Rnd_155mm_Mo_Cluster_O"
-        };
-    }; // "2S9 Sochor"
+
+    // class O_MBT_02_railgun_F {
+    //     cost = 15000;
+    //     requirements[] = {};
+    //     rearm = 600;
+    //     killReward = 500;
+    //     capValue = 4;
+    //     aps = 3;
+    // }; // "T-100 Futura"
 
     class I_Truck_02_MRL_F {
         cost = 18000;
@@ -415,8 +402,16 @@ class Vehicles {
         };
     }; // "Zamak MRL"
 
-    class O_Truck_03_medical_F {
-        killReward = 100;
-        capValue = 1;
-    }; // Tempest Spawn Truck
+    class O_MBT_02_arty_F {
+        cost = 20000;
+        requirements[] = {};
+        rearm = 1800;
+        killReward = 600;
+        capValue = 4;
+        aps = 1;
+        disallowMagazines[] = {
+            "2Rnd_155mm_Mo_Cluster",
+            "2Rnd_155mm_Mo_Cluster_O"
+        };
+    }; // "2S9 Sochor"
 };

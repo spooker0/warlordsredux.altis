@@ -6,37 +6,6 @@ class Vehicles {
         capValue = 1;
     }; // "Quad Bike"
 
-    class B_MRAP_01_F {
-        cost = 300;
-        requirements[] = {};
-        killReward = 70;
-        capValue = 1;
-    }; // "Hunter"
-
-    class B_LSV_01_armed_F {
-        cost = 200;
-        requirements[] = {};
-        rearm = 120;
-        killReward = 150;
-        capValue = 1;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {
-                "HMG_127_LSV_01"
-            };
-            addMagazines[] = {
-                "100Rnd_127x99_mag_Tracer_Red",
-                "100Rnd_127x99_mag_Tracer_Red",
-                "100Rnd_127x99_mag_Tracer_Red"
-            };
-            addWeapons[] = {
-                "HMG_127_LSV_01"
-            };
-        };
-    }; // "Prowler (HMG)"
-
     class B_G_Offroad_01_armed_F {
         cost = 150;
         requirements[] = {};
@@ -62,6 +31,73 @@ class Vehicles {
         };
     }; // "Offroad (HMG)"
 
+    class B_Truck_01_transport_F {
+        cost = 200;
+        requirements[] = {};
+        killReward = 80;
+        capValue = 1;
+    }; // "HEMTT Transport"
+
+    class B_LSV_01_armed_F {
+        cost = 200;
+        requirements[] = {};
+        rearm = 120;
+        killReward = 150;
+        capValue = 1;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {};
+            removeWeapons[] = {
+                "HMG_127_LSV_01"
+            };
+            addMagazines[] = {
+                "100Rnd_127x99_mag_Tracer_Red",
+                "100Rnd_127x99_mag_Tracer_Red",
+                "100Rnd_127x99_mag_Tracer_Red"
+            };
+            addWeapons[] = {
+                "HMG_127_LSV_01"
+            };
+        };
+    }; // "Prowler (HMG)"
+
+    class B_MRAP_01_F {
+        cost = 300;
+        requirements[] = {};
+        killReward = 70;
+        capValue = 1;
+    }; // "Hunter"
+
+    class B_Truck_01_flatbed_F {
+        cost = 500;
+        requirements[] = {};
+        killReward = 80;
+        capValue = 1;
+    }; // "HEMTT Flatbed"
+
+    class B_G_Offroad_01_AT_F {
+        cost = 500;
+        requirements[] = {};
+        rearm = 180;
+        killReward = 180;
+        capValue = 1;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {};
+            removeWeapons[] = {
+                "launcher_SPG9"
+            };
+            addMagazines[] = {
+                "12Rnd_SPG9_HEAT"
+            };
+            addWeapons[] = {
+                "launcher_SPG9"
+            };
+        };
+    }; // "Offroad (AT)"
+
     class B_LSV_01_AT_F {
         cost = 750;
         requirements[] = {};
@@ -86,6 +122,36 @@ class Vehicles {
             };
         };
     }; // "Prowler (AT)"
+
+    class B_MRAP_01_hmg_F {
+        cost = 900;
+        requirements[] = {};
+        rearm = 300;
+        killReward = 250;
+        capValue = 2;
+        aps = 1;
+    }; // "Hunter HMG"
+
+    class B_Truck_01_ammo_F {
+        cost = 1000;
+        requirements[] = {};
+        killReward = 80;
+        capValue = 1;
+    }; // "HEMTT Ammo"
+
+    class B_Truck_01_fuel_F {
+        cost = 1000;
+        requirements[] = {};
+        killReward = 80;
+        capValue = 1;
+    }; // "HEMTT Fuel"
+
+    class B_Truck_01_Repair_F {
+        cost = 1000;
+        requirements[] = {};
+        killReward = 80;
+        capValue = 1;
+    }; // "HEMTT Repair"
 
     class B_LSV_01_AT_UP_F {
         name = "Prowler (AT UP)";
@@ -114,37 +180,6 @@ class Vehicles {
         };
     }; // "Prowler (AT UP)"
 
-    class B_G_Offroad_01_AT_F {
-        cost = 500;
-        requirements[] = {};
-        rearm = 180;
-        killReward = 180;
-        capValue = 1;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {
-                "launcher_SPG9"
-            };
-            addMagazines[] = {
-                "12Rnd_SPG9_HEAT"
-            };
-            addWeapons[] = {
-                "launcher_SPG9"
-            };
-        };
-    }; // "Offroad (AT)"
-
-    class B_MRAP_01_hmg_F {
-        cost = 900;
-        requirements[] = {};
-        rearm = 300;
-        killReward = 250;
-        capValue = 2;
-        aps = 1;
-    }; // "Hunter HMG"
-
     class B_MRAP_01_gmg_F {
         cost = 1250;
         requirements[] = {};
@@ -153,6 +188,14 @@ class Vehicles {
         capValue = 2;
         aps = 1;
     }; // "Hunter GMG"
+
+    class O_T_Truck_03_device_ghex_F {
+        cost = 1500;
+        requirements[] = {};
+        killReward = 200;
+        capValue = 1;
+        aps = 4;
+    }; // "Tempest Device"
 
     class B_MRAP_01_gmg_up_F {
         name = "Hunter UP Autocannon";
@@ -188,49 +231,6 @@ class Vehicles {
         };
     };
 
-    class B_Truck_01_ammo_F {
-        cost = 1000;
-        requirements[] = {};
-        killReward = 80;
-        capValue = 1;
-    }; // "HEMTT Ammo"
-
-    class B_Truck_01_Repair_F {
-        cost = 1000;
-        requirements[] = {};
-        killReward = 80;
-        capValue = 1;
-    }; // "HEMTT Repair"
-
-    class B_Truck_01_fuel_F {
-        cost = 1000;
-        requirements[] = {};
-        killReward = 80;
-        capValue = 1;
-    }; // "HEMTT Fuel"
-
-    class O_T_Truck_03_device_ghex_F {
-        cost = 1500;
-        requirements[] = {};
-        killReward = 200;
-        capValue = 1;
-        aps = 4;
-    }; // "Tempest Device"
-
-    class B_Truck_01_transport_F {
-        cost = 200;
-        requirements[] = {};
-        killReward = 80;
-        capValue = 1;
-    }; // "HEMTT Transport"
-
-    class B_Truck_01_flatbed_F {
-        cost = 500;
-        requirements[] = {};
-        killReward = 80;
-        capValue = 1;
-    }; // "HEMTT Flatbed"
-
     class B_APC_Tracked_01_CRV_F {
         cost = 1700;
         requirements[] = {};
@@ -238,6 +238,15 @@ class Vehicles {
         capValue = 2;
         aps = 2;
     }; // "CRV-6e Bobcat"
+
+    class B_APC_Tracked_01_rcws_F {
+        cost = 1800;
+        requirements[] = {};
+        rearm = 400;
+        killReward = 300;
+        capValue = 3;
+        aps = 2;
+    }; // "IFV-6c Panther"
 
     class B_APC_Wheeled_03_cannon_F {
         cost = 2900;
@@ -307,14 +316,14 @@ class Vehicles {
         };
     };
 
-    class B_APC_Tracked_01_rcws_F {
-        cost = 1800;
+    class B_AFV_Wheeled_01_cannon_F {
+        cost = 4500;
         requirements[] = {};
-        rearm = 400;
-        killReward = 300;
-        capValue = 3;
+        rearm = 500;
+        killReward = 450;
+        capValue = 4;
         aps = 2;
-    }; // "IFV-6c Panther"
+    }; // "Rhino MGS"
 
     class B_APC_Tracked_01_AA_F {
         cost = 5000;
@@ -341,43 +350,6 @@ class Vehicles {
             };
         };
     }; // "IFV-6a Cheetah"
-
-    class B_APC_Tracked_01_AA_UP_F {
-        name = "IFV-6X Puma";
-        spawn = "B_APC_Tracked_01_AA_F";
-        cost = 9000;
-        requirements[] = {};
-        rearm = 450;
-        killReward = 600;
-        capValue = 4;
-        aps = 2;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {
-                "4Rnd_Titan_long_missiles"
-            };
-            removeWeapons[] = {
-                "missiles_titan_AA"
-            };
-            addMagazines[] = {
-                "magazine_Missile_mim145_x4",
-                "680Rnd_35mm_AA_shells_Tracer_Red"
-            };
-            addWeapons[] = {
-                "weapon_mim145Launcher"
-            };
-        };
-    };
-
-    class B_AFV_Wheeled_01_cannon_F {
-        cost = 4500;
-        requirements[] = {};
-        rearm = 500;
-        killReward = 450;
-        capValue = 4;
-        aps = 2;
-    }; // "Rhino MGS"
 
     class B_AFV_Wheeled_01_up_cannon_F {
         cost = 5000;
@@ -414,36 +386,64 @@ class Vehicles {
         };
     }; // "M2A1 Slammer UP"
 
-    class B_MBT_01_TUSK_Railgun_F {
-        name = "M2X Slammer (Railgun)";
-        spawn = "B_MBT_01_TUSK_F";
-        cost = 13000;
+    class B_APC_Tracked_01_AA_UP_F {
+        name = "IFV-6X Puma";
+        spawn = "B_APC_Tracked_01_AA_F";
+        cost = 9000;
         requirements[] = {};
-        rearm = 600;
-        killReward = 550;
+        rearm = 450;
+        killReward = 600;
         capValue = 4;
-        aps = 3;
+        aps = 2;
 
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
             removeMagazines[] = {
-                "24Rnd_120mm_APFSDS_shells_Tracer_Red",
-                "12Rnd_120mm_HE_shells_Tracer_Red",
-                "12Rnd_120mm_HEAT_MP_T_Red"
+                "4Rnd_Titan_long_missiles"
             };
             removeWeapons[] = {
-                "cannon_120mm"
+                "missiles_titan_AA"
             };
             addMagazines[] = {
-                "RailGun_01_DummyMagazine",
-                "60Rnd_75mm_RailGun_APFSDS_mag"
+                "magazine_Missile_mim145_x4",
+                "680Rnd_35mm_AA_shells_Tracer_Red"
             };
             addWeapons[] = {
-                "cannon_railgun",
-                "cannon_railgun_fake"
+                "weapon_mim145Launcher"
             };
         };
     };
+
+    // class B_MBT_01_TUSK_Railgun_F {
+    //     name = "M2X Slammer (Railgun)";
+    //     spawn = "B_MBT_01_TUSK_F";
+    //     cost = 13000;
+    //     requirements[] = {};
+    //     rearm = 600;
+    //     killReward = 550;
+    //     capValue = 4;
+    //     aps = 3;
+
+    //     class Gunner: WLTurretDefaults {
+    //         turret[] = { 0 };
+    //         removeMagazines[] = {
+    //             "24Rnd_120mm_APFSDS_shells_Tracer_Red",
+    //             "12Rnd_120mm_HE_shells_Tracer_Red",
+    //             "12Rnd_120mm_HEAT_MP_T_Red"
+    //         };
+    //         removeWeapons[] = {
+    //             "cannon_120mm"
+    //         };
+    //         addMagazines[] = {
+    //             "RailGun_01_DummyMagazine",
+    //             "60Rnd_75mm_RailGun_APFSDS_mag"
+    //         };
+    //         addWeapons[] = {
+    //             "cannon_railgun",
+    //             "cannon_railgun_fake"
+    //         };
+    //     };
+    // };
 
     class B_MBT_01_arty_F {
         cost = 20000;
@@ -469,9 +469,4 @@ class Vehicles {
             "12Rnd_230mm_rockets_cluster"
         };
     }; // "M5 Sandstorm MLRS"
-
-    class B_Truck_01_medical_F {
-        killReward = 100;
-        capValue = 1;
-    }; // HEMMT Spawn Truck
 };
