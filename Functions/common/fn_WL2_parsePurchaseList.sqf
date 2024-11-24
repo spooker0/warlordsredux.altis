@@ -196,7 +196,7 @@ _strategyArr pushBack ["RespawnVicFT", 0, [], localize "STR_A3_WL_respawn_vicFT_
 _strategyArr pushBack ["RespawnPodFT", 0, [], "Fast Travel to Medical Pod (Free)", "\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg", ""];
 _strategyArr pushBack ["RespawnVic", (getMissionConfigValue ["BIS_WL_orderFTVehicleCost", 200]), [], localize "STR_A3_WL_respawn_vicFT_order", "\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg", ""];
 _strategyArr pushBack ["RespawnPod", (getMissionConfigValue ["BIS_WL_orderFTVehicleCost", 200]), [], "Purchase Fast Travel Pod", "\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg", "Order medical pod"];
-_strategyArr pushBack ["FundsTransfer", (getMissionConfigValue ["BIS_WL_fundsTransferCost", 2000]), [], localize "STR_A3_WL_menu_fundstransfer", "\A3\Data_F_Warlords\Data\preview_cp_transfer.jpg", localize "STR_A3_WL_menu_fundstransfer_info"];
+_strategyArr pushBack ["FundsTransfer", (getMissionConfigValue ["BIS_WL_fundsTransferCost", 2000]), [], localize "STR_A3_WL_menu_moneytransfer", "\A3\Data_F_Warlords\Data\preview_cp_transfer.jpg", localize "STR_A3_WL_menu_fundstransfer_info"];
 _strategyArr pushBack ["TargetReset", (getMissionConfigValue ["BIS_WL_targetResetCost", 500]), [], localize "STR_A3_WL_menu_resetvoting", "\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg", localize "STR_A3_WL_menu_resetvoting_info"];
 _strategyArr pushBack ["LockVehicles", 0, [], localize "STR_A3_WL_feature_lock_all", "\A3\Data_F_Warlords\Data\preview_empty.jpg", ""];
 _strategyArr pushBack ["UnlockVehicles", 0, [], localize "STR_A3_WL_feature_unlock_all", "\A3\Data_F_Warlords\Data\preview_empty.jpg", ""];

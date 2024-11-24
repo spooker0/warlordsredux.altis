@@ -18,7 +18,7 @@ _vics = missionNamespace getVariable [_var, []];
 
 if !(["(EU) #11", serverName] call BIS_fnc_inString) then {
 	player addAction [
-		"10K CP",
+		"+$10K",
 		{[player, "10K"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2];}
 	];
 };
