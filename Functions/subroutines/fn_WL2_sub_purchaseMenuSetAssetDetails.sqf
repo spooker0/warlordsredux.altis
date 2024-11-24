@@ -31,5 +31,7 @@ _id = _purchase_category lbValue lbCurSel _purchase_category;
 _purchase_info_asset ctrlSetStructuredText parseText format ["<t align = 'center' size = '%2'>%1</t>", _text, (0.85 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 _cost = _purchase_items lbValue lbCurSel _purchase_items;
 
-_purchase_title_cost ctrlSetStructuredText parseText format ["<t size = '%7' align = 'center' shadow = '0'>%1%8: %2 %3%4%5%6</t>", localize "STR_A3_WL_menu_cost", _cost, localize "STR_A3_WL_unit_cp", if ("A" in _requirements) then {", " + localize "STR_A3_WL_param32_title"} else {""}, if ("H" in _requirements) then {", " + localize "STR_A3_WL_module_service_helipad"} else {""}, if ("W" in _requirements) then {", " + localize "STR_A3_WL_param30_title"} else {""}, (1.25 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale), if (toLower language == "french") then {" "} else {""}];
+private _side = side player;
+private _moneySign = [_side] call BIS_fnc_WL2_getMoneySign;
+_purchase_title_cost ctrlSetStructuredText parseText format ["<t size = '%7' align = 'center' shadow = '0'>%1%8: %2%3%4%5%6</t>", localize "STR_A3_WL_menu_cost", _moneySign, _cost, if ("A" in _requirements) then {", " + localize "STR_A3_WL_param32_title"} else {""}, if ("H" in _requirements) then {", " + localize "STR_A3_WL_module_service_helipad"} else {""}, if ("W" in _requirements) then {", " + localize "STR_A3_WL_param30_title"} else {""}, (1.25 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale), if (toLower language == "french") then {" "} else {""}];
 call BIS_fnc_WL2_sub_purchaseMenuRefresh;

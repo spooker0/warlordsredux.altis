@@ -513,21 +513,38 @@
             <Chinese>%1请求重置部门投票。</Chinese>
         </Key>
         <Key ID="STR_A3_WL_donate_cp">
-            <Original>%1 donated %3CP to %2.</Original>
-            <English>%1 donated %3CP to %2.</English>
-            <Czech>%1 daroval %3CP %2.</Czech>
-            <French>%1 a fait un don de %3CP à %2.</French>
-            <German>%1 hat %3CP an %2 gestiftet.</German>
-            <Italian>%1 ha donato %3CP a %2.</Italian>
-            <Polish>%1 przekazał %3CP dla %2.</Polish>
-            <Portuguese>%1 doou %3CP para %2.</Portuguese>
-            <Russian>%1 пожертвовал %3CP %2.</Russian>
-            <Spanish>%1 ha donado %3CP a %2.</Spanish>
-            <Turkish>%1 tarafından %3CP bağışlandı %2 tarafına.</Turkish>
-            <Korean>%1이 %2에게 %3CP를 기부했습니다.</Korean>
-            <Japanese>%1は%2に%3CPを寄付しました。</Japanese>
-            <Chinesesimp>%1捐赠了%3CP给%2。</Chinesesimp>
-            <Chinese>%1捐贈了%3CP給%2。</Chinese>
+            <Original>%1 donated %3 to %2.</Original>
+            <English>%1 donated %3 to %2.</English>
+            <Czech>%1 daroval %3 %2.</Czech>
+            <French>%1 a fait un don de %3 à %2.</French>
+            <German>%1 hat %3 an %2 gestiftet.</German>
+            <Italian>%1 ha donato %3 a %2.</Italian>
+            <Polish>%1 przekazał %3 dla %2.</Polish>
+            <Portuguese>%1 doou %3 para %2.</Portuguese>
+            <Russian>%1 пожертвовал %3 %2.</Russian>
+            <Spanish>%1 ha donado %3 a %2.</Spanish>
+            <Turkish>%1 tarafından %3 bağışlandı %2 tarafına.</Turkish>
+            <Korean>%1이 %2에게 %3를 기부했습니다.</Korean>
+            <Japanese>%1は%2に%3を寄付しました。</Japanese>
+            <Chinesesimp>%1捐赠了%3给%2。</Chinesesimp>
+            <Chinese>%1捐贈了%3給%2。</Chinese>
+        </Key>
+        <Key ID="STR_A3_WL_menu_moneytransfer">
+            <Original>Transfer Money</Original>
+            <English>Transfer Money</English>
+            <Czech>Převod peněz</Czech>
+            <French>Transférer de l'argent</French>
+            <German>Geld überweisen</German>
+            <Italian>Trasferire denaro</Italian>
+            <Polish>Przelew pieniędzy</Polish>
+            <Portuguese>Transferir dinheiro</Portuguese>
+            <Russian>Перевод денег</Russian>
+            <Spanish>Transferir dinero</Spanish>
+            <Turkish>Para Transferi</Turkish>
+            <Korean>돈 이체</Korean>
+            <Japanese>送金</Japanese>
+            <Chinesesimp>转账</Chinesesimp>
+            <Chinese>轉帳</Chinese>
         </Key>
         <Key ID="STR_A3_dazzler_enable">
             <Original>Enable dazzler</Original>
@@ -2813,6 +2830,5 @@
             <Chinesesimp>开始投票放弃游戏。这将结束比赛并重新开始任务。</Chinesesimp>
             <Chinese>開始投票放棄比賽。這將結束比賽並重新開始任務。</Chinese>
         </Key>
-        
     </Container>
 </Project>

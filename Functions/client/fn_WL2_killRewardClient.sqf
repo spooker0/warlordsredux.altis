@@ -7,16 +7,18 @@ private _scale = 0.65 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale;
 private _displayText = "";
 private _displayName = "";
 
+private _side = BIS_WL_playerSide;
+
 if (_customText != "") then {
-	_displayText = format ["%1 +%2CP", _customText, _reward];
+	_displayText = format ["%1 %2%3", _customText, [_side] call BIS_fnc_WL2_getMoneySign, _reward];
 } else {
 	if (_unit isKindOf "Man") then {
-		_displayText = "Enemy killed %2CP";
+		_displayText = "Enemy killed %2%3";
 	} else {
 		_displayName = getText (configFile >> "CfgVehicles" >> (typeOf _unit) >> "displayName");
-		_displayText = "%1 destroyed %2CP";
+		_displayText = "%1 destroyed %2%3";
 	};
-	_displayText = format [_displayText, _displayName, if (_reward > 0) then {format ["+%1", _reward]} else {format ["%1", _reward]}];
+	_displayText = format [_displayText, _displayName, [_side] call BIS_fnc_WL2_getMoneySign, _reward];
 };
 
 private _killRewardExisting = missionNamespace getVariable ["WL_killReward", []];

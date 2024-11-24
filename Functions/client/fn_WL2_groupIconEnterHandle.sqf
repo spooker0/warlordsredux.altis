@@ -35,7 +35,7 @@ private _color = ['#004d99', '#7f0400', '#007f04'] # ([west, east, independent] 
 	(1 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale),
 	_sector getVariable "BIS_WL_name",
 	_sector getVariable "BIS_WL_value",
-	localize "STR_A3_WL_unit_cp",
+	[_side] call BIS_fnc_WL2_getMoneySign,
 	localize "STR_A3_rscmpprogress_min",
 	if (_airstrip || {_helipad || {_harbor}}) then {"<br/>"} else {""},
 	if (_airstrip) then {localize "STR_A3_WL_param32_title"} else {""},
@@ -71,13 +71,13 @@ private _availableSectors = (switch (BIS_WL_currentSelection) do {
 });
 
 if (_sector in _availableSectors) then {
-	WL_CONTROL_MAP ctrlMapCursor ["Track", "HC_overMission"]; 
+	WL_CONTROL_MAP ctrlMapCursor ["Track", "HC_overMission"];
 	BIS_WL_highlightedSector = _sector;
 	if !(BIS_WL_hoverSamplePlayed) then {
 		playSound "clickSoft";
 		BIS_WL_hoverSamplePlayed = TRUE;
 	};
 } else {
-	WL_CONTROL_MAP ctrlMapCursor ["Track", "HC_unsel"]; 
+	WL_CONTROL_MAP ctrlMapCursor ["Track", "HC_unsel"];
 	BIS_WL_highlightedSector = objNull;
 };

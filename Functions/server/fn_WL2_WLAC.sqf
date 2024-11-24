@@ -15,8 +15,8 @@ while {!BIS_WL_missionEnd && _serverCheck} do {
 		if (_diff >= 10000) then {
 			private _player = _uid call BIS_fnc_getUnitByUid;
 			private _diff = _newPlayerFunds - _oldPlayerFunds;
-			diag_log format ["WLAC: Name: %1 UID: %2 earned %3CP within %4 seconds", name _player, _uid, _diff, _sleep];
-			"You have been flagged for cheating and your CP has been reverted" remoteExec ["hint", owner _player];
+			diag_log format ["WLAC: Name: %1 UID: %2 earned %3 points within %4 seconds", name _player, _uid, _diff, _sleep];
+			"You have been flagged for cheating and your points have been reverted" remoteExec ["hint", owner _player];
 			_fundsDB set [_uid, _oldPlayerFunds];
 			(serverNamespace getVariable "fundsDatabase") call BIS_fnc_WL2_fundsDatabaseUpdate;
 		};

@@ -8,6 +8,8 @@ waitUntil {!isNull (findDisplay 46)};
 _voteLocked = missionNamespace getVariable ["voteLocked", false];
 if (_voteLocked) exitWith {};
 
+private _side = BIS_WL_playerSide;
+private _moneySign = [_side] call BIS_fnc_WL2_getMoneySign;
 if (_displayClass == "OSD") then {
 	{
 		_x params ["_var", "_type"];
@@ -272,7 +274,7 @@ if (_displayClass == "OSD") then {
 		_purchase_title_details ctrlSetStructuredText parseText format ["<t size = '%2' align = 'center' shadow = '2'>%1</t>", localize "STR_A3_WL_purchase_menu_title_detail", (1.5 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 		_purchase_title_deployment ctrlSetStructuredText parseText format ["<t size = '%2' align = 'center' shadow = '2'>%1</t>", localize "STR_A3_WL_purchase_menu_title_deployment", (1.5 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 		_purchase_request ctrlSetStructuredText parseText format ["<t font = 'PuristaLight' align = 'center' shadow = '2' size = '%2'>%1</t>", toUpper localize "STR_A3_WL_menu_request", (1.75 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
-		_purchase_transfer_cp_title ctrlSetStructuredText parseText format ["<t align = 'center' size = '%2'>%1</t>", localize "STR_A3_WL_unit_cp", (1.25 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
+		_purchase_transfer_cp_title ctrlSetStructuredText parseText format ["<t align = 'center' size = '%2'>%1</t>", _moneySign, (1.25 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 		_purchase_transfer_ok ctrlSetStructuredText parseText format ["<t align = 'center' shadow = '2' size = '%2'>%1</t>", localize "STR_A3_WL_button_transfer", (1.25 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 		_purchase_transfer_cancel ctrlSetStructuredText parseText format ["<t align = 'center' shadow = '2' size = '%2'>%1</t>", localize "STR_disp_cancel", (1.25 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 
