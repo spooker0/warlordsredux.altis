@@ -322,8 +322,9 @@ if (_action == "updateZeus") exitWith {
 };
 
 if (_action == "droneExplode") then {
-	_expl = createVehicle ["IEDUrbanBig_Remote_Ammo", (getPos getConnectedUAV _sender), [], 0, "FLY"];
-	_expl setShotParents [getConnectedUAV _sender, _sender];
+	private _drone = _param1;
+	_expl = createVehicle ["IEDUrbanBig_Remote_Ammo", getPos _drone, [], 0, "FLY"];
+	_expl setShotParents [_drone, _sender];
 	triggerAmmo _expl;
-	deleteVehicle (getConnectedUAV player);
+	deleteVehicle _drone;
 }
