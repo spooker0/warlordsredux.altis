@@ -17,17 +17,17 @@ class Gear {
         killReward = 40;
     }; // "Basic Weapons [CSAT]"
 
-    class Box_CSAT_Uniforms_F {
-        cost = 100;
-        requirements[] = {};
-        killReward = 40;
-    }; // "Uniforms [NATO]"
-
     class Box_CSAT_Equip_F {
         cost = 100;
         requirements[] = {};
         killReward = 40;
     }; // "Equipment [NATO]"
+
+    class Box_CSAT_Uniforms_F {
+        cost = 100;
+        requirements[] = {};
+        killReward = 40;
+    }; // "Uniforms [NATO]"
 
     class Box_East_AmmoOrd_F {
         cost = 150;
@@ -47,17 +47,23 @@ class Gear {
         killReward = 40;
     }; // "Special Weapons [CSAT]"
 
+    class Box_East_AmmoVeh_F {
+        cost = 250;
+        requirements[] = {};
+        killReward = 70;
+    }; // "Vehicle Ammo [CSAT]"
+
     class O_supplyCrate_F {
         cost = 300;
         requirements[] = {};
         killReward = 40;
     }; // "Supply Box [CSAT]"
 
-    class Box_East_AmmoVeh_F {
-        cost = 250;
+    class Land_Pod_Heli_Transport_04_fuel_F {
+        cost = 300;
         requirements[] = {};
-        killReward = 70;
-    }; // "Vehicle Ammo [CSAT]"
+        killReward = 150;
+    }; // "Taru Fuel Pod"
 
     class Land_Pod_Heli_Transport_04_ammo_F {
         cost = 500;
@@ -70,14 +76,4 @@ class Gear {
         requirements[] = {};
         killReward = 150;
     }; // "Taru Repair Pod"
-
-    class Land_Pod_Heli_Transport_04_fuel_F {
-        cost = 300;
-        requirements[] = {};
-        killReward = 150;
-    }; // "Taru Fuel Pod"
-
-    class Land_Pod_Heli_Transport_04_medevac_F {
-        killReward = 300;
-    }; // Taru Spawn Container
 };

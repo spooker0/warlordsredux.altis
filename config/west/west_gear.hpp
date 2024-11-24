@@ -17,17 +17,17 @@ class Gear {
         killReward = 40;
     }; // "Basic Weapons [NATO]"
 
-    class Box_NATO_Uniforms_F {
-        cost = 100;
-        requirements[] = {};
-        killReward = 40;
-    }; // "Uniforms [NATO]"
-
     class Box_NATO_Equip_F {
         cost = 100;
         requirements[] = {};
         killReward = 40;
     }; // "Equipment [NATO]"
+
+    class Box_NATO_Uniforms_F {
+        cost = 100;
+        requirements[] = {};
+        killReward = 40;
+    }; // "Uniforms [NATO]"
 
     class Box_NATO_AmmoOrd_F {
         cost = 150;
@@ -47,17 +47,23 @@ class Gear {
         killReward = 40;
     }; // "Special Weapons [NATO]"
 
-    class B_supplyCrate_F {
-        cost = 300;
-        requirements[] = {};
-        killReward = 40;
-    }; // "Supply Box [NATO]"
-
     class Box_NATO_AmmoVeh_F {
         cost = 250;
         requirements[] = {};
         killReward = 70;
     }; // "Vehicle Ammo [NATO]"
+
+    class B_Slingload_01_Fuel_F {
+        cost = 300;
+        requirements[] = {};
+        killReward = 150;
+    }; // "Huron Fuel Container"
+
+    class B_supplyCrate_F {
+        cost = 300;
+        requirements[] = {};
+        killReward = 40;
+    }; // "Supply Box [NATO]"
 
     class B_Slingload_01_Ammo_F {
         cost = 500;
@@ -70,14 +76,4 @@ class Gear {
         requirements[] = {};
         killReward = 150;
     }; // "Huron Repair Container"
-
-    class B_Slingload_01_Fuel_F {
-        cost = 300;
-        requirements[] = {};
-        killReward = 150;
-    }; // "Huron Fuel Container"
-
-    class B_Slingload_01_Medevac_F {
-        killReward = 300;
-    }; // Huron Spawn
 };

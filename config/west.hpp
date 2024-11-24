@@ -5,4 +5,5 @@ class WEST {
     #include "west\west_naval.hpp"
     #include "west\west_gear.hpp"
     #include "west\west_defenses.hpp"
+    #include "west\west_spawn.hpp"
 };

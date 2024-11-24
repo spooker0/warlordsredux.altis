@@ -5,4 +5,5 @@ class EAST {
     #include "east\east_naval.hpp"
     #include "east\east_gear.hpp"
     #include "east\east_defenses.hpp"
+    #include "east\east_spawn.hpp"
 };
