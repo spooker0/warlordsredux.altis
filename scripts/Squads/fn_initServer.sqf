@@ -5,11 +5,6 @@ if (isNil "SQUAD_MANAGER") then {
 };
 missionNamespace setVariable ["SQUAD_MANAGER", SQUAD_MANAGER, true];
 
-if (isNil "WL_PlayerSquadContribution") then {
-    WL_PlayerSquadContribution = createHashMap;
-};
-missionNamespace setVariable ["WL_PlayerSquadContribution", WL_PlayerSquadContribution, true];
-
 addMissionEventHandler ["PlayerDisconnected", {
     params ["_id", "_uid", "_name", "_jip", "_owner", "_idstr"];
     private _playerId = format ["%1", _id];
@@ -29,7 +24,7 @@ missionNamespace setVariable ["SQD_VoiceChannels", [WEST_VOICE_CHANNEL, EAST_VOI
         {
             private _squad = _x;
             private _members = _squad select 2;
-            
+
             {
                 private _member = _x;
                 private _danglingSquadmate = allPlayers findIf {getPlayerID _x == _member} == -1;

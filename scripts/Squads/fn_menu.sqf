@@ -18,6 +18,8 @@ disableSerialization;
     private _selectedPlayer = -1;
 
     private _squadManager = missionNamespace getVariable ["SQUAD_MANAGER", []];
+    WL_PlayerSquadContribution = missionNamespace getVariable ["WL_PlayerSquadContribution", createHashMap];
+
     private _getSquadlist = {
         _squadListUnordered = _squadManager select {
             private _squad = _x;
