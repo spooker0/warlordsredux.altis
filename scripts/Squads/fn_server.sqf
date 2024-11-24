@@ -174,20 +174,33 @@ switch (_action) do {
         _message = format ["Player %1 is regular squad member: %2", _playerId, _isRegular];
         _return = _isRegular;
     };
-    case "getSquadSizeOfSquadLeader": {
-        // Get squad size of squad leader
+    case "getSquadVotingPower": {
+        // Get squad voting power of squad leader
         private _playerId = _params select 0;
 
         private _squad = SQUAD_MANAGER select {(_x select 1) == _playerId} select 0;
-        private _squadSize = if (isNil "_squad") then {1} else {count (_squad select 2)};
+        private _squadVotingPower = if (isNil "_squad") then {
+            private _points = WL_PlayerSquadContribution getOrDefault [_playerId, 0];
+            _points max 1;
+        } else {
+            private _sum = 0;
+            {
+                private _playerId = _x;
+                private _points = WL_PlayerSquadContribution getOrDefault [_playerId, 0];
+                _sum = _sum + (_points max 1);
+            } forEach (_squad select 2);
+            _sum max 1;
+        };
 
-        _message = format ["Squad size of squad leader %1: %2", _playerId, _squadSize];
-        _return = _squadSize;
+        _message = format ["Voting power of squad leader %1: %2", _playerId, _squadVotingPower];
+        _return = _squadVotingPower;
     };
 
     case "earnPoints": {
         private _playerId = _params select 0;
         private _points = _params select 1;
+
+        WL_PlayerSquadContribution = missionNamespace getVariable ["WL_PlayerSquadContribution", createHashMap];
 
         _oldPoints = WL_PlayerSquadContribution getOrDefault [_playerId, 0];
         _points = _points + _oldPoints;
