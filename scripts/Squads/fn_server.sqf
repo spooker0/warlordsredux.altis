@@ -178,6 +178,8 @@ switch (_action) do {
         // Get squad voting power of squad leader
         private _playerId = _params select 0;
 
+        WL_PlayerSquadContribution = missionNamespace getVariable ["WL_PlayerSquadContribution", createHashMap];
+
         private _squad = SQUAD_MANAGER select {(_x select 1) == _playerId} select 0;
         private _squadVotingPower = if (isNil "_squad") then {
             private _points = WL_PlayerSquadContribution getOrDefault [_playerId, 0];
