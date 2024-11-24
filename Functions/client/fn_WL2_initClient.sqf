@@ -448,8 +448,8 @@ missionNamespace setVariable [format ["BIS_WL2_minesDB_%1", getPlayerUID player]
 			private _isInMySquad = ["isInMySquad", [_ownerID]] call SQD_fnc_client;
 
 			private _isConnectable = player isUAVConnectable [_uav, true];
-
-			if (!_isInMySquad && _ownerUnit != player) then {
+			private _isLockedFromSquad = _uav getVariable ["BIS_WL_lockedFromSquad", false];
+			if ((!_isInMySquad || _isLockedFromSquad) && _ownerUnit != player) then {
 				_uav setVariable ["WL_canConnectUav", false];
 				if (_isConnectable) then {
 					player disableUAVConnectability [_uav, true];
