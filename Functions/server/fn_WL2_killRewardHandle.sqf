@@ -1,6 +1,7 @@
 params ["_unit", "_responsibleLeader"];
 
-if (!(_unit isKindOf "Man") && {(((serverNamespace getVariable "WL2_killRewards") getOrDefault [(typeOf _unit), 0]) == 0)}) exitWith {};
+private _assetActualType = _unit getVariable ["WL2_orderedClass", typeOf _unit];
+if (!(_unit isKindOf "Man") && {(((serverNamespace getVariable "WL2_killRewards") getOrDefault [_assetActualType, 0]) == 0)}) exitWith {};
 
 // One last sanity check
 if (!isPlayer _responsibleLeader) exitWith {};
@@ -15,7 +16,7 @@ if (_killerSide != _unitSide) then {
 	if (_unit isKindOf "Man") then {
 		_killReward = (if (isPlayer _unit) then {60} else {30});
 	} else {
-		_killReward = (serverNamespace getVariable "WL2_killRewards") get (typeOf _unit);
+		_killReward = (serverNamespace getVariable "WL2_killRewards") getOrDefault [_assetActualType, 0];
 	};
 	if (_responsibleLeader getVariable ["MRTM_3rdPersonDisabled", false]) then {
 		_killReward = _killReward * 2;

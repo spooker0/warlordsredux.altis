@@ -55,7 +55,14 @@ addMissionEventHandler ["EntityKilled", {
 
 		private _lastSpotted = _unit getVariable ["WL_lastSpotted", objNull];
 		if (!isNull _lastSpotted && {_lastSpotted != _responsiblePlayer}) then {
-			private _spotReward = 5;
+			private _assetActualType = _unit getVariable ["WL2_orderedClass", typeOf _unit];
+			private _killReward = if (_unit isKindOf "Man") then {
+				if (isPlayer _unit) then {60} else {30};
+			} else {
+				(serverNamespace getVariable "WL2_killRewards") getOrDefault [_assetActualType, 0];
+			};
+
+			private _spotReward = round (_killReward / 8.0);
 			_uid = getPlayerUID _lastSpotted;
 			_spotReward call BIS_fnc_WL2_fundsDatabaseWrite;
 			[_unit, _spotReward, "Spot assist", "#7a7ab9"] remoteExec ["BIS_fnc_WL2_killRewardClient", _lastSpotted];
