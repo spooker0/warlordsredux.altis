@@ -28,11 +28,11 @@ class Aircraft {
                 "LMG_Minigun_Transport"
             };
             addMagazines[] = {
-                "1000Rnd_20mm_shells",
-                "1000Rnd_20mm_shells"
+                "250Rnd_30mm_HE_shells_Tracer_Green",
+                "250Rnd_30mm_APDS_shells_Tracer_Green"
             };
             addWeapons[] = {
-                "gatling_20mm"
+                "gatling_30mm"
             };
         };
 
@@ -45,11 +45,11 @@ class Aircraft {
                 "LMG_Minigun_Transport2"
             };
             addMagazines[] = {
-                "1000Rnd_20mm_shells",
-                "1000Rnd_20mm_shells"
+                "250Rnd_30mm_HE_shells_Tracer_Green",
+                "250Rnd_30mm_APDS_shells_Tracer_Green"
             };
             addWeapons[] = {
-                "gatling_20mm"
+                "gatling_30mm"
             };
         };
     };
@@ -59,6 +59,32 @@ class Aircraft {
         requirements[] = {"H"};
         killReward = 100;
     }; // "CH-67 Huron"
+
+    class B_Plane_Caeser_Armed_01_F {
+        name = "Caesar BTT (Armed)";
+        spawn = "C_Plane_Civil_01_F";
+        cost = 1500;
+
+        requirements[] = {"A"};
+        killReward = 300;
+        class Gunner: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {};
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "500Rnd_127x99_mag_Tracer_Yellow",
+                "500Rnd_127x99_mag_Tracer_Yellow",
+                "96Rnd_40mm_G_belt",
+                "96Rnd_40mm_G_belt",
+                "240Rnd_CMFlare_Chaff_Magazine"
+            };
+            addWeapons[] = {
+                "HMG_127",
+                "GMG_40mm",
+                "CMFlareLauncher"
+            };
+        };
+    }; // "Caesar BTT (Armed)"
 
     class B_Heli_Light_01_dynamicLoadout_F {
         cost = 2500;

@@ -196,13 +196,17 @@ class Vehicles {
                 "GMG_40mm"
             };
             addMagazines[] = {
-                "140Rnd_30mm_MP_shells_Tracer_Red",
-                "140Rnd_30mm_MP_shells_Tracer_Red",
-                "60Rnd_30mm_APFSDS_shells_Tracer_Red",
-                "60Rnd_30mm_APFSDS_shells_Tracer_Red"
+                "60Rnd_20mm_HE_shells",
+                "60Rnd_20mm_HE_shells",
+                "60Rnd_20mm_HE_shells",
+                "60Rnd_20mm_HE_shells",
+                "60Rnd_20mm_HE_shells",
+                "60Rnd_20mm_HE_shells",
+                "60Rnd_20mm_AP_shells",
+                "60Rnd_20mm_AP_shells"
             };
             addWeapons[] = {
-                "autocannon_30mm_CTWS"
+                "cannon_20mm"
             };
         };
     };
