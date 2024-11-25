@@ -24,7 +24,7 @@ class Aircraft {
 
         requirements[] = {"A"};
         killReward = 300;
-        class Gunner: WLTurretDefaults {
+        class Pilot: WLTurretDefaults {
             turret[] = { -1 };
             removeMagazines[] = {};
             removeWeapons[] = {};
@@ -138,6 +138,10 @@ class Aircraft {
         requirements[] = {"H"};
         rearm = 700;
         killReward = 550;
+
+        allowPylonMagazines[] = {
+            "PylonMissile_Missile_HARM_x1"
+        };
     }; // "AH-99 Blackfoot"
 
     class B_Plane_CAS_01_dynamicLoadout_F {
@@ -148,11 +152,11 @@ class Aircraft {
     }; // "A-164 Wipeout (CAS)"
 
     class B_UAV_05_F {
-        cost = 20000;
+        cost = 25000;
         requirements[] = {"A"};
         rearm = 500;
         killReward = 650;
-    }; // "Sentinel"
+    }; // "UCAV Sentinel"
 
     class I_Plane_Fighter_04_F {
         cost = 23000;
@@ -166,6 +170,10 @@ class Aircraft {
         requirements[] = {"A"};
         rearm = 900;
         killReward = 1000;
+
+        allowPylonMagazines[] = {
+            "PylonMissile_Missile_HARM_x1"
+        };
     }; // "F/A-181 Black Wasp II"
 
     class B_Plane_Fighter_01_Stealth_F {
@@ -173,5 +181,9 @@ class Aircraft {
         requirements[] = {"A"};
         rearm = 900;
         killReward = 1000;
+
+        allowPylonMagazines[] = {
+            "PylonMissile_Missile_HARM_x1"
+        };
     }; // "F/A-181 Black Wasp II (Stealth)"
 };

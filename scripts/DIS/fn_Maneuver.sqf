@@ -7,37 +7,39 @@ params ["_projectile"];
     private _startTime = time;
     private _isLOAL = getNumber (configfile >> "CfgAmmo" >> typeOf _projectile >> "autoSeekTarget") == 1;
 
-    sleep 3;
     while { alive _projectile } do {
+        sleep 3;
+
         // Ghost missile relocking check.
         if (_isLOAL && !(alive missileTarget _projectile)) exitWith {
             triggerAmmo _projectile;
-        };        
+        };
         if (time > (_startTime + WL_SAM_TIMEOUT)) exitWith {
             triggerAmmo _projectile;
         };
-
-        sleep 1;
     };
 };
 
-sleep 5;
+private _iteration = 0;
+private _maxAcceleration = (getNumber (configfile >> "CfgAmmo" >> typeOf _projectile >> "thrust")) / 10.0 * WL_SAM_ACCELERATION_FACTOR;
+private _maxSpeed = getNumber (configfile >> "CfgAmmo" >> typeOf _projectile >> "maxSpeed") * WL_SAM_MAX_SPEED_FACTOR;
+sleep 1;
 while { alive _projectile } do {
     private _currentVector = velocityModelSpace _projectile;
 
     private _currentSpeed = _currentVector # 1;
-    if ((_currentSpeed + WL_SAM_ACCELERATION) < WL_SAM_MAX_SPEED) then {
-        _currentSpeed = _currentSpeed + WL_SAM_ACCELERATION;
-    } else {
-        _currentSpeed = WL_SAM_MAX_SPEED;
+
+    if (_currentSpeed < _maxSpeed) then {
+        _currentSpeed = _currentSpeed + _maxAcceleration;
+
+        private _newVector = [
+            _currentVector # 0,
+            _currentSpeed,
+            _currentVector # 2
+        ];
+        _projectile setVelocityModelSpace _newVector;
     };
 
-    private _newVector = [
-        _currentVector # 0,
-        _currentSpeed,
-        _currentVector # 2
-    ];
-    _projectile setVelocityModelSpace _newVector;
-
+    _iteration = _iteration + 1;
     sleep 0.1;
 };
