@@ -80,7 +80,8 @@ class Aircraft {
         killReward = 550;
 
         allowPylonMagazines[] = {
-            "PylonRack_12Rnd_PG_missiles"
+            "PylonRack_12Rnd_PG_missiles",
+            "PylonMissile_Missile_KH58_x1"
         };
     }; // "Mi-48 Kajman"
 
@@ -110,6 +111,10 @@ class Aircraft {
         requirements[] = {"A"};
         rearm = 900;
         killReward = 1100;
+
+        allowPylonMagazines[] = {
+            "PylonMissile_Missile_KH58_x1"
+        };
     }; // "To-201 Shikra (Stealth)"
 
     class O_Plane_Fighter_02_F {
@@ -117,5 +122,9 @@ class Aircraft {
         requirements[] = {"A"};
         rearm = 900;
         killReward = 1100;
+
+        allowPylonMagazines[] = {
+            "PylonMissile_Missile_KH58_x1"
+        };
     }; // "To-201 Shikra"
 };
