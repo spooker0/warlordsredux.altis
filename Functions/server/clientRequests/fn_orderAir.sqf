@@ -68,6 +68,17 @@ private _turretOverridesForVehicle = _turretOverrides getOrDefault [_orderedClas
 		_asset removeWeaponTurret [_x, _turret];
 	} forEach _removeWeapons;
 
+	private _existingMagazines = _asset magazinesTurret _turret;
+	private _existingWeapons = _asset weaponsTurret _turret;
+
+	{
+		_asset removeMagazineTurret [_x, _turret];
+	} forEach _existingMagazines;
+
+	{
+		_asset removeWeaponTurret [_x, _turret];
+	} forEach _existingWeapons;
+
 	{
 		_asset addMagazineTurret [_x, _turret];
 	} forEach _addMagazines;
@@ -75,6 +86,14 @@ private _turretOverridesForVehicle = _turretOverrides getOrDefault [_orderedClas
 	{
 		_asset addWeaponTurret [_x, _turret];
 	} forEach _addWeapons;
+
+	{
+		_asset addMagazineTurret [_x, _turret];
+	} forEach _existingMagazines;
+
+	{
+		_asset addWeaponTurret [_x, _turret];
+	} forEach _existingWeapons;
 } forEach _turretOverridesForVehicle;
 
 private _smallFlareMags = (_asset magazinesTurret [-1]) select {_x == "120Rnd_CMFlare_Chaff_Magazine"};

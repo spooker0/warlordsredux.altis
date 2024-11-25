@@ -390,6 +390,42 @@ class Vehicles {
     //     aps = 3;
     // }; // "T-100 Futura"
 
+    class O_MBT_04_nato_F {
+        cost = 18000;
+        name = "T-140N Yukon";
+        spawn = "O_MBT_04_command_F";
+        requirements[] = {};
+        rearm = 600;
+        killReward = 800;
+        capValue = 4;
+        aps = 3;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {
+                "20Rnd_125mm_APFSDS_T_Green",
+                "12Rnd_125mm_HEAT_T_Green",
+                "12Rnd_125mm_HE_T_Green"
+            };
+            removeWeapons[] = {
+                "cannon_125mm_advanced"
+            };
+            addMagazines[] = {
+                "4Rnd_120mm_LG_cannon_missiles",
+                "4Rnd_120mm_LG_cannon_missiles",
+                "4Rnd_120mm_LG_cannon_missiles",
+                "4Rnd_120mm_LG_cannon_missiles",
+                "4Rnd_120mm_LG_cannon_missiles",
+                "4Rnd_120mm_LG_cannon_missiles",
+                "4Rnd_120mm_LG_cannon_missiles",
+                "4Rnd_120mm_LG_cannon_missiles"
+            };
+            addWeapons[] = {
+                "cannon_120mm"
+            };
+        };
+    };
+
     class I_Truck_02_MRL_F {
         cost = 18000;
         requirements[] = {};
