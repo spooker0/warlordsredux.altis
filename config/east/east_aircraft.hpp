@@ -69,8 +69,7 @@ class Aircraft {
         killReward = 600;
 
         allowPylonMagazines[] = {
-            "PylonRack_12Rnd_PG_missiles",
-            "PylonMissile_Missile_KH58_x1"
+            "PylonRack_12Rnd_PG_missiles"
         };
     }; // "K40 Ababil-3"
 
@@ -81,7 +80,8 @@ class Aircraft {
         killReward = 550;
 
         allowPylonMagazines[] = {
-            "PylonRack_12Rnd_PG_missiles"
+            "PylonRack_12Rnd_PG_missiles",
+            "PylonMissile_Missile_KH58_x1"
         };
     }; // "Mi-48 Kajman"
 
