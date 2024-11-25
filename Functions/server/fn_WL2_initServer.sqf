@@ -72,7 +72,7 @@ if !(isDedicated) then {waitUntil {!isNull player && {isPlayer player}}};
 call BIS_fnc_WL2_sectorsInitServer;
 "setup" call BIS_fnc_WL2_handleRespawnMarkers;
 if !(isDedicated) then {
-	{_x call BIS_fnc_WL2_parsePurchaseList} forEach BIS_WL_competingSides;
+	{_x call BIS_fnc_WL2_parsePurchaseList} forEach BIS_WL_sidesArray;
 };
 0 spawn BIS_fnc_WL2_detectNewPlayers;
 ["server", true] call BIS_fnc_WL2_updateSectorArrays;
@@ -100,7 +100,7 @@ setTimeMultiplier 8;
 			private _currentSideTarget = missionNamespace getVariable [_currentSideTargetVar, objNull];
 			private _currentSideTargetOwner = objNull;
 			waitUntil {
-				sleep 5; 
+				sleep 5;
 				_currentSideTarget = missionNamespace getVariable [_currentSideTargetVar, objNull];
 				_currentSideTargetOwner = _currentSideTarget getVariable ["BIS_WL_owner", sideUnknown];
 				_currentSideTargetOwner != _side;
@@ -117,8 +117,8 @@ setTimeMultiplier 8;
 if !(["(EU) #11", serverName] call BIS_fnc_inString) then {
 	0 spawn {
 		while {!BIS_WL_missionEnd} do {
-			_allEntities = entities [[], ["Logic"], true]; 
-			{ 
+			_allEntities = entities [[], ["Logic"], true];
+			{
 				_x addCuratorEditableObjects [_allEntities, true];
 			} forEach allCurators;
 			sleep 30;

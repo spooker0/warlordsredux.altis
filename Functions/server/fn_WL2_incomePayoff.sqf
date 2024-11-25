@@ -6,11 +6,15 @@ while {!BIS_WL_missionEnd} do {
 	{
 		_uid = getPlayerUID _x;
 
-		if ((serverNamespace getVariable [variable, 40]) < 50) then {
-			50 call BIS_fnc_WL2_fundsDatabaseWrite;
+		private _calculatedIncome = if (side group _x == independent) then {
+			private _blueIncome = serverNamespace getVariable ["actualIncomeBlu", 40];
+			private _opfIncome = serverNamespace getVariable ["actualIncomeOpf", 40];
+			_blueIncome + _opfIncome;
 		} else {
-			(serverNamespace getVariable variable) call BIS_fnc_WL2_fundsDatabaseWrite;
+			serverNamespace getVariable [variable, 40];
 		};
+
+		(_calculatedIncome max 50) call BIS_fnc_WL2_fundsDatabaseWrite;
 	} forEach _notBlocked;
 
 	private _blocked = allPlayers select {(_x getVariable ["BIS_WL_incomeBlocked", false])};

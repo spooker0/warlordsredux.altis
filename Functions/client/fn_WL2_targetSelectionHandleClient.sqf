@@ -1,5 +1,7 @@
 #include "..\warlords_constants.inc"
 
+if !(BIS_WL_playerSide in BIS_WL_competingSides) exitWith {};
+
 {_x setMarkerAlphaLocal 0} forEach BIS_WL_sectorLinks;
 _mostVotedVar = format ["BIS_WL_mostVoted_%1", BIS_WL_playerSide];
 _voteTallyDisplayVar = format ["BIS_WL_sectorVoteTallyDisplay_%1", BIS_WL_playerSide];

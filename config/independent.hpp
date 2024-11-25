@@ -1,7 +1,8 @@
-class INDEPENDENT {
+class GUER {
     class Infantry {
         class I_soldier_F{
             unitSpawn = 1;
+            cost = 10;
         };
 
         class I_Soldier_GL_F{
@@ -91,6 +92,7 @@ class INDEPENDENT {
             capValue = 3;
             vehicleSpawn = 1;
             aps = 1;
+            cost = 10;
         };
 
         class I_MRAP_03_gmg_F {
@@ -153,9 +155,36 @@ class INDEPENDENT {
         };
     };
 
+    class Naval {
+        class C_Scooter_Transport_01_F {
+            cost = 50;
+            requirements[] = {"W"};
+            killReward = 20;
+        };	// "Water scooter"
+    };
+
+    class Gear {
+        class Box_NATO_Ammo_F {
+            cost = 50;
+            requirements[] = {};
+            killReward = 40;
+        }; // "Basic Ammo [NATO]"
+    };
+
+    class Defences {
+        class Land_Razorwire_F {
+            cost = 50;
+            requirements[] = {};
+            offset[] = {0, 5, 0};
+            killReward = 30;
+            structure = 1;
+        }; // "Razor Wire Fence"
+    };
+
     class Aircraft {
         class I_Heli_light_03_F {
             killReward = 300;
+            cost = 10;
         };
 
         class I_Plane_Fighter_03_CAS_F {

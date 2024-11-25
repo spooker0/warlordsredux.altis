@@ -189,10 +189,10 @@ if (["(EU) #11", serverName] call BIS_fnc_inString) then {
 	};
 };
 
-if !(BIS_WL_playerSide in BIS_WL_competingSides) exitWith {
-	["client_init"] call BIS_fnc_endLoadingScreen;
-	["Warlords error: Your unit is not a Warlords competitor"] call BIS_fnc_error;
-};
+// if !(BIS_WL_playerSide in BIS_WL_competingSides) exitWith {
+// 	["client_init"] call BIS_fnc_endLoadingScreen;
+// 	["Warlords error: Your unit is not a Warlords competitor"] call BIS_fnc_error;
+// };
 
 private _penaltyCheck = profileNameSpace getVariable ["teamkill_penalty", createHashMap];
 private _sessionID = missionNamespace getVariable ["sessionID", -1];
@@ -491,7 +491,7 @@ missionNamespace setVariable [format ["BIS_WL2_minesDB_%1", getPlayerUID player]
 				BIS_WL_selection_dimSectors = true;
 			};
 			case WL_ID_SELECTION_FAST_TRAVEL: {
-				BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 2) select {
+				BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 0) select {
 					(_x getVariable ["BIS_WL_owner", independent]) == (side (group player))
 				};
 				BIS_WL_selection_showLinks = false;
