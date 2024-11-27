@@ -155,8 +155,9 @@ class Vehicles {
 
     class B_LSV_01_AT_UP_F {
         name = "Prowler (AT UP)";
+        description = "Prowler (AT UP) is a variant of the Prowler armed with a 5-mag Titan AT launcher.<br/>Armament: 5Rnd Titan AT x2";
         spawn = "B_LSV_01_AT_F";
-        cost = 1000;
+        cost = 1100;
         requirements[] = {};
         rearm = 200;
         killReward = 250;
@@ -191,6 +192,7 @@ class Vehicles {
 
     class B_MRAP_01_gmg_up_F {
         name = "Hunter UP Autocannon";
+        description = "Hunter UP is a variant of the Hunter armed with a 20mm autocannon.<br/>Armament: 60Rnd 20mm HE x6, 60Rnd 20mm AP x3, 200Rnd 127mm x3";
         spawn = "B_MRAP_01_gmg_F";
         cost = 1500;
         requirements[] = {};
@@ -285,6 +287,7 @@ class Vehicles {
 
     // class B_APC_Wheeled_03_sam_F {
     //     name = "AFV-4 Gorgon AD";
+    //     description = "AFV-4 Gorgon AD is a variant of the AFV-4 Gorgon armed with a SAAMI launcher.<br/>Armament: 4Rnd SAAMI x6, 1000Rnd 20mm x2";
     //     spawn = "B_APC_Wheeled_03_cannon_F";
     //     cost = 3000;
     //     requirements[] = {};
@@ -331,6 +334,7 @@ class Vehicles {
 
     class B_APC_Wheeled_01_cannon_up_F {
         name = "AMV-7 Marshall UP";
+        description = "AMV-7 Marshall UP is a variant of the AMV-7 Marshall armed with a 20mm autocannon.<br/>Armament: 1000Rnd 20mm x2";
         spawn = "B_APC_Wheeled_01_cannon_F";
         cost = 3500;
         requirements[] = {};
@@ -430,6 +434,7 @@ class Vehicles {
 
     class B_APC_Tracked_01_AA_UP_F {
         name = "IFV-6X Puma";
+        description = "IFV-6X Puma is a variant of the IFV-6a Cheetah armed with Defender missiles.<br/>Armament: 680Rnd 35mm x2, 4Rnd Defender";
         spawn = "B_APC_Tracked_01_AA_F";
         cost = 9000;
         requirements[] = {};
@@ -458,6 +463,7 @@ class Vehicles {
 
     // class B_MBT_01_TUSK_Railgun_F {
     //     name = "M2X Slammer (Railgun)";
+    //     description = "M2X Slammer (Railgun) is a variant of the M2A1 Slammer armed with a railgun.<br/>Armament: 60Rnd 75mm APFSDS x2";
     //     spawn = "B_MBT_01_TUSK_F";
     //     cost = 13000;
     //     requirements[] = {};

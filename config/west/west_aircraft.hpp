@@ -19,6 +19,7 @@ class Aircraft {
 
     class B_Plane_Caeser_Armed_01_F {
         name = "Caesar BTT (Armed)";
+        description = "Caesar BTT (Armed) is a variant of the Caesar BTT armed with a HMG, GMG, and countermeasures.<br/>Armament: 500Rnd 12.7mm x2, 96Rnd 40mm x2, 240Rnd CMFlare_Chaff";
         spawn = "C_Plane_Civil_01_F";
         cost = 1500;
 
@@ -45,6 +46,7 @@ class Aircraft {
 
     class B_Heli_Transport_01_UP_F {
         name = "UH-80 Ghost Hawk UP";
+        description = "UH-80 Ghost Hawk UP is a variant of the UH-80 Ghost Hawk armed with 20mm autocannons.<br/>Armament (each door): 250Rnd 20mm HE, 250Rnd 20mm APDS";
         spawn = "B_Heli_Transport_01_F";
         cost = 2000;
         requirements[] = {"H"};

@@ -219,6 +219,7 @@ class Defences {
 
     class O_static_AA_UP_F {
         name = "Static AA Launcher (UP)";
+        description = "Static AA Launcher (UP) is a variant of the Static AA Launcher armed with SAAMI missiles.<br/>Armament: 4Rnd SAAMI x3";
         spawn = "O_static_AA_F";
         cost = 600;
         requirements[] = {};
@@ -269,6 +270,7 @@ class Defences {
 
     class O_UAV_01_UP_F {
         name = "AR-2 Darter UP";
+        description = "AR-2 Darter UP is a variant of the AR-2 Darter armed with a 45ACP SMG.<br/>Armament: 30Rnd 45ACP x20";
         spawn = "O_UAV_01_F";
         cost = 1200;
         requirements[] = {};
@@ -308,6 +310,7 @@ class Defences {
 
     class O_UGV_01_rcws_up_F {
         name = "UGV Stomper UP";
+        description = "UGV Stomper UP is a variant of the UGV Stomper armed with a 30mm autocannon.<br/>Armament: 140Rnd 30mm MP, 60Rnd 30mm APFSDS";
         spawn = "O_UGV_01_rcws_F";
         cost = 1500;
         requirements[] = {};
@@ -335,6 +338,7 @@ class Defences {
 
     class Land_Communication_F {
         name = "Jamming Tower";
+        description = "Jamming Tower can be used to jam enemy autonomous assets. It must be placed outside the home base in an owned sector.";
         cost = 2500;
         requirements[] = {};
         offset[] = {0, 6, 0};

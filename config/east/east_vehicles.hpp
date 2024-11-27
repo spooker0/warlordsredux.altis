@@ -125,7 +125,7 @@ class Vehicles {
 
     class O_LSV_02_AT_M_F {
         name = "Qilin (AT-M)";
-        description = "Qilin (AT-M) is a variant of the Qilin armed with a Firefist AT missile launcher.<br/>";
+        description = "Qilin (AT-M) is a variant of the Qilin armed with a Firefist AT missile launcher.<br/>Armament: 2Rnd Firefist x5";
         spawn = "O_LSV_02_AT_F";
         cost = 800;
         requirements[] = {};
@@ -204,6 +204,7 @@ class Vehicles {
 
     class O_MRAP_02_gmg_m_F {
         name = "Ifrit-M Autocannon";
+        description = "Ifrit-M is a variant of the Ifrit armed with a 20mm autocannon.<br/>Armament: 60Rnd 20mm HE x6, 60Rnd 20mm AP x3, 200Rnd 127mm x3";
         spawn = "O_MRAP_02_gmg_F";
         cost = 1500;
         requirements[] = {};
@@ -251,6 +252,7 @@ class Vehicles {
 
     class O_APC_Wheeled_02_rcws_v2_m_F {
         name = "MSE-3M Marid Autocannon";
+        description = "MSE-3M Marid is a variant of the MSE-3 Marid armed with a 30mm autocannon.<br/>Armament: 250Rnd 30mm HE x2, 250Rnd 30mm APDS x2";
         spawn = "O_APC_Wheeled_02_rcws_v2_F";
         cost = 2600;
         requirements[] = {};
@@ -344,6 +346,7 @@ class Vehicles {
 
     class O_APC_Tracked_02_AA_M_F {
         name = "ZSU-49 Euphrates";
+        description = "ZSU-49 Euphrates is a variant of the ZSU-39 Tigris armed with Rhea missiles.<br/>Armament: 680Rnd 35mm AA x2, 4Rnd Rhea";
         spawn = "O_APC_Tracked_02_AA_F";
         cost = 9000;
         requirements[] = {};
@@ -398,9 +401,10 @@ class Vehicles {
     // }; // "T-100 Futura"
 
     class O_MBT_04_nato_F {
-        cost = 18000;
         name = "T-140N Yukon";
+        description = "T-140N Yukon is a variant of the T-140 Angara armed with a NATO 120mm cannon.<br/>Armament: 4Rnd 120mm ATGM LG x8";
         spawn = "O_MBT_04_command_F";
+        cost = 18000;
         requirements[] = {};
         rearm = 600;
         killReward = 800;

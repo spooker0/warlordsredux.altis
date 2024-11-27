@@ -25,6 +25,7 @@ class Aircraft {
 
     class O_Plane_Caeser_Armed_01_F {
         name = "Caesar BTT (Armed)";
+        description = "Caesar BTT (Armed) is a variant of the Caesar BTT armed with a HMG, GMG, and countermeasures.<br/>Armament: 500Rnd 12.7mm x2, 96Rnd 40mm x2, 240Rnd CMFlare_Chaff";
         spawn = "C_Plane_Civil_01_F";
         cost = 1500;
 
