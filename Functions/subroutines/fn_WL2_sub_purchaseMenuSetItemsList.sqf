@@ -26,8 +26,8 @@ _purchase_items = _display displayCtrl 1;
 	"<t align = 'left' size = '%2'>%1</t>",
 	[
 		format [localize "STR_A3_WL_asset_infantry_info", BIS_WL_matesAvailable],
-		localize "STR_A3_WL_LightVehicles_Info",
-		localize "STR_A3_WL_HeavyVehicles_Info",
+		localize "STR_A3_WL_LightVehicle_Info",
+		localize "STR_A3_WL_HeavyVehicle_Info",
 		localize "STR_A3_WL_RotaryWing_Info",
 		localize "STR_A3_WL_FixedWing_Info",
 		localize "STR_A3_WL_RemoteControl_Info",
