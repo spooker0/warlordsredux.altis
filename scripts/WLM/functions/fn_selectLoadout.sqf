@@ -10,9 +10,9 @@ if (_lbCurSel == 0) exitWith {};    // careful
 private _loadoutName = _control lbData _lbCurSel;
 private _display = findDisplay WLM_DISPLAY;
 
+private _assetActualType = _asset getVariable ["WL2_orderedClass", typeOf _asset];
 private _myPreset = if (_isAircraft) then {
     private _pylonConfig = configFile >> "CfgVehicles" >> typeOf _asset >> "Components" >> "TransportPylonsComponent";
-    private _assetActualType = _asset getVariable ["WL2_orderedClass", typeOf _asset];
 
     if (_loadoutName != "") then {
         getArray (_pylonConfig >> "Presets" >> _loadoutName >> "attachment") apply { [_x, []] };
