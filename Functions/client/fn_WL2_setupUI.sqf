@@ -285,10 +285,14 @@ if (_displayClass == "OSD") then {
 			_purchase_category lbSetValue [(lbSize _purchase_category) - 1, _forEachIndex];
 		} forEach [
 			localize "STR_A3_cfgmarkers_nato_inf",
-			localize "STR_dn_vehicles",
-			localize "STR_A3_WL_menu_aircraft",
+			localize "STR_A3_WL_LightVehicles",
+			localize "STR_A3_WL_HeavyVehicles",
+			localize "STR_A3_WL_RotaryWing",
+			localize "STR_A3_WL_FixedWing",
+			localize "STR_A3_WL_RemoteControl",
+			localize "STR_A3_WL_AirDefense",
+			localize "STR_A3_WL_SectorDefense",
 			localize "STR_A3_rscdisplaygarage_tab_naval",
-			localize "STR_A3_WL_menu_defences",
 			localize "STR_A3_rscdisplaywelcome_exp_parb_list4_title",
 			localize "STR_A3_WL_menu_strategy"
 		];

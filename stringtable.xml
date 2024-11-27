@@ -1,6 +1,244 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project name="Warlords Redux">
     <Container name="WL2_onScreenText">
+        <Key ID="STR_A3_WL_LightVehicles">
+            <Original>Light Vehicles</Original>
+            <English>Light Vehicles</English>
+            <Czech>Lehká vozidla</Czech>
+            <French>Véhicules légers</French>
+            <German>Leichte Fahrzeuge</German>
+            <Italian>Veicoli leggeri</Italian>
+            <Polish>Pojazdy lekkie</Polish>
+            <Portuguese>Veículos leves</Portuguese>
+            <Russian>Легкие машины</Russian>
+            <Spanish>Vehículos ligeros</Spanish>
+            <Turkish>Hafif Araçlar</Turkish>
+            <Korean>경량 차량</Korean>
+            <Japanese>軽車両</Japanese>
+            <Chinesesimp>轻型车辆</Chinesesimp>
+            <Chinese>輕型車輛</Chinese>
+        </Key>
+        <Key ID="STR_A3_WL_HeavyVehicles">
+            <Original>Heavy Vehicles</Original>
+            <English>Heavy Vehicles</English>
+            <Czech>Těžká vozidla</Czech>
+            <French>Véhicules lourds</French>
+            <German>Schwere Fahrzeuge</German>
+            <Italian>Veicoli pesanti</Italian>
+            <Polish>Pojazdy ciężkie</Polish>
+            <Portuguese>Veículos pesados</Portuguese>
+            <Russian>Тяжелые машины</Russian>
+            <Spanish>Vehículos pesados</Spanish>
+            <Turkish>Ağır Araçlar</Turkish>
+            <Korean>중량 차량</Korean>
+            <Japanese>重車両</Japanese>
+            <Chinesesimp>重型车辆</Chinesesimp>
+            <Chinese>重型車輛</Chinese>
+        </Key>
+        <Key ID="STR_A3_WL_RotaryWing">
+            <Original>Rotary Wing</Original>
+            <English>Rotary Wing</English>
+            <Czech>Vrtulníky</Czech>
+            <French>Hélicoptères</French>
+            <German>Drehflügler</German>
+            <Italian>Elicotteri</Italian>
+            <Polish>Śmigłowce</Polish>
+            <Portuguese>Helicópteros</Portuguese>
+            <Russian>Вертолеты</Russian>
+            <Spanish>Helicópteros</Spanish>
+            <Turkish>Döner Kanatlılar</Turkish>
+            <Korean>회전익</Korean>
+            <Japanese>回転翼機</Japanese>
+            <Chinesesimp>旋翼机</Chinesesimp>
+            <Chinese>旋翼機</Chinese>
+        </Key>
+        <Key ID="STR_A3_WL_FixedWing">
+            <Original>Fixed Wing</Original>
+            <English>Fixed Wing</English>
+            <Czech>Letadla</Czech>
+            <French>Avions</French>
+            <German>Starrflügler</German>
+            <Italian>Aerei</Italian>
+            <Polish>Samoloty</Polish>
+            <Portuguese>Aeronaves de asa fixa</Portuguese>
+            <Russian>Самолеты</Russian>
+            <Spanish>Aeronaves de ala fija</Spanish>
+            <Turkish>Sabit Kanatlılar</Turkish>
+            <Korean>고정익</Korean>
+            <Japanese>固定翼機</Japanese>
+            <Chinesesimp>固定翼机</Chinesesimp>
+            <Chinese>固定翼機</Chinese>
+        </Key>
+        <Key ID="STR_A3_WL_RemoteControl">
+            <Original>Remote Control</Original>
+            <English>Remote Control</English>
+            <Czech>Vzdálené ovládání</Czech>
+            <French>Télécommande</French>
+            <German>Fernsteuerung</German>
+            <Italian>Telecomando</Italian>
+            <Polish>Zdalne sterowanie</Polish>
+            <Portuguese>Controle remoto</Portuguese>
+            <Russian>Дистанционное управление</Russian>
+            <Spanish>Control remoto</Spanish>
+            <Turkish>Uzaktan Kumanda</Turkish>
+            <Korean>원격 제어</Korean>
+            <Japanese>リモートコントロール</Japanese>
+            <Chinesesimp>遥控</Chinesesimp>
+            <Chinese>遙控</Chinese>
+        </Key>
+        <Key ID="STR_A3_WL_AirDefense">
+            <Original>Air Defense</Original>
+            <English>Air Defense</English>
+            <Czech>Protiraketová obrana</Czech>
+            <French>Défense aérienne</French>
+            <German>Flugabwehr</German>
+            <Italian>Difesa aerea</Italian>
+            <Polish>Obrona przeciwlotnicza</Polish>
+            <Portuguese>Defesa aérea</Portuguese>
+            <Russian>ПВО</Russian>
+            <Spanish>Defensa aérea</Spanish>
+            <Turkish>Hava Savunması</Turkish>
+            <Korean>방공</Korean>
+            <Japanese>防空</Japanese>
+            <Chinesesimp>防空</Chinesesimp>
+            <Chinese>防空</Chinese>
+        </Key>
+        <Key ID="STR_A3_WL_SectorDefense">
+            <Original>Sector Defense</Original>
+            <English>Sector Defense</English>
+            <Czech>Obrana sektoru</Czech>
+            <French>Défense de secteur</French>
+            <German>Sektorverteidigung</German>
+            <Italian>Difesa del settore</Italian>
+            <Polish>Obrona sektora</Polish>
+            <Portuguese>Defesa do setor</Portuguese>
+            <Russian>Защита сектора</Russian>
+            <Spanish>Defensa del sector</Spanish>
+            <Turkish>Sektör Savunması</Turkish>
+            <Korean>섹터 방어</Korean>
+            <Japanese>セクター防衛</Japanese>
+            <Chinesesimp>区域防御</Chinesesimp>
+            <Chinese>區域防禦</Chinese>
+        </Key>
+        <Key ID="STR_A3_WL_LightVehicle_Info">
+            <Original>Compact and maneuverable ground vehicles designed for utility and mobility.</Original>
+            <English>Compact and maneuverable ground vehicles designed for utility and mobility.</English>
+            <Czech>Kompaktní a ovladatelná pozemní vozidla navržená pro užitečnost a mobilitu.</Czech>
+            <French>Véhicules terrestres compacts et maniables conçus pour l'utilité et la mobilité.</French>
+            <German>Kompakte und wendige Bodenfahrzeuge, die für Nutzen und Mobilität ausgelegt sind.</German>
+            <Italian>Veicoli terrestri compatti e manovrabili progettati per utilità e mobilità.</Italian>
+            <Polish>Kompaktowe i zwrotne pojazdy naziemne zaprojektowane pod kątem użyteczności i mobilności.</Polish>
+            <Portuguese>Veículos terrestres compactos e manobráveis projetados para utilidade e mobilidade.</Portuguese>
+            <Russian>Компактные и маневренные наземные машины, предназначенные для полезности и мобильности.</Russian>
+            <Spanish>Vehículos terrestres compactos y maniobrables diseñados para utilidad y movilidad.</Spanish>
+            <Turkish>Kullanışlılık ve hareketlilik için tasarlanmış kompakt ve manevra kabiliyeti yüksek kara araçları.</Turkish>
+            <Korean>실용성과 기동성을 위해 설계된 컴팩트하고 기동성 있는 지상 차량.</Korean>
+            <Japanese>実用性と機動性を備えたコンパクトで機動性の高い地上車両。</Japanese>
+            <Chinesesimp>为实用性和机动性设计的紧凑且灵活的地面车辆。</Chinesesimp>
+            <Chinese>為實用性和機動性設計的緊湊且靈活的地面車輛。</Chinese>
+        </Key>
+        <Key ID="STR_A3_WL_HeavyVehicle_Info">
+            <Original>Heavily armored ground vehicles built for durability and carrying specialized weaponry.</Original>
+            <English>Heavily armored ground vehicles built for durability and carrying specialized weaponry.</English>
+            <Czech>Silně obrněná pozemní vozidla vyrobená pro odolnost a nesoucí speciální zbraně.</Czech>
+            <French>Véhicules terrestres lourdement blindés conçus pour la durabilité et équipés d'armements spécialisés.</French>
+            <German>Schwer gepanzerte Bodenfahrzeuge, die auf Haltbarkeit und spezielle Bewaffnung ausgelegt sind.</German>
+            <Italian>Veicoli terrestri pesantemente corazzati progettati per la durata e per il trasporto di armi specializzate.</Italian>
+            <Polish>Mocno opancerzone pojazdy naziemne zaprojektowane pod kątem trwałości i przenoszenia specjalistycznego uzbrojenia.</Polish>
+            <Portuguese>Veículos terrestres fortemente blindados projetados para durabilidade e transporte de armamento especializado.</Portuguese>
+            <Russian>Сильно бронированные наземные машины, рассчитанные на долговечность и оснащенные специальным вооружением.</Russian>
+            <Spanish>Vehículos terrestres fuertemente blindados diseñados para durabilidad y equipados con armamento especializado.</Spanish>
+            <Turkish>Dayanıklılık ve özel silah sistemlerini taşımak için tasarlanmış ağır zırhlı kara araçları.</Turkish>
+            <Korean>내구성과 특수 무기 운반을 위해 제작된 중장갑 지상 차량.</Korean>
+            <Japanese>耐久性と特殊武器の搭載のために設計された重装甲地上車両。</Japanese>
+            <Chinesesimp>为耐用性和携带专业武器设计的重型装甲地面车辆。</Chinesesimp>
+            <Chinese>為耐用性和攜帶專業武器設計的重型裝甲地面車輛。</Chinese>
+        </Key>
+        <Key ID="STR_A3_WL_RotaryWing_Info">
+            <Original>Helicopters.</Original>
+            <English>Helicopters.</English>
+            <Czech>Vrtulníky.</Czech>
+            <French>Hélicoptères.</French>
+            <German>Hubschrauber.</German>
+            <Italian>Elicotteri.</Italian>
+            <Polish>Śmigłowce.</Polish>
+            <Portuguese>Helicópteros.</Portuguese>
+            <Russian>Вертолеты.</Russian>
+            <Spanish>Helicópteros.</Spanish>
+            <Turkish>Helikopterler.</Turkish>
+            <Korean>헬리콥터.</Korean>
+            <Japanese>ヘリコプター。</Japanese>
+            <Chinesesimp>直升机。</Chinesesimp>
+            <Chinese>直升機。</Chinese>
+        </Key>
+        <Key ID="STR_A3_WL_FixedWing_Info">
+            <Original>Planes and VTOL aircraft.</Original>
+            <English>Planes and VTOL aircraft.</English>
+            <Czech>Letadla a VTOL stroje.</Czech>
+            <French>Avions et appareils VTOL.</French>
+            <German>Flugzeuge und VTOL-Fluggeräte.</German>
+            <Italian>Aerei e velivoli VTOL.</Italian>
+            <Polish>Samoloty i pojazdy VTOL.</Polish>
+            <Portuguese>Aviões e aeronaves VTOL.</Portuguese>
+            <Russian>Самолеты и аппараты с вертикальным взлетом и посадкой.</Russian>
+            <Spanish>Aviones y aeronaves VTOL.</Spanish>
+            <Turkish>Uçaklar ve VTOL hava araçları.</Turkish>
+            <Korean>비행기 및 수직 이착륙 항공기.</Korean>
+            <Japanese>飛行機とVTOL機。</Japanese>
+            <Chinesesimp>飞机和垂直起降飞机。</Chinesesimp>
+            <Chinese>飛機和垂直起降飛機。</Chinese>
+        </Key>
+        <Key ID="STR_A3_WL_RemoteControl_Info">
+            <Original>Vehicles or equipment operated remotely, allowing for safe and precise control from a distance.</Original>
+            <English>Vehicles or equipment operated remotely, allowing for safe and precise control from a distance.</English>
+            <Czech>Vozidla nebo vybavení ovládané na dálku pro bezpečnou a přesnou manipulaci.</Czech>
+            <French>Véhicules ou équipements télécommandés pour un contrôle sûr et précis à distance.</French>
+            <German>Fahrzeuge oder Geräte, die ferngesteuert werden und sichere sowie präzise Bedienung aus der Ferne ermöglichen.</German>
+            <Italian>Veicoli o attrezzature controllati a distanza per un controllo sicuro e preciso da lontano.</Italian>
+            <Polish>Pojazdy lub sprzęt sterowane zdalnie, zapewniające bezpieczną i precyzyjną kontrolę na odległość.</Polish>
+            <Portuguese>Veículos ou equipamentos operados remotamente, permitindo controle seguro e preciso à distância.</Portuguese>
+            <Russian>Дистанционно управляемые машины или оборудование для безопасного и точного контроля на расстоянии.</Russian>
+            <Spanish>Vehículos o equipos operados de forma remota que permiten un control seguro y preciso a distancia.</Spanish>
+            <Turkish>Uzaktan güvenli ve hassas kontrol sağlamak için işletilen araçlar veya ekipmanlar.</Turkish>
+            <Korean>원격으로 작동하여 안전하고 정밀한 제어를 가능하게 하는 차량 또는 장비.</Korean>
+            <Japanese>安全で正確な遠隔操作が可能な車両や装置。</Japanese>
+            <Chinesesimp>远程操作的车辆或设备，提供安全和精确的控制。</Chinesesimp>
+            <Chinese>遠程操作的車輛或設備，提供安全和精確的控制。</Chinese>
+        </Key>
+        <Key ID="STR_A3_WL_AirDefense_Info">
+            <Original>Systems and launchers designed to detect, intercept, and neutralize enemy aircraft.</Original>
+            <English>Systems and launchers designed to detect, intercept, and neutralize enemy aircraft.</English>
+            <Czech>Systémy a odpalovací zařízení navržené k detekci, zachycení a neutralizaci nepřátelských letadel.</Czech>
+            <French>Systèmes et lanceurs conçus pour détecter, intercepter et neutraliser les avions ennemis.</French>
+            <German>Systeme und Abschussvorrichtungen zur Erkennung, Abfangung und Neutralisierung feindlicher Flugzeuge.</German>
+            <Italian>Sistemi e lanciatori progettati per rilevare, intercettare e neutralizzare velivoli nemici.</Italian>
+            <Polish>Systemy i wyrzutnie zaprojektowane do wykrywania, przechwytywania i neutralizowania wrogich samolotów.</Polish>
+            <Portuguese>Sistemas e lançadores projetados para detectar, interceptar e neutralizar aeronaves inimigas.</Portuguese>
+            <Russian>Системы и пусковые установки для обнаружения, перехвата и нейтрализации вражеских самолетов.</Russian>
+            <Spanish>Sistemas y lanzadores diseñados para detectar, interceptar y neutralizar aviones enemigos.</Spanish>
+            <Turkish>Düşman uçaklarını algılamak, yakalamak ve etkisiz hale getirmek için tasarlanmış sistemler ve fırlatıcılar.</Turkish>
+            <Korean>적 항공기를 탐지, 요격 및 무력화하기 위해 설계된 시스템 및 발사대.</Korean>
+            <Japanese>敵航空機を検出、迎撃、無力化するためのシステムおよび発射装置。</Japanese>
+            <Chinesesimp>设计用于检测、拦截和消除敌机的系统和发射装置。</Chinesesimp>
+            <Chinese>設計用於檢測、攔截和消除敵機的系統和發射裝置。</Chinese>
+        </Key>
+        <Key ID="STR_A3_WL_SectorDefense_Info">
+            <Original>Defensive systems and fortifications designed to protect friendly sectors.</Original>
+            <English>Defensive systems and fortifications designed to protect friendly sectors.</English>
+            <Czech>Obranné systémy a opevnění určené k ochraně spojeneckých sektorů.</Czech>
+            <French>Systèmes de défense et fortifications conçus pour protéger les secteurs amis.</French>
+            <German>Verteidigungssysteme und Befestigungen zum Schutz verbündeter Sektoren.</German>
+            <Italian>Sistemi difensivi e fortificazioni progettati per proteggere i settori alleati.</Italian>
+            <Polish>Systemy obronne i fortyfikacje zaprojektowane do ochrony przyjaznych sektorów.</Polish>
+            <Portuguese>Sistemas defensivos e fortificações projetados para proteger setores aliados.</Portuguese>
+            <Russian>Оборонительные системы и укрепления для защиты дружественных секторов.</Russian>
+            <Spanish>Sistemas defensivos y fortificaciones diseñados para proteger sectores aliados.</Spanish>
+            <Turkish>Dost sektörleri korumak için tasarlanmış savunma sistemleri ve tahkimatlar.</Turkish>
+            <Korean>아군 지역을 보호하기 위해 설계된 방어 시스템 및 요새.</Korean>
+            <Japanese>友軍セクターを保護するために設計された防衛システムと要塞。</Japanese>
+            <Chinesesimp>旨在保护友军区域的防御系统和工事。</Chinesesimp>
+            <Chinese>旨在保護友軍區域的防禦系統和工事。</Chinese>
+        </Key>
         <Key ID="STR_A3_WL_aps_friendly_warning">
             <Original>Watch where you're shooting! You've triggered the Active Protection System on a nearby friendly vehicle.</Original>
             <English>Watch where you're shooting! You've triggered the Active Protection System on a nearby friendly vehicle.</English>

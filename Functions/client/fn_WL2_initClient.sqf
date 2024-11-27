@@ -25,7 +25,6 @@ BIS_fnc_WL2_mapIcons = compileFinal preprocessFileLineNumbers "Functions\client\
 BIS_fnc_WL2_onPause = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_onPause.sqf";
 BIS_fnc_WL2_orderAircraft = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_orderAircraft.sqf";
 BIS_fnc_WL2_orderArsenal = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_orderArsenal.sqf";
-BIS_fnc_WL2_orderDefence = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_orderDefence.sqf";
 BIS_fnc_WL2_orderFastTravel = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_orderFastTravel.sqf";
 BIS_fnc_WL2_orderForfeit = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_orderForfeit.sqf";
 BIS_fnc_WL2_orderFTPodFT = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_orderFTPodFT.sqf";

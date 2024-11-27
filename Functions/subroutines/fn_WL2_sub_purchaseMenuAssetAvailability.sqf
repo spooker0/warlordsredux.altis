@@ -200,7 +200,8 @@ if (_ret) then {
 			_visitedSectorID = _possibleSectors findIf {player inArea (_x getVariable "objectAreaComplete")};
 			_servicesAvailable = BIS_WL_sectorsArray # 5;
 			_var = format ["BIS_WL_ownedVehicles_%1", getPlayerUID player];
-			_vehiclesCnt = count ((missionNamespace getVariable [_var, []]) select {alive _x});
+			private _ownedVehicles = missionNamespace getVariable [_var, []];
+			_vehiclesCnt = count (_ownedVehicles select {alive _x});
 			_units = ((units group player) select {((_x getVariable ["BIS_WL_ownerAsset", "123"]) == getPlayerUID player) && {_x != player && {alive _x}}});
 			private _currentSector = if (_visitedSectorID != -1) then {
 				_possibleSectors # _visitedSectorID
@@ -216,22 +217,50 @@ if (_ret) then {
 
 			if (_requirements findIf {!(_x in _servicesAvailable)} >= 0) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_airdrop_restr1"};
 			if (_category == "Infantry" && {(count _units) >= BIS_WL_matesAvailable}) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_airdrop_restr2"};
-			if (_category in ["Vehicles", "Gear", "Defences", "Aircraft", "Naval"] && {_vehiclesCnt >= (getMissionConfigValue ["BIS_WL_assetLimit", 10])}) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_popup_asset_limit_reached"};
-			if (_category in ["Infantry", "Vehicles", "Gear", "Defences", "Aircraft", "Naval"] && {_nearbyEnemies}) exitWith {_ret = false; _tooltip =  localize "STR_A3_WL_tooltip_deploy_enemies_nearby"};
-			if (_category in ["Infantry", "Vehicles", "Gear", "Defences"] && {vehicle player != player}) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_fasttravel_restr3"};
-			if (_category in ["Vehicles", "Infantry", "Gear", "Defences"] && {(_visitedSectorID == -1)}) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_ftVehicle_restr1"};
-			if (_category in ["Infantry", "Vehicles", "Gear", "Defences", "Aircraft", "Naval"] && {(player getVariable ["BIS_WL_isOrdering", false])}) exitWith {_ret = false; _tooltip =  "Another order is in progress!"};
-			if (_category == "Aircraft") exitWith {
-				if (getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") == 1) then {
-					if (({(unitIsUAV _x) && {alive _x}} count (missionNamespace getVariable [_var, []])) >= (getMissionConfigValue ["BIS_WL_autonomous_limit", 2])) then {
-						_ret = false;
-						_tooltip = format [localize "STR_A3_WL_tip_max_autonomous", (getMissionConfigValue ["BIS_WL_autonomous_limit", 2])];
-					};
+
+			if (_category == "Strategy") exitWith {};
+
+			if (_vehiclesCnt >= (getMissionConfigValue ["BIS_WL_assetLimit", 10])) exitWith {
+				_ret = false;
+				_tooltip = localize "STR_A3_WL_popup_asset_limit_reached";
+			};
+
+			if (_nearbyEnemies) exitWith {
+				_ret = false;
+				_tooltip =  localize "STR_A3_WL_tooltip_deploy_enemies_nearby";
+			};
+
+			if (vehicle player != player) exitWith {
+				_ret = false;
+				_tooltip = localize "STR_A3_WL_fasttravel_restr3";
+			};
+
+			if (_visitedSectorID == -1) exitWith {
+				_ret = false;
+				_tooltip = localize "STR_A3_WL_ftVehicle_restr1";
+			};
+
+			if (player getVariable ["BIS_WL_isOrdering", false]) exitWith {
+				_ret = false;
+				_tooltip = "Another order is in progress!";
+			};
+
+			private _spawnClass = missionNamespace getVariable ["WL2_spawnClass", createHashMap] getOrDefault [_class, _class];
+			if (getNumber (configFile >> "CfgVehicles" >> _spawnClass >> "isUav") == 1) then {
+				private _ownedUavs = _ownedVehicles select {
+					private _isUav = unitIsUAV _x || getNumber (configFile >> "CfgVehicles" >> typeOf _x >> "isUav") == 1;
+					_isUav && alive _x
 				};
-				if (!("A" in _requirements) && _visitedSectorID == -1) then {
+
+				if (count _ownedUavs >= getMissionConfigValue ["BIS_WL_autonomous_limit", 2]) exitWith {
 					_ret = false;
-					_tooltip = localize "STR_A3_WL_ftVehicle_restr1";
+					_tooltip = format [localize "STR_A3_WL_tip_max_autonomous", (getMissionConfigValue ["BIS_WL_autonomous_limit", 2])];
 				};
+			};
+
+			if (!("A" in _requirements) && _visitedSectorID == -1) exitWith {
+				_ret = false;
+				_tooltip = localize "STR_A3_WL_ftVehicle_restr1";
 			};
 
 			if (_class == "Land_Communication_F") then {
@@ -251,14 +280,7 @@ if (_ret) then {
 					_tooltip = localize "STR_A3_WL_jammer_home_restr";
 				};
 			};
-			if (_category == "Defences") exitWith {
-				if (getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") == 1) then {
-					if ((count ((missionNamespace getVariable [_var, []]) select {alive _x && {(getNumber (configFile >> "CfgVehicles" >> typeOf _x >> "isUav") == 1)}})) >= (getMissionConfigValue ["BIS_WL_autonomous_limit", 2])) then {
-						_ret = false;
-						_tooltip = format [localize "STR_A3_WL_tip_max_autonomous", (getMissionConfigValue ["BIS_WL_autonomous_limit", 2])];
-					};
-				};
-			};
+
 			_DLCOwned = [_class, "IsOwned"] call BIS_fnc_WL2_sub_purchaseMenuHandleDLC;
 			_DLCTooltip = [_class, "GetTooltip"] call BIS_fnc_WL2_sub_purchaseMenuHandleDLC;
 		};

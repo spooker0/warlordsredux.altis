@@ -1,31 +1,7 @@
-class Aircraft {
-    class O_Heli_Transport_04_covered_F {
-        cost = 400;
-        requirements[] = {"H"};
-        killReward = 100;
-    }; // "Mi-290 Taru (Transport)"
-
-    class O_Heli_Transport_04_F {
-        cost = 500;
-        requirements[] = {"H"};
-        killReward = 100;
-    }; // "Mi-290 Taru"
-
-    class O_Heli_Transport_04_medevac_F {
-        cost = 500;
-        requirements[] = {"H"};
-        killReward = 100;
-    }; // "Mi-290 Taru (Medical)"
-
-    class O_Heli_Light_02_unarmed_F {
-        cost = 500;
-        requirements[] = {"H"};
-        killReward = 125;
-    }; // "PO-30 Orca (Unarmed)"
-
+class FixedWing {
     class O_Plane_Caeser_Armed_01_F {
         name = "Caesar BTT (Armed)";
-        description = "Caesar BTT (Armed) is a variant of the Caesar BTT armed with a HMG, GMG, and countermeasures.<br/>Armament: 500Rnd 12.7mm x2, 96Rnd 40mm x2, 240Rnd CMFlare_Chaff";
+        description = "Caesar BTT (Armed) is a variant of the Caesar BTT armed with a HMG, GMG, and countermeasures.<br/>Armament: 500Rnd 12.7mm x2, 96Rnd 40mm x2, 240Rnd Countermeasures";
         spawn = "C_Plane_Civil_01_F";
         cost = 1500;
 
@@ -49,42 +25,6 @@ class Aircraft {
             };
         };
     }; // "Caesar BTT (Armed)"
-
-    class O_Heli_Light_02_dynamicLoadout_F {
-        cost = 4000;
-        requirements[] = {"H"};
-        killReward = 300;
-    }; // "PO-30 Orca"
-
-    class O_T_UAV_04_CAS_F {
-        cost = 6000;
-        requirements[] = {"A"};
-        rearm = 300;
-        killReward = 600;
-    }; // "KH-3A Fenghuang"
-
-    class O_UAV_02_dynamicLoadout_F {
-        cost = 8000;
-        requirements[] = {"A"};
-        rearm = 300;
-        killReward = 600;
-
-        allowPylonMagazines[] = {
-            "PylonRack_12Rnd_PG_missiles"
-        };
-    }; // "K40 Ababil-3"
-
-    class O_Heli_Attack_02_dynamicLoadout_F {
-        cost = 10000;
-        requirements[] = {"H"};
-        rearm = 700;
-        killReward = 550;
-
-        allowPylonMagazines[] = {
-            "PylonRack_12Rnd_PG_missiles",
-            "PylonMissile_Missile_KH58_x1"
-        };
-    }; // "Mi-48 Kajman"
 
     class O_T_VTOL_02_infantry_dynamicLoadout_F {
         cost = 14000;

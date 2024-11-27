@@ -1,0 +1,88 @@
+class RotaryWing {
+    class B_Heli_Light_01_F {
+        cost = 300;
+        requirements[] = {"H"};
+        killReward = 100;
+    }; // "MH-9 Hummingbird"
+
+    class B_Heli_Transport_01_F {
+        cost = 800;
+        requirements[] = {"H"};
+        killReward = 100;
+    }; // "UH-80 Ghost Hawk"
+
+    class B_Heli_Transport_03_F {
+        cost = 1000;
+        requirements[] = {"H"};
+        killReward = 100;
+    }; // "CH-67 Huron"
+
+    class B_Heli_Transport_01_UP_F {
+        name = "UH-80 Ghost Hawk UP";
+        description = "UH-80 Ghost Hawk UP is a variant of the UH-80 Ghost Hawk armed with 20mm autocannons.<br/>Armament (each door): 250Rnd 20mm HE, 250Rnd 20mm APDS";
+        spawn = "B_Heli_Transport_01_F";
+        cost = 2000;
+        requirements[] = {"H"};
+        killReward = 200;
+        rearm = 300;
+
+        class LeftGunner: WLTurretDefaults {
+            turret[] = { 1 };
+            removeMagazines[] = {
+                "2000Rnd_65x39_Belt_Tracer_Red"
+            };
+            removeWeapons[] = {
+                "LMG_Minigun_Transport"
+            };
+            addMagazines[] = {
+                "250Rnd_30mm_HE_shells_Tracer_Green",
+                "250Rnd_30mm_APDS_shells_Tracer_Green"
+            };
+            addWeapons[] = {
+                "gatling_30mm"
+            };
+        };
+
+        class RightGunner: WLTurretDefaults {
+            turret[] = { 2 };
+            removeMagazines[] = {
+                "2000Rnd_65x39_Belt_Tracer_Red"
+            };
+            removeWeapons[] = {
+                "LMG_Minigun_Transport2"
+            };
+            addMagazines[] = {
+                "250Rnd_30mm_HE_shells_Tracer_Green",
+                "250Rnd_30mm_APDS_shells_Tracer_Green"
+            };
+            addWeapons[] = {
+                "gatling_30mm"
+            };
+        };
+    };
+
+    class B_Heli_Light_01_dynamicLoadout_F {
+        cost = 2500;
+        requirements[] = {"H"};
+        rearm = 300;
+        killReward = 200;
+    }; // "AH-9 Pawnee"
+
+    class I_Heli_light_03_dynamicLoadout_F {
+        cost = 6000;
+        requirements[] = {"H"};
+        rearm = 300;
+        killReward = 300;
+    }; // "WY-55 Hellcat"
+
+    class B_Heli_Attack_01_dynamicLoadout_F {
+        cost = 13000;
+        requirements[] = {"H"};
+        rearm = 700;
+        killReward = 550;
+
+        allowPylonMagazines[] = {
+            "PylonMissile_Missile_HARM_x1"
+        };
+    }; // "AH-99 Blackfoot"
+};

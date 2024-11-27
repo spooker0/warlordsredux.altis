@@ -1,4 +1,4 @@
-params ["_orderedClass", "_cost"];
+params ["_orderedClass", "_cost", "_offset"];
 
 player setVariable ["BIS_WL_isOrdering", true, [2, clientOwner]];
 
@@ -11,7 +11,15 @@ if (_class isKindOf "Man") then {
 	[_asset, player] spawn BIS_fnc_WL2_newAssetHandle;
 	player setVariable ["BIS_WL_isOrdering", false, [2, clientOwner]];
 } else {
-	_offset = [0, 8, 0];
+	if (visibleMap) then {
+		openMap [false, false];
+		titleCut ["", "BLACK IN", 0.5];
+	};
+
+	if (count _offset != 3) then {
+		_offset = [0, 8, 0];
+	};
+
 	_asset = createSimpleObject [_class, (AGLToASL (player modelToWorld _offset)), true];
 
 	_asset setDir direction player;

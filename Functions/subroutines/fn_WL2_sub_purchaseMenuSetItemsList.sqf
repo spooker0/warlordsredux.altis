@@ -23,13 +23,17 @@ _id = lbCurSel _purchase_category;
 (_display displayCtrl 101) lbSetCurSel ((uiNamespace getVariable ["BIS_WL_purchaseMenuLastSelection", [0, 0, 0]]) # 1);;
 _purchase_items = _display displayCtrl 1;
 (_display displayCtrl 103) ctrlSetStructuredText parseText format [
-	"<t align = 'center' size = '%2'>%1</t>",
+	"<t align = 'left' size = '%2'>%1</t>",
 	[
 		format [localize "STR_A3_WL_asset_infantry_info", BIS_WL_matesAvailable],
-		localize "STR_A3_WL_asset_vehicles_info",
-	 	localize "STR_A3_WL_asset_aircraft_info",
+		localize "STR_A3_WL_LightVehicles_Info",
+		localize "STR_A3_WL_HeavyVehicles_Info",
+		localize "STR_A3_WL_RotaryWing_Info",
+		localize "STR_A3_WL_FixedWing_Info",
+		localize "STR_A3_WL_RemoteControl_Info",
+		localize "STR_A3_WL_AirDefense_Info",
+		localize "STR_A3_WL_SectorDefense_Info",
 	 	localize "STR_A3_WL_asset_naval_info",
-	 	localize "STR_A3_WL_asset_defences_info",
 	 	localize "STR_A3_WL_asset_gear_info",
 	 	""
 	] # _id,

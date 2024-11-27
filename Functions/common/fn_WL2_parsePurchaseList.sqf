@@ -29,6 +29,7 @@ private _savedLoadoutHandled = FALSE;
 
 			_index = _forEachIndex;
 			_category = _x;
+			_category = (_category splitString " ") joinString "";
 			_data = [];
 			if (count _sortedArray >= (_index + 1)) then {
 				_data = _sortedArray # _index
@@ -99,7 +100,7 @@ private _savedLoadoutHandled = FALSE;
 					_backpack = getText (_class >> "backpack");
 					if (_backpack != "") then {_text = _text + (getText (configFile >> "CfgVehicles" >> _backpack >> "displayName"))};
 				} else {
-					if (_category in ["Vehicles", "Aircraft", "Naval", "Defences"]) then {
+					if (_category in ["LightVehicles", "HeavyVehicles", "RotaryWing", "FixedWing", "RemoteControl", "AirDefense", "SectorDefense", "Naval"]) then {
 						_text = getText (_class >> "Library" >> "LibTextDesc");
 						if (_text == "") then {_text = getText (_class >> "Armory" >> "description")};
 						if (_text == "") then {
@@ -179,7 +180,7 @@ private _savedLoadoutHandled = FALSE;
 				if (_picture == "") then {_picture = " "};
 
 				_data pushBack [_className, _cost, _requirements, _displayName, _picture, _text, _offset, _notForAIUse];
-			} forEach (configProperties [_preset >> str _side >> _x, "isClass _x"]);
+			} forEach (configProperties [_preset >> str _side >> _category, "isClass _x"]);
 
 			if (_category == "Gear" && !_saveLoadoutHandled) then {
 				_saveLoadoutHandled = TRUE;
