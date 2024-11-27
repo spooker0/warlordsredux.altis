@@ -189,14 +189,6 @@ class Vehicles {
         aps = 1;
     }; // "Hunter GMG"
 
-    class O_T_Truck_03_device_ghex_F {
-        cost = 1500;
-        requirements[] = {};
-        killReward = 200;
-        capValue = 1;
-        aps = 4;
-    }; // "Tempest Device"
-
     class B_MRAP_01_gmg_up_F {
         name = "Hunter UP Autocannon";
         spawn = "B_MRAP_01_gmg_F";
@@ -235,6 +227,14 @@ class Vehicles {
             };
         };
     };
+
+    class O_T_Truck_03_device_ghex_F {
+        cost = 1500;
+        requirements[] = {};
+        killReward = 200;
+        capValue = 1;
+        aps = 4;
+    }; // "Tempest Device"
 
     class B_APC_Tracked_01_CRV_F {
         cost = 1700;

@@ -202,18 +202,10 @@ class Vehicles {
         aps = 2;
     }; // "MSE-3 Marid"
 
-    class O_Truck_03_device_F {
-        cost = 1500;
-        requirements[] = {};
-        killReward = 200;
-        capValue = 1;
-        aps = 4;
-    }; // "Tempest Device"
-
     class O_MRAP_02_gmg_m_F {
         name = "Ifrit-M Autocannon";
         spawn = "O_MRAP_02_gmg_F";
-        cost = 1700;
+        cost = 1500;
         requirements[] = {};
         rearm = 300;
         killReward = 300;
@@ -236,13 +228,26 @@ class Vehicles {
                 "60Rnd_20mm_HE_shells",
                 "60Rnd_20mm_HE_shells",
                 "60Rnd_20mm_AP_shells",
-                "60Rnd_20mm_AP_shells"
+                "60Rnd_20mm_AP_shells",
+                "60Rnd_20mm_AP_shells",
+                "200Rnd_127x99_mag_Tracer_Green",
+                "200Rnd_127x99_mag_Tracer_Green",
+                "200Rnd_127x99_mag_Tracer_Green"
             };
             addWeapons[] = {
-                "cannon_20mm"
+                "cannon_20mm",
+                "HMG_127"
             };
         };
     };
+
+    class O_Truck_03_device_F {
+        cost = 1500;
+        requirements[] = {};
+        killReward = 200;
+        capValue = 1;
+        aps = 4;
+    }; // "Tempest Device"
 
     class O_APC_Wheeled_02_rcws_v2_m_F {
         name = "MSE-3M Marid Autocannon";
