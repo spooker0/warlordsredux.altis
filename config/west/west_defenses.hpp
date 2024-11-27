@@ -124,6 +124,35 @@ class Defences {
         loadable = 1;
     }; // "Mk32 GMG 20mm (Raised)"
 
+    // class B_Minigun_01_high_F {
+    //     name = "Mk30X Minigun (Raised)";
+    //     cost = 250;
+    //     spawn = "B_G_HMG_02_high_F";
+    //     requirements[] = {};
+    //     rearm = 300;
+    //     killReward = 100;
+    //     loadable = 1;
+
+    //     class Gunner: WLTurretDefaults {
+    //         turret[] = { 0 };
+    //         removeMagazines[] = {
+    //             "100Rnd_127x99_mag_Tracer_Yellow",
+    //         };
+    //         removeWeapons[] = {
+    //             "HMG_M2_Mounted"
+    //         };
+    //         addMagazines[] = {
+    //             "2000Rnd_65x39_Belt_Tracer_Yellow",
+    //             "2000Rnd_65x39_Belt_Tracer_Yellow",
+    //             "2000Rnd_65x39_Belt_Tracer_Yellow",
+    //             "2000Rnd_65x39_Belt_Tracer_Yellow"
+    //         };
+    //         addWeapons[] = {
+    //             "LMG_Minigun_Transport"
+    //         };
+    //     };
+    // };
+
     class B_static_AA_F {
         cost = 300;
         requirements[] = {};

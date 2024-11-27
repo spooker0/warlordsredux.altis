@@ -42,7 +42,7 @@
 				} else {
 					'#ffff00';
 				};
-				_display = _display + format ["<t size='1.2' align='center' color='%1' shadow='2'>%2: %3</t><br/>", _color, _vote getVariable "BIS_WL_name", _voteCount];
+				_display = _display + format ["<t size='1.2' align='center' color='%1' shadow='2'>%2: %3 pts</t><br/>", _color, _vote getVariable "BIS_WL_name", _voteCount];
 			} forEach _sortedVoteList;
 
 			private _maxVotedSector = if (count _sortedVoteList > 0) then {

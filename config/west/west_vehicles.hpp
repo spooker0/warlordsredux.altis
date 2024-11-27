@@ -200,7 +200,7 @@ class Vehicles {
     class B_MRAP_01_gmg_up_F {
         name = "Hunter UP Autocannon";
         spawn = "B_MRAP_01_gmg_F";
-        cost = 1700;
+        cost = 1500;
         requirements[] = {};
         rearm = 300;
         killReward = 300;
@@ -223,10 +223,15 @@ class Vehicles {
                 "60Rnd_20mm_HE_shells",
                 "60Rnd_20mm_HE_shells",
                 "60Rnd_20mm_AP_shells",
-                "60Rnd_20mm_AP_shells"
+                "60Rnd_20mm_AP_shells",
+                "60Rnd_20mm_AP_shells",
+                "200Rnd_127x99_mag_Tracer_Red",
+                "200Rnd_127x99_mag_Tracer_Red",
+                "200Rnd_127x99_mag_Tracer_Red"
             };
             addWeapons[] = {
-                "cannon_20mm"
+                "cannon_20mm",
+                "HMG_127"
             };
         };
     };
@@ -277,6 +282,43 @@ class Vehicles {
             };
         };
     }; // "BLUFOR Gorgon"
+
+    // class B_APC_Wheeled_03_sam_F {
+    //     name = "AFV-4 Gorgon AD";
+    //     spawn = "B_APC_Wheeled_03_cannon_F";
+    //     cost = 3000;
+    //     requirements[] = {};
+    //     rearm = 500;
+    //     killReward = 300;
+    //     capValue = 3;
+    //     aps = 2;
+
+    //     class Gunner: WLTurretDefaults {
+    //         turret[] = { 0 };
+    //         removeMagazines[] = {
+    //             "2Rnd_GAT_missiles",
+    //             "60Rnd_30mm_APFSDS_shells_Tracer_Yellow",
+    //             "140Rnd_30mm_MP_shells_Tracer_Yellow"
+    //         };
+    //         removeWeapons[] = {
+    //             "missiles_titan",
+    //             "autocannon_30mm_CTWS"
+    //         };
+    //         addMagazines[] = {
+    //             "1000Rnd_20mm_shells",
+    //             "1000Rnd_20mm_shells",
+    //             "4Rnd_70mm_SAAMI_missiles",
+    //             "4Rnd_70mm_SAAMI_missiles",
+    //             "4Rnd_70mm_SAAMI_missiles",
+    //             "4Rnd_70mm_SAAMI_missiles",
+    //             "4Rnd_70mm_SAAMI_missiles"
+    //         };
+    //         addWeapons[] = {
+    //             "gatling_20mm_VTOL_01",
+    //             "missiles_SAAMI"
+    //         };
+    //     };
+    // };
 
     class B_APC_Wheeled_01_cannon_F {
         cost = 3200;

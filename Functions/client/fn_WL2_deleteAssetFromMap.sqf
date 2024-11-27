@@ -2,7 +2,10 @@
 
 params ["_target"];
 
-_displayName = getText (configFile >> "CfgVehicles" >> (typeOf _target) >> "displayName");
+private _assetActualType = _target getVariable ["WL2_orderedClass", typeOf _target];
+private _nameOverrides = missionNamespace getVariable ["WL2_nameOverrides", createHashMap];
+private _displayName = _nameOverrides getOrDefault [_assetActualType, getText (configFile >> 'CfgVehicles' >> _assetActualType >> 'displayName')];
+
 _result = [format ["Are you sure you would like to delete: %1", _displayName], "Delete asset", true, true] call BIS_fnc_guiMessage;
 
 if (_result) then {
@@ -22,7 +25,7 @@ if (_result) then {
 		{_target deleteVehicleCrew _x} forEach crew _target;
 		deleteGroup _grp;
 	};
-	
+
 	deleteVehicle _target;
 	((ctrlParent WL_CONTROL_MAP) getVariable "BIS_sectorInfoBox") ctrlShow false;
 	((ctrlParent WL_CONTROL_MAP) getVariable "BIS_sectorInfoBox") ctrlEnable true;

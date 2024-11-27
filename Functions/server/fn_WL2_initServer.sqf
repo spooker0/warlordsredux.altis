@@ -35,7 +35,6 @@ BIS_fnc_WL2_removeAsset = compileFinal preprocessFileLineNumbers "Functions\serv
 BIS_fnc_WL2_selectTarget = compileFinal preprocessFileLineNumbers "Functions\server\fn_WL2_selectTarget.sqf";
 BIS_fnc_WL2_serverEHs = compileFinal preprocessFileLineNumbers "Functions\server\fn_WL2_serverEHs.sqf";
 BIS_fnc_WL2_setupNewWarlord = compileFinal preprocessFileLineNumbers "Functions\server\fn_WL2_setupNewWarlord.sqf";
-BIS_fnc_WL2_tablesSetUp = compileFinal preprocessFileLineNumbers "Functions\server\fn_WL2_tablesSetUp.sqf";
 BIS_fnc_WL2_targetResetHandleServer = compileFinal preprocessFileLineNumbers "Functions\server\fn_WL2_targetResetHandleServer.sqf";
 BIS_fnc_WL2_targetSelectionHandleServer = compileFinal preprocessFileLineNumbers "Functions\server\fn_WL2_targetSelectionHandleServer.sqf";
 BIS_fnc_WL2_zoneRestrictionHandleServer = compileFinal preprocessFileLineNumbers "Functions\server\fn_WL2_zoneRestrictionHandleServer.sqf";
@@ -57,7 +56,6 @@ BIS_fnc_WL2_WLAC = compileFinal preprocessFileLineNumbers "Functions\server\fn_W
 
 call SQD_fnc_initServer;
 
-call BIS_fnc_WL2_tablesSetUp;
 call BIS_fnc_WL2_serverEHs;
 
 _group = createGroup civilian;
@@ -100,7 +98,7 @@ setTimeMultiplier 8;
 			private _currentSideTarget = missionNamespace getVariable [_currentSideTargetVar, objNull];
 			private _currentSideTargetOwner = objNull;
 			waitUntil {
-				sleep 5; 
+				sleep 5;
 				_currentSideTarget = missionNamespace getVariable [_currentSideTargetVar, objNull];
 				_currentSideTargetOwner = _currentSideTarget getVariable ["BIS_WL_owner", sideUnknown];
 				_currentSideTargetOwner != _side;
@@ -117,8 +115,8 @@ setTimeMultiplier 8;
 if !(["(EU) #11", serverName] call BIS_fnc_inString) then {
 	0 spawn {
 		while {!BIS_WL_missionEnd} do {
-			_allEntities = entities [[], ["Logic"], true]; 
-			{ 
+			_allEntities = entities [[], ["Logic"], true];
+			{
 				_x addCuratorEditableObjects [_allEntities, true];
 			} forEach allCurators;
 			sleep 30;

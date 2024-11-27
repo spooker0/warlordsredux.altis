@@ -48,6 +48,8 @@ private _savedLoadoutHandled = FALSE;
 				_data pushBack ["SavedLoadout", (getMissionConfigValue ["BIS_WL_savedLoadoutCost", 500]), [], (localize "STR_A3_WL_saved_loadout"), "\A3\Data_F_Warlords\Data\preview_loadout.jpg", format [localize "STR_A3_WL_saved_loadout_info", "<br/>"]];
 			};
 
+			private _descriptionMap = missionNamespace getVariable ["WL2_descriptions", createHashMap];
+
 			{
 				_className = configName _x;
 				_actualClassName = getText (_x >> "spawn");
@@ -166,6 +168,11 @@ private _savedLoadoutHandled = FALSE;
 					} else {
 						_text = _text + "..."
 					};
+				};
+
+				private _description = _descriptionMap getOrDefault [_className, ""];
+				if (_description != "") then {
+					_text = _description;
 				};
 
 				if (_text == "") then {_text = " "};

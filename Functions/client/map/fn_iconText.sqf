@@ -4,16 +4,11 @@ _text = "";
 _control = (findDisplay 12) displayCtrl 51;
 _continue = if (_gps) then {true} else {(ctrlMapScale _control) < 0.3};
 
-private _nameOverrides = createHashMapFromArray [
-	["B_Truck_01_medical_F", "Spawn Truck"],
-	["B_Slingload_01_Medevac_F", "Medical Container"],
-	["O_Truck_03_medical_F", "Spawn Truck"],
-	["Land_Pod_Heli_Transport_04_medevac_F", "Medical Pod"],
-	["Land_Communication_F", "Jammer Tower"]
-];
+private _nameOverrides = missionNamespace getVariable ["WL2_nameOverrides", createHashMap];
 
 if (_continue) then {
-	private _vd = _nameOverrides getOrDefault [typeOf _t, getText (configFile >> 'CfgVehicles' >> (typeOf _t) >> 'displayName')];
+	private _assetActualType = _t getVariable ["WL2_orderedClass", typeOf _t];
+	private _vd = _nameOverrides getOrDefault [_assetActualType, getText (configFile >> 'CfgVehicles' >> _assetActualType >> 'displayName')];
 	if (unitIsUAV _t) then {
 		if (isUAVConnected _t) then {
 			_op = (UAVControl _t) select 0;

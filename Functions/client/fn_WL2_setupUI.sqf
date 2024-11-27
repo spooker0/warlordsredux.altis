@@ -401,14 +401,18 @@ if (_displayClass == "OSD") then {
 							private _listText = "Your assets<br/>";
 							{
 								private _asset = _x;
-								private _assetType = getText (configFile >> "CfgVehicles" >> typeOf _asset >> "displayName");
+
+								private _assetActualType = _asset getVariable ["WL2_orderedClass", typeOf _asset];
+								private _nameOverrides = missionNamespace getVariable ["WL2_nameOverrides", createHashMap];
+								private _displayName = _nameOverrides getOrDefault [_assetActualType, getText (configFile >> 'CfgVehicles' >> _assetActualType >> 'displayName')];
+
 								private _assetSector = BIS_WL_allSectors select { _asset inArea (_x getVariable "objectAreaComplete") };
 								private _assetLocation = if (count _assetSector > 0) then {
 									(_assetSector # 0) getVariable ["BIS_WL_name", str (mapGridPosition _asset)];
 								} else {
 									mapGridPosition _asset;
 								};
-								_listText = _listText + format ["%1 @ %2<br/>", _assetType, _assetLocation];
+								_listText = _listText + format ["%1 @ %2<br/>", _displayName, _assetLocation];
 							} forEach _allAssets;
 							_listText = _listText + "Would you like to go through and delete some of them?";
 
@@ -418,14 +422,17 @@ if (_displayClass == "OSD") then {
 								{
 									sleep 0.2;
 									private _asset = _x;
-									private _assetType = getText (configFile >> "CfgVehicles" >> typeOf _asset >> "displayName");
+									private _assetActualType = _asset getVariable ["WL2_orderedClass", typeOf _asset];
+									private _nameOverrides = missionNamespace getVariable ["WL2_nameOverrides", createHashMap];
+									private _displayName = _nameOverrides getOrDefault [_assetActualType, getText (configFile >> 'CfgVehicles' >> _assetActualType >> 'displayName')];
+
 									private _assetSector = BIS_WL_allSectors select { _asset inArea (_x getVariable "objectAreaComplete") };
 									private _assetLocation = if (count _assetSector > 0) then {
 										(_assetSector # 0) getVariable ["BIS_WL_name", str (mapGridPosition _asset)];
 									} else {
 										mapGridPosition _asset;
 									};
-									_result = [format ["Would you would like to delete: %1 @ %2", _assetType, _assetLocation], "Delete asset", true, true] call BIS_fnc_guiMessage;
+									_result = [format ["Would you would like to delete: %1 @ %2", _displayName, _assetLocation], "Delete asset", true, true] call BIS_fnc_guiMessage;
 
 									if (_result) then {
 										if (unitIsUAV _asset) then {

@@ -98,35 +98,6 @@ class Vehicles {
         };
     }; // "Offroad (AT)"
 
-    class O_LSV_02_AT_M_F {
-        name = "Qilin (AT-M)";
-        spawn = "O_LSV_02_AT_F";
-        cost = 750;
-        requirements[] = {};
-        rearm = 200;
-        killReward = 220;
-        capValue = 1;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {
-                "Vorona_HEAT"
-            };
-            removeWeapons[] = {
-                "missiles_Vorona"
-            };
-            addMagazines[] = {
-                "2Rnd_127mm_Firefist_missiles",
-                "2Rnd_127mm_Firefist_missiles",
-                "2Rnd_127mm_Firefist_missiles",
-                "2Rnd_127mm_Firefist_missiles"
-            };
-            addWeapons[] = {
-                "missiles_Firefist"
-            };
-        };
-    };
-
     class O_LSV_02_AT_F {
         cost = 750;
         requirements[] = {};
@@ -151,6 +122,37 @@ class Vehicles {
             };
         };
     }; // "Qilin (AT)"
+
+    class O_LSV_02_AT_M_F {
+        name = "Qilin (AT-M)";
+        description = "Qilin (AT-M) is a variant of the Qilin armed with a Firefist AT missile launcher.<br/>";
+        spawn = "O_LSV_02_AT_F";
+        cost = 800;
+        requirements[] = {};
+        rearm = 200;
+        killReward = 220;
+        capValue = 1;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {
+                "Vorona_HEAT"
+            };
+            removeWeapons[] = {
+                "missiles_Vorona"
+            };
+            addMagazines[] = {
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles"
+            };
+            addWeapons[] = {
+                "missiles_Firefist"
+            };
+        };
+    };
 
     class O_MRAP_02_hmg_F {
         cost = 900;
