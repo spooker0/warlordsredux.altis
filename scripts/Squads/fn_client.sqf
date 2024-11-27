@@ -255,6 +255,22 @@ switch (_action) do {
             _return = _squad select 0;
         };
     };
+    case "areInSquad": {
+        private _player1 = _params select 0;
+        private _player2 = _params select 1;
+
+        if (_player1 == _player2) then {
+            _return = true;
+        } else {
+            private _squad = _squadManager select { (_x select 2) find _player1 > -1 } select 0;
+            if (isNil "_squad") then {
+                _return = false;
+            } else {
+                private _squadMembers = _squad select 2;
+                _return = _squadMembers find _player2 > -1;
+            };
+        };
+    };
 };
 
 if (isNil "_return") exitWith { };
