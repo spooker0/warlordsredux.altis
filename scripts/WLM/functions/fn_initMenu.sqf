@@ -283,7 +283,9 @@ private _customizationAllowList = [
     "moveplow",
     "showcamo",
     "showammobox",
-    "wing_fold_l"
+    "wing_fold_l",
+    "hide_rail",
+    "hide_shield"
 ];
 
 private _availableCustomizations = [];
