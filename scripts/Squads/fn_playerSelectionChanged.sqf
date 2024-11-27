@@ -21,5 +21,12 @@ if (isNil "_mySquad") exitWith {
     _inviteButtonControl ctrlSetTooltip (localize "STR_SQUADS_fastTravelSquadInvalidNoSquad");
 };
 
+private _playersInSquad = _mySquad select 2;
+private _squadSize = count _playersInSquad;
+if (_squadSize >= SQD_MAX_SQUAD_SIZE) exitWith {
+    ctrlEnable [INVITE_BUTTON, false];
+    _inviteButtonControl ctrlSetTooltip (localize "STR_SQUADS_squadFull");
+};
+
 ctrlEnable [INVITE_BUTTON, true];
 _inviteButtonControl ctrlSetTooltip localize ("STR_SQUADS_inviteSelectedPlayer");

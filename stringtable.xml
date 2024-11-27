@@ -2248,6 +2248,23 @@
             <Chinesesimp>选择一个玩家邀请。</Chinesesimp>
             <Chinese>选择一个玩家邀请。</Chinese>
         </Key>
+        <Key ID="STR_SQUADS_squadFull">
+            <Original>Your squad is full.</Original>
+            <English>Your squad is full.</English>
+            <Czech>Vaše skupina je plná.</Czech>
+            <French>Votre escouade est pleine.</French>
+            <German>Dein Trupp ist voll.</German>
+            <Italian>La tua squadra è al completo.</Italian>
+            <Polish>Twoja drużyna jest pełna.</Polish>
+            <Portuguese>Seu esquadrão está cheio.</Portuguese>
+            <Russian>Ваш отряд полон.</Russian>
+            <Spanish>Tu escuadrón está lleno.</Spanish>
+            <Turkish>Ekibiniz dolu.</Turkish>
+            <Korean>분대가 꽉 찼습니다.</Korean>
+            <Japanese>分隊が満員です。</Japanese>
+            <Chinesesimp>您的小队已满。</Chinesesimp>
+            <Chinese>您的小隊已滿。</Chinese>
+        </Key>
         <Key ID="STR_SQUADS_inviteSelectedPlayer">
             <Original>Invite selected player to your squad.</Original>
             <English>Invite selected player to your squad.</English>
