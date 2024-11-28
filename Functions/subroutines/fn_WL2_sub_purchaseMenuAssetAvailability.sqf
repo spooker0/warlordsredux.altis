@@ -1,8 +1,20 @@
 #include "..\warlords_constants.inc"
 
+params [
+	"_className",
+	"_requirements",
+	"_displayName",
+	"_picture",
+	"_text",
+	"_offset",
+	"_cost"
+];
+
+if (isNil "_cost") then {_cost = 0};
+
 private _ret = true;
 private _tooltip = "";
-private _class = _assetDetails # 0;
+private _class = _className;
 private _DLCOwned = true;
 private _DLCTooltip = "";
 

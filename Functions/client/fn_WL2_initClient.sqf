@@ -57,6 +57,7 @@ BIS_fnc_WL2_targetSelected = compileFinal preprocessFileLineNumbers "Functions\c
 BIS_fnc_WL2_targetSelectionHandleClient = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_targetSelectionHandleClient.sqf";
 BIS_fnc_WL2_teammatesAvailability = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_teammatesAvailability.sqf";
 BIS_fnc_WL2_timer = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_timer.sqf";
+BIS_fnc_WL2_triggerPurchase = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_triggerPurchase.sqf";
 BIS_fnc_WL2_wasMain = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_wasMain.sqf";
 BIS_fnc_WL2_welcome = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_welcome.sqf";
 BIS_fnc_WL2_zoneRestrictionHandleClient = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_zoneRestrictionHandleClient.sqf";

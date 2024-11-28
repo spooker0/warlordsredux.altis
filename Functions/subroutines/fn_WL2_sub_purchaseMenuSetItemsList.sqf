@@ -6,6 +6,14 @@ lbClear (_display displayCtrl 101);
 _id = lbCurSel _purchase_category;
 
 {
+	private _gearCode = "";
+	private _zeroes = _forEachIndex / 9;
+	for "_i" from 1 to _zeroes do {
+		_gearCode = _gearCode + "0";
+	};
+	private _tailNumber = _forEachIndex % 9 + 1;
+	_gearCode = _gearCode + str _tailNumber;
+
 	_x params [
 		"_className",
 		"_cost",
@@ -15,7 +23,7 @@ _id = lbCurSel _purchase_category;
 		"_text",
 		["_offset", [0,0,0]]
 	];
-	(_display displayCtrl 101) lbAdd _displayName;
+	(_display displayCtrl 101) lbAdd format ["%1 [%2]", _displayName, _gearCode];
 	if (_className == "RemoveUnits") then {uiNamespace setVariable ["BIS_WL_removeUnitsListID", -1 + lbSize (_display displayCtrl 101)]};
 	(_display displayCtrl 101) lbSetData [_forEachIndex, format ["%1|||%2|||%3|||%4|||%5|||%6", _className, _requirements, _displayName, _picture, _text, _offset]];
 	(_display displayCtrl 101) lbSetValue [_forEachIndex, _x # 1];
