@@ -3,6 +3,7 @@ class HeavyVehicles {
         cost = 1700;
         requirements[] = {};
         killReward = 300;
+        rearm = 400;
         capValue = 2;
         aps = 2;
     }; // "CRV-6e Bobcat"

@@ -9,12 +9,14 @@ class RotaryWing {
         cost = 800;
         requirements[] = {"H"};
         killReward = 100;
+        rearm = 300;
     }; // "UH-80 Ghost Hawk"
 
     class B_Heli_Transport_03_F {
         cost = 1000;
         requirements[] = {"H"};
         killReward = 100;
+        rearm = 300;
     }; // "CH-67 Huron"
 
     class B_Heli_Transport_01_UP_F {

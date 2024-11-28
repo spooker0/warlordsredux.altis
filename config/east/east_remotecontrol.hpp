@@ -76,6 +76,7 @@ class RemoteControl {
         cost = 1200;
         requirements[] = {};
         killReward = 200;
+        rearm = 300;
 
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
