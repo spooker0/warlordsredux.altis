@@ -27,6 +27,7 @@ class RotaryWing {
         cost = 4000;
         requirements[] = {"H"};
         killReward = 300;
+        rearm = 300;
     }; // "PO-30 Orca"
 
     class O_Heli_Attack_02_dynamicLoadout_F {
