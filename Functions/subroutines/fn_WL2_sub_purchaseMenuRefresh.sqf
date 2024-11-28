@@ -24,6 +24,9 @@ _purchase_income ctrlSetStructuredText parseText format ["<t size = '%7' align =
 _i = 0;
 for "_i" from 0 to ((lbSize _purchase_items) - 1) do {
 	_cost = _purchase_items lbValue _i;
+	if (isNil "_cost") then {
+		_cost = 0;
+	};
 	_assetDetails = (_purchase_items lbData _i) splitString "|||";
 
 	_assetDetails params [
@@ -39,7 +42,8 @@ for "_i" from 0 to ((lbSize _purchase_items) - 1) do {
 	_category = WL_REQUISITION_CATEGORIES # ((lbCurSel _purchase_category) max 0);
 	private _details = +_assetDetails;
 	_details set [1, _requirements];
-	_details pushBack _cost;
+	_details set [6, _cost];
+	_details set [7, _category];
 	_availability = _details call BIS_fnc_WL2_sub_purchaseMenuAssetAvailability;
 	if (!(_availability # 0)) then {
 		_purchase_items lbSetColor [_i, [0.5, 0.5, 0.5, 1]];
@@ -71,12 +75,16 @@ _assetDetails params [
 
 if (count _assetDetails > 0) then {
 	_cost = _purchase_items lbValue _curSel;
+	if (isNil "_cost") then {
+		_cost = 0;
+	};
 	_requirements = call compile _requirements;
 	_category = WL_REQUISITION_CATEGORIES # ((lbCurSel _purchase_category) max 0);
 	_color = BIS_WL_colorFriendly;
 	private _details = +_assetDetails;
 	_details set [1, _requirements];
-	_details pushBack _cost;
+	_details set [6, _cost];
+	_details set [7, _category];
 	_availability = _details call BIS_fnc_WL2_sub_purchaseMenuAssetAvailability;
 	_purchase_request ctrlSetTooltipColorBox [1, 1, 1, 1];
 	_purchase_request ctrlSetTooltipColorText [1, 1, 1, 1];

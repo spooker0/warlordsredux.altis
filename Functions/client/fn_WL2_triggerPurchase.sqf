@@ -5,7 +5,8 @@ params [
     "_picture",
     "_text",
     "_offset",
-    "_cost"
+    "_cost",
+    "_category"
 ];
 
 if (typeName _offset == "STRING") then {

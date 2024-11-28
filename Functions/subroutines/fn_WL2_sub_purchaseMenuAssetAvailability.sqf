@@ -7,10 +7,9 @@ params [
 	"_picture",
 	"_text",
 	"_offset",
-	"_cost"
+	"_cost",
+	"_category"
 ];
-
-if (isNil "_cost") then {_cost = 0};
 
 private _ret = true;
 private _tooltip = "";
@@ -228,7 +227,7 @@ if (_ret) then {
 			};
 
 			if (_requirements findIf {!(_x in _servicesAvailable)} >= 0) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_airdrop_restr1"};
-			if (_category == "Infantry" && {(count _units) >= BIS_WL_matesAvailable}) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_airdrop_restr2"};
+			if (_className isKindOf "Man" && {(count _units) >= BIS_WL_matesAvailable}) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_airdrop_restr2"};
 
 			if (_category == "Strategy") exitWith {};
 

@@ -245,7 +245,11 @@ if (_displayClass == "OSD") then {
 					"_offset"
 				];
 
-				private _assetDetails = [_className, _requirements, _displayName, _picture, _text, _offset, _cost];
+				private _categoryString = WL_REQUISITION_CATEGORIES # _categoryCode;
+				if (isNil "_cost") then {
+					_cost = 0;
+				};
+				private _assetDetails = [_className, _requirements, _displayName, _picture, _text, _offset, _cost, _categoryString];
 
 				private _availability = _assetDetails call BIS_fnc_WL2_sub_purchaseMenuAssetAvailability;
 				if (_availability # 0) then {
@@ -477,7 +481,8 @@ if (_displayClass == "OSD") then {
 				_curSel = (lbCurSel _purchase_items) max 0;
 				_assetDetails = (_purchase_items lbData _curSel) splitString "|||";
 				_cost = _purchase_items lbValue lbCurSel _purchase_items;
-				_assetDetails pushBack _cost;
+				_assetDetails set [6, _cost];
+				_assetDetails set [7, _category];
 
 				_assetDetails call BIS_fnc_WL2_triggerPurchase;
 			} else {
