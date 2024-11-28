@@ -37,6 +37,7 @@ class SectorDefense {
     class B_HMG_01_F {
         cost = 150;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
         loadable = 1;
@@ -71,6 +72,7 @@ class SectorDefense {
     class B_HMG_01_high_F {
         cost = 200;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
         loadable = 1;
@@ -96,6 +98,7 @@ class SectorDefense {
     class B_GMG_01_F {
         cost = 200;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
         loadable = 1;
@@ -104,6 +107,7 @@ class SectorDefense {
     class B_GMG_01_high_F {
         cost = 250;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
         loadable = 1;
@@ -141,6 +145,7 @@ class SectorDefense {
     class B_static_AA_F {
         cost = 300;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
         loadable = 1;
@@ -168,6 +173,7 @@ class SectorDefense {
     class B_static_AT_F {
         cost = 300;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
         loadable = 1;
@@ -198,6 +204,7 @@ class SectorDefense {
         spawn = "B_static_AA_F";
         cost = 600;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 200;
 
@@ -236,6 +243,7 @@ class SectorDefense {
     class B_Mortar_01_F {
         cost = 4000;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 900;
         killReward = 125;
         loadable = 1;

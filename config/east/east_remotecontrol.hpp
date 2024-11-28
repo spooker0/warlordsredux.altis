@@ -10,7 +10,7 @@ class RemoteControl {
     class O_UGV_01_F {
         cost = 150;
         requirements[] = {};
-        offset[] = {0, 3, 0};
+        offset[] = {0, 5, 0};
         killReward = 50;
     };  // "UGV Stomper"
 
@@ -18,6 +18,7 @@ class RemoteControl {
         name = "Mk30 HMG Auto Turret";
         cost = 500;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 150;
         loadable = 1;
@@ -49,7 +50,7 @@ class RemoteControl {
     class O_UGV_01_rcws_F {
         cost = 500;
         requirements[] = {};
-        offset[] = {0, 3, 0};
+        offset[] = {0, 5, 0};
         rearm = 300;
         killReward = 100;
     };  // "UGAV rcws"
@@ -58,6 +59,7 @@ class RemoteControl {
         name = "Mk32 GMG Auto Turret";
         cost = 650;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 150;
         loadable = 1;
@@ -116,7 +118,7 @@ class RemoteControl {
         spawn = "O_UGV_01_rcws_F";
         cost = 1500;
         requirements[] = {};
-        offset[] = {0, 3, 0};
+        offset[] = {0, 5, 0};
         rearm = 300;
         killReward = 300;
 
