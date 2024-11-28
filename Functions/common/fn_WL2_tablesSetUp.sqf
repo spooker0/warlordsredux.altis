@@ -1,9 +1,7 @@
-serverNamespace setVariable ["fundsDatabase", createHashMap];
-serverNamespace setVariable ["playerList", createHashMap];
-
 // Read mission config file for requisition costs
 // Hierarchy: CfgWLRequisitionPresets >> preset >> side >> category >> class
 private _nameHashMap = createHashMap;
+private _descriptionHashMap = createHashMap;
 private _spawnHashMap = createHashMap;
 private _costHashMap = createHashMap;
 private _rearmTimerHashMap = createHashMap;
@@ -35,6 +33,7 @@ private _requisitionPresets = BIS_WL_purchaseListTemplate;
 			{
 				private _requistitonName = configName _x;
 				private _requisitionNameOverride = getText (_x >> "name");
+				private _requisitionDescription = getText (_x >> "description");
 				private _requisitionSpawn = getText (_x >> "spawn");
 				private _requisitionCost = getNumber (_x >> "cost");
 				private _requisitionRearmTime = getNumber (_x >> "rearm");
@@ -58,6 +57,10 @@ private _requisitionPresets = BIS_WL_purchaseListTemplate;
 
 				if (_requisitionNameOverride != "") then {
 					_nameHashMap set [_requistitonName, _requisitionNameOverride];
+				};
+
+				if (_requisitionDescription != "") then {
+					_descriptionHashMap set [_requistitonName, _requisitionDescription];
 				};
 
 				if (_requisitionSpawn != "") then {
@@ -136,40 +139,48 @@ private _requisitionPresets = BIS_WL_purchaseListTemplate;
 	} forEach _requisitionSides;
 } forEach _requisitionPresets;
 
-missionNamespace setVariable ["WL2_nameOverrides", _nameHashMap, true];
-missionNamespace setVariable ["WL2_spawnClass", _spawnHashMap, true];
-serverNamespace setVariable ["WL2_costs", _costHashMap];
-serverNamespace setVariable ["WL2_killRewards", _killRewardHashMap];
-serverNamespace setVariable ["WL2_cappingValues", _capValueHashMap];
-missionNamespace setVariable ["WL2_aps", _apsHashMap, true];
 
-serverNamespace setVariable ["WL2_staticsGarbageCollector", _garbageCollectHashMap];
-missionNamespace setVariable ["WL2_demolishable", _demolishableHashMap, true];
-missionNamespace setVariable ["WL2_loadable", _loadableHashMap, true];
-missionNamespace setVariable ["WL2_structure", _structureHashMap, true];
+if (isServer) then {
+	serverNamespace setVariable ["fundsDatabase", createHashMap];
+	serverNamespace setVariable ["playerList", createHashMap];
 
-serverNamespace setVariable ["WL2_populateUnitPoolList", _populateUnitPoolList];
-serverNamespace setVariable ["WL2_populateVehiclePoolList", _populateVehiclePoolList];
-serverNamespace setVariable ["WL2_populateAircraftPoolList", _populateAircraftPoolList];
+	serverNamespace setVariable ["WL2_costs", _costHashMap];
+	serverNamespace setVariable ["WL2_killRewards", _killRewardHashMap];
+	serverNamespace setVariable ["WL2_cappingValues", _capValueHashMap];
 
-missionNamespace setVariable ["WL2_disallowMagazinesForVehicle", _disallowMagazinesForVehicle, true];
-missionNamespace setVariable ["WL2_allowPylonMagazines", _allowPylonMagazines, true];
-missionNamespace setVariable ["WL2_rearmTimers", _rearmTimerHashMap, true];
-missionNamespace setVariable ["WL2_turretOverrides", _turretOverridesHashMap, true];
+	serverNamespace setVariable ["WL2_populateUnitPoolList", _populateUnitPoolList];
+	serverNamespace setVariable ["WL2_populateVehiclePoolList", _populateVehiclePoolList];
+	serverNamespace setVariable ["WL2_populateAircraftPoolList", _populateAircraftPoolList];
 
-serverNamespace setVariable ["garbageCollector",
-	createHashMapFromArray [
-		["Steerable_Parachute_F", true],
-		["B_Ejection_Seat_Plane_Fighter_01_F", true],
-		["O_Ejection_Seat_Plane_Fighter_02_F", true],
-		["I_Ejection_Seat_Plane_Fighter_03_F", true],
-		["B_Ejection_Seat_Plane_CAS_01_F", true],
-		["O_Ejection_Seat_Plane_CAS_02_F", true],
-		["Plane_Fighter_03_Canopy_F", true],
-		["Plane_CAS_02_Canopy_F", true],
-		["Plane_CAS_01_Canopy_F", true],
-		["Plane_Fighter_01_Canopy_F", true],
-		["Plane_Fighter_02_Canopy_F", true],
-		["Plane_Fighter_04_Canopy_F", true] //<--no comma on last item
-	]
-];
+	serverNamespace setVariable ["WL2_staticsGarbageCollector", _garbageCollectHashMap];
+	serverNamespace setVariable ["garbageCollector",
+		createHashMapFromArray [
+			["Steerable_Parachute_F", true],
+			["B_Ejection_Seat_Plane_Fighter_01_F", true],
+			["O_Ejection_Seat_Plane_Fighter_02_F", true],
+			["I_Ejection_Seat_Plane_Fighter_03_F", true],
+			["B_Ejection_Seat_Plane_CAS_01_F", true],
+			["O_Ejection_Seat_Plane_CAS_02_F", true],
+			["Plane_Fighter_03_Canopy_F", true],
+			["Plane_CAS_02_Canopy_F", true],
+			["Plane_CAS_01_Canopy_F", true],
+			["Plane_Fighter_01_Canopy_F", true],
+			["Plane_Fighter_02_Canopy_F", true],
+			["Plane_Fighter_04_Canopy_F", true] //<--no comma on last item
+		]
+	];
+};
+
+missionNamespace setVariable ["WL2_nameOverrides", _nameHashMap];
+missionNamespace setVariable ["WL2_descriptions", _descriptionHashMap];
+missionNamespace setVariable ["WL2_spawnClass", _spawnHashMap];
+missionNamespace setVariable ["WL2_aps", _apsHashMap];
+
+missionNamespace setVariable ["WL2_demolishable", _demolishableHashMap];
+missionNamespace setVariable ["WL2_loadable", _loadableHashMap];
+missionNamespace setVariable ["WL2_structure", _structureHashMap];
+
+missionNamespace setVariable ["WL2_disallowMagazinesForVehicle", _disallowMagazinesForVehicle];
+missionNamespace setVariable ["WL2_allowPylonMagazines", _allowPylonMagazines];
+missionNamespace setVariable ["WL2_rearmTimers", _rearmTimerHashMap];
+missionNamespace setVariable ["WL2_turretOverrides", _turretOverridesHashMap];

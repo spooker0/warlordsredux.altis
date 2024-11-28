@@ -9,8 +9,9 @@ _this addEventHandler ["Fired", {
 			private _allAssetTargets = getSensorTargets _unit;
 			private _samTargets = [];
 			{
+				private _relationship = _x select 2;
 				private _detectionSource = _x select 3;
-				if ("passiveradar" in _detectionSource) then {
+				if (_relationship != "friendly" && "passiveradar" in _detectionSource) then {
 					_samTargets pushBack (_x # 0);
 				};
 			} forEach _allAssetTargets;

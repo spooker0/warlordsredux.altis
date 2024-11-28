@@ -3,54 +3,63 @@ class Gear {
         cost = 50;
         requirements[] = {};
         killReward = 40;
+        offset[] = { 0, 3, 0};
     }; // "Basic Ammo [NATO]"
 
     class Box_NATO_Grenades_F {
         cost = 50;
         requirements[] = {};
         killReward = 40;
+        offset[] = { 0, 3, 0};
     }; // "Grenades [NATO]"
 
     class Box_NATO_Wps_F {
         cost = 100;
         requirements[] = {};
         killReward = 40;
+        offset[] = { 0, 3, 0};
     }; // "Basic Weapons [NATO]"
 
     class Box_NATO_Equip_F {
         cost = 100;
         requirements[] = {};
         killReward = 40;
+        offset[] = { 0, 3, 0};
     }; // "Equipment [NATO]"
 
     class Box_NATO_Uniforms_F {
         cost = 100;
         requirements[] = {};
         killReward = 40;
+        offset[] = { 0, 3, 0};
     }; // "Uniforms [NATO]"
 
     class Box_NATO_AmmoOrd_F {
         cost = 150;
         requirements[] = {};
         killReward = 40;
+        offset[] = { 0, 3, 0};
     }; // "Explosives [NATO]"
 
     class Box_NATO_WpsLaunch_F {
         cost = 200;
         requirements[] = {};
         killReward = 40;
+        offset[] = { 0, 3, 0};
     }; // "Launchers [NATO]"
 
     class Box_NATO_WpsSpecial_F {
         cost = 250;
         requirements[] = {};
         killReward = 40;
+        offset[] = { 0, 3, 0};
     }; // "Special Weapons [NATO]"
 
     class Box_NATO_AmmoVeh_F {
         cost = 250;
         requirements[] = {};
         killReward = 70;
+        offset[] = { 0, 3, 0};
     }; // "Vehicle Ammo [NATO]"
 
     class B_Slingload_01_Fuel_F {
@@ -63,6 +72,7 @@ class Gear {
         cost = 300;
         requirements[] = {};
         killReward = 40;
+        offset[] = { 0, 3, 0};
     }; // "Supply Box [NATO]"
 
     class B_Slingload_01_Ammo_F {

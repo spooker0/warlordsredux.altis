@@ -28,7 +28,7 @@ _requirements = call compile _requirements;
 
 _purchase_pic ctrlSetStructuredText parseText format ["<img image = '%1' size = '%2' align = 'center' shadow = '0'></img>", _picture, (7.693 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 _id = _purchase_category lbValue lbCurSel _purchase_category;
-_purchase_info_asset ctrlSetStructuredText parseText format ["<t align = 'center' size = '%2'>%1</t>", _text, (0.85 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
+_purchase_info_asset ctrlSetStructuredText parseText format ["<t align = 'left' size = '%2'>%1</t>", _text, (0.75 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 _cost = _purchase_items lbValue lbCurSel _purchase_items;
 
 private _side = side player;

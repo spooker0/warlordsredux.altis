@@ -1,4 +1,5 @@
 #include "..\warlords_constants.inc"
+#include "\a3\ui_f\hpp\definedikcodes.inc"
 
 params ["_displayClass"];
 
@@ -142,6 +143,7 @@ if (_displayClass == "OSD") then {
 			WL_CONTROL_MAP ctrlEnable true;
 		}];
 
+		uiNamespace setVariable ["WL_BuyMenuCode", ""];
 		_myDisplay displayAddEventHandler ["KeyDown", {
 			_key = _this # 1;
 			if (_key in actionKeys "Gear" && !BIS_WL_gearKeyPressed) then {
@@ -153,6 +155,129 @@ if (_displayClass == "OSD") then {
 					true;
 				};
 			};
+
+			private _isNumberKey = true;
+			private _existingCode = uiNamespace getVariable ["WL_BuyMenuCode", ""];
+			private _addToCode = switch (_key) do {
+				case DIK_NUMPAD0;
+				case DIK_0: {"0"};
+				case DIK_NUMPAD1;
+				case DIK_1: {"1"};
+				case DIK_NUMPAD2;
+				case DIK_2: {"2"};
+				case DIK_NUMPAD3;
+				case DIK_3: {"3"};
+				case DIK_NUMPAD4;
+				case DIK_4: {"4"};
+				case DIK_NUMPAD5;
+				case DIK_5: {"5"};
+				case DIK_NUMPAD6;
+				case DIK_6: {"6"};
+				case DIK_NUMPAD7;
+				case DIK_7: {"7"};
+				case DIK_NUMPAD8;
+				case DIK_8: {"8"};
+				case DIK_NUMPAD9;
+				case DIK_9: {"9"};
+				default {
+					_isNumberKey = false;
+					""
+				};
+			};
+
+			if (!_isNumberKey) exitWith {
+				false
+			};
+
+			private _newCode = _existingCode + _addToCode;
+			uiNamespace setVariable ["WL_BuyMenuCode", _newCode];
+			hintSilent format ["Code: %1", _newCode];
+
+			// process code
+			private _categoryCode = 0;
+			private _categoryDone = false;
+			private _itemCode = 0;
+			private _itemDone = false;
+			private _codeArray = _newCode splitString "";
+			{
+				if (_itemDone) then {
+					break;
+				};
+				if (!_categoryDone) then {
+					if (_x == "0") then {
+						_categoryCode = _categoryCode + 9;
+					} else {
+						_categoryCode = _categoryCode + parseNumber _x;
+						_categoryDone = true;
+					};
+				} else {
+					if (_x == "0") then {
+						_itemCode = _itemCode + 9;
+					} else {
+						_itemCode = _itemCode + parseNumber _x;
+						_itemDone = true;
+					};
+				};
+			} forEach _codeArray;
+
+			_categoryCode = _categoryCode - 1;
+			_itemCode = _itemCode - 1;
+			if (_itemDone) then {
+				hintSilent "";
+				uiNamespace setVariable ["WL_BuyMenuCode", ""];
+
+				private _selectedCategory = WL_PLAYER_REQUISITION_LIST # _categoryCode;
+
+				if (_itemCode > (count _selectedCategory - 1)) exitWith {
+					systemChat "Invalid buy code item.";
+					playSound "AddItemFailed";
+					true;
+				};
+				private _selectedItem = _selectedCategory # _itemCode;
+
+				_selectedItem params [
+					"_className",
+					"_cost",
+					"_requirements",
+					"_displayName",
+					"_picture",
+					"_text",
+					"_offset"
+				];
+
+				private _categoryString = WL_REQUISITION_CATEGORIES # _categoryCode;
+				if (isNil "_cost") then {
+					_cost = 0;
+				};
+				private _assetDetails = [_className, _requirements, _displayName, _picture, _text, _offset, _cost, _categoryString];
+
+				private _availability = _assetDetails call BIS_fnc_WL2_sub_purchaseMenuAssetAvailability;
+				if (_availability # 0) then {
+					_assetDetails call BIS_fnc_WL2_triggerPurchase;
+					systemChat format ["Selected [%1]: %2", _newCode, _displayName];
+					playSound "AddItemOK";
+					"RequestMenu_close" call BIS_fnc_WL2_setupUI;
+				} else {
+					systemChat format ["Invalid buy action: %1", _availability # 1];
+					playSound "AddItemFailed";
+				};
+			} else {
+				if (_categoryDone) then {
+					if (_categoryCode > (count WL_PLAYER_REQUISITION_LIST - 1)) exitWith {
+						hintSilent "";
+						uiNamespace setVariable ["WL_BuyMenuCode", ""];
+						systemChat "Invalid buy code category.";
+						playSound "AddItemFailed";
+						true;
+					};
+
+					private _display = uiNamespace getVariable ["BIS_WL_purchaseMenuDisplay", displayNull];
+					private _purchase_category = _display displayCtrl 100;
+					_purchase_category lbSetCurSel _categoryCode;
+				};
+			};
+
+			true;
 		}];
 
 		_myDisplay spawn {
@@ -279,16 +404,28 @@ if (_displayClass == "OSD") then {
 		_purchase_transfer_cancel ctrlSetStructuredText parseText format ["<t align = 'center' shadow = '2' size = '%2'>%1</t>", localize "STR_disp_cancel", (1.25 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 
 		{
+			private _gearCode = "";
+			private _zeroes = _forEachIndex / 9;
+			for "_i" from 1 to _zeroes do {
+				_gearCode = _gearCode + "0";
+			};
+			private _tailNumber = _forEachIndex % 9 + 1;
+			_gearCode = _gearCode + str _tailNumber;
+
 			if (count (WL_PLAYER_REQUISITION_LIST # _forEachIndex) > 0) then {
-				_purchase_category lbAdd _x;
+				_purchase_category lbAdd format ["%1 [%2]", _x, _gearCode];
 			};
 			_purchase_category lbSetValue [(lbSize _purchase_category) - 1, _forEachIndex];
 		} forEach [
 			localize "STR_A3_cfgmarkers_nato_inf",
-			localize "STR_dn_vehicles",
-			localize "STR_A3_WL_menu_aircraft",
+			localize "STR_A3_WL_LightVehicles",
+			localize "STR_A3_WL_HeavyVehicles",
+			localize "STR_A3_WL_RotaryWing",
+			localize "STR_A3_WL_FixedWing",
+			localize "STR_A3_WL_RemoteControl",
+			localize "STR_A3_WL_AirDefense",
+			localize "STR_A3_WL_SectorDefense",
 			localize "STR_A3_rscdisplaygarage_tab_naval",
-			localize "STR_A3_WL_menu_defences",
 			localize "STR_A3_rscdisplaywelcome_exp_parb_list4_title",
 			localize "STR_A3_WL_menu_strategy"
 		];
@@ -343,123 +480,11 @@ if (_displayClass == "OSD") then {
 				_purchase_items = _display displayCtrl 101;
 				_curSel = (lbCurSel _purchase_items) max 0;
 				_assetDetails = (_purchase_items lbData _curSel) splitString "|||";
-
-				_assetDetails params [
-					"_className",
-					"_requirements",
-					"_displayName",
-					"_picture",
-					"_text",
-					"_offset"
-				];
-
 				_cost = _purchase_items lbValue lbCurSel _purchase_items;
-				_offset = call compile _offset;
-				_requirements = call compile _requirements;
-				switch (_className) do {
-					case "Arsenal": {if (isNull (findDisplay 602)) then {"RequestMenu_close" call BIS_fnc_WL2_setupUI; [player, "orderArsenal"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]} else {playSound "AddItemFailed"}};
-					case "LastLoadout": {"RequestMenu_close" call BIS_fnc_WL2_setupUI; [player, "lastLoadout"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]};
-					case "SaveLoadout": {"save" call BIS_fnc_WL2_orderSavedLoadout};
-					case "SavedLoadout": {"RequestMenu_close" call BIS_fnc_WL2_setupUI; [player, "savedLoadout"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]};
-					case "Scan": {0 spawn BIS_fnc_WL2_orderSectorScan};
-					case "FTSeized": {false spawn BIS_fnc_WL2_orderFastTravel};
-					case "FTConflict": {true spawn BIS_fnc_WL2_orderFastTravel};
-					case "FTSquadLeader": {
-						["ftSquadLeader"] spawn SQD_fnc_client;
-						private _ftNextUseVar = format ["BIS_WL_FTSLNextUse_%1", getPlayerUID player];
-						missionNamespace setVariable [_ftNextUseVar, serverTime + WL_FAST_TRAVEL_SQUAD_LEADER_RATE];
-					};
-					case "FundsTransfer": {call BIS_fnc_WL2_orderFundsTransfer; [player, "fundsTransferBill"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]};
-					case "TargetReset": {"RequestMenu_close" call BIS_fnc_WL2_setupUI; [player, "targetReset"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]};
-					case "forfeitVote": {0 spawn BIS_fnc_WL2_orderForfeit};
-					case "LockVehicles": {
-						{
-							[_x, false, true] remoteExec ["BIS_fnc_WL2_vehicleLock", _x];
-						} forEach ((missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []]) select {alive _x && {(!(typeOf _x == "B_Truck_01_medical_F")) && {!(typeOf _x == "O_Truck_03_medical_F") && {!(typeOf _x == "B_Slingload_01_Medevac_F") && {!(typeOf _x == "Land_Pod_Heli_Transport_04_medevac_F")}}}}});
-						[toUpper localize "STR_A3_WL_feature_lock_all_msg"] spawn BIS_fnc_WL2_smoothText;
-					};
-					case "UnlockVehicles": {
-						{
-							[_x, false, false] remoteExec ["BIS_fnc_WL2_vehicleLock", _x];
-						} forEach ((missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []]) select {alive _x});
-						[toUpper localize "STR_A3_WL_feature_unlock_all_msg"] spawn BIS_fnc_WL2_smoothText;
-					};
-					case "clearVehicles": {
-						{
-							{
-								moveOut _x;
-							} forEach ((crew _x) select {(_x != player) && {(getPlayerUID player) != (_x getVariable ["BIS_WL_ownerAsset", "123"])}});
-						} forEach ((missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []]) select {alive _x});
-					};
-					case "pruneAssets": {
-						"RequestMenu_close" call BIS_fnc_WL2_setupUI;
+				_assetDetails set [6, _cost];
+				_assetDetails set [7, _category];
 
-						0 spawn {
-							private _ownedVehicleVariable = format ["BIS_WL_ownedVehicles_%1", getPlayerUID player];
-							private _allAssets = (missionNamespace getVariable [_ownedVehicleVariable, []]) select { alive _x };
-
-							private _listText = "Your assets<br/>";
-							{
-								private _asset = _x;
-								private _assetType = getText (configFile >> "CfgVehicles" >> typeOf _asset >> "displayName");
-								private _assetSector = BIS_WL_allSectors select { _asset inArea (_x getVariable "objectAreaComplete") };
-								private _assetLocation = if (count _assetSector > 0) then {
-									(_assetSector # 0) getVariable ["BIS_WL_name", str (mapGridPosition _asset)];
-								} else {
-									mapGridPosition _asset;
-								};
-								_listText = _listText + format ["%1 @ %2<br/>", _assetType, _assetLocation];
-							} forEach _allAssets;
-							_listText = _listText + "Would you like to go through and delete some of them?";
-
-							private _result = [_listText, "Asset List", "Yes", "Cancel"] call BIS_fnc_guiMessage;
-
-							if (_result) then {
-								{
-									sleep 0.2;
-									private _asset = _x;
-									private _assetType = getText (configFile >> "CfgVehicles" >> typeOf _asset >> "displayName");
-									private _assetSector = BIS_WL_allSectors select { _asset inArea (_x getVariable "objectAreaComplete") };
-									private _assetLocation = if (count _assetSector > 0) then {
-										(_assetSector # 0) getVariable ["BIS_WL_name", str (mapGridPosition _asset)];
-									} else {
-										mapGridPosition _asset;
-									};
-									_result = [format ["Would you would like to delete: %1 @ %2", _assetType, _assetLocation], "Delete asset", true, true] call BIS_fnc_guiMessage;
-
-									if (_result) then {
-										if (unitIsUAV _asset) then {
-											private _group = group effectiveCommander _asset;
-											{_asset deleteVehicleCrew _x} forEach crew _asset;
-											deleteGroup _group;
-										};
-
-										[_asset] remoteExec ["BIS_fnc_WL2_removeAsset", 2];
-									};
-								} forEach _allAssets;
-							};
-						};
-					};
-					case "RemoveUnits": {
-						{
-							deleteVehicle _x;
-						} forEach ((groupSelectedUnits player) select {_x != player && {_x getVariable ["BIS_WL_ownerAsset", "123"] == getPlayerUID player}});
-						false spawn BIS_fnc_WL2_refreshOSD;
-					};
-					case "wipeMap": {
-						{
-							if ("_USER_DEFINED #" in _x) then {
-								deleteMarkerLocal _x;
-							};
-						} forEach allMapMarkers;
-					};
-					case "RespawnVic": {"RequestMenu_close" call BIS_fnc_WL2_setupUI; [player, "orderFTVehicle"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]};
-					case "RespawnVicFT": {0 spawn BIS_fnc_WL2_orderFTVehicleFT};
-					case "RespawnPod" : {"RequestMenu_close" call BIS_fnc_WL2_setupUI; [player, "orderFTPod"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]};
-					case "RespawnPodFT" : {0 spawn BIS_fnc_WL2_orderFTPodFT};
-					case "welcomeScreen": {0 spawn BIS_fnc_WL2_welcome};
-					default {[_className, _cost, _category, _requirements, _offset] call BIS_fnc_WL2_requestPurchase};
-				};
+				_assetDetails call BIS_fnc_WL2_triggerPurchase;
 			} else {
 				playSound "AddItemFailed";
 			};

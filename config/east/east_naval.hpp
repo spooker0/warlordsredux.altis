@@ -11,16 +11,16 @@ class Naval {
         killReward = 20;
     };	// "Assault Boat"
 
-    class O_Boat_Armed_01_hmg_F {
+    class O_SDV_01_F {
         cost = 250;
+        requirements[] = {"W"};
+        killReward = 20;
+    };	// "SDV"
+
+    class O_Boat_Armed_01_hmg_F {
+        cost = 500;
         requirements[] = {"W"};
         rearm = 400;
         killReward = 80;
     };	// "Speedboat HMG"
-
-    class O_SDV_01_F {
-        cost = 650;
-        requirements[] = {"W"};
-        killReward = 20;
-    };	// "SDV"
 };

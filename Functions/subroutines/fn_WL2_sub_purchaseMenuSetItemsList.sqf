@@ -6,6 +6,14 @@ lbClear (_display displayCtrl 101);
 _id = lbCurSel _purchase_category;
 
 {
+	private _gearCode = "";
+	private _zeroes = _forEachIndex / 9;
+	for "_i" from 1 to _zeroes do {
+		_gearCode = _gearCode + "0";
+	};
+	private _tailNumber = _forEachIndex % 9 + 1;
+	_gearCode = _gearCode + str _tailNumber;
+
 	_x params [
 		"_className",
 		"_cost",
@@ -15,7 +23,7 @@ _id = lbCurSel _purchase_category;
 		"_text",
 		["_offset", [0,0,0]]
 	];
-	(_display displayCtrl 101) lbAdd _displayName;
+	(_display displayCtrl 101) lbAdd format ["%1 [%2]", _displayName, _gearCode];
 	if (_className == "RemoveUnits") then {uiNamespace setVariable ["BIS_WL_removeUnitsListID", -1 + lbSize (_display displayCtrl 101)]};
 	(_display displayCtrl 101) lbSetData [_forEachIndex, format ["%1|||%2|||%3|||%4|||%5|||%6", _className, _requirements, _displayName, _picture, _text, _offset]];
 	(_display displayCtrl 101) lbSetValue [_forEachIndex, _x # 1];
@@ -23,13 +31,17 @@ _id = lbCurSel _purchase_category;
 (_display displayCtrl 101) lbSetCurSel ((uiNamespace getVariable ["BIS_WL_purchaseMenuLastSelection", [0, 0, 0]]) # 1);;
 _purchase_items = _display displayCtrl 1;
 (_display displayCtrl 103) ctrlSetStructuredText parseText format [
-	"<t align = 'center' size = '%2'>%1</t>",
+	"<t align = 'left' size = '%2'>%1</t>",
 	[
 		format [localize "STR_A3_WL_asset_infantry_info", BIS_WL_matesAvailable],
-		localize "STR_A3_WL_asset_vehicles_info",
-	 	localize "STR_A3_WL_asset_aircraft_info",
+		localize "STR_A3_WL_LightVehicle_Info",
+		localize "STR_A3_WL_HeavyVehicle_Info",
+		localize "STR_A3_WL_RotaryWing_Info",
+		localize "STR_A3_WL_FixedWing_Info",
+		localize "STR_A3_WL_RemoteControl_Info",
+		localize "STR_A3_WL_AirDefense_Info",
+		localize "STR_A3_WL_SectorDefense_Info",
 	 	localize "STR_A3_WL_asset_naval_info",
-	 	localize "STR_A3_WL_asset_defences_info",
 	 	localize "STR_A3_WL_asset_gear_info",
 	 	""
 	] # _id,

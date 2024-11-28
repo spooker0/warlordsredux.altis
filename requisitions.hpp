@@ -3,6 +3,7 @@ Repository for all CfgVehicle related configurations.
 
 class CfgVehicleClassName {
     name = string;                   // Name override for vehicle in buy menu.
+    description = string;            // Description override for vehicle in buy menu.
 
     cost = number;                   // Cost of the vehicle, not shown in buy menu if 0.
     spawn = text;                    // If the CfgVehicleClassName is a variant, this is the base class to spawn.

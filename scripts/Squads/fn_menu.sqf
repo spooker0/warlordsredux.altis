@@ -189,7 +189,7 @@ disableSerialization;
             private _tvColor = if (_playerId == (getPlayerID player)) then {
                 [0.4, 0.6, 1.0, 1];
             } else {
-                if (isNull _player || {!alive _player}) then {
+                if (isNil "_player" || {!alive _player}) then {
                     [1, 0, 0, 1];
                 } else {
                     [1, 1, 1, 1];

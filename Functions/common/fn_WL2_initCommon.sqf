@@ -13,6 +13,8 @@ BIS_WL_allSectors = (entities "Logic") select {count synchronizedObjects _x > 0}
 
 enableSaving [false, false];
 
+call BIS_fnc_WL2_tablesSetUp;
+
 {
 	private _sector = _x;
 	_sector setVariable ["BIS_WL_connectedSectors", (synchronizedObjects _sector) select {typeOf _x == "Logic"}];
@@ -34,7 +36,7 @@ if (isServer) then {
 		"BIS_WL_currentTarget_east",
 		"BIS_WL_wrongTeamGroup"
 	] == 0};
-	
+
 	waitUntil {{isNil {_x getVariable "BIS_WL_originalOwner"}} count [BIS_WL_base1, BIS_WL_base2] == 0};
 
 	{

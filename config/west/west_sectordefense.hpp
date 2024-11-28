@@ -1,4 +1,4 @@
-class Defences {
+class SectorDefense {
     class Land_Razorwire_F {
         cost = 50;
         requirements[] = {};
@@ -34,17 +34,10 @@ class Defences {
         structure = 1;
     }; // "Camouflage Vehicle Cover (Green)"
 
-    class B_UGV_02_Demining_F {
-        cost = 100;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 200;
-        killReward = 100;
-    }; // "UGAS demining"
-
     class B_HMG_01_F {
         cost = 150;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
         loadable = 1;
@@ -67,13 +60,6 @@ class Defences {
         };
     }; // "Mk30 HMG .50"
 
-    class B_UGV_01_F {
-        cost = 150;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        killReward = 50;
-    }; // "UGV Stomper"
-
     class Land_IRMaskingCover_01_F {
         cost = 200;
         requirements[] = {};
@@ -86,6 +72,7 @@ class Defences {
     class B_HMG_01_high_F {
         cost = 200;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
         loadable = 1;
@@ -111,6 +98,7 @@ class Defences {
     class B_GMG_01_F {
         cost = 200;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
         loadable = 1;
@@ -119,14 +107,45 @@ class Defences {
     class B_GMG_01_high_F {
         cost = 250;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
         loadable = 1;
     }; // "Mk32 GMG 20mm (Raised)"
 
+    // class B_Minigun_01_high_F {
+    //     name = "Mk30X Minigun (Raised)";
+    //     cost = 250;
+    //     spawn = "B_G_HMG_02_high_F";
+    //     requirements[] = {};
+    //     rearm = 300;
+    //     killReward = 100;
+    //     loadable = 1;
+
+    //     class Gunner: WLTurretDefaults {
+    //         turret[] = { 0 };
+    //         removeMagazines[] = {
+    //             "100Rnd_127x99_mag_Tracer_Yellow",
+    //         };
+    //         removeWeapons[] = {
+    //             "HMG_M2_Mounted"
+    //         };
+    //         addMagazines[] = {
+    //             "2000Rnd_65x39_Belt_Tracer_Yellow",
+    //             "2000Rnd_65x39_Belt_Tracer_Yellow",
+    //             "2000Rnd_65x39_Belt_Tracer_Yellow",
+    //             "2000Rnd_65x39_Belt_Tracer_Yellow"
+    //         };
+    //         addWeapons[] = {
+    //             "LMG_Minigun_Transport"
+    //         };
+    //     };
+    // };
+
     class B_static_AA_F {
         cost = 300;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
         loadable = 1;
@@ -154,6 +173,7 @@ class Defences {
     class B_static_AT_F {
         cost = 300;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
         loadable = 1;
@@ -178,51 +198,13 @@ class Defences {
         };
     }; // "Static Titan Launcher (AT) [NATO]"
 
-    class B_HMG_01_A_F {
-        name = "Mk30 HMG Auto Turret";
-        cost = 500;
-        requirements[] = {};
-        rearm = 300;
-        killReward = 150;
-        loadable = 1;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {
-                "HMG_static"
-            };
-            addMagazines[] = {
-                "100Rnd_127x99_mag_Tracer_Red",
-                "100Rnd_127x99_mag_Tracer_Red",
-                "100Rnd_127x99_mag_Tracer_Red",
-                "100Rnd_127x99_mag_Tracer_Red"
-            };
-            addWeapons[] = {
-                "HMG_static"
-            };
-        };
-    };
-
-    class B_UAV_01_F {
-        cost = 500;
-        requirements[] = {};
-        killReward = 100;
-    }; // AR-2
-
-    class B_UGV_01_rcws_F {
-        cost = 500;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
-        killReward = 100;
-    }; // "UGAS"
-
     class B_static_AA_UP_F {
         name = "Static AA Launcher (UP)";
+        description = "Static AA Launcher (UP) is a variant of the Static AA Launcher armed with SAAMI missiles.<br/>Armament: 4Rnd SAAMI x3";
         spawn = "B_static_AA_F";
         cost = 600;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 200;
 
@@ -245,97 +227,9 @@ class Defences {
         };
     };
 
-    class B_GMG_01_A_F {
-        name = "Mk32 GMG Auto Turret";
-        cost = 650;
-        requirements[] = {};
-        rearm = 300;
-        killReward = 150;
-        loadable = 1;
-    };
-
-    class B_Radar_System_01_F {
-        cost = 1000;
-        requirements[] = {};
-        offset[] = {0, 7, 0};
-        killReward = 350;
-        loadable = 1;
-    }; // "AN/MPQ-105 Radar"
-
-    class B_UAV_06_F {
-        cost = 1000;
-        requirements[] = {};
-        killReward = 200;
-    }; // "AR-6"
-
-    class B_UAV_01_UP_F {
-        name = "AR-2 Darter UP";
-        spawn = "B_UAV_01_F";
-        cost = 1200;
-        requirements[] = {};
-        killReward = 200;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {};
-            addMagazines[] = {
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow"
-            };
-            addWeapons[] = {
-                "SMG_01_F"
-            };
-        };
-    };
-
-    class B_UGV_01_rcws_UP_F {
-        name = "UGV Stomper UP";
-        spawn = "B_UGV_01_rcws_F";
-        cost = 1500;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
-        killReward = 300;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {
-                "96Rnd_40mm_G_belt"
-            };
-            removeWeapons[] = {
-                "GMG_40mm"
-            };
-            addMagazines[] = {
-                "140Rnd_30mm_MP_shells_Tracer_Red",
-                "60Rnd_30mm_APFSDS_shells_Tracer_Red"
-            };
-            addWeapons[] = {
-                "autocannon_30mm_CTWS"
-            };
-        };
-    };
-
     class Land_Communication_F {
         name = "Jamming Tower";
+        description = "Jamming Tower can be used to jam enemy autonomous assets. It must be placed outside the home base in an owned sector.";
         cost = 2500;
         requirements[] = {};
         offset[] = {0, 6, 0};
@@ -346,31 +240,14 @@ class Defences {
         // This is not loadable. It will break initialization code to load this.
     };
 
-    class B_AAA_System_01_F {
-        cost = 3500;
-        requirements[] = {};
-        offset[] = {0, 5.3, 0};
-        rearm = 300;
-        killReward = 400;
-        loadable = 1;
-    }; // "Praetorian 1C"
-
     class B_Mortar_01_F {
         cost = 4000;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         rearm = 900;
         killReward = 125;
         loadable = 1;
     }; // "Mortar"
-
-    class B_SAM_System_03_F {
-        cost = 8000;
-        requirements[] = {};
-        offset[] = {0, 6, 0};
-        rearm = 450;
-        killReward = 500;
-        loadable = 1;
-    }; // "MIM-145 Defender"
 
     class B_Ship_Gun_01_F {
         cost = 10000;
@@ -384,23 +261,6 @@ class Defences {
         };
     }; // "MK45 Hammer"
 
-    class B_SAM_System_01_F {
-        cost = 10000;
-        requirements[] = {};
-        offset[] = {0, 5.3, 0};
-        rearm = 600;
-        killReward = 500;
-        loadable = 1;
-    }; // "Mk49 Spartan"
-
-    class B_SAM_System_02_F {
-        cost = 15000;
-        requirements[] = {};
-        offset[] = {0, 5.3, 0};
-        rearm = 600;
-        killReward = 600;
-        loadable = 1;
-    }; // "Mk21 Centurion"
 
     // class B_Ship_MRLS_01_F {
     //     cost = 30000;
