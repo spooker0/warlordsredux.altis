@@ -36,6 +36,8 @@ class RotaryWing {
             };
             addMagazines[] = {
                 "250Rnd_30mm_HE_shells_Tracer_Green",
+                "250Rnd_30mm_HE_shells_Tracer_Green",
+                "250Rnd_30mm_APDS_shells_Tracer_Green",
                 "250Rnd_30mm_APDS_shells_Tracer_Green"
             };
             addWeapons[] = {
@@ -53,6 +55,8 @@ class RotaryWing {
             };
             addMagazines[] = {
                 "250Rnd_30mm_HE_shells_Tracer_Green",
+                "250Rnd_30mm_HE_shells_Tracer_Green",
+                "250Rnd_30mm_APDS_shells_Tracer_Green",
                 "250Rnd_30mm_APDS_shells_Tracer_Green"
             };
             addWeapons[] = {

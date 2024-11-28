@@ -29,6 +29,8 @@ class HeavyVehicles {
             };
             addMagazines[] = {
                 "250Rnd_30mm_HE_shells_Tracer_Red",
+                "250Rnd_30mm_HE_shells_Tracer_Red",
+                "250Rnd_30mm_APDS_shells_Tracer_Red",
                 "250Rnd_30mm_APDS_shells_Tracer_Red"
             };
             addWeapons[] = {
@@ -106,7 +108,7 @@ class HeavyVehicles {
         name = "ZSU-49 Euphrates";
         description = "ZSU-49 Euphrates is a variant of the ZSU-39 Tigris armed with Rhea missiles.<br/>Armament: 680Rnd 35mm AA x2, 4Rnd Rhea";
         spawn = "O_APC_Tracked_02_AA_F";
-        cost = 9000;
+        cost = 8000;
         requirements[] = {};
         rearm = 450;
         killReward = 600;

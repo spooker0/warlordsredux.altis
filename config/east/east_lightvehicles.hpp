@@ -222,13 +222,12 @@ class LightVehicles {
                 "60Rnd_20mm_AP_shells",
                 "60Rnd_20mm_AP_shells",
                 "60Rnd_20mm_AP_shells",
-                "200Rnd_127x99_mag_Tracer_Green",
-                "200Rnd_127x99_mag_Tracer_Green",
-                "200Rnd_127x99_mag_Tracer_Green"
+                "200Rnd_338_Mag",
+                "200Rnd_338_Mag"
             };
             addWeapons[] = {
                 "cannon_20mm",
-                "HMG_127"
+                "MMG_02_coax"
             };
         };
     };

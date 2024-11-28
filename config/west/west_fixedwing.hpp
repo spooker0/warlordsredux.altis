@@ -1,7 +1,7 @@
 class FixedWing {
-    class B_Plane_Caeser_Armed_01_F {
-        name = "Caesar BTT (Armed)";
-        description = "Caesar BTT (Armed) is a variant of the Caesar BTT armed with a HMG, GMG, and countermeasures.<br/>Armament: 500Rnd 12.7mm x2, 96Rnd 40mm x2, 240Rnd Countermeasures";
+    class B_Plane_Caesar_hmggmg_01_F {
+        name = "Caesar BTT (HMG/GMG)";
+        description = "Caesar BTT (HMG/GMG) is a variant of the Caesar BTT armed with a HMG and GMG.<br/>Armament: 500Rnd 12.7mm x2, 96Rnd 40mm x2, 240Rnd Countermeasures";
         spawn = "C_Plane_Civil_01_F";
         cost = 1500;
 
@@ -24,7 +24,54 @@ class FixedWing {
                 "CMFlareLauncher"
             };
         };
-    }; // "Caesar BTT (Armed)"
+    };
+
+    class B_Plane_Caesar_rocket_01_F {
+        name = "Caesar BTT (Rocket)";
+        description = "Caesar BTT (Rocket) is a variant of the Caesar BTT armed with rockets.<br/>Armament: 14Rnd 80mm x2, 240Rnd Countermeasures";
+        spawn = "C_Plane_Civil_01_F";
+        cost = 1800;
+
+        requirements[] = {"A"};
+        killReward = 300;
+        class Pilot: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {};
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "14Rnd_80mm_rockets",
+                "14Rnd_80mm_rockets",
+                "240Rnd_CMFlare_Chaff_Magazine"
+            };
+            addWeapons[] = {
+                "rockets_Skyfire",
+                "CMFlareLauncher"
+            };
+        };
+    };
+
+    class B_Plane_Caesar_bomb_01_F {
+        name = "Caesar BTT (Bomb)";
+        description = "Caesar BTT (Bomb) is a variant of the Caesar BTT armed with a pair of Mk82 bombs.<br/>Armament: 2Rnd Mk82, 240Rnd Countermeasures";
+        spawn = "C_Plane_Civil_01_F";
+        cost = 2000;
+
+        requirements[] = {"A"};
+        killReward = 300;
+        class Pilot: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {};
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "2Rnd_Mk82",
+                "240Rnd_CMFlare_Chaff_Magazine"
+            };
+            addWeapons[] = {
+                "Mk82BombLauncher",
+                "CMFlareLauncher"
+            };
+        };
+    };
 
     class B_T_VTOL_01_infantry_F {
         cost = 2000;
