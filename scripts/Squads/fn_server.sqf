@@ -36,6 +36,15 @@ switch (_action) do {
             _return = 1;
         };
 
+        private _squadLeader = _squad select 1;
+        if (_squadLeader != _inviter) then {
+            private _inviterInfo = getUserInfo _inviter;
+            _message = format ["%1 has invited %2 to the squad.", _inviterInfo # 4, _userInfo # 4];
+
+            private _squadLeaderInfo = getUserInfo _squadLeader;
+            [_message] remoteExec ["systemChat", _squadLeaderInfo # 1];
+        };
+
         private _owner = _userInfo select 1;
 
         ['invited', [_inviter]] remoteExec ["SQD_fnc_client", _owner];
