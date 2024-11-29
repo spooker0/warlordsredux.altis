@@ -41,7 +41,7 @@ addMissionEventHandler ["Map", {
 							"<t color = '#ff4b4b'>",
 							"</t>",
 							"<br/>",
-							getText (configFile >> "CfgVehicles" >> typeOf BIS_WL_mapAssetTarget >> "displayName")
+							[BIS_WL_mapAssetTarget] call BIS_fnc_WL2_getAssetTypeName
 						]
 					];
 					((ctrlParent _map) getVariable "BIS_sectorInfoBox") ctrlShow true;

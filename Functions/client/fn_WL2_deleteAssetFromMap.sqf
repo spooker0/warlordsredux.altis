@@ -2,15 +2,12 @@
 
 params ["_target"];
 
-private _assetActualType = _target getVariable ["WL2_orderedClass", typeOf _target];
-private _nameOverrides = missionNamespace getVariable ["WL2_nameOverrides", createHashMap];
-private _displayName = _nameOverrides getOrDefault [_assetActualType, getText (configFile >> 'CfgVehicles' >> _assetActualType >> 'displayName')];
-
+private _displayName = [_target] call BIS_fnc_WL2_getAssetTypeName;
 _result = [format ["Are you sure you would like to delete: %1", _displayName], "Delete asset", true, true] call BIS_fnc_guiMessage;
 
 if (_result) then {
 	playSound "AddItemOK";
-	[format [toUpper localize "STR_A3_WL_popup_asset_deleted", toUpper (getText (configFile >> "CfgVehicles" >> typeOf _target >> "displayName"))], 2] spawn BIS_fnc_WL2_smoothText;
+	[format [toUpper localize "STR_A3_WL_popup_asset_deleted", toUpper _displayName], 2] spawn BIS_fnc_WL2_smoothText;
 	_vehicles = missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []];
 	_vehicles deleteAt (_vehicles find _target);
 	missionNamespace setVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], _vehicles, [2, clientOwner]];

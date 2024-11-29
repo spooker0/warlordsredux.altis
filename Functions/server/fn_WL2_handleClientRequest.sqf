@@ -25,24 +25,7 @@ if (_action == "orderAsset") exitWith {
 	private _nearbyEntities = [];
 	if !(_orderType in ["air", "naval"]) then {
 		private _direction = _param4;
-		private _simulatedObject = [_class, ATLToASL _position, _direction, true, false, true] call BIS_fnc_createSimpleObject;
-
-		private _circleA = boundingBoxReal [_simulatedObject, "FireGeometry"];
-		private _radiusA = _circleA select 2;
-
-		private _BUFFER = 1;
-		_nearbyEntities = _simulatedObject nearEntities 30 select {
-			private _circleB = boundingBoxReal [_x, "FireGeometry"];
-			private _radiusB = _circleB select 2;
-			private _assetOwner = _x getVariable ["BIS_WL_ownerAsset", "notAsset"];
-
-			(_x distance _simulatedObject) < (_radiusA + _radiusB + _BUFFER)
-			&& !(_x isKindOf "Man")
-			&& _assetOwner != "notAsset"
-			&& _uid != (_x getVariable ["BIS_WL_ownerAsset", "123"])
-		};
-
-		deleteVehicle _simulatedObject;
+		_nearbyEntities = [_class, ATLToASL _position, _direction, _uid, []] call BIS_fnc_WL2_grieferCheck;
 	};
 
 	if (count _nearbyEntities > 0) exitWith {
@@ -50,7 +33,7 @@ if (_action == "orderAsset") exitWith {
 		_sender setVariable ["BIS_WL_isOrdering", false, [2, _owner]];
 
 		private _nearbyObject = _nearbyEntities # 0;
-		private _nearbyObjectName = getText (configFile >> "CfgVehicles" >> typeOf _nearbyObject >> "displayName");
+		private _nearbyObjectName = [_nearbyObject] call BIS_fnc_WL2_getAssetTypeName;
 		private _nearbyObjectPosition = getPosASL _nearbyObject;
 
 		playSound3D ["a3\3den\data\sound\cfgsound\notificationwarning.wss", objNull, false, _nearbyObjectPosition, 5];

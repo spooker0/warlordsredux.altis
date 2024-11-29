@@ -61,10 +61,7 @@ switch (_className) do {
             {
                 private _asset = _x;
 
-                private _assetActualType = _asset getVariable ["WL2_orderedClass", typeOf _asset];
-                private _nameOverrides = missionNamespace getVariable ["WL2_nameOverrides", createHashMap];
-                private _displayName = _nameOverrides getOrDefault [_assetActualType, getText (configFile >> 'CfgVehicles' >> _assetActualType >> 'displayName')];
-
+                private _displayName = [_asset] call BIS_fnc_WL2_getAssetTypeName;
                 private _assetSector = BIS_WL_allSectors select { _asset inArea (_x getVariable "objectAreaComplete") };
                 private _assetLocation = if (count _assetSector > 0) then {
                     (_assetSector # 0) getVariable ["BIS_WL_name", str (mapGridPosition _asset)];
@@ -81,10 +78,8 @@ switch (_className) do {
                 {
                     sleep 0.2;
                     private _asset = _x;
-                    private _assetActualType = _asset getVariable ["WL2_orderedClass", typeOf _asset];
-                    private _nameOverrides = missionNamespace getVariable ["WL2_nameOverrides", createHashMap];
-                    private _displayName = _nameOverrides getOrDefault [_assetActualType, getText (configFile >> 'CfgVehicles' >> _assetActualType >> 'displayName')];
 
+                    private _displayName = [_asset] call BIS_fnc_WL2_getAssetTypeName;
                     private _assetSector = BIS_WL_allSectors select { _asset inArea (_x getVariable "objectAreaComplete") };
                     private _assetLocation = if (count _assetSector > 0) then {
                         (_assetSector # 0) getVariable ["BIS_WL_name", str (mapGridPosition _asset)];
