@@ -6,10 +6,7 @@ private _removeActionID = _asset addAction [
 	{
 		private _unit = _this # 0;
 
-		private _assetActualType = _unit getVariable ["WL2_orderedClass", typeOf _unit];
-		private _nameOverrides = missionNamespace getVariable ["WL2_nameOverrides", createHashMap];
-		private _displayName = _nameOverrides getOrDefault [_assetActualType, getText (configFile >> 'CfgVehicles' >> _assetActualType >> 'displayName')];
-
+		private _displayName = [_unit] call BIS_fnc_WL2_getAssetTypeName;
 		private _result = [format ["Are you sure you would like to delete: %1", _displayName], "Delete asset", true, true] call BIS_fnc_guiMessage;
 
 		if (_result) exitWith {

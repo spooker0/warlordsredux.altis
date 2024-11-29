@@ -19,11 +19,7 @@ if (_customText != "") then {
 			typeOf _unit
 		};
 
-		private _nameOverrides = missionNamespace getVariable ["WL2_nameOverrides", []];
-		private _assetActualType = _unit getVariable ["WL2_orderedClass", _unitType];
-
-		_displayName = _nameOverrides getOrDefault [_assetActualType, getText (configFile >> "CfgVehicles" >> _assetActualType >> "displayName")];
-
+		_displayName = [_unit, _unitType] call BIS_fnc_WL2_getAssetTypeName;
 		_displayText = "%1 destroyed";
 	};
 	_displayText = format [_displayText, _displayName];
