@@ -9,12 +9,18 @@ if ((_unit isKindOf "Building") && !(_unit getVariable ["WL_structure", false]))
 
 private _killerSide = side group _responsibleLeader;
 private _unitSide = [_unit] call BIS_fnc_WL2_getAssetSide;
+private _customText = "";
 
 if (_killerSide != _unitSide) then {
 	_targets = [missionNamespace getVariable "BIS_WL_currentTarget_west", missionNamespace getVariable "BIS_WL_currentTarget_east"] select {!(isNull _x)};
-	_killReward = 0;
+	private _killReward = 0;
 	if (_unit isKindOf "Man") then {
-		_killReward = (if (isPlayer _unit) then {60} else {30});
+		if (isPlayer _unit) then {
+			_killReward = 60;
+			_customText = "Enemy player killed";
+		} else {
+			_killReward = 30;
+		};
 	} else {
 		_killReward = (serverNamespace getVariable "WL2_killRewards") getOrDefault [_assetActualType, 0];
 	};
@@ -44,7 +50,7 @@ if (_killerSide != _unitSide) then {
 	_killReward = round _killReward;
 	_killReward call BIS_fnc_WL2_fundsDatabaseWrite;
 
-	[_unit, _killReward, "", "#228b22", typeOf _unit] remoteExec ["BIS_fnc_WL2_killRewardClient", owner _responsibleLeader];
+	[_unit, _killReward, _customText, "#228b22", typeOf _unit] remoteExec ["BIS_fnc_WL2_killRewardClient", owner _responsibleLeader];
 
 	["earnPoints", [_playerId, _killReward]] call SQD_fnc_server;
 

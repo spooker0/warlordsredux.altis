@@ -65,6 +65,7 @@ BIS_fnc_WL2_factionBasedClientInit = compileFinal preprocessFileLineNumbers "Fun
 BIS_fnc_WL2_pingFix = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_pingFix.sqf";
 BIS_fnc_WL2_pingFixInit = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_pingFixInit.sqf";
 BIS_fnc_WL2_uavJammer = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_uavJammer.sqf";
+BIS_fnc_WL2_updateKillFeed = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_updateKillFeed.sqf";
 BIS_fnc_WL2_spectrumAction = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_spectrumAction.sqf";
 BIS_fnc_WL2_captureList = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_captureList.sqf";
 BIS_fnc_WL2_MineLimitHint = compileFinal preprocessFileLineNumbers "Functions\client\fn_WL2_MineLimitHint.sqf";
@@ -557,19 +558,28 @@ missionNamespace setVariable [format ["BIS_WL2_minesDB_%1", getPlayerUID player]
 	_scoreControl ctrlSetPosition [_displayX - (_blockW * 110), _displayY - (_blockH * 16 * 3 + _blockH * 30), _blockW * 160, _blockH * 16 * 4];
 	_scoreControl ctrlCommit 0;
 
+	uiNamespace setVariable ["WL_scoreControl", _scoreControl];
+	uiNamespace setVariable ["WL_killRewardMap", createHashMap];
+
 	while { !BIS_WL_missionEnd } do {
-		private _killRewards = missionNamespace getVariable ["WL_killReward", []];
-		_killRewards = _killRewards select {
-			((_x # 1) + 10) > serverTime
+		private _killRewards = uiNamespace getVariable ["WL_killRewardMap", []];
+		private _killFeedDirty = false;
+		private _newKillRewardMap = createHashMap;
+		{
+			private _killRewardTimestamp = _y # 3;
+			if ((_killRewardTimestamp + 10) > serverTime) then {
+				_newKillRewardMap set [_x, _y];
+			} else {
+				_killFeedDirty = true;
+			};
+		} forEach _killRewards;
+
+		if (_killFeedDirty) then {
+			uiNamespace setVariable ["WL_killRewardMap", _newKillRewardMap];
+			[_newKillRewardMap] call BIS_fnc_WL2_updateKillFeed;
 		};
-		missionNamespace setVariable ["WL_killReward", _killRewards];
 
-		private _killText = (_killRewards apply {
-			_x # 0
-		}) joinString "<br />";
-		_scoreControl ctrlSetStructuredText parseText _killText;
-
-		sleep 0.5;
+		sleep 1;
 	};
 };
 
