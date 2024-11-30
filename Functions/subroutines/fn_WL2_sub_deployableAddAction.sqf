@@ -19,7 +19,7 @@ private _deployActionId = _asset addAction [
                     _assetToLoad enableVehicleSensor [_x # 0, false];
                 } forEach (listVehicleSensors _assetToLoad);
 
-                _asset setVariable ["WL2_loadedItem", _assetToLoad];
+                _asset setVariable ["WL2_loadedItem", _assetToLoad];\
 
                 private _enemyGroups = allGroups select {side _x == BIS_WL_enemySide};
                 {
@@ -29,6 +29,10 @@ private _deployActionId = _asset addAction [
                 {
                     _x forgetTarget _assetToLoad;
                 } forEach _enemyUnits;
+
+                private _assetChildren = _asset getVariable ["WL2_children", []];
+                _assetChildren pushBack _assetToLoad;
+                _asset setVariable ["WL2_children", _assetChildren, [2, clientOwner]];
             };
         } else {
             private _desiredPosRelative = [8, 0, 0];
@@ -59,6 +63,10 @@ private _deployActionId = _asset addAction [
             } forEach (listVehicleSensors _assetLoadedItem);
 
             _asset setVariable ["WL2_loadedItem", objNull];
+
+            private _assetChildren = _asset getVariable ["WL2_children", []];
+            _assetChildren = _assetChildren - [_assetLoadedItem];
+            _asset setVariable ["WL2_children", _assetChildren, [2, clientOwner]];
         };
 	},
 	[],
@@ -95,9 +103,9 @@ private _deployActionId = _asset addAction [
     };
 
     // Unload if killed/removed
-    detach _assetLastLoadedItem;
-    _assetLastLoadedItem setVehicleLock "UNLOCKED";
-    {
-        _assetLastLoadedItem enableVehicleSensor [_x # 0, true];
-    } forEach (listVehicleSensors _assetLastLoadedItem);
+    // detach _assetLastLoadedItem;
+    // _assetLastLoadedItem setVehicleLock "UNLOCKED";
+    // {
+    //     _assetLastLoadedItem enableVehicleSensor [_x # 0, true];
+    // } forEach (listVehicleSensors _assetLastLoadedItem);
 };

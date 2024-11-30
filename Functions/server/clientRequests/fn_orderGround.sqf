@@ -44,6 +44,10 @@ if (_class != _orderedClass) then {
 		private _flag = createVehicle ["FlagChecked_F", _asset, [], 0, "CAN_COLLIDE"];
 		_flag setFlagTexture _sideFlag;
 		_flag attachTo [_asset, _flagOffset, "otocvez", true];
+
+		private _assetChildren = _asset getVariable ["WL2_children", []];
+		_assetChildren pushBack _flag;
+		_asset setVariable ["WL2_children", _assetChildren, [2, _sender]];
 	} else {
 		_asset forceFlagTexture _sideFlag;
 	};
