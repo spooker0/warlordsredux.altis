@@ -30,6 +30,17 @@ private _asset = if (_isUav) then {
 // 	} forEach _textures;
 // };
 
+if (_class != _orderedClass) then {
+	private _side = side group _sender;
+	private _sideFlag = if (_side == west) then {
+		"\A3\Data_F_Exp\Flags\flag_CTRG_CO.paa"
+	} else {
+		"\A3\Data_F_Exp\Flags\flag_VIPER_CO.paa"
+	};
+
+	_asset forceFlagTexture _sideFlag;
+};
+
 waitUntil {sleep 0.1; !(isNull _asset)};
 
 private _turretOverrides = missionNamespace getVariable ["WL2_turretOverrides", createHashMap];
