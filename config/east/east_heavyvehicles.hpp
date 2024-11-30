@@ -151,20 +151,11 @@ class HeavyVehicles {
         aps = 3;
     }; // "T-140K Angara"
 
-    // class O_MBT_02_railgun_F {
-    //     cost = 15000;
-    //     requirements[] = {};
-    //     rearm = 600;
-    //     killReward = 500;
-    //     capValue = 4;
-    //     aps = 3;
-    // }; // "T-100 Futura"
-
     class O_MBT_04_nato_F {
         name = "T-140N Yukon";
         description = "T-140N Yukon is a variant of the T-140 Angara armed with a NATO 120mm cannon.<br/>Armament: 4Rnd 120mm ATGM LG x8";
         spawn = "O_MBT_04_command_F";
-        cost = 18000;
+        cost = 13500;
         requirements[] = {};
         rearm = 600;
         killReward = 800;
@@ -196,6 +187,15 @@ class HeavyVehicles {
             };
         };
     };
+
+    // class O_MBT_02_railgun_F {
+    //     cost = 15000;
+    //     requirements[] = {};
+    //     rearm = 600;
+    //     killReward = 500;
+    //     capValue = 4;
+    //     aps = 3;
+    // }; // "T-100 Futura"
 
     class I_Truck_02_MRL_F {
         cost = 18000;
