@@ -179,6 +179,10 @@ class LightVehicles {
                 "missiles_titan"
             };
         };
+
+        disallowMagazines[] = {
+            "4Rnd_GAA_missiles"
+        };
     }; // "Prowler (AT UP)"
 
     class B_MRAP_01_gmg_F {
