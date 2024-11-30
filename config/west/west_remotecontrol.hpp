@@ -14,33 +14,6 @@ class RemoteControl {
         killReward = 50;
     }; // "UGV Stomper"
 
-    class B_HMG_01_A_F {
-        name = "Mk30 HMG Auto Turret";
-        cost = 500;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
-        killReward = 150;
-        loadable = 1;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {
-                "HMG_static"
-            };
-            addMagazines[] = {
-                "100Rnd_127x99_mag_Tracer_Red",
-                "100Rnd_127x99_mag_Tracer_Red",
-                "100Rnd_127x99_mag_Tracer_Red",
-                "100Rnd_127x99_mag_Tracer_Red"
-            };
-            addWeapons[] = {
-                "HMG_static"
-            };
-        };
-    };
-
     class B_UAV_01_F {
         cost = 500;
         requirements[] = {};
@@ -54,16 +27,6 @@ class RemoteControl {
         rearm = 300;
         killReward = 100;
     }; // "UGAS"
-
-    class B_GMG_01_A_F {
-        name = "Mk32 GMG Auto Turret";
-        cost = 650;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
-        killReward = 150;
-        loadable = 1;
-    };
 
     class B_UAV_06_F {
         cost = 1000;

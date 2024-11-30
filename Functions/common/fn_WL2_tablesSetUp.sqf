@@ -45,8 +45,8 @@ private _requisitionPresets = BIS_WL_purchaseListTemplate;
 
 				private _requisitionGarbageCollect = getNumber (_x >> "garbageCollect");
 				private _requisitionDemolishable = getNumber (_x >> "demolishable");
-				private _requisitionLoadable = getNumber (_x >> "loadable");
 
+				private _requisitionLoadable = getArray (_x >> "loadable");
 				private _requisitionFlagOffset = getArray (_x >> "flagOffset");
 
 				private _requisitionDisallowMagazines = getArray (_x >> "disallowMagazines");
@@ -102,8 +102,8 @@ private _requisitionPresets = BIS_WL_purchaseListTemplate;
 					_demolishableHashMap set [_requistitonName, true];
 				};
 
-				if (_requisitionLoadable != 0) then {
-					_loadableHashMap set [_requistitonName, true];
+				if (count _requisitionLoadable > 0) then {
+					_loadableHashMap set [_requistitonName, _requisitionLoadable];
 				};
 
 				if (count _requisitionFlagOffset > 0) then {

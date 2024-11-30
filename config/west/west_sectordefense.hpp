@@ -40,7 +40,7 @@ class SectorDefense {
         offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
-        loadable = 1;
+        loadable[] = {0, -2.5, 0.4};
 
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
@@ -75,7 +75,7 @@ class SectorDefense {
         offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
-        loadable = 1;
+        loadable[] = {0, -2.5, 0.8};
 
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
@@ -101,7 +101,7 @@ class SectorDefense {
         offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
-        loadable = 1;
+        loadable[] = {0, -2.5, 0.4};
     }; // "Mk32 GMG 20mm"
 
     class B_GMG_01_high_F {
@@ -110,7 +110,7 @@ class SectorDefense {
         offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
-        loadable = 1;
+        loadable[] = {0, -2.5, 0.8};
     }; // "Mk32 GMG 20mm (Raised)"
 
     // class B_Minigun_01_high_F {
@@ -120,7 +120,7 @@ class SectorDefense {
     //     requirements[] = {};
     //     rearm = 300;
     //     killReward = 100;
-    //     loadable = 1;
+    //     loadable[] = {0, -2.5, 0};
 
     //     class Gunner: WLTurretDefaults {
     //         turret[] = { 0 };
@@ -148,7 +148,7 @@ class SectorDefense {
         offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
-        loadable = 1;
+        loadable[] = {0, -2.5, 0.2};
 
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
@@ -176,7 +176,7 @@ class SectorDefense {
         offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 100;
-        loadable = 1;
+        loadable[] = {0, -2.5, 0.2};
 
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
@@ -198,6 +198,33 @@ class SectorDefense {
         };
     }; // "Static Titan Launcher (AT) [NATO]"
 
+    class B_HMG_01_A_F {
+        name = "Mk30 HMG Auto Turret";
+        cost = 500;
+        requirements[] = {};
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        killReward = 150;
+        loadable[] = {0, -2.5, 0.4};
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {};
+            removeWeapons[] = {
+                "HMG_static"
+            };
+            addMagazines[] = {
+                "100Rnd_127x99_mag_Tracer_Red",
+                "100Rnd_127x99_mag_Tracer_Red",
+                "100Rnd_127x99_mag_Tracer_Red",
+                "100Rnd_127x99_mag_Tracer_Red"
+            };
+            addWeapons[] = {
+                "HMG_static"
+            };
+        };
+    };
+
     class B_static_AA_UP_F {
         name = "Static AA Launcher (UP)";
         description = "Static AA Launcher (UP) is a variant of the Static AA Launcher armed with SAAMI missiles.<br/>Armament: 4Rnd SAAMI x3";
@@ -207,6 +234,7 @@ class SectorDefense {
         offset[] = {0, 3, 0};
         rearm = 300;
         killReward = 200;
+        loadable[] = {0, -2.5, 0.2};
 
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
@@ -225,6 +253,16 @@ class SectorDefense {
                 "missiles_SAAMI"
             };
         };
+    };
+
+    class B_GMG_01_A_F {
+        name = "Mk32 GMG Auto Turret";
+        cost = 650;
+        requirements[] = {};
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        killReward = 150;
+        loadable[] = {0, -2.5, 0.4};
     };
 
     class Land_Communication_F {
@@ -246,7 +284,7 @@ class SectorDefense {
         offset[] = {0, 3, 0};
         rearm = 900;
         killReward = 125;
-        loadable = 1;
+        loadable[] = {0, -2.5, 0};
     }; // "Mortar"
 
     class B_Ship_Gun_01_F {

@@ -7,13 +7,13 @@ private _deployActionId = _asset addAction [
 
         private _assetLoadedItem = _asset getVariable ["WL2_loadedItem", objNull];
         if (isNull _assetLoadedItem) then {
-            private _nearLoadableEntities = (_asset nearEntities 30) select {isNull attachedTo _x};
-            private _loadableHashmap = missionNamespace getVariable ["WL2_loadable", createHashMap];
-            private _nearLoadable = _nearLoadableEntities select {typeOf _x in _loadableHashmap};
+            private _eligibilityQuery = [_asset, _caller] call BIS_fnc_WL2_sub_deployableEligibility;
+            private _nearLoadableEntities = _eligibilityQuery # 1;
 
-            if (count _nearLoadable > 0) then {
-                private _assetToLoad = _nearLoadable select 0;
-                _assetToLoad attachTo [_asset, [0, 0, 1], "proxy:\a3\data_f\proxies\truck_01\cargo.001"];
+            if (count _nearLoadableEntities > 0) then {
+                private _assetToLoad = _nearLoadableEntities select 0;
+                private _offset = _eligibilityQuery # 2;
+                _assetToLoad attachTo [_asset, _offset, "proxy:\a3\data_f\proxies\truck_01\cargo.001"];
                 _assetToLoad setVehicleLock "LOCKED";
                 {
                     _assetToLoad enableVehicleSensor [_x # 0, false];
@@ -74,16 +74,15 @@ private _deployActionId = _asset addAction [
 	false,
 	false,
 	"",
-	"[_target, _this] call BIS_fnc_WL2_sub_deployableEligibility",
+	"([_target, _this] call BIS_fnc_WL2_sub_deployableEligibility) # 0",
 	30,
 	false
 ];
 
 [_asset, _deployActionId] spawn {
     params ["_asset", "_deployActionId"];
-    private _assetLastLoadedItem = objNull;
     while { alive _asset } do {
-        _assetLastLoadedItem = _asset getVariable ["WL2_loadedItem", objNull];
+        private _assetLastLoadedItem = _asset getVariable ["WL2_loadedItem", objNull];
         private _hasLoad = !isNull _assetLastLoadedItem;
 
         private _actionText = if (_hasLoad) then {
