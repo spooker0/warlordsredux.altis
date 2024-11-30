@@ -1707,15 +1707,15 @@
         <Key ID="STR_WLM_REARM">
             <Original>Rearm</Original>
             <English>Rearm</English>
-            <Czech>Přezbrojit</Czech>
+            <Czech>Přezbroj</Czech>
             <French>Réarmer</French>
-            <German>Nachrüsten</German>
-            <Italian>Riarmare</Italian>
-            <Polish>Przezbrojenie</Polish>
+            <German>Rüsten</German>
+            <Italian>Riarma</Italian>
+            <Polish>Zbroj</Polish>
             <Portuguese>Rearmar</Portuguese>
-            <Russian>Перевооружение</Russian>
+            <Russian>Реарм</Russian>
             <Spanish>Rearmar</Spanish>
-            <Turkish>Yeniden Silahlandır</Turkish>
+            <Turkish>Silahlan</Turkish>
             <Korean>재무장</Korean>
             <Japanese>再武装する</Japanese>
             <Chinesesimp>重新武装</Chinesesimp>
@@ -1962,19 +1962,19 @@
 		<Key ID="STR_WLM_APPLY_FREE">
             <Original>Apply/Rearm</Original>
             <English>Apply/Rearm</English>
-            <Czech>Přiložit a znovu zapnout</Czech>
-            <French>Appliquer et réarmer</French>
-            <German>Anwenden und erneut aktivieren</German>
-            <Italian>Applica e riarma</Italian>
-            <Polish>Zastosuj i uzbroić</Polish>
-            <Portuguese>Aplicar e rearmar</Portuguese>
-            <Russian>Применить и перевооружить</Russian>
-            <Spanish>Aplicar y rearmar</Spanish>
-            <Turkish>Uygula ve Yeniden Silahlandır</Turkish>
-            <Korean>적용 및 재설정</Korean>
-            <Japanese>適用と再準備</Japanese>
-            <Chinesesimp>应用并重新装备</Chinesesimp>
-            <Chinese>應用並重新裝備</Chinese>
+            <Czech>Přilož/Zapni</Czech>
+            <French>Applique/Réarme</French>
+            <German>Anw/Aktiv</German>
+            <Italian>Applica/Riarma</Italian>
+            <Polish>Zastos/Uzbr</Polish>
+            <Portuguese>Aplica/Rearma</Portuguese>
+            <Russian>Прим/Реарм</Russian>
+            <Spanish>Aplica/Rearma</Spanish>
+            <Turkish>Uyg/Silahlan</Turkish>
+            <Korean>적용/재설정</Korean>
+            <Japanese>適用/再準備</Japanese>
+            <Chinesesimp>应用/装备</Chinesesimp>
+            <Chinese>應用/裝備</Chinese>
         </Key>
         <Key ID="STR_WLM_APPLY_SELECTED_PYLONS">
             <Original>Apply the selected magazines to the vehicle.</Original>
