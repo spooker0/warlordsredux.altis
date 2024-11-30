@@ -157,6 +157,7 @@ class HeavyVehicles {
         spawn = "O_MBT_04_command_F";
         cost = 13500;
         requirements[] = {};
+        flagOffset[] = {-0.69, -3.1, 1.8};
         rearm = 600;
         killReward = 800;
         capValue = 4;
