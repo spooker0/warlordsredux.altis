@@ -25,21 +25,10 @@ if (!alive player) then {_ret = false; _tooltip = localize "STR_A3_WL_fasttravel
 if (lifeState player == "INCAPACITATED") then {_ret = false; _tooltip = format [localize "STR_A3_Revive_MSG_INCAPACITATED", name player]};
 
 if (_ret) then {
-	//Added this check to stop a "rouge" friendly player or a cheater placing an enemy at the main base blocking fast travel
-	//These distance checks appear to be running every frame. I think this is a client side UI script but in general thats a really bad idea.
-	private _flagPole = nearestObjects [player, ["FlagPole_F"], 100];
-	private _nearbyEnemies = false;
-	if (count _flagPole > 0) then
-	{
-		//do nothing because _nearbyEnemies is already false;
-		//systemChat "Flag nearby";
-	}
-	else
-	{
-		//systemChat "Normal";
-		_nearbyEnemies = (count ((allPlayers inAreaArray [player, 100, 100]) select {_x != player && {BIS_WL_playerSide != side group _x && {alive _x}}}) > 0);
-	};
-
+	private _enemiesNearPlayer = (allPlayers inAreaArray [player, 100, 100]) select {_x != player && BIS_WL_playerSide != side group _x && alive _x};
+	private _homeBase = BIS_WL_playerSide call BIS_fnc_WL2_getSideBase;
+	private _isInHomeBase = player inArea (_homeBase getVariable "objectAreaComplete");
+	private _nearbyEnemies = count _enemiesNearPlayer > 0 && !_isInHomeBase;
 
 	switch (_class) do {
 		case "FTSeized": {
@@ -277,16 +266,18 @@ if (_ret) then {
 			if (_class == "Land_Communication_F") then {
 				private _jammerMarkers = missionNamespace getVariable ["BIS_WL_jammerMarkers", []];
 				private _allJammers = _jammerMarkers apply { _x # 0 };
-				private _allTowers = _allJammers select { typeOf _x == "Land_Communication_F" };
-				private _jammersNear = _allTowers select { player distance _x < (WL_JAMMER_RANGE_OUTER * 2) };
+				private _allTowersOnTeam = _allJammers select {
+					typeOf _x == "Land_Communication_F"
+					&& _x getVariable ["BIS_WL_ownerAssetSide", sideUnknown] == BIS_WL_playerSide
+				};
+				private _jammersNear = _allTowersOnTeam select { player distance _x < (WL_JAMMER_RANGE_OUTER * 2) };
 
 				if (count _jammersNear > 0) exitWith {
 					_ret = false;
 					_tooltip = localize "STR_A3_WL_jammer_restr";
 				};
 
-				private _homeBase = BIS_WL_playerSide call BIS_fnc_WL2_getSideBase;
-				if (player inArea (_homeBase getVariable "objectAreaComplete")) exitWith {
+				if (_isInHomeBase) exitWith {
 					_ret = false;
 					_tooltip = localize "STR_A3_WL_jammer_home_restr";
 				};
