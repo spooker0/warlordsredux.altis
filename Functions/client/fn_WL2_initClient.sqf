@@ -218,6 +218,7 @@ enableSentences true;
 {
 	_x enableChannel [true, false]
 } forEach [0, 2];
+setCurrentChannel 1;
 enableEnvironment [false, true];
 
 call MRTM_fnc_settingsInit;
