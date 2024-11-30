@@ -5,7 +5,7 @@ class AirDefense {
         requirements[] = {};
         offset[] = {0, 7, 0};
         killReward = 350;
-        loadable = 1;
+        loadable[] = {0, 0, 1};
     }; // "AN/MPQ-105 Radar"
 
     class B_AAA_System_01_F {
@@ -15,7 +15,7 @@ class AirDefense {
         offset[] = {0, 5.3, 0};
         rearm = 300;
         killReward = 400;
-        loadable = 1;
+        loadable[] = {0, -1, 1.7};
     }; // "Praetorian 1C"
 
     class B_SAM_System_03_F {
@@ -25,7 +25,7 @@ class AirDefense {
         offset[] = {0, 6, 0};
         rearm = 450;
         killReward = 500;
-        loadable = 1;
+        loadable[] = {0, 0, 1};
     }; // "MIM-145 Defender"
 
     class B_SAM_System_01_F {
@@ -35,7 +35,7 @@ class AirDefense {
         offset[] = {0, 5.3, 0};
         rearm = 600;
         killReward = 500;
-        loadable = 1;
+        loadable[] = {0, -2, 0.8};
     }; // "Mk49 Spartan"
 
     class B_SAM_System_02_F {
@@ -45,6 +45,6 @@ class AirDefense {
         offset[] = {0, 5.3, 0};
         rearm = 600;
         killReward = 600;
-        loadable = 1;
+        loadable[] = {0, -2, 1};
     }; // "Mk21 Centurion"
 };

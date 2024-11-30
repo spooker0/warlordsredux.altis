@@ -1,5 +1,4 @@
 params ["_asset", "_caller"];
-
 private _assetOwner = _asset getVariable ["BIS_WL_ownerAsset", "123"];
 private _callerUID = getPlayerUID _caller;
 private _callerID = getPlayerID _caller;
@@ -10,6 +9,9 @@ private _nearLoadableEntities = (_asset nearEntities 30) select {isNull attached
 private _loadableHashmap = missionNamespace getVariable ["WL2_loadable", createHashMap];
 private _nearLoadable = _nearLoadableEntities select {
     private _ownerUID = _x getVariable ["BIS_WL_ownerUavAsset", "123"];
+    if (_ownerUID == "123") then {
+        _ownerUID = _x getVariable ["BIS_WL_ownerAsset", "123"];
+    };
     private _owner = _ownerUID call BIS_fnc_getUnitByUid;
     private _ownerID = getPlayerID _owner;
 
@@ -21,4 +23,15 @@ private _nearLoadable = _nearLoadableEntities select {
 };
 private _hasNearLoadable = count _nearLoadable > 0;
 
-_assetOwner == _callerUID && alive _asset && (_hasLoadedItem || _hasNearLoadable)
+private _offset = if (_hasNearLoadable) then {
+    private _loadable = _nearLoadable # 0;
+    private _loadableType = _loadable getVariable ["WL2_orderedClass", typeOf _loadable];
+    _loadableHashmap getOrDefault [_loadableType, [0, 0, 1]];
+} else {
+    [0, 0, 1];
+};
+
+// 0: eligible
+// 1: near loadables
+// 2: offset
+[_assetOwner == _callerUID && alive _asset && (_hasLoadedItem || _hasNearLoadable), _nearLoadable, _offset];
