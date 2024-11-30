@@ -38,7 +38,15 @@ if (_class != _orderedClass) then {
 		"\A3\Data_F_Exp\Flags\flag_VIPER_CO.paa"
 	};
 
-	_asset forceFlagTexture _sideFlag;
+	private _flagMap = missionNamespace getVariable ["WL2_flagOffsets", createHashMap];
+	private _flagOffset = _flagMap getOrDefault [_orderedClass, []];
+	if (count _flagOffset > 0) then {
+		private _flag = createVehicle ["FlagChecked_F", _asset, [], 0, "CAN_COLLIDE"];
+		_flag setFlagTexture _sideFlag;
+		_flag attachTo [_asset, _flagOffset, "otocvez", true];
+	} else {
+		_asset forceFlagTexture _sideFlag;
+	};
 };
 
 waitUntil {sleep 0.1; !(isNull _asset)};
