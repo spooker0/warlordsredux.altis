@@ -25,14 +25,14 @@ private _projectileSettings = [
     ["M_125mm_cannon_ATGM", [2, 1, true]],      // 125mm Cannon ATGM
 
     // Ground Vehicle AT
-    ["M_127mm_Firefist_AT", [2, 2, true]],      // Nyx Firefist AT - Max loadout: 6
+    ["M_127mm_Firefist_AT", [2, 2, true]],      // Nyx Firefist AT
     ["M_Titan_AT_long", [2, 1, true]],          // Titan AT (Vehicle)
     ["M_SPG9_HE", [2, 1, false]],               // SPG-9 HE
     ["M_SPG9_HEAT", [2, 1, false]],             // SPG-9 HEAT
 
     // Air Vehicle SEAD
-    ["ammo_Missile_HARM", [2, 3, true]],        // AGM-88 HARM - Max loadout: 2
-    ["ammo_Missile_KH58", [2, 2, true]],        // KH-58 ARM - Max loadout: 3
+    ["ammo_Missile_HARM", [2, 3, true]],        // AGM-88 HARM
+    ["ammo_Missile_KH58", [2, 2, true]],        // KH-58 ARM
 
     // Air Vehicle Guided
     ["M_Jian_AT", [2, 2, true]],                // Jian - Max loadout: 4
