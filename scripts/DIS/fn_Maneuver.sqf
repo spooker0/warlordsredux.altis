@@ -24,6 +24,7 @@ params ["_projectile"];
     params ["_projectile"];
     sleep 1;
     while { alive _projectile } do {
+        sleep 0.5;
         private _missileTarget = missileTarget _projectile;
         private _missileTargetSide = _missileTarget getVariable ["BIS_WL_ownerAssetSide", side _missileTarget];
         private _projectileSide = side (group player);
