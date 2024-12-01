@@ -398,4 +398,8 @@ if (isPlayer _owner) then {
 			};
 		}];
 	};
+
+	if ("hide_rail" in (animationNames _asset)) then {
+		_asset animateSource ["hide_rail", 0];
+	};
 };
