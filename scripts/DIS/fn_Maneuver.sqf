@@ -20,6 +20,20 @@ params ["_projectile"];
     };
 };
 
+[_projectile] spawn {
+    params ["_projectile"];
+    sleep 1;
+    while { alive _projectile } do {
+        sleep 0.5;
+        private _missileTarget = missileTarget _projectile;
+        private _missileTargetSide = _missileTarget getVariable ["BIS_WL_ownerAssetSide", side _missileTarget];
+        private _projectileSide = side (group player);
+        if (_missileTargetSide == _projectileSide) exitWith {
+            triggerAmmo _projectile;
+        };
+    };
+};
+
 private _iteration = 0;
 private _maxAcceleration = (getNumber (configfile >> "CfgAmmo" >> typeOf _projectile >> "thrust")) / 10.0 * WL_SAM_ACCELERATION_FACTOR;
 private _maxSpeed = getNumber (configfile >> "CfgAmmo" >> typeOf _projectile >> "maxSpeed") * WL_SAM_MAX_SPEED_FACTOR;
