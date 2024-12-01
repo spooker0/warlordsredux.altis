@@ -19,11 +19,15 @@ class CfgVehicleClassName {
     vehicleSpawn = number (0|1);     // For populating independent sectors, vehicle units.
     aircraftSpawn = number (0|1);    // For populating independent sectors, aircraft units.
     garbageCollect = number (0|1);   // Whether we manually delete the vehicle when it's destroyed. For buildables.
+    demolishable = number (0|1);     // Whether the vehicle can be demolished. For buildables.
 
-    disallowMagazines[] = array;      // CfgMagazine classes to disallow in the vehicle.
-    allowPylonMagazines[] = array;    // CfgMagazine classes to allow on pylons of aircraft.
+    loadable = array;                // when set, the vehicle can be loaded into a flatbed. The array is the offset.
+    flagOffset = array;              // when set, if the vehicle spawns a flag, its offset will use this.
 
-    WLTurretDefaults[] = classes;     // Turret defaults allows replacing weapons/ammo from a turret of a vehicle.
+    disallowMagazines[] = array;     // CfgMagazine classes to disallow in the vehicle.
+    allowPylonMagazines[] = array;   // CfgMagazine classes to allow on pylons of aircraft.
+
+    WLTurretDefaults[] = classes;    // Turret defaults allows replacing weapons/ammo from a turret of a vehicle.
 };
 
 Turret defaults allows replacing weapons/ammo from a turret of a vehicle.
@@ -32,6 +36,7 @@ Note 2: The order of operation is remove magazines, remove weapons, add magazine
 
 class NameItAnything: WLTurretDefaults {
     turret[] = { 0 };                // Turret path to modify.
+    reloadOverride = number;         // Override the reload time of the vehicle's weapons. Can only be shorter than default.
     removeMagazines[] = {            // CfgMagazine classes to remove.
         "magazine_classname",        // Note: For now, we remove all magazines of this class from the turret.
         ...

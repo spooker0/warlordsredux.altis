@@ -65,6 +65,7 @@ private _turretOverridesForVehicle = _turretOverrides getOrDefault [_orderedClas
 	private _removeWeapons = getArray (_turretOverride >> "removeWeapons");
 	private _addMagazines = getArray (_turretOverride >> "addMagazines");
 	private _addWeapons = getArray (_turretOverride >> "addWeapons");
+	private _reloadOverride = getNumber (_turretOverride >> "reloadOverride");
 
 	{
 		_asset removeMagazinesTurret [_x, _turret];
@@ -100,6 +101,21 @@ private _turretOverridesForVehicle = _turretOverrides getOrDefault [_orderedClas
 	{
 		_asset addWeaponTurret [_x, _turret];
 	} forEach _existingWeapons;
+
+	if (_reloadOverride != 0) then {
+		_asset setVariable ["WL2_reloadOverride", [_reloadOverride, _turret]];
+		_asset addEventHandler ["Fired", {
+			params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
+			private _reloadOverride = _unit getVariable ["WL2_reloadOverride", []];
+			private _reloadTime = _reloadOverride # 0;
+			private _turret = _reloadOverride # 1;
+
+			private _weaponState = weaponState [_unit, _turret];
+			if (_weaponState # 6 > 0) then {
+				[_unit, _weapon, _turret, _reloadTime] remoteExec ["BIS_fnc_WL2_reloadOverride", _gunner];
+			};
+		}];
+	};
 } forEach _turretOverridesForVehicle;
 
 private _defaultMags = magazinesAllTurrets _asset;
