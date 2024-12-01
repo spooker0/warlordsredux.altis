@@ -30,7 +30,8 @@ private _asset = if (_isUav) then {
 // 	} forEach _textures;
 // };
 
-if (_class != _orderedClass) then {
+private _originalIsBuyable = (serverNamespace getVariable ["WL2_costs", createHashMap]) getOrDefault [_class, 0] != 0;
+if (_class != _orderedClass && _originalIsBuyable) then {
 	private _side = side group _sender;
 	private _sideFlag = if (_side == west) then {
 		"\A3\Data_F_Exp\Flags\flag_CTRG_CO.paa"

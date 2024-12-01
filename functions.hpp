@@ -38,10 +38,6 @@ class CfgFunctions {
 			class CountAmmo {};
 			class GetDirection {};
 			class HasCharges {};
-			class IsIRguided {};
-			class IsLaserGuided {};
-			class IsRadarGuided {};
-			class IsVisualGuided {};
 			class MisguideMissile {};
 			class RelDir2 {};
 			class getMaxAmmo {};
