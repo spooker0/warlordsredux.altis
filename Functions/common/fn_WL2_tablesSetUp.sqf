@@ -6,6 +6,7 @@ private _spawnHashMap = createHashMap;
 private _costHashMap = createHashMap;
 private _rearmTimerHashMap = createHashMap;
 private _killRewardHashMap = createHashMap;
+
 private _structureHashMap = createHashMap;
 private _capValueHashMap = createHashMap;
 private _apsHashMap = createHashMap;
@@ -184,9 +185,9 @@ missionNamespace setVariable ["WL2_spawnClass", _spawnHashMap];
 missionNamespace setVariable ["WL2_aps", _apsHashMap];
 
 missionNamespace setVariable ["WL2_demolishable", _demolishableHashMap];
-missionNamespace setVariable ["WL2_loadable", _loadableHashMap];
 missionNamespace setVariable ["WL2_structure", _structureHashMap];
 
+missionNamespace setVariable ["WL2_loadable", _loadableHashMap];
 missionNamespace setVariable ["WL2_flagOffsets", _flagOffsetHashMap];
 
 missionNamespace setVariable ["WL2_disallowMagazinesForVehicle", _disallowMagazinesForVehicle];

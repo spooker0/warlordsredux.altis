@@ -127,7 +127,7 @@ class LightVehicles {
         name = "Qilin (AT-M)";
         description = "Qilin (AT-M) is a variant of the Qilin armed with a Firefist AT missile launcher.<br/>Armament: 2Rnd Firefist x5";
         spawn = "O_LSV_02_AT_F";
-        cost = 800;
+        cost = 1200;
         requirements[] = {};
         rearm = 200;
         killReward = 220;
@@ -135,6 +135,7 @@ class LightVehicles {
 
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
+            reloadOverride = 6;
             removeMagazines[] = {
                 "Vorona_HEAT"
             };

@@ -64,6 +64,10 @@ class CfgRemoteExec {
 			allowedTargets = 0;
 		};
 
+		class BIS_fnc_WL2_reloadOverride {
+			allowedTargets = 0;
+		};
+
 		class BIS_fnc_WL2_removeAsset {
 			allowedTargets = 2;
 		};
