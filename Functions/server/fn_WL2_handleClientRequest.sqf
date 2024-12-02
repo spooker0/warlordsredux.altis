@@ -192,6 +192,14 @@ if (_action == "orderFTPod") exitWith {
 	};
 };
 
+if (_action == "orderRespawnBag") exitWith {
+	_cost = 20;
+	_hasFunds = (playerFunds >= _cost);
+	if (_hasFunds) then {
+		(-_cost) call BIS_fnc_WL2_fundsDatabaseWrite;
+	};
+};
+
 if (_action == "ftSupportPoints") exitWith {
 	private _ftVehicle = _param1;
 	private _reward = 5;

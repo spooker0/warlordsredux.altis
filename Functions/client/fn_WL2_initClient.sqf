@@ -411,6 +411,19 @@ player addEventHandler ["HandleRating", {
 	0;
 }];
 
+player addEventHandler ["WeaponAssembled", {
+	params ["_unit", "_staticWeapon", "_primaryBag", "_secondaryBag"];
+	if (typeOf _staticWeapon != "Respawn_TentA_F") exitWith {};
+
+	private _previousRespawnBag = _unit getVariable ["BIS_WL2_respawnBag", objNull];
+	if (!isNull _previousRespawnBag) then {
+		player setVariable ["BIS_WL2_respawnBag", objNull];
+		deleteVehicle _previousRespawnBag;
+	};
+	_unit setVariable ["BIS_WL2_respawnBag", _staticWeapon];
+	_staticWeapon enableWeaponDisassembly false;
+}];
+
 call SQD_fnc_initClient;
 
 call BIS_fnc_WL2_pingFixInit;

@@ -118,6 +118,19 @@ switch (_className) do {
     case "RespawnVicFT": {0 spawn BIS_fnc_WL2_orderFTVehicleFT};
     case "RespawnPod" : {"RequestMenu_close" call BIS_fnc_WL2_setupUI; [player, "orderFTPod"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]};
     case "RespawnPodFT" : {0 spawn BIS_fnc_WL2_orderFTPodFT};
+    case "RespawnBag": {
+        player addBackpack "B_Respawn_TentA_F";
+        [player, "orderRespawnBag"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2];
+        "RequestMenu_close" call BIS_fnc_WL2_setupUI;
+    };
+    case "RespawnBagFT": {
+        private _respawnBag = player getVariable ["BIS_WL2_respawnBag", objNull];
+        if (!isNull _respawnBag) then {
+            deleteVehicle _respawnBag;
+            player setVariable ["BIS_WL2_respawnBag", objNull];
+            player setPosATL (getPosATL _respawnBag);
+        };
+    };
     case "welcomeScreen": {0 spawn BIS_fnc_WL2_welcome};
     default {[_className, _cost, _category, _requirements, _offset] call BIS_fnc_WL2_requestPurchase};
 };

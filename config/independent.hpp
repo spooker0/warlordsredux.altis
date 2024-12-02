@@ -151,6 +151,10 @@ class INDEPENDENT {
             vehicleSpawn = 1;
             aps = 3;
         };
+
+        class Respawn_TentA_F {
+            garbageCollector = 1;
+        };
     };
 
     class Aircraft {
