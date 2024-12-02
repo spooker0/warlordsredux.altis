@@ -2,6 +2,7 @@ class LightVehicles {
     class O_Quadbike_01_F {
         cost = 20;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         killReward = 20;
         capValue = 1;
     }; // "Quad Bike"
@@ -9,6 +10,7 @@ class LightVehicles {
     class O_G_Offroad_01_armed_F {
         cost = 150;
         requirements[] = {};
+        offset[] = {0, 5, 0};
         rearm = 120;
         killReward = 150;
         capValue = 1;
@@ -34,6 +36,7 @@ class LightVehicles {
     class O_LSV_02_armed_F {
         cost = 200;
         requirements[] = {};
+        offset[] = {0, 5, 0};
         rearm = 120;
         killReward = 150;
         capValue = 1;
@@ -79,6 +82,7 @@ class LightVehicles {
     class O_G_Offroad_01_AT_F {
         cost = 500;
         requirements[] = {};
+        offset[] = {0, 5, 0};
         rearm = 180;
         killReward = 180;
         capValue = 1;
@@ -101,6 +105,7 @@ class LightVehicles {
     class O_LSV_02_AT_F {
         cost = 750;
         requirements[] = {};
+        offset[] = {0, 5, 0};
         rearm = 200;
         killReward = 200;
         capValue = 1;
@@ -122,38 +127,6 @@ class LightVehicles {
             };
         };
     }; // "Qilin (AT)"
-
-    class O_LSV_02_AT_M_F {
-        name = "Qilin (AT-M)";
-        description = "Qilin (AT-M) is a variant of the Qilin armed with a Firefist AT missile launcher.<br/>Armament: 2Rnd Firefist x5";
-        spawn = "O_LSV_02_AT_F";
-        cost = 1200;
-        requirements[] = {};
-        rearm = 200;
-        killReward = 220;
-        capValue = 1;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            reloadOverride = 6;
-            removeMagazines[] = {
-                "Vorona_HEAT"
-            };
-            removeWeapons[] = {
-                "missiles_Vorona"
-            };
-            addMagazines[] = {
-                "2Rnd_127mm_Firefist_missiles",
-                "2Rnd_127mm_Firefist_missiles",
-                "2Rnd_127mm_Firefist_missiles",
-                "2Rnd_127mm_Firefist_missiles",
-                "2Rnd_127mm_Firefist_missiles"
-            };
-            addWeapons[] = {
-                "missiles_Firefist"
-            };
-        };
-    };
 
     class O_MRAP_02_hmg_F {
         cost = 900;
@@ -184,6 +157,39 @@ class LightVehicles {
         killReward = 80;
         capValue = 1;
     }; // "Tempest Repair"
+
+    class O_LSV_02_AT_M_F {
+        name = "Qilin (AT-M)";
+        description = "Qilin (AT-M) is a variant of the Qilin armed with a Firefist AT missile launcher.<br/>Armament: 2Rnd Firefist x5";
+        spawn = "O_LSV_02_AT_F";
+        cost = 1200;
+        requirements[] = {};
+        offset[] = {0, 5, 0};
+        rearm = 200;
+        killReward = 220;
+        capValue = 1;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            reloadOverride = 6;
+            removeMagazines[] = {
+                "Vorona_HEAT"
+            };
+            removeWeapons[] = {
+                "missiles_Vorona"
+            };
+            addMagazines[] = {
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles"
+            };
+            addWeapons[] = {
+                "missiles_Firefist"
+            };
+        };
+    };
 
     class O_MRAP_02_gmg_F {
         cost = 1250;

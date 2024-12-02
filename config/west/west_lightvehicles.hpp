@@ -2,6 +2,7 @@ class LightVehicles {
     class B_Quadbike_01_F {
         cost = 20;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         killReward = 20;
         capValue = 1;
     }; // "Quad Bike"
@@ -9,6 +10,7 @@ class LightVehicles {
     class B_G_Offroad_01_armed_F {
         cost = 150;
         requirements[] = {};
+        offset[] = {0, 5, 0};
         rearm = 120;
         killReward = 150;
         capValue = 1;
@@ -41,6 +43,7 @@ class LightVehicles {
     class B_LSV_01_armed_F {
         cost = 200;
         requirements[] = {};
+        offset[] = {0, 5, 0};
         rearm = 120;
         killReward = 150;
         capValue = 1;
@@ -79,6 +82,7 @@ class LightVehicles {
     class B_G_Offroad_01_AT_F {
         cost = 500;
         requirements[] = {};
+        offset[] = {0, 5, 0};
         rearm = 180;
         killReward = 180;
         capValue = 1;
@@ -101,6 +105,7 @@ class LightVehicles {
     class B_LSV_01_AT_F {
         cost = 750;
         requirements[] = {};
+        offset[] = {0, 5, 0};
         rearm = 200;
         killReward = 200;
         capValue = 1;
@@ -159,6 +164,7 @@ class LightVehicles {
         spawn = "B_LSV_01_AT_F";
         cost = 1200;
         requirements[] = {};
+        offset[] = {0, 5, 0};
         rearm = 200;
         killReward = 250;
         capValue = 1;
