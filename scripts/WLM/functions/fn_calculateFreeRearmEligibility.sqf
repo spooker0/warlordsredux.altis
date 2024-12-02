@@ -51,6 +51,15 @@ if (_isAircraft) then {
     if (_asset getVariable ["WLM_ineligibleForRearmTimer", 0] > serverTime) then {
         _eligibleFreeRearm = false;
     };
+
+    // Check if the vehicle is totally empty of magazines
+    // Do not use someAmmo, which only checks main muzzle
+    private _empty = count (_currentMags select {
+        _x # 2 > 0
+    }) == 0;
+    if (_empty) then {
+        _eligibleFreeRearm = false;
+    };
 };
 
 _eligibleFreeRearm;
