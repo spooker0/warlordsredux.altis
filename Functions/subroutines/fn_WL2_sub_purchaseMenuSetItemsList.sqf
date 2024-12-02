@@ -2,7 +2,8 @@
 
 _display = uiNamespace getVariable ["BIS_WL_purchaseMenuDisplay", displayNull];
 _purchase_category = _display displayCtrl 100;
-lbClear (_display displayCtrl 101);
+private _purchase_items_list = _display displayCtrl 101;
+lbClear _purchase_items_list;
 _id = lbCurSel _purchase_category;
 
 {
@@ -23,12 +24,14 @@ _id = lbCurSel _purchase_category;
 		"_text",
 		["_offset", [0,0,0]]
 	];
-	(_display displayCtrl 101) lbAdd format ["%1 [%2]", _displayName, _gearCode];
-	if (_className == "RemoveUnits") then {uiNamespace setVariable ["BIS_WL_removeUnitsListID", -1 + lbSize (_display displayCtrl 101)]};
-	(_display displayCtrl 101) lbSetData [_forEachIndex, format ["%1|||%2|||%3|||%4|||%5|||%6", _className, _requirements, _displayName, _picture, _text, _offset]];
-	(_display displayCtrl 101) lbSetValue [_forEachIndex, _x # 1];
+
+	_purchase_items_list lbAdd format ["%1 [%2]", _displayName, _gearCode];
+	if (_className == "RemoveUnits") then {uiNamespace setVariable ["BIS_WL_removeUnitsListID", -1 + lbSize _purchase_items_list]};
+	_purchase_items_list lbSetData [_forEachIndex, format ["%1|||%2|||%3|||%4|||%5|||%6", _className, _requirements, _displayName, _picture, _text, _offset]];
+	_purchase_items_list lbSetValue [_forEachIndex, _x # 1];
 } forEach (WL_PLAYER_REQUISITION_LIST # _id);
-(_display displayCtrl 101) lbSetCurSel ((uiNamespace getVariable ["BIS_WL_purchaseMenuLastSelection", [0, 0, 0]]) # 1);;
+
+_purchase_items_list lbSetCurSel ((uiNamespace getVariable ["BIS_WL_purchaseMenuLastSelection", [0, 0, 0]]) # 1);;
 _purchase_items = _display displayCtrl 1;
 (_display displayCtrl 103) ctrlSetStructuredText parseText format [
 	"<t align = 'left' size = '%2'>%1</t>",

@@ -17,6 +17,7 @@ class RemoteControl {
     class O_UAV_01_F {
         cost = 500;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         killReward = 100;
     };  // "AR-2"
 
@@ -31,6 +32,7 @@ class RemoteControl {
     class O_UAV_06_F {
         cost = 1000;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         killReward = 200;
     };  // "AR-6"
 
@@ -40,6 +42,7 @@ class RemoteControl {
         spawn = "O_UAV_01_F";
         cost = 1200;
         requirements[] = {};
+        offset[] = {0, 3, 0};
         killReward = 200;
         rearm = 300;
 

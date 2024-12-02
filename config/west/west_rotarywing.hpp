@@ -8,6 +8,7 @@ class RotaryWing {
     class B_Heli_Transport_01_F {
         cost = 800;
         requirements[] = {"H"};
+        offset[] = {0, 11, 0};
         killReward = 100;
         rearm = 300;
     }; // "UH-80 Ghost Hawk"
@@ -15,6 +16,7 @@ class RotaryWing {
     class B_Heli_Transport_03_F {
         cost = 1000;
         requirements[] = {"H"};
+        offset[] = {0, 10, 0};
         killReward = 100;
         rearm = 300;
     }; // "CH-67 Huron"
@@ -25,6 +27,7 @@ class RotaryWing {
         spawn = "B_Heli_Transport_01_F";
         cost = 2000;
         requirements[] = {"H"};
+        offset[] = {0, 11, 0};
         killReward = 200;
         rearm = 300;
 
@@ -77,6 +80,7 @@ class RotaryWing {
     class I_Heli_light_03_dynamicLoadout_F {
         cost = 6000;
         requirements[] = {"H"};
+        offset[] = {0, 9, 0};
         rearm = 300;
         killReward = 300;
     }; // "WY-55 Hellcat"
@@ -84,6 +88,7 @@ class RotaryWing {
     class B_Heli_Attack_01_dynamicLoadout_F {
         cost = 13000;
         requirements[] = {"H"};
+        offset[] = {0, 10, 0};
         rearm = 700;
         killReward = 550;
 
