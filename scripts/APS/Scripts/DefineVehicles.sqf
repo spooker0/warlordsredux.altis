@@ -12,12 +12,8 @@
 // Value: [APS Type (0-2, 3 if not applicable), APS ammo consumption, Dazzleable]
 
 private _projectileSettings = [
-    // Laser-guided bombs
+    // SDB
     ["ammo_Bomb_SDB", [3, 1, true]],            // GBU SDB
-    ["Bo_GBU12_LGB", [3, 1, true]],             // GBU-12 LGB
-    ["Bo_GBU12_LGB_MI10", [3, 1, true]],        // GBU-12 LGB
-    ["Bomb_04_F", [3, 1, true]],                // GBU-12 LGB
-    ["Bomb_03_F", [3, 1, true]],                // KAB-250 LGB
 
     // Tank ATGM
     ["M_120mm_cannon_ATGM", [1, 1, true]],      // 120mm Cannon ATGM
