@@ -24,7 +24,9 @@ private _deployActionId = _asset addAction [
                 };
 
                 _asset setVariable ["WL2_loadedItem", _assetToLoad];
-
+                _assetToLoad setVariable ["WL2_autonomousBeforeLoad", isAutonomous _assetToLoad];
+                _assetToLoad setVariable ["BIS_WL_lockedFromSquad", true, true];
+                
                 private _enemyGroups = allGroups select {side _x == BIS_WL_enemySide};
                 {
                     _x forgetTarget _assetToLoad;
@@ -82,6 +84,10 @@ private _deployActionId = _asset addAction [
             private _assetLoadedItemPos = getPos _assetLoadedItem;
             _assetLoadedItem setPos [_assetLoadedItemPos # 0, _assetLoadedItemPos # 1, 0];
 
+            private _wasAutonomous = _assetLoadedItem getVariable ["WL2_autonomousBeforeLoad", false];
+            _assetLoadedItem setAutonomous _wasAutonomous;
+            _assetLoadedItem setVariable ["BIS_WL_lockedFromSquad", false, true];
+
             _asset setVariable ["WL2_loadedItem", objNull];
 
             private _assetChildren = _asset getVariable ["WL2_children", []];
@@ -111,6 +117,10 @@ private _deployActionId = _asset addAction [
             "Load deployable";
         };
 
+        if (_hasLoad) then {
+            _assetLastLoadedItem setAutonomous false;
+        };
+
         private _actionIcon = if (isNull (_asset getVariable ["WL2_loadedItem", objNull])) then {
             '\A3\ui_f\data\map\markers\handdrawn\start_CA.paa'
         } else {
@@ -120,11 +130,4 @@ private _deployActionId = _asset addAction [
         _asset setUserActionText [_deployActionId, _actionText, format ["<img size='3' image='%1'/>", _actionIcon]];
         sleep 1;
     };
-
-    // Unload if killed/removed
-    // detach _assetLastLoadedItem;
-    // _assetLastLoadedItem setVehicleLock "UNLOCKED";
-    // {
-    //     _assetLastLoadedItem enableVehicleSensor [_x # 0, true];
-    // } forEach (listVehicleSensors _assetLastLoadedItem);
 };
