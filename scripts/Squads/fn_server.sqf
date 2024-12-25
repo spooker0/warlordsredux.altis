@@ -36,6 +36,15 @@ switch (_action) do {
             _return = 1;
         };
 
+        private _squadLeader = _squad select 1;
+        if (_squadLeader != _inviter) then {
+            private _inviterInfo = getUserInfo _inviter;
+            _message = format ["%1 has invited %2 to the squad.", _inviterInfo # 4, _userInfo # 4];
+
+            private _squadLeaderInfo = getUserInfo _squadLeader;
+            [_message] remoteExec ["systemChat", _squadLeaderInfo # 1];
+        };
+
         private _owner = _userInfo select 1;
 
         ['invited', [_inviter]] remoteExec ["SQD_fnc_client", _owner];
@@ -87,7 +96,10 @@ switch (_action) do {
             if (_playerId == (_squad select 1)) then {
                 private _hasAnyRemaining = count _members > 0;
                 if (_hasAnyRemaining) then {
-                    _squad set [1, _members select 0];
+                    private _newSquadLeader = _members select 0;
+                    private _newSLPlayer = allPlayers select { getPlayerID _x == _newSquadLeader } select 0;
+                    ["promoted", [_newSquadLeader]] remoteExec ["SQD_fnc_client", _newSLPlayer];
+                    _squad set [1, _newSquadLeader];
                 };
             };
         } forEach _squads;
@@ -108,6 +120,10 @@ switch (_action) do {
             _return = 1;
         } else {
             private _squad = _squads select 0;
+
+            private _newSLPlayer = allPlayers select { getPlayerID _x == _playerId } select 0;
+            ["promoted", [_newSquadLeader]] remoteExec ["SQD_fnc_client", _newSLPlayer];
+
             _squad set [1, _playerId];
             _message = format ["Player %1 promoted to Squad Leader of %2", _playerId, (_squad select 0)];
             _return = 0;
@@ -174,20 +190,35 @@ switch (_action) do {
         _message = format ["Player %1 is regular squad member: %2", _playerId, _isRegular];
         _return = _isRegular;
     };
-    case "getSquadSizeOfSquadLeader": {
-        // Get squad size of squad leader
+    case "getSquadVotingPower": {
+        // Get squad voting power of squad leader
         private _playerId = _params select 0;
 
-        private _squad = SQUAD_MANAGER select {(_x select 1) == _playerId} select 0;
-        private _squadSize = if (isNil "_squad") then {1} else {count (_squad select 2)};
+        WL_PlayerSquadContribution = missionNamespace getVariable ["WL_PlayerSquadContribution", createHashMap];
 
-        _message = format ["Squad size of squad leader %1: %2", _playerId, _squadSize];
-        _return = _squadSize;
+        private _squad = SQUAD_MANAGER select {(_x select 1) == _playerId} select 0;
+        private _squadVotingPower = if (isNil "_squad") then {
+            private _points = WL_PlayerSquadContribution getOrDefault [_playerId, 0];
+            _points max 1;
+        } else {
+            private _sum = 0;
+            {
+                private _playerId = _x;
+                private _points = WL_PlayerSquadContribution getOrDefault [_playerId, 0];
+                _sum = _sum + (_points max 1);
+            } forEach (_squad select 2);
+            _sum max 1;
+        };
+
+        _message = format ["Voting power of squad leader %1: %2", _playerId, _squadVotingPower];
+        _return = _squadVotingPower;
     };
 
     case "earnPoints": {
         private _playerId = _params select 0;
         private _points = _params select 1;
+
+        WL_PlayerSquadContribution = missionNamespace getVariable ["WL_PlayerSquadContribution", createHashMap];
 
         _oldPoints = WL_PlayerSquadContribution getOrDefault [_playerId, 0];
         _points = _points + _oldPoints;

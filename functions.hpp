@@ -38,10 +38,6 @@ class CfgFunctions {
 			class CountAmmo {};
 			class GetDirection {};
 			class HasCharges {};
-			class IsIRguided {};
-			class IsLaserGuided {};
-			class IsRadarGuided {};
-			class IsVisualGuided {};
 			class MisguideMissile {};
 			class RelDir2 {};
 			class getMaxAmmo {};
@@ -89,6 +85,7 @@ class CfgFunctions {
 	class WLM {
 		class WLM {
 			file = "Scripts\WLM\functions";
+			class applyCustomization {};
 			class applyLoadoutAircraft {};
 			class applyLoadoutVehicle {};
 			class applyPylon {};

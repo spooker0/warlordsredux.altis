@@ -4,12 +4,12 @@ private _firedPosition = getPosATL _gunner;
 private _minDistSqr = getMissionConfigValue ["BIS_WL_minAPSDist", 400];
 private _maxDistSqr = getMissionConfigValue ["BIS_WL_maxAPSDist", 1600];
 
-private _dazzleable = _projectile call APS_fnc_IsLaserGuided || {
-	_projectile call APS_fnc_IsIRguided || {
-	_projectile call APS_fnc_IsVisualGuided || {
-	typeOf _projectile == "M_Vorona_HEAT" || {
-	typeOf _projectile == "M_Vorona_HE"}}}
-};
+private _apsProjectileConfig = APS_ProjectileMap get (typeOf _projectile);
+private _projectileAPSType = _apsProjectileConfig # 0;
+private _projectileAPSConsumption = _apsProjectileConfig # 1;
+private _dazzleable = _apsProjectileConfig # 2;
+private _isGuided = _projectileAPSType < 3;		// if stoppable by APS, always dazzleable by dazzler
+
 private _radius = if (_dazzleable) then {125} else {sqrt _maxDistSqr};
 
 private _maxSpeed = getNumber (configFile >> "CfgAmmo" >> typeof _projectile >> "maxSpeed");
@@ -18,7 +18,6 @@ private _previousPos = getPosWorld _projectile;
 private _safeMaxDistSqr = _maxDistSqr;
 
 private _unitSide = side group _unit;
-private _apsType = missionNamespace getVariable ["WL2_aps", createHashMap];
 
 private _continue = alive _projectile;
 while {_continue && alive _projectile} do {
@@ -40,7 +39,7 @@ while {_continue && alive _projectile} do {
 		private _ownerSide = _x getVariable ["BIS_WL_ownerAssetSide", sideUnknown];
 		private _isFriendly = _unitSide == _ownerSide;
 		if (_isFriendly) then {	// if friendly, disable insurance measures
-			(_x distance _firedPosition) < _radius;
+			(_x distanceSqr _firedPosition) > _minDistSqr;
 		} else {
 			true;
 		};
@@ -48,16 +47,17 @@ while {_continue && alive _projectile} do {
 
 	_sortedEligibleList = [_eligibleNearbyVehicles, [_projectile], { _input0 distance _x }, "ASCEND"] call BIS_fnc_sortBy;
 	{
-		if (!alive _projectile || {!_continue}) exitWith {
+		if (!alive _projectile || !_continue) exitWith {
 			_continue = false;
 		};
 
-		_vehicleAPSType = _x getVariable ["apsType", -1];
-		private _apsProjectileConfig = apsEligibleProjectiles get (typeOf _projectile);
-		private _projectileAPSType = _apsProjectileConfig # 0;
-		private _projectileAPSConsumption = _apsProjectileConfig # 1;
+		private _vehicleAPSType = _x getVariable ["apsType", -1];
 		if (_vehicleAPSType == 3) then {
-			if (_dazzleable) exitWith {
+			if (!isNull (missileTarget _projectile)) then {
+				_isGuided = true;
+			};
+
+			if (_dazzleable && _isGuided) exitWith {
 				private _projectilePosition = getPosATL _projectile;
 				private _projectileDirection = _firedPosition getDir _x;
 				private _relativeDirection = [_projectileDirection, _x] call APS_fnc_RelDir2;
@@ -95,7 +95,7 @@ while {_continue && alive _projectile} do {
 				_explosionPosition set [2, _explosionHeight];
 				createVehicle ["SmallSecondary", _explosionPosition, [], 0, "FLY"];
 
-				[_x, _relativeDirection, true] remoteExec ["APS_fnc_Report", _x];
+				[_x, _relativeDirection, true, _gunner] remoteExec ["APS_fnc_Report", _x];
 
 				private _ownerSide = _x getVariable ["BIS_WL_ownerAssetSide", sideUnknown];
 				if (side _unit == _ownerSide) then {

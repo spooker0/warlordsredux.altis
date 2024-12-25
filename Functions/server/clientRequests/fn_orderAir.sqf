@@ -1,6 +1,7 @@
-params ["_sender", "_pos", "_class", "_cost"];
+params ["_sender", "_pos", "_orderedClass", "_cost"];
 
 if !(isServer) exitWith {};
+private _class = missionNamespace getVariable ["WL2_spawnClass", createHashMap] getOrDefault [_orderedClass, _orderedClass];
 
 private _owner = owner _sender;
 _uid = getPlayerUID _sender;
@@ -42,11 +43,75 @@ private _asset = if (_isUav) then {
 
 _asset setDir _dir;
 
+private _side = side group _sender;
+private _variant = missionNamespace getVariable ["WL2_variant", createHashMap] getOrDefault [_orderedClass, 0];
+if (_variant != 0) then {
+	private _sideFlag = if (_side == west) then {
+		"\A3\Ui_f\data\Map\Markers\Flags\nato_ca.paa"
+	} else {
+		"\A3\Ui_f\data\Map\Markers\Flags\CSAT_ca.paa"
+	};
+	_asset forceFlagTexture _sideFlag;
+};
+
+private _textureHashmap = missionNamespace getVariable ["WL2_textures", createHashMap];
+private _assetTextures = _textureHashmap getOrDefault [_orderedClass, []];
+{
+	_asset setObjectTextureGlobal [_forEachIndex, _x];
+} forEach _assetTextures;
+
 waitUntil {sleep 0.1; !(isNull _asset)};
 _asset enableWeaponDisassembly false;
 _asset setVehicleReportRemoteTargets true;
 _asset setVehicleReceiveRemoteTargets true;
 _asset setVehicleReportOwnPosition true;
+
+private _turretOverrides = missionNamespace getVariable ["WL2_turretOverrides", createHashMap];
+private _turretOverridesForVehicle = _turretOverrides getOrDefault [_orderedClass, []];
+
+{
+	private _turretOverride = _x;
+	private _turret = getArray (_turretOverride >> "turret");
+	private _removeMagazines = getArray (_turretOverride >> "removeMagazines");
+	private _removeWeapons = getArray (_turretOverride >> "removeWeapons");
+	private _addMagazines = getArray (_turretOverride >> "addMagazines");
+	private _addWeapons = getArray (_turretOverride >> "addWeapons");
+
+	{
+		_asset removeMagazinesTurret [_x, _turret];
+	} forEach _removeMagazines;
+
+	{
+		_asset removeWeaponTurret [_x, _turret];
+	} forEach _removeWeapons;
+
+	private _existingMagazines = _asset magazinesTurret _turret;
+	private _existingWeapons = _asset weaponsTurret _turret;
+
+	{
+		_asset removeMagazineTurret [_x, _turret];
+	} forEach _existingMagazines;
+
+	{
+		_asset removeWeaponTurret [_x, _turret];
+	} forEach _existingWeapons;
+
+	{
+		_asset addMagazineTurret [_x, _turret];
+	} forEach _addMagazines;
+
+	{
+		_asset addWeaponTurret [_x, _turret];
+	} forEach _addWeapons;
+
+	{
+		_asset addMagazineTurret [_x, _turret];
+	} forEach _existingMagazines;
+
+	{
+		_asset addWeaponTurret [_x, _turret];
+	} forEach _existingWeapons;
+} forEach _turretOverridesForVehicle;
 
 private _smallFlareMags = (_asset magazinesTurret [-1]) select {_x == "120Rnd_CMFlare_Chaff_Magazine"};
 if (count _smallFlareMags == 1) then {
@@ -54,7 +119,14 @@ if (count _smallFlareMags == 1) then {
 	_asset addMagazineTurret ["240Rnd_CMFlare_Chaff_Magazine", [-1]]
 };
 
-_asset setVariable ["BIS_WL_ownerAsset", _uid, [2, _owner]];
+private _defaultMags = magazinesAllTurrets _asset;
+_asset setVariable ["BIS_WL_defaultMagazines", _defaultMags, true];
+_asset setVariable ["WLM_savedDefaultMags", _defaultMags, true];
+
+_asset lock false;
+
+_asset setVariable ["BIS_WL_ownerAsset", _uid, true];
 [_asset] call BIS_fnc_WL2_lastHitHandler;
+_asset setVariable ["WL2_orderedClass", _orderedClass, true];
 [_asset, _sender] remoteExec ["BIS_fnc_WL2_newAssetHandle", _owner];
 _sender setVariable ["BIS_WL_isOrdering", false, [2, _owner]];

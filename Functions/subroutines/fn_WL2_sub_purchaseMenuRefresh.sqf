@@ -8,22 +8,17 @@ _purchase_category = _display displayCtrl 100;
 _purchase_items = _display displayCtrl 101;
 _purchase_pic = _display displayCtrl 102;
 _purchase_info = _display displayCtrl 103;
-_purchase_income = _display displayCtrl 104;
 _purchase_info_asset = _display displayCtrl 105;
-_purchase_title_cost = _display displayCtrl 106;
 _purchase_request = _display displayCtrl 107;
-
-_funds = ((missionNamespace getVariable "fundsDatabaseClients") get (getPlayerUID player));
-_matesAvail = ((BIS_WL_matesAvailable + 1) - count ((units group player) select {(_x getVariable ["BIS_WL_ownerAsset", "123"]) == getPlayerUID player})) max 0;
-_servicesAvailable = BIS_WL_sectorsArray # 5;
-
-_purchase_income ctrlSetStructuredText parseText format ["<t size = '%7' align = 'center' shadow = '2'>%2 %3%4%5%6, " + localize "STR_A3_WL_max_group_size" + "</t>", _matesAvail, _funds, localize "STR_A3_WL_unit_cp", if ("A" in _servicesAvailable) then {", " + localize "STR_A3_WL_param32_title"} else {""}, if ("H" in _servicesAvailable) then {", " + localize "STR_A3_WL_module_service_helipad"} else {""}, if ("W" in _servicesAvailable) then {", " + localize "STR_A3_WL_param30_title"} else {""}, (1.5 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 
 _i = 0;
 for "_i" from 0 to ((lbSize _purchase_items) - 1) do {
 	_cost = _purchase_items lbValue _i;
+	if (isNil "_cost") then {
+		_cost = 0;
+	};
 	_assetDetails = (_purchase_items lbData _i) splitString "|||";
-	
+
 	_assetDetails params [
 		"_className",
 		"_requirements",
@@ -35,12 +30,33 @@ for "_i" from 0 to ((lbSize _purchase_items) - 1) do {
 	if (isNil "_requirements") then {continue};
 	_requirements = call compile _requirements;
 	_category = WL_REQUISITION_CATEGORIES # ((lbCurSel _purchase_category) max 0);
-	_availability = call BIS_fnc_WL2_sub_purchaseMenuAssetAvailability;
-	if (!(_availability # 0)) then {
-		_purchase_items lbSetColor [_i, [0.5, 0.5, 0.5, 1]];
+	private _details = +_assetDetails;
+	_details set [1, _requirements];
+	_details set [6, _cost];
+	_details set [7, _category];
+	_availability = _details call BIS_fnc_WL2_sub_purchaseMenuAssetAvailability;
+
+	// private _spawnClass = missionNamespace getVariable ["WL2_spawnClass", createHashMap] getOrDefault [_className, _className];
+	// private _spawnClassTeam = missionNamespace getVariable ["WL2_teams", createHashMap] getOrDefault [_spawnClass, "UNKNOWN"];
+	// private _variant = _spawnClass != _className && _spawnClassTeam == (str BIS_WL_playerSide);
+	private _variant = missionNamespace getVariable ["WL2_variant", createHashMap] getOrDefault [_className, 0];
+	if !(_availability # 0) then {
+		private _color = if (_variant != 0) then {
+			[0.5, 0.42, 0.25, 1]
+		} else {
+			[0.5, 0.5, 0.5, 1]
+		};
+
+		_purchase_items lbSetColor [_i, _color];
 		_purchase_items lbSetTooltip [_i, _availability # 1];
 	} else {
-		_purchase_items lbSetColor [_i, [1, 1, 1, 1]];
+		private _color = if (_variant != 0) then {
+			[1, 0.85, 0.5, 1]
+		} else {
+			[1, 1, 1, 1]
+		};
+
+		_purchase_items lbSetColor [_i, _color];
 		_purchase_items lbSetTooltip [_i, ""];
 	};
 };
@@ -66,10 +82,17 @@ _assetDetails params [
 
 if (count _assetDetails > 0) then {
 	_cost = _purchase_items lbValue _curSel;
+	if (isNil "_cost") then {
+		_cost = 0;
+	};
 	_requirements = call compile _requirements;
 	_category = WL_REQUISITION_CATEGORIES # ((lbCurSel _purchase_category) max 0);
 	_color = BIS_WL_colorFriendly;
-	_availability = call BIS_fnc_WL2_sub_purchaseMenuAssetAvailability;
+	private _details = +_assetDetails;
+	_details set [1, _requirements];
+	_details set [6, _cost];
+	_details set [7, _category];
+	_availability = _details call BIS_fnc_WL2_sub_purchaseMenuAssetAvailability;
 	_purchase_request ctrlSetTooltipColorBox [1, 1, 1, 1];
 	_purchase_request ctrlSetTooltipColorText [1, 1, 1, 1];
 	if (_id == 6) then {

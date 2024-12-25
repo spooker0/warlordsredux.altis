@@ -29,6 +29,7 @@ private _savedLoadoutHandled = FALSE;
 
 			_index = _forEachIndex;
 			_category = _x;
+			_category = (_category splitString " ") joinString "";
 			_data = [];
 			if (count _sortedArray >= (_index + 1)) then {
 				_data = _sortedArray # _index
@@ -48,9 +49,13 @@ private _savedLoadoutHandled = FALSE;
 				_data pushBack ["SavedLoadout", (getMissionConfigValue ["BIS_WL_savedLoadoutCost", 500]), [], (localize "STR_A3_WL_saved_loadout"), "\A3\Data_F_Warlords\Data\preview_loadout.jpg", format [localize "STR_A3_WL_saved_loadout_info", "<br/>"]];
 			};
 
+			private _descriptionMap = missionNamespace getVariable ["WL2_descriptions", createHashMap];
+
 			{
 				_className = configName _x;
-				_class = configFile >> "CfgVehicles" >> _className;
+				_actualClassName = getText (_x >> "spawn");
+				if (_actualClassName == "") then {_actualClassName = _className};
+				_class = configFile >> "CfgVehicles" >> _actualClassName;
 				_cost = getNumber (_x >> "cost");
 				_requirements = getArray (_x >> "requirements");
 				_offset = getArray (_x >> "offset");
@@ -95,9 +100,11 @@ private _savedLoadoutHandled = FALSE;
 					_backpack = getText (_class >> "backpack");
 					if (_backpack != "") then {_text = _text + (getText (configFile >> "CfgVehicles" >> _backpack >> "displayName"))};
 				} else {
-					if (_category in ["Vehicles", "Aircraft", "Naval", "Defences"]) then {
+					if (_category in ["LightVehicles", "HeavyVehicles", "RotaryWing", "FixedWing", "RemoteControl", "AirDefense", "SectorDefense", "Naval"]) then {
 						_text = getText (_class >> "Library" >> "LibTextDesc");
-						if (_text == "") then {_text = getText (_class >> "Armory" >> "description")};
+						if (_text == "") then {
+							_text = getText (_class >> "Armory" >> "description");
+						};
 						if (_text == "") then {
 							_validClassArr = "toLower getText (_x >> 'vehicle') == toLower _entryClass" configClasses (configFile >> "CfgHints");
 							if (count _validClassArr > 0) then {
@@ -149,28 +156,30 @@ private _savedLoadoutHandled = FALSE;
 
 				if (_text != "") then {
 					_textNew = (_text splitString "$") # 0;
-					if (_textNew != _text) then {_text = localize _textNew} else {_text = _textNew};
+					if (_textNew != _text) then {
+						_text = localize _textNew
+					} else {
+						_text = _textNew
+					};
+					_text = _text regexReplace ["\. ", "="];
+					_text = ((_text splitString "=") # 0) + ".";
 				};
 
-				_textSize = count _text;
-				_textLimit = if (_category != "Gear") then {500} else {750};
+				private _description = _descriptionMap getOrDefault [_className, ""];
+				if (_description != "") then {
+					_text = _description;
+				};
 
-				if (_textSize > _textLimit) then {
-					_textArr = toArray _text;
-					_textArr deleteRange [_textLimit, _textSize - _textLimit];
-					_text = toString _textArr;
-					if (_category != "Gear") then {
-						_text = _text + "...<br/><br/>" + localize "STR_A3_WL_menu_field_manual_tip";
-					} else {
-						_text = _text + "..."
-					};
+				if (_category in ["LightVehicles", "HeavyVehicles", "RotaryWing", "FixedWing", "RemoteControl", "AirDefense", "SectorDefense", "Naval"]) then {
+					private _vehicleWeapons = [_className, _actualClassName] call BIS_fnc_WL2_getVehicleWeapons;
+					_text = _text + "<br/><t color='#ffffff' shadow='0' size='1.2'>Armament</t><br/>" + _vehicleWeapons;
 				};
 
 				if (_text == "") then {_text = " "};
 				if (_picture == "") then {_picture = " "};
 
 				_data pushBack [_className, _cost, _requirements, _displayName, _picture, _text, _offset, _notForAIUse];
-			} forEach (configProperties [_preset >> str _side >> _x, "isClass _x"]);
+			} forEach (configProperties [_preset >> str _side >> _category, "isClass _x"]);
 
 			if (_category == "Gear" && !_saveLoadoutHandled) then {
 				_saveLoadoutHandled = TRUE;
@@ -194,7 +203,7 @@ _strategyArr pushBack ["RespawnVicFT", 0, [], localize "STR_A3_WL_respawn_vicFT_
 _strategyArr pushBack ["RespawnPodFT", 0, [], "Fast Travel to Medical Pod (Free)", "\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg", ""];
 _strategyArr pushBack ["RespawnVic", (getMissionConfigValue ["BIS_WL_orderFTVehicleCost", 200]), [], localize "STR_A3_WL_respawn_vicFT_order", "\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg", ""];
 _strategyArr pushBack ["RespawnPod", (getMissionConfigValue ["BIS_WL_orderFTVehicleCost", 200]), [], "Purchase Fast Travel Pod", "\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg", "Order medical pod"];
-_strategyArr pushBack ["FundsTransfer", (getMissionConfigValue ["BIS_WL_fundsTransferCost", 2000]), [], localize "STR_A3_WL_menu_fundstransfer", "\A3\Data_F_Warlords\Data\preview_cp_transfer.jpg", localize "STR_A3_WL_menu_fundstransfer_info"];
+_strategyArr pushBack ["FundsTransfer", (getMissionConfigValue ["BIS_WL_fundsTransferCost", 2000]), [], localize "STR_A3_WL_menu_moneytransfer", "\A3\Data_F_Warlords\Data\preview_cp_transfer.jpg", localize "STR_A3_WL_menu_fundstransfer_info"];
 _strategyArr pushBack ["TargetReset", (getMissionConfigValue ["BIS_WL_targetResetCost", 500]), [], localize "STR_A3_WL_menu_resetvoting", "\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg", localize "STR_A3_WL_menu_resetvoting_info"];
 _strategyArr pushBack ["LockVehicles", 0, [], localize "STR_A3_WL_feature_lock_all", "\A3\Data_F_Warlords\Data\preview_empty.jpg", ""];
 _strategyArr pushBack ["UnlockVehicles", 0, [], localize "STR_A3_WL_feature_unlock_all", "\A3\Data_F_Warlords\Data\preview_empty.jpg", ""];

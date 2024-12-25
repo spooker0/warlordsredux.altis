@@ -99,7 +99,7 @@ private _responsibleText = format ["<t size='1.7' color='%1'>%2 %3 %4</t>", _kil
 
 showScoretable 0;
 
-private _killerVehicle = typeOf vehicle _killer;
+private _killerVehicle = vehicle _killer;
 private _killerWeapon = currentWeapon _killer;
 
 private _deathDisplay = uiNamespace getVariable ["RscWLDeathDisplay", objNull];
@@ -143,7 +143,7 @@ private _centerDisplayIconText = if (vehicle _killer isKindOf "Man") then {
     private _weaponIcon = getText (configfile >> "CfgWeapons" >> _killerWeapon >> "picture");
     _weaponIcon;
 } else {
-    private _vehicleIcon = getText (configfile >> "CfgVehicles" >> _killerVehicle >> "picture");
+    private _vehicleIcon = getText (configfile >> "CfgVehicles" >> typeOf _killerVehicle >> "picture"); // use spawned vehicle type
     _vehicleIcon;
 };
 
@@ -154,7 +154,7 @@ private _centerDisplayKillerText = if (vehicle _killer isKindOf "Man") then {
     private _weaponText = getText (configfile >> "CfgWeapons" >> _killerWeapon >> "displayName");
     _weaponText;
 } else {
-    private _vehicleText = getText (configfile >> "CfgVehicles" >> _killerVehicle >> "displayName");
+    private _vehicleText = [_killerVehicle] call BIS_fnc_WL2_getAssetTypeName;
     _vehicleText;
 };
 
@@ -202,6 +202,9 @@ missionNamespace setVariable ["WL_lastScore", _score];
 private _scoreText = format ["<t size='1' color='#ffffff'>%1</t><br/><t size='1.8' color='#00ff00' shadow='0' font='RobotoCondensedBold'>%2</t>", localize "STR_A3_WL_score_in_life", _scoreChange];
 _rightDisplayText2 ctrlSetStructuredText parseText _scoreText;
 _rightDisplayText2 ctrlShow true;
+
+sleep (playerRespawnTime / 2);
+showScoretable 1;
 
 waitUntil {
     sleep 0.2;

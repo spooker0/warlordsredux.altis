@@ -28,14 +28,14 @@ private _color = ['#004d99', '#7f0400', '#007f04'] # ([west, east, independent] 
 ((ctrlParent WL_CONTROL_MAP) getVariable "BIS_sectorInfoBox") ctrlCommit 0;
 ((ctrlParent WL_CONTROL_MAP) getVariable "BIS_sectorInfoBox") ctrlSetStructuredText parseText format [
 	if (_scanCD == 0) then {
-		"<t shadow = '2' size = '%1'>%2<br/>+%3 %4/%5%6%7%8%9%10%11<br/><t color = '%15'>%14</t></t>"
+		"<t shadow = '2' size = '%1'>%2<br/>%3%4/%5%6%7%8%9%10%11<br/><t color = '%15'>%14</t></t>"
 	} else {
-		"<t shadow = '2' size = '%1'>%2<br/>+%3 %4/%5%6%7%8%9%10%11<br/>%12: <t color = '#ff4b4b'>%13</t><br/><t color = '%15'>%14</t></t>"
+		"<t shadow = '2' size = '%1'>%2<br/>%3%4/%5%6%7%8%9%10%11<br/>%12: <t color = '#ff4b4b'>%13</t><br/><t color = '%15'>%14</t></t>"
 	},
 	(1 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale),
 	_sector getVariable "BIS_WL_name",
+	[_side] call BIS_fnc_WL2_getMoneySign,
 	_sector getVariable "BIS_WL_value",
-	localize "STR_A3_WL_unit_cp",
 	localize "STR_A3_rscmpprogress_min",
 	if (_airstrip || {_helipad || {_harbor}}) then {"<br/>"} else {""},
 	if (_airstrip) then {localize "STR_A3_WL_param32_title"} else {""},
@@ -71,13 +71,13 @@ private _availableSectors = (switch (BIS_WL_currentSelection) do {
 });
 
 if (_sector in _availableSectors) then {
-	WL_CONTROL_MAP ctrlMapCursor ["Track", "HC_overMission"]; 
+	WL_CONTROL_MAP ctrlMapCursor ["Track", "HC_overMission"];
 	BIS_WL_highlightedSector = _sector;
 	if !(BIS_WL_hoverSamplePlayed) then {
 		playSound "clickSoft";
 		BIS_WL_hoverSamplePlayed = TRUE;
 	};
 } else {
-	WL_CONTROL_MAP ctrlMapCursor ["Track", "HC_unsel"]; 
+	WL_CONTROL_MAP ctrlMapCursor ["Track", "HC_unsel"];
 	BIS_WL_highlightedSector = objNull;
 };

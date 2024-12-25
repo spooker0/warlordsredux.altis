@@ -121,7 +121,7 @@ if ((getPlayerUID player) in (getArray (missionConfigFile >> "adminIDs"))) then 
 		_text = toLower _text;
 		_list = getArray (missionConfigFile >> "adminFilter");
 		_return = ((_list findIf {[_x, _text] call BIS_fnc_inString}) != -1);
-		
+
 		_senderLocked = _person getVariable ["voteLocked", false];
 		if (_senderLocked) then {
 			_senderLocked;
@@ -133,75 +133,22 @@ if ((getPlayerUID player) in (getArray (missionConfigFile >> "adminIDs"))) then 
 
 0 spawn {
 	waituntil {sleep 0.1; !isnull (findDisplay 46)};
-	(findDisplay 46) displayAddEventHandler ["KeyUp", {
+	private _display = findDisplay 46;
+	_display displayAddEventHandler ["KeyUp", {
 		_key = _this # 1;
 		if (_key in actionKeys "Gear") then {
 			BIS_WL_gearKeyPressed = false;
 		};
 	}];
 
-	(findDisplay 46) displayAddEventHandler ["KeyDown", {
-		params ["_displayorcontrol", "_key", "_shift", "_ctrl", "_alt"];
-		private _e = false;
-		private _zeusKey = actionKeys "curatorInterface";
-		private _viewKey = actionKeys "tacticalView";
-		_e = ((_key in _viewKey || {_key in _zeusKey}) && {!((getPlayerUID player) in (getArray (missionConfigFile >> "adminIDs")))});
+	_display displayAddEventHandler ["KeyDown", {
+		_this call BIS_fnc_WL2_handleKeypress;
+	}];
 
-		if (inputAction "cycleThrownItems" > 0.01) exitWith {
-			[vehicle player, 0, false] spawn APS_fnc_Report;
-		};
-
-		if (_key in actionKeys "Gear" && {!(missionNamespace getVariable ["BIS_WL_gearKeyPressed", false]) && {alive player && {!BIS_WL_penalized}}}) then {
-			if !(isNull (uiNamespace getVariable ["BIS_WL_purchaseMenuDisplay", displayNull])) then {
-				"RequestMenu_close" call BIS_fnc_WL2_setupUI;
-			} else {
-				BIS_WL_gearKeyPressed = true;
-				0 spawn {
-					_t = time + 0.5;
-					waitUntil {!BIS_WL_gearKeyPressed || {time >= _t}};
-					if (time < _t) then {
-						if (isNull findDisplay 602) then {
-							if (vehicle player == player) then {
-								if (cursorTarget distanceSqr player <= 25 && {!(cursorTarget isKindOf "House") && {(!alive cursorTarget || {!(cursorTarget isKindOf "Man")})}}) then {
-									player action ["Gear", cursorTarget];
-								} else {
-									player action ["Gear", objNull];
-								};
-							} else {
-								vehicle player action ["Gear", vehicle player];
-							};
-						} else {
-							closeDialog 602;
-						};
-					} else {
-						if (BIS_WL_gearKeyPressed && {!(player getVariable ["BIS_WL_menuLocked", false])}) then {
-							if (BIS_WL_currentSelection in [0, 2]) then {
-								"RequestMenu_open" call BIS_fnc_WL2_setupUI;
-							} else {
-								playSound "AddItemFailed";
-								_action = if (BIS_WL_currentSelection == 1) then {
-									localize "STR_A3_WL_popup_voting";
-								} else {
-									if (BIS_WL_currentSelection in [3,8]) then {
-										localize "STR_A3_WL_action_destination_select";
-									} else {
-										if (BIS_WL_currentSelection in [4,5,7]) then {
-											localize "STR_A3_WL_action_scan_select";
-										} else {
-											"";
-										};
-									};
-								};
-								[toUpper format [(localize "STR_A3_WL_another_action") + (if (_action == "") then {"."} else {" (%1)."}), _action]] spawn BIS_fnc_WL2_smoothText;
-							};
-						};
-					};
-				};
-			};
-			_e = true;
-		};
-
-		_e;
+	// intentionally separate handler
+	_display displayAddEventHandler ["KeyDown", {
+		private _key = _this # 1;
+		[_key] call BIS_fnc_WL2_handleBuyMenuKeypress;
 	}];
 };
 
@@ -245,5 +192,13 @@ addMissionEventHandler ["EntityCreated", {
 			missionNameSpace setVariable ["mineDisplayActive", serverTime + 5];
 			missionNamespace setVariable [format ["BIS_WL2_minesDB_%1", getPlayerUID player], _minesDB, [2, clientOwner]];
 		};
+	};
+}];
+
+addMissionEventHandler ["EntityRespawned", {
+	params ["_newEntity", "_oldEntity"];
+	private _wasMan = _oldEntity getEntityInfo 0;
+	if (_wasMan) then {
+		removeAllActions _oldEntity;
 	};
 }];

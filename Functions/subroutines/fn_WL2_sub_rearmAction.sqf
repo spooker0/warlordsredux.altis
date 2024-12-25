@@ -18,4 +18,4 @@ _index = _asset addAction [
 	false
 ];
 
-_asset setUserActionText [_index, format ["Modify/%1", localize "STR_rearm"], "<img size='1.5' image='a3\ui_f\data\igui\cfg\simpletasks\types\rearm_ca.paa'/>"];
+_asset setUserActionText [_index, format ["<t color = '#4bff58'>Modify/%1</t>", localize "STR_rearm"], "<img size='1.5' image='a3\ui_f\data\igui\cfg\simpletasks\types\rearm_ca.paa'/>"];

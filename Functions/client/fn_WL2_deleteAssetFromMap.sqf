@@ -2,12 +2,24 @@
 
 params ["_target"];
 
-_displayName = getText (configFile >> "CfgVehicles" >> (typeOf _target) >> "displayName");
-_result = [format ["Are you sure you would like to delete: %1", _displayName], "Delete asset", true, true] call BIS_fnc_guiMessage;
+private _displayName = [_target] call BIS_fnc_WL2_getAssetTypeName;
+private _assetSector = BIS_WL_allSectors select { _target inArea (_x getVariable "objectAreaComplete") };
+private _assetLocation = if (count _assetSector > 0) then {
+	(_assetSector # 0) getVariable ["BIS_WL_name", str (mapGridPosition _target)];
+} else {
+	mapGridPosition _target;
+};
+
+_result = [format ["Are you sure you would like to delete: %1 @ %2", _displayName, _assetLocation], "Delete asset", true, true] call BIS_fnc_guiMessage;
 
 if (_result) then {
+	if (!(unitIsUAV _target) && !(_target isKindOf "Man") && (crew _target) findIf {alive _x} >= 0) exitWith {
+		[toUpper localize "STR_A3_WL_popup_asset_not_empty"] spawn BIS_fnc_WL2_smoothText;
+		playSound "AddItemFailed";
+	};
+
 	playSound "AddItemOK";
-	[format [toUpper localize "STR_A3_WL_popup_asset_deleted", toUpper (getText (configFile >> "CfgVehicles" >> typeOf _target >> "displayName"))], 2] spawn BIS_fnc_WL2_smoothText;
+	[format [toUpper localize "STR_A3_WL_popup_asset_deleted", toUpper _displayName], 2] spawn BIS_fnc_WL2_smoothText;
 	_vehicles = missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []];
 	_vehicles deleteAt (_vehicles find _target);
 	missionNamespace setVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], _vehicles, [2, clientOwner]];
@@ -22,7 +34,7 @@ if (_result) then {
 		{_target deleteVehicleCrew _x} forEach crew _target;
 		deleteGroup _grp;
 	};
-	
+
 	deleteVehicle _target;
 	((ctrlParent WL_CONTROL_MAP) getVariable "BIS_sectorInfoBox") ctrlShow false;
 	((ctrlParent WL_CONTROL_MAP) getVariable "BIS_sectorInfoBox") ctrlEnable true;

@@ -1,3 +1,5 @@
+#include "..\warlords_constants.inc"
+
 params ["_sector", "_owner"];
 
 private _units = [];
@@ -6,30 +8,55 @@ if (_owner == resistance) then {
 	if (count (_sector getVariable ["BIS_WL_vehiclesToSpawn", []]) == 0) then {
 		private _roads = ((_sector nearRoads 400) select {count roadsConnectedTo _x > 0}) inAreaArray (_sector getVariable "objectAreaComplete");
 		if (count _roads > 0) then {
-			private _road = selectRandom _roads;
-			private _posRoad = position _road;
-			_vehicleArray = [_posRoad, _road getDir selectRandom (roadsConnectedTo _road), selectRandom (serverNamespace getVariable "WL2_populateVehiclePoolList"), _owner] call BIS_fnc_spawnVehicle;
-			_vehicleArray params ["_vehicle", "_crew", "_group"];
+			private _hasRadar = false;
+			private _numVehicleSpawn = if (WL_HARD_AI_MODE) then {
+				private _sectorValue = _sector getVariable ["BIS_WL_value", 50];
+				((_sectorValue / 5) max 1) min 4;
+			} else {
+				1;
+			};
 
-			_vehicle call BIS_fnc_WL2_newAssetHandle;
-			_units pushBack _vehicle;
+			for "_i" from 1 to _numVehicleSpawn do {
+				private _road = selectRandom _roads;
+				private _posRoad = position _road;
+				_vehicleArray = [_posRoad, _road getDir selectRandom (roadsConnectedTo _road), selectRandom (serverNamespace getVariable "WL2_populateVehiclePoolList"), _owner] call BIS_fnc_spawnVehicle;
+				_vehicleArray params ["_vehicle", "_crew", "_group"];
 
-			{
-				_x call BIS_fnc_WL2_newAssetHandle;
-				_units pushBack _x;
-			} forEach _crew;
+				_vehicle call BIS_fnc_WL2_newAssetHandle;
+				_units pushBack _vehicle;
 
-			[_group, 0] setWaypointPosition [position _vehicle, 100];
-			_group setBehaviour "COMBAT";
-			_group deleteGroupWhenEmpty true;
+				{
+					_x call BIS_fnc_WL2_newAssetHandle;
+					_units pushBack _x;
+				} forEach _crew;
 
-			_wp = _group addWaypoint [_posRoad, 100];
-			_wp setWaypointType "SAD";
+				[_group, 0] setWaypointPosition [position _vehicle, 100];
+				_group setBehaviour "COMBAT";
+				_group deleteGroupWhenEmpty true;
 
-			_wp = _group addWaypoint [_posRoad, 100];
-			_wp setWaypointType "CYCLE";
+				_wp = _group addWaypoint [_posRoad, 100];
+				_wp setWaypointType "SAD";
 
-			_vehicle allowCrewInImmobile [true, true];
+				_wp = _group addWaypoint [_posRoad, 100];
+				_wp setWaypointType "CYCLE";
+
+				_vehicle allowCrewInImmobile [true, true];
+
+				if (typeOf _vehicle == "I_LT_01_scout_F") then {
+					_hasRadar = true;
+				};
+			};
+
+			if (_hasRadar && WL_HARD_AI_MODE) then {
+				private _samLocation = selectRandom ([_sector, 0, true] call BIS_fnc_WL2_findSpawnPositions);
+				private _createSamResult = [_samLocation, 0, "I_E_SAM_System_03_F", resistance] call BIS_fnc_spawnVehicle;
+				private _sam = _createSamResult select 0;
+				for "_i" from 1 to 10 do {
+					_sam addMagazineTurret ["magazine_Missile_mim145_x4", [0]];
+				};
+				_sam call BIS_fnc_WL2_newAssetHandle;
+				_units pushBack _sam;
+			};
 		};
 	} else {
 		{
@@ -127,8 +154,9 @@ while {_i < _garrisonSize} do {
 	private _cnt = (count allPlayers) max 1;
 
 	private _i2 = 0;
+	private _groupPosArr = _spawnPosArr select {(_pos distance2D _x) < 150};
 	for "_i2" from 0 to _grpSize do {
-		_newUnit = _newGrp createUnit [selectRandom _unitsPool, _pos, [], 5, "NONE"];
+		private _newUnit = _newGrp createUnit [selectRandom _unitsPool, selectRandom _groupPosArr, [], 0, "NONE"];
 		_newUnit call BIS_fnc_WL2_newAssetHandle;
 		_units pushBack _newUnit;
 

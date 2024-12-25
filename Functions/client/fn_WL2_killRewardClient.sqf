@@ -1,28 +1,39 @@
-params ["_unit", "_reward", ["_customText", ""], ["_customColor", "#228b22"]];
+params ["_unit", "_reward", ["_customText", ""], ["_customColor", "#228b22"], ["_unitTypeName", ""]];
 
 disableSerialization;
-
-private _scale = 0.65 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale;
 
 private _displayText = "";
 private _displayName = "";
 
+private _side = BIS_WL_playerSide;
+
 if (_customText != "") then {
-	_displayText = format ["%1 +%2CP", _customText, _reward];
+	_displayText = format ["%1", _customText];
 } else {
-	if (_unit isKindOf "Man") then {
-		_displayText = "Enemy killed %2CP";
+	private _unitType = if (typeOf _unit == "") then {
+		_unitTypeName
 	} else {
-		_displayName = getText (configFile >> "CfgVehicles" >> (typeOf _unit) >> "displayName");
-		_displayText = "%1 destroyed %2CP";
+		typeOf _unit
 	};
-	_displayText = format [_displayText, _displayName, if (_reward > 0) then {format ["+%1", _reward]} else {format ["%1", _reward]}];
+
+	if (_unitType isKindOf "Man") then {
+		_displayText = "Enemy killed";
+	} else {
+		_displayName = [_unit, _unitType] call BIS_fnc_WL2_getAssetTypeName;
+		_displayText = "%1 destroyed";
+	};
+	_displayText = format [_displayText, _displayName];
 };
 
-private _killRewardExisting = missionNamespace getVariable ["WL_killReward", []];
-private _rewardText = format ["<t size='%1' align='right' color='%2'>%3</t>", _scale, _customColor, _displayText];
-_killRewardExisting pushBack [_rewardText, serverTime];
-missionNamespace setVariable ["WL_killReward", _killRewardExisting];
+// map: displayText => [repetition, points, customColor, timestamp]
+private _killRewardMap = uiNamespace getVariable ["WL_killRewardMap", createHashMap];
+private _killRewardEntry = _killRewardMap getOrDefault [_displayText, [0, 0, "", 0]];
+private _repetitions = _killRewardEntry # 0;
+private _points = _killRewardEntry # 1;
+_killRewardMap set [_displayText, [_repetitions + 1, _points + _reward, _customColor, serverTime]];
+
+uiNamespace setVariable ["WL_killRewardMap", _killRewardMap];
+[_killRewardMap] call BIS_fnc_WL2_updateKillFeed;
 
 WAS_score = true;
 

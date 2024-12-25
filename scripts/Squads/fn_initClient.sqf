@@ -10,7 +10,6 @@ SQD_HAS_INVITE = false;
         _voiceChannels # 1
     };
     _sideCustomChannel radioChannelAdd [player];
-    setCurrentChannel (_sideCustomChannel + 5);
 
     player addEventHandler ["Respawn", {
         params ["_unit", "_corpse"];
@@ -23,7 +22,6 @@ SQD_HAS_INVITE = false;
         };
 
         _sideCustomChannel radioChannelAdd [_unit];
-        setCurrentChannel (_sideCustomChannel + 5);
     }];
 
     addMissionEventHandler ["HandleChatMessage", {

@@ -1,8 +1,19 @@
 #include "..\warlords_constants.inc"
 
+params [
+	"_className",
+	"_requirements",
+	"_displayName",
+	"_picture",
+	"_text",
+	"_offset",
+	"_cost",
+	"_category"
+];
+
 private _ret = true;
 private _tooltip = "";
-private _class = _assetDetails # 0;
+private _class = _className;
 private _DLCOwned = true;
 private _DLCTooltip = "";
 
@@ -14,21 +25,10 @@ if (!alive player) then {_ret = false; _tooltip = localize "STR_A3_WL_fasttravel
 if (lifeState player == "INCAPACITATED") then {_ret = false; _tooltip = format [localize "STR_A3_Revive_MSG_INCAPACITATED", name player]};
 
 if (_ret) then {
-	//Added this check to stop a "rouge" friendly player or a cheater placing an enemy at the main base blocking fast travel
-	//These distance checks appear to be running every frame. I think this is a client side UI script but in general thats a really bad idea.
-	private _flagPole = nearestObjects [player, ["FlagPole_F"], 100];
-	private _nearbyEnemies = false;
-	if (count _flagPole > 0) then
-	{
-		//do nothing because _nearbyEnemies is already false;
-		//systemChat "Flag nearby";
-	}
-	else
-	{
-		//systemChat "Normal";
-		_nearbyEnemies = (count ((allPlayers inAreaArray [player, 100, 100]) select {_x != player && {BIS_WL_playerSide != side group _x && {alive _x}}}) > 0);
-	};
-
+	private _enemiesNearPlayer = (allPlayers inAreaArray [player, 100, 100]) select {_x != player && BIS_WL_playerSide != side group _x && alive _x};
+	private _homeBase = BIS_WL_playerSide call BIS_fnc_WL2_getSideBase;
+	private _isInHomeBase = player inArea (_homeBase getVariable "objectAreaComplete");
+	private _nearbyEnemies = count _enemiesNearPlayer > 0 && !_isInHomeBase;
 
 	switch (_class) do {
 		case "FTSeized": {
@@ -200,8 +200,9 @@ if (_ret) then {
 			_visitedSectorID = _possibleSectors findIf {player inArea (_x getVariable "objectAreaComplete")};
 			_servicesAvailable = BIS_WL_sectorsArray # 5;
 			_var = format ["BIS_WL_ownedVehicles_%1", getPlayerUID player];
-			_vehiclesCnt = count ((missionNamespace getVariable [_var, []]) select {alive _x});
-			_units = ((units group player) select {((_x getVariable ["BIS_WL_ownerAsset", "123"]) == getPlayerUID player) && {_x != player && {alive _x}}});
+			private _ownedVehicles = missionNamespace getVariable [_var, []];
+			_vehiclesCnt = count (_ownedVehicles select {alive _x});
+
 			private _currentSector = if (_visitedSectorID != -1) then {
 				_possibleSectors # _visitedSectorID
 			} else {
@@ -214,51 +215,76 @@ if (_ret) then {
 				_tooltip = localize "STR_A3_WL_popup_appropriate_sector_selection";
 			};
 
-			if (_requirements findIf {!(_x in _servicesAvailable)} >= 0) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_airdrop_restr1"};
-			if (_category == "Infantry" && {(count _units) >= BIS_WL_matesAvailable}) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_airdrop_restr2"};
-			if (_category in ["Vehicles", "Gear", "Defences", "Aircraft", "Naval"] && {_vehiclesCnt >= (getMissionConfigValue ["BIS_WL_assetLimit", 10])}) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_popup_asset_limit_reached"};
-			if (_category in ["Infantry", "Vehicles", "Gear", "Defences", "Aircraft", "Naval"] && {_nearbyEnemies}) exitWith {_ret = false; _tooltip =  localize "STR_A3_WL_tooltip_deploy_enemies_nearby"};
-			if (_category in ["Infantry", "Vehicles", "Gear", "Defences"] && {vehicle player != player}) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_fasttravel_restr3"};
-			if (_category in ["Vehicles", "Infantry", "Gear", "Defences"] && {(_visitedSectorID == -1)}) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_ftVehicle_restr1"};
-			if (_category in ["Infantry", "Vehicles", "Gear", "Defences", "Aircraft", "Naval"] && {(player getVariable ["BIS_WL_isOrdering", false])}) exitWith {_ret = false; _tooltip =  "Another order is in progress!"};
-			if (_category == "Aircraft") exitWith {
-				if (getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") == 1) then {
-					if (({(unitIsUAV _x) && {alive _x}} count (missionNamespace getVariable [_var, []])) >= (getMissionConfigValue ["BIS_WL_autonomous_limit", 2])) then {
-						_ret = false;
-						_tooltip = format [localize "STR_A3_WL_tip_max_autonomous", (getMissionConfigValue ["BIS_WL_autonomous_limit", 2])];
-					};
+			if (_requirements findIf {!(_x in _servicesAvailable)} >= 0) exitWith {
+				_ret = false;
+				_tooltip = localize "STR_A3_WL_airdrop_restr1"
+			};
+
+			if (_className isKindOf "Man" && BIS_WL_matesAvailable <= 0) exitWith {
+				_ret = false;
+				_tooltip = localize "STR_A3_WL_airdrop_restr2"
+			};
+
+			if (_category == "Strategy") exitWith {};
+
+			if (_vehiclesCnt >= (getMissionConfigValue ["BIS_WL_assetLimit", 10])) exitWith {
+				_ret = false;
+				_tooltip = localize "STR_A3_WL_popup_asset_limit_reached";
+			};
+
+			if (_nearbyEnemies) exitWith {
+				_ret = false;
+				_tooltip =  localize "STR_A3_WL_tooltip_deploy_enemies_nearby";
+			};
+
+			if (vehicle player != player && !("A" in _requirements)) exitWith {
+				_ret = false;
+				_tooltip = localize "STR_A3_WL_fasttravel_restr3";
+			};
+
+			if (!("A" in _requirements) && !("W" in _requirements) && _visitedSectorID == -1) exitWith {
+				_ret = false;
+				_tooltip = localize "STR_A3_WL_ftVehicle_restr1";
+			};
+
+			if (player getVariable ["BIS_WL_isOrdering", false]) exitWith {
+				_ret = false;
+				_tooltip = "Another order is in progress!";
+			};
+
+			private _spawnClass = missionNamespace getVariable ["WL2_spawnClass", createHashMap] getOrDefault [_class, _class];
+			if (getNumber (configFile >> "CfgVehicles" >> _spawnClass >> "isUav") == 1) then {
+				private _ownedUavs = _ownedVehicles select {
+					private _isUav = unitIsUAV _x || getNumber (configFile >> "CfgVehicles" >> typeOf _x >> "isUav") == 1;
+					_isUav && alive _x
 				};
-				if (!("A" in _requirements) && _visitedSectorID == -1) then {
+
+				if (count _ownedUavs >= getMissionConfigValue ["BIS_WL_autonomous_limit", 2]) exitWith {
 					_ret = false;
-					_tooltip = localize "STR_A3_WL_ftVehicle_restr1";
+					_tooltip = format [localize "STR_A3_WL_tip_max_autonomous", (getMissionConfigValue ["BIS_WL_autonomous_limit", 2])];
 				};
 			};
 
 			if (_class == "Land_Communication_F") then {
 				private _jammerMarkers = missionNamespace getVariable ["BIS_WL_jammerMarkers", []];
 				private _allJammers = _jammerMarkers apply { _x # 0 };
-				private _allTowers = _allJammers select { typeOf _x == "Land_Communication_F" };
-				private _jammersNear = _allTowers select { player distance _x < (WL_JAMMER_RANGE_OUTER * 2) };
+				private _allTowersOnTeam = _allJammers select {
+					typeOf _x == "Land_Communication_F"
+					&& _x getVariable ["BIS_WL_ownerAssetSide", sideUnknown] == BIS_WL_playerSide
+				};
+				private _jammersNear = _allTowersOnTeam select { player distance _x < (WL_JAMMER_RANGE_OUTER * 2) };
 
 				if (count _jammersNear > 0) exitWith {
 					_ret = false;
 					_tooltip = localize "STR_A3_WL_jammer_restr";
 				};
 
-				private _homeBase = BIS_WL_playerSide call BIS_fnc_WL2_getSideBase;
-				if (player inArea (_homeBase getVariable "objectAreaComplete")) exitWith {
+				if (_isInHomeBase) exitWith {
 					_ret = false;
 					_tooltip = localize "STR_A3_WL_jammer_home_restr";
 				};
 			};
-			if (_category == "Defences") exitWith {
-				if (getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") == 1) then {
-					if ((count ((missionNamespace getVariable [_var, []]) select {alive _x && {(getNumber (configFile >> "CfgVehicles" >> typeOf _x >> "isUav") == 1)}})) >= (getMissionConfigValue ["BIS_WL_autonomous_limit", 2])) then {
-						_ret = false;
-						_tooltip = format [localize "STR_A3_WL_tip_max_autonomous", (getMissionConfigValue ["BIS_WL_autonomous_limit", 2])];
-					};
-				};
-			};
+
 			_DLCOwned = [_class, "IsOwned"] call BIS_fnc_WL2_sub_purchaseMenuHandleDLC;
 			_DLCTooltip = [_class, "GetTooltip"] call BIS_fnc_WL2_sub_purchaseMenuHandleDLC;
 		};

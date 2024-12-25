@@ -19,7 +19,6 @@
 #define WL_ID_SELECTION_ORDERING_AIRCRAFT 5
 #define WL_ID_SELECTION_SCAN 7
 #define WL_ID_SELECTION_FAST_TRAVEL_CONTESTED 8
-#define WL_ID_SELECTION_DEPLOYING_DEFENCE 9
 #define WL_FAST_TRAVEL_OFFSET 110
 #define WL_FAST_TRAVEL_RANGE_AXIS 100
 #define WL_FAST_TRAVEL_SQUAD_LEADER_RATE 240
@@ -34,17 +33,19 @@
 #define WL_MAINTENANCE_COOLDOWN_REARM_Spartan 600
 #define WL_MAINTENANCE_COOLDOWN_REARM_DefenderRhea 750
 #define WL_MAINTENANCE_COOLDOWN_REARM_Centurion 900
-#define WL_MAINTENANCE_COOLDOWN_REARM_Artillery 1800 
+#define WL_MAINTENANCE_COOLDOWN_REARM_Artillery 1800
 #define WL_MAINTENANCE_COOLDOWN_REARM_VLS 2700
 #define WL_TARGET_RESET_VOTING_TIME 60
 #define WL_TARGET_FRIENDLY (missionNamespace getVariable format ["BIS_WL_currentTarget_%1", BIS_WL_playerSide])
 #define WL_TARGET_ENEMY (missionNamespace getVariable format ["BIS_WL_currentTarget_%1", BIS_WL_enemySide])
 #define WL_CONTROL_MAP (uiNamespace getVariable ["BIS_WL_mapControl", controlNull])
 #define WL_PLAYER_REQUISITION_LIST (missionNamespace getVariable format ["BIS_WL_purchasable_%1", BIS_WL_playerSide])
-#define WL_REQUISITION_CATEGORIES ["Infantry", "Vehicles", "Aircraft", "Naval", "Defences", "Gear", "Strategy"]
+#define WL_REQUISITION_CATEGORIES ["Infantry", "Light Vehicles", "Heavy Vehicles", "Rotary Wing", "Fixed Wing", "Remote Control", "Air Defense", "Sector Defense", "Naval", "Gear", "Strategy"]
 #define WL_BASES [BIS_WL_base1, BIS_WL_base2]
 #define WL_JAMMER_RANGE_OUTER 3000
 #define WL_JAMMER_RANGE_INNER 500
 #define WL_JAMMER_SPECTRUM_RANGE 1500
 #define WL_JAMMER_SENSOR_THRESHOLD 0.2
 #define WL_JAMMER_HARDLINE_RANGE 20
+#define WL_HARD_AI_MODE false
+#define WL_MANPOWER_REFRESH_COOLDOWN 300

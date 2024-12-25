@@ -34,16 +34,24 @@ private _currentAssetPylonInfo = getAllPylonsInfo _asset;
     private _allowedMagazines = _asset getCompatiblePylonMagazines _pylonConfigName;
 
     private _allowListForPylon = missionNamespace getVariable ["WL2_allowPylonMagazines", createHashMap];
-    _allowedMagazines append (_allowListForPylon getOrDefault [typeOf _asset, []]);
+    private _disallowListForPylon = missionNamespace getVariable ["WL2_disallowMagazinesForVehicle", createHashMap];
+    private _assetActualType = _asset getVariable ["WL2_orderedClass", typeOf _asset];
+    private _disallowListForAsset = _disallowListForPylon getOrDefault [_assetActualType, []];
+    {
+        if !(_x in _allowedMagazines) then {
+            _allowedMagazines pushBack _x;
+        };
+    } forEach (_allowListForPylon getOrDefault [_assetActualType, []]);
 
     private _bannedWords = ["leaflet", "bombcluster"];
     _allowedMagazines = _allowedMagazines select {
         private _mag = _x;
-        private _isBanned = false;
+        private _isBannedByWord = false;
         {
-            _isBanned = _isBanned || [_x, _mag] call BIS_fnc_inString;
+            _isBannedByWord = _isBannedByWord || [_x, _mag] call BIS_fnc_inString;
         } forEach _bannedWords;
-        !_isBanned;
+        private _isDisallowed = _mag in _disallowListForAsset;
+        !_isBannedByWord && !_isDisallowed;
     };
 
     {

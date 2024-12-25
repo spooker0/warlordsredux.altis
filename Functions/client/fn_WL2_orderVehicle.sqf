@@ -1,6 +1,8 @@
-params ["_class", "_cost"];
+params ["_orderedClass", "_cost", "_offset"];
 
 player setVariable ["BIS_WL_isOrdering", true, [2, clientOwner]];
+
+private _class = missionNamespace getVariable ["WL2_spawnClass", createHashMap] getOrDefault [_orderedClass, _orderedClass];
 
 if (_class isKindOf "Man") then {
 	_asset = (group player) createUnit [_class, (getPosATL player), [], 2, "NONE"];
@@ -9,16 +11,25 @@ if (_class isKindOf "Man") then {
 	[_asset, player] spawn BIS_fnc_WL2_newAssetHandle;
 	player setVariable ["BIS_WL_isOrdering", false, [2, clientOwner]];
 } else {
-	_offset = [0, 8, 0];
-	_asset = createSimpleObject [_class, (AGLToASL (player modelToWorld _offset)), true];
+	if (visibleMap) then {
+		openMap [false, false];
+		titleCut ["", "BLACK IN", 0.5];
+	};
+
+	if (count _offset != 3) then {
+		_offset = [0, 8, 0];
+	};
+
+	private _asset = createSimpleObject [_class, AGLToASL (player modelToWorld _offset), true];
 
 	_asset setDir direction player;
 	_asset lock 2;
-	_asset attachTo [player, _offset];
-	_h = (position _asset) # 2;
-	detach _asset;
-	_offset_tweaked = [_offset select 0, _offset select 1, _h];
-	_asset attachTo [player, _offset_tweaked];
+
+	private _textureHashmap = missionNamespace getVariable ["WL2_textures", createHashMap];
+	private _assetTextures = _textureHashmap getOrDefault [_orderedClass, []];
+	{
+		_asset setObjectTextureGlobal [_forEachIndex, _x];
+	} forEach _assetTextures;
 
 	[player, "assembly"] call BIS_fnc_WL2_hintHandle;
 
@@ -39,19 +50,31 @@ if (_class isKindOf "Man") then {
 	}];
 
 	uiNamespace setVariable ["BIS_WL_deployKeyHandle", _deployKeyHandle];
+	private _originalPosition = getPosATL player;
 
-	0 spawn {
+	[_asset, _offset] spawn {
+		params ["_asset", "_offset"];
+
+		private _boundingBoxHeight = (boundingBoxReal _asset) # 0 # 2;
+		while { !(isNull _asset) && !(BIS_WL_spacePressed) && !(BIS_WL_backspacePressed) } do {
+			private _assetPos = player modelToWorld _offset;
+			private _assetHeight = getTerrainHeightASL [_assetPos # 0, _assetPos # 1];
+			private _playerHeight = (getPosASL player) # 2;
+			private _offset_tweaked = [_offset # 0, _offset # 1, _assetHeight - _playerHeight - _boundingBoxHeight];
+			_asset attachTo [player, _offset_tweaked];
+			sleep 1;
+		};
+	};
+
+	[_originalPosition, _asset] spawn {
+		params ["_originalPosition"];
+
 		waitUntil {
 			sleep 0.1;
 			BIS_WL_spacePressed ||
-			{BIS_WL_backspacePressed ||
-			{vehicle player != player ||
-			{!alive player ||
-			{lifeState player == "INCAPACITATED" ||
-			{(count ((allPlayers inAreaArray [player, 100, 100]) select {(_x != player) && {(BIS_WL_playerSide != side group _x) && {alive _x}}}) > 0) ||
-			{(getPosATL player) select 2 > 1 ||
-			{(BIS_WL_sectorsArray # 0) findIf {player inArea (_x getVariable "objectAreaComplete")} == -1
-		}}}}}}}};
+			BIS_WL_backspacePressed ||
+			[_originalPosition] call BIS_fnc_WL2_cancelVehicleOrder;
+		};
 
 		if !(BIS_WL_spacePressed) then {
 			BIS_WL_backspacePressed = TRUE;
@@ -69,9 +92,10 @@ if (_class isKindOf "Man") then {
 
 	[player, "assembly", false] call BIS_fnc_WL2_hintHandle;
 
-	if (BIS_WL_spacePressed) then {
+	private _canStillOrderVehicle = !([_originalPosition] call BIS_fnc_WL2_cancelVehicleOrder);
+	if (BIS_WL_spacePressed && _canStillOrderVehicle) then {
 		playSound "assemble_target";
-		[player, "orderAsset", "vehicle", [(_p # 0), (_p # 1), 0], _class, direction player] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2];
+		[player, "orderAsset", "vehicle", [(_p # 0), (_p # 1), 0], _orderedClass, direction player] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2];
 	} else {
 		"Canceled" call BIS_fnc_WL2_announcer;
 		[toUpper localize "STR_A3_WL_deploy_canceled"] spawn BIS_fnc_WL2_smoothText;

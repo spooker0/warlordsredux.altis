@@ -103,6 +103,13 @@ switch (_action) do {
 
         ["promote", [_player]] remoteExec ["SQD_fnc_server", 2];
     };
+    case "promoted": {
+        systemChat "You have been promoted to squad leader.";
+
+        private _sound = playSoundUI ["a3\music_f_tank\maintheme_f_tank.ogg", 1, 1, false, 1.7];
+        sleep 2.8;
+        stopSound _sound;
+    };
     case "kick": {
         private _selection = tvCurSel TREE;
         if (isNil "_selection") exitWith {
@@ -253,6 +260,22 @@ switch (_action) do {
             _return = "No Squad";
         } else {
             _return = _squad select 0;
+        };
+    };
+    case "areInSquad": {
+        private _player1 = _params select 0;
+        private _player2 = _params select 1;
+
+        if (_player1 == _player2) then {
+            _return = true;
+        } else {
+            private _squad = _squadManager select { (_x select 2) find _player1 > -1 } select 0;
+            if (isNil "_squad") then {
+                _return = false;
+            } else {
+                private _squadMembers = _squad select 2;
+                _return = _squadMembers find _player2 > -1;
+            };
         };
     };
 };

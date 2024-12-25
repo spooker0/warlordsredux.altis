@@ -8,10 +8,14 @@ waitUntil {!isNull (findDisplay 46)};
 _voteLocked = missionNamespace getVariable ["voteLocked", false];
 if (_voteLocked) exitWith {};
 
+private _side = BIS_WL_playerSide;
+private _moneySign = [_side] call BIS_fnc_WL2_getMoneySign;
 if (_displayClass == "OSD") then {
+	"OSDLayer" cutRsc ["RscTitleDisplayEmpty", "PLAIN"];
+	private _display = uiNamespace getVariable "RscTitleDisplayEmpty";
 	{
 		_x params ["_var", "_type"];
-		uiNamespace setVariable [_var, (findDisplay 46) ctrlCreate [_type, -1]];
+		uiNamespace setVariable [_var, _display ctrlCreate [_type, -1]];
 	} forEach [
 		["BIS_WL_osd_cp_current", "RscStructuredText"],
 		["BIS_WL_osd_icon_side_1", "RscPictureKeepAspect"],
@@ -26,7 +30,6 @@ if (_displayClass == "OSD") then {
 		["BIS_WL_osd_progress_voting_background", "RscText"],
 		["BIS_WL_osd_progress_voting", "RscProgress"],
 		["BIS_WL_osd_action_voting_title", "RscStructuredText"],
-		["BIS_WL_osd_sl_nearby", "RscStructuredText"],
 		["BIS_WL_osd_rearm_possible", "RscStructuredText"]
 	];
 
@@ -43,7 +46,6 @@ if (_displayClass == "OSD") then {
 	_osd_progress_voting_background = uiNamespace getVariable "BIS_WL_osd_progress_voting_background";
 	_osd_progress_voting = uiNamespace getVariable "BIS_WL_osd_progress_voting";
 	_osd_action_voting_title = uiNamespace getVariable "BIS_WL_osd_action_voting_title";
-	_osd_action_sl_nearby = uiNamespace getVariable "BIS_WL_osd_sl_nearby";
 	_osd_rearm_possible = uiNamespace getVariable "BIS_WL_osd_rearm_possible";
 
 	_blockW = safeZoneW / 1000;
@@ -68,9 +70,7 @@ if (_displayClass == "OSD") then {
 
 	_osd_income_side_2 ctrlSetPosition [_displayX + (_blockW * 137), _displayY - (_blockH * 13), _blockW * 40, _blockH * 16];
 
-	_osd_action_sl_nearby ctrlSetPosition [_displayX + (_blockW * 55), _displayY - (_blockH * 13), _blockW * 40, _blockH * 16];
-
-	_osd_rearm_possible ctrlSetPosition [_displayX + (_blockW * 73), _displayY + (_blockH * 8), _blockW * 120, _blockH * 16];
+	_osd_rearm_possible ctrlSetPosition [_displayX, _displayY + (_blockH * 8), _blockW * 177, _blockH * 16];
 
 	_osd_icon_side_2 ctrlSetText "\A3\Ui_F_Curator\Data\Displays\RscDisplayCurator\modeUnits_ca.paa";
 
@@ -96,7 +96,6 @@ if (_displayClass == "OSD") then {
 		_osd_progress_voting_background,
 		_osd_progress_voting,
 		_osd_action_voting_title,
-		_osd_action_sl_nearby,
 		_osd_rearm_possible
 	];
 
@@ -137,20 +136,16 @@ if (_displayClass == "OSD") then {
 				playSound "AddItemFailed";
 			};
 			BIS_WL_purchaseMenuVisible = false;
+			WL_GEAR_BUY_MENU = false;
 			WL_CONTROL_MAP ctrlEnable true;
+			hint "";
 		}];
 
+		uiNamespace setVariable ["WL_BuyMenuCode", ""];
 		_myDisplay displayAddEventHandler ["KeyDown", {
-			_key = _this # 1;
-			if (_key in actionKeys "Gear" && !BIS_WL_gearKeyPressed) then {
-				"RequestMenu_close" call BIS_fnc_WL2_setupUI;
-				true;
-			};
-			if (_key in actionKeys "curatorInterface") then {
-				if !((getPlayerUID player) in (getArray (missionConfigFile >> "adminIDs"))) then {
-					true;
-				};
-			};
+			private _key = _this # 1;
+			WL_GEAR_BUY_MENU = true;
+			[_key] call BIS_fnc_WL2_handleBuyMenuKeypress;
 		}];
 
 		_myDisplay spawn {
@@ -166,51 +161,71 @@ if (_displayClass == "OSD") then {
 			};
 		}];
 
-		_purchase_background = _myDisplay ctrlCreate ["RscText", -1];
-		_purchase_background_1 = _myDisplay ctrlCreate ["RscText", -1];
-		_purchase_background_2 = _myDisplay ctrlCreate ["RscText", -1];
-		_purchase_title_assets = _myDisplay ctrlCreate ["RscStructuredText", -1];
-		_purchase_title_details = _myDisplay ctrlCreate ["RscStructuredText", -1];
-		_purchase_title_deployment = _myDisplay ctrlCreate ["RscStructuredText", -1];
-		_purchase_category = _myDisplay ctrlCreate ["RscListBox", 100];
-		_purchase_items = _myDisplay ctrlCreate ["RscListBox", 101];
-		_purchase_pic = _myDisplay ctrlCreate ["RscStructuredText", 102];
-		_purchase_info = _myDisplay ctrlCreate ["RscStructuredText", 103];
-		_purchase_income = _myDisplay ctrlCreate ["RscStructuredText", 104];
-		_purchase_info_asset = _myDisplay ctrlCreate ["RscStructuredText", 105];
-		_purchase_title_cost = _myDisplay ctrlCreate ["RscStructuredText", 106];
-		_purchase_request = _myDisplay ctrlCreate ["RscStructuredText", 107];
-		_purchase_box = _myDisplay ctrlCreate ["RscStructuredText", 108];
-		_purchase_transfer_background = _myDisplay ctrlCreate ["RscText", 115];
-		_purchase_transfer_units = _myDisplay ctrlCreate ["RscListBox", 116];
-		_purchase_transfer_amount = _myDisplay ctrlCreate ["RscEdit", 117];
-		_purchase_transfer_cp_title = _myDisplay ctrlCreate ["RscStructuredText", 118];
-		_purchase_transfer_ok = _myDisplay ctrlCreate ["RscStructuredText", 119];
-		_purchase_transfer_cancel = _myDisplay ctrlCreate ["RscStructuredText", 120];
+		private _purchase_background = _myDisplay ctrlCreate ["RscText", -1];
+		private _purchase_title_assets = _myDisplay ctrlCreate ["RscStructuredText", -1];
+		private _purchase_title_details = _myDisplay ctrlCreate ["RscStructuredText", -1];
+
+		private _purchase_frame = _myDisplay ctrlCreate ["RscPicture", -1];
+		private _purchase_frame_top = _myDisplay ctrlCreate ["RscPicture", -1];
+		private _purchase_frame_bottom = _myDisplay ctrlCreate ["RscPicture", -1];
+		private _purchase_frame_left = _myDisplay ctrlCreate ["RscPicture", -1];
+		private _purchase_frame_right = _myDisplay ctrlCreate ["RscPicture", -1];
+		private _purchase_frame_topleft = _myDisplay ctrlCreate ["RscPicture", -1];
+		private _purchase_frame_topright = _myDisplay ctrlCreate ["RscPicture", -1];
+		private _purchase_frame_bottomleft = _myDisplay ctrlCreate ["RscPicture", -1];
+		private _purchase_frame_bottomright = _myDisplay ctrlCreate ["RscPicture", -1];
+
+		private _purchase_category = _myDisplay ctrlCreate ["RscListBox", 100];
+		private _purchase_items = _myDisplay ctrlCreate ["RscListBox", 101];
+		private _purchase_pic = _myDisplay ctrlCreate ["RscStructuredText", 102];
+		private _purchase_info = _myDisplay ctrlCreate ["RscStructuredText", 103];
+		private _purchase_info_asset = _myDisplay ctrlCreate ["RscStructuredText", 105];
+		private _purchase_request = _myDisplay ctrlCreate ["RscStructuredText", 107];
+		private _purchase_transfer_background = _myDisplay ctrlCreate ["RscText", 115];
+		private _purchase_transfer_units = _myDisplay ctrlCreate ["RscListBox", 116];
+		private _purchase_transfer_amount = _myDisplay ctrlCreate ["RscEdit", 117];
+		private _purchase_transfer_cp_title = _myDisplay ctrlCreate ["RscStructuredText", 118];
+		private _purchase_transfer_ok = _myDisplay ctrlCreate ["RscStructuredText", 119];
+		private _purchase_transfer_cancel = _myDisplay ctrlCreate ["RscStructuredText", 120];
 
 		uiNamespace setVariable ["BIS_WL_purchaseMenuDisplay", _myDisplay];
 
-		_purchase_background ctrlSetPosition [_xDef, _yDef + (_hDef * 0.15), _wDef, _hDef * 0.7];
-		_purchase_title_assets ctrlSetPosition [_xDef, _yDef + (_hDef * 0.15), _wDef / 2, _hDef * 0.045];
+		_purchase_background ctrlSetPosition [_xDef + (_wDef / 4), _yDef + (_hDef * 0.15), _wDef / 2, _hDef * 0.7];
+		_purchase_title_assets ctrlSetPosition [_xDef + (_wDef / 4), _yDef + (_hDef * 0.15), _wDef / 4, _hDef * 0.045];
 		_purchase_title_details ctrlSetPosition [_xDef + (_wDef / 2), _yDef + (_hDef * 0.15), _wDef / 4, _hDef * 0.045];
-		_purchase_title_deployment ctrlSetPosition [_xDef + (_wDef * 0.75), _yDef + (_hDef * 0.15), _wDef / 4, _hDef * 0.045];
-		_purchase_income ctrlSetPosition [_xDef, _yDef + (_hDef * 0.805), _wDef, _hDef * 0.045];
-		_purchase_category ctrlSetPosition [_xDef, _yDef + (_hDef * 0.195), _wDef * 0.25, _hDef * 0.5];
-		_purchase_items ctrlSetPosition [_xDef + (_wDef * 0.25), _yDef + (_hDef * 0.195), _wDef * 0.25, _hDef * 0.5];
-		_purchase_info ctrlSetPosition [_xDef, _yDef + (_hDef * 0.695), _wDef * 0.5, _hDef * 0.11];
+
+		_purchase_frame ctrlSetPosition [_xDef + (_wDef / 4), _yDef + (_hDef * 0.15), _wDef / 2, _hDef * 0.7];
+		_purchase_frame_top ctrlSetPosition [_xDef + (_wDef * 0.25), _yDef + (_hDef * 0.117), _wDef * 0.5, _hDef * 0.05];
+		_purchase_frame_bottom ctrlSetPosition [_xDef + (_wDef * 0.25), _yDef + (_hDef * 0.834), _wDef * 0.5, _hDef * 0.05];
+		_purchase_frame_left ctrlSetPosition [_xDef + (_wDef * 0.227), _yDef + (_hDef * 0.15), _wDef * 0.035, _hDef * 0.7];
+		_purchase_frame_right ctrlSetPosition [_xDef + (_wDef * 0.739), _yDef + (_hDef * 0.15), _wDef * 0.035, _hDef * 0.7];
+		_purchase_frame_topleft ctrlSetPosition [_xDef + (_wDef * 0.227), _yDef + (_hDef * 0.117), _wDef * 0.035, _hDef * 0.05];
+		_purchase_frame_topright ctrlSetPosition [_xDef + (_wDef * 0.739), _yDef + (_hDef * 0.117), _wDef * 0.035, _hDef * 0.05];
+		_purchase_frame_bottomleft ctrlSetPosition [_xDef + (_wDef * 0.227), _yDef + (_hDef * 0.834), _wDef * 0.035, _hDef * 0.05];
+		_purchase_frame_bottomright ctrlSetPosition [_xDef + (_wDef * 0.739), _yDef + (_hDef * 0.834), _wDef * 0.035, _hDef * 0.05];
+
+		_purchase_category ctrlSetPosition [_xDef + (_wDef / 4), _yDef + (_hDef * 0.195), _wDef * 3 / 32, _hDef * 0.5];
+		_purchase_items ctrlSetPosition [_xDef + (_wDef * 11 / 32), _yDef + (_hDef * 0.195), _wDef * 5 / 32, _hDef * 0.5];
+		_purchase_info ctrlSetPosition [_xDef + (_wDef / 4), _yDef + (_hDef * 0.695), _wDef / 2, _hDef * 0.11];
 		_purchase_pic ctrlSetPosition [_xDef + (_wDef * 0.5), _yDef + (_hDef * 0.195), _wDef * 0.25, _hDef * 0.23];
-		_purchase_info_asset ctrlSetPosition [_xDef + (_wDef * 0.5), _yDef + (_hDef * 0.425), _wDef * 0.25, _hDef * 0.38];
-		_purchase_background_1 ctrlSetPosition [_xDef + (_wDef * 0.75), _yDef + (_hDef * 0.195), _wDef, _hDef * 0.1625];
-		_purchase_title_cost ctrlSetPosition [_xDef + (_wDef * 0.75), _yDef + (_hDef * 0.195), _wDef / 4, _hDef * 0.04];
-		_purchase_request ctrlSetPosition [_xDef + (_wDef * 0.75), _yDef + (_hDef * 0.235), _wDef / 4, _hDef * 0.055];
-		_purchase_box ctrlSetPosition [_xDef + (_wDef * 0.75), _yDef + (_hDef * 0.3575), _wDef / 4, _hDef * 0.1875];
-		_purchase_background_2 ctrlSetPosition [_xDef + (_wDef * 0.75), _yDef + (_hDef * 0.5452), _wDef, _hDef * 0.2598];
+		_purchase_info_asset ctrlSetPosition [_xDef + (_wDef * 0.5), _yDef + (_hDef * 0.425), _wDef * 0.25, _hDef * 0.27];
+		_purchase_request ctrlSetPosition [_xDef + (_wDef / 4), _yDef + (_hDef * 0.805), _wDef / 2, _hDef * 0.045];
 		_purchase_transfer_background ctrlSetPosition [_xDef + (_wDef / 3), _yDef + (_hDef / 3), _wDef / 3, _hDef / 3];
 		_purchase_transfer_units ctrlSetPosition [_xDef + (_wDef / 3), _yDef + (_hDef / 3), _wDef / 6, _hDef / 3];
 		_purchase_transfer_amount ctrlSetPosition [_xDef + (_wDef / 3) + (_wDef / 6), _yDef + (_hDef * 0.425), _wDef / 12, _hDef * 0.035];
 		_purchase_transfer_cp_title ctrlSetPosition [_xDef + (_wDef / 3) + (_wDef / 6) + (_wDef / 12), _yDef + (_hDef * 0.425), _wDef / 12, _hDef * 0.035];
 		_purchase_transfer_ok ctrlSetPosition [_xDef + (_wDef / 3) + (_wDef / 6), _yDef + (_hDef * 0.5502), _wDef / 6, _hDef * 0.035];
 		_purchase_transfer_cancel ctrlSetPosition [_xDef + (_wDef / 3) + (_wDef / 6), _yDef + (_hDef * 0.59), _wDef / 6, _hDef * 0.035];
+
+		_purchase_frame ctrlSetText "a3\ui_f\data\igui\rsctitles\interlacing\interlacing_ca.paa";
+		_purchase_frame_top ctrlSetText "A3\ui_f\data\GUI\Rsc\RscMiniMapSmall\GPS_T_ca.paa";
+		_purchase_frame_bottom ctrlSetText "A3\ui_f\data\GUI\Rsc\RscMiniMapSmall\GPS_B_ca.paa";
+		_purchase_frame_left ctrlSetText "A3\ui_f\data\GUI\Rsc\RscMiniMapSmall\GPS_L_ca.paa";
+		_purchase_frame_right ctrlSetText "A3\ui_f\data\GUI\Rsc\RscMiniMapSmall\GPS_R_ca.paa";
+		_purchase_frame_topleft ctrlSetText "A3\ui_f\data\GUI\Rsc\RscMiniMapSmall\GPS_TL_ca.paa";
+		_purchase_frame_topright ctrlSetText "A3\ui_f\data\GUI\Rsc\RscMiniMapSmall\GPS_TR_ca.paa";
+		_purchase_frame_bottomleft ctrlSetText "A3\ui_f\data\GUI\Rsc\RscMiniMapSmall\GPS_BL_ca.paa";
+		_purchase_frame_bottomright ctrlSetText "A3\ui_f\data\GUI\Rsc\RscMiniMapSmall\GPS_BR_ca.paa";
 
 		{_x ctrlSetFade 1; _x ctrlEnable false; _x ctrlCommit 0} forEach [
 			_purchase_transfer_background,
@@ -221,39 +236,40 @@ if (_displayClass == "OSD") then {
 			_purchase_transfer_cancel
 		];
 
+		{_x ctrlCommit 0} forEach [
+			_purchase_frame_top,
+			_purchase_frame_bottom,
+			_purchase_frame_left,
+			_purchase_frame_right,
+			_purchase_frame_topleft,
+			_purchase_frame_topright,
+			_purchase_frame_bottomleft,
+			_purchase_frame_bottomright
+		];
+
 		{_x ctrlEnable false; _x ctrlCommit 0} forEach [
 			_purchase_background,
 			_purchase_title_assets,
 			_purchase_title_details,
-			_purchase_title_deployment,
-			_purchase_income,
 			_purchase_info,
 			_purchase_pic,
 			_purchase_info_asset,
-			_purchase_background_1,
-			_purchase_title_cost,
-			_purchase_background_2
+			_purchase_frame
 		];
 
 		{_x ctrlCommit 0} forEach [
 			_purchase_category,
 			_purchase_items,
-			_purchase_request,
-			_purchase_box
+			_purchase_request
 		];
 
-		_purchase_background ctrlSetBackgroundColor [0, 0, 0, 0.5];
+		_purchase_background ctrlSetBackgroundColor [0.2, 0.2, 0.2, 1];
 		_purchase_title_assets ctrlSetBackgroundColor [0, 0, 0, 0.5];
 		_purchase_title_details ctrlSetBackgroundColor [0, 0, 0, 0.5];
-		_purchase_title_deployment ctrlSetBackgroundColor [0, 0, 0, 0.5];
-		_purchase_income ctrlSetBackgroundColor [0, 0, 0, 0.5];
 		_purchase_info ctrlSetBackgroundColor [0, 0, 0, 0.3];
 		_purchase_pic ctrlSetBackgroundColor [0, 0, 0, 0.3];
 		_purchase_info_asset ctrlSetBackgroundColor [0, 0, 0, 0.3];
-		_purchase_background_1 ctrlSetBackgroundColor [0, 0, 0, 0.3];
 		_purchase_request ctrlSetBackgroundColor BIS_WL_colorFriendly;
-		_purchase_box ctrlSetBackgroundColor [0, 0, 0, 0.3];
-		_purchase_background_2 ctrlSetBackgroundColor [0, 0, 0, 0.3];
 		_purchase_transfer_background ctrlSetBackgroundColor [0, 0, 0, 1];
 		_purchase_transfer_ok ctrlSetBackgroundColor BIS_WL_colorFriendly;
 		_purchase_transfer_cancel ctrlSetBackgroundColor BIS_WL_colorFriendly;
@@ -261,32 +277,40 @@ if (_displayClass == "OSD") then {
 		{_x ctrlSetTextColor [0.65, 0.65, 0.65, 1]} forEach [
 			_purchase_title_assets,
 			_purchase_title_details,
-			_purchase_title_deployment,
-			_purchase_income,
 			_purchase_info,
-			_purchase_info_asset,
-			_purchase_title_cost
+			_purchase_info_asset
 		];
 
 		_purchase_title_assets ctrlSetStructuredText parseText format ["<t size = '%2' align = 'center' shadow = '2'>%1</t>", localize "STR_A3_WL_purchase_menu_title_assets", (1.5 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 		_purchase_title_details ctrlSetStructuredText parseText format ["<t size = '%2' align = 'center' shadow = '2'>%1</t>", localize "STR_A3_WL_purchase_menu_title_detail", (1.5 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
-		_purchase_title_deployment ctrlSetStructuredText parseText format ["<t size = '%2' align = 'center' shadow = '2'>%1</t>", localize "STR_A3_WL_purchase_menu_title_deployment", (1.5 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 		_purchase_request ctrlSetStructuredText parseText format ["<t font = 'PuristaLight' align = 'center' shadow = '2' size = '%2'>%1</t>", toUpper localize "STR_A3_WL_menu_request", (1.75 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
-		_purchase_transfer_cp_title ctrlSetStructuredText parseText format ["<t align = 'center' size = '%2'>%1</t>", localize "STR_A3_WL_unit_cp", (1.25 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
+		_purchase_transfer_cp_title ctrlSetStructuredText parseText format ["<t align = 'center' size = '%2'>%1</t>", _moneySign, (1.25 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 		_purchase_transfer_ok ctrlSetStructuredText parseText format ["<t align = 'center' shadow = '2' size = '%2'>%1</t>", localize "STR_A3_WL_button_transfer", (1.25 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 		_purchase_transfer_cancel ctrlSetStructuredText parseText format ["<t align = 'center' shadow = '2' size = '%2'>%1</t>", localize "STR_disp_cancel", (1.25 call BIS_fnc_WL2_sub_purchaseMenuGetUIScale)];
 
 		{
+			private _gearCode = "";
+			private _zeroes = _forEachIndex / 9;
+			for "_i" from 1 to _zeroes do {
+				_gearCode = _gearCode + "0";
+			};
+			private _tailNumber = _forEachIndex % 9 + 1;
+			_gearCode = _gearCode + str _tailNumber;
+
 			if (count (WL_PLAYER_REQUISITION_LIST # _forEachIndex) > 0) then {
-				_purchase_category lbAdd _x;
+				_purchase_category lbAdd format ["%1 [%2]", _x, _gearCode];
 			};
 			_purchase_category lbSetValue [(lbSize _purchase_category) - 1, _forEachIndex];
 		} forEach [
 			localize "STR_A3_cfgmarkers_nato_inf",
-			localize "STR_dn_vehicles",
-			localize "STR_A3_WL_menu_aircraft",
+			localize "STR_A3_WL_LightVehicles",
+			localize "STR_A3_WL_HeavyVehicles",
+			localize "STR_A3_WL_RotaryWing",
+			localize "STR_A3_WL_FixedWing",
+			localize "STR_A3_WL_RemoteControl",
+			localize "STR_A3_WL_AirDefense",
+			localize "STR_A3_WL_SectorDefense",
 			localize "STR_A3_rscdisplaygarage_tab_naval",
-			localize "STR_A3_WL_menu_defences",
 			localize "STR_A3_rscdisplaywelcome_exp_parb_list4_title",
 			localize "STR_A3_WL_menu_strategy"
 		];
@@ -297,6 +321,44 @@ if (_displayClass == "OSD") then {
 
 		_purchase_items ctrlAddEventHandler ["LBSelChanged", {
 			call BIS_fnc_WL2_sub_purchaseMenuSetAssetDetails;
+		}];
+
+		_purchase_items ctrlAddEventHandler ["LBDblClick", {
+			params ["_control", "_selectedIndex"];
+			private _display = uiNamespace getVariable ["BIS_WL_purchaseMenuDisplay", displayNull];
+			private _purchase_category = _display displayCtrl 100;
+
+			private _assetDetails = (_control lbData _selectedIndex) splitString "|||";
+			_assetDetails params [
+				"_className",
+				"_requirements",
+				"_displayName",
+				"_picture",
+				"_text",
+				"_offset"
+			];
+
+			_requirements = call compile _requirements;
+			private _category = WL_REQUISITION_CATEGORIES # ((lbCurSel _purchase_category) max 0);
+			private _cost = _control lbValue _selectedIndex;
+			if (isNil "_cost") then {
+				_cost = 0;
+			};
+
+			private _purchaseDetails = [_className, _requirements, _displayName, _picture, _text, _offset, _cost, _category];
+			private _availability = _purchaseDetails call BIS_fnc_WL2_sub_purchaseMenuAssetAvailability;
+			if (_availability # 0) then {
+				_purchaseDetails call BIS_fnc_WL2_triggerPurchase;
+				playSound "AddItemOK";
+
+				private _tasksRequireUIList = ["FundsTransfer"];
+				if !(_className in _tasksRequireUIList) then {
+					"RequestMenu_close" call BIS_fnc_WL2_setupUI;
+				};
+			} else {
+				systemChat format ["Invalid buy action: %1", _availability # 1];
+				playSound "AddItemFailed";
+			};
 		}];
 
 		_purchase_request ctrlAddEventHandler ["MouseEnter", {
@@ -341,125 +403,11 @@ if (_displayClass == "OSD") then {
 				_purchase_items = _display displayCtrl 101;
 				_curSel = (lbCurSel _purchase_items) max 0;
 				_assetDetails = (_purchase_items lbData _curSel) splitString "|||";
-
-				_assetDetails params [
-					"_className",
-					"_requirements",
-					"_displayName",
-					"_picture",
-					"_text",
-					"_offset"
-				];
-
 				_cost = _purchase_items lbValue lbCurSel _purchase_items;
-				_offset = call compile _offset;
-				_requirements = call compile _requirements;
-				switch (_className) do {
-					case "Arsenal": {if (isNull (findDisplay 602)) then {"RequestMenu_close" call BIS_fnc_WL2_setupUI; [player, "orderArsenal"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]} else {playSound "AddItemFailed"}};
-					case "LastLoadout": {"RequestMenu_close" call BIS_fnc_WL2_setupUI; [player, "lastLoadout"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]};
-					case "SaveLoadout": {"save" call BIS_fnc_WL2_orderSavedLoadout};
-					case "SavedLoadout": {"RequestMenu_close" call BIS_fnc_WL2_setupUI; [player, "savedLoadout"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]};
-					case "Scan": {0 spawn BIS_fnc_WL2_orderSectorScan};
-					case "FTSeized": {false spawn BIS_fnc_WL2_orderFastTravel};
-					case "FTConflict": {true spawn BIS_fnc_WL2_orderFastTravel};
-					case "FTSquadLeader": {
-						["ftSquadLeader"] spawn SQD_fnc_client;
-						private _ftNextUseVar = format ["BIS_WL_FTSLNextUse_%1", getPlayerUID player];
-						missionNamespace setVariable [_ftNextUseVar, serverTime + WL_FAST_TRAVEL_SQUAD_LEADER_RATE];
-					};
-					case "FundsTransfer": {call BIS_fnc_WL2_orderFundsTransfer; [player, "fundsTransferBill"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]};
-					case "TargetReset": {"RequestMenu_close" call BIS_fnc_WL2_setupUI; [player, "targetReset"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]};
-					case "forfeitVote": {0 spawn BIS_fnc_WL2_orderForfeit};
-					case "LockVehicles": {
-						{
-							[_x, 2] remoteExec ["lock", _x];
-							_x setUserActionText [_x getVariable ["BIS_WL_lockActionID", -1], format ["<t color = '%1'>%2</t>", if ((locked _x) == 2) then {"#4bff58"} else {"#ff4b4b"}, if ((locked _x) == 2) then {localize "STR_A3_cfgvehicles_miscunlock_f_0"} else {localize "STR_A3_cfgvehicles_misclock_f_0"}]];
-						} forEach ((missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []]) select {alive _x && {(!(typeOf _x == "B_Truck_01_medical_F")) && {!(typeOf _x == "O_Truck_03_medical_F") && {!(typeOf _x == "B_Slingload_01_Medevac_F") && {!(typeOf _x == "Land_Pod_Heli_Transport_04_medevac_F")}}}}});
-						[toUpper localize "STR_A3_WL_feature_lock_all_msg"] spawn BIS_fnc_WL2_smoothText;
-					};
-					case "UnlockVehicles": {
-						{
-							[_x, 0] remoteExec ["lock", _x];
-							_x setUserActionText [_x getVariable ["BIS_WL_lockActionID", -1], format ["<t color = '%1'>%2</t>", if ((locked _x) == 2) then {"#4bff58"} else {"#ff4b4b"}, if ((locked _x) == 2) then {localize "STR_A3_cfgvehicles_miscunlock_f_0"} else {localize "STR_A3_cfgvehicles_misclock_f_0"}]];
-						} forEach ((missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []]) select {alive _x});
-						[toUpper localize "STR_A3_WL_feature_unlock_all_msg"] spawn BIS_fnc_WL2_smoothText;
-					};
-					case "clearVehicles": {
-						{
-							{
-								moveOut _x;
-							} forEach ((crew _x) select {(_x != player) && {(getPlayerUID player) != (_x getVariable ["BIS_WL_ownerAsset", "123"])}});
-						} forEach ((missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []]) select {alive _x});
-					};
-					case "pruneAssets": {
-						"RequestMenu_close" call BIS_fnc_WL2_setupUI;
+				_assetDetails set [6, _cost];
+				_assetDetails set [7, _category];
 
-						0 spawn {
-							private _ownedVehicleVariable = format ["BIS_WL_ownedVehicles_%1", getPlayerUID player];
-							private _allAssets = (missionNamespace getVariable [_ownedVehicleVariable, []]) select { alive _x };
-
-							private _listText = "Your assets<br/>";
-							{
-								private _asset = _x;
-								private _assetType = getText (configFile >> "CfgVehicles" >> typeOf _asset >> "displayName");
-								private _assetSector = BIS_WL_allSectors select { _asset inArea (_x getVariable "objectAreaComplete") };
-								private _assetLocation = if (count _assetSector > 0) then {
-									(_assetSector # 0) getVariable ["BIS_WL_name", str (mapGridPosition _asset)];
-								} else {
-									mapGridPosition _asset;
-								};
-								_listText = _listText + format ["%1 @ %2<br/>", _assetType, _assetLocation];
-							} forEach _allAssets;
-							_listText = _listText + "Would you like to go through and delete some of them?";
-
-							private _result = [_listText, "Asset List", "Yes", "Cancel"] call BIS_fnc_guiMessage;
-
-							if (_result) then {
-								{
-									sleep 0.2;
-									private _asset = _x;
-									private _assetType = getText (configFile >> "CfgVehicles" >> typeOf _asset >> "displayName");
-									private _assetSector = BIS_WL_allSectors select { _asset inArea (_x getVariable "objectAreaComplete") };
-									private _assetLocation = if (count _assetSector > 0) then {
-										(_assetSector # 0) getVariable ["BIS_WL_name", str (mapGridPosition _asset)];
-									} else {
-										mapGridPosition _asset;
-									};
-									_result = [format ["Would you would like to delete: %1 @ %2", _assetType, _assetLocation], "Delete asset", true, true] call BIS_fnc_guiMessage;
-
-									if (_result) then {
-										if (unitIsUAV _asset) then {
-											private _group = group effectiveCommander _asset;
-											{_asset deleteVehicleCrew _x} forEach crew _asset;
-											deleteGroup _group;
-										};
-
-										[_asset] remoteExec ["BIS_fnc_WL2_removeAsset", 2];
-									};
-								} forEach _allAssets;
-							};
-						};
-					};
-					case "RemoveUnits": {
-						{
-							deleteVehicle _x;
-						} forEach ((groupSelectedUnits player) select {_x != player && {_x getVariable ["BIS_WL_ownerAsset", "123"] == getPlayerUID player}});
-						false spawn BIS_fnc_WL2_refreshOSD;
-					};
-					case "wipeMap": {
-						{
-							if ("_USER_DEFINED #" in _x) then {
-								deleteMarkerLocal _x;
-							};
-						} forEach allMapMarkers;
-					};
-					case "RespawnVic": {"RequestMenu_close" call BIS_fnc_WL2_setupUI; [player, "orderFTVehicle"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]};
-					case "RespawnVicFT": {0 spawn BIS_fnc_WL2_orderFTVehicleFT};
-					case "RespawnPod" : {"RequestMenu_close" call BIS_fnc_WL2_setupUI; [player, "orderFTPod"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2]};
-					case "RespawnPodFT" : {0 spawn BIS_fnc_WL2_orderFTPodFT};
-					case "welcomeScreen": {0 spawn BIS_fnc_WL2_welcome};
-					default {[_className, _cost, _category, _requirements, _offset] call BIS_fnc_WL2_requestPurchase};
-				};
+				_assetDetails call BIS_fnc_WL2_triggerPurchase;
 			} else {
 				playSound "AddItemFailed";
 			};

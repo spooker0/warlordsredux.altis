@@ -17,18 +17,22 @@ if (isPlayer _owner) then {
 
 	if (_asset isKindOf "Man") then {
 		_asset call APS_fnc_SetupProjectiles;
-		_asset addEventHandler ["Killed", {
-			missionNamespace setVariable ["WL2_manLost", true];
-			BIS_WL_matesAvailable = (BIS_WL_matesAvailable - 1) max 0;
-			false spawn BIS_fnc_WL2_refreshOSD;
-		}];
+
+		private _refreshTimerVar = format ["WL2_manpowerRefreshTimers_%1", getPlayerUID player];
+		private _manpowerRefreshTimers = missionNamespace getVariable [_refreshTimerVar, []];
+		_manpowerRefreshTimers pushBack [serverTime + WL_MANPOWER_REFRESH_COOLDOWN, _asset];
+		missionNamespace setVariable [_refreshTimerVar, _manpowerRefreshTimers, true];
+
+		call BIS_fnc_WL2_teammatesAvailability;
 	} else {
 		private _side = side _owner;
+		private _assetActualType = _asset getVariable ["WL2_orderedClass", typeOf _asset];
 
 		[_asset] call APS_fnc_RegisterVehicle;
 		_asset call APS_fnc_SetupProjectiles;
 		_asset setVariable ["BIS_WL_nextRepair", 0];
 		_asset setVariable ["BIS_WL_ownerAssetSide", _side, true];
+		_asset setVariable ["WL2_massDefault", getMass _asset];
 
 		_var = format ["BIS_WL_ownedVehicles_%1", getPlayerUID player];
 		_vehicles = missionNamespace getVariable [_var, []];
@@ -48,13 +52,6 @@ if (isPlayer _owner) then {
 				_asset call BIS_fnc_WL2_sub_jammerAction;
 
 				[_asset, _side] call BIS_fnc_drawJammerCircle;
-
-				if (_side == west) then {
-					_asset setObjectTextureGlobal [0, "#(argb,8,8,3)color(0.80,0.76,0.66,0.15)"];
-					_asset setObjectTextureGlobal [1, "#(argb,8,8,3)color(0.2,0.25,0.25,0.15)"];
-					_asset setObjectTextureGlobal [2, "#(argb,8,8,3)color(0.2,0.25,0.3,0.15)"];
-					_asset setObjectTextureGlobal [3, "#(argb,8,8,3)color(0.6,0.6,0.4,0.15)"];
-				};
 			};
 			case "Land_Communication_F": {
 				_asset setVariable ["BIS_WL_jammerActivated", false, true];
@@ -72,53 +69,17 @@ if (isPlayer _owner) then {
 
 			// Logistics
 			case "B_Truck_01_flatbed_F": {
-				_asset call BIS_fnc_WL2_sub_logisticsAddAction;
-				if (_side == east) then {
-					{
-						_asset setObjectTextureGlobal [_forEachIndex, _x];
-					} forEach (getArray (configfile >> "CfgVehicles" >> typeof _asset >> "textureSources" >> "Olive" >> "textures"));
-				};
+				_asset call BIS_fnc_WL2_sub_deployableAddAction;
 			};
-			case "B_T_VTOL_01_vehicle_F";
-			case "O_T_VTOL_02_vehicle_dynamicLoadout_F": {
+			case "B_T_VTOL_01_vehicle_F": {
 				_asset call BIS_fnc_WL2_sub_logisticsAddAction;
 			};
-
-			// Livery changes
-			case "I_Plane_Fighter_03_dynamicLoadout_F": {
-				{
-					_asset setObjectTextureGlobal [_forEachIndex, _x];
-				} forEach (getArray (configfile >> "CfgVehicles" >> typeof _asset >> "textureSources" >> "Hex" >> "textures"));
-			};
-			case "I_Plane_Fighter_04_F": {
-				{
-					_asset setObjectTextureGlobal [_forEachIndex, _x];
-				} forEach (getArray (configfile >> "CfgVehicles" >> typeof _asset >> "textureSources" >> "DigitalCamoGrey" >> "textures"));
-			};
-			case "I_Truck_02_MRL_F": {
-				{
-					_asset setObjectTextureGlobal [_forEachIndex, _x];
-				} forEach (getArray (configfile >> "CfgVehicles" >> typeof _asset >> "textureSources" >> "Opfor" >> "textures"));
-			};
-			case "B_APC_Wheeled_03_cannon_F": {
-				_asset setObjectTextureGlobal [0, "A3\armor_f_gamma\APC_Wheeled_03\Data\apc_wheeled_03_ext_co.paa"];
-				_asset setObjectTextureGlobal [1, "A3\armor_f_gamma\APC_Wheeled_03\Data\apc_wheeled_03_ext2_co.paa"];
-				_asset setObjectTextureGlobal [2, "A3\armor_f_gamma\APC_Wheeled_03\Data\rcws30_co.paa"];
-				_asset setObjectTextureGlobal [3, "A3\armor_f_gamma\APC_Wheeled_03\Data\apc_wheeled_03_ext_alpha_co.paa"];
-			};
-			case "I_Heli_light_03_dynamicLoadout_F": {
-				{
-					_asset setObjectTextureGlobal [_forEachIndex, _x];
-				} forEach getArray (configfile >> "CfgVehicles" >> typeof _asset >> "textureSources" >> "EAF" >> "textures");
-			};
-			case "B_AAA_System_01_F";
-			case "B_SAM_System_01_F";
-			case "B_SAM_System_02_F": {
-				if (_side == east) then {
-					{
-						_asset setObjectTextureGlobal [_forEachIndex, _x];
-					} forEach getArray (configfile >> "CfgVehicles" >> typeof _asset >> "textureSources" >> "Green" >> "textures");
-				};
+			case "B_Heli_Transport_01_F";
+			case "B_Heli_Transport_03_F";
+			case "O_Heli_Light_02_unarmed_F";
+			case "O_Heli_Light_02_dynamicLoadout_F";
+			case "O_Heli_Transport_04_F": {
+				_asset call BIS_fnc_WL2_sub_slingAddAction;
 			};
 
 			// Radars
@@ -163,8 +124,9 @@ if (isPlayer _owner) then {
 						},
 						{},
 						{
-							(getConnectedUAVUnit player) addEventHandler ["Killed", { params ["_unit", "_killer", "_instigator", "_useEffects"];
-								[player, "droneExplode"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2];
+							(getConnectedUAVUnit player) addEventHandler ["Killed", {
+								params ["_unit", "_killer", "_instigator", "_useEffects"];
+								[player, "droneExplode", _unit] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2];
 							}];
 							[
 								getConnectedUAVUnit player,
@@ -176,7 +138,7 @@ if (isPlayer _owner) then {
 								{},
 								{},
 								{
-									[player, "droneExplode"] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2];
+									[_caller, "droneExplode", _target] remoteExec ["BIS_fnc_WL2_handleClientRequest", 2];
 								},
 								{},
 								[],
@@ -197,11 +159,19 @@ if (isPlayer _owner) then {
 
 		if (unitIsUAV _asset) then {
 			if (profileNamespace getVariable ["MRTM_enableAuto", true]) then {
-				_asset setAutonomous false;
+				[_asset, false] remoteExec ["setAutonomous", 0];
 			};
 			_asset setVariable ["BIS_WL_ownerUavAsset", getPlayerUID player, true];
 			[_asset, _owner] spawn BIS_fnc_WL2_uavJammer;
 			_asset setVariable ["WL_canConnectUav", true];
+
+			private _assetGrp = group _asset;
+			private _assetTypeName = [_asset] call BIS_fnc_WL2_getAssetTypeName;
+			_assetGrp setGroupIdGlobal [format ["%1#%2#%3", name _owner, _assetTypeName, groupId _assetGrp]];
+
+			_asset setVariable ["WL2_accessControl", 2, true];
+
+			[_asset] call BIS_fnc_WL2_uavConnectRefresh;
 		};
 
 		private _notLockableVehicles = createHashMapFromArray [
@@ -277,94 +247,127 @@ if (isPlayer _owner) then {
 			};
 			_asset setVariable ["WLM_ammoCargo", _amount, true];
 		};
-	};
 
-	private _rearmTime = (missionNamespace getVariable "WL2_rearmTimers") getOrDefault [(typeOf _asset), 600];
-	_asset setVariable ["BIS_WL_nextRearm", serverTime + _rearmTime];
+		private _rearmTime = (missionNamespace getVariable "WL2_rearmTimers") getOrDefault [(typeOf _asset), 600];
+		_asset setVariable ["BIS_WL_nextRearm", serverTime + _rearmTime];
 
-	if (_asset call DIS_fnc_Check) then {
-		_asset spawn DIS_fnc_RegisterLauncher;
+		if (_asset call DIS_fnc_Check) then {
+			_asset spawn DIS_fnc_RegisterLauncher;
 
-		// Warning for turret ownership change
-		[_asset] spawn {
-			params ["_asset"];
-			private _weaponSafe = -1;
-			private _warned = false;
-			while { alive _asset && !_warned } do {
-				private _uavControl = UAVControl _asset;
-				private _isTurretTransferring = _uavControl # 1 != "" && !(_asset turretLocal [0]);
-				if (_isTurretTransferring && _weaponSafe == -1) then {
-					_weaponSafe = _asset addAction ["Weapon Safety", {
-						systemChat "Changing turret ownership (arma bug). Wait a few seconds before firing.";
-					}, [], 0, false, false, "DefaultAction", ""];
+			// Warning for turret ownership change
+			[_asset] spawn {
+				params ["_asset"];
+				private _weaponSafe = -1;
+				private _warned = false;
+				while { alive _asset && !_warned } do {
+					private _uavControl = UAVControl _asset;
+					private _isTurretTransferring = _uavControl # 1 != "" && !(_asset turretLocal [0]);
+					if (_isTurretTransferring && _weaponSafe == -1) then {
+						_weaponSafe = _asset addAction ["Weapon Safety", {
+							systemChat "Changing turret ownership (arma bug). Wait a few seconds before firing.";
+						}, [], 0, false, false, "DefaultAction", ""];
+					};
+					if (!_isTurretTransferring && _weaponSafe != -1) then {
+						_asset removeAction _weaponSafe;
+						_weaponSafe = -1;
+						_warned = true;
+					};
+					sleep 0.1;
 				};
-				if (!_isTurretTransferring && _weaponSafe != -1) then {
-					_asset removeAction _weaponSafe;
-					_weaponSafe = -1;
-					_warned = true;
-				};
-				sleep 0.1;
 			};
 		};
-	};
-	if (typeOf _asset == "B_Ship_MRLS_01_F") then {
-		_asset addEventHandler ["Fired", {
-			params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
-			if (local _projectile) then {
-				[_projectile, _unit] call DIS_fnc_StartMissileCamera;
+		if (typeOf _asset == "B_Ship_MRLS_01_F") then {
+			_asset addEventHandler ["Fired", {
+				params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
+				if (local _projectile) then {
+					[_projectile, _unit] call DIS_fnc_StartMissileCamera;
+				};
+			}];
+		};
+
+		private _crewPosition = (fullCrew [_asset, "", true]) select {!("cargo" in _x)};
+		private _radarSensor = (listVehicleSensors _asset) select {{"ActiveRadarSensorComponent" in _x} forEach _x};
+		if ((count _radarSensor > 0) && (count _crewPosition > 1 || (unitIsUAV _asset))) then {
+			_asset setVariable ["radarOperation", false, true];
+			_asset setVehicleRadar 2;
+			[_asset, "toggle"] call BIS_fnc_WL2_sub_radarOperate;
+
+			_asset spawn {
+				params ["_asset"];
+
+				while {alive _asset} do {
+					private _radarValue = if (_asset getVariable "radarOperation") then {
+						1;
+					} else {
+						2;
+					};
+
+					if (local _asset) then {
+						_asset setVehicleRadar _radarValue;
+					} else {
+						[_asset, _radarValue] remoteExec ["setVehicleRadar", _asset];
+					};
+					sleep 10;
+				};
 			};
-		}];
+		};
+
+		if (typeOf _asset == "B_APC_Tracked_01_AA_F" || typeOf _asset == "O_APC_Tracked_02_AA_F") then {
+			_asset addEventHandler ["Fired", {
+				params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
+				if (_muzzle == "autocannon_35mm") then {
+					private _ammoCount = _unit ammo "autocannon_35mm";
+					if (_ammoCount % 5 == 0) then {
+						_projectile spawn BIS_fnc_WL2_airburst;
+					};
+				};
+			}];
+		};
+
+		private _demolishable = missionNamespace getVariable ["WL2_demolishable", createHashMap];
+		if (_demolishable getOrDefault [_assetActualType, false]) then {
+			_asset setVariable ["WL_demolishTurnsLeft", 4, true];
+			[_asset] remoteExec ["BIS_fnc_WL2_sub_demolish", 0, true];
+		};
+
+		private _structure = missionNamespace getVariable ["WL2_structure", createHashMap];
+		if (_structure getOrDefault [typeOf _asset, false]) then {
+			_asset setVariable ["WL_structure", true, 2];
+		};
+
+		private _parachuteCount = count ((backpackCargo _asset) select {_x == "B_Parachute"});
+		if (_parachuteCount > 0) then {
+			_asset addEventHandler ["GetOut", {
+				params ["_vehicle", "_role", "_unit", "_turret", "_isEject"];
+
+				if (!_isEject) exitWith {};
+
+
+				[_vehicle, _unit] spawn {
+					params ["_vehicle", "_unit"];
+
+					private _height = (getPos _unit) # 2;
+					private _distance = _vehicle distance _unit;
+
+					waitUntil {
+						sleep 1;
+						_height = (getPos _unit) # 2;
+						_distance = _vehicle distance _unit;
+						_height < 5 || _distance > 10 || !alive _unit || !alive _vehicle;
+					};
+
+					if (_height > 5 && alive _unit) then {
+						private _parachute = createVehicle ["Steerable_Parachute_F", position _unit, [], 0, "CAN_COLLIDE"];
+						_unit moveInDriver _parachute;
+					};
+				};
+			}];
+		};
+
+		if ("hide_rail" in (animationNames _asset)) then {
+			_asset animateSource ["hide_rail", 0];
+		};
 	};
 
 	_asset call BIS_fnc_WL2_sub_removeAction;
-
-	private _crewPosition = (fullCrew [_asset, "", true]) select {!("cargo" in _x)};
-	private _radarSensor = (listVehicleSensors _asset) select {{"ActiveRadarSensorComponent" in _x} forEach _x};
-	if ((count _radarSensor > 0) && (count _crewPosition > 1 || (unitIsUAV _asset))) then {
-		_asset setVariable ["radarOperation", false, true];
-		_asset setVehicleRadar 2;
-		[_asset, "toggle"] call BIS_fnc_WL2_sub_radarOperate;
-
-		_asset spawn {
-			params ["_asset"];
-
-			while {alive _asset} do {
-				private _radarValue = if (_asset getVariable "radarOperation") then {
-					1;
-				} else {
-					2;
-				};
-
-				if (local _asset) then {
-					_asset setVehicleRadar _radarValue;
-				} else {
-					[_asset, _radarValue] remoteExec ["setVehicleRadar", _asset];
-				};
-				sleep 10;
-			};
-		};
-	};
-
-	if (typeOf _asset == "B_APC_Tracked_01_AA_F" || typeOf _asset == "O_APC_Tracked_02_AA_F") then {
-		_asset addEventHandler ["Fired", {
-			params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
-			if (_muzzle == "autocannon_35mm") then {
-				private _ammoCount = _unit ammo "autocannon_35mm";
-				if (_ammoCount % 5 == 0) then {
-					_projectile spawn BIS_fnc_WL2_airburst;
-				};
-			};
-		}];
-	};
-
-	private _demolishable = missionNamespace getVariable ["WL2_demolishable", createHashMap];
-	if (_demolishable getOrDefault [typeOf _asset, false]) then {
-		_asset setVariable ["WL_demolishTurnsLeft", 4, true];
-		[_asset] remoteExec ["BIS_fnc_WL2_sub_demolish", 0, true];
-	};
-
-	private _structure = missionNamespace getVariable ["WL2_structure", createHashMap];
-	if (_structure getOrDefault [typeOf _asset, false]) then {
-		_asset setVariable ["WL_structure", true, 2];
-	};
 };

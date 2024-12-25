@@ -6,7 +6,7 @@ _magazineTypes = [
 	"1Rnd_SmokeYellow_Grenade_shell",
 	"SmokeShellOrange",
 	"SmokeShellYellow"
-];	
+];
 
 if (side player == west) then {
 	player linkItem "B_UavTerminal";

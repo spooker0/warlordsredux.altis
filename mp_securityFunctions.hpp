@@ -60,8 +60,20 @@ class CfgRemoteExec {
 			allowedTargets = 2;
 		};
 
-		class BIS_fnc_WL2_removeAsset {
-			allowedTargets = 2;
+		class BIS_fnc_WL2_vehicleLock {
+			allowedTargets = 0;
+		};
+
+		class BIS_fnc_WL2_reloadOverride {
+			allowedTargets = 0;
+		};
+
+		class BIS_fnc_WL2_slingloadInit {
+			allowedTargets = 0;
+		};
+
+		class BIS_fnc_WL2_uavConnectRefresh {
+			allowedTargets = 0;
 		};
 
 		class BIS_fnc_WL2_updateVehicleList {
@@ -172,6 +184,14 @@ class CfgRemoteExec {
 
 		class setVelocityModelSpace {
 			allowedTargets = 2;
+		};
+
+		class setMass {
+			allowedTargets = 0;
+		};
+
+		class setAutonomous {
+			allowedTargets = 0;
 		};
 	};
 };

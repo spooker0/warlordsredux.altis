@@ -27,7 +27,7 @@ switch (_locality) do {
 		BIS_WL_purchaseMenuVisible = FALSE;
 		BIS_WL_gearKeyPressed = FALSE;
 		BIS_WL_currentSelection = 0;
-		BIS_WL_matesAvailable = 1;
+		BIS_WL_matesAvailable = 0;
 		BIS_WL_lastLoadout = [];
 		BIS_WL_savedLoadout = [];
 		BIS_WL_loadoutApplied = FALSE;
@@ -50,7 +50,8 @@ switch (_locality) do {
 			"\A3\ui_f\data\map\markers\nato\n_installation.paa"
 		];
 		BIS_WL_colorFriendly = BIS_WL_colorsArray # (BIS_WL_sidesArray find BIS_WL_playerSide);
-		BIS_WL_penalized = false;
 		BIS_WL_mapAssetTarget = objNull;
+		WL_GEAR_BUY_MENU = false;
+		WL_TEMP_BUY_MENU = false;
 	};
 };

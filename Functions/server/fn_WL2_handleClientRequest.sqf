@@ -17,30 +17,15 @@ private _broadcastActionToSide = {
 if (_action == "orderAsset") exitWith {
 	private _orderType = _param1;
 	private _position = _param2;
-	private _class = _param3;
+	private _orderedClass = _param3;
+
+	private _class = missionNamespace getVariable ["WL2_spawnClass", createHashMap] getOrDefault [_orderedClass, _orderedClass];
 
 	// Griefer check
 	private _nearbyEntities = [];
 	if !(_orderType in ["air", "naval"]) then {
 		private _direction = _param4;
-		private _simulatedObject = [_class, ATLToASL _position, _direction, true, false, true] call BIS_fnc_createSimpleObject;
-
-		private _circleA = boundingBoxReal [_simulatedObject, "FireGeometry"];
-		private _radiusA = _circleA select 2;
-
-		private _BUFFER = 1;
-		_nearbyEntities = _simulatedObject nearEntities 30 select {
-			private _circleB = boundingBoxReal [_x, "FireGeometry"];
-			private _radiusB = _circleB select 2;
-			private _assetOwner = _x getVariable ["BIS_WL_ownerAsset", "notAsset"];
-
-			(_x distance _simulatedObject) < (_radiusA + _radiusB + _BUFFER)
-			&& !(_x isKindOf "Man")
-			&& _assetOwner != "notAsset"
-			&& _uid != (_x getVariable ["BIS_WL_ownerAsset", "123"])
-		};
-
-		deleteVehicle _simulatedObject;
+		_nearbyEntities = [_class, ATLToASL _position, _direction, _uid, []] call BIS_fnc_WL2_grieferCheck;
 	};
 
 	if (count _nearbyEntities > 0) exitWith {
@@ -48,28 +33,28 @@ if (_action == "orderAsset") exitWith {
 		_sender setVariable ["BIS_WL_isOrdering", false, [2, _owner]];
 
 		private _nearbyObject = _nearbyEntities # 0;
-		private _nearbyObjectName = getText (configFile >> "CfgVehicles" >> typeOf _nearbyObject >> "displayName");
+		private _nearbyObjectName = [_nearbyObject] call BIS_fnc_WL2_getAssetTypeName;
 		private _nearbyObjectPosition = getPosASL _nearbyObject;
 
 		playSound3D ["a3\3den\data\sound\cfgsound\notificationwarning.wss", objNull, false, _nearbyObjectPosition, 5];
 		[format ["Too close to another %1!", _nearbyObjectName]] remoteExec ["systemChat", _owner];
 	};
 
-	private _cost = ((serverNamespace getVariable "WL2_costs") getOrDefault [_class, 50001]);
+	private _cost = ((serverNamespace getVariable "WL2_costs") getOrDefault [_orderedClass, 50001]);
 	private _hasFunds = (playerFunds >= _cost);
 	if (_hasFunds) then {
 		(-_cost) call BIS_fnc_WL2_fundsDatabaseWrite;
 
 		switch (_orderType) do {
 			case "air" : {
-				[_sender, _position, _class, _cost] spawn BIS_fnc_orderAir;
+				[_sender, _position, _orderedClass, _cost] spawn BIS_fnc_orderAir;
 			};
 			case "naval" : {
-				[_sender, _position, _class] spawn BIS_fnc_orderNaval;
+				[_sender, _position, _orderedClass] spawn BIS_fnc_orderNaval;
 			};
 			default {
 				private _direction = _param4;
-				[_sender, _position, _class, _direction] spawn BIS_fnc_orderGround;
+				[_sender, _position, _orderedClass, _direction] spawn BIS_fnc_orderGround;
 			};
 		};
 	};
@@ -264,17 +249,25 @@ if (_action == "orderAI") exitWith {
 
 if (_action == "fundsTransfer") exitWith {
 	private _incomeBlocked = serverNamespace getVariable ["BIS_WL_incomeBlockedList", []];
-	if (playerFunds >= _param1) then {
-		_uid = getPlayerUID _param2;
+	private _transferCost = getMissionConfigValue ["BIS_WL_fundsTransferCost", 2000];
+	private _transferAmount = _param1;
+	private _recipient = _param2;
+	if (playerFunds >= (_transferAmount + _transferCost)) then {
+		_uid = getPlayerUID _recipient;
 		if !(_uid in _incomeBlocked) then {
-			_param1 call BIS_fnc_WL2_fundsDatabaseWrite;
-      private _oldTransfer = serverNamespace getVariable [format ["BIS_WL_WLAC_%1", _uid], 0];
-		  serverNamespace setVariable [format ["BIS_WL_WLAC_%1", _uid], _oldTransfer + _param1];
+			_transferAmount call BIS_fnc_WL2_fundsDatabaseWrite;
+
+      		private _oldTransfer = serverNamespace getVariable [format ["BIS_WL_WLAC_%1", _uid], 0];
+		  	serverNamespace setVariable [format ["BIS_WL_WLAC_%1", _uid], _oldTransfer + _transferAmount];
+
 			_uid = getPlayerUID _sender;
-			(-_param1) call BIS_fnc_WL2_fundsDatabaseWrite;
+			-(_transferAmount + _transferCost) call BIS_fnc_WL2_fundsDatabaseWrite;
+
 			serverNamespace setVariable [format ["BIS_WL_isTransferring_%1", _uid], false];
 
-			private _message = format [localize "STR_A3_WL_donate_cp", name _sender, name _param2, _param1];
+			private _sentMoney = format ["%1%2", [_side] call BIS_fnc_WL2_getMoneySign, _transferAmount];
+			private _message = format [localize "STR_A3_WL_donate_cp", name _sender, name _recipient, _sentMoney];
+
 			[_side, _message] call _broadcastActionToSide;
 		};
 	};
@@ -282,14 +275,11 @@ if (_action == "fundsTransfer") exitWith {
 
 if (_action == "fundsTransferCancel") exitWith {
 	if (serverNamespace getVariable (format ["BIS_WL_isTransferring_%1", _uid])) then {
-		(getMissionConfigValue ["BIS_WL_fundsTransferCost", 2000]) call BIS_fnc_WL2_fundsDatabaseWrite;
 		serverNamespace setVariable [format ["BIS_WL_isTransferring_%1", _uid], false];
 	};
 };
 
 if (_action == "fundsTransferBill") exitWith {
-	(-(getMissionConfigValue ["BIS_WL_fundsTransferCost", 2000])) call BIS_fnc_WL2_fundsDatabaseWrite;
-
 	serverNamespace setVariable [format ["BIS_WL_isTransferring_%1", _uid], true];
 };
 
@@ -319,8 +309,9 @@ if (_action == "updateZeus") exitWith {
 };
 
 if (_action == "droneExplode") then {
-	_expl = createVehicle ["IEDUrbanBig_Remote_Ammo", (getPos getConnectedUAV _sender), [], 0, "FLY"];
-	_expl setShotParents [getConnectedUAV _sender, _sender];
+	private _drone = vehicle _param1;
+	private _expl = createVehicle ["IEDUrbanBig_Remote_Ammo", getPos _drone, [], 0, "FLY"];
+	_expl setShotParents [_drone, _sender];
 	triggerAmmo _expl;
-	deleteVehicle (getConnectedUAV player);
+	deleteVehicle _drone;
 }
