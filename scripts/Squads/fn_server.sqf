@@ -198,13 +198,15 @@ switch (_action) do {
 
         private _squad = SQUAD_MANAGER select {(_x select 1) == _playerId} select 0;
         private _squadVotingPower = if (isNil "_squad") then {
-            private _points = WL_PlayerSquadContribution getOrDefault [_playerId, 0];
+            private _playerUid = (getUserInfo _playerId) # 2;
+            private _points = WL_PlayerSquadContribution getOrDefault [_playerUid, 0];
             _points max 1;
         } else {
             private _sum = 0;
             {
-                private _playerId = _x;
-                private _points = WL_PlayerSquadContribution getOrDefault [_playerId, 0];
+                private _squadMemberId = _x;
+                private _squadMemberUid = (getUserInfo _squadMemberId) # 2;
+                private _points = WL_PlayerSquadContribution getOrDefault [_squadMemberUid, 0];
                 _sum = _sum + (_points max 1);
             } forEach (_squad select 2);
             _sum max 1;

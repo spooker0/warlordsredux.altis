@@ -61,16 +61,6 @@ class RemoteControl {
                 "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
                 "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
                 "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
                 "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow"
             };
             addWeapons[] = {
@@ -115,6 +105,17 @@ class RemoteControl {
         requirements[] = {"A"};
         rearm = 300;
         killReward = 600;
+        class Pilot: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {
+                "120Rnd_CMFlare_Chaff_Magazine"
+            };
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "240Rnd_CMFlare_Chaff_Magazine"
+            };
+            addWeapons[] = {};
+        };
     }; // "KH-3A Fenghuang"
 
     class O_UAV_02_dynamicLoadout_F {

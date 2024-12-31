@@ -160,7 +160,7 @@ class LightVehicles {
 
     class B_LSV_01_AT_UP_F {
         name = "Prowler (AT UP)";
-        description = "Prowler (AT UP) is a variant of the Prowler armed with a 5-mag Titan AT launcher.";
+        description = "Prowler (AT UP) is a variant of the Prowler AT.";
         spawn = "B_LSV_01_AT_F";
         variant = 1;
         cost = 1100;
@@ -180,6 +180,11 @@ class LightVehicles {
                 "missiles_titan_static"
             };
             addMagazines[] = {
+                "2Rnd_GAT_missiles",
+                "2Rnd_GAT_missiles",
+                "2Rnd_GAT_missiles",
+                "2Rnd_GAT_missiles",
+                "2Rnd_GAT_missiles",
                 "2Rnd_GAT_missiles",
                 "2Rnd_GAT_missiles",
                 "2Rnd_GAT_missiles",
@@ -230,10 +235,6 @@ class LightVehicles {
                 "60Rnd_20mm_HE_shells",
                 "60Rnd_20mm_HE_shells",
                 "60Rnd_20mm_HE_shells",
-                "60Rnd_20mm_HE_shells",
-                "60Rnd_20mm_HE_shells",
-                "60Rnd_20mm_HE_shells",
-                "60Rnd_20mm_AP_shells",
                 "60Rnd_20mm_AP_shells",
                 "60Rnd_20mm_AP_shells",
                 "200Rnd_338_Mag",

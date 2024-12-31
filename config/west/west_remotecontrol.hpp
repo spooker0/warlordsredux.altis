@@ -61,16 +61,6 @@ class RemoteControl {
                 "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
                 "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
                 "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
-                "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow",
                 "30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow"
             };
             addWeapons[] = {
@@ -122,6 +112,17 @@ class RemoteControl {
         requirements[] = {"H"};
         rearm = 600;
         killReward = 600;
+        class Pilot: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {
+                "120Rnd_CMFlare_Chaff_Magazine"
+            };
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "240Rnd_CMFlare_Chaff_Magazine"
+            };
+            addWeapons[] = {};
+        };
     }; // "Falcon"
 
     class B_UAV_05_F {
@@ -129,5 +130,16 @@ class RemoteControl {
         requirements[] = {"A"};
         rearm = 500;
         killReward = 650;
+        class Pilot: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {
+                "120Rnd_CMFlare_Chaff_Magazine"
+            };
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "240Rnd_CMFlare_Chaff_Magazine"
+            };
+            addWeapons[] = {};
+        };
     }; // "UCAV Sentinel"
 };
