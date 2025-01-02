@@ -82,7 +82,7 @@ disableSerialization;
                 _treeEntries set [format ["%1", _playerId], [_squadItem, _playerItem]];
             } forEach (_squad select 2);
 
-            private _squadLeader = getUserInfo (_squad select 1) # 4;
+            private _squadLeader = name (allPlayers select {getPlayerID _x == (_squad select 1)} select 0);
             tvSetTooltip [TREE, [_squadItem], format [localize "STR_SQUADS_squadLeaderTooltip", _squadLeader, _squadPoints]];
 
             private _squadColor = if ((_squad select 1) == (getPlayerID player)) then {
