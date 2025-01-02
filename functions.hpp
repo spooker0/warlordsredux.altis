@@ -116,7 +116,6 @@ class CfgFunctions {
 			class forfeitHandle {};
 			class handleBuyMenuKeypress {};
 			class handleKeypress {};
-			class handleSelectionState {};
 			class hintHandle {};
 			class initClient {};
 			class interceptAction {};
@@ -203,6 +202,7 @@ class CfgFunctions {
 			class groupIconEnterHandle {};
 			class groupIconLeaveHandle {};
 			class handleEnemyCapture {};
+			class handleSelectionState {};
 			class mapControlHandle {};
 			class sectorCaptureStatus {};
 			class sectorMarkerUpdate {};
@@ -216,6 +216,7 @@ class CfgFunctions {
 			class targetResetHandle {};
 			class targetResetHandleVote {};
 			class targetSelected {};
+			class updateSelectionState {};
 		};
 		class ClientOrder {
 			file = "core\client\order";
