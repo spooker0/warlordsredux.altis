@@ -150,6 +150,15 @@ if ((getPlayerUID player) in (getArray (missionConfigFile >> "adminIDs"))) then 
 		private _key = _this # 1;
 		[_key] call WL2_fnc_handleBuyMenuKeypress;
 	}];
+
+	while { !BIS_WL_missionEnd } do {
+		private _purchaseMenu = uiNamespace getVariable ["BIS_WL_purchaseMenuDisplay", displayNull];
+		if (isNull _purchaseMenu) then {
+			WL_GEAR_BUY_MENU = false;
+			WL_CONTROL_MAP ctrlEnable true;
+		};
+		sleep 1;
+	};
 };
 
 //***Fetch price from requisitions.hpp using "priceHash getOrDefault [typeOf _asset, 200]"***/

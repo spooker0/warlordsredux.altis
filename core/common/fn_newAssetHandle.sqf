@@ -55,6 +55,8 @@ if (_asset isKindOf "Man") then {
 
 	[_asset] remoteExec ["WL2_fnc_rearmAction", 0, true];
 
+	_asset setVariable ["WL2_lastLoadedTime", serverTime];
+
 	switch (typeOf _asset) do {
 		// Dazzlers
 		case "O_T_Truck_03_device_ghex_F";

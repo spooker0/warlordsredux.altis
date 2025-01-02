@@ -14,7 +14,7 @@ private _deployActionId = _asset addAction [
         private _timeSinceLastLoad = serverTime - (_asset getVariable ["WL2_lastLoadedTime", 0]);
         private _timeRemaining = 10 - _timeSinceLastLoad;
         if (_timeRemaining > 0) exitWith {
-            systemChat format ["Please wait %1 seconds to load/unload again. (This prevents despawning.)", round _timeRemaining];
+            systemChat format ["Please wait %1 seconds to load/unload. (This prevents despawning.)", round _timeRemaining];
             playSound "AddItemFailed";
         };
         _asset setVariable ["WL2_lastLoadedTime", serverTime];
