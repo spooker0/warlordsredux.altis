@@ -108,11 +108,11 @@ if (_displayClass == "OSD") then {
 	}];
 } else {
 	if (_displayClass == "RequestMenu_open") then {
-		if (BIS_WL_purchaseMenuVisible) exitWith {};
+		if (WL_GEAR_BUY_MENU) exitWith {};
 
 		disableSerialization;
 
-		BIS_WL_purchaseMenuVisible = true;
+		WL_GEAR_BUY_MENU = true;
 
 		if (random 10 > 7) then {
 			playSound selectRandom ["RadioAmbient6", "UAV_01", "UAV_03"];
@@ -135,7 +135,6 @@ if (_displayClass == "OSD") then {
 			if (ctrlEnabled (_display displayCtrl 120)) then {
 				playSound "AddItemFailed";
 			};
-			BIS_WL_purchaseMenuVisible = false;
 			WL_GEAR_BUY_MENU = false;
 			WL_CONTROL_MAP ctrlEnable true;
 			hint "";
@@ -144,7 +143,6 @@ if (_displayClass == "OSD") then {
 		uiNamespace setVariable ["WL_BuyMenuCode", ""];
 		_myDisplay displayAddEventHandler ["KeyDown", {
 			private _key = _this # 1;
-			WL_GEAR_BUY_MENU = true;
 			[_key] call WL2_fnc_handleBuyMenuKeypress;
 		}];
 

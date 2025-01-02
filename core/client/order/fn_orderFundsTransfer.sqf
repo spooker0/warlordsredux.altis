@@ -71,7 +71,7 @@ _purchase_transfer_units lbSetCurSel 0;
 		private _value = if (_valueText != "") then {
 			parseNumber _valueText
 		} else {
-				0
+			0
 		};
 		private _maxTransfer = _this # 3;
 		if (_value <= _maxTransfer && _value > 0) then {
