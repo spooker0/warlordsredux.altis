@@ -7,6 +7,8 @@ if !(_orderSelectionActive || _scanSelectionActive || _votingActive) exitWith {
 	BIS_WL_highlightedSector = objNull;
 };
 
+call WL2_fnc_updateSelectionState;
+
 private _sector = (_this # 1) getVariable ["BIS_WL_sector", objNull];
 
 if (isNull _sector) exitWith {};
