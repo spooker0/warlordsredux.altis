@@ -1,28 +1,36 @@
 #include "..\warlords_constants.inc"
 
 private _previousState = BIS_WL_currentSelection;
+private _previousVotePhase = WL_VotePhase;
 private _lastFullUpdate = -1;
 while { !BIS_WL_missionEnd } do {
     sleep 0.1;
-    if (_previousState == BIS_WL_currentSelection && _lastFullUpdate + 2 > serverTime) then {
+    if (_previousState == BIS_WL_currentSelection && _previousVotePhase == WL_VotePhase && _lastFullUpdate + 2 > serverTime) then {
         continue;
     };
 
     // state changed or full update every 2s
     _previousState = BIS_WL_currentSelection;
     _lastFullUpdate = serverTime;
+
+    if (WL_VotePhase == 2) then {
+        BIS_WL_selection_availableSectors = BIS_WL_sectorsArray # 1;
+        BIS_WL_selection_showLinks = true;
+        BIS_WL_selection_dimSectors = true;
+    };
+
     switch (BIS_WL_currentSelection) do {
-        case WL_ID_SELECTION_NONE;
+        case WL_ID_SELECTION_NONE: {
+            if (WL_VotePhase == 0) then {
+                BIS_WL_selection_availableSectors = [];
+                BIS_WL_selection_showLinks = false;
+                BIS_WL_selection_dimSectors = false;
+            };
+        };
         case WL_ID_SELECTION_ORDERING_NAVAL: {
             BIS_WL_selection_availableSectors = [];
             BIS_WL_selection_showLinks = false;
             BIS_WL_selection_dimSectors = false;
-        };
-        case WL_ID_SELECTION_VOTING;
-        case WL_ID_SELECTION_VOTED: {
-            BIS_WL_selection_availableSectors = BIS_WL_sectorsArray # 1;
-            BIS_WL_selection_showLinks = true;
-            BIS_WL_selection_dimSectors = true;
         };
         case WL_ID_SELECTION_FAST_TRAVEL: {
             BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 2) select {
@@ -53,6 +61,12 @@ while { !BIS_WL_missionEnd } do {
             BIS_WL_selection_showLinks = false;
             BIS_WL_selection_dimSectors = true;
         };
+    };
+
+    if (WL_VotePhase == 1) then {
+        BIS_WL_selection_availableSectors = BIS_WL_sectorsArray # 1;
+        BIS_WL_selection_showLinks = true;
+        BIS_WL_selection_dimSectors = true;
     };
 
     if (BIS_WL_selection_showLinks) then {

@@ -2,6 +2,8 @@ params ["_m"];
 
 private _side = BIS_WL_playerSide;
 private _sideN = [east, west] find _side;
+
+// Draw white hover selector
 if !(isNull BIS_WL_highlightedSector) then {
 	_m drawIcon [
 		"A3\ui_f\data\map\groupicons\selector_selectedMission_ca.paa",
@@ -12,6 +14,20 @@ if !(isNull BIS_WL_highlightedSector) then {
 		(time * 75) % 360
 	];
 };
+
+// Draw vote selected marker
+if !(isNull BIS_WL_targetVote) then {
+	_m drawIcon [
+		"A3\ui_f\data\map\groupicons\selector_selectedMission_ca.paa",
+		[0.8, 0.8, 0.8, 1],
+		BIS_WL_targetVote,
+		60,
+		60,
+		0
+	];
+};
+
+// Draw naval selector
 if (BIS_WL_currentSelection == 4) then {
 	_cursorPos = _m ctrlMapScreenToWorld getMousePosition;
 	_isWater = surfaceIsWater _cursorPos;
@@ -24,6 +40,8 @@ if (BIS_WL_currentSelection == 4) then {
 		if (_isWater) then {(time * 75) % 360} else {0}
 	];
 };
+
+// Draw delete asset selector
 if (!isNull BIS_WL_mapAssetTarget) then {
 	_m drawIcon [
 		"A3\ui_f\data\map\groupicons\selector_selectedMission_ca.paa",
