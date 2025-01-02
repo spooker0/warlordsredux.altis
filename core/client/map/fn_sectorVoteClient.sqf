@@ -8,18 +8,22 @@
             call WL2_fnc_sectorVoteDisplay;
         };
 
-        if (_lastTargetFriendly != WL_TARGET_FRIENDLY && !isNull WL_TARGET_FRIENDLY) then {
-            call WL2_fnc_refreshCurrentTargetData;
-            private _voteDisplay = uiNamespace getVariable ["RscWLVoteDisplay", objNull];
-            if (!isNull _voteDisplay) then {
-                private _indicator = _voteDisplay displayCtrl 7002;
-                private _indicatorBackground = _voteDisplay displayCtrl 7003;
-                _indicator ctrlSetText "";
-                _indicatorBackground ctrlSetBackgroundColor [0, 0, 0, 0];
-            };
+        if (_lastTargetFriendly != WL_TARGET_FRIENDLY) then {
+            ["client"] call WL2_fnc_updateSectorArrays;
 
-            "Selected" call WL2_fnc_announcer;
-            [toUpper format [localize "STR_A3_WL_popup_voting_done", WL_TARGET_FRIENDLY getVariable "BIS_WL_name"]] spawn WL2_fnc_smoothText;
+            if (!isNull WL_TARGET_FRIENDLY) then {
+                call WL2_fnc_refreshCurrentTargetData;
+                private _voteDisplay = uiNamespace getVariable ["RscWLVoteDisplay", objNull];
+                if (!isNull _voteDisplay) then {
+                    private _indicator = _voteDisplay displayCtrl 7002;
+                    private _indicatorBackground = _voteDisplay displayCtrl 7003;
+                    _indicator ctrlSetText "";
+                    _indicatorBackground ctrlSetBackgroundColor [0, 0, 0, 0];
+                };
+
+                "Selected" call WL2_fnc_announcer;
+                [toUpper format [localize "STR_A3_WL_popup_voting_done", WL_TARGET_FRIENDLY getVariable "BIS_WL_name"]] spawn WL2_fnc_smoothText;
+            };
         };
 
         _lastTargetFriendly = WL_TARGET_FRIENDLY;
