@@ -198,7 +198,7 @@ call WL2_fnc_targetResetHandle;
 }] call WL2_fnc_hintHandle;
 
 0 spawn WL2_fnc_selectedTargetsHandle;
-0 spawn WL2_fnc_targetSelectionHandleClient;
+0 spawn WL2_fnc_sectorVoteClient;
 0 spawn WL2_fnc_assetMapControl;
 0 spawn WL2_fnc_mapIcons;
 

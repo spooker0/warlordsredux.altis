@@ -210,11 +210,12 @@ class CfgFunctions {
 			class sectorRevealHandle {};
 			class sectorScanHandle {};
 			class sectorsInitClient {};
+			class sectorVoteClient {};
+			class sectorVoteDisplay {};
 			class selectedTargetsHandle {};
 			class targetResetHandle {};
 			class targetResetHandleVote {};
 			class targetSelected {};
-			class targetSelectionHandleClient {};
 		};
 		class ClientOrder {
 			file = "core\client\order";

@@ -60,12 +60,16 @@ addMissionEventHandler ["Map", {
 					} forEach BIS_WL_sectorLinks;
 
 					{
-						if (_x == BIS_WL_targetVote) then {
-							((_x getVariable "BIS_WL_markers") # 0) setMarkerSizeLocal [WL_MAP_PULSE_ICON_SIZE, WL_MAP_PULSE_ICON_SIZE];
+						if !(_x in BIS_WL_selection_availableSectors) then {
+							((_x getVariable "BIS_WL_markers") # 0) setMarkerSizeLocal [1, 1];
 						} else {
-							((_x getVariable "BIS_WL_markers") # 0) setMarkerSizeLocal _markerSizeArr;
+							if (_x == BIS_WL_targetVote) then {
+								((_x getVariable "BIS_WL_markers") # 0) setMarkerSizeLocal [WL_MAP_PULSE_ICON_SIZE, WL_MAP_PULSE_ICON_SIZE];
+							} else {
+								((_x getVariable "BIS_WL_markers") # 0) setMarkerSizeLocal _markerSizeArr;
+							};
 						};
-					} forEach BIS_WL_selection_availableSectors;
+					} forEach BIS_WL_allSectors;
 				};
 			};
 
