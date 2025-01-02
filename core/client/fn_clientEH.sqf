@@ -1,3 +1,4 @@
+#include "..\warlords_constants.inc"
 
 private _voteLocked = missionNamespace getVariable ["voteLocked", true];
 private _start = serverTime + 10;
