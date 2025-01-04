@@ -19,7 +19,7 @@
 
             {
                 private _screenPosition = worldToScreen (ASLToAGL getPosASL _x);
-                
+
                 if (_screenPosition isEqualTo []) then { continue; };
                 if (_screenPosition # 0 < 0 || _screenPosition # 0 > 1 || _screenPosition # 1 < 0 || _screenPosition # 1 > 1) then { continue; };
 
@@ -28,7 +28,7 @@
 
                 systemChat (localize "STR_A3_jammer_sent");
                 _x setVariable ["BIS_WL_spectrumJammed", true, true];
-                _x setVariable ["BIS_WL_lastHitter", player, 2];
+                _x setVariable ["WL_lastHitter", player, 2];
             } forEach _allEnemyUavs;
         };
     },

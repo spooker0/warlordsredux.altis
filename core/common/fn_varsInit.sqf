@@ -52,5 +52,6 @@ switch (_locality) do {
 		BIS_WL_mapAssetTarget = objNull;
 		WL_GEAR_BUY_MENU = false;
 		WL_TEMP_BUY_MENU = false;
+		WL_VotePhase = 0;
 	};
 };

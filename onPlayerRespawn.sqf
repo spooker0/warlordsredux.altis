@@ -1,5 +1,4 @@
 params ["_newUnit", "_oldUnit", "_respawn", "_respawnDelay"];
-0 spawn KS_fnc_unflipVehicleAddAction;
 
 private _newGroup = group _newUnit;
 if (leader _newGroup != _newUnit) then {

@@ -8,11 +8,11 @@ private _children = _unit getVariable ["WL2_children", []];
 private _responsiblePlayer = [_killer, _instigator] call WL2_fnc_handleInstigator;
 if (isNull _responsiblePlayer || _unit == _responsiblePlayer) then {
     // only use last hit if no direct killer is found OR if responsible player is the unit
-    _responsiblePlayer = _unit getVariable ["BIS_WL_lastHitter", objNull];
+    _responsiblePlayer = _unit getVariable ["WL_lastHitter", objNull];
 };
 
 if !(isNull _responsiblePlayer) then {
-    _unit setVariable ["BIS_WL_lastHitter", objNull, true];
+    _unit setVariable ["WL_lastHitter", objNull, true];
 
     // must be sync calls, type info may disappear in next frame
     [_unit, _responsiblePlayer] call WL2_fnc_killRewardHandle;

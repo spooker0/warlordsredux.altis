@@ -28,15 +28,35 @@ class CfgRemoteExec {
 			allowedTargets = 1;
 		};
 
+		class WL2_fnc_deployableAddAction {
+			allowedTargets = 1;
+		};
+
+		class WL2_fnc_slingAddAction {
+			allowedTargets = 1;
+		};
+
+		class WL2_fnc_jammerAction {
+			allowedTargets = 1;
+		};
+
+		class WL2_fnc_dazzlerAction {
+			allowedTargets = 1;
+		};
+
+		class WL2_fnc_radarOperateAction {
+			allowedTargets = 1;
+		};
+
+		class WL2_fnc_radarRotateAction {
+			allowedTargets = 1;
+		};
+
 		class WL2_fnc_repairAction {
 			allowedTargets = 1;
 		};
 
 		class WL2_fnc_handleClientRequest {
-			allowedTargets = 2;
-		};
-
-		class KS_fnc_unflipVehicle {
 			allowedTargets = 2;
 		};
 
@@ -80,7 +100,7 @@ class CfgRemoteExec {
 			allowedTargets = 2;
 		};
 
-		class WL2_fnc_vehicleLock {
+		class WL2_fnc_vehicleLockUpdate {
 			allowedTargets = 0;
 		};
 

@@ -35,13 +35,13 @@ switch (_className) do {
     case "forfeitVote": {0 spawn WL2_fnc_orderForfeit};
     case "LockVehicles": {
         {
-            _x setVariable ["WL2_accessControl", 5, true];
+            _x setVariable ["WL2_accessControl", 6, true];
         } forEach ((missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []]) select {alive _x && {(!(typeOf _x == "B_Truck_01_medical_F")) && {!(typeOf _x == "O_Truck_03_medical_F") && {!(typeOf _x == "B_Slingload_01_Medevac_F") && {!(typeOf _x == "Land_Pod_Heli_Transport_04_medevac_F")}}}}});
         [toUpper localize "STR_A3_WL_feature_lock_all_msg"] spawn WL2_fnc_smoothText;
     };
     case "UnlockVehicles": {
         {
-            _x setVariable ["WL2_accessControl", 0, true];
+            _x setVariable ["WL2_accessControl", 1, true];
         } forEach ((missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []]) select {alive _x});
         [toUpper localize "STR_A3_WL_feature_unlock_all_msg"] spawn WL2_fnc_smoothText;
     };
@@ -51,6 +51,39 @@ switch (_className) do {
                 moveOut _x;
             } forEach ((crew _x) select {(_x != player) && {(getPlayerUID player) != (_x getVariable ["BIS_WL_ownerAsset", "123"])}});
         } forEach ((missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []]) select {alive _x});
+    };
+    case "resetVehicle": {
+        private _vehicle = cursorObject;
+        if (isNull _vehicle) exitWith {};
+        "RequestMenu_close" call WL2_fnc_setupUI;
+        [_vehicle] spawn {
+            params ["_vehicle"];
+            private _class = typeOf _vehicle;
+            private _orderedClass = _vehicle getVariable ["WL2_orderedClass", _class];
+            private _distanceToVehicle = player distance2D _vehicle;
+            private _offset = [0, _distanceToVehicle, 0];
+
+            private _deploymentResult = [_class, _orderedClass, _offset, 30] call WL2_fnc_deployment;
+
+            if (_deploymentResult # 0) then {
+                private _position =  _deploymentResult # 1;
+                private _direction = direction player;
+                private _uid = getPlayerUID player;
+                private _nearbyEntities = [_class, ATLToASL _position, _direction, _uid, []] call WL2_fnc_grieferCheck;
+                if (count _nearbyEntities > 0) then {
+                    private _nearbyObject = _nearbyEntities # 0;
+                    private _nearbyObjectName = [_nearbyObject] call WL2_fnc_getAssetTypeName;
+                    private _nearbyObjectPosition = getPosASL _nearbyObject;
+		            playSound3D ["a3\3den\data\sound\cfgsound\notificationwarning.wss", objNull, false, _nearbyObjectPosition, 5];
+		            systemChat format ["Too close to another %1!", _nearbyObjectName];
+                } else {
+                    playSound "assemble_target";
+                    [player, "resetVehicle", _vehicle, _position, _direction] remoteExec ["WL2_fnc_handleClientRequest", 2];
+                };
+            } else {
+                playSound "AddItemFailed";
+            };
+        };
     };
     case "pruneAssets": {
         "RequestMenu_close" call WL2_fnc_setupUI;

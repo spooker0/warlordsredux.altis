@@ -195,6 +195,25 @@ if (_ret) then {
 				};
 			};
 		};
+		case "resetVehicle" : {
+			private _vehicle = cursorObject;
+			if (isNull _vehicle || player distance2D _vehicle > 15) exitWith {
+				_ret = false;
+				_tooltip = "Please point at a valid vehicle.";
+			};
+
+			private _accessControl = _vehicle getVariable ["WL2_accessControl", -1];
+			if (_accessControl == -1) exitWith {
+				_ret = false;
+				_tooltip = "Please point at a valid vehicle.";
+			};
+
+			private _access = [_vehicle, player, "driver"] call WL2_fnc_accessControl;
+			if !(_access # 0) exitWith {
+				_ret = false;
+				_tooltip = format ["You do not have access to this vehicle. %1", _accessControl # 1];
+			};
+		};
 		default {
 			_possibleSectors = (BIS_WL_sectorsArray # 0);
 			_visitedSectorID = _possibleSectors findIf {player inArea (_x getVariable "objectAreaComplete")};

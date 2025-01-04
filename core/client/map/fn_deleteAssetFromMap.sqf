@@ -10,7 +10,7 @@ private _assetLocation = if (count _assetSector > 0) then {
 	mapGridPosition _target;
 };
 
-_result = [format ["Are you sure you would like to delete: %1 @ %2", _displayName, _assetLocation], "Delete asset", true, true] call BIS_fnc_guiMessage;
+private _result = ["Delete asset", format ["Are you sure you would like to delete: %1 @ %2", _displayName, _assetLocation], "Yes", "Cancel"] call WL2_fnc_prompt;
 
 if (_result) then {
 	if (!alive player) exitWith {

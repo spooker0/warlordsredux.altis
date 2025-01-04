@@ -1,7 +1,5 @@
 #include "..\..\warlords_constants.inc"
 
-BIS_WL_assetInfoActive = false;
-
 addMissionEventHandler ["Map", {
 	params ["_mapIsOpened", "_mapIsForced"];
 
@@ -18,34 +16,41 @@ addMissionEventHandler ["Map", {
 
 	if (_mapIsOpened) then {
 		MAP_CONTROL = addMissionEventHandler ["EachFrame", {
-			_shown = false;
-			_map = (uiNamespace getVariable ["BIS_WL_mapControl", controlNull]);
+			private _map = (uiNamespace getVariable ["BIS_WL_mapControl", controlNull]);
 
 			if (visibleMap) then {
-				_radius = (((ctrlMapScale _map) * 500) min 30);
-				_pos = (_map ctrlMapScreenToWorld getMousePosition);
-				_nearbyAssets = (_pos nearObjects _radius) select {(getPlayerUID player) == (_x getVariable ["BIS_WL_ownerAsset", "123"]) && {_x != player && {alive _x}}};
-				_nearbyAssets append (allUnitsUAV select {(getPlayerUID player) == (_x getVariable ["BIS_WL_ownerAsset", "123"]) && {alive _x && {(_x distance2D _pos) < _radius && {!(_x in _nearbyAssets)}}}});
+				private _ctrlMap = ctrlParent _map;
+				private _ctrlAssetInfoBox = _ctrlMap getVariable "BIS_assetInfoBox";
+
+				private _radius = (((ctrlMapScale _map) * 500) min 30) max 3;
+				private _pos = _map ctrlMapScreenToWorld getMousePosition;
+
+				private _allTeamVehicles = missionNamespace getVariable [format ["BIS_WL_%1ownedVehicles", side group player], []];
+				private _allUnits = allUnits select {
+					!(typeOf _x in ["B_UAV_AI", "O_UAV_AI"])
+				};
+				private _nearbyAssets = (_allUnits + _allTeamVehicles) select {
+					getPlayerUID player == (_x getVariable ["BIS_WL_ownerAsset", "123"]) && alive _x && (_x distance2D _pos) < _radius && _x != player
+				};
 
 				if (count _nearbyAssets > 0) then {
 					BIS_WL_mapAssetTarget = _nearbyAssets # 0;
-					BIS_WL_assetInfoActive = true;
-					_shown = true;
-					((ctrlParent _map) getVariable "BIS_sectorInfoBox") ctrlSetPosition [(getMousePosition # 0) + safeZoneW / 100, (getMousePosition # 1) + safeZoneH / 50, safeZoneW, safeZoneH];
-					((ctrlParent _map) getVariable "BIS_sectorInfoBox") ctrlCommit 0;
-					((ctrlParent _map) getVariable "BIS_sectorInfoBox") ctrlSetStructuredText parseText format [
+					_ctrlAssetInfoBox ctrlSetPosition [(getMousePosition # 0) + safeZoneW / 100, (getMousePosition # 1) + safeZoneH / 50, safeZoneW, safeZoneH];
+					_ctrlAssetInfoBox ctrlCommit 0;
+					_ctrlAssetInfoBox ctrlSetStructuredText parseText format [
 						"<t shadow = '2' size = '%1'>%2</t>",
 						(1 call WL2_fnc_purchaseMenuGetUIScale),
 						format [
-							localize "STR_A3_WL_info_asset_map_deletion",
-							"<t color = '#ff4b4b'>",
-							"</t>",
-							"<br/>",
+							"Click for options:<br/><t color='#ff4b4b'>%1</t>",
 							[BIS_WL_mapAssetTarget] call WL2_fnc_getAssetTypeName
 						]
 					];
-					((ctrlParent _map) getVariable "BIS_sectorInfoBox") ctrlShow true;
-					((ctrlParent _map) getVariable "BIS_sectorInfoBox") ctrlEnable true;
+					_ctrlAssetInfoBox ctrlShow true;
+					_ctrlAssetInfoBox ctrlEnable true;
+				} else {
+					BIS_WL_mapAssetTarget = objNull;
+					_ctrlAssetInfoBox ctrlShow false;
+					_ctrlAssetInfoBox ctrlEnable false;
 				};
 
 				if (isNull (findDisplay 160 displayCtrl 51)) then {
@@ -60,31 +65,257 @@ addMissionEventHandler ["Map", {
 					} forEach BIS_WL_sectorLinks;
 
 					{
-						if (_x == BIS_WL_targetVote) then {
-							((_x getVariable "BIS_WL_markers") # 0) setMarkerSizeLocal [WL_MAP_PULSE_ICON_SIZE, WL_MAP_PULSE_ICON_SIZE];
+						if !(_x in BIS_WL_selection_availableSectors) then {
+							((_x getVariable "BIS_WL_markers") # 0) setMarkerSizeLocal [1, 1];
 						} else {
-							((_x getVariable "BIS_WL_markers") # 0) setMarkerSizeLocal _markerSizeArr;
+							if (_x == BIS_WL_targetVote) then {
+								((_x getVariable "BIS_WL_markers") # 0) setMarkerSizeLocal [WL_MAP_PULSE_ICON_SIZE, WL_MAP_PULSE_ICON_SIZE];
+							} else {
+								((_x getVariable "BIS_WL_markers") # 0) setMarkerSizeLocal _markerSizeArr;
+							};
 						};
-					} forEach BIS_WL_selection_availableSectors;
+					} forEach BIS_WL_allSectors;
 				};
-			};
-
-			if (!_shown && BIS_WL_assetInfoActive) then {
-				BIS_WL_mapAssetTarget = objNull;
-				BIS_WL_assetInfoActive = false;
-				((ctrlParent _map) getVariable "BIS_sectorInfoBox") ctrlShow false;
-				((ctrlParent _map) getVariable "BIS_sectorInfoBox") ctrlEnable false;
 			};
 		}];
 
 		MAP_CONTROL_CLICK = addMissionEventHandler ["MapSingleClick", {
 			params ["_units", "_pos", "_alt", "_shift"];
-			_asset = BIS_WL_mapAssetTarget;
-			if (_alt && _shift) then {
+			private _asset = BIS_WL_mapAssetTarget;
+
+			if (isNull _asset) exitWith {};
+			WL_MapActionTarget = _asset;
+
+			private _dialog = findDisplay 46 createDisplay "RscDisplayEmpty";
+
+			getMousePosition params ["_mouseX", "_mouseY"];
+
+			private _offsetX = _mouseX + 0.03;
+			private _offsetY = _mouseY + 0.04;
+
+			private _menuButtons = [];
+
+			private _deleteButton = _dialog ctrlCreate ["RscButtonMenu", -1];
+			_deleteButton ctrlSetPosition [_offsetX, _offsetY, 0.35, 0.05];
+			_deleteButton ctrlSetStructuredText parseText "<t align='center'>DELETE</t>";
+			_deleteButton ctrlCommit 0;
+			_menuButtons pushBack _deleteButton;
+
+			_deleteButton ctrlAddEventHandler ["ButtonClick", {
+				params ["_control"];
+				private _asset = WL_MapActionTarget;
 				if !(isNull _asset) then {
-					_vehicles = (missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []]);
 					_asset spawn WL2_fnc_deleteAssetFromMap;
 				};
+				WL_MapActionTarget = objNull;
+
+				private _dialog = ctrlParent _control;
+				_dialog closeDisplay 1;
+			}];
+
+			private _accessControl = _asset getVariable ["WL2_accessControl", -1];
+			if (_accessControl != -1) then {
+				private _lockButton = _dialog ctrlCreate ["RscButtonMenu", -1];
+				_lockButton ctrlSetPosition [_offsetX, _offsetY + count _menuButtons * 0.05, 0.35, 0.05];
+				private _lockStatus = ["ALL (FULL)", "ALL (OPERATE)", "ALL (PASSENGER)", "SQUAD (FULL)", "SQUAD (OPERATE)", "SQUAD (PASSENGER)", "PERSONAL", "LOCKED"] select _accessControl;
+				private _lockColor = ["#4bff58", "#4bff58", "#4bff58", "#00ffff", "#00ffff", "#00ffff", "#ff4b4b", "#ff4b4b"] select _accessControl;
+				_lockButton ctrlSetStructuredText parseText format ["<t align='center'>ACCESS: <t color='%1'>%2</t></t>", _lockColor, _lockStatus];
+				_lockButton ctrlCommit 0;
+				_menuButtons pushBack _lockButton;
+
+				_lockButton ctrlAddEventHandler ["ButtonClick", {
+					params ["_control"];
+					private _asset = WL_MapActionTarget;
+					if !(isNull _asset) then {
+						private _accessControl = _asset getVariable ["WL2_accessControl", 0];
+						private _newAccess = (_accessControl + 1) % 8;
+						_asset setVariable ["WL2_accessControl", _newAccess, true];
+						playSound3D ["a3\sounds_f\sfx\objects\upload_terminal\terminal_lock_close.wss", _asset, false, getPosASL _asset, 1, 1, 0, 0];
+
+						private _lockStatus = ["ALL (FULL)", "ALL (OPERATE)", "ALL (PASSENGER)", "SQUAD (FULL)", "SQUAD (OPERATE)", "SQUAD (PASSENGER)", "PERSONAL", "LOCKED"] select _newAccess;
+						private _lockColor = ["#4bff58", "#4bff58", "#4bff58", "#00ffff", "#00ffff", "#00ffff", "#ff4b4b", "#ff4b4b"] select _newAccess;
+						_control ctrlSetStructuredText parseText format ["<t align='center'>ACCESS: <t color='%1'>%2</t></t>", _lockColor, _lockStatus];
+					};
+				}];
+			};
+
+			private _hasCrew = count ((crew _asset) select {
+				!(typeof _x in ["B_UAV_AI", "O_UAV_AI"]) && getPlayerUID player != (_x getVariable ["BIS_WL_ownerAsset", "123"])
+			}) > 0;
+			if (_hasCrew) then {
+				private _kickButton = _dialog ctrlCreate ["RscButtonMenu", -1];
+				_kickButton ctrlSetPosition [_offsetX, _offsetY + count _menuButtons * 0.05, 0.35, 0.05];
+				_kickButton ctrlSetStructuredText parseText "<t align='center'>KICK</t>";
+				_kickButton ctrlCommit 0;
+				_menuButtons pushBack _kickButton;
+
+				_kickButton ctrlAddEventHandler ["ButtonClick", {
+					params ["_control"];
+					private _asset = WL_MapActionTarget;
+					if !(isNull _asset) then {
+						private _unwantedPassengers = (crew _asset) select {
+							(_x != player) && getPlayerUID player != (_x getVariable ["BIS_WL_ownerAsset", "123"])
+						};
+						{
+							moveOut _x;
+						} forEach _unwantedPassengers;
+					};
+					WL_MapActionTarget = objNull;
+
+					private _dialog = ctrlParent _control;
+					_dialog closeDisplay 1;
+				}];
+			};
+
+			if (typeof _asset in ["O_T_Truck_03_device_ghex_F", "O_Truck_03_device_F"]) then {
+				private _dazzlerButton = _dialog ctrlCreate ["RscButtonMenu", -1];
+				_dazzlerButton ctrlSetPosition [_offsetX, _offsetY + count _menuButtons * 0.05, 0.35, 0.05];
+				private _dazzlerActivated = _asset getVariable ["BIS_WL_dazzlerActivated", false];
+				private _dazzlerColor = if (_dazzlerActivated) then {
+					"#4bff58"
+				} else {
+					"#ff4b4b"
+				};
+				private _dazzlerText = if (_dazzlerActivated) then {
+					"ON"
+				} else {
+					"OFF"
+				};
+				_dazzlerButton ctrlSetStructuredText parseText format ["<t align='center'>DAZZLER: <t color='%1'>%2</t></t>", _dazzlerColor, _dazzlerText];
+				_dazzlerButton ctrlCommit 0;
+				_menuButtons pushBack _dazzlerButton;
+
+				_dazzlerButton ctrlAddEventHandler ["ButtonClick", {
+					params ["_control"];
+					private _asset = WL_MapActionTarget;
+					if !(isNull _asset) then {
+						[_asset] call WL2_fnc_dazzlerToggle;
+					};
+
+					private _dialog = ctrlParent _control;
+					_dialog closeDisplay 1;
+				}];
+			};
+
+			if (typeof _asset in ["O_T_Truck_03_device_ghex_F", "O_Truck_03_device_F", "Land_Communication_F"]) then {
+				private _jammerButton = _dialog ctrlCreate ["RscButtonMenu", -1];
+				_jammerButton ctrlSetPosition [_offsetX, _offsetY + count _menuButtons * 0.05, 0.35, 0.05];
+				private _jammerActivated = _asset getVariable ["BIS_WL_jammerActivated", false];
+				private _jammerActivating = _asset getVariable ["BIS_WL_jammerActivating", false];
+				private _jammerColor = if (_jammerActivated) then {
+					"#4bff58"
+				} else {
+					if (_jammerActivating) then {
+						"#4b51ff"
+					} else {
+						"#ff4b4b"
+					};
+				};
+				private _jammerText = if (_jammerActivated) then {
+					"ON"
+				} else {
+					if (_jammerActivating) then {
+						"ACTIVATING"
+					} else {
+						"OFF"
+					};
+				};
+				_jammerButton ctrlSetStructuredText parseText format ["<t align='center'>JAMMER: <t color='%1'>%2</t></t>", _jammerColor, _jammerText];
+				_jammerButton ctrlCommit 0;
+				_menuButtons pushBack _jammerButton;
+
+				_jammerButton ctrlAddEventHandler ["ButtonClick", {
+					params ["_control"];
+					private _asset = WL_MapActionTarget;
+					if !(isNull _asset) then {
+						[_asset] call WL2_fnc_jammerToggle;
+					};
+
+					private _dialog = ctrlParent _control;
+					_dialog closeDisplay 1;
+				}];
+			};
+
+			if (typeof _asset in ["B_Radar_System_01_F", "O_Radar_System_01_F"]) then {
+				private _radarRotateButton = _dialog ctrlCreate ["RscButtonMenu", -1];
+				_radarRotateButton ctrlSetPosition [_offsetX, _offsetY + count _menuButtons * 0.05, 0.35, 0.05];
+				private _radarRotation = _asset getVariable ["radarRotation", false];
+				private _radarColor = if (_radarRotation) then {
+					"#4bff58"
+				} else {
+					"#ff4b4b"
+				};
+				private _radarText = if (_radarRotation) then {
+					"RADAR ROTATE: ON"
+				} else {
+					"RADAR ROTATE: OFF"
+				};
+				_radarRotateButton ctrlSetStructuredText parseText format ["<t align='center'>%1</t>", format ["<t color='%1'>%2</t>", _radarColor, _radarText]];
+				_radarRotateButton ctrlCommit 0;
+				_menuButtons pushBack _radarRotateButton;
+
+				_radarRotateButton ctrlAddEventHandler ["ButtonClick", {
+					params ["_control"];
+					private _asset = WL_MapActionTarget;
+					if !(isNull _asset) then {
+						_asset setVariable ["radarRotation", !(_asset getVariable ["radarRotation", false]), true];
+					};
+
+					private _dialog = ctrlParent _control;
+					_dialog closeDisplay 1;
+				}];
+			};
+
+			private _crewPosition = (fullCrew [_asset, "", true]) select {!("cargo" in _x)};
+			private _radarSensor = (listVehicleSensors _asset) select {{"ActiveRadarSensorComponent" in _x} forEach _x};
+			private _hasRadar = count _radarSensor > 0 && (count _crewPosition > 1 || unitIsUAV _asset);
+			if (_hasRadar) then {
+				private _radarButton = _dialog ctrlCreate ["RscButtonMenu", -1];
+				_radarButton ctrlSetPosition [_offsetX, _offsetY + count _menuButtons * 0.05, 0.35, 0.05];
+				private _radarOperation = _asset getVariable ["radarOperation", false];
+				private _radarColor = if (_radarOperation) then {
+					"#4bff58"
+				} else {
+					"#ff4b4b"
+				};
+				private _radarText = if (_radarOperation) then {
+					"AI RADAR: ON"
+				} else {
+					"AI RADAR: OFF"
+				};
+				_radarButton ctrlSetStructuredText parseText format ["<t align='center'>%1</t>", format ["<t color='%1'>%2</t>", _radarColor, _radarText]];
+				_radarButton ctrlCommit 0;
+				_menuButtons pushBack _radarButton;
+
+				_radarButton ctrlAddEventHandler ["ButtonClick", {
+					params ["_control"];
+					private _asset = WL_MapActionTarget;
+					if !(isNull _asset) then {
+						_asset setVariable ["radarOperation", !(_asset getVariable ["radarOperation", false]), true];
+					};
+
+					private _dialog = ctrlParent _control;
+					_dialog closeDisplay 1;
+				}];
+			};
+
+			[_dialog, _offsetX, _offsetY, _menuButtons] spawn {
+				params ["_dialog", "_originalMouseX", "_originalMouseY", "_menuButtons"];
+				private _keepDialog = true;
+				private _menuHeight = (count _menuButtons) * 0.05;
+				while { visibleMap && _keepDialog} do {
+					getMousePosition params ["_mouseX", "_mouseY"];
+
+					private _deltaX = _mouseX - _originalMouseX;
+					private _deltaY = _mouseY - _originalMouseY;
+
+					if (_deltaX < 0 || _deltaX > 0.35 || _deltaY < 0 || _deltaY > _menuHeight) then {
+						_keepDialog = inputMouse 0 == 0 && inputMouse 1 == 0;
+					};
+				};
+
+				WL_MapActionTarget = objNull;
+				_dialog closeDisplay 1;
 			};
 		}];
 	} else {

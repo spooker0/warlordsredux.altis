@@ -2555,21 +2555,21 @@
             <Chinese>欢迎使用小队系统。小队提供多种好处，包括共享积分/投票以及在小队队长旁重生的能力。</Chinese>
         </Key>
         <Key ID="STR_SQUADS_squadLeaderTooltip">
-            <Original>Leader: %1</Original>
-            <English>Leader: %1</English>
-            <Czech>Vedoucí: %1</Czech>
-            <French>Chef : %1</French>
-            <German>Führer: %1</German>
-            <Italian>Capo: %1</Italian>
-            <Polish>Leader: %1</Polish>
-            <Portuguese>Líder: %1</Portuguese>
-            <Russian>Лидер: %1</Russian>
-            <Spanish>Líder: %1</Spanish>
-            <Turkish>Lider: %1</Turkish>
-            <Korean>리더: %1</Korean>
-            <Japanese>リーダー: %1</Japanese>
-            <Chinesesimp>队长：%1</Chinesesimp>
-            <Chinese>队长：%1</Chinese>
+            <Original>Squad Leader: %1, Points: %2</Original>
+            <English>Squad Leader: %1, Points: %2</English>
+            <Czech>Velitel čety: %1, Body: %2</Czech>
+            <French>Chef d'escouade : %1, Points : %2</French>
+            <German>Zugführer: %1, Punkte: %2</German>
+            <Italian>Caposquadra: %1, Punti: %2</Italian>
+            <Polish>Dowódca drużyny: %1, Punkty: %2</Polish>
+            <Portuguese>Líder de esquadrão: %1, Pontos: %2</Portuguese>
+            <Russian>Командир отряда: %1, Очки: %2</Russian>
+            <Spanish>Líder de escuadrón: %1, Puntos: %2</Spanish>
+            <Turkish>Bölük Lideri: %1, Puan: %2</Turkish>
+            <Korean>분대장: %1, 점수: %2</Korean>
+            <Japanese>分隊長: %1, ポイント: %2</Japanese>
+            <Chinesesimp>小队长：%1，积分：%2</Chinesesimp>
+            <Chinese>小隊長：%1，積分：%2</Chinese>
         </Key>
         <Key ID="STR_SQUADS_squadMemberTooltip">
             <Original>%1 (%2 points)</Original>

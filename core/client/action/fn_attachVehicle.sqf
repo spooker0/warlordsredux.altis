@@ -10,8 +10,8 @@ if (_isAttaching) then {
         ropeDestroy _x;
     } forEach _ropes;
 
-    _asset setVariable ["WL2_loadedItem", _childAsset];
-    _childAsset setVariable ["WL2_autonomousBeforeLoad", isAutonomous _childAsset];
+    _asset setVariable ["WL2_loadedItem", _childAsset, true];
+    _childAsset setVariable ["WL2_autonomousBeforeLoad", isAutonomous _childAsset, true];
     _childAsset setVariable ["WL2_transporting", true, true];
     [_childAsset] remoteExec ["WL2_fnc_uavConnectRefresh", 0];
 
@@ -42,11 +42,11 @@ if (_isAttaching) then {
     _childAsset setVariable ["WL2_transporting", false, true];
     [_childAsset] call WL2_fnc_uavConnectRefresh;
 
-    _asset setVariable ["WL2_loadedItem", objNull];
+    _asset setVariable ["WL2_loadedItem", objNull, true];
 
     private _assetChildren = _asset getVariable ["WL2_children", []];
     _assetChildren = _assetChildren - [_childAsset];
-    _asset setVariable ["WL2_children", _assetChildren, [2, clientOwner]];
+    _asset setVariable ["WL2_children", _assetChildren, true];
 
     private _massBeforeLoad = _childAsset getVariable ["WL2_massDefault", 1000];
     [_childAsset, _massBeforeLoad] remoteExec ["setMass", 0];

@@ -63,8 +63,9 @@ if (_asset isKindOf "Man") then {
 		case "O_Truck_03_device_F": {
 			_asset setVariable ["BIS_WL_dazzlerActivated", false, true];
 			_asset setVariable ["BIS_WL_jammerActivated", false, true];
-			_asset call WL2_fnc_dazzlerAction;
-			_asset call WL2_fnc_jammerAction;
+
+			[_asset] remoteExec ["WL2_fnc_dazzlerAction", 0, true];
+			[_asset] remoteExec ["WL2_fnc_jammerAction", 0, true];
 
 			[_asset, _side] call WL2_fnc_drawJammerCircle;
 		};
@@ -77,14 +78,14 @@ if (_asset isKindOf "Man") then {
 
 			// too hardy otherwise, start off at 10% health
 			_asset setDamage 0.9;
-			_asset call WL2_fnc_jammerAction;
+			[_asset] remoteExec ["WL2_fnc_jammerAction", 0, true];
 
 			[_asset, _side] call WL2_fnc_drawJammerCircle;
 		};
 
 		// Logistics
 		case "B_Truck_01_flatbed_F": {
-			_asset call WL2_fnc_deployableAddAction;
+			[_asset] remoteExec ["WL2_fnc_deployableAddAction", 0, true];
 		};
 		case "B_T_VTOL_01_vehicle_F": {
 			_asset call WL2_fnc_logisticsAddAction;
@@ -94,20 +95,22 @@ if (_asset isKindOf "Man") then {
 		case "O_Heli_Light_02_unarmed_F";
 		case "O_Heli_Light_02_dynamicLoadout_F";
 		case "O_Heli_Transport_04_F": {
-			_asset call WL2_fnc_slingAddAction;
+			[_asset] remoteExec ["WL2_fnc_slingAddAction", 0, true];
 		};
 
 		// Radars
 		case "B_Radar_System_01_F";
 		case "O_Radar_System_02_F": {
 			_asset setVariable ["radarRotation", false, true];
-			[_asset, "rotation"] call WL2_fnc_radarOperate;
+			[_asset] remoteExec ["WL2_fnc_radarRotateAction", 0, true];
+
 			[_asset] spawn {
 				params ["_asset"];
 				private _lookAtAngles = [0, 90, 180, 270];
 				private _radarIter = 0;
 				while {alive _asset} do {
-					if (_asset getVariable "radarRotation") then {
+					private _radarRotation = _asset getVariable ["radarRotation", false];
+					if (_radarRotation) then {
 						private _lookAtPos = _asset getRelPos [100, _lookAtAngles # _radarIter];
 						if (local _asset) then {
 							_asset lookAt _lookAtPos;
@@ -153,7 +156,7 @@ if (_asset isKindOf "Man") then {
 							{},
 							{},
 							{
-								[_caller, "droneExplode", _target] remoteExec ["WL2_fnc_handleClientRequest", 2];
+								[player, "droneExplode", _target] remoteExec ["WL2_fnc_handleClientRequest", 2];
 							},
 							{},
 							[],
@@ -184,8 +187,6 @@ if (_asset isKindOf "Man") then {
 		private _assetTypeName = [_asset] call WL2_fnc_getAssetTypeName;
 		_assetGrp setGroupIdGlobal [format ["%1#%2#%3", name _owner, _assetTypeName, groupId _assetGrp]];
 
-		_asset setVariable ["WL2_accessControl", 2, true];
-
 		[_asset] call WL2_fnc_uavConnectRefresh;
 	};
 
@@ -196,6 +197,7 @@ if (_asset isKindOf "Man") then {
 		["B_Slingload_01_Medevac_F", true]
 	];
 	if !(_notLockableVehicles getOrDefault [typeOf _asset, false]) then {
+		_asset setVariable ["WL2_accessControl", 4, true];
 		[_asset] remoteExec ["WL2_fnc_vehicleLockAction", 0, true];
 	};
 
@@ -218,6 +220,10 @@ if (_asset isKindOf "Man") then {
 			_amount = ((getNumber (configfile >> "CfgVehicles" >> typeof _asset >> "transportAmmo")) min 30000);
 		};
 		_asset setVariable ["WLM_ammoCargo", _amount, true];
+	};
+
+	if (getNumber (configFile >> "CfgVehicles" >> typeOf _asset >> "transportRepair") > 0) then {
+		[_asset, 0] remoteExec ["setRepairCargo", 0];
 	};
 
 	private _rearmTime = (missionNamespace getVariable "WL2_rearmTimers") getOrDefault [(typeOf _asset), 600];
@@ -259,10 +265,11 @@ if (_asset isKindOf "Man") then {
 
 	private _crewPosition = (fullCrew [_asset, "", true]) select {!("cargo" in _x)};
 	private _radarSensor = (listVehicleSensors _asset) select {{"ActiveRadarSensorComponent" in _x} forEach _x};
-	if ((count _radarSensor > 0) && (count _crewPosition > 1 || (unitIsUAV _asset))) then {
+	private _hasRadar = count _radarSensor > 0 && (count _crewPosition > 1 || unitIsUAV _asset);
+	if (_hasRadar) then {
 		_asset setVariable ["radarOperation", false, true];
 		_asset setVehicleRadar 2;
-		[_asset, "toggle"] call WL2_fnc_radarOperate;
+		[_asset] remoteExec ["WL2_fnc_radarOperateAction", 0, true];
 
 		_asset spawn {
 			params ["_asset"];
@@ -279,6 +286,7 @@ if (_asset isKindOf "Man") then {
 				} else {
 					[_asset, _radarValue] remoteExec ["setVehicleRadar", _asset];
 				};
+
 				sleep 10;
 			};
 		};

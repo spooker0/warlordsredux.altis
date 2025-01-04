@@ -4,6 +4,7 @@ params ["_action", "_params"];
 
 private _squadManager = missionNamespace getVariable ["SQUAD_MANAGER", []];
 private _mySquadNumber = _squadManager findIf {(_x select 2) find (getPlayerID player) > -1};
+private _allPlayers = call BIS_fnc_listPlayers;
 
 _return = nil;
 
@@ -59,36 +60,34 @@ switch (_action) do {
         if (isNil "_squad") exitWith {
             _return = 1;
         };
-        private _inviterName = name (allPlayers select {getPlayerID _x == _inviter} select 0);
+        private _inviterName = name (_allPlayers select {getPlayerID _x == _inviter} select 0);
 
         playSoundUI ["a3\sounds_f\sfx\blip1.wss"];
 
-        private _squadsMenuDialog = createDialog ["SquadsMenu", true];
-
-        _acceptInvite = [
-            format [localize "STR_SQUADS_receiveInvitationText", _inviterName, _squad select 0],
+        private _acceptInvite = [
             localize "STR_SQUADS_joinSquadTitle",
+            format [localize "STR_SQUADS_receiveInvitationText", _inviterName, _squad select 0],
             localize "STR_SQUADS_joinSquadAccept",
-            localize "STR_SQUADS_joinSquadDecline",
-            _squadsMenuDialog
-        ] call BIS_fnc_guiMessage;
+            localize "STR_SQUADS_joinSquadDecline"
+        ] call WL2_fnc_prompt;
 
         SQD_HAS_INVITE = false;
 
         if (_acceptInvite) then {
             ["add", [_inviter, getPlayerID player]] remoteExec ["SQD_fnc_server", 2];
         };
-
-        if (!isNull _squadsMenuDialog) exitWith {
-            _squadsMenuDialog closeDisplay 0;
-        };
     };
     case "newjoin": {
         private _joinerId = _params select 0;
-        private _joiner = allPlayers select { getPlayerID _x == _joinerId } select 0;
+        private _joiner = _allPlayers select { getPlayerID _x == _joinerId } select 0;
 
         playSoundUI ["a3\animals_f_beta\sheep\data\sound\sheep3.wss"];
-        systemChat format ["%1 has joined your squad.", name _joiner];
+
+        if (_joiner == player) then {
+            systemChat "You have joined a squad.";
+        } else {
+            systemChat format ["%1 has joined your squad.", name _joiner];
+        };
     };
     case "promote": {
         private _selection = tvCurSel TREE;
@@ -153,7 +152,7 @@ switch (_action) do {
     case "ftSquadLeader": {
         // call this async
         private _sl = ['getMySquadLeader'] call SQD_fnc_client;
-        private _squadLeader = allPlayers select {getPlayerID _x == _sl} select 0;
+        private _squadLeader = _allPlayers select {getPlayerID _x == _sl} select 0;
 
         if (isNil "_squadLeader") exitWith {
             _return = 1;

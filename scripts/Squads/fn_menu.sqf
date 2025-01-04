@@ -47,8 +47,8 @@ disableSerialization;
             private _squad = _x;
             private _squadItem = tvAdd [TREE, [], _squad select 0];
             tvSetData [TREE, [_squadItem], format ["%1", _forEachIndex]];
-            tvSetTooltip [TREE, [_squadItem], format [localize "STR_SQUADS_squadLeaderTooltip", name (allPlayers select {getPlayerID _x == (_squad select 1)} select 0)]];
 
+            private _squadPoints = 0;
             {
                 private _playerId = _x;
                 private _player = allPlayers select {getPlayerID _x == _playerId} select 0;
@@ -63,9 +63,10 @@ disableSerialization;
                 tvSetData [TREE, [_squadItem, _playerItem], format ["%1", _playerId]];
 
                 _points = WL_PlayerSquadContribution getOrDefault [getPlayerUID _player, 0];
+                _squadPoints = _squadPoints + _points;
                 tvSetTooltip [TREE, [_squadItem, _playerItem], format [localize "STR_SQUADS_squadMemberTooltip", _playerName, _points]];
 
-                _tvColor = if (_playerId == (getPlayerID player)) then {
+                private _tvColor = if (_playerId == (getPlayerID player)) then {
                     [0.4, 0.6, 1.0, 1];
                 } else {
                     if (!alive _player) then {
@@ -80,6 +81,9 @@ disableSerialization;
 
                 _treeEntries set [format ["%1", _playerId], [_squadItem, _playerItem]];
             } forEach (_squad select 2);
+
+            private _squadLeader = name (allPlayers select {getPlayerID _x == (_squad select 1)} select 0);
+            tvSetTooltip [TREE, [_squadItem], format [localize "STR_SQUADS_squadLeaderTooltip", _squadLeader, _squadPoints]];
 
             private _squadColor = if ((_squad select 1) == (getPlayerID player)) then {
                 [0.4, 0.6, 1.0, 1];

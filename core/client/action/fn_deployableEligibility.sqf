@@ -1,6 +1,5 @@
 params ["_asset", "_caller"];
-private _assetOwner = _asset getVariable ["BIS_WL_ownerAsset", "123"];
-private _callerUID = getPlayerUID _caller;
+private _hasAccess = ([_asset, _caller, "full"] call WL2_fnc_accessControl) # 0;
 private _callerID = getPlayerID _caller;
 private _loadedItem = _asset getVariable ["WL2_loadedItem", objNull];
 private _loadedVehicles = getVehicleCargo _asset;
@@ -13,7 +12,7 @@ private _nearLoadableEntities = (_asset nearEntities 30) select {
 private _loadableHashmap = missionNamespace getVariable ["WL2_loadable", createHashMap];
 private _nearLoadable = _nearLoadableEntities select {
     private _assetActualType = _x getVariable ["WL2_orderedClass", typeOf _x];
-    private _access = [_x, _caller, "tow"] call WL2_fnc_accessControl;
+    private _access = [_x, _caller, "full"] call WL2_fnc_accessControl;
     (_assetActualType in _loadableHashmap) && (_access # 0);
 };
 private _hasNearLoadable = count _nearLoadable > 0;
@@ -29,4 +28,4 @@ private _offset = if (_hasNearLoadable) then {
 // 0: eligible
 // 1: near loadables
 // 2: offset
-[_assetOwner == _callerUID && alive _asset && (_hasLoadedItem || _hasNearLoadable), _nearLoadable, _offset];
+[_hasAccess && alive _asset && (_hasLoadedItem || _hasNearLoadable), _nearLoadable, _offset];

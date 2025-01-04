@@ -33,14 +33,6 @@ class CfgFunctions {
 			class earplugs {};
 		};
 	};
-	class KS {
-		class Default {
-			file = "scripts\VUnflip\functions";
-			class unflipVehicle {};
-			class unflipVehicleAddAction {};
-			class isFlipped {};
-		};
-	};
 	class APS {
 		class Default {
 			file = "scripts\APS\Scripts";
@@ -116,7 +108,6 @@ class CfgFunctions {
 			class forfeitHandle {};
 			class handleBuyMenuKeypress {};
 			class handleKeypress {};
-			class handleSelectionState {};
 			class hintHandle {};
 			class initClient {};
 			class interceptAction {};
@@ -124,6 +115,7 @@ class CfgFunctions {
 			class onPause {};
 			class pingFix {};
 			class pingFixInit {};
+			class prompt {};
 			class repackMagazines {};
 			class rita {};
 			class sideToFaction {};
@@ -142,10 +134,14 @@ class CfgFunctions {
 			class claimAction {};
 			class claimEligibility {};
 			class dazzlerAction {};
+			class dazzlerToggle {};
+			class dazzlerUpdate {};
 			class demolish {};
 			class deployableAddAction {};
 			class deployableEligibility {};
 			class jammerAction {};
+			class jammerToggle {};
+			class jammerUpdate {};
 			class logisticsAddAction {};
 			class purchaseMenuAssetAvailability {};
 			class purchaseMenuGetUIScale {};
@@ -153,13 +149,17 @@ class CfgFunctions {
 			class purchaseMenuRefresh {};
 			class purchaseMenuSetAssetDetails {};
 			class purchaseMenuSetItemsList {};
-			class radarOperate {};
+			class radarOperateAction {};
+			class radarOperateUpdate {};
+			class radarRotateAction {};
+			class radarRotateUpdate {};
 			class rearmAction {};
 			class removeAction {};
 			class repairAction {};
 			class repairActionEligibility {};
 			class slingAddAction {};
 			class vehicleLockAction {};
+			class vehicleLockUpdate {};
 		};
 		class ClientDraw {
 			file = "core\client\draw";
@@ -203,6 +203,7 @@ class CfgFunctions {
 			class groupIconEnterHandle {};
 			class groupIconLeaveHandle {};
 			class handleEnemyCapture {};
+			class handleSelectionState {};
 			class mapControlHandle {};
 			class sectorCaptureStatus {};
 			class sectorMarkerUpdate {};
@@ -210,15 +211,18 @@ class CfgFunctions {
 			class sectorRevealHandle {};
 			class sectorScanHandle {};
 			class sectorsInitClient {};
+			class sectorVoteClient {};
+			class sectorVoteDisplay {};
 			class selectedTargetsHandle {};
 			class targetResetHandle {};
 			class targetResetHandleVote {};
 			class targetSelected {};
-			class targetSelectionHandleClient {};
+			class updateSelectionState {};
 		};
 		class ClientOrder {
 			file = "core\client\order";
 			class cancelVehicleOrder {};
+			class deployment {};
 			class orderAircraft {};
 			class orderArsenal {};
 			class orderFastTravel {};
@@ -258,7 +262,6 @@ class CfgFunctions {
 			class uavConnectRefresh {};
 			class updateSectorArrays {};
 			class varsInit {};
-			class vehicleLock {};
 		};
 		class Server {
 			file = "core\server";

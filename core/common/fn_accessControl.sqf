@@ -17,33 +17,44 @@ private _access = false;
 private _message = "";
 switch (_accessControl) do {
     case 0: {
-        // All
+        // All (Full)
         _access = true;
-        _message = "Access: All";
+        _message = "Access: All (Full)";
     };
     case 1: {
+        // All (Operate)
+        _access = _isOwner || _role != "full";
+        _message = "Access: All (Operate)";
+    };
+    case 2: {
         // All (Passenger Only)
         _access = _isOwner || (_role == "cargo");
         _message = "Access: All (Passenger Only)";
     };
-    case 2: {
-        // Squad
+    case 3: {
+        // Squad (Full)
         private _areInSquad = ["areInSquad", [_callerID, _ownerID]] call SQD_fnc_client;
         _access = _isOwner || _areInSquad;
-        _message = "Access: Squad";
+        _message = "Access: Squad (Full)";
     };
-    case 3: {
+    case 4: {
+        // Squad (Operate)
+        private _areInSquad = ["areInSquad", [_callerID, _ownerID]] call SQD_fnc_client;
+        _access = _isOwner || (_areInSquad && _role != "full");
+        _message = "Access: Squad (Operate)";
+    };
+    case 5: {
         // Squad (Passenger Only)
         private _areInSquad = ["areInSquad", [_callerID, _ownerID]] call SQD_fnc_client;
         _access = _isOwner || (_areInSquad && _role == "cargo");
         _message = "Access: Squad (Passenger Only)";
     };
-    case 4: {
+    case 6: {
         // Personal
         _access = _isOwner;
         _message = "Access: Personal";
     };
-    case 5: {
+    case 7: {
         // Locked
         _access = false;
         _message = "Access: Locked";
