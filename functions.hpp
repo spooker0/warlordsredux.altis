@@ -142,10 +142,12 @@ class CfgFunctions {
 			class claimAction {};
 			class claimEligibility {};
 			class dazzlerAction {};
+			class dazzlerToggle {};
 			class demolish {};
 			class deployableAddAction {};
 			class deployableEligibility {};
 			class jammerAction {};
+			class jammerToggle {};
 			class logisticsAddAction {};
 			class purchaseMenuAssetAvailability {};
 			class purchaseMenuGetUIScale {};
