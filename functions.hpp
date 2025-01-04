@@ -222,6 +222,7 @@ class CfgFunctions {
 		class ClientOrder {
 			file = "core\client\order";
 			class cancelVehicleOrder {};
+			class deployment {};
 			class orderAircraft {};
 			class orderArsenal {};
 			class orderFastTravel {};

@@ -232,6 +232,10 @@ class SectorDefense {
                 "missiles_titan"
             };
         };
+
+        disallowMagazines[] = {
+            "4Rnd_GAA_missiles"
+        };
     };
 
     class O_static_AA_UP_F {

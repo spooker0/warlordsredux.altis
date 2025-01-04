@@ -113,10 +113,10 @@ addMissionEventHandler ["Map", {
 				_dialog closeDisplay 1;
 			}];
 
-			if !(_asset isKindOf "Man") then {
+			private _accessControl = _asset getVariable ["WL2_accessControl", -1];
+			if (_accessControl != -1) then {
 				private _lockButton = _dialog ctrlCreate ["RscButtonMenu", -1];
 				_lockButton ctrlSetPosition [_offsetX, _offsetY + count _menuButtons * 0.05, 0.35, 0.05];
-				private _accessControl = _asset getVariable ["WL2_accessControl", 0];
 				private _lockStatus = ["ALL (FULL)", "ALL (OPERATE)", "ALL (PASSENGER)", "SQUAD (FULL)", "SQUAD (OPERATE)", "SQUAD (PASSENGER)", "PERSONAL", "LOCKED"] select _accessControl;
 				private _lockColor = ["#4bff58", "#4bff58", "#4bff58", "#00ffff", "#00ffff", "#00ffff", "#ff4b4b", "#ff4b4b"] select _accessControl;
 				_lockButton ctrlSetStructuredText parseText format ["<t align='center'>ACCESS: <t color='%1'>%2</t></t>", _lockColor, _lockStatus];

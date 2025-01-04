@@ -60,6 +60,19 @@ if (_action == "orderAsset") exitWith {
 	};
 };
 
+if (_action == "resetVehicle") exitWith {
+	private _cost = 10;
+	private _hasFunds = playerFunds >= _cost;
+	private _asset = _param1;
+	private _position = _param2;
+	private _direction = _param3;
+	if (_hasFunds) then {
+		(-_cost) call WL2_fnc_fundsDatabaseWrite;
+		_asset setDir _direction;
+		_asset setPosATL [_position select 0, _position select 1, 0];
+	};
+};
+
 if (_action == "lastLoadout") exitWith {
 	_cost = (getMissionConfigValue ["BIS_WL_lastLoadoutCost", 100]);
 	_hasFunds = (playerFunds >= _cost);
