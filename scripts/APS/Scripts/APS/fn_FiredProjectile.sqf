@@ -108,7 +108,7 @@ while {_continue && alive _projectile} do {
 						hint localize "STR_A3_WL_aps_friendly_warning";
 					};
 				} else {
-					[_unit] remoteExec ["APS_fnc_serverHandleAPS", 2];
+					[_gunner] remoteExec ["APS_fnc_serverHandleAPS", 2];
 				};
 			};
 		};
