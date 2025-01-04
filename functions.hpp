@@ -33,14 +33,6 @@ class CfgFunctions {
 			class earplugs {};
 		};
 	};
-	class KS {
-		class Default {
-			file = "scripts\VUnflip\functions";
-			class unflipVehicle {};
-			class unflipVehicleAddAction {};
-			class isFlipped {};
-		};
-	};
 	class APS {
 		class Default {
 			file = "scripts\APS\Scripts";

@@ -60,10 +60,6 @@ class CfgRemoteExec {
 			allowedTargets = 2;
 		};
 
-		class KS_fnc_unflipVehicle {
-			allowedTargets = 2;
-		};
-
 		class WL2_fnc_forfeitHandleServer {
 			allowedTargets = 2;
 		};
