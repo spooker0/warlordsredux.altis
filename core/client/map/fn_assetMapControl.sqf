@@ -26,7 +26,10 @@ addMissionEventHandler ["Map", {
 				private _pos = _map ctrlMapScreenToWorld getMousePosition;
 
 				private _allTeamVehicles = missionNamespace getVariable [format ["BIS_WL_%1ownedVehicles", side group player], []];
-				private _nearbyAssets = (allUnits + _allTeamVehicles) select {
+				private _allUnits = allUnits select {
+					!(typeOf _x in ["B_UAV_AI", "O_UAV_AI"])
+				};
+				private _nearbyAssets = (_allUnits + _allTeamVehicles) select {
 					getPlayerUID player == (_x getVariable ["BIS_WL_ownerAsset", "123"]) && alive _x && (_x distance2D _pos) < _radius && _x != player
 				};
 
@@ -187,19 +190,6 @@ addMissionEventHandler ["Map", {
 					private _asset = WL_MapActionTarget;
 					if !(isNull _asset) then {
 						[_asset] call WL2_fnc_dazzlerToggle;
-
-						private _dazzlerActivated = _asset getVariable ["BIS_WL_dazzlerActivated", false];
-						private _dazzlerColor = if (_dazzlerActivated) then {
-							"#4bff58"
-						} else {
-							"#ff4b4b"
-						};
-						private _dazzlerText = if (_dazzlerActivated) then {
-							"ON"
-						} else {
-							"OFF"
-						};
-						_control ctrlSetStructuredText parseText format ["<t align='center'>DAZZLER: <t color='%1'>%2</t></t>", _dazzlerColor, _dazzlerText];
 					};
 
 					private _dialog = ctrlParent _control;
@@ -239,28 +229,69 @@ addMissionEventHandler ["Map", {
 					private _asset = WL_MapActionTarget;
 					if !(isNull _asset) then {
 						[_asset] call WL2_fnc_jammerToggle;
+					};
 
-						private _jammerActivating = _asset getVariable ["BIS_WL_jammerActivating", false];
-						private _jammerActivated = _asset getVariable ["BIS_WL_jammerActivated", false];
-						private _jammerColor = if (_jammerActivated) then {
-							"#4bff58"
-						} else {
-							if (_jammerActivating) then {
-								"#4b51ff"
-							} else {
-								"#ff4b4b"
-							};
-						};
-						private _jammerText = if (_jammerActivated) then {
-							"ON"
-						} else {
-							if (_jammerActivating) then {
-								"ACTIVATING"
-							} else {
-								"OFF"
-							};
-						};
-						_control ctrlSetStructuredText parseText format ["<t align='center'>JAMMER: <t color='%1'>%2</t></t>", _jammerColor, _jammerText];
+					private _dialog = ctrlParent _control;
+					_dialog closeDisplay 1;
+				}];
+			};
+
+			if (typeof _asset in ["B_Radar_System_01_F", "O_Radar_System_01_F"]) then {
+				private _radarRotateButton = _dialog ctrlCreate ["RscButtonMenu", -1];
+				_radarRotateButton ctrlSetPosition [_offsetX, _offsetY + count _menuButtons * 0.05, 0.35, 0.05];
+				private _radarRotation = _asset getVariable ["radarRotation", false];
+				private _radarColor = if (_radarRotation) then {
+					"#4bff58"
+				} else {
+					"#ff4b4b"
+				};
+				private _radarText = if (_radarRotation) then {
+					"RADAR ROTATE: ON"
+				} else {
+					"RADAR ROTATE: OFF"
+				};
+				_radarRotateButton ctrlSetStructuredText parseText format ["<t align='center'>%1</t>", format ["<t color='%1'>%2</t>", _radarColor, _radarText]];
+				_radarRotateButton ctrlCommit 0;
+				_menuButtons pushBack _radarRotateButton;
+
+				_radarRotateButton ctrlAddEventHandler ["ButtonClick", {
+					params ["_control"];
+					private _asset = WL_MapActionTarget;
+					if !(isNull _asset) then {
+						_asset setVariable ["radarRotation", !(_asset getVariable ["radarRotation", false]), true];
+					};
+
+					private _dialog = ctrlParent _control;
+					_dialog closeDisplay 1;
+				}];
+			};
+
+			private _crewPosition = (fullCrew [_asset, "", true]) select {!("cargo" in _x)};
+			private _radarSensor = (listVehicleSensors _asset) select {{"ActiveRadarSensorComponent" in _x} forEach _x};
+			private _hasRadar = count _radarSensor > 0 && (count _crewPosition > 1 || unitIsUAV _asset);
+			if (_hasRadar) then {
+				private _radarButton = _dialog ctrlCreate ["RscButtonMenu", -1];
+				_radarButton ctrlSetPosition [_offsetX, _offsetY + count _menuButtons * 0.05, 0.35, 0.05];
+				private _radarOperation = _asset getVariable ["radarOperation", false];
+				private _radarColor = if (_radarOperation) then {
+					"#4bff58"
+				} else {
+					"#ff4b4b"
+				};
+				private _radarText = if (_radarOperation) then {
+					"AI RADAR: ON"
+				} else {
+					"AI RADAR: OFF"
+				};
+				_radarButton ctrlSetStructuredText parseText format ["<t align='center'>%1</t>", format ["<t color='%1'>%2</t>", _radarColor, _radarText]];
+				_radarButton ctrlCommit 0;
+				_menuButtons pushBack _radarButton;
+
+				_radarButton ctrlAddEventHandler ["ButtonClick", {
+					params ["_control"];
+					private _asset = WL_MapActionTarget;
+					if !(isNull _asset) then {
+						_asset setVariable ["radarOperation", !(_asset getVariable ["radarOperation", false]), true];
 					};
 
 					private _dialog = ctrlParent _control;

@@ -157,7 +157,10 @@ class CfgFunctions {
 			class purchaseMenuRefresh {};
 			class purchaseMenuSetAssetDetails {};
 			class purchaseMenuSetItemsList {};
-			class radarOperate {};
+			class radarOperateAction {};
+			class radarOperateUpdate {};
+			class radarRotateAction {};
+			class radarRotateUpdate {};
 			class rearmAction {};
 			class removeAction {};
 			class repairAction {};

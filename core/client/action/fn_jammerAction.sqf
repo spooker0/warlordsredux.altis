@@ -12,7 +12,7 @@ private _actionID = _asset addAction [
 	false,
 	false,
 	"",
-	"alive _target && {getPlayerUID _this == (_target getVariable ['BIS_WL_ownerAsset', '123'])}",
+	"alive _target && ([_target, _this, ""full""] call WL2_fnc_accessControl) # 0 && (cursorObject == _target || vehicle _this == _target)",
 	30,
 	true
 ];
