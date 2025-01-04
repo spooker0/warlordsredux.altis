@@ -134,7 +134,7 @@ switch (_className) do {
             uiNamespace setVariable ['BIS_WL_deployKeyHandle', nil];
             _offset set [1, _asset distance2D player];
             detach _asset;
-            _p = getPosATL _asset;
+            _p = getPosASL _asset;
             deleteVehicle _asset;
 
             [player, "assembly", false] call WL2_fnc_hintHandle;
@@ -142,7 +142,7 @@ switch (_className) do {
             private _canStillOrderVehicle = !([_originalPosition, 30, true] call WL2_fnc_cancelVehicleOrder);
             if (BIS_WL_spacePressed && _canStillOrderVehicle) then {
                 playSound "assemble_target";
-                _vehicle setPosATL _p;
+                _vehicle setPosASL _p;
                 _vehicle setDir direction player;
             } else {
                 "Canceled" call WL2_fnc_announcer;
