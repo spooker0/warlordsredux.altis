@@ -13,7 +13,7 @@ _index = _asset addAction [
 	true,
 	false,
 	"",
-	"alive _target && ([_target, _this, ""driver""] call WL2_fnc_accessControl) # 0 && vehicle _this == _this && cursorObject == _target",
+	"alive _target && ([_target, _this, ""full""] call WL2_fnc_accessControl) # 0 && vehicle _this == _this && cursorObject == _target",
 	WL_MAINTENANCE_RADIUS,
 	false
 ];

@@ -20,19 +20,21 @@ addMissionEventHandler ["Map", {
 
 			if (visibleMap) then {
 				private _ctrlMap = ctrlParent _map;
-				private _ctrlSectorInfoBox = _ctrlMap getVariable "BIS_sectorInfoBox";
+				private _ctrlAssetInfoBox = _ctrlMap getVariable "BIS_assetInfoBox";
 
 				private _radius = (((ctrlMapScale _map) * 500) min 30) max 3;
 				private _pos = _map ctrlMapScreenToWorld getMousePosition;
-				private _nearbyAssets = (_pos nearObjects _radius) select {
-					(getPlayerUID player) == (_x getVariable ["BIS_WL_ownerAsset", "123"]) && _x != player && alive _x
+
+				private _allTeamVehicles = missionNamespace getVariable [format ["BIS_WL_%1ownedVehicles", side group player], []];
+				private _nearbyAssets = (allUnits + _allTeamVehicles) select {
+					getPlayerUID player == (_x getVariable ["BIS_WL_ownerAsset", "123"]) && alive _x && (_x distance2D _pos) < _radius && _x != player
 				};
 
 				if (count _nearbyAssets > 0) then {
 					BIS_WL_mapAssetTarget = _nearbyAssets # 0;
-					_ctrlSectorInfoBox ctrlSetPosition [(getMousePosition # 0) + safeZoneW / 100, (getMousePosition # 1) + safeZoneH / 50, safeZoneW, safeZoneH];
-					_ctrlSectorInfoBox ctrlCommit 0;
-					_ctrlSectorInfoBox ctrlSetStructuredText parseText format [
+					_ctrlAssetInfoBox ctrlSetPosition [(getMousePosition # 0) + safeZoneW / 100, (getMousePosition # 1) + safeZoneH / 50, safeZoneW, safeZoneH];
+					_ctrlAssetInfoBox ctrlCommit 0;
+					_ctrlAssetInfoBox ctrlSetStructuredText parseText format [
 						"<t shadow = '2' size = '%1'>%2</t>",
 						(1 call WL2_fnc_purchaseMenuGetUIScale),
 						format [
@@ -40,12 +42,12 @@ addMissionEventHandler ["Map", {
 							[BIS_WL_mapAssetTarget] call WL2_fnc_getAssetTypeName
 						]
 					];
-					_ctrlSectorInfoBox ctrlShow true;
-					_ctrlSectorInfoBox ctrlEnable true;
+					_ctrlAssetInfoBox ctrlShow true;
+					_ctrlAssetInfoBox ctrlEnable true;
 				} else {
 					BIS_WL_mapAssetTarget = objNull;
-					_ctrlSectorInfoBox ctrlShow false;
-					_ctrlSectorInfoBox ctrlEnable false;
+					_ctrlAssetInfoBox ctrlShow false;
+					_ctrlAssetInfoBox ctrlEnable false;
 				};
 
 				if (isNull (findDisplay 160 displayCtrl 51)) then {
@@ -110,11 +112,11 @@ addMissionEventHandler ["Map", {
 
 			if !(_asset isKindOf "Man") then {
 				private _lockButton = _dialog ctrlCreate ["RscButtonMenu", -1];
-				_lockButton ctrlSetPosition [_offsetX, _offsetY + 0.05, 0.35, 0.05];
+				_lockButton ctrlSetPosition [_offsetX, _offsetY + count _menuButtons * 0.05, 0.35, 0.05];
 				private _accessControl = _asset getVariable ["WL2_accessControl", 0];
-				private _lockStatus = ["ALL", "ALL (PASSENGER)", "SQUAD", "SQUAD (PASSENGER)", "PERSONAL", "LOCKED"] select _accessControl;
-				private _lockColor = ["#4bff58", "#4bff58", "#00ffff", "#00ffff", "#ff4b4b", "#ff4b4b"] select _accessControl;
-				_lockButton ctrlSetStructuredText parseText format ["<t align='center'>LOCK: <t color='%1'>%2</t></t>", _lockColor, _lockStatus];
+				private _lockStatus = ["ALL (FULL)", "ALL (OPERATE)", "ALL (PASSENGER)", "SQUAD (FULL)", "SQUAD (OPERATE)", "SQUAD (PASSENGER)", "PERSONAL", "LOCKED"] select _accessControl;
+				private _lockColor = ["#4bff58", "#4bff58", "#4bff58", "#00ffff", "#00ffff", "#00ffff", "#ff4b4b", "#ff4b4b"] select _accessControl;
+				_lockButton ctrlSetStructuredText parseText format ["<t align='center'>ACCESS: <t color='%1'>%2</t></t>", _lockColor, _lockStatus];
 				_lockButton ctrlCommit 0;
 				_menuButtons pushBack _lockButton;
 
@@ -123,13 +125,13 @@ addMissionEventHandler ["Map", {
 					private _asset = WL_MapActionTarget;
 					if !(isNull _asset) then {
 						private _accessControl = _asset getVariable ["WL2_accessControl", 0];
-						private _newAccess = (_accessControl + 1) % 6;
+						private _newAccess = (_accessControl + 1) % 8;
 						_asset setVariable ["WL2_accessControl", _newAccess, true];
 						playSound3D ["a3\sounds_f\sfx\objects\upload_terminal\terminal_lock_close.wss", _asset, false, getPosASL _asset, 1, 1, 0, 0];
 
-						private _lockStatus = ["ALL", "ALL (PASSENGER)", "SQUAD", "SQUAD (PASSENGER)", "PERSONAL", "LOCKED"] select _newAccess;
-						private _lockColor = ["#4bff58", "#4bff58", "#00ffff", "#00ffff", "#ff4b4b", "#ff4b4b"] select _newAccess;
-						_control ctrlSetStructuredText parseText format ["<t align='center'>LOCK: <t color='%1'>%2</t></t>", _lockColor, _lockStatus];
+						private _lockStatus = ["ALL (FULL)", "ALL (OPERATE)", "ALL (PASSENGER)", "SQUAD (FULL)", "SQUAD (OPERATE)", "SQUAD (PASSENGER)", "PERSONAL", "LOCKED"] select _newAccess;
+						private _lockColor = ["#4bff58", "#4bff58", "#4bff58", "#00ffff", "#00ffff", "#00ffff", "#ff4b4b", "#ff4b4b"] select _newAccess;
+						_control ctrlSetStructuredText parseText format ["<t align='center'>ACCESS: <t color='%1'>%2</t></t>", _lockColor, _lockStatus];
 					};
 				}];
 			};
@@ -139,7 +141,7 @@ addMissionEventHandler ["Map", {
 			}) > 0;
 			if (_hasCrew) then {
 				private _kickButton = _dialog ctrlCreate ["RscButtonMenu", -1];
-				_kickButton ctrlSetPosition [_offsetX, _offsetY + 0.1, 0.35, 0.05];
+				_kickButton ctrlSetPosition [_offsetX, _offsetY + count _menuButtons * 0.05, 0.35, 0.05];
 				_kickButton ctrlSetStructuredText parseText "<t align='center'>KICK</t>";
 				_kickButton ctrlCommit 0;
 				_menuButtons pushBack _kickButton;
@@ -164,7 +166,7 @@ addMissionEventHandler ["Map", {
 
 			if (typeof _asset in ["O_T_Truck_03_device_ghex_F", "O_Truck_03_device_F"]) then {
 				private _dazzlerButton = _dialog ctrlCreate ["RscButtonMenu", -1];
-				_dazzlerButton ctrlSetPosition [_offsetX, _offsetY + 0.15, 0.35, 0.05];
+				_dazzlerButton ctrlSetPosition [_offsetX, _offsetY + count _menuButtons * 0.05, 0.35, 0.05];
 				private _dazzlerActivated = _asset getVariable ["BIS_WL_dazzlerActivated", false];
 				private _dazzlerColor = if (_dazzlerActivated) then {
 					"#4bff58"
@@ -207,7 +209,7 @@ addMissionEventHandler ["Map", {
 
 			if (typeof _asset in ["O_T_Truck_03_device_ghex_F", "O_Truck_03_device_F", "Land_Communication_F"]) then {
 				private _jammerButton = _dialog ctrlCreate ["RscButtonMenu", -1];
-				_jammerButton ctrlSetPosition [_offsetX, _offsetY + 0.2, 0.35, 0.05];
+				_jammerButton ctrlSetPosition [_offsetX, _offsetY + count _menuButtons * 0.05, 0.35, 0.05];
 				private _jammerActivated = _asset getVariable ["BIS_WL_jammerActivated", false];
 				private _jammerActivating = _asset getVariable ["BIS_WL_jammerActivating", false];
 				private _jammerColor = if (_jammerActivated) then {
@@ -236,12 +238,9 @@ addMissionEventHandler ["Map", {
 					params ["_control"];
 					private _asset = WL_MapActionTarget;
 					if !(isNull _asset) then {
+						[_asset] call WL2_fnc_jammerToggle;
+
 						private _jammerActivating = _asset getVariable ["BIS_WL_jammerActivating", false];
-
-						if (!_jammerActivating) then {
-							[_asset] call WL2_fnc_jammerToggle;
-						};
-
 						private _jammerActivated = _asset getVariable ["BIS_WL_jammerActivated", false];
 						private _jammerColor = if (_jammerActivated) then {
 							"#4bff58"

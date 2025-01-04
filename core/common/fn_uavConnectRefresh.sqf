@@ -13,7 +13,7 @@ if (_isPosInWater) then {
     };
 };
 
-private _access = [_uav, player, "drone"] call WL2_fnc_accessControl;
+private _access = [_uav, player, "driver"] call WL2_fnc_accessControl;
 private _disableConnection = !(_access # 0) || _isTransporting || _isPosInWater;
 private _isConnectable = player isUAVConnectable [_uav, true];
 
