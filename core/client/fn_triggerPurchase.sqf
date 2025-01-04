@@ -60,93 +60,28 @@ switch (_className) do {
             params ["_vehicle"];
             private _class = typeOf _vehicle;
             private _orderedClass = _vehicle getVariable ["WL2_orderedClass", _class];
-
             private _distanceToVehicle = player distance2D _vehicle;
-
             private _offset = [0, _distanceToVehicle, 0];
-            private _asset = createSimpleObject [_class, AGLToASL (player modelToWorld _offset), true];
 
-            _asset setDir direction player;
-            _asset lock 2;
+            private _deploymentResult = [_class, _orderedClass, _offset, 30] call WL2_fnc_deployment;
 
-            private _textureHashmap = missionNamespace getVariable ["WL2_textures", createHashMap];
-            private _assetTextures = _textureHashmap getOrDefault [_orderedClass, []];
-            {
-                _asset setObjectTextureGlobal [_forEachIndex, _x];
-            } forEach _assetTextures;
-
-            [player, "assembly"] call WL2_fnc_hintHandle;
-
-            BIS_WL_spacePressed = false;
-        	BIS_WL_backspacePressed = false;
-
-            private _deployKeyHandle = (findDisplay 46) displayAddEventHandler ["KeyDown", {
-                if (_this # 1 == 57) then {
-                    if !(BIS_WL_backspacePressed) then {
-                        BIS_WL_spacePressed = true;
-                    };
+            if (_deploymentResult # 0) then {
+                private _position =  _deploymentResult # 1;
+                private _direction = direction player;
+                private _uid = getPlayerUID player;
+                private _nearbyEntities = [_class, ATLToASL _position, _direction, _uid, []] call WL2_fnc_grieferCheck;
+                if (count _nearbyEntities > 0) then {
+                    private _nearbyObject = _nearbyEntities # 0;
+                    private _nearbyObjectName = [_nearbyObject] call WL2_fnc_getAssetTypeName;
+                    private _nearbyObjectPosition = getPosASL _nearbyObject;
+		            playSound3D ["a3\3den\data\sound\cfgsound\notificationwarning.wss", objNull, false, _nearbyObjectPosition, 5];
+		            systemChat format ["Too close to another %1!", _nearbyObjectName];
+                } else {
+                    playSound "assemble_target";
+                    [player, "resetVehicle", _vehicle, _position, _direction] remoteExec ["WL2_fnc_handleClientRequest", 2];
                 };
-                if (_this # 1 == 14) then {
-                    if !(BIS_WL_spacePressed) then {
-                        BIS_WL_backspacePressed = true;
-                    };
-                };
-            }];
-
-            uiNamespace setVariable ["BIS_WL_deployKeyHandle", _deployKeyHandle];
-            private _originalPosition = getPosATL player;
-
-            [_asset, _offset] spawn {
-                params ["_asset", "_offset"];
-
-                private _boundingBoxHeight = (boundingBoxReal _asset) # 0 # 2;
-                while { !(isNull _asset) && !(BIS_WL_spacePressed) && !(BIS_WL_backspacePressed) } do {
-                    private _assetPos = player modelToWorld _offset;
-                    private _assetHeight = getTerrainHeightASL [_assetPos # 0, _assetPos # 1];
-                    private _playerHeight = (getPosASL player) # 2;
-                    private _offset_tweaked = [_offset # 0, _offset # 1, _assetHeight - _playerHeight - _boundingBoxHeight];
-                    _asset attachTo [player, _offset_tweaked];
-                    sleep 1;
-                };
-            };
-
-            [_originalPosition, _asset] spawn {
-                params ["_originalPosition"];
-
-                waitUntil {
-                    sleep 0.1;
-                    BIS_WL_spacePressed ||
-                    BIS_WL_backspacePressed ||
-                    [_originalPosition, 30, true] call WL2_fnc_cancelVehicleOrder;
-                };
-
-                if !(BIS_WL_spacePressed) then {
-                    BIS_WL_backspacePressed = TRUE;
-                };
-            };
-
-            waitUntil {
-                sleep 0.1;
-                BIS_WL_spacePressed || BIS_WL_backspacePressed
-            };
-
-            (findDisplay 46) displayRemoveEventHandler ["KeyDown", uiNamespace getVariable "BIS_WL_deployKeyHandle"];
-            uiNamespace setVariable ['BIS_WL_deployKeyHandle', nil];
-            _offset set [1, _asset distance2D player];
-            detach _asset;
-            _p = getPosASL _asset;
-            deleteVehicle _asset;
-
-            [player, "assembly", false] call WL2_fnc_hintHandle;
-
-            private _canStillOrderVehicle = !([_originalPosition, 30, true] call WL2_fnc_cancelVehicleOrder);
-            if (BIS_WL_spacePressed && _canStillOrderVehicle) then {
-                playSound "assemble_target";
-                _vehicle setPosASL _p;
-                _vehicle setDir direction player;
             } else {
-                "Canceled" call WL2_fnc_announcer;
-                [toUpper localize "STR_A3_WL_deploy_canceled"] spawn WL2_fnc_smoothText;
+                playSound "AddItemFailed";
             };
         };
     };

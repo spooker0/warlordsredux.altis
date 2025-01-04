@@ -175,8 +175,6 @@ if (_asset isKindOf "Man") then {
 		};
 	};
 
-	_asset setVariable ["WL2_accessControl", 4, true];
-
 	if (unitIsUAV _asset) then {
 		if (profileNamespace getVariable ["MRTM_enableAuto", true]) then {
 			[_asset, false] remoteExec ["setAutonomous", 0];
@@ -199,6 +197,7 @@ if (_asset isKindOf "Man") then {
 		["B_Slingload_01_Medevac_F", true]
 	];
 	if !(_notLockableVehicles getOrDefault [typeOf _asset, false]) then {
+		_asset setVariable ["WL2_accessControl", 4, true];
 		[_asset] remoteExec ["WL2_fnc_vehicleLockAction", 0, true];
 	};
 
@@ -221,6 +220,10 @@ if (_asset isKindOf "Man") then {
 			_amount = ((getNumber (configfile >> "CfgVehicles" >> typeof _asset >> "transportAmmo")) min 30000);
 		};
 		_asset setVariable ["WLM_ammoCargo", _amount, true];
+	};
+
+	if (getNumber (configFile >> "CfgVehicles" >> typeOf _asset >> "transportRepair") > 0) then {
+		[_asset, 0] remoteExec ["setRepairCargo", 0];
 	};
 
 	private _rearmTime = (missionNamespace getVariable "WL2_rearmTimers") getOrDefault [(typeOf _asset), 600];
