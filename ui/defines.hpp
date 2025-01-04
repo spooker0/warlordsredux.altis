@@ -75,7 +75,7 @@
 
 #define SL_TEXTURES       0x10
 
-// progress bar 
+// progress bar
 #define ST_VERTICAL       0x01
 #define ST_HORIZONTAL     0
 
@@ -147,14 +147,14 @@ class RscTextMRTM
 	fade = 0;
 	type = 0;
 	idc = -1;
-	colorBackground[] = 
+	colorBackground[] =
 	{
 		0,
 		0,
 		0,
 		0
 	};
-	colorText[] = 
+	colorText[] =
 	{
 		1,
 		1,
@@ -169,7 +169,7 @@ class RscTextMRTM
 	w = 0.3;
 	style = 0;
 	shadow = 1;
-	colorShadow[] = 
+	colorShadow[] =
 	{
 		1,
 		1,
@@ -179,21 +179,21 @@ class RscTextMRTM
 	font = "RobotoCondensed";
 	SizeEx = "0.021 / (getResolution select 5)";
 	linespacing = 1;
-	tooltipColorText[] = 
+	tooltipColorText[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorBox[] = 
+	tooltipColorBox[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorShade[] = 
+	tooltipColorShade[] =
 	{
 		1,
 		1,
@@ -208,7 +208,7 @@ class RscStructuredTextMRTM
 	type = 13;
 	idc = -1;
 	style = 0;
-	colorText[] = 
+	colorText[] =
 	{
 		1,
 		1,
@@ -239,14 +239,14 @@ class RscPictureMRTM
 	type = 0;
 	idc = -1;
 	style = 48;
-	colorBackground[] = 
+	colorBackground[] =
 	{
 		0,
 		0,
 		0,
 		0
 	};
-	colorText[] = 
+	colorText[] =
 	{
 		1,
 		1,
@@ -263,21 +263,21 @@ class RscPictureMRTM
 	y = 0;
 	w = 0.2;
 	h = 0.15;
-	tooltipColorText[] = 
+	tooltipColorText[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorBox[] = 
+	tooltipColorBox[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorShade[] = 
+	tooltipColorShade[] =
 	{
 		0,
 		0,
@@ -294,28 +294,28 @@ class RscEditMRTM
 	y = 0;
 	h = 0.04;
 	w = 0.2;
-	colorBackground[] = 
+	colorBackground[] =
 	{
 		0,
 		0,
 		0,
 		0
 	};
-	colorText[] = 
+	colorText[] =
 	{
 		0.95,
 		0.95,
 		0.95,
 		1
 	};
-	colorDisabled[] = 
+	colorDisabled[] =
 	{
 		1,
 		1,
 		1,
 		0.25
 	};
-	colorSelection[] = 
+	colorSelection[] =
 	{
 		"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.13])",
 		"(profilenamespace getvariable ['GUI_BCG_RGB_G',0.54])",
@@ -330,21 +330,21 @@ class RscEditMRTM
 	shadow = 2;
 	sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
 	canModify = 1;
-	tooltipColorText[] = 
+	tooltipColorText[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorBox[] = 
+	tooltipColorBox[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorShade[] = 
+	tooltipColorShade[] =
 	{
 		0,
 		0,
@@ -357,138 +357,138 @@ class RscComboMRTM
 	deletable = 0;
 	fade = 0;
 	type = 4;
-	colorSelect[] = 
+	colorSelect[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	colorText[] = 
+	colorText[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorBackground[] = 
+	colorBackground[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	colorScrollbar[] = 
+	colorScrollbar[] =
 	{
 		1,
 		0,
 		0,
 		1
 	};
-	colorDisabled[] = 
+	colorDisabled[] =
 	{
 		1,
 		1,
 		1,
 		0.25
 	};
-	colorPicture[] = 
+	colorPicture[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorPictureSelected[] = 
+	colorPictureSelected[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorPictureDisabled[] = 
+	colorPictureDisabled[] =
 	{
 		1,
 		1,
 		1,
 		0.25
 	};
-	colorPictureRight[] = 
+	colorPictureRight[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorPictureRightSelected[] = 
+	colorPictureRightSelected[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorPictureRightDisabled[] = 
+	colorPictureRightDisabled[] =
 	{
 		1,
 		1,
 		1,
 		0.25
 	};
-	colorTextRight[] = 
+	colorTextRight[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorSelectRight[] = 
+	colorSelectRight[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	colorSelect2Right[] = 
+	colorSelect2Right[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	tooltipColorText[] = 
+	tooltipColorText[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorBox[] = 
+	tooltipColorBox[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorShade[] = 
+	tooltipColorShade[] =
 	{
 		0,
 		0,
 		0,
 		0.65
 	};
-	soundSelect[] = 
+	soundSelect[] =
 	{
 		"\A3\ui_f\data\sound\RscCombo\soundSelect",
 		0.1,
 		1
 	};
-	soundExpand[] = 
+	soundExpand[] =
 	{
 		"\A3\ui_f\data\sound\RscCombo\soundExpand",
 		0.1,
 		1
 	};
-	soundCollapse[] = 
+	soundCollapse[] =
 	{
 		"\A3\ui_f\data\sound\RscCombo\soundCollapse",
 		0.1,
@@ -497,7 +497,7 @@ class RscComboMRTM
 	maxHistoryDelay = 1;
 	class ComboScrollBar
 	{
-		color[] = 
+		color[] =
 		{
 			1,
 			1,
@@ -513,7 +513,7 @@ class RscComboMRTM
 	y = 0;
 	w = 0.12;
 	h = 0.035;
-	colorSelectBackground[] = 
+	colorSelectBackground[] =
 	{
 		1,
 		1,
@@ -523,7 +523,7 @@ class RscComboMRTM
 	arrowEmpty = "\A3\ui_f\data\GUI\RscCommon\rsccombo\arrow_combo_ca.paa";
 	arrowFull = "\A3\ui_f\data\GUI\RscCommon\rsccombo\arrow_combo_active_ca.paa";
 	wholeHeight = 0.45;
-	colorActive[] = 
+	colorActive[] =
 	{
 		1,
 		0,
@@ -537,63 +537,63 @@ class RscListBoxMRTM
 	fade = 0;
 	type = 5;
 	rowHeight = 0;
-	colorText[] = 
+	colorText[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorDisabled[] = 
+	colorDisabled[] =
 	{
 		1,
 		1,
 		1,
 		0.25
 	};
-	colorScrollbar[] = 
+	colorScrollbar[] =
 	{
 		1,
 		0,
 		0,
 		0
 	};
-	colorSelect[] = 
+	colorSelect[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	colorSelect2[] = 
+	colorSelect2[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	colorSelectBackground[] = 
+	colorSelectBackground[] =
 	{
 		0.95,
 		0.95,
 		0.95,
 		1
 	};
-	colorSelectBackground2[] = 
+	colorSelectBackground2[] =
 	{
 		1,
 		1,
 		1,
 		0.5
 	};
-	colorBackground[] = 
+	colorBackground[] =
 	{
 		0,
 		0,
 		0,
 		0.3
 	};
-	soundSelect[] = 
+	soundSelect[] =
 	{
 		"\A3\ui_f\data\sound\RscListbox\soundSelect",
 		0.09,
@@ -604,84 +604,84 @@ class RscListBoxMRTM
 	autoScrollRewind = 0;
 	arrowEmpty = "#(argb,8,8,3)color(1,1,1,1)";
 	arrowFull = "#(argb,8,8,3)color(1,1,1,1)";
-	colorPicture[] = 
+	colorPicture[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorPictureSelected[] = 
+	colorPictureSelected[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorPictureDisabled[] = 
+	colorPictureDisabled[] =
 	{
 		1,
 		1,
 		1,
 		0.25
 	};
-	colorPictureRight[] = 
+	colorPictureRight[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorPictureRightSelected[] = 
+	colorPictureRightSelected[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorPictureRightDisabled[] = 
+	colorPictureRightDisabled[] =
 	{
 		1,
 		1,
 		1,
 		0.25
 	};
-	colorTextRight[] = 
+	colorTextRight[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorSelectRight[] = 
+	colorSelectRight[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	colorSelect2Right[] = 
+	colorSelect2Right[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	tooltipColorText[] = 
+	tooltipColorText[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorBox[] = 
+	tooltipColorBox[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorShade[] = 
+	tooltipColorShade[] =
 	{
 		0,
 		0,
@@ -690,7 +690,7 @@ class RscListBoxMRTM
 	};
 	class ListScrollBar
 	{
-		color[] = 
+		color[] =
 		{
 			1,
 			1,
@@ -707,7 +707,7 @@ class RscListBoxMRTM
 	font = "RobotoCondensed";
 	sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
 	shadow = 0;
-	colorShadow[] = 
+	colorShadow[] =
 	{
 		0,
 		0,
@@ -723,81 +723,81 @@ class RscButtonMRTM
 	fade = 0;
 	type = 1;
 	text = "";
-	colorText[] = 
+	colorText[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorDisabled[] = 
+	colorDisabled[] =
 	{
 		1,
 		1,
 		1,
 		0.25
 	};
-	colorBackground[] = 
+	colorBackground[] =
 	{
 		0,
 		0,
 		0,
 		0.5
 	};
-	colorBackgroundDisabled[] = 
+	colorBackgroundDisabled[] =
 	{
 		0,
 		0,
 		0,
 		0.5
 	};
-	colorBackgroundActive[] = 
+	colorBackgroundActive[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	colorFocused[] = 
+	colorFocused[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	colorShadow[] = 
+	colorShadow[] =
 	{
 		0,
 		0,
 		0,
 		0
 	};
-	colorBorder[] = 
+	colorBorder[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	soundEnter[] = 
+	soundEnter[] =
 	{
 		"\A3\ui_f\data\sound\RscButton\soundEnter",
 		0.09,
 		1
 	};
-	soundPush[] = 
+	soundPush[] =
 	{
 		"\A3\ui_f\data\sound\RscButton\soundPush",
 		0.09,
 		1
 	};
-	soundClick[] = 
+	soundClick[] =
 	{
 		"\A3\ui_f\data\sound\RscButton\soundClick",
 		0.09,
 		1
 	};
-	soundEscape[] = 
+	soundEscape[] =
 	{
 		"\A3\ui_f\data\sound\RscButton\soundEscape",
 		0.09,
@@ -847,78 +847,78 @@ class RscShortcutButtonMRTM
 		right = 0.005;
 		bottom = 0;
 	};
-	shortcuts[] = 
+	shortcuts[] =
 	{
 	};
 	textureNoShortcut = "#(argb,8,8,3)color(0,0,0,0)";
-	color[] = 
+	color[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorFocused[] = 
+	colorFocused[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	color2[] = 
+	color2[] =
 	{
 		0.95,
 		0.95,
 		0.95,
 		1
 	};
-	colorDisabled[] = 
+	colorDisabled[] =
 	{
 		1,
 		1,
 		1,
 		0.25
 	};
-	colorBackground[] = 
+	colorBackground[] =
 	{
 		"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.13])",
 		"(profilenamespace getvariable ['GUI_BCG_RGB_G',0.54])",
 		"(profilenamespace getvariable ['GUI_BCG_RGB_B',0.21])",
 		1
 	};
-	colorBackgroundFocused[] = 
+	colorBackgroundFocused[] =
 	{
 		"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.13])",
 		"(profilenamespace getvariable ['GUI_BCG_RGB_G',0.54])",
 		"(profilenamespace getvariable ['GUI_BCG_RGB_B',0.21])",
 		1
 	};
-	colorBackground2[] = 
+	colorBackground2[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	soundEnter[] = 
+	soundEnter[] =
 	{
 		"\A3\ui_f\data\sound\RscButton\soundEnter",
 		0.09,
 		1
 	};
-	soundPush[] = 
+	soundPush[] =
 	{
 		"\A3\ui_f\data\sound\RscButton\soundPush",
 		0.09,
 		1
 	};
-	soundClick[] = 
+	soundClick[] =
 	{
 		"\A3\ui_f\data\sound\RscButton\soundClick",
 		0.09,
 		1
 	};
-	soundEscape[] = 
+	soundEscape[] =
 	{
 		"\A3\ui_f\data\sound\RscButton\soundEscape",
 		0.09,
@@ -938,28 +938,28 @@ class RscShortcutButtonMRTM
 	w = 0.183825;
 	h = "((((safezoneW / safezoneH) min 1.2) / 1.2) / 20)";
 	textSecondary = "";
-	colorSecondary[] = 
+	colorSecondary[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorFocusedSecondary[] = 
+	colorFocusedSecondary[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	color2Secondary[] = 
+	color2Secondary[] =
 	{
 		0.95,
 		0.95,
 		0.95,
 		1
 	};
-	colorDisabledSecondary[] = 
+	colorDisabledSecondary[] =
 	{
 		1,
 		1,
@@ -997,14 +997,14 @@ class RscShortcutButtonMainMRTM
 	default = 0;
 	w = 0.313726;
 	h = 0.104575;
-	color[] = 
+	color[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorDisabled[] = 
+	colorDisabled[] =
 	{
 		1,
 		1,
@@ -1065,14 +1065,14 @@ class RscFrameMRTM
 	deletable = 0;
 	style = 64;
 	shadow = 2;
-	colorBackground[] = 
+	colorBackground[] =
 	{
 		0,
 		0,
 		0,
 		0
 	};
-	colorText[] = 
+	colorText[] =
 	{
 		1,
 		1,
@@ -1093,14 +1093,14 @@ class RscSliderMRTM
 	fade = 0;
 	type = 3;
 	style = 1024;
-	color[] = 
+	color[] =
 	{
 		1,
 		1,
 		1,
 		0.8
 	};
-	colorActive[] = 
+	colorActive[] =
 	{
 		1,
 		1,
@@ -1141,7 +1141,7 @@ class IGUIBackMRTM
 	idc = 124;
 	style = 128;
 	text = "";
-	colorText[] = 
+	colorText[] =
 	{
 		0,
 		0,
@@ -1155,7 +1155,7 @@ class IGUIBackMRTM
 	y = 0.1;
 	w = 0.1;
 	h = 0.1;
-	colorbackground[] = 
+	colorbackground[] =
 	{
 		"(profilenamespace getvariable ['IGUI_BCG_RGB_R',0])",
 		"(profilenamespace getvariable ['IGUI_BCG_RGB_G',1])",
@@ -1174,70 +1174,70 @@ class RscCheckBoxMRTM
 	y = "0.36 * safezoneH + safezoneY";
 	w = "0.025 * safezoneW";
 	h = "0.04 * safezoneH";
-	color[] = 
+	color[] =
 	{
 		1,
 		1,
 		1,
 		0.7
 	};
-	colorFocused[] = 
+	colorFocused[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorHover[] = 
+	colorHover[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorPressed[] = 
+	colorPressed[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorDisabled[] = 
+	colorDisabled[] =
 	{
 		1,
 		1,
 		1,
 		0.2
 	};
-	colorBackground[] = 
+	colorBackground[] =
 	{
 		0,
 		0,
 		0,
 		0
 	};
-	colorBackgroundFocused[] = 
+	colorBackgroundFocused[] =
 	{
 		0,
 		0,
 		0,
 		0
 	};
-	colorBackgroundHover[] = 
+	colorBackgroundHover[] =
 	{
 		0,
 		0,
 		0,
 		0
 	};
-	colorBackgroundPressed[] = 
+	colorBackgroundPressed[] =
 	{
 		0,
 		0,
 		0,
 		0
 	};
-	colorBackgroundDisabled[] = 
+	colorBackgroundDisabled[] =
 	{
 		0,
 		0,
@@ -1254,46 +1254,46 @@ class RscCheckBoxMRTM
 	texturePressedUnchecked = "Img\toggle-left_ca.paa";
 	textureDisabledChecked = "Img\toggle-right_ca.paa";
 	textureDisabledUnchecked = "Img\toggle-left_ca.paa";
-	tooltipColorText[] = 
+	tooltipColorText[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorBox[] = 
+	tooltipColorBox[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorShade[] = 
+	tooltipColorShade[] =
 	{
 		0,
 		0,
 		0,
 		0.65
 	};
-	soundEnter[] = 
+	soundEnter[] =
 	{
 		"",
 		0.1,
 		1
 	};
-	soundPush[] = 
+	soundPush[] =
 	{
 		"",
 		0.1,
 		1
 	};
-	soundClick[] = 
+	soundClick[] =
 	{
 		"",
 		0.1,
 		1
 	};
-	soundEscape[] = 
+	soundEscape[] =
 	{
 		"",
 		0.1,
@@ -1309,77 +1309,77 @@ class RscTextCheckBoxMRTM
 	y = "0.36 * safezoneH + safezoneY";
 	w = "0.025 * safezoneW";
 	h = "0.04 * safezoneH";
-	colorText[] = 
+	colorText[] =
 	{
 		1,
 		0,
 		0,
 		1
 	};
-	color[] = 
+	color[] =
 	{
 		0,
 		0,
 		0,
 		0
 	};
-	colorBackground[] = 
+	colorBackground[] =
 	{
 		0,
 		0,
 		0,
 		0
 	};
-	colorTextSelect[] = 
+	colorTextSelect[] =
 	{
 		0,
 		0.8,
 		0,
 		1
 	};
-	colorSelectedBg[] = 
+	colorSelectedBg[] =
 	{
 		"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.13])",
 		"(profilenamespace getvariable ['GUI_BCG_RGB_G',0.54])",
 		"(profilenamespace getvariable ['GUI_BCG_RGB_B',0.21])",
 		1
 	};
-	colorSelect[] = 
+	colorSelect[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	colorTextDisable[] = 
+	colorTextDisable[] =
 	{
 		0.4,
 		0.4,
 		0.4,
 		1
 	};
-	colorDisable[] = 
+	colorDisable[] =
 	{
 		0.4,
 		0.4,
 		0.4,
 		1
 	};
-	tooltipColorText[] = 
+	tooltipColorText[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorBox[] = 
+	tooltipColorBox[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorShade[] = 
+	tooltipColorShade[] =
 	{
 		0,
 		0,
@@ -1390,11 +1390,11 @@ class RscTextCheckBoxMRTM
 	sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
 	rows = 1;
 	columns = 1;
-	strings[] = 
+	strings[] =
 	{
 		"UNCHECKED"
 	};
-	checked_strings[] = 
+	checked_strings[] =
 	{
 		"CHECKED"
 	};
@@ -1416,56 +1416,56 @@ class RscButtonMenuMRTM
 	animTextureFocused = "#(argb,8,8,3)color(1,1,1,1)";
 	animTexturePressed = "#(argb,8,8,3)color(1,1,1,1)";
 	animTextureDefault = "#(argb,8,8,3)color(1,1,1,1)";
-	colorBackground[] = 
+	colorBackground[] =
 	{
 		0,
 		0,
 		0,
 		0.8
 	};
-	colorBackgroundFocused[] = 
+	colorBackgroundFocused[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorBackground2[] = 
+	colorBackground2[] =
 	{
 		0.75,
 		0.75,
 		0.75,
 		1
 	};
-	color[] = 
+	color[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorFocused[] = 
+	colorFocused[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	color2[] = 
+	color2[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	colorText[] = 
+	colorText[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorDisabled[] = 
+	colorDisabled[] =
 	{
 		1,
 		1,
@@ -1473,28 +1473,28 @@ class RscButtonMenuMRTM
 		0.25
 	};
 	textSecondary = "";
-	colorSecondary[] = 
+	colorSecondary[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	colorFocusedSecondary[] = 
+	colorFocusedSecondary[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	color2Secondary[] = 
+	color2Secondary[] =
 	{
 		0,
 		0,
 		0,
 		1
 	};
-	colorDisabledSecondary[] = 
+	colorDisabledSecondary[] =
 	{
 		1,
 		1,
@@ -1508,21 +1508,21 @@ class RscButtonMenuMRTM
 	periodOver = 1.2;
 	size = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
 	sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
-	tooltipColorText[] = 
+	tooltipColorText[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorBox[] = 
+	tooltipColorBox[] =
 	{
 		1,
 		1,
 		1,
 		1
 	};
-	tooltipColorShade[] = 
+	tooltipColorShade[] =
 	{
 		0,
 		0,
@@ -1550,25 +1550,25 @@ class RscButtonMenuMRTM
 		w = "1 * (((safezoneW / safezoneH) min 1.2) / 40)";
 		h = "1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 	};
-	soundEnter[] = 
+	soundEnter[] =
 	{
 		"\A3\ui_f\data\sound\RscButtonMenu\soundEnter",
 		0.09,
 		1
 	};
-	soundPush[] = 
+	soundPush[] =
 	{
 		"\A3\ui_f\data\sound\RscButtonMenu\soundPush",
 		0.09,
 		1
 	};
-	soundClick[] = 
+	soundClick[] =
 	{
 		"\A3\ui_f\data\sound\RscButtonMenu\soundClick",
 		0.09,
 		1
 	};
-	soundEscape[] = 
+	soundEscape[] =
 	{
 		"\A3\ui_f\data\sound\RscButtonMenu\soundEscape",
 		0.09,
@@ -1578,7 +1578,7 @@ class RscButtonMenuMRTM
 class RscButtonMenuOKMRTM
 {
 	idc = 1;
-	shortcuts[] = 
+	shortcuts[] =
 	{
 		"0x00050000 + 0",
 		28,
@@ -1587,7 +1587,7 @@ class RscButtonMenuOKMRTM
 	};
 	default = 1;
 	text = "OK";
-	soundPush[] = 
+	soundPush[] =
 	{
 		"\A3\ui_f\data\sound\RscButtonMenuOK\soundPush",
 		0.09,
@@ -1597,7 +1597,7 @@ class RscButtonMenuOKMRTM
 class RscButtonMenuCancelMRTM
 {
 	idc = 2;
-	shortcuts[] = 
+	shortcuts[] =
 	{
 		"0x00050000 + 1"
 	};
@@ -1626,7 +1626,7 @@ class RscControlsGroupMRTM {
 		shadow = 0;
 		scrollSpeed = 0.05;
 	};
-	
+
 	class VScrollbar:ScrollBar {
 		width = 0.021;
 		autoScrollSpeed = -1;
@@ -1635,13 +1635,13 @@ class RscControlsGroupMRTM {
 		shadow = 0;
 		color[] = {1, 1, 1, 0.6};
 	};
-	
+
 	class HScrollbar:ScrollBar {
 		height = 0;
 		shadow = 0;
 		color[] = {1, 1, 1, 0.6};
 	};
-	
+
 	class Controls {};
 };
 

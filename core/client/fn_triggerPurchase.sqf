@@ -74,7 +74,7 @@ switch (_className) do {
             } forEach _allAssets;
             _listText = _listText + "Would you like to go through and delete some of them?";
 
-            private _result = [_listText, "Asset List", "Yes", "Cancel"] call BIS_fnc_guiMessage;
+            private _result = ["Asset List", _listText, "Yes", "Cancel"] call WL2_fnc_prompt;
 
             if (_result) then {
                 {

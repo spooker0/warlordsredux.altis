@@ -7,7 +7,7 @@ private _removeActionID = _asset addAction [
 		private _unit = _this # 0;
 
 		private _displayName = [_unit] call WL2_fnc_getAssetTypeName;
-		private _result = [format ["Are you sure you would like to delete: %1", _displayName], "Delete asset", true, true] call BIS_fnc_guiMessage;
+		private _result = ["Delete asset", format ["Are you sure you would like to delete: %1", _displayName], "Yes", "Cancel"] call WL2_fnc_prompt;
 
 		if (_result) exitWith {
 			if (unitIsUAV _unit) then {

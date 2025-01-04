@@ -2,6 +2,8 @@
 
 params ["_action", "_params"];
 
+private _allPlayers = call BIS_fnc_listPlayers;
+
 _message = nil;
 _return = nil;
 
@@ -69,14 +71,15 @@ switch (_action) do {
         private _squadSize = count _playersInSquad;
         if (_squadSize >= SQD_MAX_SQUAD_SIZE) exitWith {
             _message = format ["Squad ""%1"" is full: %2/%3", _squad select 0, _squadSize, SQD_MAX_SQUAD_SIZE];
-            private _player = allPlayers select { getPlayerID _x == _playerId } select 0;
+            private _player = _allPlayers select { getPlayerID _x == _playerId } select 0;
             [_message] remoteExec ["systemChat", _player];
             _return = 1;
         };
 
-        private _targets = allPlayers select { getPlayerID _x in _playersInSquad };
-        ["newjoin", [_playerId]] remoteExec ["SQD_fnc_client", _targets];
         _playersInSquad pushBack _playerId;
+
+        private _targets = _allPlayers select { getPlayerID _x in _playersInSquad };
+        ["newjoin", [_playerId]] remoteExec ["SQD_fnc_client", _targets];
 
         _message = format ["Player %1 joined Squad %2", _playerId, (_squad select 0)];
         _return = 0;
@@ -97,7 +100,7 @@ switch (_action) do {
                 private _hasAnyRemaining = count _members > 0;
                 if (_hasAnyRemaining) then {
                     private _newSquadLeader = _members select 0;
-                    private _newSLPlayer = allPlayers select { getPlayerID _x == _newSquadLeader } select 0;
+                    private _newSLPlayer = _allPlayers select { getPlayerID _x == _newSquadLeader } select 0;
                     ["promoted", [_newSquadLeader]] remoteExec ["SQD_fnc_client", _newSLPlayer];
                     _squad set [1, _newSquadLeader];
                 };
@@ -121,7 +124,7 @@ switch (_action) do {
         } else {
             private _squad = _squads select 0;
 
-            private _newSLPlayer = allPlayers select { getPlayerID _x == _playerId } select 0;
+            private _newSLPlayer = _allPlayers select { getPlayerID _x == _playerId } select 0;
             ["promoted", [_newSquadLeader]] remoteExec ["SQD_fnc_client", _newSLPlayer];
 
             _squad set [1, _playerId];

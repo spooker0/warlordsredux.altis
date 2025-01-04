@@ -14,12 +14,21 @@ if (isNil "WL2_ffBuffer") then {
 			private _assetType = _params # 2;
 
 			if (isPlayer _victim) then {
-				private _askForgiveness = [format ["Choose to forgive: %1?", name _killer], "Forgive Friendly Fire", "Forgive", "Don't forgive"] call BIS_fnc_guiMessage;
+				private _askForgiveness = [
+					"Forgive Friendly Fire",
+					format ["Choose to forgive %1?", name _killer],
+					"Forgive", "Don't forgive"
+				] call WL2_fnc_prompt;
 				[_killer, player, _askForgiveness, name player] remoteExec ["WL2_fnc_forgiveTeamkill", 2];
+
 				WL2_ffBuffer deleteAt 0;
 				_busy = false;
 			} else {
-				private _askForgiveness = [format ["Choose to forgive %1 for killing: %2?", name _killer, _assetType], "Forgive Friendly Fire", "Forgive", "Don't forgive"] call BIS_fnc_guiMessage;
+				private _askForgiveness = [
+					"Forgive Friendly Fire",
+					format ["Choose to forgive %1 for killing %2?", name _killer, _assetType],
+					"Forgive", "Don't forgive"
+				] call WL2_fnc_prompt;
 				[_killer, player, _askForgiveness, _assetType] remoteExec ["WL2_fnc_forgiveTeamkill", 2];
 
 				WL2_ffBuffer deleteAt 0;
