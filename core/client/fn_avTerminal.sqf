@@ -12,6 +12,8 @@ while { !BIS_WL_missionEnd } do {
         private _size = lbSize _selectBox;
         private _changes = false;
 
+        private _allPlayers = call BIS_fnc_listPlayers;
+
         for "_i" from 1 to (_size - 1) do {
             private _text = _selectBox lbText _i;
             private _data = _text splitString "#";
@@ -27,7 +29,7 @@ while { !BIS_WL_missionEnd } do {
                 if (_playerName == name player) then {
                     _selectBox lbSetColor [_i, [0, 1, 0, 1]];
                 } else {
-                    private _player = allPlayers select { name _x == _playerName } select 0;
+                    private _player = _allPlayers select { name _x == _playerName } select 0;
                     private _isInMySquad = ["isInMySquad", [getPlayerID _player]] call SQD_fnc_client;
 
                     if (_isInMySquad) then {

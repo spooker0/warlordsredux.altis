@@ -123,6 +123,7 @@ class CfgFunctions {
 			class onPause {};
 			class pingFix {};
 			class pingFixInit {};
+			class prompt {};
 			class repackMagazines {};
 			class rita {};
 			class sideToFaction {};
