@@ -24,11 +24,9 @@ if (isNull _playerVehicle) then {
 	};
 };
 
-private _notYourVehicle = false;
+private _accessControl = [_playerVehicle, player, "full"] call WL2_fnc_accessControl;
 if (!isNull _playerVehicle) then {
-	if ((_playerVehicle getVariable ["BIS_WL_ownerAsset", "-1"]) == "-1") then {
-		_notYourVehicle = true;
-	} else {
+	if (_accessControl # 0) then {
 		private _cooldown = ((_playerVehicle getVariable ["BIS_WL_nextRearm", 0]) - serverTime) max 0;
 		if (_cooldown > 0) then {
 			private _cooldownDisplay = [_cooldown, "MM:SS"] call BIS_fnc_secondsToString;
@@ -40,8 +38,10 @@ if (!isNull _playerVehicle) then {
 };
 
 private _rearm_possible = uiNamespace getVariable "BIS_WL_osd_rearm_possible";
-if (_notYourVehicle) then {
-	_rearm_possible ctrlSetStructuredText parseText format ["<t color = '#ff0000' size = '%1' shadow = '2' align = 'center'>Not your vehicle</t>", _scale];
+if !(_accessControl # 0) then {
+	private _vehicleOwner = _playerVehicle getVariable ["BIS_WL_ownerAsset", "123"];
+	private _vehicleOwnerUnit = _vehicleOwner call BIS_fnc_getUnitByUid;
+	_rearm_possible ctrlSetStructuredText parseText format ["<t color = '#ff0000' size = '%1' shadow = '2' align = 'center'>Owner: %2 (%3)</t>", _scale, name _vehicleOwnerUnit, _accessControl # 1];
 } else {
 	if (BIS_WL_showHint_maintenance) then {
 		if (_cdText != "") then {
