@@ -143,11 +143,13 @@ class CfgFunctions {
 			class claimEligibility {};
 			class dazzlerAction {};
 			class dazzlerToggle {};
+			class dazzlerUpdate {};
 			class demolish {};
 			class deployableAddAction {};
 			class deployableEligibility {};
 			class jammerAction {};
 			class jammerToggle {};
+			class jammerUpdate {};
 			class logisticsAddAction {};
 			class purchaseMenuAssetAvailability {};
 			class purchaseMenuGetUIScale {};
@@ -162,6 +164,7 @@ class CfgFunctions {
 			class repairActionEligibility {};
 			class slingAddAction {};
 			class vehicleLockAction {};
+			class vehicleLockUpdate {};
 		};
 		class ClientDraw {
 			file = "core\client\draw";
@@ -263,7 +266,6 @@ class CfgFunctions {
 			class uavConnectRefresh {};
 			class updateSectorArrays {};
 			class varsInit {};
-			class vehicleLock {};
 		};
 		class Server {
 			file = "core\server";

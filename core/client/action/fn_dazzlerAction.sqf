@@ -5,6 +5,7 @@ private _actionID = _asset addAction [
 	{
 		_this params ["_asset", "_caller", "_actionID"];
 		[_asset] call WL2_fnc_dazzlerToggle;
+		[_asset, _actionID] call WL2_fnc_dazzlerUpdate;
 	},
 	[],
 	99,
@@ -19,20 +20,7 @@ private _actionID = _asset addAction [
 [_asset, _actionID] spawn {
 	params ["_asset", "_actionID"];
 	while { alive _asset } do {
-		private _actionColor = if ([_asset] call APS_fnc_active) then {
-			"#ff4b4b";
-		} else {
-			"#4bff58";
-		};
-
-		private _actionText = if ([_asset] call APS_fnc_active) then {
-			localize "STR_A3_dazzler_disable";
-		} else {
-			localize "STR_A3_dazzler_enable";
-		};
-
-		_asset setUserActionText [_actionID, format ["<t color = '%1'>%2</t>", _actionColor, _actionText]];
-
+		[_asset, _actionID] call WL2_fnc_dazzlerUpdate;
 		sleep 1;
 	};
 };

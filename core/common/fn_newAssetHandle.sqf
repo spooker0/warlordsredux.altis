@@ -172,6 +172,8 @@ if (_asset isKindOf "Man") then {
 		};
 	};
 
+	_asset setVariable ["WL2_accessControl", 2, true];
+
 	if (unitIsUAV _asset) then {
 		if (profileNamespace getVariable ["MRTM_enableAuto", true]) then {
 			[_asset, false] remoteExec ["setAutonomous", 0];
