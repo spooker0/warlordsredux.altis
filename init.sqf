@@ -6,7 +6,6 @@ if !(isDedicated) then {
 	call GFE_fnc_credits;
 
 	waitUntil { !isNull player };
-	0 spawn KS_fnc_unflipVehicleAddAction;
 };
 /*******************************END OF SCRIPTS****************************/
 

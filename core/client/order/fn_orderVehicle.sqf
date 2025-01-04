@@ -73,7 +73,7 @@ if (_class isKindOf "Man") then {
 			sleep 0.1;
 			BIS_WL_spacePressed ||
 			BIS_WL_backspacePressed ||
-			[_originalPosition] call WL2_fnc_cancelVehicleOrder;
+			[_originalPosition, 100, false] call WL2_fnc_cancelVehicleOrder;
 		};
 
 		if !(BIS_WL_spacePressed) then {
@@ -92,7 +92,7 @@ if (_class isKindOf "Man") then {
 
 	[player, "assembly", false] call WL2_fnc_hintHandle;
 
-	private _canStillOrderVehicle = !([_originalPosition] call WL2_fnc_cancelVehicleOrder);
+	private _canStillOrderVehicle = !([_originalPosition, 100, false] call WL2_fnc_cancelVehicleOrder);
 	if (BIS_WL_spacePressed && _canStillOrderVehicle) then {
 		playSound "assemble_target";
 		[player, "orderAsset", "vehicle", [(_p # 0), (_p # 1), 0], _orderedClass, direction player] remoteExec ["WL2_fnc_handleClientRequest", 2];
