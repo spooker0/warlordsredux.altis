@@ -80,7 +80,7 @@ class CfgRemoteExec {
 			allowedTargets = 2;
 		};
 
-		class WL2_fnc_vehicleLock {
+		class WL2_fnc_vehicleLockUpdate {
 			allowedTargets = 0;
 		};
 

@@ -7,7 +7,7 @@ private _lockActionId = _asset addAction [
 		private _accessControl = _asset getVariable ["WL2_accessControl", 0];
 		private _newAccess = (_accessControl + 1) % 6;
 		_asset setVariable ["WL2_accessControl", _newAccess, true];
-		[_asset, _lockActionId] call WL2_fnc_vehicleLock;
+		[_asset, _lockActionId] call WL2_fnc_vehicleLockUpdate;
 		playSound3D ["a3\sounds_f\sfx\objects\upload_terminal\terminal_lock_close.wss", _asset, false, getPosASL _asset, 1, 1, 0, 0];
 	},
 	[],
@@ -23,7 +23,7 @@ private _lockActionId = _asset addAction [
 [_asset, _lockActionId] spawn {
     params ["_asset", "_lockActionId"];
     while { alive _asset } do {
-		[_asset, _lockActionId] call WL2_fnc_vehicleLock;
+		[_asset, _lockActionId] call WL2_fnc_vehicleLockUpdate;
         sleep 1;
     };
 };

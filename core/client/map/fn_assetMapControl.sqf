@@ -132,7 +132,12 @@ addMissionEventHandler ["Map", {
 						_control ctrlSetStructuredText parseText format ["<t align='center'>LOCK: <t color='%1'>%2</t></t>", _lockColor, _lockStatus];
 					};
 				}];
+			};
 
+			private _hasCrew = count ((crew _asset) select {
+				!(typeof _x in ["B_UAV_AI", "O_UAV_AI"]) && getPlayerUID player != (_x getVariable ["BIS_WL_ownerAsset", "123"])
+			}) > 0;
+			if (_hasCrew) then {
 				private _kickButton = _dialog ctrlCreate ["RscButtonMenu", -1];
 				_kickButton ctrlSetPosition [_offsetX, _offsetY + 0.1, 0.35, 0.05];
 				_kickButton ctrlSetStructuredText parseText "<t align='center'>KICK</t>";
