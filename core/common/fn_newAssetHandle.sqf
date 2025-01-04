@@ -153,7 +153,7 @@ if (_asset isKindOf "Man") then {
 							{},
 							{},
 							{
-								[_caller, "droneExplode", _target] remoteExec ["WL2_fnc_handleClientRequest", 2];
+								[player, "droneExplode", _target] remoteExec ["WL2_fnc_handleClientRequest", 2];
 							},
 							{},
 							[],
