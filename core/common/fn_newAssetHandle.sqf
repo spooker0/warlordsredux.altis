@@ -172,7 +172,7 @@ if (_asset isKindOf "Man") then {
 		};
 	};
 
-	_asset setVariable ["WL2_accessControl", 2, true];
+	_asset setVariable ["WL2_accessControl", 4, true];
 
 	if (unitIsUAV _asset) then {
 		if (profileNamespace getVariable ["MRTM_enableAuto", true]) then {
@@ -185,8 +185,6 @@ if (_asset isKindOf "Man") then {
 		private _assetGrp = group _asset;
 		private _assetTypeName = [_asset] call WL2_fnc_getAssetTypeName;
 		_assetGrp setGroupIdGlobal [format ["%1#%2#%3", name _owner, _assetTypeName, groupId _assetGrp]];
-
-		_asset setVariable ["WL2_accessControl", 2, true];
 
 		[_asset] call WL2_fnc_uavConnectRefresh;
 	};
