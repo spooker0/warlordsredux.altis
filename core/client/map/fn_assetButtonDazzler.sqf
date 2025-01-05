@@ -1,6 +1,6 @@
 params ["_asset"];
 
-private _dazzlerActivated = _asset getVariable ["BIS_WL_dazzlerActivated", false];
+private _dazzlerActivated = [_asset] call APS_fnc_active;
 private _dazzlerColor = if (_dazzlerActivated) then {
     "#4bff58"
 } else {

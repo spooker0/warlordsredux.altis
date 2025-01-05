@@ -35,6 +35,13 @@ addMissionEventHandler ["Map", {
 					alive _x &&
 					(_x distance2D _pos) < _radius
 				};
+				private _squadLeaderID = ['getMySquadLeader'] call SQD_fnc_client;
+				private _squadLeader = _allUnits select {
+					_x != player &&
+					getPlayerID _x == _squadLeaderID &&
+					(_x distance2D _pos) < _radius
+				};
+				_nearbyAssets append _squadLeader;
 				_nearbyAssets = [_nearbyAssets, [_pos], { _input0 distance2D _x }, "ASCEND"] call BIS_fnc_sortBy;
 
 				if (count _nearbyAssets > 0) then {
@@ -43,7 +50,7 @@ addMissionEventHandler ["Map", {
 					_ctrlAssetInfoBox ctrlCommit 0;
 					_ctrlAssetInfoBox ctrlSetStructuredText parseText format [
 						"<t shadow = '2' size = '%1'>%2</t>",
-						(1 call WL2_fnc_purchaseMenuGetUIScale),
+						1 call WL2_fnc_purchaseMenuGetUIScale,
 						format [
 							"Click for options:<br/><t color='#ff4b4b'>%1</t>",
 							[WL_AssetActionTarget] call WL2_fnc_getAssetTypeName
@@ -83,7 +90,6 @@ addMissionEventHandler ["Map", {
 			};
 		}];
 		0 spawn {
-			WL_MapBusy = [];
 			sleep 1;
 			MAP_CONTROL_CLICK = addMissionEventHandler ["MapSingleClick", {
 				if (count WL_MapBusy > 0) exitWith {};

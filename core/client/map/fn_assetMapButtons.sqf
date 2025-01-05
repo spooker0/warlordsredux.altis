@@ -20,13 +20,15 @@ private _assetName = [WL_AssetActionTarget] call WL2_fnc_getAssetTypeName;
 _titleBar ctrlSetStructuredText parseText format ["<t align='center' font='PuristaBold'>%1</t>", toUpper _assetName];
 _titleBar ctrlCommit 0;
 
-["DELETE", {
-    params ["_asset"];
-    _asset spawn WL2_fnc_deleteAssetFromMap;
-}, true] call WL2_fnc_addTargetMapButton;
+if !(isPlayer _asset) then {
+    ["DELETE", {
+        params ["_asset"];
+        _asset spawn WL2_fnc_deleteAssetFromMap;
+    }, true] call WL2_fnc_addTargetMapButton;
+};
 
 private _accessControl = _asset getVariable ["WL2_accessControl", -1];
-if (_accessControl != -1) then {
+if (_accessControl != -1 && !(isPlayer _asset)) then {
     private _lockText = [_accessControl] call WL2_fnc_assetButtonAccessControl;
 
     [_lockText, {
@@ -44,15 +46,18 @@ if (_accessControl != -1) then {
 private _hasCrew = count ((crew _asset) select {
     !(typeof _x in ["B_UAV_AI", "O_UAV_AI"]) && getPlayerUID player != (_x getVariable ["BIS_WL_ownerAsset", "123"])
 }) > 0;
-if (_hasCrew) then {
+private _isNotFlying = (getPosATL _asset # 2) < 10;
+if (_hasCrew && _isNotFlying) then {
     ["KICK", {
         params ["_asset"];
-        private _unwantedPassengers = (crew _asset) select {
-            (_x != player) && getPlayerUID player != (_x getVariable ["BIS_WL_ownerAsset", "123"])
+        if ((getPosATL _asset # 2) < 10) then {
+            private _unwantedPassengers = (crew _asset) select {
+                (_x != player) && getPlayerUID player != (_x getVariable ["BIS_WL_ownerAsset", "123"])
+            };
+            {
+                moveOut _x;
+            } forEach _unwantedPassengers;
         };
-        {
-            moveOut _x;
-        } forEach _unwantedPassengers;
     }, true] call WL2_fnc_addTargetMapButton;
 };
 
@@ -110,6 +115,27 @@ if (unitIsUAV _asset && getConnectedUAV player != _asset && _access # 0) then {
         _access = [_asset, player, "driver"] call WL2_fnc_accessControl;
         if (_access # 0) then {
             player connectTerminalToUAV _asset;
+        };
+    }, true] call WL2_fnc_addTargetMapButton;
+};
+
+private _fastTravelSLCost = getMissionConfigValue ["BIS_WL_fastTravelCostSquadLeader", 10];
+private _eligibleFastTravelSL = (["FTSquadLeader", [], "", "", "", [], _fastTravelSLCost, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
+private _mySquadLeader = ['getMySquadLeader'] call SQD_fnc_client;
+private _isMySquadLeader = getPlayerID _asset == _mySquadLeader;
+private _moneySign = [BIS_WL_playerSide] call WL2_fnc_getMoneySign;
+if (isPlayer _asset && _eligibleFastTravelSL && _isMySquadLeader) then {
+    private _fastTravelText = format ["FAST TRAVEL SL (%1%2)", _moneySign, _fastTravelSLCost];
+    [_fastTravelText, {
+        params ["_asset"];
+        private _fastTravelSLCost = getMissionConfigValue ["BIS_WL_fastTravelCostSquadLeader", 10];
+        private _eligibleFastTravelSL = (["FTSquadLeader", [], "", "", "", [], _fastTravelSLCost, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
+        private _mySquadLeader = ['getMySquadLeader'] call SQD_fnc_client;
+        private _isMySquadLeader = getPlayerID _asset == _mySquadLeader;
+        if (isPlayer _asset && _eligibleFastTravelSL && _isMySquadLeader) then {
+            ["ftSquadLeader"] spawn SQD_fnc_client;
+            private _ftNextUseVar = format ["BIS_WL_FTSLNextUse_%1", getPlayerUID player];
+            missionNamespace setVariable [_ftNextUseVar, serverTime + WL_FAST_TRAVEL_SQUAD_LEADER_RATE];
         };
     }, true] call WL2_fnc_addTargetMapButton;
 };
