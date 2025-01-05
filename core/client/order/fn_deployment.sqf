@@ -1,4 +1,4 @@
-params ["_class", "_orderedClass", "_offset", "_range"];
+params ["_class", "_orderedClass", "_offset", "_range", "_ignoreSector"];
 
 private _asset = createSimpleObject [_class, AGLToASL (player modelToWorld _offset), true];
 
@@ -49,14 +49,14 @@ private _originalPosition = getPosATL player;
     };
 };
 
-[_originalPosition, _range] spawn {
-    params ["_originalPosition", "_range"];
+[_originalPosition, _range, _ignoreSector] spawn {
+    params ["_originalPosition", "_range", "_ignoreSector"];
 
     waitUntil {
         sleep 0.1;
         BIS_WL_spacePressed ||
         BIS_WL_backspacePressed ||
-        [_originalPosition, _range, false] call WL2_fnc_cancelVehicleOrder;
+        [_originalPosition, _range, _ignoreSector] call WL2_fnc_cancelVehicleOrder;
     };
 
     if !(BIS_WL_spacePressed) then {
@@ -75,6 +75,6 @@ deleteVehicle _asset;
 
 [player, "assembly", false] call WL2_fnc_hintHandle;
 
-private _canStillOrderVehicle = !([_originalPosition, _range, false] call WL2_fnc_cancelVehicleOrder);
+private _canStillOrderVehicle = !([_originalPosition, _range, _ignoreSector] call WL2_fnc_cancelVehicleOrder);
 
 [BIS_WL_spacePressed && _canStillOrderVehicle, _p];

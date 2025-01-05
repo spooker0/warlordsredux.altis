@@ -209,7 +209,7 @@ _strategyArr pushBack ["TargetReset", (getMissionConfigValue ["BIS_WL_targetRese
 _strategyArr pushBack ["LockVehicles", 0, [], localize "STR_A3_WL_feature_lock_all", "\A3\Data_F_Warlords\Data\preview_empty.jpg", ""];
 _strategyArr pushBack ["UnlockVehicles", 0, [], localize "STR_A3_WL_feature_unlock_all", "\A3\Data_F_Warlords\Data\preview_empty.jpg", ""];
 _strategyArr pushBack ["clearVehicles", 0, [], "Kick players from all vehicles", "\A3\Data_F_Warlords\Data\preview_empty.jpg", "This doesn't include you or your AI."];
-_strategyArr pushBack ["resetVehicle", 10, [], "Reset vehicle", "\A3\Data_F_Warlords\Data\preview_empty.jpg", "Reset vehicle."];
+_strategyArr pushBack ["resetVehicle", 10, [], "Reset vehicle", "\A3\Data_F_Warlords\Data\preview_empty.jpg", "Reset vehicle. Must be within 15m and looking at the vehicle."];
 _strategyArr pushBack ["pruneAssets", 0, [], "List/Prune Assets", "\A3\Data_F_Warlords\Data\preview_empty.jpg", "List all your assets in the game and decide whether to take action to delete some of them."];
 _strategyArr pushBack ["wipeMap", 0, [], "Wipe Map", "\A3\Data_F_Warlords\Data\preview_empty.jpg", "Wipes all user-defined markers from your own map locally. This includes your own."];
 _strategyArr pushBack ["RemoveUnits", 0, [], localize "STR_A3_WL_feature_dismiss_selected", "\A3\Data_F_Warlords\Data\preview_empty.jpg", ""];

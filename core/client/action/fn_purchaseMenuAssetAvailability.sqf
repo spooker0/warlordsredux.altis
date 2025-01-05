@@ -197,13 +197,19 @@ if (_ret) then {
 		};
 		case "resetVehicle" : {
 			private _vehicle = cursorObject;
-			if (isNull _vehicle || player distance2D _vehicle > 15) exitWith {
+			if (isNull _vehicle) exitWith {
 				_ret = false;
 				_tooltip = "Please point at a valid vehicle.";
 			};
 
+			private _outOfRange = player distance2D _vehicle > 15;
+
 			private _accessControl = _vehicle getVariable ["WL2_accessControl", -1];
-			if (_accessControl == -1) exitWith {
+			private _hasNoLock = _accessControl == -1;
+
+			private _isTransporting = _vehicle getVariable ["WL2_transporting", false];
+
+			if (_outOfRange || _hasNoLock || _isTransporting) exitWith {
 				_ret = false;
 				_tooltip = "Please point at a valid vehicle.";
 			};

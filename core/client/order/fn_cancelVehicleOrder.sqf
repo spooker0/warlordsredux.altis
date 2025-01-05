@@ -1,4 +1,4 @@
-params ["_originalPosition", "_limitDistance", "_resetting"];
+params ["_originalPosition", "_limitDistance", "_ignoreSector"];
 
 private _enemiesNearPlayer = (allPlayers inAreaArray [player, 100, 100]) select {_x != player && BIS_WL_playerSide != side group _x && alive _x};
 private _homeBase = BIS_WL_playerSide call WL2_fnc_getSideBase;
@@ -9,7 +9,7 @@ private _isInOwnedSector = (BIS_WL_sectorsArray # 0) findIf {player inArea (_x g
 vehicle player != player ||
 !alive player ||
 lifeState player == "INCAPACITATED" ||
-(_nearbyEnemies && !_resetting) ||
+(_nearbyEnemies && !_ignoreSector) ||
 (getPosATL player) select 2 > 1 ||
-(_isInOwnedSector && !_resetting) ||
+(_isInOwnedSector && !_ignoreSector) ||
 (_originalPosition distance2D player) > _limitDistance;
