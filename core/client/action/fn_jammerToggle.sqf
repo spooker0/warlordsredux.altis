@@ -3,8 +3,12 @@ params ["_asset"];
 if (_asset getVariable ["BIS_WL_jammerActivated", false] && isEngineOn _asset) then {
     _asset setVariable ["BIS_WL_jammerActivated", false, true];
     _asset setVariable ["BIS_WL_jammerActivating", false, true];
+    playSoundUI ["a3\sounds_f_bootcamp\sfx\vr\simulation_fatal.wss"];
 } else {
-    if (_asset getVariable ["BIS_WL_jammerActivating", false]) exitWith {};
+    if (_asset getVariable ["BIS_WL_jammerActivating", false]) exitWith {
+        playSoundUI ["AddItemFailed"];
+    };
+    playSoundUI ["a3\sounds_f_bootcamp\sfx\vr\simulation_restart.wss"];
 
     _asset setVariable ["BIS_WL_jammerActivating", true, true];
 

@@ -42,16 +42,29 @@ if (BIS_WL_currentSelection == 4) then {
 };
 
 // Draw delete asset selector
-if (!isNull BIS_WL_mapAssetTarget) then {
+if (!isNull WL_AssetActionTarget) then {
 	_m drawIcon [
 		"A3\ui_f\data\map\groupicons\selector_selectedMission_ca.paa",
-		[1,1,1,1],
-		BIS_WL_mapAssetTarget,
+		call WL2_fnc_iconColor,
+		WL_AssetActionTarget,
 		40,
 		40,
 		(time * 75) % 360
 	];
 };
+
+// Draw sector selector
+if (!isNull WL_SectorActionTarget && isNull BIS_WL_highlightedSector) then {
+	_m drawIcon [
+		"A3\ui_f\data\map\groupicons\selector_selectedMission_ca.paa",
+		call WL2_fnc_iconColor,
+		WL_SectorActionTarget,
+		50,
+		50,
+		(time * 75) % 360
+	];
+};
+
 {
 	private _revealTrigger = _x getVariable "BIS_WL_revealTrigger";
 	{

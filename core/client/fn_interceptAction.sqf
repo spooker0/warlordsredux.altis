@@ -81,8 +81,32 @@ inGameUISetEventHandler ["Action", '
                 false;
             };
         };
+        case "Gear";
+        case "Rearm": {
+            private _access = [_target, _caller, "cargo"] call WL2_fnc_accessControl;
+            if !(_access # 0) then {
+                systemChat format ["Inventory locked. (%1)", _access # 1];
+                playSoundUI ["AddItemFailed"];
+                true;
+            } else {
+                false;
+            };
+        };
         default {
             false;
         };
     };
 '];
+
+player addEventHandler ["InventoryOpened", {
+	params ["_unit", "_container", "_secondaryContainer"];
+
+    private _access = [_container, player, "cargo"] call WL2_fnc_accessControl;
+    if !(_access # 0) then {
+        systemChat format ["Inventory locked. (%1)", _access # 1];
+        playSoundUI ["AddItemFailed"];
+        true;
+    } else {
+        false;
+    };
+}];
