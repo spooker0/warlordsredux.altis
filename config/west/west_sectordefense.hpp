@@ -25,6 +25,15 @@ class SectorDefense {
         structure = 1;
     }; // "Tank barrier"
 
+    class Land_HBarrierWall6_F {
+        cost = 60;
+        requirements[] = {};
+        offset[] = {0, 3, 0};
+        killReward = 30;
+        demolishable = 1;
+        structure = 1;
+    }; // "H-barrier wall"
+
     class CamoNet_BLUFOR_big_F {
         cost = 100;
         requirements[] = {};
