@@ -4,13 +4,7 @@ BIS_WL_highlightedSector = objNull;
 
 addMissionEventHandler ["Map", {
 	BIS_WL_highlightedSector = objNull;
-	BIS_WL_hoverSamplePlayed = FALSE;
-	if (_this # 0) then {
-		if (isNull WL_TARGET_FRIENDLY && {BIS_WL_currentSelection == WL_ID_SELECTION_VOTING}) then {
-			WL_CONTROL_MAP ctrlMapAnimAdd [0, 1, [BIS_WL_mapSize / 2, BIS_WL_mapSize / 2]];
-			ctrlMapAnimCommit WL_CONTROL_MAP;
-		};
-	};
+	BIS_WL_hoverSamplePlayed = false;
 }];
 
 while {!BIS_WL_missionEnd} do {

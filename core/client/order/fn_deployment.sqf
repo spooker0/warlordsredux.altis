@@ -33,7 +33,7 @@ private _deployKeyHandle = (findDisplay 46) displayAddEventHandler ["KeyDown", {
 }];
 
 uiNamespace setVariable ["BIS_WL_deployKeyHandle", _deployKeyHandle];
-private _originalPosition = getPosATL player;
+private _originalPosition = getPosATL _asset;
 
 [_asset, _offset] spawn {
     params ["_asset", "_offset"];

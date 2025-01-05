@@ -17,9 +17,13 @@ BIS_WL_targetSector = objNull;
 private _selectionBefore = BIS_WL_currentSelection;
 BIS_WL_currentSelection = WL_ID_SELECTION_ORDERING_AIRCRAFT;
 BIS_WL_orderedAssetRequirements = _requirements;
+WL_MapBusy pushBack "orderAircraft";
 sleep 0.25;
 
-waitUntil {sleep 0.05; !isNull BIS_WL_targetSector || {!visibleMap || {BIS_WL_currentSelection == WL_ID_SELECTION_VOTING}}};
+waitUntil {
+	sleep 0.05;
+	!isNull BIS_WL_targetSector || !visibleMap
+};
 
 if (BIS_WL_currentSelection == WL_ID_SELECTION_ORDERING_AIRCRAFT) then {
 	BIS_WL_currentSelection = _selectionBefore;
@@ -34,3 +38,6 @@ if (isNull BIS_WL_targetSector) exitWith {
 [toUpper localize "STR_A3_WL_asset_dispatched_TODO_REWRITE"] spawn WL2_fnc_smoothText;
 
 [player, "orderAsset", "air", BIS_WL_targetSector, _orderedClass] remoteExec ["WL2_fnc_handleClientRequest", 2];
+
+sleep 1;
+WL_MapBusy = WL_MapBusy - ["orderAircraft"];
