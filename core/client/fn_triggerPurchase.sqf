@@ -63,7 +63,7 @@ switch (_className) do {
             private _distanceToVehicle = player distance2D _vehicle;
             private _offset = [0, _distanceToVehicle, 0];
 
-            private _deploymentResult = [_class, _orderedClass, _offset, 30] call WL2_fnc_deployment;
+            private _deploymentResult = [_class, _orderedClass, _offset, 30, true] call WL2_fnc_deployment;
 
             if (_deploymentResult # 0) then {
                 private _position =  _deploymentResult # 1;

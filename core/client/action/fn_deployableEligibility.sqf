@@ -17,8 +17,16 @@ private _nearLoadable = _nearLoadableEntities select {
 };
 private _hasNearLoadable = count _nearLoadable > 0;
 
+private _sortedNearLoadable = if (_hasNearLoadable) then {
+    [_nearLoadable, [_asset], {
+        _input0 distance _x;
+    }, "ASCEND"] call BIS_fnc_sortBy;
+} else {
+    [];
+};
+
 private _offset = if (_hasNearLoadable) then {
-    private _loadable = _nearLoadable # 0;
+    private _loadable = _sortedNearLoadable # 0;
     private _loadableType = _loadable getVariable ["WL2_orderedClass", typeOf _loadable];
     _loadableHashmap getOrDefault [_loadableType, [0, 0, 1]];
 } else {
@@ -28,4 +36,4 @@ private _offset = if (_hasNearLoadable) then {
 // 0: eligible
 // 1: near loadables
 // 2: offset
-[_hasAccess && alive _asset && (_hasLoadedItem || _hasNearLoadable), _nearLoadable, _offset];
+[_hasAccess && alive _asset && (_hasLoadedItem || _hasNearLoadable), _sortedNearLoadable, _offset];
