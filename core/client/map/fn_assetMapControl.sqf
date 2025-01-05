@@ -22,16 +22,20 @@ addMissionEventHandler ["Map", {
 				private _ctrlMap = ctrlParent _map;
 				private _ctrlAssetInfoBox = _ctrlMap getVariable "BIS_assetInfoBox";
 
-				private _radius = (((ctrlMapScale _map) * 500) min 30) max 5;
+				private _radius = (((ctrlMapScale _map) * 500) min 30) max 3;
 				private _pos = _map ctrlMapScreenToWorld getMousePosition;
 
 				private _allTeamVehicles = missionNamespace getVariable [format ["BIS_WL_%1ownedVehicles", side group player], []];
 				private _allUnits = allUnits select {
-					!(typeOf _x in ["B_UAV_AI", "O_UAV_AI"])
+					!(typeOf _x in ["B_UAV_AI", "O_UAV_AI"]) && isNull objectParent _x;
 				};
 				private _nearbyAssets = (_allUnits + _allTeamVehicles) select {
-					getPlayerUID player == (_x getVariable ["BIS_WL_ownerAsset", "123"]) && alive _x && (_x distance2D _pos) < _radius && _x != player
+					getPlayerUID player == (_x getVariable ["BIS_WL_ownerAsset", "123"]) &&
+					_x != player &&
+					alive _x &&
+					(_x distance2D _pos) < _radius
 				};
+				_nearbyAssets = [_nearbyAssets, [_pos], { _input0 distance2D _x }, "ASCEND"] call BIS_fnc_sortBy;
 
 				if (count _nearbyAssets > 0) then {
 					WL_AssetActionTarget = _nearbyAssets # 0;
@@ -78,18 +82,25 @@ addMissionEventHandler ["Map", {
 				};
 			};
 		}];
+		0 spawn {
+			WL_MapBusy = [];
+			sleep 1;
+			MAP_CONTROL_CLICK = addMissionEventHandler ["MapSingleClick", {
+				if (count WL_MapBusy > 0) exitWith {};
 
-		MAP_CONTROL_CLICK = addMissionEventHandler ["MapSingleClick", {
-			if !(isNull WL_AssetActionTarget) then {
-				call WL2_fnc_assetMapButtons;
-			};
+				if !(isNull WL_AssetActionTarget) then {
+					call WL2_fnc_assetMapButtons;
+				};
 
-			if !(isNull WL_SectorActionTarget) then {
-				call WL2_fnc_sectorMapButtons;
-			};
-		}];
+				if !(isNull WL_SectorActionTarget) then {
+					call WL2_fnc_sectorMapButtons;
+				};
+			}];
+		};
 	} else {
 		removeMissionEventHandler ["EachFrame", MAP_CONTROL];
-		removeMissionEventHandler ["MapSingleClick", MAP_CONTROL_CLICK];
+		if !(isNil "MAP_CONTROL_CLICK") then {
+			removeMissionEventHandler ["MapSingleClick", MAP_CONTROL_CLICK];
+		};
 	};
 }];

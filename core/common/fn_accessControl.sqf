@@ -1,6 +1,9 @@
 params ["_asset", "_unit", "_role"];
 
-private _accessControl = _asset getVariable ["WL2_accessControl", 0];
+private _accessControl = _asset getVariable ["WL2_accessControl", -1];
+if (_accessControl == -1) exitWith {
+    [true, "Access: Not Set"];
+};
 
 private _ownerUID = _asset getVariable ["BIS_WL_ownerUavAsset", _asset getVariable ["BIS_WL_ownerAsset", "123"]];
 private _owner = _ownerUID call BIS_fnc_getUnitByUid;
@@ -10,7 +13,7 @@ private _isOwner = _ownerUID == getPlayerUID (leader _unit);
 
 private _isEnemy = (side group _unit) != _asset call WL2_fnc_getAssetSide;
 if (_isEnemy) exitWith {
-    [true, "Access: Enemy"];
+    [false, "Access: Enemy (Claim to Capture)"];
 };
 
 private _access = false;

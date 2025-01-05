@@ -18,6 +18,7 @@ if !(visibleMap) then {
 BIS_WL_targetSector = objNull;
 private _selectionBefore = BIS_WL_currentSelection;
 BIS_WL_currentSelection = if (_toContested) then {WL_ID_SELECTION_FAST_TRAVEL_CONTESTED} else {WL_ID_SELECTION_FAST_TRAVEL};
+WL_MapBusy pushBack "orderFastTravel";
 private _action = if (_toContested) then {"travelling_contested"} else {"travelling"};
 private _marker = "";
 private _markerText = "";
@@ -47,7 +48,10 @@ if (_toContested) then {
 
 sleep WL_TIMEOUT_SHORT;
 
-waitUntil {sleep WL_TIMEOUT_MIN; !isNull BIS_WL_targetSector || {!visibleMap || {BIS_WL_currentSelection == WL_ID_SELECTION_VOTING || {!alive player || {lifeState player == "INCAPACITATED"}}}}};
+waitUntil {
+	sleep WL_TIMEOUT_MIN;
+	!isNull BIS_WL_targetSector || !visibleMap || !alive player || lifeState player == "INCAPACITATED"
+};
 
 if (isNull BIS_WL_targetSector) exitWith {
 	if (BIS_WL_currentSelection in [WL_ID_SELECTION_FAST_TRAVEL, WL_ID_SELECTION_FAST_TRAVEL_CONTESTED]) then {
@@ -67,3 +71,6 @@ deleteMarkerLocal _markerText;
 if (BIS_WL_currentSelection in [WL_ID_SELECTION_FAST_TRAVEL, WL_ID_SELECTION_FAST_TRAVEL_CONTESTED]) then {
 	BIS_WL_currentSelection = _selectionBefore;
 };
+
+sleep 1;
+WL_MapBusy = WL_MapBusy - ["orderFastTravel"];
