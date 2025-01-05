@@ -49,7 +49,8 @@ switch (_locality) do {
 			"\A3\ui_f\data\map\markers\nato\n_installation.paa"
 		];
 		BIS_WL_colorFriendly = BIS_WL_colorsArray # (BIS_WL_sidesArray find BIS_WL_playerSide);
-		BIS_WL_mapAssetTarget = objNull;
+		WL_AssetActionTarget = objNull;
+		WL_SectorActionTarget = objNull;
 		WL_GEAR_BUY_MENU = false;
 		WL_TEMP_BUY_MENU = false;
 		WL_VotePhase = 0;

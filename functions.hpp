@@ -194,6 +194,13 @@ class CfgFunctions {
 		};
 		class ClientMap {
 			file = "core\client\map";
+			class addTargetMapButton {};
+			class assetButtonAccessControl {};
+			class assetButtonDazzler {};
+			class assetButtonJammer {};
+			class assetButtonRadarOperate {};
+			class assetButtonRadarRotate {};
+			class assetMapButtons {};
 			class assetMapControl {};
 			class captureList {};
 			class deleteAssetFromMap {};
@@ -206,6 +213,7 @@ class CfgFunctions {
 			class handleSelectionState {};
 			class mapControlHandle {};
 			class sectorCaptureStatus {};
+			class sectorMapButtons {};
 			class sectorMarkerUpdate {};
 			class sectorOwnershipHandleClient {};
 			class sectorRevealHandle {};
@@ -223,6 +231,7 @@ class CfgFunctions {
 			file = "core\client\order";
 			class cancelVehicleOrder {};
 			class deployment {};
+			class executeFastTravel {};
 			class orderAircraft {};
 			class orderArsenal {};
 			class orderFastTravel {};

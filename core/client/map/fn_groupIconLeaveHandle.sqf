@@ -1,7 +1,8 @@
 #include "..\..\warlords_constants.inc"
 
 BIS_WL_highlightedSector = objNull;
-BIS_WL_hoverSamplePlayed = FALSE;
+BIS_WL_hoverSamplePlayed = false;
+WL_SectorActionTarget = objNull;
 
 WL_CONTROL_MAP ctrlMapCursor ["Track", "Track"];
 
