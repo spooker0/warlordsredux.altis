@@ -12,6 +12,7 @@ if !(visibleMap) then {
 BIS_WL_waterDropPos = [];
 private _selectionBefore = BIS_WL_currentSelection;
 BIS_WL_currentSelection = WL_ID_SELECTION_ORDERING_NAVAL;
+WL_MapBusy pushBack "orderNaval";
 sleep WL_TIMEOUT_SHORT;
 
 _mapClickEH = addMissionEventHandler ["MapSingleClick", {
@@ -37,6 +38,9 @@ removeMissionEventHandler ["MapSingleClick", _mapClickEH];
 if (count BIS_WL_waterDropPos == 0) exitWith {
 	"Canceled" call WL2_fnc_announcer;
 	[toUpper localize "STR_A3_WL_airdrop_canceled"] spawn WL2_fnc_smoothText;
+
+	sleep 1;
+	WL_MapBusy = WL_MapBusy - ["orderNaval"];
 };
 
 if (BIS_WL_waterDropPos distance2D player <= 300) then {
@@ -49,3 +53,6 @@ BIS_WL_waterDropPos set [2, 0];
 playSound "AddItemOK";
 
 [player, "orderAsset", "naval", BIS_WL_waterDropPos, _class] remoteExec ["WL2_fnc_handleClientRequest", 2];
+
+sleep 1;
+WL_MapBusy = WL_MapBusy - ["orderNaval"];

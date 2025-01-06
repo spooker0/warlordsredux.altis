@@ -34,6 +34,9 @@ if (BIS_WL_currentSelection == WL_ID_SELECTION_SCAN) then {
 if (isNull BIS_WL_targetSector) exitWith {
 	"Canceled" call WL2_fnc_announcer;
 	[toUpper localize "STR_A3_WL_scan_canceled"] spawn WL2_fnc_smoothText;
+
+	sleep 1;
+	WL_MapBusy = WL_MapBusy - ["orderSectorScan"];
 };
 
 [player, "scan", [], BIS_WL_targetSector] remoteExec ["WL2_fnc_handleClientRequest", 2];

@@ -61,6 +61,9 @@ if (isNull BIS_WL_targetSector) exitWith {
 	[toUpper localize "STR_A3_WL_menu_fasttravel_canceled"] spawn WL2_fnc_smoothText;
 	deleteMarkerLocal _marker;
 	deleteMarkerLocal _markerText;
+
+	sleep 1;
+	WL_MapBusy = WL_MapBusy - ["orderFastTravel"];
 };
 
 [_toContested, _marker] call WL2_fnc_executeFastTravel;
