@@ -37,6 +37,7 @@ addMissionEventHandler ["Map", {
 				};
 				private _squadLeaderID = ['getMySquadLeader'] call SQD_fnc_client;
 				private _squadLeader = _allUnits select {
+					isPlayer _x &&
 					_x != player &&
 					getPlayerID _x == _squadLeaderID &&
 					(_x distance2D _pos) < _radius
