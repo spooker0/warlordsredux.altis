@@ -18,6 +18,11 @@ while { !BIS_WL_missionEnd } do {
 	private _info = _sector call WL2_fnc_getCapValues;
 	private _sortedInfo = [_info, [], { _x # 1 }, "DESCEND"] call BIS_fnc_sortBy;
 
+	if (_sortedInfo # 0 # 1 == _sortedInfo # 1 # 1) then {
+		_winner = independent;
+		_winningScore = 100;
+	};
+
 	private _topEntry = _sortedInfo # 0;
 	private _winner = _topEntry # 0;
 	private _winningScore = _topEntry # 1;
@@ -32,7 +37,7 @@ while { !BIS_WL_missionEnd } do {
 		};
 	} else {
 		if (_captureProgress > 0) then {
-			_captureProgress = _captureProgress - _progressMovement;
+			_captureProgress = _captureProgress - _progressMovement * 0.2;
 		} else {
 			if (_winner != independent) then {
 				_captureProgress = 0;
