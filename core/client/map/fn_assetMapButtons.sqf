@@ -28,7 +28,7 @@ if !(isPlayer _asset) then {
 };
 
 private _accessControl = _asset getVariable ["WL2_accessControl", -1];
-if (_accessControl != -1 && !(isPlayer _asset)) then {
+if (_accessControl != -1 && !(_asset isKindOf "Man")) then {
     private _lockText = [_accessControl] call WL2_fnc_assetButtonAccessControl;
 
     [_lockText, {
@@ -47,7 +47,7 @@ private _hasCrew = count ((crew _asset) select {
     !(typeof _x in ["B_UAV_AI", "O_UAV_AI"]) && getPlayerUID player != (_x getVariable ["BIS_WL_ownerAsset", "123"])
 }) > 0;
 private _isNotFlying = (getPosATL _asset # 2) < 10;
-if (_hasCrew && _isNotFlying && !(isPlayer _asset)) then {
+if (_hasCrew && _isNotFlying && !(_asset isKindOf "Man")) then {
     ["KICK", {
         params ["_asset"];
         if ((getPosATL _asset # 2) < 10) then {
