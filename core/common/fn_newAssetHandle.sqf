@@ -100,7 +100,8 @@ if (_asset isKindOf "Man") then {
 
 		// Radars
 		case "B_Radar_System_01_F";
-		case "O_Radar_System_02_F": {
+		case "O_Radar_System_02_F";
+		case "I_E_Radar_System_01_F": {
 			_asset setVariable ["radarRotation", false, true];
 			[_asset] remoteExec ["WL2_fnc_radarRotateAction", 0, true];
 
@@ -126,7 +127,8 @@ if (_asset isKindOf "Man") then {
 
 		// Suicide drones
 		case "B_UAV_06_F";
-		case "O_UAV_06_F": {
+		case "O_UAV_06_F";
+		case "I_UAV_06_F": {
 			waitUntil {sleep 0.1; !(isNull group _asset)};
 			_asset spawn {
 				params ["_asset"];

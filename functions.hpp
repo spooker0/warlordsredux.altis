@@ -115,6 +115,7 @@ class CfgFunctions {
 			class onPause {};
 			class pingFix {};
 			class pingFixInit {};
+			class playerEventHandlers {};
 			class prompt {};
 			class repackMagazines {};
 			class rita {};

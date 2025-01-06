@@ -2,7 +2,11 @@
 params ["_asset", "_side"];
 
 private _outerMarkerName = format ["BIS_WL_jammerMarkerOuter_%1", netId _asset];
-private _jamColor = if (_side == west) then { "ColorWEST" } else { "ColorEAST" };
+private _jamColor = switch (_side) do {
+    case west: { "ColorWEST" };
+    case east: { "ColorEAST" };
+    case independent: { "ColorGUER" };
+};
 
 createMarkerLocal [_outerMarkerName, _asset];
 _outerMarkerName setMarkerShapeLocal "ELLIPSE";

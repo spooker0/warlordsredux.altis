@@ -11,10 +11,9 @@ private _deployActionId = _asset addAction [
             playSound "AddItemFailed";
         };
 
-        private _timeSinceLastLoad = serverTime - (_asset getVariable ["WL2_lastLoadedTime", 0]);
-        private _timeRemaining = 10 - _timeSinceLastLoad;
-        if (_timeRemaining > 0) exitWith {
-            systemChat format ["Please wait %1 seconds to load/unload. (This prevents despawning.)", round _timeRemaining];
+        private _timeRemainingParent = 10 - (serverTime - (_asset getVariable ["WL2_lastLoadedTime", 0]));
+        if (_timeRemainingParent > 0) exitWith {
+            systemChat format ["Please wait %1 seconds to load/unload. (This prevents despawning.)", round _timeRemainingParent];
             playSound "AddItemFailed";
         };
         _asset setVariable ["WL2_lastLoadedTime", serverTime];
@@ -26,6 +25,13 @@ private _deployActionId = _asset addAction [
 
             if (count _nearLoadableEntities > 0) then {
                 private _assetToLoad = _nearLoadableEntities select 0;
+
+                private _timeRemainingChild = 10 - (serverTime - (_assetToLoad getVariable ["WL2_lastLoadedTime", 0]));
+                if (_timeRemainingChild > 0) exitWith {
+                    systemChat format ["Please wait %1 seconds to load/unload. (This prevents despawning.)", round _timeRemainingChild];
+                    playSound "AddItemFailed";
+                };
+                _assetToLoad setVariable ["WL2_lastLoadedTime", serverTime];
 
                 if ((_asset canVehicleCargo _assetToLoad) # 0) then {
                     _asset setVehicleCargo _assetToLoad;

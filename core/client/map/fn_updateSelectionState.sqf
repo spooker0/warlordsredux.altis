@@ -20,7 +20,7 @@ switch (BIS_WL_currentSelection) do {
         BIS_WL_selection_dimSectors = false;
     };
     case WL_ID_SELECTION_FAST_TRAVEL: {
-        BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 2) select {
+        BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 0) select {
             (_x getVariable ["BIS_WL_owner", independent]) == (side (group player))
         };
         BIS_WL_selection_showLinks = false;

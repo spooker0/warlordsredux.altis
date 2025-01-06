@@ -125,7 +125,11 @@ class FixedWing {
         };
     }; // "A-164 Wipeout (CAS)"
 
-    class I_Plane_Fighter_04_F {
+    class B_Plane_Fighter_04_F {
+        name = "A-149 Gryphon";
+        description = "A-149 Gryphon is a light multirole aircraft.";
+        spawn = "I_Plane_Fighter_04_F";
+
         cost = 23000;
         requirements[] = {"A"};
         textures[] = {

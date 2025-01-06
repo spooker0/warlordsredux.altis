@@ -16,7 +16,7 @@ if (_owner == BIS_WL_playerSide || {BIS_WL_playerSide in _previousOwners}) then 
 	_mrkrArea setMarkerBrushLocal "Border";
 };
 
-if (BIS_WL_playerSide in (_sector getVariable ["BIS_WL_revealedBy", []])) then {
+if (BIS_WL_playerSide in (_sector getVariable ["BIS_WL_revealedBy", []]) || BIS_WL_playerSide == independent) then {
 	if (_sector in WL_BASES) then {
 		_mrkrMain setMarkerSizeLocal [WL_BASE_ICON_SIZE, WL_BASE_ICON_SIZE];
 	};

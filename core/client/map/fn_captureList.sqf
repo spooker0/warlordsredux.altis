@@ -18,7 +18,7 @@ while { !BIS_WL_missionEnd } do {
 	private _side = BIS_WL_playerSide;
 	private _sectorsBeingCaptured = BIS_WL_allSectors select {
 		private _isBeingCaptured = _x getVariable ["BIS_WL_captureProgress", 0] > 0;
-		private _revealed = _side in (_x getVariable ["BIS_WL_revealedBy", []]);
+		private _revealed = _side in (_x getVariable ["BIS_WL_revealedBy", []]) || _side == independent;
 		_isBeingCaptured && _revealed;
 	};
 
@@ -34,11 +34,12 @@ while { !BIS_WL_missionEnd } do {
 		private _capturingTeam = _x getVariable ["BIS_WL_capturingTeam", independent];
 		private _captureProgress = (_x getVariable ["BIS_WL_captureProgress", 0]) * 100;
 		private _displayPercent = _captureProgress toFixed 1;
-		_captureIndicatorText = if (_capturingTeam == west) then {
-			_captureIndicatorText + format ["<t size='1.2' shadow='2' color='#004d99'>%1: %2%3</t><br/>", _sectorName, _displayPercent, "%"];
-		} else {
-			_captureIndicatorText + format ["<t size='1.2' shadow='2' color='#ff4b4b'>%1: %2%3</t><br/>", _sectorName, _displayPercent, "%"];
+		private _captureColor = switch (_capturingTeam) do {
+			case west: { "#004d99" };
+			case east: { "#ff4b4b" };
+			case independent: { "#00a300" };
 		};
+		_captureIndicatorText = _captureIndicatorText + format ["<t size='1.2' shadow='2' color='%1'>%2: %3%4</t><br/>", _captureColor, _sectorName, _displayPercent, "%"];
 	} forEach _sectorsBeingCaptured;
 
 	_indicator ctrlSetStructuredText (parseText _captureIndicatorText);

@@ -66,7 +66,7 @@ private _eligibleEntitiesInArea = _allInArea select {
 };
 
 private _vehicleCapValueList = serverNamespace getVariable "WL2_cappingValues";
-private _disallowManList = ["B_UAV_AI", "O_UAV_AI"];
+private _disallowManList = ["B_UAV_AI", "O_UAV_AI", "I_UAV_AI"];
 private _sideCapValues = createHashMap;
 {
 	private _unit = _x;

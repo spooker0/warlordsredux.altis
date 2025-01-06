@@ -19,10 +19,16 @@ if (isNull (findDisplay 602)) then {
 				removeVest player;
 			};
 			if !(headgear player in (getArray (missionConfigFile >> "arsenalConfig" >> _side >> "Helmets"))) then {
-				if (side player == west) then {
-					player addHeadgear "H_HelmetB";
-				} else {
-					player addHeadgear "H_HelmetO_ocamo";
+				switch (BIS_WL_playerSide) do {
+					case west: {
+						player addHeadgear "H_HelmetB";
+					};
+					case east: {
+						player addHeadgear "H_HelmetO_ocamo";
+					};
+					case independent: {
+						player addHeadgear "H_HelmetIA";
+					};
 				};
 			};
 			if !(isNull (findDisplay 602)) then {

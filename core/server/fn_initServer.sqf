@@ -1,3 +1,5 @@
+#include "..\warlords_constants.inc"
+
 ["server_init"] call BIS_fnc_startLoadingScreen;
 
 {createCenter _x} forEach [west, east, resistance, civilian];
@@ -13,6 +15,20 @@ civilian setFriend [resistance, 1];
 west setFriend [civilian, 1];
 east setFriend [civilian, 1];
 resistance setFriend [civilian, 1];
+
+if (WL_FACTION_THREE_ENABLED) then {
+	{
+		_x setVariable ["WL2_isPlayableGreen", true];
+		_x setVehiclePosition [[-1000, -1000, 0], [], 0, "NONE"];
+		_x allowDamage false;
+	} forEach (units independent);
+} else {
+	{
+		private _group = group _x;
+		_group deleteGroupWhenEmpty true;
+		deleteVehicle _x;
+	} forEach (units independent);
+};
 
 call SQD_fnc_initServer;
 
@@ -30,7 +46,9 @@ if !(isDedicated) then {waitUntil {!isNull player && {isPlayer player}}};
 call WL2_fnc_sectorsInitServer;
 "setup" call WL2_fnc_handleRespawnMarkers;
 if !(isDedicated) then {
-	{_x call WL2_fnc_parsePurchaseList} forEach BIS_WL_competingSides;
+	{
+		_x call WL2_fnc_parsePurchaseList;
+	} forEach BIS_WL_sidesArray;
 };
 0 spawn WL2_fnc_detectNewPlayers;
 ["server", true] call WL2_fnc_updateSectorArrays;
@@ -41,7 +59,18 @@ if !(isDedicated) then {
 0 spawn WL2_fnc_WLAC;
 call WL2_fnc_processRunways;
 
-setTimeMultiplier 8;
+0 spawn {
+	while {!BIS_WL_missionEnd} do {
+		if (dayTime >= 18 || dayTime <= 6) then {
+			setTimeMultiplier 60;
+		} else {
+			setTimeMultiplier 1;
+		};
+
+		sleep 60;
+	};
+};
+
 0 spawn {
 	while {!BIS_WL_missionEnd} do {
 		_overcastPreset = random 1;

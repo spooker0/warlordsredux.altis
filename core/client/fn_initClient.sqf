@@ -54,7 +54,7 @@ if ((call BIS_fnc_admin) == 0) then {
 	};
 };
 
-if !(BIS_WL_playerSide in BIS_WL_competingSides) exitWith {
+if !(BIS_WL_playerSide in BIS_WL_sidesArray) exitWith {
 	["client_init"] call BIS_fnc_endLoadingScreen;
 	["Warlords error: Your unit is not a Warlords competitor"] call BIS_fnc_error;
 };
@@ -271,11 +271,6 @@ player setUserActionText [_squadActionId, _squadActionText, "<img size='2' image
 0 spawn WL2_fnc_mineLimitHint;
 
 call WL2_fnc_spectrumAction;
-
-player addEventHandler ["HandleRating", {
-	params ["_unit", "_rating"];
-	0;
-}];
 
 call SQD_fnc_initClient;
 

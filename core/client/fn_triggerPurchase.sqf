@@ -144,5 +144,25 @@ switch (_className) do {
     case "RespawnPod" : {"RequestMenu_close" call WL2_fnc_setupUI; [player, "orderFTPod"] remoteExec ["WL2_fnc_handleClientRequest", 2]};
     case "RespawnPodFT" : {0 spawn WL2_fnc_orderFTPodFT};
     case "welcomeScreen": {0 spawn WL2_fnc_welcome};
+    case "switchToGreen": {
+        private _greenUnits = allUnits select {
+            (_x getVariable ["WL2_isPlayableGreen", false]) && !isPlayer _x;
+        };
+        if (count _greenUnits == 0) exitWith {};
+
+        selectPlayer (_greenUnits # 0);
+        BIS_WL_playerSide = independent;
+        ["client", true] call WL2_fnc_updateSectorArrays;
+        {
+            [_x, _x getVariable "BIS_WL_owner", []] call WL2_fnc_sectorMarkerUpdate;
+        } forEach BIS_WL_allSectors;
+
+        player allowDamage true;
+
+        createMarkerLocal ["respawn_guerrila", ([independent] call WL2_fnc_getSideBase)];
+        call WL2_fnc_playerEventHandlers;
+
+        forceRespawn player;
+    };
     default {[_className, _cost, _category, _requirements, _offset] call WL2_fnc_requestPurchase};
 };

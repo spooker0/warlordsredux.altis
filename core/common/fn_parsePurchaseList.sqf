@@ -215,6 +215,9 @@ _strategyArr pushBack ["wipeMap", 0, [], "Wipe Map", "\A3\Data_F_Warlords\Data\p
 _strategyArr pushBack ["RemoveUnits", 0, [], localize "STR_A3_WL_feature_dismiss_selected", "\A3\Data_F_Warlords\Data\preview_empty.jpg", ""];
 _strategyArr pushBack ["welcomeScreen", 0, [], localize "STR_A3_WL_infoScreen", "img\wl_logo_ca.paa", ""];
 _strategyArr pushBack ["forfeitVote", 0, [], localize "STR_A3_WL_feature_OrderForfeit", "\a3\data_f\flags\flag_white_dmg_co.paa", localize "STR_A3_WL_feature_OrderForfeit_info"];
+if (WL_FACTION_THREE_ENABLED) then {
+	_strategyArr pushBack ["switchToGreen", 0, [], "Switch to Green", "\a3\data_f\flags\flag_green_co.paa", "Switch to Green side"];
+};
 _sortedArray pushBack _strategyArr;
 
 missionNamespace setVariable [format ["BIS_WL_purchasable_%1", _side], _sortedArray];

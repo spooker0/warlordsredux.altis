@@ -1,8 +1,16 @@
+#include "core\warlords_constants.inc"
+
 params ["_newUnit", "_oldUnit", "_respawn", "_respawnDelay"];
 
 private _newGroup = group _newUnit;
 if (leader _newGroup != _newUnit) then {
 	[_newGroup, _newUnit] remoteExec ["selectLeader", groupOwner _newGroup];
+};
+
+if (WL_FACTION_THREE_ENABLED) then {
+	if (side group player == independent) then {
+		"respawn_guerrila" setMarkerPosLocal ([independent] call WL2_fnc_getSideBase);
+	};
 };
 
 _var = format ["BIS_WL_ownedVehicles_%1", getPlayerUID _newUnit];
@@ -26,11 +34,6 @@ player setUserActionText [_squadActionId, _squadActionText, "<img size='2' image
 
 player setVariable ["BIS_WL_isOrdering", false, [2, clientOwner]];
 0 spawn WL2_fnc_factionBasedClientInit;
-
-player addEventHandler ["HandleRating", {
-	params ["_unit", "_rating"];
-	0;
-}];
 
 private _penaltyCheck = profileNameSpace getVariable ["teamkill_penalty", createHashMap];
 private _sessionID = missionNamespace getVariable ["sessionID", -1];

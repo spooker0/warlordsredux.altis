@@ -4,6 +4,17 @@
 0 spawn {
     private _lastTargetFriendly = objNull;
     while {!BIS_WL_missionEnd} do {
+        if !(BIS_WL_playerSide in BIS_WL_competingSides) exitWith {
+            WL_VotePhase = 0;
+            private _voteDisplay = uiNamespace getVariable ["RscWLVoteDisplay", objNull];
+            if (!isNull _voteDisplay) then {
+                private _indicator = _voteDisplay displayCtrl 7002;
+                private _indicatorBackground = _voteDisplay displayCtrl 7003;
+                _indicator ctrlSetText "";
+                _indicatorBackground ctrlSetBackgroundColor [0, 0, 0, 0];
+            };
+        };
+
         if (isNull WL_TARGET_FRIENDLY) then {
             call WL2_fnc_sectorVoteDisplay;
         };
@@ -33,6 +44,10 @@
 
 // Checks for voting phase
 while {!BIS_WL_missionEnd} do {
+    if !(BIS_WL_playerSide in BIS_WL_competingSides) exitWith {
+        WL_VotePhase = 0;
+    };
+
     private _isVoting = isNull WL_TARGET_FRIENDLY;
     private _isVoted = !isNull BIS_WL_targetVote;
     private _isRegularSquadMember = ["isRegularSquadMember", [getPlayerID player]] call SQD_fnc_client;

@@ -9,11 +9,6 @@ _sleepDuration = 600;
 _currentPos = getPos player;
 _currentDir = getDir player;
 
-player addEventHandler ["Fired", {
-	params ["_unit", "_object", "_score"];
-	WAS_fired = true;
-}];
-
 while {!BIS_WL_missionEnd} do {
 	sleep (if (player getVariable ["BIS_WL_incomeBlocked", false]) then {10} else {_sleepDuration});
 	_inActScore = 5;
@@ -42,7 +37,7 @@ while {!BIS_WL_missionEnd} do {
 
 	if (VIC_ENTERED) then {
 		_inActScore = _inActScore - 5;
-		VIC_ENTERED = false;		
+		VIC_ENTERED = false;
 	};
 
 	if (WAS_store) then {

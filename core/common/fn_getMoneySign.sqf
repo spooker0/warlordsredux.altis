@@ -1,7 +1,13 @@
 params ["_team"];
 
-if (_team == WEST) then {
-    "$"
-} else {
-    "¥"
+switch (_team) do {
+    case WEST: {
+        "$"
+    };
+    case EAST: {
+        "¥"
+    };
+    case INDEPENDENT: {
+        "$"
+    };
 };

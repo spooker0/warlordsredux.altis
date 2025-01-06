@@ -7,7 +7,7 @@ while { !BIS_WL_missionEnd } do {
 	{
 		_x call WL2_fnc_setupNewWarlord;
 	} forEach _newPlayers;
-	
+
 	private _thresholds = [
 		[20, 1],
 		[15, 2],
@@ -30,7 +30,7 @@ while { !BIS_WL_missionEnd } do {
 		} forEach _thresholds;
 
 		missionNamespace setVariable [format ["BIS_WL_maxSubordinates_%1", _side], _value, true];
-	} forEach [west, east];
+	} forEach [west, east, independent];
 
 	uiSleep 1;
 };
