@@ -13,7 +13,7 @@ private _assetsRemain = true;
 
 while {_assetsRemain} do {
 	private _targetedSectors = [
-		missionNamespace getVariable "BIS_WL_currentTarget_west", 
+		missionNamespace getVariable "BIS_WL_currentTarget_west",
 		missionNamespace getVariable "BIS_WL_currentTarget_east"
 	] select {!isNull _x};
 	private _sectorIsTargeted = _parentSector in _targetedSectors;
@@ -37,8 +37,10 @@ while {_assetsRemain} do {
 	};
 
 	sleep 30;
-	
+
 	_soldierList = _soldierList select {alive _x};
-	_vehicleList = _vehicleList select {alive _x};
+	_vehicleList = _vehicleList select {
+		alive _x && _x getVariable ["BIS_WL_ownerAsset", "123"] == "123"
+	};
 	_assetsRemain = count _soldierList > 0 || count _vehicleList > 0;
 };
