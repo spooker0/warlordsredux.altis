@@ -357,7 +357,7 @@ class Primary {
     class Promet_SG_RCO {
         name = "Promet SG (RCO)";
         item = "arifle_MSBS65_UBS_F";
-        level = 11
+        level = 11;
         cost = 50;
         magazines[] = {
             "30Rnd_65x39_caseless_msbs_mag_Tracer",

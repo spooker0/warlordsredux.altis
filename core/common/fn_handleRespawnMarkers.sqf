@@ -20,7 +20,7 @@ switch (_mode) do {
 			};
 		};
 		if (isServer) then {
-			{_x call _spawnMarkers} forEach BIS_WL_sidesArray;
+			{_x call _spawnMarkers} forEach BIS_WL_competingSides;
 		} else {
 			BIS_WL_playerSide call _spawnMarkers;
 		};

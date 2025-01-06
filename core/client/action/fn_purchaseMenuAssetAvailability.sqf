@@ -30,7 +30,7 @@ if (_ret) then {
 	private _isInHomeBase = player inArea (_homeBase getVariable "objectAreaComplete");
 	private _nearbyEnemies = count _enemiesNearPlayer > 0 && !_isInHomeBase;
 
-	private _excludeForIndependent = ["FTConflict", "TargetReset", "forfeitVote", "RespawnVic", "RespawnVicFT", "RespawnPod", "RespawnPodFT"];
+	private _excludeForIndependent = ["Scan", "FTConflict", "TargetReset", "forfeitVote", "RespawnVic", "RespawnVicFT", "RespawnPod", "RespawnPodFT", "switchToGreen"];
 	if (BIS_WL_playerSide == independent && _class in _excludeForIndependent) exitWith {
 		_ret = false;
 		_tooltip = "This action is not available for Independents.";
@@ -231,6 +231,16 @@ if (_ret) then {
 			if !(_access # 0) exitWith {
 				_ret = false;
 				_tooltip = format ["You do not have access to this vehicle. %1", _accessControl # 1];
+			};
+		};
+		case "switchToGreen" : {
+			private _allPlayers = call BIS_fnc_listPlayers;
+			private _greenPlayers = _allPlayers select {
+				side _x == independent;
+			};
+			if (count _greenPlayers > 3) exitWith {
+				_ret = false;
+				_tooltip = "There are too many Independents.";
 			};
 		};
 		default {

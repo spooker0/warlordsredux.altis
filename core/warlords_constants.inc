@@ -34,7 +34,7 @@
 #define WL_MAINTENANCE_COOLDOWN_REARM_Artillery 1800
 #define WL_MAINTENANCE_COOLDOWN_REARM_VLS 2700
 #define WL_TARGET_RESET_VOTING_TIME 60
-#define WL_TARGET_FRIENDLY (missionNamespace getVariable format ["BIS_WL_currentTarget_%1", BIS_WL_playerSide])
+#define WL_TARGET_FRIENDLY (missionNamespace getVariable [format ["BIS_WL_currentTarget_%1", BIS_WL_playerSide], objNull])
 #define WL_TARGET_ENEMY (missionNamespace getVariable format ["BIS_WL_currentTarget_%1", BIS_WL_enemySide])
 #define WL_CONTROL_MAP (uiNamespace getVariable ["BIS_WL_mapControl", controlNull])
 #define WL_PLAYER_REQUISITION_LIST (missionNamespace getVariable format ["BIS_WL_purchasable_%1", BIS_WL_playerSide])
@@ -47,3 +47,4 @@
 #define WL_JAMMER_HARDLINE_RANGE 20
 #define WL_HARD_AI_MODE false
 #define WL_MANPOWER_REFRESH_COOLDOWN 300
+#define WL_FACTION_THREE_ENABLED true

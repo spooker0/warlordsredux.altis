@@ -1,3 +1,5 @@
+#include "..\warlords_constants.inc"
+
 ["server_init"] call BIS_fnc_startLoadingScreen;
 
 {createCenter _x} forEach [west, east, resistance, civilian];
@@ -13,6 +15,20 @@ civilian setFriend [resistance, 1];
 west setFriend [civilian, 1];
 east setFriend [civilian, 1];
 resistance setFriend [civilian, 1];
+
+if (WL_FACTION_THREE_ENABLED) then {
+	{
+		_x setVariable ["WL2_isPlayableGreen", true];
+		_x setVehiclePosition [[-1000, -1000, 0], [], 0, "NONE"];
+		_x allowDamage false;
+	} forEach (units independent);
+} else {
+	{
+		private _group = group _x;
+		_group deleteGroupWhenEmpty true;
+		deleteVehicle _x;
+	} forEach (units independent);
+};
 
 call SQD_fnc_initServer;
 
@@ -51,7 +67,7 @@ call WL2_fnc_processRunways;
 			setTimeMultiplier 1;
 		};
 
-		sleep 300;
+		sleep 60;
 	};
 };
 

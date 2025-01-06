@@ -97,16 +97,3 @@ inGameUISetEventHandler ["Action", '
         };
     };
 '];
-
-player addEventHandler ["InventoryOpened", {
-	params ["_unit", "_container", "_secondaryContainer"];
-
-    private _access = [_container, player, "cargo"] call WL2_fnc_accessControl;
-    if !(_access # 0) then {
-        systemChat format ["Inventory locked. (%1)", _access # 1];
-        playSoundUI ["AddItemFailed"];
-        true;
-    } else {
-        false;
-    };
-}];

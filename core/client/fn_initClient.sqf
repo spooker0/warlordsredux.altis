@@ -272,11 +272,6 @@ player setUserActionText [_squadActionId, _squadActionText, "<img size='2' image
 
 call WL2_fnc_spectrumAction;
 
-player addEventHandler ["HandleRating", {
-	params ["_unit", "_rating"];
-	0;
-}];
-
 call SQD_fnc_initClient;
 
 call WL2_fnc_pingFixInit;

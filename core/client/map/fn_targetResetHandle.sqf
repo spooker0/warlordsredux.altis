@@ -7,13 +7,24 @@ BIS_WL_playerSide spawn {
 	_target = objNull;
 
 	while {!BIS_WL_missionEnd} do {
-		waitUntil {sleep WL_TIMEOUT_STANDARD; !isNull WL_TARGET_FRIENDLY};
+		if !(BIS_WL_playerSide in BIS_WL_competingSides) exitWith {};
+
+		waitUntil {
+			sleep WL_TIMEOUT_STANDARD;
+			!isNull WL_TARGET_FRIENDLY
+		};
 
 		_target = WL_TARGET_FRIENDLY;
-		waitUntil {sleep WL_TIMEOUT_STANDARD; isNull WL_TARGET_FRIENDLY};
+		waitUntil {
+			sleep WL_TIMEOUT_STANDARD;
+			isNull WL_TARGET_FRIENDLY
+		};
 
 		_t = serverTime + 3;
-		waitUntil {sleep WL_TIMEOUT_SHORT; serverTime > _t || {(_target getVariable "BIS_WL_owner") == BIS_WL_playerSide || {(missionNamespace getVariable [_varName, false])}}};
+		waitUntil {
+			sleep WL_TIMEOUT_SHORT;
+			serverTime > _t || (_target getVariable "BIS_WL_owner") == BIS_WL_playerSide || (missionNamespace getVariable [_varName, false])
+		};
 
 		if (missionNamespace getVariable [_varName, FALSE]) then {
 			"Reset" call WL2_fnc_announcer;
