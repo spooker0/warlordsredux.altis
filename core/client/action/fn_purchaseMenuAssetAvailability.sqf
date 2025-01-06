@@ -209,7 +209,8 @@ if (_ret) then {
 
 			private _isTransporting = _vehicle getVariable ["WL2_transporting", false];
 
-			if (_outOfRange || _hasNoLock || _isTransporting) exitWith {
+			private _isVehicle = vehicle _vehicle == _vehicle;
+			if (_outOfRange || _hasNoLock || _isTransporting || !_isVehicle) exitWith {
 				_ret = false;
 				_tooltip = "Please point at a valid vehicle.";
 			};

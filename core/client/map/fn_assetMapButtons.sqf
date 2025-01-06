@@ -47,7 +47,7 @@ private _hasCrew = count ((crew _asset) select {
     !(typeof _x in ["B_UAV_AI", "O_UAV_AI"]) && getPlayerUID player != (_x getVariable ["BIS_WL_ownerAsset", "123"])
 }) > 0;
 private _isNotFlying = (getPosATL _asset # 2) < 10;
-if (_hasCrew && _isNotFlying) then {
+if (_hasCrew && _isNotFlying && !(isPlayer _asset)) then {
     ["KICK", {
         params ["_asset"];
         if ((getPosATL _asset # 2) < 10) then {
