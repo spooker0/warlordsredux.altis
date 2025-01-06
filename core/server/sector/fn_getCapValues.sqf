@@ -82,7 +82,8 @@ private _sideCapValues = createHashMap;
 		private _aliveCrew = (crew _unit) select { alive _x && !(typeOf _x in _disallowManList) };
 		private _crewCount = count _aliveCrew;
 		if (_crewCount > 0) then {
-			_vehicleCapValueList getOrDefault [typeOf _unit, 0];
+			private _assetActualType = _unit getVariable ["WL2_orderedClass", typeOf _unit];
+			_vehicleCapValueList getOrDefault [_assetActualType, 0];
 		} else {
 			0;
 		};
