@@ -92,6 +92,16 @@ inGameUISetEventHandler ["Action", '
                 false;
             };
         };
+        case "TakeVehicleControl": {
+            private _bannedVehicles = ["C_Plane_Civil_01_F", "I_C_Plane_Civil_01_F"];
+            if (typeof _target in _bannedVehicles) then {
+                systemChat "You cannot take control of this vehicle.";
+                playSoundUI ["AddItemFailed"];
+                true;
+            } else {
+                false;
+            };
+        };
         default {
             false;
         };
