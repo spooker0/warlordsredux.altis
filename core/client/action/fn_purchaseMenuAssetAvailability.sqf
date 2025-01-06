@@ -209,11 +209,15 @@ if (_ret) then {
 
 			private _isTransporting = _vehicle getVariable ["WL2_transporting", false];
 
-			private _isOnFoot = isNull objectParent _vehicle;
-
-			if (_outOfRange || _hasNoLock || _isTransporting || _isOnFoot) exitWith {
+			if (_outOfRange || _hasNoLock || _isTransporting) exitWith {
 				_ret = false;
 				_tooltip = "Please point at a valid vehicle.";
+			};
+
+			private _isOnFoot = isNull objectParent player;
+			if (!_isOnFoot) exitWith {
+				_ret = false;
+				_tooltip = localize "STR_A3_WL_fasttravel_restr3";
 			};
 
 			private _access = [_vehicle, player, "driver"] call WL2_fnc_accessControl;
