@@ -13,14 +13,14 @@ switch (_mode) do {
 			if (_baseSpotsCnt > WL_RESPAWN_MARKERS_CNT) then {
 				_baseSpots resize WL_RESPAWN_MARKERS_CNT;
 			};
-			
+
 			_i = 1;
 			for "_i" from 1 to WL_RESPAWN_MARKERS_CNT do {
 				createMarkerLocal [_respawnMarkerFormat + str _i, if (_baseSpotsCnt == WL_RESPAWN_MARKERS_CNT) then {_baseSpots # _i} else {selectRandom _baseSpots}];
 			};
 		};
 		if (isServer) then {
-			{_x call _spawnMarkers} forEach BIS_WL_competingSides;
+			{_x call _spawnMarkers} forEach BIS_WL_sidesArray;
 		} else {
 			BIS_WL_playerSide call _spawnMarkers;
 		};
@@ -31,7 +31,7 @@ switch (_mode) do {
 		_base = _side call WL2_fnc_getSideBase;
 		_baseArea = +(_base getVariable "objectArea");
 		_markerLocArr = [[_base, (_baseArea # 0) + WL_BASE_DANGER_SPAWN_RANGE, (_baseArea # 1) + WL_BASE_DANGER_SPAWN_RANGE, _baseArea # 2, _baseArea # 3], 50] call WL2_fnc_findSpawnPositions;
-		
+
 		_i = 1;
 		for "_i" from 1 to WL_RESPAWN_MARKERS_CNT do {
 			_mrkr = (_respawnMarkerFormat + str _i);
@@ -43,7 +43,7 @@ switch (_mode) do {
 		_respawnMarkerFormat = format ["respawn_%1_", _sideID];
 		_base = _side call WL2_fnc_getSideBase;
 		_baseSpots = [_base, 0, true] call WL2_fnc_findSpawnPositions;
-		
+
 		_i = 1;
 		for "_i" from 1 to WL_RESPAWN_MARKERS_CNT do {
 			_mrkr = (_respawnMarkerFormat + str _i);

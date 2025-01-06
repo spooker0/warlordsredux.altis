@@ -30,6 +30,12 @@ if (_ret) then {
 	private _isInHomeBase = player inArea (_homeBase getVariable "objectAreaComplete");
 	private _nearbyEnemies = count _enemiesNearPlayer > 0 && !_isInHomeBase;
 
+	private _excludeForIndependent = ["FTConflict", "TargetReset", "forfeitVote", "RespawnVic", "RespawnVicFT", "RespawnPod", "RespawnPodFT"];
+	if (BIS_WL_playerSide == independent && _class in _excludeForIndependent) exitWith {
+		_ret = false;
+		_tooltip = "This action is not available for Independents.";
+	};
+
 	switch (_class) do {
 		case "FTSeized": {
 			if (vehicle player != player) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_fasttravel_restr3"};

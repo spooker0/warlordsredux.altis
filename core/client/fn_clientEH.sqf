@@ -171,9 +171,9 @@ _fullList = (missionNamespace getVariable (format ["BIS_WL_purchasable_%1", side
 		{
 			_x params["_name", "_cost"];
 			priceHash set [_name, _cost]
-		}forEach _category;
+		} forEach _category;
 	};
-}forEach _fullList;
+} forEach _fullList;
 
 addMissionEventHandler ["EntityCreated", {
 	params ["_entity"];

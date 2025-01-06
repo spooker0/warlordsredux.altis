@@ -1,5 +1,9 @@
 #include "..\..\warlords_constants.inc"
 
+if !(BIS_WL_playerSide in BIS_WL_competingSides) exitWith {
+    WL_VotePhase = 0;
+};
+
 // Ongoing checks for sector target
 0 spawn {
     private _lastTargetFriendly = objNull;

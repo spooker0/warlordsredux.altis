@@ -14,10 +14,16 @@ _asset = [_class, _pos, _direction] call WL2_fnc_createVehicleCorrectly;
 private _side = side group _sender;
 private _assetGrp = createGroup _side;
 
-private _aiUnit = if (_side == west) then {
-	"B_UAV_AI"
-} else {
-	"O_UAV_AI"
+private _aiUnit = switch (_side) do {
+	case west: {
+		"B_UAV_AI"
+	};
+	case east: {
+		"O_UAV_AI"
+	};
+	case independent: {
+		"I_UAV_AI"
+	};
 };
 
 {

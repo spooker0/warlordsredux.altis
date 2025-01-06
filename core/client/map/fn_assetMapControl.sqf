@@ -27,7 +27,7 @@ addMissionEventHandler ["Map", {
 
 				private _allTeamVehicles = missionNamespace getVariable [format ["BIS_WL_%1ownedVehicles", side group player], []];
 				private _allUnits = allUnits select {
-					!(typeOf _x in ["B_UAV_AI", "O_UAV_AI"]) && isNull objectParent _x;
+					!(typeOf _x in ["B_UAV_AI", "O_UAV_AI", "I_UAV_AI"]) && isNull objectParent _x;
 				};
 				private _nearbyAssets = (_allUnits + _allTeamVehicles) select {
 					getPlayerUID player == (_x getVariable ["BIS_WL_ownerAsset", "123"]) &&

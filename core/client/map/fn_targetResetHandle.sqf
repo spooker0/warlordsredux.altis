@@ -1,5 +1,7 @@
 #include "..\..\warlords_constants.inc"
 
+if !(BIS_WL_playerSide in BIS_WL_competingSides) exitWith {};
+
 BIS_WL_playerSide spawn {
 	_varName = format ["BIS_WL_recentTargetReset_%1", _this];
 	_target = objNull;

@@ -36,10 +36,16 @@ private _side = side group _sender;
 private _isAircraft = _asset isKindOf "Air";
 private _variant = missionNamespace getVariable ["WL2_variant", createHashMap] getOrDefault [_orderedClass, 0];
 if (!_isAircraft && _variant != 0) then {
-	private _sideFlag = if (_side == west) then {
-		"\A3\Ui_f\data\Map\Markers\Flags\nato_ca.paa"
-	} else {
-		"\A3\Ui_f\data\Map\Markers\Flags\CSAT_ca.paa"
+	private _sideFlag = switch (_side) do {
+		case west: {
+			"\A3\Ui_f\data\Map\Markers\Flags\nato_ca.paa"
+		};
+		case east: {
+			"\A3\Ui_f\data\Map\Markers\Flags\CSAT_ca.paa"
+		};
+		case independent: {
+			"\A3\Ui_f\data\Map\Markers\Flags\AAF_ca.paa"
+		};
 	};
 
 	private _flagMap = missionNamespace getVariable ["WL2_flagOffsets", createHashMap];

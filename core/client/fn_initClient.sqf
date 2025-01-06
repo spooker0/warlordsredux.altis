@@ -54,7 +54,7 @@ if ((call BIS_fnc_admin) == 0) then {
 	};
 };
 
-if !(BIS_WL_playerSide in BIS_WL_competingSides) exitWith {
+if !(BIS_WL_playerSide in BIS_WL_sidesArray) exitWith {
 	["client_init"] call BIS_fnc_endLoadingScreen;
 	["Warlords error: Your unit is not a Warlords competitor"] call BIS_fnc_error;
 };

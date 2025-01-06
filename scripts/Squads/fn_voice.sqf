@@ -4,6 +4,8 @@
 SQD_AUDIBLE_PLAYERS = createHashMap;
 SQD_SOUND_CHANGES = [];
 
+if (side group player == independent) exitWith {};
+
 0 spawn {
     private _deltaVoice = {
         params ["_player", "_playerId", "_newValue"];

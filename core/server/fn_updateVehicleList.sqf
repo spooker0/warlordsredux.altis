@@ -1,16 +1,22 @@
 private _westOwnedVehicles = [];
 private _eastOwnedVehicles = [];
+private _guerOwnedVehicles = [];
 {
     private _playerVehicleVariable = format ["BIS_WL_ownedVehicles_%1", getPlayerUID _x];
     private _vehicles = missionNamespace getVariable [_playerVehicleVariable, []];
-    private _playerSide = side group _x;
-    if (_playerSide == west) then {
-        _westOwnedVehicles append _vehicles;
-    };
-    if (_playerSide == east) then {
-        _eastOwnedVehicles append _vehicles;
+    switch (side group _x) do {
+        case west: {
+            _westOwnedVehicles append _vehicles;
+        };
+        case east: {
+            _eastOwnedVehicles append _vehicles;
+        };
+        case independent: {
+            _guerOwnedVehicles append _vehicles;
+        };
     };
 } forEach allPlayers;
 
 missionNamespace setVariable ["BIS_WL_westOwnedVehicles", _westOwnedVehicles, true];
 missionNamespace setVariable ["BIS_WL_eastOwnedVehicles", _eastOwnedVehicles, true];
+missionNamespace setVariable ["BIS_WL_guerOwnedVehicles", _guerOwnedVehicles, true];

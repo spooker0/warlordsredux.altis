@@ -25,7 +25,7 @@ _titleBar ctrlCommit 0;
 private _moneySign = [BIS_WL_playerSide] call WL2_fnc_getMoneySign;
 
 private _eligibleFastTravel = (["FTSeized", [], "", "", "", [], 0, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
-private _eligibleSectors = (BIS_WL_sectorsArray # 2) select {
+private _eligibleSectors = (BIS_WL_sectorsArray # 0) select {
     (_x getVariable ["BIS_WL_owner", independent]) == (side (group player))
 };
 if (_eligibleFastTravel && _sector in _eligibleSectors) then {
@@ -33,7 +33,7 @@ if (_eligibleFastTravel && _sector in _eligibleSectors) then {
         params ["_sector"];
         BIS_WL_targetSector = _sector;
         private _eligibleFastTravel = (["FTSeized", [], "", "", "", [], 0, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
-        private _eligibleSectors = (BIS_WL_sectorsArray # 2) select {
+        private _eligibleSectors = (BIS_WL_sectorsArray # 0) select {
             (_x getVariable ["BIS_WL_owner", independent]) == (side (group player))
         };
         if (_eligibleFastTravel && _sector in _eligibleSectors) then {

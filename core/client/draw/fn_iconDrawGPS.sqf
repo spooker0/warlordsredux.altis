@@ -6,7 +6,6 @@ if (
 ) exitWith {};
 
 private _side = BIS_WL_playerSide;
-private _sideN = [east, west] find _side;
 {
 	private _revealTrigger = _x getVariable "BIS_WL_revealTrigger";
 	{
@@ -14,7 +13,11 @@ private _sideN = [east, west] find _side;
 			_size = call WL2_fnc_iconSize;
 			_m drawIcon [
 				call WL2_fnc_iconType,
-				if (side group _x == Independent) then {[0,0.6,0,0.9]} else {if (side group _x == west) then {[0,0.3,0.6,0.9]} else {[0.5,0,0,0.9]}},
+				switch (side group _x) do {
+					case west: { [0, 0.3, 0.6, 0.9] };
+					case east: { [0.5, 0, 0, 0.9] };
+					case independent: { [0, 0.6, 0, 0.9] };
+				},
 				call WL2_fnc_getPos,
 				_size,
 				_size,
@@ -94,10 +97,10 @@ private _sideN = [east, west] find _side;
 	];
 } forEach ((units player) select {(alive _x) && {(isNull objectParent _x) && {_x != player}}});
 
-private _teamVariable = if (_sideN == 0) then {
-	"BIS_WL_eastOwnedVehicles"
-} else {
-	"BIS_WL_westOwnedVehicles"
+private _teamVariable = switch (_side) do {
+	case west: { "BIS_WL_westOwnedVehicles" };
+	case east: { "BIS_WL_eastOwnedVehicles" };
+	case independent: { "BIS_WL_guerOwnedVehicles" };
 };
 private _sideVehicles = missionNamespace getVariable [_teamVariable, []];
 private _vehiclesOnSide = vehicles select { count crew _x > 0 && side _x == _side };

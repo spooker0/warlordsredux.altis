@@ -44,7 +44,7 @@ if (_accessControl != -1 && !(isPlayer _asset)) then {
 };
 
 private _hasCrew = count ((crew _asset) select {
-    !(typeof _x in ["B_UAV_AI", "O_UAV_AI"]) && getPlayerUID player != (_x getVariable ["BIS_WL_ownerAsset", "123"])
+    !(typeof _x in ["B_UAV_AI", "O_UAV_AI", "I_UAV_AI"]) && getPlayerUID player != (_x getVariable ["BIS_WL_ownerAsset", "123"])
 }) > 0;
 private _isNotFlying = (getPosATL _asset # 2) < 10;
 if (_hasCrew && _isNotFlying && !(isPlayer _asset)) then {
@@ -79,7 +79,7 @@ if (typeof _asset in ["O_T_Truck_03_device_ghex_F", "O_Truck_03_device_F", "Land
     }, true] call WL2_fnc_addTargetMapButton;
 };
 
-if (typeof _asset in ["B_Radar_System_01_F", "O_Radar_System_01_F"]) then {
+if (typeof _asset in ["B_Radar_System_01_F", "O_Radar_System_01_F", "I_E_Radar_System_01_F"]) then {
     private _radarRotateText = [_asset] call WL2_fnc_assetButtonRadarRotate;
 
     [_radarRotateText, {

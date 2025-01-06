@@ -30,7 +30,9 @@ if !(isDedicated) then {waitUntil {!isNull player && {isPlayer player}}};
 call WL2_fnc_sectorsInitServer;
 "setup" call WL2_fnc_handleRespawnMarkers;
 if !(isDedicated) then {
-	{_x call WL2_fnc_parsePurchaseList} forEach BIS_WL_competingSides;
+	{
+		_x call WL2_fnc_parsePurchaseList;
+	} forEach BIS_WL_sidesArray;
 };
 0 spawn WL2_fnc_detectNewPlayers;
 ["server", true] call WL2_fnc_updateSectorArrays;
@@ -41,7 +43,18 @@ if !(isDedicated) then {
 0 spawn WL2_fnc_WLAC;
 call WL2_fnc_processRunways;
 
-setTimeMultiplier 8;
+0 spawn {
+	while {!BIS_WL_missionEnd} do {
+		if (dayTime >= 18 || dayTime <= 6) then {
+			setTimeMultiplier 60;
+		} else {
+			setTimeMultiplier 1;
+		};
+
+		sleep 300;
+	};
+};
+
 0 spawn {
 	while {!BIS_WL_missionEnd} do {
 		_overcastPreset = random 1;
