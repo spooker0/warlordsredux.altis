@@ -197,7 +197,11 @@ if (_asset isKindOf "Man") then {
 		["B_Slingload_01_Medevac_F", true]
 	];
 	if !(_notLockableVehicles getOrDefault [typeOf _asset, false]) then {
-		_asset setVariable ["WL2_accessControl", 4, true];
+		if (_asset isKindOf "ReammoBox_F") then {
+			_asset setVariable ["WL2_accessControl", 2, true];
+		} else {
+			_asset setVariable ["WL2_accessControl", 4, true];
+		};
 		[_asset] remoteExec ["WL2_fnc_vehicleLockAction", 0, true];
 	};
 

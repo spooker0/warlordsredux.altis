@@ -20,7 +20,7 @@ if (_class isKindOf "Man") then {
 		_offset = [0, 8, 0];
 	};
 
-	private _deploymentResult = [_class, _orderedClass, _offset, 100] call WL2_fnc_deployment;
+	private _deploymentResult = [_class, _orderedClass, _offset, 100, false] call WL2_fnc_deployment;
 
 	if (_deploymentResult # 0) then {
 		playSound "assemble_target";

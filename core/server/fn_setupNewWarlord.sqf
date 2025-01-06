@@ -31,7 +31,8 @@ if (_boundToTeam) then {
 	missionNamespace setVariable [_varSwitch, (!_correctSide), _owner];
 
 	if (_correctSide) then {
-		_warlord setVariable ["BIS_WL_ownerAsset", _uid, [2, _owner]];
+		_warlord setVariable ["BIS_WL_ownerAsset", _uid, true];
+		_warlord setVariable ["WL2_accessControl", 0, true];
 		missionNamespace setVariable [_varImb, false, _owner];
 		_friendlyFireVarName = format ["BIS_WL_%1_friendlyKillPenaltyEnd", _uid];
 		if ((serverNamespace getVariable _friendlyFireVarName) > serverTime) then {
@@ -49,13 +50,15 @@ if (_boundToTeam) then {
 		if (_imb) then {
 			missionNamespace setVariable [_varImb, _imb, _owner];
 		} else {
-			_warlord setVariable ["BIS_WL_ownerAsset", _uid, [2, _owner]];
+			_warlord setVariable ["BIS_WL_ownerAsset", _uid, true];
+			_warlord setVariable ["WL2_accessControl", 0, true];
 			_pList set [_uid, [true, _sideW]];
 			serverNamespace setVariable ["playerList", _pList];
 			missionNamespace setVariable [_varImb, _imb, _owner];
 		};
 	} else {
-		_warlord setVariable ["BIS_WL_ownerAsset", _uid, [2, _owner]];
+		_warlord setVariable ["BIS_WL_ownerAsset", _uid, true];
+		_warlord setVariable ["WL2_accessControl", 0, true];
 		_pList set [_uid, [true, _sideW]];
 		serverNamespace setVariable ["playerList", _pList];
 		missionNamespace setVariable [_varImb, false, _owner];

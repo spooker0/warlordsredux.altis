@@ -14,6 +14,7 @@ if !(visibleMap) then {
 BIS_WL_targetSector = objNull;
 private _selectionBefore = BIS_WL_currentSelection;
 BIS_WL_currentSelection = WL_ID_SELECTION_SCAN;
+WL_MapBusy pushBack "orderSectorScan";
 
 sleep WL_TIMEOUT_SHORT;
 
@@ -22,7 +23,6 @@ waitUntil {
 
 	!isNull BIS_WL_targetSector ||
 	!visibleMap ||
-	BIS_WL_currentSelection == WL_ID_SELECTION_VOTING ||
 	!alive player ||
 	lifeState player == "INCAPACITATED";
 };
@@ -37,3 +37,6 @@ if (isNull BIS_WL_targetSector) exitWith {
 };
 
 [player, "scan", [], BIS_WL_targetSector] remoteExec ["WL2_fnc_handleClientRequest", 2];
+
+sleep 1;
+WL_MapBusy = WL_MapBusy - ["orderSectorScan"];

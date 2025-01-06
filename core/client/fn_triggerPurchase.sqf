@@ -46,11 +46,19 @@ switch (_className) do {
         [toUpper localize "STR_A3_WL_feature_unlock_all_msg"] spawn WL2_fnc_smoothText;
     };
     case "clearVehicles": {
+        private _playerAssets = missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []];
+        private _eligibleAssets = _playerAssets select {
+            alive _x && ((getPosATL _x) # 2) < 10
+        };
         {
+            private _unwantedPassengers = (crew _x) select {
+                _x != player &&
+                getPlayerUID player != (_x getVariable ["BIS_WL_ownerAsset", "123"])
+            };
             {
                 moveOut _x;
-            } forEach ((crew _x) select {(_x != player) && {(getPlayerUID player) != (_x getVariable ["BIS_WL_ownerAsset", "123"])}});
-        } forEach ((missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []]) select {alive _x});
+            } forEach _unwantedPassengers;
+        } forEach _eligibleAssets;
     };
     case "resetVehicle": {
         private _vehicle = cursorObject;
@@ -63,7 +71,7 @@ switch (_className) do {
             private _distanceToVehicle = player distance2D _vehicle;
             private _offset = [0, _distanceToVehicle, 0];
 
-            private _deploymentResult = [_class, _orderedClass, _offset, 30] call WL2_fnc_deployment;
+            private _deploymentResult = [_class, _orderedClass, _offset, 10, true] call WL2_fnc_deployment;
 
             if (_deploymentResult # 0) then {
                 private _position =  _deploymentResult # 1;

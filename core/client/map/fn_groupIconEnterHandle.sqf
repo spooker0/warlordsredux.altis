@@ -52,6 +52,7 @@ private _color = ['#004d99', '#7f0400', '#007f04'] # ([west, east, independent] 
 
 ((ctrlParent WL_CONTROL_MAP) getVariable "BIS_sectorInfoBox") ctrlShow true;
 ((ctrlParent WL_CONTROL_MAP) getVariable "BIS_sectorInfoBox") ctrlEnable true;
+WL_SectorActionTarget = _sector;
 
 if !(_selectionActive || _votingActive) exitWith {
 	if ((_sector getVariable "BIS_WL_owner") == BIS_WL_playerSide) then {
