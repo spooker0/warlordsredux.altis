@@ -33,6 +33,9 @@ if (isNull BIS_WL_targetSector) exitWith {
 	"Canceled" call WL2_fnc_announcer;
 	[toUpper localize "STR_A3_WL_deploy_canceled"] spawn WL2_fnc_smoothText;
 	player setVariable ["BIS_WL_isOrdering", false, [2, clientOwner]];
+
+	sleep 1;
+	WL_MapBusy = WL_MapBusy - ["orderAircraft"];
 };
 
 [toUpper localize "STR_A3_WL_asset_dispatched_TODO_REWRITE"] spawn WL2_fnc_smoothText;
