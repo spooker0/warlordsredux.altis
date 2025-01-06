@@ -152,17 +152,22 @@ switch (_className) do {
 
         private _newUnit = _greenUnits # 0;
         selectPlayer _newUnit;
-        BIS_WL_playerSide = independent;
-        ["client", true] call WL2_fnc_updateSectorArrays;
-        {
-            [_x, _x getVariable "BIS_WL_owner", []] call WL2_fnc_sectorMarkerUpdate;
-        } forEach BIS_WL_allSectors;
-
-        createMarkerLocal ["respawn_guerrila", ([independent] call WL2_fnc_getSideBase)];
-        call WL2_fnc_playerEventHandlers;
 
         0 spawn {
             sleep 3;
+            BIS_WL_playerSide = independent;
+            player setVariable ["BIS_WL_ownerAssetSide", independent, true];
+
+            ["client", true] call WL2_fnc_updateSectorArrays;
+            {
+                [_x, _x getVariable "BIS_WL_owner", []] call WL2_fnc_sectorMarkerUpdate;
+            } forEach BIS_WL_allSectors;
+
+            createMarkerLocal ["respawn_guerrila", ([independent] call WL2_fnc_getSideBase)];
+            call WL2_fnc_playerEventHandlers;
+
+            independent call WL2_fnc_parsePurchaseList;
+
             forceRespawn player;
             player allowDamage true;
         };
