@@ -15,7 +15,8 @@ if (_killerSide == _unitSide) exitWith {};
 
 private _customText = "";
 
-if (_unit isKindOf "Man") then {
+private _noRewardList = ["B_UAV_AI", "O_UAV_AI", "I_UAV_AI"];
+if (_unit isKindOf "Man" && !(_unit in _noRewardList)) then {
 	if (isPlayer _unit) then {
 		_killReward = 60;
 		_customText = "Enemy player killed";
