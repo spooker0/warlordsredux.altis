@@ -18,16 +18,13 @@ resistance setFriend [civilian, 1];
 
 if (WL_FACTION_THREE_ENABLED) then {
 	{
-		_x setVariable ["WL2_isPlayableGreen", true];
-		_x setVehiclePosition [[-1000, -1000, 0], [], 0, "NONE"];
-		_x allowDamage false;
-	} forEach (units independent);
-} else {
-	{
-		private _group = group _x;
+		private _group = createGroup independent;
 		_group deleteGroupWhenEmpty true;
-		deleteVehicle _x;
-	} forEach (units independent);
+
+		private _unit = _group createUnit ["I_Soldier_TL_F", [-1000, -1000, 0], [], 0, "NONE"];
+		_unit setVariable ["WL2_isPlayableGreen", true, true];
+		_unit allowDamage false;
+	} forEach [1, 2, 3, 4, 5];
 };
 
 call SQD_fnc_initServer;

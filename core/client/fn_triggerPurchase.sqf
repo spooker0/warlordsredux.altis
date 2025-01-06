@@ -150,19 +150,22 @@ switch (_className) do {
         };
         if (count _greenUnits == 0) exitWith {};
 
-        selectPlayer (_greenUnits # 0);
+        private _newUnit = _greenUnits # 0;
+        selectPlayer _newUnit;
         BIS_WL_playerSide = independent;
         ["client", true] call WL2_fnc_updateSectorArrays;
         {
             [_x, _x getVariable "BIS_WL_owner", []] call WL2_fnc_sectorMarkerUpdate;
         } forEach BIS_WL_allSectors;
 
-        player allowDamage true;
-
         createMarkerLocal ["respawn_guerrila", ([independent] call WL2_fnc_getSideBase)];
         call WL2_fnc_playerEventHandlers;
 
-        forceRespawn player;
+        0 spawn {
+            sleep 3;
+            forceRespawn player;
+            player allowDamage true;
+        };
     };
     default {[_className, _cost, _category, _requirements, _offset] call WL2_fnc_requestPurchase};
 };
