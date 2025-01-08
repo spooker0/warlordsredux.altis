@@ -12,6 +12,10 @@ class CfgRemoteExec {
 			allowedTargets = 2;
 		};
 
+		class APS_fnc_setupProjectiles {
+			allowedTargets = 0;
+		};
+
 		class WL2_fnc_claimAction {
 			allowedTargets = 1;
 		};
