@@ -201,6 +201,40 @@ if (_ret) then {
 				};
 			};
 		};
+		case "RespawnBag": {
+			if (vehicle player != player) exitWith {
+				_ret = false;
+				_tooltip = localize "STR_A3_WL_fasttravel_restr3"
+			};
+			if (_nearbyEnemies) exitWith {
+				_ret = false;
+				_tooltip =  localize "STR_A3_WL_fasttravel_restr4"
+			};
+
+			private _visitedSectorID = (BIS_WL_sectorsArray # 0) findIf {
+				player inArea (_x getVariable "objectAreaComplete")
+			};
+			if (_visitedSectorID == -1) exitWith {
+				_ret = false;
+				_tooltip = localize "STR_A3_WL_ftVehicle_restr1"
+			};
+		};
+		case "RespawnBagFT": {
+			if (vehicle player != player) exitWith {
+				_ret = false;
+				_tooltip = localize "STR_A3_WL_fasttravel_restr3"
+			};
+			if (_nearbyEnemies) exitWith {
+				_ret = false;
+				_tooltip =  localize "STR_A3_WL_fasttravel_restr4"
+			};
+
+			private _respawnBag = player getVariable ["WL2_respawnBag", objNull];
+			if (!alive _respawnBag) exitWith {
+				_ret = false;
+				_tooltip = "You don't have a respawn bag."
+			};
+		};
 		case "resetVehicle" : {
 			private _vehicle = cursorObject;
 			if (isNull _vehicle) exitWith {

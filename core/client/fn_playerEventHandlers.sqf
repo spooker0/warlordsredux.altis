@@ -119,3 +119,21 @@ player addEventHandler ["Respawn", {
         };
     };
 }];
+
+player addEventHandler ["WeaponAssembled", {
+	params ["_unit", "_staticWeapon", "_primaryBag", "_secondaryBag"];
+	if !((typeOf _staticWeapon) in ["Respawn_TentA_F", "Respawn_TentDome_F"]) exitWith {};
+
+	private _previousRespawnBag = _unit getVariable ["WL2_respawnBag", objNull];
+	if (!isNull _previousRespawnBag) then {
+		player setVariable ["WL2_respawnBag", objNull];
+		deleteVehicle _previousRespawnBag;
+	};
+
+	_unit setVariable ["WL2_respawnBag", _staticWeapon];
+	_staticWeapon enableWeaponDisassembly false;
+
+	if (BIS_WL_playerSide == west) then {
+
+	};
+}];

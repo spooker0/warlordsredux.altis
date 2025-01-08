@@ -260,6 +260,14 @@ if (_action == "orderAI") exitWith {
 	(-_cost) call WL2_fnc_fundsDatabaseWrite;
 };
 
+if (_action == "orderRespawnBag") exitWith {
+	_cost = 20;
+	_hasFunds = (playerFunds >= _cost);
+	if (_hasFunds) then {
+		(-_cost) call WL2_fnc_fundsDatabaseWrite;
+	};
+};
+
 if (_action == "fundsTransfer") exitWith {
 	private _incomeBlocked = serverNamespace getVariable ["BIS_WL_incomeBlockedList", []];
 	private _transferCost = getMissionConfigValue ["BIS_WL_fundsTransferCost", 2000];

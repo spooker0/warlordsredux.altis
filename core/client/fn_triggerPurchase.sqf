@@ -143,6 +143,23 @@ switch (_className) do {
     case "RespawnVicFT": {0 spawn WL2_fnc_orderFTVehicleFT};
     case "RespawnPod" : {"RequestMenu_close" call WL2_fnc_setupUI; [player, "orderFTPod"] remoteExec ["WL2_fnc_handleClientRequest", 2]};
     case "RespawnPodFT" : {0 spawn WL2_fnc_orderFTPodFT};
+    case "RespawnBag": {
+        if (BIS_WL_playerSide == west) then {
+            player addBackpack "B_Respawn_TentA_F";
+        } else {
+            player addBackpack "B_Respawn_TentDome_F";
+        };
+        [player, "orderRespawnBag"] remoteExec ["WL2_fnc_handleClientRequest", 2];
+        "RequestMenu_close" call BIS_fnc_WL2_setupUI;
+    };
+    case "RespawnBagFT": {
+        private _respawnBag = player getVariable ["WL2_respawnBag", objNull];
+        if (!isNull _respawnBag) then {
+            deleteVehicle _respawnBag;
+            player setVariable ["WL2_respawnBag", objNull];
+            player setPosATL (getPosATL _respawnBag);
+        };
+    };
     case "welcomeScreen": {0 spawn WL2_fnc_welcome};
     case "switchToGreen": {
         private _greenUnits = allUnits select {
