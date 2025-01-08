@@ -11,9 +11,7 @@ while {!BIS_WL_missionEnd} do {
 		_uid = getPlayerUID _x;
 
 		private _calculatedIncome = if (side group _x == independent) then {
-			private _blueIncome = serverNamespace getVariable ["actualIncomeBlu", 40];
-			private _opfIncome = serverNamespace getVariable ["actualIncomeOpf", 40];
-			_blueIncome + _opfIncome;
+			200;
 		} else {
 			serverNamespace getVariable [variable, 40];
 		};

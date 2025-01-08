@@ -150,11 +150,19 @@ switch (_className) do {
         };
         if (count _greenUnits == 0) exitWith {};
 
+        private _oldUnit = player;
+
         private _newUnit = _greenUnits # 0;
         selectPlayer _newUnit;
 
-        0 spawn {
-            sleep 3;
+        [_newUnit, _oldUnit] spawn {
+            params ["_unit", "_oldUnit"];
+
+            waitUntil {
+                sleep 0.1;
+                local _unit;
+            };
+
             BIS_WL_playerSide = independent;
             player setVariable ["BIS_WL_ownerAssetSide", independent, true];
 
@@ -163,12 +171,14 @@ switch (_className) do {
                 [_x, _x getVariable "BIS_WL_owner", []] call WL2_fnc_sectorMarkerUpdate;
             } forEach BIS_WL_allSectors;
 
-            createMarkerLocal ["respawn_guerrila", ([independent] call WL2_fnc_getSideBase)];
+            createMarkerLocal ["respawn_guerrila", [independent] call WL2_fnc_getSideBase];
             call WL2_fnc_playerEventHandlers;
 
             independent call WL2_fnc_parsePurchaseList;
 
             forceRespawn player;
+            forceRespawn _oldUnit;
+
             player allowDamage true;
         };
     };

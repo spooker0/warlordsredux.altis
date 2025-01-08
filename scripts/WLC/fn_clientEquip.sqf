@@ -54,7 +54,7 @@ switch (_type) do {
     case "Uniform": {
         private _uniformItems = uniformItems player;
         removeUniform player;
-        player addUniform _item;
+        player forceAddUniform _item;
         {
             player addItemToUniform _x;
         } forEach _uniformItems;

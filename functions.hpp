@@ -2,23 +2,14 @@ class CfgFunctions {
 	class MRTM {
 		class Default {
 			file = "scripts\MRTM";
-			class accept {};
-			class getLBPicture {};
-			class getLBText {};
-			class invite {};
-			class leaveGroup {};
-			class onButtonClick {};
 			class onChar {};
-			class onLBSelChanged {};
 			class onSliderChanged {};
-			class openGroupMenu {};
 			class openMenu {};
 			class settingsInit {};
 			class settingsMenu {};
 			class updateSettings {};
 			class updateViewDistance {};
 		};
-
 		class Debug {
 			file = "scripts\MRTMDebug";
 			class execCode {};
@@ -337,6 +328,7 @@ class CfgFunctions {
 			class applyCustomization {};
 			class applyLoadoutAircraft {};
 			class applyLoadoutVehicle {};
+			class applyTexture {};
 			class applyPylon {};
 			class applyVehicle {};
 			class calculateFreeRearmEligibility {};

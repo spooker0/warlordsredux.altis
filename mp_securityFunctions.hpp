@@ -72,14 +72,6 @@ class CfgRemoteExec {
 			allowedTargets = 0;
 		};
 
-		class MRTM_fnc_invite {
-			allowedTargets = 2;
-		};
-
-		class MRTM_fnc_accept {
-			allowedTargets = 2;
-		};
-
 		class WL2_fnc_forgiveTeamkill {
 			allowedTargets = 2;
 		};
