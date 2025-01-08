@@ -42,7 +42,7 @@ if (_asset isKindOf "Man") then {
 	private _assetActualType = _asset getVariable ["WL2_orderedClass", typeOf _asset];
 
 	[_asset] call APS_fnc_registerVehicle;
-	_asset call APS_fnc_setupProjectiles;
+	_asset remoteExec ["APS_fnc_setupProjectiles", 0, true];
 	_asset setVariable ["BIS_WL_nextRepair", 0, true];
 	_asset setVariable ["BIS_WL_ownerAssetSide", _side, true];
 	_asset setVariable ["WL2_massDefault", getMass _asset];
