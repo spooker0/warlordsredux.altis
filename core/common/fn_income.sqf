@@ -1,14 +1,14 @@
 params ["_side"];
 
+if (_side == independent) exitWith {
+	200;
+};
+
 if (isServer) then {
 	if (isNil "BIS_WL_sectorsArrays") then {
 		50;
 	} else {
-		if (_side == independent) then {
-			200;
-		} else {
-			(BIS_WL_sectorsArrays # (BIS_WL_competingSides find _side)) # 4;
-		};
+		(BIS_WL_sectorsArrays # (BIS_WL_competingSides find _side)) # 4;
 	};
 } else {
 	if (_side == BIS_WL_playerSide) then {
