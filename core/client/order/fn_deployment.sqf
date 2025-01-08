@@ -8,11 +8,28 @@ _asset setDir direction player;
 
 _asset lock 2;
 
-private _textureHashmap = missionNamespace getVariable ["WL2_textures", createHashMap];
-private _assetTextures = _textureHashmap getOrDefault [_orderedClass, []];
+private _appearanceDefaults = profileNamespace getVariable ["WLM_appearanceDefaults", createHashmap];
+private _assetAppearanceDefaults = _appearanceDefaults getOrDefault [_orderedClass, createHashmap];
+
+private _camo = _assetAppearanceDefaults getOrDefault ["camo", createHashmap];
+if (count _camo == 0) then {
+    private _textureHashmap = missionNamespace getVariable ["WL2_textures", createHashMap];
+    private _assetTextures = _textureHashmap getOrDefault [_orderedClass, []];
+    {
+        _asset setObjectTextureGlobal [_forEachIndex, _x];
+    } forEach _assetTextures;
+};
+
 {
-    _asset setObjectTextureGlobal [_forEachIndex, _x];
-} forEach _assetTextures;
+    if (_x == "camo") then {
+        [_asset, _y] call WLM_fnc_applyTexture;
+    } else {
+        private _skipped = ["smoke", "horn"];
+        if !(_x in _skipped) then {
+            [_asset, ["", "", 0, 0, [[_x, _y]], []]] call BIS_fnc_adjustSimpleObject;
+        };
+    };
+} forEach _assetAppearanceDefaults;
 
 [player, "assembly"] call WL2_fnc_hintHandle;
 

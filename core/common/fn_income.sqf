@@ -5,7 +5,7 @@ if (isServer) then {
 		50;
 	} else {
 		if (_side == independent) then {
-			(serverNamespace getVariable ["actualIncomeBlu", 40]) + (serverNamespace getVariable ["actualIncomeOpf", 40]);
+			200;
 		} else {
 			(BIS_WL_sectorsArrays # (BIS_WL_competingSides find _side)) # 4;
 		};

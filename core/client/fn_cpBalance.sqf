@@ -17,7 +17,11 @@ _var = ["blanceMultilplierBlu", "blanceMultilplierOpf"] select _side;
 while {!BIS_WL_missionEnd} do {
 	_balanceMultiplier = (missionNamespace getVariable _var) - 1;
 	_sidePercentage = if (isNil "_balanceMultiplier") then [{0}, {_balanceMultiplier * 100}];
-	_sidePercentageFinal = (round _sidePercentage) min 100;
+	_sidePercentageFinal = if (BIS_WL_playerSide == independent) then {
+		0;
+	} else {
+		(round _sidePercentage) min 100;
+	};
 	_cpBalanceCtrl ctrlSetStructuredText parseText format ["<t size = '%4' >%1%2%3</t>", (if (_sidePercentageFinal >0) then [{"+"},{""}]), _sidePercentageFinal, "%", (0.65 call WL2_fnc_purchaseMenuGetUIScale)];
 	_cpBalanceCtrl ctrlSetTextColor (if(_sidePercentageFinal > 0) then {[0,1,0,1]} else {if (_sidePercentageFinal < 0) then [{[1,0,0,1]}, {[1,1,1,1]}]});
 	_cpBalanceCtrl ctrlCommit 0;

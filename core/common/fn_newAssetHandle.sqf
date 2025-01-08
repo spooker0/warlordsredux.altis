@@ -355,6 +355,16 @@ if (_asset isKindOf "Man") then {
 	};
 
 	[_asset] remoteExec ["WL2_fnc_claimAction", 0, true];
+
+	private _appearanceDefaults = profileNamespace getVariable ["WLM_appearanceDefaults", createHashmap];
+	private _assetAppearanceDefaults = _appearanceDefaults getOrDefault [_assetActualType, createHashmap];
+	{
+		if (_x == "camo") then {
+			[_asset, _y] call WLM_fnc_applyTexture;
+		} else {
+			[_x, _y, _asset] call WLM_fnc_applyCustomization;
+		};
+	} forEach _assetAppearanceDefaults;
 };
 
 [_asset] remoteExec ["WL2_fnc_removeAction", 0, true];

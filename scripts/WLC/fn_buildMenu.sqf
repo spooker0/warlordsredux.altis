@@ -51,7 +51,8 @@ private _moneySign = [_side] call WL2_fnc_getMoneySign;
 
         private _cost = _customization getOrDefault ["cost", 0];
         private _displayName = if (_cost > 0) then {
-            format ["%1 [%2%3]", _name, _moneySign, _cost];
+            // format ["%1 [%2%3]", _name, _moneySign, _cost];
+            continue;
         } else {
             _name;
         };
@@ -86,7 +87,8 @@ private _moneySign = [_side] call WL2_fnc_getMoneySign;
             "";
         };
 
-        private _tooltip = format ["%1\nUnlock: Level %2\nCost: %3%4\n%5%6", _name, _requiredLevel, _moneySign, _cost, _magsDisplay, _attachmentsDisplay];
+        // private _tooltip = format ["%1\nUnlock: Level %2\nCost: %3%4\n%5%6", _name, _requiredLevel, _moneySign, _cost, _magsDisplay, _attachmentsDisplay];
+        private _tooltip = format ["%1\nUnlock: Level %2\n%3%4", _name, _requiredLevel, _magsDisplay, _attachmentsDisplay];
         _select lbSetTooltip [_index, _tooltip];
     } forEach _customizationList;
     _select lbSortBy ["VALUE", false];

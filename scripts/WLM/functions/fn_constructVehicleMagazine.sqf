@@ -1,6 +1,8 @@
 #include "..\WLM_constants.inc"
 
-private _asset = uiNamespace getVariable "WLM_asset";
+private _asset = uiNamespace getVariable ["WLM_asset", objNull];
+
+if (isNull _asset) exitWith {};
 
 private _allTurrets = [[-1]] + allTurrets _asset;
 private _display = findDisplay WLM_DISPLAY;
