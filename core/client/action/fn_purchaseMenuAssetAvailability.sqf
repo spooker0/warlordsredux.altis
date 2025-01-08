@@ -204,11 +204,11 @@ if (_ret) then {
 		case "RespawnBag": {
 			if (vehicle player != player) exitWith {
 				_ret = false;
-				_tooltip = localize "STR_A3_WL_fasttravel_restr3"
+				_tooltip = localize "STR_A3_WL_fasttravel_restr3";
 			};
 			if (_nearbyEnemies) exitWith {
 				_ret = false;
-				_tooltip =  localize "STR_A3_WL_fasttravel_restr4"
+				_tooltip =  localize "STR_A3_WL_fasttravel_restr4";
 			};
 
 			private _visitedSectorID = (BIS_WL_sectorsArray # 0) findIf {
@@ -216,7 +216,15 @@ if (_ret) then {
 			};
 			if (_visitedSectorID == -1) exitWith {
 				_ret = false;
-				_tooltip = localize "STR_A3_WL_ftVehicle_restr1"
+				_tooltip = localize "STR_A3_WL_ftVehicle_restr1";
+			};
+
+			private _tentActions = (actionIDs player) select {
+				(player actionParams _x) # 2 isEqualTo "tent";
+			};
+			if (count _tentActions > 0) exitWith {
+				_ret = false;
+				_tooltip = "You already have a tent on you.";
 			};
 		};
 		case "RespawnBagFT": {
@@ -264,7 +272,7 @@ if (_ret) then {
 			private _access = [_vehicle, player, "driver"] call WL2_fnc_accessControl;
 			if !(_access # 0) exitWith {
 				_ret = false;
-				_tooltip = format ["You do not have access to this vehicle. %1", _accessControl # 1];
+				_tooltip = format ["You do not have access to this vehicle. %1", _access # 1];
 			};
 		};
 		case "switchToGreen" : {

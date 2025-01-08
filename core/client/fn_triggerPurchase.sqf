@@ -144,21 +144,47 @@ switch (_className) do {
     case "RespawnPod" : {"RequestMenu_close" call WL2_fnc_setupUI; [player, "orderFTPod"] remoteExec ["WL2_fnc_handleClientRequest", 2]};
     case "RespawnPodFT" : {0 spawn WL2_fnc_orderFTPodFT};
     case "RespawnBag": {
-        if (BIS_WL_playerSide == west) then {
-            player addBackpack "B_Respawn_TentA_F";
-        } else {
-            player addBackpack "B_Respawn_TentDome_F";
-        };
         [player, "orderRespawnBag"] remoteExec ["WL2_fnc_handleClientRequest", 2];
-        "RequestMenu_close" call BIS_fnc_WL2_setupUI;
+
+        private _actionId = player addAction [
+            "<t color='#ff0000'>Place Fast Travel Tent</t>",
+            {
+                params ["_target", "_caller", "_actionId", "_arguments"];
+                player removeAction _actionId;
+
+                private _previousRespawnBag = player getVariable ["WL2_respawnBag", objNull];
+                if (!isNull _previousRespawnBag) then {
+                    player setVariable ["WL2_respawnBag", objNull];
+                    deleteVehicle _previousRespawnBag;
+                };
+
+                private _freshTent = createVehicle ["Land_TentA_F", getPosATL player, [], 0, "NONE"];
+                player setVariable ["WL2_respawnBag", _freshTent];
+                _freshTent enableWeaponDisassembly false;
+
+                playSoundUI ["a3\ui_f\data\sound\cfgnotifications\communicationmenuitemadded.wss"];
+            },
+            "tent",
+            6,
+            true,
+            true,
+            "",
+            "_this == player"
+        ];
+
+        player setUserActionText [_actionId, "<t color='#ff0000'>Place Fast Travel Tent</t>", "<img size='2' image='\A3\ui_f\data\map\mapcontrol\Tourism_CA.paa'/>"];
+
+        "RequestMenu_close" call WL2_fnc_setupUI;
     };
     case "RespawnBagFT": {
         private _respawnBag = player getVariable ["WL2_respawnBag", objNull];
         if (!isNull _respawnBag) then {
+            player setVehiclePosition [getPosATL _respawnBag, [], 0, "NONE"];
+
             deleteVehicle _respawnBag;
             player setVariable ["WL2_respawnBag", objNull];
-            player setPosATL (getPosATL _respawnBag);
         };
+        "RequestMenu_close" call WL2_fnc_setupUI;
     };
     case "welcomeScreen": {0 spawn WL2_fnc_welcome};
     case "switchToGreen": {
@@ -168,6 +194,23 @@ switch (_className) do {
         if (count _greenUnits == 0) exitWith {};
 
         private _oldUnit = player;
+
+        private _ownedVehiclesVar = format ["BIS_WL_ownedVehicles_%1", getPlayerUID player];
+        private _ownedVehicles = (missionNamespace getVariable [_ownedVehiclesVar, []]) select {
+            !(isNull _x
+        )};
+        {
+            if (unitIsUAV _x) then {
+                private _group = group effectiveCommander _x;
+                {
+                    _x deleteVehicleCrew _x;
+                } forEach crew _x;
+                deleteGroup _group;
+            };
+
+            deleteVehicle _x;
+        } forEach _ownedVehicles;
+        missionNamespace setVariable [_ownedVehiclesVar, nil];
 
         private _newUnit = _greenUnits # 0;
         selectPlayer _newUnit;
