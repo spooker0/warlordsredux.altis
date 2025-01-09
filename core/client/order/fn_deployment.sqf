@@ -55,7 +55,7 @@ private _originalPosition = getPosATL _asset;
 [_asset, _offset] spawn {
     params ["_asset", "_offset"];
 
-    private _isInCarrierSector = count ((BIS_WL_sectorsArray # 0) select {
+    private _isInCarrierSector = count (BIS_WL_allSectors select {
         player inArea (_x getVariable "objectAreaComplete") && count (_x getVariable ["WL_aircraftCarrier", []]) > 0
     }) > 0;
 
