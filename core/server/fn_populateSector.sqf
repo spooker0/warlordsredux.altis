@@ -1,7 +1,10 @@
 #include "..\warlords_constants.inc"
 
 params ["_sector", "_owner"];
-private _startTime = serverTime;
+
+private _carrierSettings = _sector getVariable ["WL_aircraftCarrier", []];
+if (count _carrierSettings > 0) exitWith {};
+
 private _vehicleUnits = [];
 if (_owner == resistance) then {
 	_sector setVariable ["WL2_aafSpawned", true];

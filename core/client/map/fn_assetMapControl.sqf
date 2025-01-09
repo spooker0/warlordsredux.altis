@@ -25,24 +25,30 @@ addMissionEventHandler ["Map", {
 				private _radius = (((ctrlMapScale _map) * 500) min 30) max 3;
 				private _pos = _map ctrlMapScreenToWorld getMousePosition;
 
-				private _allTeamVehicles = missionNamespace getVariable [format ["BIS_WL_%1ownedVehicles", side group player], []];
-				private _allUnits = allUnits select {
-					!(typeOf _x in ["B_UAV_AI", "O_UAV_AI", "I_UAV_AI"]) && isNull objectParent _x;
-				};
-				private _nearbyAssets = (_allUnits + _allTeamVehicles) select {
-					getPlayerUID player == (_x getVariable ["BIS_WL_ownerAsset", "123"]) &&
-					_x != player &&
+				private _teamVehicles = missionNamespace getVariable [format ["BIS_WL_%1ownedVehicles", side group player], []];
+				private _selectableVehicles = _teamVehicles select {
+					(_x getVariable ["BIS_WL_ownerAsset", "123"]) == getPlayerUID player &&
 					alive _x &&
 					(_x distance2D _pos) < _radius
 				};
+
 				private _squadLeaderID = ['getMySquadLeader'] call SQD_fnc_client;
-				private _squadLeader = _allUnits select {
-					isPlayer _x &&
+				private _selectableUnits = allUnits select {
+					!(typeOf _x in ["B_UAV_AI", "O_UAV_AI", "I_UAV_AI"]) &&
+					isNull objectParent _x &&
 					_x != player &&
-					getPlayerID _x == _squadLeaderID &&
-					(_x distance2D _pos) < _radius
+					alive _x &&
+					(_x distance2D _pos) < _radius &&
+					(
+						// independent units (unclaimed)
+						(side group player == independent && _x isKindOf "Man" && (_x getVariable ["BIS_WL_ownerAsset", "123"]) == "123") ||
+						// squad leader
+						(isPlayer _x && getPlayerID _x == _squadLeaderID) ||
+						// my units
+						(_x getVariable ["BIS_WL_ownerAsset", "123"]) == getPlayerUID player
+					)
 				};
-				_nearbyAssets append _squadLeader;
+				private _nearbyAssets = _selectableVehicles + _selectableUnits;
 				_nearbyAssets = [_nearbyAssets, [_pos], { _input0 distance2D _x }, "ASCEND"] call BIS_fnc_sortBy;
 
 				if (count _nearbyAssets > 0) then {
@@ -93,6 +99,8 @@ addMissionEventHandler ["Map", {
 		0 spawn {
 			sleep 1;
 			MAP_CONTROL_CLICK = addMissionEventHandler ["MapSingleClick", {
+				params ["_units", "_pos", "_alt", "_shift"];
+				if (_shift) exitWith {};
 				if (count WL_MapBusy > 0) exitWith {};
 
 				if !(isNull WL_AssetActionTarget) then {
@@ -106,6 +114,7 @@ addMissionEventHandler ["Map", {
 		};
 	} else {
 		removeMissionEventHandler ["EachFrame", MAP_CONTROL];
+		MAP_CONTROL = -1;
 		if !(isNil "MAP_CONTROL_CLICK") then {
 			removeMissionEventHandler ["MapSingleClick", MAP_CONTROL_CLICK];
 		};

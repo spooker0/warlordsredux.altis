@@ -1,3 +1,5 @@
+#include "..\..\warlords_constants.inc"
+
 private _dialog = findDisplay 46 createDisplay "RscDisplayEmpty";
 
 getMousePosition params ["_mouseX", "_mouseY"];
@@ -20,10 +22,53 @@ private _assetName = [WL_AssetActionTarget] call WL2_fnc_getAssetTypeName;
 _titleBar ctrlSetStructuredText parseText format ["<t align='center' font='PuristaBold'>%1</t>", toUpper _assetName];
 _titleBar ctrlCommit 0;
 
-if !(isPlayer _asset) then {
+if (!isPlayer _asset && (_asset getVariable ["BIS_WL_ownerAsset", "123"]) == getPlayerUID player) then {
     ["DELETE", {
         params ["_asset"];
-        _asset spawn WL2_fnc_deleteAssetFromMap;
+        if ((_asset getVariable ["BIS_WL_ownerAsset", "123"]) == getPlayerUID player) then {
+            _asset spawn WL2_fnc_deleteAssetFromMap;
+        } else {
+            playSoundUI ["AddItemFailed"];
+            systemChat "You do not own this asset.";
+        };
+    }, true] call WL2_fnc_addTargetMapButton;
+};
+
+if (side group player == independent && _asset isKindOf "Man" && !isPlayer _asset) then {
+    ["CONTROL", {
+        params ["_asset"];
+
+        private _assetIsNotMine = (_asset getVariable ["BIS_WL_ownerAsset", "123"]) != getPlayerUID player;
+        private _noMoreClaims = BIS_WL_matesAvailable <= 0;
+        if (!alive _asset || (_assetIsNotMine && _noMoreClaims)) then {
+            playSoundUI ["AddItemFailed"];
+            systemChat "No available slots for this unit, or the unit is dead.";
+        } else {
+            private _maxSubordinates = missionNamespace getVariable [format ["BIS_WL_maxSubordinates_%1", BIS_WL_playerSide], 1];
+            private _refreshTimerVar = format ["WL2_manpowerRefreshTimers_%1", getPlayerUID player];
+            private _manpowerRefreshTimers = missionNamespace getVariable [_refreshTimerVar, []];
+            private _assetIndex = _manpowerRefreshTimers findIf {
+                _x # 1 == _asset
+            };
+
+            // spawned unit
+            if (_assetIndex != -1) then {
+                _manpowerRefreshTimers set [_assetIndex, [_manpowerRefreshTimers # _assetIndex # 0, player]];
+            } else {
+                _asset setVariable ["BIS_WL_ownerAsset", getPlayerUID player, true];
+                _manpowerRefreshTimers pushBack [serverTime + WL_MANPOWER_REFRESH_COOLDOWN, _asset];
+            };
+            missionNamespace setVariable [_refreshTimerVar, _manpowerRefreshTimers, true];
+            call WL2_fnc_teammatesAvailability;
+
+            private _playerGroup = group player;
+            [_asset] joinSilent _playerGroup;
+
+            selectPlayer _asset;
+            _playerGroup selectLeader player;
+
+            playSoundUI ["AddItemOK"];
+        };
     }, true] call WL2_fnc_addTargetMapButton;
 };
 

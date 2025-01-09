@@ -149,6 +149,7 @@ class CfgFunctions {
 			class removeAction {};
 			class repairAction {};
 			class repairActionEligibility {};
+			class respawnBagAction {};
 			class slingAddAction {};
 			class vehicleLockAction {};
 			class vehicleLockUpdate {};

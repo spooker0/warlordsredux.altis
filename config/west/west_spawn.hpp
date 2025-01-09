@@ -11,7 +11,7 @@ class Spawn {
         loadable[] = { 0, 0, 0 };
     }; // Huron Spawn
 
-    class Respawn_TentA_F {
+    class Land_TentA_F {
         garbageCollector = 1;
-    }; // Respawn Tent
+    }; // Fast Travel Tent
 };

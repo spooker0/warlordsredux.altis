@@ -10,8 +10,4 @@ class Spawn {
         killReward = 300;
         loadable[] = { 0, 0, 0 };
     }; // Taru Spawn Container
-
-    class B_Respawn_TentDome_F {
-        garbageCollector = 1;
-    }; // Respawn Tent
 };

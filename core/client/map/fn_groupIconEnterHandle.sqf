@@ -1,5 +1,8 @@
 #include "..\..\warlords_constants.inc"
 
+if (isNil "MAP_CONTROL") exitWith {};
+if (MAP_CONTROL == -1) exitWith {};
+
 private _sector = (_this # 1) getVariable ["BIS_WL_sector", objNull];
 
 if (isNull _sector) exitWith {BIS_WL_highlightedSector = objNull; ((ctrlParent WL_CONTROL_MAP) getVariable "BIS_sectorInfoBox") ctrlShow FALSE; ((ctrlParent WL_CONTROL_MAP) getVariable "BIS_sectorInfoBox") ctrlEnable FALSE};
