@@ -6,23 +6,38 @@ private _class = missionNamespace getVariable ["WL2_spawnClass", createHashMap] 
 private _owner = owner _sender;
 _uid = getPlayerUID _sender;
 
-private _sector = ((_pos nearObjects ["Logic", 10]) select {count (_x getVariable ["BIS_WL_runwaySpawnPosArr", []]) > 0}) # 0;
-private _taxiNodes = _sector getVariable "BIS_WL_runwaySpawnPosArr";
-private _taxiNodesCnt = count _taxiNodes;
 private _spawnPos = [];
 private _dir = 0;
-private _checks = 0;
-while {count _spawnPos == 0 && _checks < 100} do {
-	_checks = _checks + 1;
-	private _i = (floor random _taxiNodesCnt) max 1;
-	private _pointB = _taxiNodes # _i;
-	private _pointA = _taxiNodes # (_i - 1);
-	_dir = _pointA getDir _pointB;
-	private _pos = [_pointA, random (_pointA distance2D _pointB), _dir] call BIS_fnc_relPos;
-	if (count (_pos nearObjects ["AllVehicles", 20]) == 0) then {
-		_spawnPos = _pos;
+
+private _sector = _pos nearObjects ["Logic", 10];
+
+private _carrierSectors = _sector select {
+	count (_x getVariable ["WL_aircraftCarrier", []]) > 0
+};
+if (count _carrierSectors > 0) then {
+	_sector = _carrierSectors # 0;
+
+	private _carrierSettings = _sector getVariable ["WL_aircraftCarrier", []];
+	_spawnPos = _carrierSettings # 0;
+	_dir = _carrierSettings # 1;
+} else {
+	_sector = (_sector select {count (_x getVariable ["BIS_WL_runwaySpawnPosArr", []]) > 0}) # 0;
+
+	private _taxiNodes = _sector getVariable "BIS_WL_runwaySpawnPosArr";
+	private _taxiNodesCnt = count _taxiNodes;
+	private _checks = 0;
+	while {count _spawnPos == 0 && _checks < 100} do {
+		_checks = _checks + 1;
+		private _i = (floor random _taxiNodesCnt) max 1;
+		private _pointB = _taxiNodes # _i;
+		private _pointA = _taxiNodes # (_i - 1);
+		_dir = _pointA getDir _pointB;
+		private _pos = [_pointA, random (_pointA distance2D _pointB), _dir] call BIS_fnc_relPos;
+		if (count (_pos nearObjects ["AllVehicles", 20]) == 0) then {
+			_spawnPos = _pos;
+		};
+		sleep 0.001;
 	};
-	sleep 0.001;
 };
 
 if (count _spawnPos == 0) exitWith {

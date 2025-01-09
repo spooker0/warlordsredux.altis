@@ -21,7 +21,7 @@ _potBases = (_potBases select {(_x distanceSqr _firstBase) > _baseDistanceMin});
 private _secondBase = selectRandom _potBases;
 
 private _presetBase = BIS_WL_allSectors select {
-	_x getVariable ["BIS_WL_name", ""] in ["Bomos", "Telos"];
+	_x getVariable ["BIS_WL_name", ""] in ["AAC Airfield", "Diesel Power Plant"];
 };
 
 _firstBase = _presetBase # 0;

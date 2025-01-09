@@ -30,7 +30,9 @@ while { !BIS_WL_missionEnd } do {
 		} forEach _thresholds;
 
 		missionNamespace setVariable [format ["BIS_WL_maxSubordinates_%1", _side], _value, true];
-	} forEach [west, east, independent];
+	} forEach [west, east];
+
+	missionNamespace setVariable ["BIS_WL_maxSubordinates_guer", 12, true];
 
 	uiSleep 1;
 };

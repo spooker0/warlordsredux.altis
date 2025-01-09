@@ -55,6 +55,15 @@ private _originalPosition = getPosATL _asset;
 [_asset, _offset] spawn {
     params ["_asset", "_offset"];
 
+    private _isInCarrierSector = count ((BIS_WL_sectorsArray # 0) select {
+        player inArea (_x getVariable "objectAreaComplete") && count (_x getVariable ["WL_aircraftCarrier", []]) > 0
+    }) > 0;
+
+    if (_isInCarrierSector) exitWith {
+        _offset = _offset vectorAdd [0, 0, 2.5];
+        _asset attachTo [player, _offset];
+    };
+
     private _boundingBoxHeight = (boundingBoxReal _asset) # 0 # 2;
     while { !(isNull _asset) && !(BIS_WL_spacePressed) && !(BIS_WL_backspacePressed) } do {
         private _assetPos = player modelToWorld _offset;
@@ -81,7 +90,10 @@ private _originalPosition = getPosATL _asset;
     };
 };
 
-waitUntil {sleep 0.1; BIS_WL_spacePressed || {BIS_WL_backspacePressed}};
+waitUntil {
+    sleep 0.1;
+    BIS_WL_spacePressed || BIS_WL_backspacePressed;
+};
 
 (findDisplay 46) displayRemoveEventHandler ["KeyDown", uiNamespace getVariable "BIS_WL_deployKeyHandle"];
 uiNamespace setVariable ['BIS_WL_deployKeyHandle', nil];

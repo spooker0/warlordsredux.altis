@@ -145,41 +145,14 @@ switch (_className) do {
     case "RespawnPodFT" : {0 spawn WL2_fnc_orderFTPodFT};
     case "RespawnBag": {
         [player, "orderRespawnBag"] remoteExec ["WL2_fnc_handleClientRequest", 2];
-
-        private _actionId = player addAction [
-            "<t color='#ff0000'>Place Fast Travel Tent</t>",
-            {
-                params ["_target", "_caller", "_actionId", "_arguments"];
-                player removeAction _actionId;
-
-                private _previousRespawnBag = player getVariable ["WL2_respawnBag", objNull];
-                if (!isNull _previousRespawnBag) then {
-                    player setVariable ["WL2_respawnBag", objNull];
-                    deleteVehicle _previousRespawnBag;
-                };
-
-                private _freshTent = createVehicle ["Land_TentA_F", getPosATL player, [], 0, "NONE"];
-                player setVariable ["WL2_respawnBag", _freshTent];
-                _freshTent enableWeaponDisassembly false;
-
-                playSoundUI ["a3\ui_f\data\sound\cfgnotifications\communicationmenuitemadded.wss"];
-            },
-            "tent",
-            6,
-            true,
-            true,
-            "",
-            "_this == player"
-        ];
-
-        player setUserActionText [_actionId, "<t color='#ff0000'>Place Fast Travel Tent</t>", "<img size='2' image='\A3\ui_f\data\map\mapcontrol\Tourism_CA.paa'/>"];
-
+        call WL2_fnc_respawnBagAction;
         "RequestMenu_close" call WL2_fnc_setupUI;
     };
     case "RespawnBagFT": {
         private _respawnBag = player getVariable ["WL2_respawnBag", objNull];
         if (!isNull _respawnBag) then {
-            player setVehiclePosition [getPosATL _respawnBag, [], 0, "NONE"];
+            private _pos = getPosATL _respawnBag;
+            player setVehiclePosition [[_pos # 0, _pos # 1, _pos # 2 + 0.5], [], 0, "CAN_COLLIDE"];
 
             deleteVehicle _respawnBag;
             player setVariable ["WL2_respawnBag", objNull];
@@ -212,6 +185,17 @@ switch (_className) do {
         } forEach _ownedVehicles;
         missionNamespace setVariable [_ownedVehiclesVar, nil];
 
+        private _playerUnits = allUnits select {
+            _x getVariable ["BIS_WL_ownerAsset", "123"] == getPlayerUID player;
+        };
+        {
+	    	if !(isPlayer _x) then {
+                deleteVehicle _x;
+            };
+    	} forEach _playerUnits;
+
+        ["remove", [getPlayerID player]] remoteExec ["SQD_fnc_server", 2];
+
         private _newUnit = _greenUnits # 0;
         selectPlayer _newUnit;
 
@@ -224,6 +208,7 @@ switch (_className) do {
             };
 
             BIS_WL_playerSide = independent;
+            player setVariable ["BIS_WL_ownerAsset", getPlayerUID player, true];
             player setVariable ["BIS_WL_ownerAssetSide", independent, true];
 
             ["client", true] call WL2_fnc_updateSectorArrays;

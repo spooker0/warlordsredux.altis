@@ -56,8 +56,8 @@ for "_i" from 0 to count _aliveTimers - 1 do {
 		private _timeString = [_timer, "MM:SS"] call BIS_fnc_secondsToString;
 		format ["<t color = '#ff0000'>%1</t>", _timeString];
 	};
-	private _unitLastname = ((name _unit) splitString " ") # 1;
-	_slotsArray pushBack format ["%1 (%2)", _unitLastname, _timerText];
+	private _unitName = name _unit;
+	_slotsArray pushBack format ["%1 (%2)", _unitName, _timerText];
 };
 for "_i" from 0 to count _deadTimers - 1 do {
 	private _slot = _deadTimers # _i;

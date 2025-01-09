@@ -261,7 +261,7 @@ if (_action == "orderAI") exitWith {
 };
 
 if (_action == "orderRespawnBag") exitWith {
-	_cost = 20;
+	_cost = 50;
 	_hasFunds = (playerFunds >= _cost);
 	if (_hasFunds) then {
 		(-_cost) call WL2_fnc_fundsDatabaseWrite;
