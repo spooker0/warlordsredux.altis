@@ -3,10 +3,10 @@ _pos params ["_posX", "_posY", "_posZ"];
 
 if !(isServer) exitWith {};
 
-_asset = createVehicle [_class, [_posX, _posY, _posZ-50], [], 0, "CAN_COLLIDE"];
+_asset = createVehicle [_class, [_posX, _posY, _posZ - 50], [], 0, "CAN_COLLIDE"];
 _asset setDir _direction;
 
-private _isInCarrierSector = count ((BIS_WL_sectorsArray # 0) select {
+private _isInCarrierSector = count (BIS_WL_allSectors select {
 	_pos inArea (_x getVariable "objectAreaComplete") && count (_x getVariable ["WL_aircraftCarrier", []]) > 0
 }) > 0;
 if (_isInCarrierSector) then {
