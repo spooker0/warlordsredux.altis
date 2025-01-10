@@ -11,8 +11,9 @@ sleep 1;
 private _destination = [];
 if (_toContested) then {
 	if (_isCarrierSector) then {
-		private _randomPos = BIS_WL_targetSector call BIS_fnc_randomPosTrigger;
-		_destination = [_randomPos # 0, _randomPos # 1, 100];
+		private _randomPos = _marker call BIS_fnc_randomPosTrigger;
+		private _distance = _randomPos distance2D BIS_WL_targetSector;
+		_destination = [_randomPos # 0, _randomPos # 1, (_distance + 100) min 200];
 	} else {
 		_destination = ([_marker, 0, true] call WL2_fnc_findSpawnPositions) select {
 			private _pos = _x;
@@ -41,7 +42,7 @@ private _tagAlong = (units player) select {
 };
 
 
-private _directionToSector = player getDir BIS_WL_targetSector;
+private _directionToSector = _destination getDir (markerPos _marker);
 if (_isCarrierSector && _toContested) then {
 	{
 		_x setPosASL _destination;

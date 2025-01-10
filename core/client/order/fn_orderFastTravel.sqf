@@ -23,8 +23,8 @@ private _action = if (_toContested) then {"travelling_contested"} else {"travell
 private _marker = "";
 private _markerText = "";
 
-private _isCarrierSector = count (WL_TARGET_FRIENDLY getVariable ["WL_aircraftCarrier", []]) > 0;
-if (_toContested && !_isCarrierSector) then {
+// private _isCarrierSector = count (WL_TARGET_FRIENDLY getVariable ["WL_aircraftCarrier", []]) > 0;
+if (_toContested) then {
 	private _fastTravelConflict = call WL2_fnc_fastTravelConflictMarker;
 	_marker = _fastTravelConflict # 0;
 	_markerText = _fastTravelConflict # 1;
@@ -50,7 +50,7 @@ if (isNull BIS_WL_targetSector) exitWith {
 	WL_MapBusy = WL_MapBusy - ["orderFastTravel"];
 };
 
-_isCarrierSector = count (BIS_WL_targetSector getVariable ["WL_aircraftCarrier", []]) > 0;
+private _isCarrierSector = count (BIS_WL_targetSector getVariable ["WL_aircraftCarrier", []]) > 0;
 [_toContested, _marker, _isCarrierSector] call WL2_fnc_executeFastTravel;
 
 deleteMarkerLocal _marker;

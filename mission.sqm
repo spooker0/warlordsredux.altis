@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=1824;
+		nextID=1833;
 	};
 	class MarkerIDProvider
 	{
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={1810.8129,42.554516,15491.076};
-		dir[]={-0.90712756,-0.36104047,-0.21674399};
-		up[]={-0.35122406,0.93250036,-0.083920278};
-		aside[]={-0.23242059,1.0671793e-06,0.97271407};
+		pos[]={2138.8706,377.04794,15442.982};
+		dir[]={-0.77413702,-0.59525716,0.21544261};
+		up[]={-0.57346141,0.80353212,0.15959418};
+		aside[]={0.26811489,-3.8160942e-07,0.96340698};
 	};
 };
 binarizationWanted=0;
@@ -239,7 +239,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=502;
+		items=503;
 		class Item0
 		{
 			dataType="Logic";
@@ -9260,7 +9260,7 @@ class Mission
 		{
 			dataType="Trigger";
 			position[]={23059.529,49.055279,7274.6079};
-			angle=3.9814024;
+			angle=3.9814017;
 			class Attributes
 			{
 				sizeA=150;
@@ -9313,7 +9313,7 @@ class Mission
 		{
 			dataType="Trigger";
 			position[]={22753.467,18.265915,13577.189};
-			angle=3.9814024;
+			angle=3.9814017;
 			class Attributes
 			{
 				sizeA=150;
@@ -9352,18 +9352,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1729.8333,0.11634812,15581.902};
-				angles[]={0,5.8209305,0};
+				position[]={1729.833,0.20289214,15581.902};
+				angles[]={0,5.8209352,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				name="Carrier1";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1457;
 			type="Land_Carrier_01_base_F";
-			atlOffset=187.17175;
+			atlOffset=187.25829;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12030,17 +12031,17 @@ class Mission
 		class Item405
 		{
 			dataType="Trigger";
-			position[]={1735.6804,-184.39882,15566.38};
-			angle=1.1074984;
+			position[]={1735.6801,-184.39838,15566.38};
+			angle=1.1074985;
 			class Attributes
 			{
-				sizeA=280;
-				sizeB=100;
+				sizeA=350;
+				sizeB=200;
 				isRectangle=1;
 			};
 			id=1632;
 			type="EmptyDetector";
-			atlOffset=1.328598;
+			atlOffset=1.3289948;
 		};
 		class Item406
 		{
@@ -12059,7 +12060,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1614.8164,22.075546,15724.18};
+				position[]={1614.8164,22.161831,15724.18};
 				angles[]={0,5.7604251,0};
 			};
 			side="Empty";
@@ -12072,14 +12073,14 @@ class Mission
 			};
 			id=1643;
 			type="B_SAM_System_02_F";
-			atlOffset=205.29787;
+			atlOffset=205.38416;
 		};
 		class Item408
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1803.5728,18.608372,15490.198};
+				position[]={1803.5728,18.694656,15490.198};
 				angles[]={0,1.1517563,0};
 			};
 			side="Empty";
@@ -12093,14 +12094,14 @@ class Mission
 			};
 			id=1646;
 			type="B_SAM_System_01_F";
-			atlOffset=0.031734467;
+			atlOffset=0.031475067;
 		};
 		class Item409
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1679.0476,21.757538,15751.789};
+				position[]={1679.0476,21.843822,15751.789};
 				angles[]={6.2743535,1.1256486,6.2788982};
 			};
 			side="Empty";
@@ -12113,14 +12114,14 @@ class Mission
 			};
 			id=1649;
 			type="B_SAM_System_02_F";
-			atlOffset=205.98045;
+			atlOffset=206.06674;
 		};
 		class Item410
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1630.3799,13.895905,15743.699};
+				position[]={1630.3799,13.982189,15743.699};
 				angles[]={0,5.8036757,0};
 			};
 			side="Empty";
@@ -12133,18 +12134,17 @@ class Mission
 			};
 			id=1650;
 			type="B_AAA_System_01_F";
-			atlOffset=196.07001;
+			atlOffset=196.1563;
 		};
 		class Item411
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1727.525,25.395248,15506.941};
+				position[]={1727.525,25.481533,15506.941};
 				angles[]={0,4.2706232,0};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
 				reportRemoteTargets=1;
@@ -12154,13 +12154,14 @@ class Mission
 			};
 			id=1651;
 			type="B_SAM_System_01_F";
+			atlOffset=209.55663;
 		};
 		class Item412
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1698.8766,26.573709,15584.022};
+				position[]={1698.8766,26.659992,15584.022};
 				angles[]={0,1.1100487,0};
 			};
 			side="Empty";
@@ -12174,18 +12175,17 @@ class Mission
 			};
 			id=1653;
 			type="B_Radar_System_01_F";
-			atlOffset=0.011665344;
+			atlOffset=0.011404037;
 		};
 		class Item413
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1721.0743,27.513733,15538.134};
+				position[]={1721.0743,27.600018,15538.134};
 				angles[]={0,1.0882245,0};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
 				receiveRemoteTargets=1;
@@ -12194,14 +12194,14 @@ class Mission
 			};
 			id=1654;
 			type="B_SAM_System_03_F";
-			atlOffset=0.00019073486;
+			atlOffset=208.61731;
 		};
 		class Item414
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1682.0942,27.389362,15616.244};
+				position[]={1682.0942,27.475647,15616.244};
 				angles[]={2.3518618e-07,1.0993029,0};
 			};
 			side="Empty";
@@ -12213,25 +12213,26 @@ class Mission
 			};
 			id=1656;
 			type="B_SAM_System_03_F";
-			atlOffset=10.455397;
+			atlOffset=10.455137;
 		};
 		class Item415
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1810.3162,24.918053,15433.381};
+				position[]={1810.3162,25.004337,15433.381};
 				angles[]={0,4.8013892,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1663;
 			type="Land_HBarrier_Big_F";
-			atlOffset=210.98067;
+			atlOffset=211.06696;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12255,17 +12256,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1796.5121,24.471476,15455.312};
+				position[]={1796.5121,24.55776,15455.312};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1664;
 			type="Land_HBarrierWall6_F";
-			atlOffset=209.59042;
+			atlOffset=209.67671;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12289,18 +12291,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1780.7153,24.44692,15499.153};
+				position[]={1780.7153,24.533205,15499.153};
 				angles[]={6.2831316,5.2531877,0.00011236266};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1665;
 			type="Land_HBarrierWall_corridor_F";
-			atlOffset=209.22839;
+			atlOffset=209.31468;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12324,18 +12327,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1786.0182,24.446447,15530.112};
+				position[]={1786.0182,24.532732,15530.112};
 				angles[]={6.2828403,1.6990029,0.0014235723};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1666;
 			type="Land_HBarrierWall_corner_F";
-			atlOffset=211.10197;
+			atlOffset=211.18826;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12359,18 +12363,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1742.8585,24.421412,15569.698};
+				position[]={1742.8585,24.507696,15569.698};
 				angles[]={0,5.6276336,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1667;
 			type="Land_HBarrierWall4_F";
-			atlOffset=209.87222;
+			atlOffset=209.95851;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12394,18 +12399,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1746.8579,24.423441,15573.177};
+				position[]={1746.8579,24.509726,15573.177};
 				angles[]={0,5.6314487,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1668;
 			type="Land_HBarrierWall4_F";
-			atlOffset=209.95084;
+			atlOffset=210.03712;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12429,19 +12435,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1749.1066,24.424353,15597.135};
+				position[]={1749.1066,24.510637,15597.135};
 				angles[]={0,4.042347,0};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1669;
 			type="Land_HBarrier_5_F";
-			atlOffset=0.025295258;
+			atlOffset=0.025035858;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12465,19 +12472,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1746.2401,24.46039,15598.982};
+				position[]={1746.2401,24.546675,15598.982};
 				angles[]={0,3.15079,0};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1670;
 			type="Land_HBarrier_3_F";
-			atlOffset=3.8146973e-06;
+			atlOffset=212.64626;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12501,19 +12508,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1725.4617,24.401159,15622.67};
-				angles[]={0,1.6824583,0};
+				position[]={1727.8287,24.488237,15624.819};
+				angles[]={0,6.2389359,0};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1671;
 			type="Land_HBarrier_5_F";
-			atlOffset=1.9073486e-06;
+			atlOffset=211.90878;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12537,17 +12544,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1727.5845,24.154181,15627.896};
+				position[]={1722.4159,24.508898,15626.239};
 			};
 			side="Empty";
+			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1672;
 			type="Land_HBarrierWall_corridor_F";
-			atlOffset=211.46805;
+			atlOffset=1.9073486e-06;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12571,18 +12580,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1689.0811,24.400244,15709.144};
+				position[]={1689.0811,24.486528,15709.144};
 				angles[]={3.2446948e-08,0.83322567,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1673;
 			type="Land_HBarrierWall_corner_F";
-			atlOffset=210.64075;
+			atlOffset=210.72704;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12606,18 +12616,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1655.4707,24.34551,15694.011};
+				position[]={1655.4707,24.431795,15694.011};
 				angles[]={0,2.444135,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1674;
 			type="Land_HBarrier_5_F";
-			atlOffset=209.86761;
+			atlOffset=209.9539;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12641,18 +12652,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1657.3052,24.360783,15733.814};
+				position[]={1657.3052,24.447067,15733.814};
 				angles[]={0,5.7707891,0};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1676;
 			type="Land_HBarrier_1_F";
+			atlOffset=209.39346;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12676,19 +12688,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1645.734,24.360569,15729.033};
+				position[]={1645.734,24.446854,15729.033};
 				angles[]={0,2.398901,0};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1677;
 			type="Land_HBarrier_1_F";
-			atlOffset=5.7220459e-06;
+			atlOffset=208.94632;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12712,19 +12724,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1652.1118,24.456804,15731.14};
+				position[]={1652.1118,24.543089,15731.14};
 				angles[]={0,5.7689271,0};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1678;
 			type="Land_HBarrier_3_F";
-			atlOffset=5.7220459e-06;
+			atlOffset=209.11319;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12748,19 +12760,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1652.1586,24.421869,15713.617};
+				position[]={1652.1586,24.508154,15713.617};
 				angles[]={0,5.0345497,0};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1679;
 			type="Land_HBarrierWall6_F";
-			atlOffset=5.7220459e-06;
+			atlOffset=209.2583;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12784,19 +12796,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1797.7609,25.407928,15433.883};
+				position[]={1797.7609,25.494213,15433.883};
 				angles[]={0,5.5929513,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1680;
 			type="Land_Mil_WallBig_4m_F";
-			atlOffset=210.78339;
+			atlOffset=210.86967;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12820,18 +12833,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1809.0424,25.407944,15451.289};
+				position[]={1809.0424,25.494228,15451.289};
 				angles[]={0,4.5867453,0};
 			};
 			side="Empty";
-			flags=5;
+			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1684;
 			type="Land_Mil_WallBig_4m_F";
+			atlOffset=210.02888;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12855,19 +12870,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1775.7749,25.386963,15558.722};
+				position[]={1775.7749,25.473248,15558.722};
 				angles[]={0,4.3377562,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1685;
 			type="Land_Mil_WallBig_4m_F";
-			atlOffset=210.79604;
+			atlOffset=210.88232;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12891,19 +12907,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1773.5676,25.359222,15561.913};
+				position[]={1773.5676,25.445507,15561.913};
 				angles[]={0,3.8796875,0};
 			};
 			side="Empty";
-			flags=5;
+			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1686;
 			type="Land_Mil_WallBig_4m_F";
-			atlOffset=7.6293945e-06;
+			atlOffset=210.45357;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12927,19 +12944,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1770.649,25.359009,15564.477};
+				position[]={1770.649,25.445293,15564.477};
 				angles[]={0,3.7921755,0};
 			};
 			side="Empty";
-			flags=5;
+			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1687;
 			type="Land_Mil_WallBig_4m_F";
-			atlOffset=7.6293945e-06;
+			atlOffset=209.97392;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12963,19 +12981,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1767.5219,24.229437,15566.767};
+				position[]={1767.5219,24.315722,15566.767};
 				angles[]={0,3.8788831,0};
 			};
 			side="Empty";
-			flags=5;
+			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1689;
 			type="Land_Mil_WallBig_4m_damaged_center_F";
-			atlOffset=1.9073486e-06;
+			atlOffset=209.81419;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12999,18 +13018,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1754.1066,24.48218,15585.151};
+				position[]={1754.1066,24.568464,15585.151};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1690;
 			type="Land_HBarrier_3_F";
-			atlOffset=0.025629044;
+			atlOffset=0.025369644;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13034,19 +13054,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1720.1917,24.453112,15583.119};
+				position[]={1720.1917,24.539396,15583.119};
 				angles[]={0,1.4370308,0};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1691;
 			type="Land_HBarrier_3_F";
-			atlOffset=3.8146973e-06;
+			atlOffset=210.64822;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13070,19 +13090,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1721.7985,25.4193,15563.828};
+				position[]={1721.7985,25.505585,15563.828};
 				angles[]={0,2.6643384,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1692;
 			type="Land_CncWall4_F";
-			atlOffset=208.64047;
+			atlOffset=208.72676;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13106,19 +13127,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1717.1483,25.419376,15561.498};
+				position[]={1717.1483,25.505661,15561.498};
 				angles[]={0,2.6901848,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1693;
 			type="Land_CncWall4_F";
-			atlOffset=208.57745;
+			atlOffset=208.66374;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13142,18 +13164,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1713.8293,25.419346,15558.079};
+				position[]={1713.8293,25.50563,15558.079};
 				angles[]={0,2.0075903,0};
 			};
 			side="Empty";
-			flags=5;
+			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1694;
 			type="Land_CncWall4_F";
+			atlOffset=208.9964;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13177,19 +13201,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1719.0354,24.865364,15670.083};
+				position[]={1719.0354,24.951649,15670.083};
 				angles[]={0,4.2275991,0.00034526698};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1696;
 			type="Land_HBarrier_Big_F";
-			atlOffset=7.6293945e-06;
+			atlOffset=210.57899;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13213,18 +13237,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1753.2917,23.318237,15512.663};
-				angles[]={0,3.8786352,0};
+				position[]={1762.3424,23.133556,15529.505};
+				angles[]={0,4.9921041,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1702;
 			type="Land_Wreck_Plane_Transport_01_F";
-			atlOffset=208.91087;
+			atlOffset=208.75356;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13248,17 +13273,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1709.8082,24.471903,15629.125};
+				position[]={1715.4451,24.583958,15626.135};
 			};
 			side="Empty";
+			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1705;
 			type="Land_Wreck_HMMWV_F";
-			atlOffset=210.50146;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13282,17 +13308,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1696.5468,25.515684,15645.899};
+				position[]={1714.0278,25.605936,15644.373};
+				angles[]={0,0,0.00034526698};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1706;
 			type="Land_Wreck_Hunter_F";
-			atlOffset=211.68738;
+			atlOffset=211.28735;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13316,19 +13344,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1696.6926,25.513243,15653.375};
-				angles[]={0,0,0.00034526698};
+				position[]={1719.1008,25.323709,15655.055};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1707;
 			type="Land_Wreck_Hunter_F";
-			atlOffset=1.9073486e-06;
+			atlOffset=211.06068;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13352,18 +13379,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1736.1917,24.865322,15614.324};
-				angles[]={0,2.029639,0};
+				position[]={1745.8663,24.953392,15614.449};
+				angles[]={0,4.592658,0};
 			};
 			side="Empty";
+			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1708;
 			type="Land_Wreck_AFV_Wheeled_01_F";
-			atlOffset=213.13199;
+			atlOffset=1.9073486e-06;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13387,17 +13416,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1705.6434,27.947981,15701.208};
+				position[]={1705.6434,28.034266,15701.208};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1709;
 			type="Land_UWreck_MV22_F";
-			atlOffset=210.79137;
+			atlOffset=210.87766;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13421,19 +13451,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1732.3101,24.917181,15645.751};
-				angles[]={0,0,0.00034526698};
+				position[]={1753.7262,24.588047,15605.081};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1712;
-			type="Land_Wreck_Heli_Attack_01_F";
-			atlOffset=5.7220459e-06;
+			id=1714;
+			type="Land_Wreck_HMMWV_F";
+			atlOffset=212.05701;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13457,18 +13486,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1753.7262,24.501762,15605.081};
+				position[]={1730.1453,24.56632,15591.892};
+				angles[]={0,2.4699109,0};
 			};
 			side="Empty";
-			flags=4;
+			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1714;
-			type="Land_Wreck_HMMWV_F";
-			atlOffset=7.6293945e-06;
+			id=1715;
+			type="Land_CncBarrierMedium4_F";
+			atlOffset=211.64325;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13492,19 +13523,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1730.1453,24.480036,15591.892};
-				angles[]={0,2.4699109,0};
+				position[]={1735.7444,25.510727,15594.276};
+				angles[]={0,2.9757531,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1715;
-			type="Land_CncBarrierMedium4_F";
-			atlOffset=211.55696;
+			id=1718;
+			type="Land_CncWall4_F";
+			atlOffset=212.0679;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13528,19 +13560,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1735.7444,25.424442,15594.276};
-				angles[]={0,2.9757531,0};
+				position[]={1759.5171,25.512512,15594.83};
+				angles[]={0,4.5166416,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1718;
+			id=1720;
 			type="Land_CncWall4_F";
-			atlOffset=211.98161;
+			atlOffset=210.78636;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13564,19 +13597,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1759.5171,25.426228,15594.83};
-				angles[]={0,4.5166416,0};
+				position[]={1756.8165,24.485628,15583.227};
+				angles[]={0,4.1307554,0};
 			};
 			side="Empty";
-			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1720;
-			type="Land_CncWall4_F";
-			atlOffset=210.70007;
+			id=1721;
+			type="Land_HBarrier_5_F";
+			atlOffset=10.566236;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13600,18 +13633,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1756.8165,24.399343,15583.227};
-				angles[]={0,4.1307554,0};
+				position[]={1734.6381,24.51203,15622.719};
+				angles[]={0,0.14134166,0};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1721;
-			type="Land_HBarrier_5_F";
+			id=1722;
+			type="Land_HBarrierWall6_F";
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13635,18 +13669,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1746.9164,24.427393,15622.633};
-				angles[]={0,0.14134166,0};
+				position[]={1693.5819,24.674839,15671.499};
+				angles[]={0,5.3399601,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1722;
-			type="Land_HBarrierWall6_F";
-			atlOffset=212.72913;
+			id=1730;
+			type="Land_ScrapHeap_1_F";
+			atlOffset=0.48051071;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13670,18 +13705,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1693.5819,24.588554,15671.499};
-				angles[]={0,5.3399601,0};
+				position[]={1688.5632,24.497484,15687.727};
+				angles[]={0,0.59732115,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1730;
-			type="Land_ScrapHeap_1_F";
-			atlOffset=0.4807682;
+			id=1737;
+			type="Land_HBarrierWall_corner_F";
+			atlOffset=210.6312;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13705,18 +13741,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1688.5632,24.4112,15687.727};
-				angles[]={0,0.59732115,0};
+				position[]={1636.2192,24.537542,15721.747};
+				angles[]={0,5.1627207,0};
 			};
 			side="Empty";
+			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1737;
-			type="Land_HBarrierWall_corner_F";
-			atlOffset=210.54491;
+			id=1741;
+			type="Land_CncBarrierMedium4_F";
+			atlOffset=209.08322;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13740,19 +13778,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1636.2192,24.451258,15721.747};
-				angles[]={0,5.1627207,0};
+				position[]={1705.3522,24.577276,15608.814};
+				angles[]={0,6.1116576,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1741;
+			id=1742;
 			type="Land_CncBarrierMedium4_F";
-			atlOffset=208.99693;
+			atlOffset=210.56142;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13776,19 +13815,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1705.3522,24.490992,15608.814};
-				angles[]={0,6.1116576,0};
+				position[]={1711.5365,25.495483,15610.115};
+				angles[]={0,6.1244192,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1742;
-			type="Land_CncBarrierMedium4_F";
-			atlOffset=210.47513;
+			id=1743;
+			type="Land_CncWall4_F";
+			atlOffset=210.72089;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13812,19 +13852,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1711.5365,25.409199,15610.115};
-				angles[]={0,6.1244192,0};
+				position[]={1707.2656,24.493242,15623.177};
+				angles[]={0,5.5862365,0};
 			};
 			side="Empty";
-			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1743;
-			type="Land_CncWall4_F";
-			atlOffset=210.6346;
+			id=1744;
+			type="Land_HBarrierWall_corridor_F";
+			atlOffset=210.2115;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13848,18 +13888,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1709.2177,24.420065,15623.41};
-				angles[]={0,0.98044616,0};
+				position[]={1648.0403,25.495483,15664.057};
+				angles[]={0,5.9123092,0};
 			};
 			side="Empty";
+			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1744;
-			type="Land_HBarrierWall_corridor_F";
-			atlOffset=210.2662;
+			id=1746;
+			type="Land_CncWall4_F";
+			atlOffset=210.14635;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13883,19 +13925,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1648.0403,25.409199,15664.057};
-				angles[]={0,5.9123092,0};
+				position[]={1642.9547,25.495483,15667.45};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1746;
+			id=1747;
 			type="Land_CncWall4_F";
-			atlOffset=210.06006;
+			atlOffset=209.9066;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13919,18 +13961,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1642.9547,25.409199,15667.45};
+				position[]={1671.7961,24.485781,15731.654};
+				angles[]={0,0.16312937,0};
 			};
 			side="Empty";
-			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1747;
-			type="Land_CncWall4_F";
-			atlOffset=209.82031;
+			id=1749;
+			type="Land_HBarrier_5_F";
+			atlOffset=210.37834;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13954,18 +13997,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1671.7961,24.399496,15731.654};
-				angles[]={0,0.16312937,0};
+				position[]={1750.854,24.340761,15552.688};
 			};
 			side="Empty";
+			flags=5;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1749;
-			type="Land_HBarrier_5_F";
-			atlOffset=210.29205;
+			id=1753;
+			type="Land_Mil_WallBig_4m_damaged_center_F";
+			atlOffset=0.032360077;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13989,18 +14033,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1750.854,24.254477,15552.688};
+				position[]={1747.3654,25.448772,15551.712};
+				angles[]={0,2.7849963,0};
 			};
 			side="Empty";
-			flags=5;
+			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1753;
-			type="Land_Mil_WallBig_4m_damaged_center_F";
-			atlOffset=0.032619476;
+			id=1755;
+			type="Land_Mil_WallBig_4m_damaged_left_F";
+			atlOffset=209.47835;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14024,18 +14070,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1747.3654,25.362488,15551.712};
-				angles[]={0,2.7849963,0};
+				position[]={1737.928,25.440853,15559.444};
 			};
 			side="Empty";
-			flags=5;
+			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1755;
-			type="Land_Mil_WallBig_4m_damaged_left_F";
+			id=1756;
+			type="Land_Mil_WallBig_4m_F";
+			atlOffset=209.42091;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14059,18 +14106,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1737.928,25.354568,15559.444};
+				position[]={1739.7126,25.431238,15537.988};
+				angles[]={0,4.1479139,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1756;
-			type="Land_Mil_WallBig_4m_F";
-			atlOffset=209.33463;
+			id=1757;
+			type="Land_Mil_WallBig_4m_battered_F";
+			atlOffset=208.7448;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14094,19 +14143,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1739.7126,25.344954,15537.988};
-				angles[]={0,2.308115,0};
+				position[]={1672.3658,24.150387,15687.443};
+				angles[]={0,1.9090934,0};
 			};
 			side="Empty";
-			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1757;
-			type="Land_Mil_WallBig_4m_battered_F";
-			atlOffset=208.65851;
+			id=1760;
+			type="Land_BagFence_Long_F";
+			atlOffset=210.51222;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14130,18 +14179,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1672.3658,24.064102,15687.443};
-				angles[]={0,1.9090934,0};
+				position[]={1682.8636,24.494482,15691.143};
+				angles[]={0,0.58300769,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1760;
-			type="Land_BagFence_Long_F";
-			atlOffset=210.42593;
+			id=1736;
+			type="Land_HBarrierWall6_F";
+			atlOffset=210.77504;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14165,18 +14215,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1682.8636,24.408197,15691.143};
-				angles[]={0,0.58300769,0};
+				position[]={1676.5576,24.150387,15689.189};
+				angles[]={0,0.35820803,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1736;
-			type="Land_HBarrierWall6_F";
-			atlOffset=210.68875;
+			id=1762;
+			type="Land_BagFence_Long_F";
+			atlOffset=210.66338;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14200,18 +14251,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1676.5576,24.064102,15689.189};
-				angles[]={0,0.35820803,0};
+				position[]={1689.8081,24.150387,15679.039};
+				angles[]={0,1.6448083,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1762;
+			id=1766;
 			type="Land_BagFence_Long_F";
-			atlOffset=210.57709;
+			atlOffset=210.45874;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14235,18 +14287,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1689.8081,24.064102,15679.039};
-				angles[]={0,1.6448083,0};
+				position[]={1776.7466,25.602457,15469.861};
+				angles[]={0,1.2116547,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1766;
-			type="Land_BagFence_Long_F";
-			atlOffset=210.37245;
+			id=1767;
+			type="Land_Wreck_Hunter_F";
+			atlOffset=210.90286;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14270,18 +14323,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1776.7466,25.516172,15469.861};
-				angles[]={0,1.2116547,0};
+				position[]={1673.8434,24.150387,15689.463};
+				angles[]={0,2.7208769,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1767;
-			type="Land_Wreck_Hunter_F";
-			atlOffset=210.81657;
+			id=1768;
+			type="Land_BagFence_Round_F";
+			atlOffset=210.57727;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14305,18 +14359,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1673.8434,24.064102,15689.463};
-				angles[]={0,2.7208769,0};
+				position[]={1778.9751,24.678232,15528.917};
+				angles[]={6.2828403,1.7507751,0.0014235723};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1768;
-			type="Land_BagFence_Round_F";
-			atlOffset=210.49098;
+			id=1771;
+			type="Land_ScrapHeap_2_F";
+			atlOffset=210.69543;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14340,18 +14395,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1764.1836,24.581907,15536.139};
-				angles[]={6.2825875,1.7507751,0.0012918708};
+				position[]={1676.4257,25.801012,15683.462};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1771;
-			type="Land_ScrapHeap_2_F";
-			atlOffset=209.35155;
+			id=1777;
+			type="CamoNet_INDP_big_F";
+			atlOffset=210.58476;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14375,17 +14430,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1676.4257,25.714727,15683.462};
+				position[]={1698.5129,24.618019,15646.277};
+				angles[]={0,5.6680951,0.00034526698};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1777;
-			type="CamoNet_INDP_big_F";
-			atlOffset=210.49847;
+			id=1778;
+			type="Land_BagBunker_Large_F";
+			atlOffset=211.75023;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14409,18 +14466,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1675.0596,24.534481,15644.005};
-				angles[]={0,5.6680951,0};
+				position[]={1685.238,24.529417,15628.586};
+				angles[]={0,3.4961007,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1778;
-			type="Land_BagBunker_Large_F";
-			atlOffset=211.5096;
+			id=1781;
+			type="Land_HBarrier_3_F";
+			atlOffset=210.68799;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14444,18 +14502,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1685.238,24.443132,15628.586};
-				angles[]={0,3.4961007,0};
+				position[]={1695.6357,24.47159,15620.664};
+				angles[]={0,4.280282,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1781;
-			type="Land_HBarrier_3_F";
-			atlOffset=210.6017;
+			id=1782;
+			type="Land_HBarrier_5_F";
+			atlOffset=209.99696;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14479,18 +14538,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1695.6357,24.385305,15620.664};
-				angles[]={0,4.280282,0};
+				position[]={1716.6764,24.577276,15587.267};
+				angles[]={0,3.843087,0};
 			};
 			side="Empty";
+			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1782;
-			type="Land_HBarrier_5_F";
-			atlOffset=209.91068;
+			id=1785;
+			type="Land_CncBarrierMedium4_F";
+			atlOffset=210.76863;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14514,19 +14575,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1716.6764,24.490992,15587.267};
-				angles[]={0,3.843087,0};
+				position[]={1698.3914,25.601969,15606.361};
+				angles[]={0,4.1350412,0};
 			};
 			side="Empty";
-			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1785;
-			type="Land_CncBarrierMedium4_F";
-			atlOffset=210.68234;
+			id=1786;
+			type="Land_Wreck_Hunter_F";
+			atlOffset=211.1994;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14550,18 +14611,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1698.3914,25.515684,15606.361};
-				angles[]={0,4.1350412,0};
+				position[]={1691.3016,24.569141,15608.611};
+				angles[]={0,1.1614474,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1786;
-			type="Land_Wreck_Hunter_F";
-			atlOffset=211.11311;
+			id=1789;
+			type="Land_Wreck_HMMWV_F";
+			atlOffset=10.57275;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14585,18 +14647,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1691.3016,24.482857,15608.611};
-				angles[]={0,1.1614474,0};
+				position[]={1686.1786,24.569141,15595.929};
+				angles[]={0,1.3754901,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1789;
+			id=1790;
 			type="Land_Wreck_HMMWV_F";
-			atlOffset=10.573009;
+			atlOffset=212.36052;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14620,18 +14683,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1686.1786,24.482857,15595.929};
-				angles[]={0,1.3754901,0};
+				position[]={1677.015,25.495483,15711.916};
+				angles[]={0,2.3616436,0};
 			};
 			side="Empty";
+			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1790;
-			type="Land_Wreck_HMMWV_F";
-			atlOffset=212.27423;
+			id=1792;
+			type="Land_CncWall4_F";
+			atlOffset=210.49333;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14655,19 +14720,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1677.015,25.409199,15711.916};
-				angles[]={0,2.3616436,0};
+				position[]={1672.9497,24.577276,15707.152};
+				angles[]={0,2.1004062,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1792;
-			type="Land_CncWall4_F";
-			atlOffset=210.40704;
+			id=1793;
+			type="Land_CncBarrierMedium4_F";
+			atlOffset=210.59502;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14691,19 +14757,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1672.9497,24.490992,15707.152};
-				angles[]={0,2.1004062,0};
+				position[]={1676.5588,24.56171,15682.915};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1793;
-			type="Land_CncBarrierMedium4_F";
-			atlOffset=210.50873;
+			id=1795;
+			type="RuggedTerminal_01_communications_F";
+			atlOffset=210.58319;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14727,18 +14793,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1676.5588,24.475426,15682.915};
+				position[]={1684.358,28.295704,15663.404};
+				angles[]={0,4.963943,0};
 			};
 			side="Empty";
 			flags=1;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1795;
-			type="RuggedTerminal_01_communications_F";
-			atlOffset=210.4969;
+			id=1796;
+			type="RuggedTerminal_01_communications_hub_F";
+			atlOffset=211.27127;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14762,19 +14830,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1684.358,28.209419,15663.404};
-				angles[]={0,4.963943,0};
+				position[]={1717.0641,24.909033,15571.436};
+				angles[]={0,5.6654158,0};
 			};
 			side="Empty";
-			flags=5;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1796;
-			type="RuggedTerminal_01_communications_hub_F";
-			atlOffset=0.00024032593;
+			id=1802;
+			type="CamoNet_INDP_open_F";
+			atlOffset=209.26656;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14798,18 +14866,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1717.0641,24.822748,15571.436};
-				angles[]={0,5.6654158,0};
+				position[]={1791.4806,24.937963,15474.497};
+				angles[]={0,1.3639648,0};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1802;
+			id=1805;
 			type="CamoNet_INDP_open_F";
+			atlOffset=210.06812;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14833,18 +14902,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1791.4806,24.851679,15474.497};
-				angles[]={0,1.3639648,0};
+				position[]={1792.2698,24.937963,15443.639};
+				angles[]={2.3037703e-07,1.1571678,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1805;
+			id=1806;
 			type="CamoNet_INDP_open_F";
-			atlOffset=209.98183;
+			atlOffset=210.06842;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14868,18 +14938,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1792.2698,24.851679,15443.639};
-				angles[]={2.3037703e-07,1.1571678,0};
+				position[]={1668.882,24.912909,15720.96};
+				angles[]={0,5.9254174,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1806;
+			id=1807;
 			type="CamoNet_INDP_open_F";
-			atlOffset=209.98213;
+			atlOffset=209.81364;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14903,18 +14974,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1668.882,24.826624,15720.96};
-				angles[]={0,5.9254174,0};
+				position[]={1696.6046,24.859335,15725.178};
+				angles[]={2.0612748e-05,5.7273512,6.2831817};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1807;
+			id=1808;
 			type="CamoNet_INDP_open_F";
+			atlOffset=210.08978;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14938,18 +15010,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1696.6046,24.77305,15725.178};
-				angles[]={2.0612748e-05,5.7273512,6.2831817};
+				position[]={1716.3895,24.881659,15682.387};
+				angles[]={0.00063212361,0.18440145,0.00074678974};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1808;
+			id=1809;
 			type="CamoNet_INDP_open_F";
-			atlOffset=210.00349;
+			atlOffset=210.6067;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14973,18 +15046,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1716.3895,24.795374,15682.387};
-				angles[]={0.00063212361,0.18440145,0.00074678974};
+				position[]={1679.2813,24.849966,15630.52};
+				angles[]={6.2803197,5.5379553,4.0381099e-05};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1809;
+			id=1810;
 			type="CamoNet_INDP_open_F";
-			atlOffset=210.52042;
+			atlOffset=13.361576;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -15008,18 +15082,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1679.2813,24.763681,15630.52};
-				angles[]={6.2803197,5.5379553,4.0381099e-05};
+				position[]={1760.1129,25.567505,15508.902};
+				angles[]={0,2.652961,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1810;
-			type="CamoNet_INDP_open_F";
-			atlOffset=13.361835;
+			id=1817;
+			type="Land_CanvasCover_01_F";
+			atlOffset=209.25142;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -15043,19 +15118,20 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1776.4894,25.497334,15515.741};
-				angles[]={6.2828403,1.1831824,0.0014235723};
+				position[]={1767.4178,25.595154,15549.859};
+				angles[]={6.2825875,2.588135,0.0012918708};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1817;
+			id=1818;
 			type="Land_CanvasCover_01_F";
-			atlOffset=3.8146973e-06;
+			atlOffset=7.6293945e-06;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -15079,19 +15155,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1760.7285,25.520878,15544.505};
-				angles[]={6.2825875,2.588135,0.0012918708};
+				position[]={1738.4084,25.574463,15583.349};
+				angles[]={0,0.94419247,0};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1818;
+			id=1819;
 			type="Land_CanvasCover_01_F";
-			atlOffset=0.024389267;
+			atlOffset=211.09697;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -15115,18 +15191,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1738.4084,25.488178,15583.349};
-				angles[]={-0,0.94419247,0};
+				position[]={1722.9967,25.555969,15609.119};
+				angles[]={0,1.9215537,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1819;
+			id=1820;
 			type="Land_CanvasCover_01_F";
-			atlOffset=211.01068;
+			atlOffset=212.49168;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -15150,18 +15227,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1722.9967,25.469685,15609.119};
-				angles[]={0,1.9215537,-0};
+				position[]={1726.4882,25.576614,15645.128};
+				angles[]={0,1.9325179,0.00034526698};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1820;
+			id=1821;
 			type="Land_CanvasCover_01_F";
-			atlOffset=212.4054;
+			atlOffset=211.65683;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -15185,18 +15263,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1714.3904,25.472126,15644.122};
-				angles[]={0.00076731062,1.9325179,6.2828312};
+				position[]={1673.9226,25.567184,15646.121};
+				angles[]={0,1.9085835,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1821;
+			id=1822;
 			type="Land_CanvasCover_01_F";
-			atlOffset=211.19788;
+			atlOffset=211.5246;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -15220,18 +15299,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1704.4485,25.46262,15662.745};
-				angles[]={7.3372175e-05,0.015875818,0.00084204145};
+				position[]={1644.391,25.52713,15693.955};
+				angles[]={3.611472e-09,1.3493612,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1822;
+			id=1823;
 			type="Land_CanvasCover_01_F";
-			atlOffset=211.18111;
+			atlOffset=209.09897;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -15255,18 +15335,55 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1644.391,25.440845,15693.955};
-				angles[]={3.611472e-09,1.3493612,6.2831855};
+				position[]={1729.8929,24.546141,15627.332};
+				angles[]={0,4.7099628,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
-			id=1823;
-			type="Land_CanvasCover_01_F";
-			atlOffset=209.01268;
+			id=1827;
+			type="Land_HBarrier_3_F";
+			atlOffset=211.98328;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item502
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1744.514,28.053522,15625.169};
+				angles[]={0,4.1800461,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				createAsLocalObject=1;
+				disableSimulation=1;
+			};
+			id=1832;
+			type="Land_UWreck_MV22_F";
+			atlOffset=212.79929;
 			class CustomAttributes
 			{
 				class Attribute0
