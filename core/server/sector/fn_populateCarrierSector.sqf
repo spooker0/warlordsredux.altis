@@ -47,7 +47,7 @@ _sector setVariable ["BIS_WL_vehiclesToSpawn", nil];
 private _unitsPool = serverNamespace getVariable ["WL2_populateUnitPoolList", []];
 
 private _infantryGroups = [];
-
+private _infantryUnits = [];
 private _camoNets = (allMissionObjects "Land_CanvasCover_01_F") select {
     _x distance2D _carrier < 500;
 };
@@ -69,7 +69,7 @@ private _spawned = 0;
 
     for "_i" from 0 to 8 do {
         private _infantry = _infantryGroup createUnit [selectRandom _unitsPool, _netPosition, [], 0, "NONE"];
-        _infantry setVehiclePosition [[_netPosition # 0, _netPosition # 1, 50], [], 3, "CAN_COLLIDE"];
+        _infantry setVehiclePosition [[_netPosition # 0, _netPosition # 1, 50], [], 5, "CAN_COLLIDE"];
 
         private _collisions = _airDefenses select {
             _infantry distance _x < 1;
@@ -81,6 +81,7 @@ private _spawned = 0;
             _infantry call WL2_fnc_newAssetHandle;
             _spawned = _spawned + 1;
             doStop _infantry;
+            _infantryUnits pushBack _infantry;
         };
 
         sleep 0.001;
@@ -91,25 +92,15 @@ private _spawned = 0;
     _net hideObject false;
 } forEach (_camoNets call BIS_fnc_arrayShuffle);
 
+[_infantryUnits + _airDefenses, _sector] spawn WL2_fnc_assetRelevanceCheck;
+
 [_sector, _airDefenses, _infantryGroups] spawn {
     params ["_sector", "_airDefenses", "_infantryGroups"];
     while { _sector getVariable ["BIS_WL_owner", sideUnknown] == independent } do {
         sleep 1;
     };
 
-    {
-        deleteVehicle _x;
-    } forEach _airDefenses;
-
-    {
-        {
-            deleteVehicle _x;
-        } forEach units _x;
-    } forEach _infantryGroups;
-
     setViewDistance 1600;
-
-    [_sector] remoteExec ["WL2_fnc_cleanupCarrier", 0, true];
 };
 
 [_sector, _airDefenses] spawn {

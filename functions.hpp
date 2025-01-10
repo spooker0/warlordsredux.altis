@@ -93,6 +93,7 @@ class CfgFunctions {
 			class announcer {};
 			class avTerminal {};
 			class betty {};
+			class cleanupCarrier {};
 			class clientEH {};
 			class cpBalance {};
 			class factionBasedClientInit {};
@@ -245,7 +246,6 @@ class CfgFunctions {
 		class Common {
 			file = "core\common";
 			class accessControl {};
-			class cleanupCarrier {};
 			class findSpawnPositions {};
 			class getAssetSide {};
 			class getAssetTypeName {};

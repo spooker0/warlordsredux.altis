@@ -30,7 +30,7 @@ while {_assetsRemain} do {
 		{
 			private _vehicle = _x;
 			private _isVehicleAlone = allPlayers findIf {_x distanceSqr _vehicle < 250000} == -1;
-			if (!isNull _vehicle && _isVehicleAlone) then {
+			if (!isNull _vehicle && (_isVehicleAlone || unitIsUAV _x)) then {
 				deleteVehicle _vehicle;
 			};
 		} forEach _vehicleList;

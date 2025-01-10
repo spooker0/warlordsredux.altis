@@ -324,3 +324,5 @@ missionNamespace setVariable [format ["BIS_WL2_minesDB_%1", getPlayerUID player]
 0 spawn WL2_fnc_avTerminal;
 
 0 spawn WL2_fnc_updateJammerMarkers;
+
+0 spawn WL2_fnc_cleanupCarrier;
