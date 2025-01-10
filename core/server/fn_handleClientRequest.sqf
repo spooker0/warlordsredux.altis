@@ -69,7 +69,7 @@ if (_action == "resetVehicle") exitWith {
 	if (_hasFunds) then {
 		(-_cost) call WL2_fnc_fundsDatabaseWrite;
 		_asset setDir _direction;
-		_asset setPosATL [_position select 0, _position select 1, 0];
+		_asset setVehiclePosition [_position, [], 0, "CAN_COLLIDE"];
 	};
 };
 

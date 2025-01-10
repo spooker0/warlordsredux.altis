@@ -55,30 +55,10 @@ if (_eligibleFastTravelConflict && _sectorIsTarget) then {
         private _eligibleFastTravelConflict = (["FTConflict", [], "", "", "", [], _fastTravelConflictCost, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
         private _sectorIsTarget = _sector == WL_TARGET_FRIENDLY;
         if (_eligibleFastTravelConflict && _sectorIsTarget) then {
-            private _startArr = (synchronizedObjects WL_TARGET_FRIENDLY) select {
-                (_x getVariable "BIS_WL_owner") == BIS_WL_playerSide
-            };
-            _startArr = _startArr apply {
-                [_x distance2D player, _x]
-            };
-            _startArr sort true;
-
-            private _start = (_startArr # 0) # 1;
-            private _area = WL_TARGET_FRIENDLY getVariable "objectArea";
-            private _size = if (_area # 3) then {
-                sqrt (((_area # 0) ^ 2) + ((_area # 1) ^ 2));
-            } else {
-                (_area # 0) max (_area # 1);
-            };
-
-            private _marker = createMarkerLocal ["localMarker", [WL_TARGET_FRIENDLY, _size + WL_FAST_TRAVEL_OFFSET, WL_TARGET_FRIENDLY getDir _start] call BIS_fnc_relPos];
-            _marker setMarkerShapeLocal "RECTANGLE";
-            _marker setMarkerColorLocal BIS_WL_colorMarkerFriendly;
-            _marker setMarkerDirLocal (WL_TARGET_FRIENDLY getDir _start);
-            _marker setMarkerSizeLocal [_size, WL_FAST_TRAVEL_RANGE_AXIS];
-            [_marker] spawn {
-                params ["_marker"];
-                [true, _marker] call WL2_fnc_executeFastTravel;
+            0 spawn {
+                private _marker = (call WL2_fnc_fastTravelConflictMarker) # 0;
+                private _isCarrierSector = count (BIS_WL_targetSector getVariable ["WL_aircraftCarrier", []]) > 0;
+                [true, _marker, _isCarrierSector] call WL2_fnc_executeFastTravel;
                 deleteMarkerLocal _marker;
             };
         } else {

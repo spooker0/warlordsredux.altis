@@ -18,8 +18,13 @@ if (!isNull _sector) then {
 	} else {
 		private _owner = _sector getVariable "BIS_WL_owner";
 		private _enemySector = missionNamespace getVariable format ["BIS_WL_currentTarget_%1", (([west, east] select {_x != _side}) # 0)];
-		if (_owner == resistance && {_sector != _enemySector}) then {
-			[_sector, _owner] spawn WL2_fnc_populateSector;
+		if (_owner == resistance && _sector != _enemySector) then {
+			private _isCarrierSector = count (_sector getVariable ["WL_aircraftCarrier", []]) > 0;
+			if (_isCarrierSector) then {
+				[_sector] spawn WL2_fnc_populateCarrierSector;
+			} else {
+				[_sector, _owner] spawn WL2_fnc_populateSector;
+			};
 		};
 	};
 } else {

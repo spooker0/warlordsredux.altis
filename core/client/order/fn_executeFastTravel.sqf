@@ -1,4 +1,4 @@
-params ["_toContested", "_marker"];
+params ["_toContested", "_marker", ["_isCarrierSector", false]];
 
 titleCut ["", "BLACK OUT", 1];
 openMap [false, false];
@@ -10,19 +10,23 @@ sleep 1;
 
 private _destination = [];
 if (_toContested) then {
-	_destination = ([_marker, 0, true] call WL2_fnc_findSpawnPositions) select {
-		private _pos = _x;
-		BIS_WL_allSectors findIf {
-			_pos inArea ((_x getVariable "BIS_WL_markers") # 2)
-		} == -1
-	};
-	_destination = if (count _destination > 0) then {
-		selectRandom _destination;
+	if (_isCarrierSector) then {
+		private _randomPos = BIS_WL_targetSector call BIS_fnc_randomPosTrigger;
+		_destination = [_randomPos # 0, _randomPos # 1, 100];
 	} else {
-		markerPos _marker;
+		_destination = ([_marker, 0, true] call WL2_fnc_findSpawnPositions) select {
+			private _pos = _x;
+			BIS_WL_allSectors findIf {
+				_pos inArea ((_x getVariable "BIS_WL_markers") # 2)
+			} == -1
+		};
+		_destination = if (count _destination > 0) then {
+			selectRandom _destination;
+		} else {
+			markerPos _marker;
+		};
 	};
 
-	player setDir (player getDir BIS_WL_targetSector);
 	[player, "fastTravelContested", _destination] remoteExec ["WL2_fnc_handleClientRequest", 2];
 } else {
 	_destination = selectRandom ([BIS_WL_targetSector, 0, true] call WL2_fnc_findSpawnPositions);
@@ -36,11 +40,29 @@ private _tagAlong = (units player) select {
 	_x getVariable ["BIS_WL_ownerAsset", "123"] == getPlayerUID player
 };
 
-{
-	_x setVehiclePosition [_destination, [], 3, "NONE"];
-} forEach _tagAlong;
-player setVehiclePosition [_destination, [], 0, "NONE"];
 
+private _directionToSector = player getDir BIS_WL_targetSector;
+if (_isCarrierSector && _toContested) then {
+	{
+		_x setPosASL _destination;
+		private _parachuteAI = createVehicle ["Steerable_Parachute_F", ASLtoATL _destination, [], 0, "CAN_COLLIDE"];
+		_x moveInDriver _parachuteAI;
+		_parachuteAI setDir _directionToSector;
+	} forEach _tagAlong;
+
+	player setPosASL _destination;
+	private _parachute = createVehicle ["Steerable_Parachute_F", ASLtoATL _destination, [], 0, "CAN_COLLIDE"];
+	player moveInDriver _parachute;
+
+	_parachute setDir _directionToSector;
+} else {
+	{
+		_x setVehiclePosition [_destination, [], 3, "NONE"];
+	} forEach _tagAlong;
+	player setVehiclePosition [_destination, [], 0, "NONE"];
+
+	player setDir _directionToSector;
+};
 sleep 1;
 
 titleCut ["", "BLACK IN", 1];

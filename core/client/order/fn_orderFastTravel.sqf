@@ -23,27 +23,11 @@ private _action = if (_toContested) then {"travelling_contested"} else {"travell
 private _marker = "";
 private _markerText = "";
 
-if (_toContested) then {
-	private _startArr = (synchronizedObjects WL_TARGET_FRIENDLY) select {(_x getVariable "BIS_WL_owner") == BIS_WL_playerSide};
-	_startArr = _startArr apply {[_x distance2D player, _x]};
-	_startArr sort true;
-	private _start = (_startArr # 0) # 1;
-	private _area = WL_TARGET_FRIENDLY getVariable "objectArea";
-	private _size = (if (_area # 3) then {
-		sqrt (((_area # 0) ^ 2) + ((_area # 1) ^ 2));
-	} else {
-		(_area # 0) max (_area # 1);
-	});
-	_marker = createMarkerLocal ["localMarker", [WL_TARGET_FRIENDLY, _size + WL_FAST_TRAVEL_OFFSET, WL_TARGET_FRIENDLY getDir _start] call BIS_fnc_relPos];
-	_marker setMarkerShapeLocal "RECTANGLE";
-	_marker setMarkerColorLocal BIS_WL_colorMarkerFriendly;
-	_marker setMarkerDirLocal (WL_TARGET_FRIENDLY getDir _start);
-	_marker setMarkerSizeLocal [_size, WL_FAST_TRAVEL_RANGE_AXIS];
-	_markerText = createMarkerLocal ["localMarkerText", markerPos _marker];
-	_markerText setMarkerColorLocal BIS_WL_colorMarkerFriendly;
-	_markerText setMarkerSizeLocal [0, 0];
-	_markerText setMarkerTypeLocal "mil_dot";
-	_markerText setMarkerTextLocal localize "STR_A3_cfgvehicles_moduletasksetdestination_f_arguments_destination_0";
+private _isCarrierSector = count (WL_TARGET_FRIENDLY getVariable ["WL_aircraftCarrier", []]) > 0;
+if (_toContested && !_isCarrierSector) then {
+	private _fastTravelConflict = call WL2_fnc_fastTravelConflictMarker;
+	_marker = _fastTravelConflict # 0;
+	_markerText = _fastTravelConflict # 1;
 };
 
 sleep WL_TIMEOUT_SHORT;
@@ -66,7 +50,8 @@ if (isNull BIS_WL_targetSector) exitWith {
 	WL_MapBusy = WL_MapBusy - ["orderFastTravel"];
 };
 
-[_toContested, _marker] call WL2_fnc_executeFastTravel;
+_isCarrierSector = count (BIS_WL_targetSector getVariable ["WL_aircraftCarrier", []]) > 0;
+[_toContested, _marker, _isCarrierSector] call WL2_fnc_executeFastTravel;
 
 deleteMarkerLocal _marker;
 deleteMarkerLocal _markerText;

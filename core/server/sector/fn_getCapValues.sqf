@@ -60,8 +60,15 @@ private _eligibleEntitiesInArea = _allInArea select {
 		// Standing on top of building/>1 floor = ~0
 		// Climbing ladder = altitude above ground
 		// Flying = altitude above ground
-		private _zAboveGeneric = (getPos _unit) # 2;
-		_zAboveGeneric > -2 && _zAboveGeneric < 50;
+
+		private _isCarrierSector = count (_sector getVariable ["WL_aircraftCarrier", []]) > 0;
+
+		if (_isCarrierSector) then {
+			getPosASL _unit # 2 > 15;
+		} else {
+			private _zAboveGeneric = (getPos _unit) # 2;
+			_zAboveGeneric > -2 && _zAboveGeneric < 50;
+		};
 	};
 };
 

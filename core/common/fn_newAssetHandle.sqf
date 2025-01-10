@@ -74,7 +74,7 @@ if (_asset isKindOf "Man") then {
 
 			// reduce height for demolish action
 			private _assetPos = getPosATL _asset;
-			_asset setPosATL [_assetPos select 0, _assetPos select 1, -8];
+			_asset setPosATL [_assetPos # 0, _assetPos # 1, _assetPos # 2 - 8];
 
 			// too hardy otherwise, start off at 10% health
 			_asset setDamage 0.9;
@@ -327,7 +327,6 @@ if (_asset isKindOf "Man") then {
 			params ["_vehicle", "_role", "_unit", "_turret", "_isEject"];
 
 			if (!_isEject) exitWith {};
-
 
 			[_vehicle, _unit] spawn {
 				params ["_vehicle", "_unit"];
