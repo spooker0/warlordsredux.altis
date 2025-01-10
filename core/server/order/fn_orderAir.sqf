@@ -18,8 +18,21 @@ if (count _carrierSectors > 0) then {
 	_sector = _carrierSectors # 0;
 
 	private _carrierSettings = _sector getVariable ["WL_aircraftCarrier", []];
-	_spawnPos = _carrierSettings # 0;
-	_dir = _carrierSettings # 1;
+	{
+		private _potentialSpawn = _x;
+		private _potentialSpawnPos = _potentialSpawn # 0;
+		private _potentialSpawnDir = _potentialSpawn # 1;
+
+		private _potentialSpawnPosASL = ATLtoASL _potentialSpawnPos;
+		private _collisionObjects = (_potentialSpawnPosASL nearObjects ["AllVehicles", 20]) select {
+			!(_x isKindOf "Man")
+		};
+		if (count _collisionObjects == 0) then {
+			_spawnPos = _potentialSpawnPos;
+			_dir = _potentialSpawnDir;
+			break;
+		};
+	} forEach (_carrierSettings call BIS_fnc_arrayShuffle);
 } else {
 	_sector = (_sector select {count (_x getVariable ["BIS_WL_runwaySpawnPosArr", []]) > 0}) # 0;
 
@@ -56,6 +69,7 @@ private _asset = if (_isUav) then {
 	createVehicle [_class, _spawnPos, [], 0, "NONE"];
 };
 
+_asset setVehiclePosition [_spawnPos, [], 0, "CAN_COLLIDE"];
 _asset setDir _dir;
 
 private _textureHashmap = missionNamespace getVariable ["WL2_textures", createHashMap];
@@ -136,3 +150,5 @@ _asset setVariable ["BIS_WL_ownerAsset", _uid, true];
 _asset setVariable ["WL2_orderedClass", _orderedClass, true];
 [_asset, _sender] remoteExec ["WL2_fnc_newAssetHandle", _owner];
 _sender setVariable ["BIS_WL_isOrdering", false, [2, _owner]];
+
+[_asset] remoteExec ["WL2_fnc_catapultAction", 0];

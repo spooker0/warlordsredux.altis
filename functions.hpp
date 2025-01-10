@@ -123,6 +123,8 @@ class CfgFunctions {
 			file = "core\client\action";
 			class arsenalSetup {};
 			class attachVehicle {};
+			class catapultAction {};
+			class catapultActionEligibility {};
 			class claimAction {};
 			class claimEligibility {};
 			class dazzlerAction {};
@@ -225,6 +227,7 @@ class CfgFunctions {
 			class cancelVehicleOrder {};
 			class deployment {};
 			class executeFastTravel {};
+			class fastTravelConflictMarker {};
 			class orderAircraft {};
 			class orderArsenal {};
 			class orderFastTravel {};
@@ -242,6 +245,7 @@ class CfgFunctions {
 		class Common {
 			file = "core\common";
 			class accessControl {};
+			class cleanupCarrier {};
 			class findSpawnPositions {};
 			class getAssetSide {};
 			class getAssetTypeName {};
@@ -285,7 +289,6 @@ class CfgFunctions {
 			class incomePayoff {};
 			class initServer {};
 			class killRewardHandle {};
-			class populateSector {};
 			class processRunways {};
 			class selectTarget {};
 			class serverEHs {};
@@ -299,6 +302,8 @@ class CfgFunctions {
 		class ServerSector {
 			file = "core\server\sector";
 			class getCapValues {};
+			class populateSector {};
+			class populateCarrierSector {};
 			class sectorCaptureHandle {};
 			class sectorsInitServer {};
 		};

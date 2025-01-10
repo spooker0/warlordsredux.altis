@@ -317,6 +317,12 @@ if (_ret) then {
 
 			if (_category == "Strategy") exitWith {};
 
+			private _isCarrierSector = count (_currentSector getVariable ["WL_aircraftCarrier", []]) > 0;
+			if (_category == "Heavy Vehicles" && _isCarrierSector) exitWith {
+				_ret = false;
+				_tooltip = "Heavy vehicles unavailable on aircraft carrier.";
+			};
+
 			if (_vehiclesCnt >= (getMissionConfigValue ["BIS_WL_assetLimit", 10])) exitWith {
 				_ret = false;
 				_tooltip = localize "STR_A3_WL_popup_asset_limit_reached";

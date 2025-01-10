@@ -101,6 +101,8 @@ addMissionEventHandler ["Map", {
 			MAP_CONTROL_CLICK = addMissionEventHandler ["MapSingleClick", {
 				params ["_units", "_pos", "_alt", "_shift"];
 				if (_shift) exitWith {};
+				if (!alive player) exitWith {};
+
 				if (count WL_MapBusy > 0) exitWith {};
 
 				if !(isNull WL_AssetActionTarget) then {
