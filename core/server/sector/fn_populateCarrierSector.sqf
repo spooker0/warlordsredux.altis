@@ -4,6 +4,10 @@ params ["_sector"];
 
 setViewDistance 4500;
 
+ropeCreate [Carrier1Boat1, "", Carrier1Rope1, [0, 0, 0], -1];
+Carrier1Boat1 lock true;
+Carrier1Boat1 setPhysicsCollisionFlag false;
+
 private _sectorMarker = _sector getVariable "objectAreaComplete";
 private _carrier = ((8 allObjects 0) select {
     _x isKindOf "Land_Carrier_01_hull_base_F" && _x inArea _sectorMarker;
@@ -14,17 +18,16 @@ _airDefenseGroup deleteGroupWhenEmpty true;
 private _airDefenses = [];
 {
     _x params ["_type", "_pos", "_dir", "_lock", "_waypoints"];
-    private _vehicleArray = [_pos, _dir, _type, independent] call BIS_fnc_spawnVehicle;
+    private _vehicleArray = [[_pos # 0, _pos # 1, _pos # 2 - 50], _dir, _type, independent] call BIS_fnc_spawnVehicle;
     _vehicleArray params ["_vehicle", "_crew", "_group"];
 
     _vehicle allowDamage false;
     _vehicle setDamage 0;
-    _vehicle setVehiclePosition [[_pos # 0, _pos # 1, 50], [], 0, "CAN_COLLIDE"];
+    _vehicle setVehiclePosition [[_pos # 0, _pos # 1, 10], [], 0, "CAN_COLLIDE"];
 
     _vehicle setVehicleReportRemoteTargets true;
     _vehicle setVehicleReceiveRemoteTargets true;
     _vehicle setVehicleReportOwnPosition true;
-    _vehicle setVehicleRadar 1;
 
     _vehicle lock true;
 
@@ -75,7 +78,7 @@ private _spawned = 0;
             _infantry distance _x < 1;
         };
         private _spawnHeight = getPosASL _infantry # 2;
-        if (_spawnHeight < 20 || _spawnHeight > 30 || count _collisions > 0) then {
+        if (_spawnHeight < 10 || count _collisions > 0) then {
             deleteVehicle _infantry;
         } else {
             _infantry call WL2_fnc_newAssetHandle;
@@ -108,6 +111,7 @@ private _spawned = 0;
     while { _sector getVariable ["BIS_WL_owner", sideUnknown] == independent } do {
         {
             [_x, 1] remoteExec ["setVehicleAmmo", _x];
+            [_x, 1] remoteExec ["setVehicleRadar", _x];
         } forEach _airDefenses;
 
         {
@@ -116,6 +120,6 @@ private _spawned = 0;
             };
         } forEach vehicles;
 
-        sleep 30;
+        sleep 15;
     };
 };

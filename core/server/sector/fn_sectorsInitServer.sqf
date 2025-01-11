@@ -100,6 +100,9 @@ waitUntil {!isNil "BIS_WL_base1" && {!isNil "BIS_WL_base2"}};
 	private _sectorVehiclesArray = [];
 	{
 		private _vehicle = _x;
+		if (_vehicle getVariable ["WL_excludeSectorSpawn", false]) then {
+			continue;
+		};
 		private _group = group effectiveCommander _vehicle;
 		private _array = [typeOf _vehicle, position _vehicle, direction _vehicle, locked _vehicle];
 		private _waypoints = +(waypoints _group);
