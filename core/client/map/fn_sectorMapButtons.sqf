@@ -56,10 +56,14 @@ if (_eligibleFastTravelConflict && _sectorIsTarget) then {
         private _sectorIsTarget = _sector == WL_TARGET_FRIENDLY;
         if (_eligibleFastTravelConflict && _sectorIsTarget) then {
             0 spawn {
-                private _marker = (call WL2_fnc_fastTravelConflictMarker) # 0;
+                private _fastTravelConflictCall = call WL2_fnc_fastTravelConflictMarker;
+                private _marker = _fastTravelConflictCall # 0;
                 private _isCarrierSector = count (BIS_WL_targetSector getVariable ["WL_aircraftCarrier", []]) > 0;
                 [true, _marker, _isCarrierSector] call WL2_fnc_executeFastTravel;
                 deleteMarkerLocal _marker;
+
+                private _markerText = _fastTravelConflictCall # 1;
+                deleteMarkerLocal _markerText;
             };
         } else {
             playSoundUI "AddItemFailed";

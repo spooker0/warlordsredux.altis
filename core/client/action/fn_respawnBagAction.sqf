@@ -34,6 +34,13 @@ private _actionId = player addAction [
         _freshTent setDir (direction player);
         _freshTent setVehiclePosition [_pos, [], 0, "CAN_COLLIDE"];
 
+        private _newPos = getPosATL _freshTent;
+        if (abs ((_pos # 2) - (_newPos # 2)) > 5) exitWith {
+            systemChat "Failed to place tent. Please try again in an open spot outside.";
+            playSound "AddItemFailed";
+            call WL2_fnc_respawnBagAction;
+        };
+
         player setVariable ["WL2_respawnBag", _freshTent];
 
         _freshTent enableWeaponDisassembly false;

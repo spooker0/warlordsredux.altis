@@ -1,5 +1,7 @@
 #include "..\warlords_constants.inc"
 
+"Carrier1RappelMarker" setMarkerAlpha 0;
+
 private _changeAttackStatus = {
     params ["_carrier"];
 
@@ -14,6 +16,12 @@ private _changeAttackStatus = {
     {
         _x hideObject !_isUnderAttack;
     } forEach _carrierStatics;
+
+    if (_isUnderAttack) then {
+        "Carrier1RappelMarker" setMarkerAlpha 1;
+    } else {
+        "Carrier1RappelMarker" setMarkerAlpha 0;
+    };
 };
 
 private _carriers = [Carrier1];
@@ -28,6 +36,10 @@ private _carriers = [Carrier1];
 
 while { !BIS_WL_missionEnd } do {
     {
+        if (isNil "BIS_WL_currentTarget_west" || isNil "BIS_WL_currentTarget_east") then {
+            sleep 5;
+            continue;
+        };
         private _carrier = _x;
 
         private _sector = _carrier getVariable ["WL_carrierSector", objNull];

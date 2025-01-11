@@ -8,11 +8,11 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=1866;
+		nextID=1867;
 	};
 	class MarkerIDProvider
 	{
-		nextID=25;
+		nextID=26;
 	};
 	class LayerIndexProvider
 	{
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={1882.4082,156.94373,15603.324};
-		dir[]={-0.51552874,-0.84987718,-0.1096665};
-		up[]={-0.83126593,0.52699721,-0.17683244};
-		aside[]={-0.20808084,-1.0052463e-07,0.97816628};
+		pos[]={1811.5022,23.025229,15501.001};
+		dir[]={-0.51716036,-0.84721243,0.12216867};
+		up[]={-0.82452661,0.53123575,0.19477659};
+		aside[]={0.22991882,-2.9889634e-07,0.97329515};
 	};
 };
 binarizationWanted=0;
@@ -248,7 +248,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=504;
+		items=505;
 		class Item0
 		{
 			dataType="Logic";
@@ -15399,7 +15399,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="this setVariable [""WL_excludeSectorSpawn"", true];" \n "this addAction [""Zipline"", {player setVehiclePosition [getPosATL Carrier1Rope1, [], 0, ""CAN_COLLIDE""]}];";
+				init="this setVariable [""WL_excludeSectorSpawn"", true];";
 				name="Carrier1Boat1";
 			};
 			id=1859;
@@ -15458,6 +15458,16 @@ class Mission
 				};
 				nAttributes=1;
 			};
+		};
+		class Item504
+		{
+			dataType="Marker";
+			position[]={1803.433,-0.27200001,15494.577};
+			name="Carrier1RappelMarker";
+			text="Carrier Rappel Point";
+			type="hd_dot";
+			id=1866;
+			atlOffset=187.42284;
 		};
 	};
 	class Connections

@@ -8,11 +8,9 @@ private _ownedSector = (BIS_WL_sectorsArray # 0) select {
     player inArea (_x getVariable "objectAreaComplete")
 };
 private _isOutOfSector = count _ownedSector == 0;
-private _isInCarrierSector = if (_isOutOfSector) then {
-    false;
-} else {
-    count ((_ownedSector # 0) getVariable ["WL_aircraftCarrier", []]) > 0;
-};
+private _isInCarrierSector = count (BIS_WL_allSectors select {
+    player inArea (_x getVariable "objectAreaComplete") && count (_x getVariable ["WL_aircraftCarrier", []]) > 0
+}) > 0;
 
 vehicle player != player ||
 !alive player ||
