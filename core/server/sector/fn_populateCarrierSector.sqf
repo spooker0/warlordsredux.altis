@@ -23,7 +23,7 @@ private _airDefenses = [];
 
     _vehicle allowDamage false;
     _vehicle setDamage 0;
-    _vehicle setVehiclePosition [[_pos # 0, _pos # 1, 10], [], 0, "CAN_COLLIDE"];
+    _vehicle setVehiclePosition [[_pos # 0, _pos # 1, 200], [], 0, "CAN_COLLIDE"];
 
     _vehicle setVehicleReportRemoteTargets true;
     _vehicle setVehicleReceiveRemoteTargets true;
@@ -45,7 +45,7 @@ private _airDefenses = [];
 _airDefenseGroup setBehaviourStrong "COMBAT";
 _airDefenseGroup setCombatMode "RED";
 
-_sector setVariable ["BIS_WL_vehiclesToSpawn", nil];
+// _sector setVariable ["BIS_WL_vehiclesToSpawn", nil];
 
 private _unitsPool = serverNamespace getVariable ["WL2_populateUnitPoolList", []];
 
