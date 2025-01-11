@@ -64,7 +64,7 @@ private _eligibleEntitiesInArea = _allInArea select {
 		private _isCarrierSector = count (_sector getVariable ["WL_aircraftCarrier", []]) > 0;
 
 		if (_isCarrierSector) then {
-			getPosASL _unit # 2 > 15;
+			getPosASL _unit # 2 > 10;
 		} else {
 			private _zAboveGeneric = (getPos _unit) # 2;
 			_zAboveGeneric > -2 && _zAboveGeneric < 50;

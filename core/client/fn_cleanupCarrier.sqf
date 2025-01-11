@@ -5,6 +5,7 @@ private _changeAttackStatus = {
 
     private _sector = _carrier getVariable ["WL_carrierSector", objNull];
 
+    private _statics = WL_carrierProps;
     private _carrierStatics = _statics select {
         _x inArea (_sector getVariable "objectAreaComplete");
     };
@@ -26,8 +27,6 @@ private _carriers = [Carrier1];
 } forEach _carriers;
 
 while { !BIS_WL_missionEnd } do {
-    private _statics = WL_carrierProps;
-
     {
         private _carrier = _x;
 
