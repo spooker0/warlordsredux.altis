@@ -40,10 +40,8 @@ private _carriers = [Carrier1];
 [_carriers, _changeAttackStatus] spawn {
     params ["_carriers", "_changeAttackStatus"];
 
-    [_carrier] call _changeAttackStatus;
-
     while { !BIS_WL_missionEnd } do {
-        sleep 60;
+        sleep 30;
         {
             private _carrier = _x;
             [_carrier] call _changeAttackStatus;
