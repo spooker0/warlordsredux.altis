@@ -36,6 +36,21 @@ private _carriers = [Carrier1];
     _carrier setVariable ["WL_carrierSector", _sector];
 } forEach _carriers;
 
+// Ensure sync
+[_carriers, _changeAttackStatus] spawn {
+    params ["_carriers", "_changeAttackStatus"];
+
+    [_carrier] call _changeAttackStatus;
+
+    while { !BIS_WL_missionEnd } do {
+        sleep 60;
+        {
+            private _carrier = _x;
+            [_carrier] call _changeAttackStatus;
+        } forEach _carriers;
+    };
+};
+
 while { !BIS_WL_missionEnd } do {
     {
         if (isNil "BIS_WL_currentTarget_west" || isNil "BIS_WL_currentTarget_east") then {
@@ -54,17 +69,4 @@ while { !BIS_WL_missionEnd } do {
     } forEach _carriers;
 
     sleep 5;
-};
-
-// Ensure sync
-[_carriers, _changeAttackStatus] spawn {
-    params ["_carriers", "_changeAttackStatus"];
-
-    while { !BIS_WL_missionEnd } do {
-        sleep 60;
-        {
-            private _carrier = _x;
-            [_carrier] call _changeAttackStatus;
-        } forEach _carriers;
-    };
 };
