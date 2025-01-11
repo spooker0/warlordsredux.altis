@@ -93,15 +93,6 @@ class CfgDisabledCommands
         };
     };
 
-    class SETVELOCITYTRANSFORMATION
-    {
-        class SYNTAX1
-        {
-            targets[] = {1,0,0};
-            args[] = {{"OBJECT"},{"ARRAY"}};
-        };
-    };
-
     class ADDFORCE
     {
         class SYNTAX1

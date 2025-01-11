@@ -107,6 +107,7 @@ class CfgFunctions {
 			class pingFix {};
 			class pingFixInit {};
 			class playerEventHandlers {};
+			class prepareRappel {};
 			class prompt {};
 			class repackMagazines {};
 			class rita {};
@@ -289,7 +290,6 @@ class CfgFunctions {
 			class incomePayoff {};
 			class initServer {};
 			class killRewardHandle {};
-			class prepareRopes {};
 			class processRunways {};
 			class selectTarget {};
 			class serverEHs {};
