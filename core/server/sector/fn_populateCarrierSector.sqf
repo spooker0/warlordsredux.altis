@@ -4,8 +4,6 @@ params ["_sector"];
 
 setViewDistance 4500;
 
-call WL2_fnc_prepareRopes;
-
 private _sectorMarker = _sector getVariable "objectAreaComplete";
 private _carrier = ((8 allObjects 0) select {
     _x isKindOf "Land_Carrier_01_hull_base_F" && _x inArea _sectorMarker;

@@ -2,6 +2,8 @@
 
 "Carrier1RappelMarker" setMarkerAlpha 0;
 
+call WL2_fnc_prepareRappel;
+
 private _changeAttackStatus = {
     params ["_carrier"];
 
