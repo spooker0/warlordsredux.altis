@@ -18,12 +18,9 @@ _airDefenseGroup deleteGroupWhenEmpty true;
 private _airDefenses = [];
 {
     _x params ["_type", "_pos", "_dir", "_lock", "_waypoints"];
-    private _vehicleArray = [[_pos # 0, _pos # 1, _pos # 2 + 500], _dir, _type, independent] call BIS_fnc_spawnVehicle;
-    _vehicleArray params ["_vehicle", "_crew", "_group"];
-
+    private _vehicle = [_pos, _type, _type, _dir, objNull] call WL2_fnc_createUAVCrew;
     _vehicle allowDamage false;
     _vehicle setDamage 0;
-    _vehicle setVehiclePosition [[_pos # 0, _pos # 1, 500], [], 0, "CAN_COLLIDE"];
 
     _vehicle setVehicleReportRemoteTargets true;
     _vehicle setVehicleReceiveRemoteTargets true;
@@ -41,7 +38,7 @@ private _airDefenses = [];
         _x setSkill 1;
         [_x] joinSilent _airDefenseGroup;
         _airDefenses pushBack _x;
-    } forEach _crew;
+    } forEach (crew _vehicle);
 } forEach (_sector getVariable ["BIS_WL_vehiclesToSpawn", []]);
 _airDefenseGroup setBehaviourStrong "COMBAT";
 _airDefenseGroup setCombatMode "RED";

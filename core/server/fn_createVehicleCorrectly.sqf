@@ -1,4 +1,4 @@
-params ["_class", "_pos", "_direction"];
+params ["_class", "_orderedClass", "_pos", "_direction"];
 _pos params ["_posX", "_posY", "_posZ"];
 
 if !(isServer) exitWith {};
