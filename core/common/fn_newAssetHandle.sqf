@@ -178,8 +178,10 @@ if (_asset isKindOf "Man") then {
 	};
 
 	if (unitIsUAV _asset) then {
-		if (profileNamespace getVariable ["MRTM_enableAuto", true]) then {
+		if (profileNamespace getVariable ["MRTM_enableAuto", true] && !isDedicated) then {
 			[_asset, false] remoteExec ["setAutonomous", 0];
+		} else {
+			[_asset, true] remoteExec ["setAutonomous", 0];
 		};
 		_asset setVariable ["BIS_WL_ownerUavAsset", _playerUID, true];
 		[_asset, _owner] spawn WL2_fnc_uavJammer;
