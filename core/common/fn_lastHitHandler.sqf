@@ -8,7 +8,7 @@ _asset addEventHandler ["Hit", {
 	private _responsibleSide = side group _responsiblePlayer;
 
 	if (_ownerSide == _responsibleSide) exitWith {};
-	if (!alive _unit) exitWith {};
+	if (!alive _unit || !isDamageAllowed _unit) exitWith {};
 	if (isNull _responsiblePlayer) exitWith {};
 
 	_unit setVariable ["WL_lastHitter", _responsiblePlayer, 2];
