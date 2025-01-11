@@ -147,6 +147,12 @@ private _side = side _owner;
     private _sensors = (listVehicleSensors _asset) apply { _x # 0 };
     private _sensorsDisabled = false;
     while { alive _asset } do {
+        if (isNil "_filmGrain") then {
+            _filmGrain = call _initFilmGrain;
+            sleep 10;
+            continue;
+        };
+
         private _jammerStrength = _asset getVariable ["BIS_WL_jammerStrength", 0];
 
         if (!isRemoteControlling player) then {
