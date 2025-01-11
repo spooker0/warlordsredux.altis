@@ -59,15 +59,15 @@ private _originalPosition = getPosATL _asset;
         player inArea (_x getVariable "objectAreaComplete") && count (_x getVariable ["WL_aircraftCarrier", []]) > 0
     }) > 0;
 
-    if (_isInCarrierSector) exitWith {
-        _offset = _offset vectorAdd [0, 0, 2.5];
-        _asset attachTo [player, _offset];
-    };
-
     private _boundingBoxHeight = (boundingBoxReal _asset) # 0 # 2;
     while { !(isNull _asset) && !(BIS_WL_spacePressed) && !(BIS_WL_backspacePressed) } do {
-        private _assetPos = player modelToWorld _offset;
-        private _assetHeight = getTerrainHeightASL [_assetPos # 0, _assetPos # 1];
+        private _assetHeight = if (_isInCarrierSector) then {
+            getPosASL player # 2;
+        } else {
+            private _assetPos = player modelToWorld _offset;
+            getTerrainHeightASL [_assetPos # 0, _assetPos # 1];
+        };
+
         private _playerHeight = (getPosASL player) # 2;
         private _offset_tweaked = [_offset # 0, _offset # 1, _assetHeight - _playerHeight - _boundingBoxHeight];
         _asset attachTo [player, _offset_tweaked];

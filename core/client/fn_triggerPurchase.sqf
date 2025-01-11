@@ -151,8 +151,15 @@ switch (_className) do {
     case "RespawnBagFT": {
         private _respawnBag = player getVariable ["WL2_respawnBag", objNull];
         if (!isNull _respawnBag) then {
+            private _oldPlayerPos = getPosASL player;
             private _pos = getPosATL _respawnBag;
-            player setVehiclePosition [[_pos # 0, _pos # 1, _pos # 2 + 0.5], [], 0, "CAN_COLLIDE"];
+            player setVehiclePosition [_pos, [], 0, "NONE"];
+            private _newPos = getPosATL player;
+
+            if (abs ((_pos # 2) - (_newPos # 2)) > 5) then {
+                systemChat "Your tent was left in an invalid spot. Make sure to place it in an open spot outside next time.";
+                player setPosASL _oldPlayerPos;
+            };
 
             deleteVehicle _respawnBag;
             player setVariable ["WL2_respawnBag", objNull];

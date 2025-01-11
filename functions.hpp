@@ -289,6 +289,7 @@ class CfgFunctions {
 			class incomePayoff {};
 			class initServer {};
 			class killRewardHandle {};
+			class prepareRopes {};
 			class processRunways {};
 			class selectTarget {};
 			class serverEHs {};

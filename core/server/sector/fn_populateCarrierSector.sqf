@@ -4,9 +4,7 @@ params ["_sector"];
 
 setViewDistance 4500;
 
-ropeCreate [Carrier1Boat1, "", Carrier1Rope1, [0, 0, 0], -1];
-Carrier1Boat1 lock true;
-Carrier1Boat1 setPhysicsCollisionFlag false;
+call WL2_fnc_prepareRopes;
 
 private _sectorMarker = _sector getVariable "objectAreaComplete";
 private _carrier = ((8 allObjects 0) select {
@@ -18,7 +16,7 @@ _airDefenseGroup deleteGroupWhenEmpty true;
 private _airDefenses = [];
 {
     _x params ["_type", "_pos", "_dir", "_lock", "_waypoints"];
-    private _vehicle = [_pos, _type, _type, _dir, objNull] call WL2_fnc_createUAVCrew;
+    private _vehicle = [[_pos # 0, _pos # 1, 500], _type, _type, _dir, objNull] call WL2_fnc_createUAVCrew;
     _vehicle allowDamage false;
     _vehicle setDamage 0;
 
@@ -106,13 +104,16 @@ private _spawned = 0;
 
 [_sector, _airDefenses] spawn {
     params ["_sector", "_airDefenses"];
+    private _sectorArea = _sector getVariable "objectAreaComplete";
+    private _sectorPos = _sectorArea # 0;
     while { _sector getVariable ["BIS_WL_owner", sideUnknown] == independent } do {
         {
             [_x, 1] remoteExec ["setVehicleAmmo", _x];
         } forEach _airDefenses;
 
         {
-            if (getPosATL _x # 2 > 5) then {
+            private _vehiclePosition = getPosATL _x;
+            if ((_vehiclePosition # 2 > 50) && (_sectorPos distance2D _vehiclePosition < 6000)) then {
                 independent reportRemoteTarget [_x, 30];
                 if (side group _x != independent) then {
                     _x confirmSensorTarget [independent, true];
