@@ -28,6 +28,7 @@ private _airDefenses = [];
     _vehicle setVehicleReportRemoteTargets true;
     _vehicle setVehicleReceiveRemoteTargets true;
     _vehicle setVehicleReportOwnPosition true;
+    _vehicle setVehicleRadar 1;
 
     _vehicle lock true;
 
@@ -111,12 +112,14 @@ private _spawned = 0;
     while { _sector getVariable ["BIS_WL_owner", sideUnknown] == independent } do {
         {
             [_x, 1] remoteExec ["setVehicleAmmo", _x];
-            [_x, 1] remoteExec ["setVehicleRadar", _x];
         } forEach _airDefenses;
 
         {
-            if (getPosATL _x # 2 > 50) then {
+            if (getPosATL _x # 2 > 5) then {
                 independent reportRemoteTarget [_x, 30];
+                if (side group _x != independent) then {
+                    _x confirmSensorTarget [independent, true];
+                };
             };
         } forEach vehicles;
 
