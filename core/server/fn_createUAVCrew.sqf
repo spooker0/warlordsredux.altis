@@ -1,4 +1,4 @@
-params ["_pos", "_class", "_direction", "_sender"];
+params ["_pos", "_class", "_orderedClass", "_direction", "_sender"];
 
 private _vehCfg = configFile >> "CfgVehicles" >> _class;
 private _crewCount = {
@@ -9,9 +9,13 @@ private _crewCount = {
 private _myArray = [0];
 _myArray resize _crewCount;
 
-_asset = [_class, _pos, _direction] call WL2_fnc_createVehicleCorrectly;
+_asset = [_class, _orderedClass, _pos, _direction] call WL2_fnc_createVehicleCorrectly;
 
-private _side = side group _sender;
+private _side = if (isNull _sender) then {
+	independent;
+} else {
+	side group _sender;
+};
 private _assetGrp = createGroup _side;
 
 private _aiUnit = switch (_side) do {
@@ -29,7 +33,9 @@ private _aiUnit = switch (_side) do {
 {
 	private _unit = _assetGrp createUnit [_aiUnit, _pos, [], 0, "NONE"];
 	_unit moveInAny _asset;
-	_unit setVariable ["BIS_WL_ownerAsset", getPlayerUID _sender, [2, clientOwner]];
+	if (!isNull _sender) then {
+		_unit setVariable ["BIS_WL_ownerAsset", getPlayerUID _sender, [2, clientOwner]];
+	};
 } forEach _myArray;
 _assetGrp deleteGroupWhenEmpty true;
 

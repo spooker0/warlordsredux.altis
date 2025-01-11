@@ -6,9 +6,9 @@ private _class = missionNamespace getVariable ["WL2_spawnClass", createHashMap] 
 
 private _isUav = getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") == 1;
 private _asset = if (_isUav) then {
-	[_pos, _class, _direction, _sender] call WL2_fnc_createUAVCrew;
+	[_pos, _class, _orderedClass, _direction, _sender] call WL2_fnc_createUAVCrew;
 } else {
-	[_class, _pos, _direction] call WL2_fnc_createVehicleCorrectly;
+	[_class, _orderedClass, _pos, _direction] call WL2_fnc_createVehicleCorrectly;
 };
 
 // Colored turret texture
