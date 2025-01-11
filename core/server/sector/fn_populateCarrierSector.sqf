@@ -18,12 +18,12 @@ _airDefenseGroup deleteGroupWhenEmpty true;
 private _airDefenses = [];
 {
     _x params ["_type", "_pos", "_dir", "_lock", "_waypoints"];
-    private _vehicleArray = [[_pos # 0, _pos # 1, _pos # 2 - 50], _dir, _type, independent] call BIS_fnc_spawnVehicle;
+    private _vehicleArray = [[_pos # 0, _pos # 1, _pos # 2 + 500], _dir, _type, independent] call BIS_fnc_spawnVehicle;
     _vehicleArray params ["_vehicle", "_crew", "_group"];
 
     _vehicle allowDamage false;
     _vehicle setDamage 0;
-    _vehicle setVehiclePosition [[_pos # 0, _pos # 1, 200], [], 0, "CAN_COLLIDE"];
+    _vehicle setVehiclePosition [[_pos # 0, _pos # 1, 500], [], 0, "CAN_COLLIDE"];
 
     _vehicle setVehicleReportRemoteTargets true;
     _vehicle setVehicleReceiveRemoteTargets true;
