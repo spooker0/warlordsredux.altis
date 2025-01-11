@@ -56,6 +56,8 @@ if !(isDedicated) then {
 0 spawn WL2_fnc_WLAC;
 call WL2_fnc_processRunways;
 
+0 spawn WL2_fnc_cleanupCarrier;
+
 0 spawn {
 	while {!BIS_WL_missionEnd} do {
 		if (dayTime >= 18 || dayTime <= 6) then {
