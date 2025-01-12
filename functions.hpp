@@ -109,6 +109,7 @@ class CfgFunctions {
 			class playerEventHandlers {};
 			class prepareRappel {};
 			class prompt {};
+			class rappel {};
 			class repackMagazines {};
 			class rita {};
 			class sideToFaction {};

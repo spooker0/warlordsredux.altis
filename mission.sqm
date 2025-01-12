@@ -8,11 +8,11 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=1867;
+		nextID=1911;
 	};
 	class MarkerIDProvider
 	{
-		nextID=26;
+		nextID=35;
 	};
 	class LayerIndexProvider
 	{
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={1811.5022,23.025229,15501.001};
-		dir[]={-0.51716036,-0.84721243,0.12216867};
-		up[]={-0.82452661,0.53123575,0.19477659};
-		aside[]={0.22991882,-2.9889634e-07,0.97329515};
+		pos[]={2008.0745,201.01938,15794.897};
+		dir[]={-0.77155423,-0.49784005,-0.39611202};
+		up[]={-0.44290024,0.86724496,-0.22738297};
+		aside[]={-0.45673159,4.4761691e-07,0.88963115};
 	};
 };
 binarizationWanted=0;
@@ -58,13 +58,15 @@ addons[]=
 	"A3_Props_F_Orange_Humanitarian_Camps",
 	"A3_Static_F_Jets_SAM_System_02",
 	"A3_Boat_F_Exp_Boat_Transport_02",
-	"A3_Structures_F_Civ_Garbage"
+	"A3_Props_F_Exp_Civilian_Garbage",
+	"A3_Props_F_Jets_Military_Trolley",
+	"A3_Props_F_Jets_Military_Tractor"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=20;
+		items=22;
 		class Item0
 		{
 			className="A3_Modules_F";
@@ -203,6 +205,20 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
+		class Item20
+		{
+			className="A3_Props_F_Exp";
+			name="Arma 3 Apex - Decorative and Mission Objects";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item21
+		{
+			className="A3_Props_F_Jets";
+			name="Arma 3 Jets - Decorative and Mission Objects";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
 	};
 };
 class DynamicSimulation
@@ -248,7 +264,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=505;
+		items=527;
 		class Item0
 		{
 			dataType="Logic";
@@ -278,10 +294,10 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={3609.9597,11.929087,13023.638};
-				angles[]={0.046633169,0,0.027993103};
+				position[]={3609.96,11.929099,13023.638};
+				angles[]={0.046635196,0,0.02799508};
 			};
-			init="this setVariable [""BIS_WL_services"", [""W""]]; this setVariable [""BIS_WL_name"", ""Kavala""];";
+			init="this setVariable [""BIS_WL_services"", [""W"", ""H""]]; this setVariable [""BIS_WL_name"", ""Kavala""];";
 			id=2;
 			type="Logic";
 		};
@@ -12059,32 +12075,12 @@ class Mission
 			{
 				position[]={1742.188,-184.34352,15566.474};
 			};
-			init="this setVariable [""BIS_WL_services"", [""W"", ""H"", ""A""]]; this setVariable [""BIS_WL_name"", ""USS Freedom""]; this setVariable [""WL_aircraftCarrier"", [[[1735.29, 15654.5, 209], 153.703], [[1730.39, 15629.9, 209], 150.034], [[1761.14, 15532.5, 209], 151.724], [[1736.72, 15519.8, 209], 148.237]]];";
+			init="this setVariable [""BIS_WL_services"", [""W"", ""H"", ""A""]]; this setVariable [""BIS_WL_canBeBase"", FALSE]; this setVariable [""BIS_WL_name"", ""USS Freedom""]; this setVariable [""WL_aircraftCarrier"", [Carrier1Spawn1, Carrier1Spawn2, Carrier1Spawn3, Carrier1Spawn4]];";
 			id=1631;
 			type="Logic";
 			atlOffset=1.8119965;
 		};
 		class Item407
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={1798.1306,25.378494,15544.168};
-				angles[]={6.2828479,0.92867422,0.0014253254};
-			};
-			side="Empty";
-			class Attributes
-			{
-				reportRemoteTargets=1;
-				receiveRemoteTargets=1;
-				reportOwnPosition=1;
-				aiRadarUsage=1;
-			};
-			id=1646;
-			type="B_SAM_System_01_F";
-			atlOffset=211.91173;
-		};
-		class Item408
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12104,7 +12100,7 @@ class Mission
 			type="B_SAM_System_01_F";
 			atlOffset=209.3927;
 		};
-		class Item409
+		class Item408
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12125,7 +12121,7 @@ class Mission
 			type="B_Radar_System_01_F";
 			atlOffset=0.01140213;
 		};
-		class Item410
+		class Item409
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12144,7 +12140,7 @@ class Mission
 			type="B_SAM_System_03_F";
 			atlOffset=208.45338;
 		};
-		class Item411
+		class Item410
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12163,7 +12159,7 @@ class Mission
 			type="B_SAM_System_03_F";
 			atlOffset=10.455136;
 		};
-		class Item412
+		class Item411
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12174,7 +12170,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12199,7 +12195,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item413
+		class Item412
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12209,7 +12205,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12234,7 +12230,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item414
+		class Item413
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12245,7 +12241,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12270,7 +12266,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item415
+		class Item414
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12281,7 +12277,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12306,7 +12302,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item416
+		class Item415
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12317,7 +12313,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12342,7 +12338,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item417
+		class Item416
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12353,7 +12349,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12378,7 +12374,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item418
+		class Item417
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12390,7 +12386,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12415,7 +12411,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item419
+		class Item418
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12426,7 +12422,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12451,7 +12447,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item420
+		class Item419
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12462,7 +12458,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12487,7 +12483,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item421
+		class Item420
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12498,7 +12494,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12522,7 +12518,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item422
+		class Item421
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12533,7 +12529,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12558,7 +12554,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item423
+		class Item422
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12569,7 +12565,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12594,7 +12590,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item424
+		class Item423
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12605,7 +12601,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12630,7 +12626,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item425
+		class Item424
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12641,7 +12637,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12666,7 +12662,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item426
+		class Item425
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12677,7 +12673,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12702,7 +12698,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item427
+		class Item426
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12713,7 +12709,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12738,7 +12734,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item428
+		class Item427
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12750,7 +12746,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12775,7 +12771,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item429
+		class Item428
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12787,7 +12783,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12812,7 +12808,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item430
+		class Item429
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12824,7 +12820,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12849,7 +12845,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item431
+		class Item430
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12861,7 +12857,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12886,7 +12882,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item432
+		class Item431
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12898,7 +12894,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12923,7 +12919,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item433
+		class Item432
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12935,7 +12931,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12960,7 +12956,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item434
+		class Item433
 		{
 			dataType="Object";
 			class PositionInfo
@@ -12971,7 +12967,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -12996,7 +12992,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item435
+		class Item434
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13007,7 +13003,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13032,7 +13028,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item436
+		class Item435
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13044,7 +13040,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13069,7 +13065,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item437
+		class Item436
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13081,7 +13077,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13106,7 +13102,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item438
+		class Item437
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13118,7 +13114,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13143,7 +13139,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item439
+		class Item438
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13154,7 +13150,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13179,24 +13175,24 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item440
+		class Item439
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1762.3424,22.969635,15529.505};
+				position[]={1765.1414,23.049332,15533.334};
 				angles[]={0,4.9921041,0};
 			};
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
 			id=1702;
 			type="Land_Wreck_Plane_Transport_01_F";
-			atlOffset=208.58963;
+			atlOffset=208.78203;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -13215,7 +13211,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item441
+		class Item440
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13226,7 +13222,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13250,7 +13246,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item442
+		class Item441
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13261,7 +13257,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13286,7 +13282,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item443
+		class Item442
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13296,7 +13292,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13321,7 +13317,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item444
+		class Item443
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13333,7 +13329,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13357,7 +13353,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item445
+		class Item444
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13367,7 +13363,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13392,7 +13388,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item446
+		class Item445
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13402,7 +13398,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13427,7 +13423,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item447
+		class Item446
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13439,7 +13435,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13464,7 +13460,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item448
+		class Item447
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13476,7 +13472,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13501,7 +13497,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item449
+		class Item448
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13513,7 +13509,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13538,7 +13534,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item450
+		class Item449
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13549,7 +13545,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13574,7 +13570,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item451
+		class Item450
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13586,7 +13582,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13610,7 +13606,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item452
+		class Item451
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13621,7 +13617,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13646,7 +13642,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item453
+		class Item452
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13657,7 +13653,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13682,7 +13678,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item454
+		class Item453
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13694,7 +13690,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13719,7 +13715,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item455
+		class Item454
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13731,7 +13727,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13756,7 +13752,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item456
+		class Item455
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13768,7 +13764,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13793,7 +13789,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item457
+		class Item456
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13804,7 +13800,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13829,7 +13825,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item458
+		class Item457
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13841,7 +13837,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13866,7 +13862,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item459
+		class Item458
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13877,7 +13873,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13902,7 +13898,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item460
+		class Item459
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13913,7 +13909,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13938,7 +13934,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item461
+		class Item460
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13949,7 +13945,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -13974,7 +13970,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item462
+		class Item461
 		{
 			dataType="Object";
 			class PositionInfo
@@ -13986,7 +13982,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14011,7 +14007,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item463
+		class Item462
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14022,7 +14018,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14047,7 +14043,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item464
+		class Item463
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14059,7 +14055,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14084,7 +14080,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item465
+		class Item464
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14095,7 +14091,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14120,7 +14116,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item466
+		class Item465
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14131,7 +14127,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14156,7 +14152,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item467
+		class Item466
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14167,7 +14163,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14192,7 +14188,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item468
+		class Item467
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14203,7 +14199,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14228,7 +14224,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item469
+		class Item468
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14239,7 +14235,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14264,7 +14260,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item470
+		class Item469
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14275,7 +14271,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14300,7 +14296,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item471
+		class Item470
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14311,7 +14307,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14336,7 +14332,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item472
+		class Item471
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14346,7 +14342,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14371,7 +14367,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item473
+		class Item472
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14382,7 +14378,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14407,7 +14403,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item474
+		class Item473
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14418,7 +14414,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14443,7 +14439,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item475
+		class Item474
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14454,7 +14450,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14479,7 +14475,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item476
+		class Item475
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14491,7 +14487,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14516,7 +14512,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item477
+		class Item476
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14527,7 +14523,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14552,7 +14548,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item478
+		class Item477
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14563,7 +14559,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14588,7 +14584,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item479
+		class Item478
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14599,7 +14595,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14624,7 +14620,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item480
+		class Item479
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14636,7 +14632,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14661,7 +14657,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item481
+		class Item480
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14673,7 +14669,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14698,7 +14694,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item482
+		class Item481
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14709,7 +14705,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14734,7 +14730,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item483
+		class Item482
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14746,7 +14742,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14771,7 +14767,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item484
+		class Item483
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14782,7 +14778,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14807,7 +14803,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item485
+		class Item484
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14818,7 +14814,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14843,7 +14839,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item486
+		class Item485
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14854,7 +14850,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14879,7 +14875,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item487
+		class Item486
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14890,7 +14886,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14915,7 +14911,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item488
+		class Item487
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14926,7 +14922,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14951,7 +14947,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item489
+		class Item488
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14962,7 +14958,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -14987,7 +14983,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item490
+		class Item489
 		{
 			dataType="Object";
 			class PositionInfo
@@ -14998,7 +14994,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -15023,7 +15019,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item491
+		class Item490
 		{
 			dataType="Object";
 			class PositionInfo
@@ -15034,7 +15030,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -15059,7 +15055,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item492
+		class Item491
 		{
 			dataType="Object";
 			class PositionInfo
@@ -15071,7 +15067,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -15096,7 +15092,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item493
+		class Item492
 		{
 			dataType="Object";
 			class PositionInfo
@@ -15107,7 +15103,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -15132,7 +15128,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item494
+		class Item493
 		{
 			dataType="Object";
 			class PositionInfo
@@ -15143,7 +15139,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -15168,7 +15164,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item495
+		class Item494
 		{
 			dataType="Object";
 			class PositionInfo
@@ -15179,7 +15175,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -15204,7 +15200,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item496
+		class Item495
 		{
 			dataType="Object";
 			class PositionInfo
@@ -15215,7 +15211,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -15240,7 +15236,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item497
+		class Item496
 		{
 			dataType="Object";
 			class PositionInfo
@@ -15251,7 +15247,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -15276,7 +15272,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item498
+		class Item497
 		{
 			dataType="Object";
 			class PositionInfo
@@ -15287,7 +15283,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -15312,7 +15308,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item499
+		class Item498
 		{
 			dataType="Object";
 			class PositionInfo
@@ -15323,7 +15319,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="private _props = (missionNamespace getVariable [""WL_carrierProps"", []]); _props pushBack this; missionNamespace setVariable [""WL_carrierProps"", _props];";
+				health=0.5;
 				createAsLocalObject=1;
 				disableSimulation=1;
 			};
@@ -15348,33 +15344,13 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item500
+		class Item499
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1657.1531,25.547684,15749.127};
-				angles[]={0,0.15046288,0};
-			};
-			side="Empty";
-			class Attributes
-			{
-				reportRemoteTargets=1;
-				receiveRemoteTargets=1;
-				reportOwnPosition=1;
-				aiRadarUsage=1;
-			};
-			id=1649;
-			type="B_SAM_System_02_F";
-			atlOffset=13.873124;
-		};
-		class Item501
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={1619.9086,25.335724,15715.995};
-				angles[]={0,4.9765253,0};
+				position[]={1678.7122,21.732452,15751.729};
+				angles[]={6.2825875,0.15046288,0};
 			};
 			side="Empty";
 			flags=4;
@@ -15385,16 +15361,36 @@ class Mission
 				reportOwnPosition=1;
 				aiRadarUsage=1;
 			};
-			id=1847;
-			type="B_SAM_System_01_F";
-			atlOffset=3.8146973e-06;
+			id=1649;
+			type="B_SAM_System_02_F";
+			atlOffset=0.0018959045;
 		};
-		class Item502
+		class Item500
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1803.428,0.95014381,15495.203};
+				position[]={1614.8932,21.782394,15724.072};
+				angles[]={0,4.9765253,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				reportRemoteTargets=1;
+				receiveRemoteTargets=1;
+				reportOwnPosition=1;
+				aiRadarUsage=1;
+			};
+			id=1847;
+			type="B_SAM_System_01_F";
+			atlOffset=205.22002;
+		};
+		class Item501
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1806.245,1.3189487,15496.627};
 			};
 			side="Empty";
 			class Attributes
@@ -15404,7 +15400,43 @@ class Mission
 			};
 			id=1859;
 			type="I_C_Boat_Transport_02_F";
-			atlOffset=187.34801;
+			atlOffset=188.10602;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item502
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1803.5123,17.123322,15496.061};
+				angles[]={0,5.8506055,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="this setVariable [""WL_excludeSectorSpawn"", true];" \n "";
+				name="Carrier1Tire1";
+			};
+			id=1868;
+			type="Land_Tyre_01_F";
+			atlOffset=0.0026626587;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -15428,19 +15460,18 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1803.4324,16.84845,15495.204};
-				angles[]={0,2.6831644,0};
+				position[]={1682.2207,20.11586,15757.804};
+				angles[]={6.2825918,5.8872576,0};
 			};
 			side="Empty";
-			flags=4;
 			class Attributes
 			{
-				init="this setVariable [""WL_excludeSectorSpawn"", true];" \n "";
-				name="Carrier1Rope1";
+				init="this setVariable [""WL_excludeSectorSpawn"", true];";
+				name="Carrier1Tire2";
 			};
-			id=1863;
-			type="Land_Tyre_F";
-			atlOffset=0.0002822876;
+			id=1871;
+			type="Land_Tyre_01_F";
+			atlOffset=205.586;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -15461,13 +15492,499 @@ class Mission
 		};
 		class Item504
 		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1684.09,1.3194981,15759.558};
+				angles[]={0,5.3860335,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="this setVariable [""WL_excludeSectorSpawn"", true];";
+				name="Carrier1Boat2";
+			};
+			id=1873;
+			type="I_C_Boat_Transport_02_F";
+			atlOffset=185.64101;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item505
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1611.3358,20.377228,15723.987};
+				angles[]={0,2.690495,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="this setVariable [""WL_excludeSectorSpawn"", true];";
+				name="Carrier1Tire3";
+			};
+			id=1874;
+			type="Land_Tyre_01_F";
+			atlOffset=0.0002822876;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item506
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1745.4152,19.785507,15478.751};
+				angles[]={0,2.7294331,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="this setVariable [""WL_excludeSectorSpawn"", true];";
+				name="Carrier1Tire4";
+			};
+			id=1875;
+			type="Land_Tyre_01_F";
+			atlOffset=207.35701;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item507
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1610.283,1.318903,15723.83};
+				angles[]={0,3.2495239,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="this setVariable [""WL_excludeSectorSpawn"", true];";
+				name="Carrier1Boat3";
+			};
+			id=1876;
+			type="I_C_Boat_Transport_02_F";
+			atlOffset=185.19;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item508
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1745.552,1.3185673,15478.883};
+				angles[]={0,1.0674783,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="this setVariable [""WL_excludeSectorSpawn"", true];";
+				name="Carrier1Boat4";
+			};
+			id=1877;
+			type="I_C_Boat_Transport_02_F";
+			atlOffset=187.89102;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item509
+		{
 			dataType="Marker";
-			position[]={1803.433,-0.27200001,15494.577};
-			name="Carrier1RappelMarker";
-			text="Carrier Rappel Point";
-			type="hd_dot";
-			id=1866;
-			atlOffset=187.42284;
+			position[]={1611.2523,20.027756,15725.354};
+			name="Carrier1Corner1";
+			type="mil_dot";
+			alpha=0;
+			id=1878;
+			atlOffset=7.6293945e-06;
+		};
+		class Item510
+		{
+			dataType="Marker";
+			position[]={1681.463,19.768999,15759.153};
+			name="Carrier1Corner2";
+			type="mil_dot";
+			alpha=0;
+			id=1879;
+			atlOffset=205.45999;
+		};
+		class Item511
+		{
+			dataType="Marker";
+			position[]={1702.644,21.965,15737.889};
+			name="Carrier1Corner3";
+			type="mil_dot";
+			alpha=0;
+			id=1880;
+			atlOffset=207.87111;
+		};
+		class Item512
+		{
+			dataType="Marker";
+			position[]={1802.2146,22.931656,15546.168};
+			name="Carrier1Corner4";
+			type="mil_dot";
+			alpha=0;
+			id=1881;
+		};
+		class Item513
+		{
+			dataType="Marker";
+			position[]={1794.776,23.124001,15509.567};
+			name="Carrier1Corner5";
+			type="mil_dot";
+			alpha=0;
+			id=1882;
+			atlOffset=0.19233704;
+		};
+		class Item514
+		{
+			dataType="Marker";
+			position[]={1825.7,23.811001,15423.413};
+			name="Carrier1Corner6";
+			type="mil_dot";
+			alpha=0;
+			id=1883;
+			atlOffset=1.043745;
+		};
+		class Item515
+		{
+			dataType="Marker";
+			position[]={1799.137,23.631001,15410.298};
+			name="Carrier1Corner7";
+			type="mil_dot";
+			alpha=0;
+			id=1884;
+			atlOffset=0.86374474;
+		};
+		class Item516
+		{
+			dataType="Marker";
+			position[]={1753.816,23.568001,15483.562};
+			name="Carrier1Corner8";
+			type="mil_dot";
+			alpha=0;
+			id=1885;
+			atlOffset=1.616787;
+		};
+		class Item517
+		{
+			dataType="Marker";
+			position[]={1723.974,23.569,15499.733};
+			name="Carrier1Corner9";
+			type="mil_dot";
+			alpha=0;
+			id=1886;
+			atlOffset=0.00043869019;
+		};
+		class Item518
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={1738.615,23.568466,15516.303};
+				angles[]={0,2.5846465,0};
+			};
+			name="Carrier1Spawn1";
+			id=1889;
+			type="Logic";
+			atlOffset=0.00033950806;
+		};
+		class Item519
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={1762.978,23.576431,15528.65};
+				angles[]={6.2825875,2.6461499,0.0012918708};
+			};
+			name="Carrier1Spawn2";
+			id=1890;
+			type="Logic";
+			atlOffset=0.00048065186;
+		};
+		class Item520
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={1732.278,23.584885,15626.228};
+				angles[]={0,2.6167452,0};
+			};
+			name="Carrier1Spawn3";
+			id=1891;
+			type="Logic";
+			atlOffset=0.0002784729;
+		};
+		class Item521
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={1736.8879,23.582657,15650.65};
+				angles[]={0,2.6793475,0};
+			};
+			name="Carrier1Spawn4";
+			id=1892;
+			type="Logic";
+			atlOffset=211.36501;
+		};
+		class Item522
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1709.0552,24.298019,15582.236};
+				angles[]={0,5.8970833,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				health=0.5;
+				createAsLocalObject=1;
+				disableSimulation=1;
+			};
+			id=1895;
+			type="Land_Missle_Trolley_02_F";
+			atlOffset=0.00017929077;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item523
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1703.7992,24.307877,15575.226};
+				angles[]={0,1.0544232,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				health=0.5;
+				createAsLocalObject=1;
+				disableSimulation=1;
+			};
+			id=1896;
+			type="Land_Missle_Trolley_02_F";
+			atlOffset=210.82899;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item524
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1682.3108,24.297852,15673.75};
+				angles[]={0,1.030425,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				health=0.5;
+				createAsLocalObject=1;
+				disableSimulation=1;
+			};
+			id=1897;
+			type="Land_Bomb_Trolley_01_F";
+			atlOffset=210.73102;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item525
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1707.7576,24.243423,15576.922};
+				angles[]={0,1.3188406,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				health=0.5;
+				createAsLocalObject=1;
+				disableSimulation=1;
+			};
+			id=1898;
+			type="Land_DeckTractor_01_F";
+			atlOffset=210.37001;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="hideObject";
+					expression="if !(is3DEN) then {_this hideobjectglobal _value;};";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				nAttributes=2;
+			};
+		};
+		class Item526
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1797.813,25.593002,15544.467};
+				angles[]={6.2828403,0.96822649,0.0014235723};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				reportRemoteTargets=1;
+				receiveRemoteTargets=1;
+				reportOwnPosition=1;
+				aiRadarUsage=1;
+			};
+			id=1905;
+			type="B_SAM_System_02_F";
+			atlOffset=3.8146973e-06;
 		};
 	};
 	class Connections

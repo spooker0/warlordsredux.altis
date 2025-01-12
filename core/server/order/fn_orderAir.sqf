@@ -20,8 +20,8 @@ if (count _carrierSectors > 0) then {
 	private _carrierSettings = _sector getVariable ["WL_aircraftCarrier", []];
 	{
 		private _potentialSpawn = _x;
-		private _potentialSpawnPos = _potentialSpawn # 0;
-		private _potentialSpawnDir = _potentialSpawn # 1;
+		private _potentialSpawnPos = getPosATL _potentialSpawn;
+		private _potentialSpawnDir = getDir _potentialSpawn;
 
 		private _potentialSpawnPosASL = ATLtoASL _potentialSpawnPos;
 		private _collisionObjects = (_potentialSpawnPosASL nearObjects ["AllVehicles", 20]) select {

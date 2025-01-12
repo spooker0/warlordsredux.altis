@@ -94,7 +94,8 @@ if (_asset isKindOf "Man") then {
 		case "B_Heli_Transport_03_F";
 		case "O_Heli_Light_02_unarmed_F";
 		case "O_Heli_Light_02_dynamicLoadout_F";
-		case "O_Heli_Transport_04_F": {
+		case "O_Heli_Transport_04_F";
+		case "I_Heli_Transport_02_F": {
 			[_asset] remoteExec ["WL2_fnc_slingAddAction", 0, true];
 		};
 

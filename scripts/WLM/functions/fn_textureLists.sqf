@@ -52,7 +52,7 @@ private _sideBlacklist = switch (_side) do {
         _blacklistEast
     };
     default {
-        _blacklistWest + _blacklistEast
+        []
     };
 };
 

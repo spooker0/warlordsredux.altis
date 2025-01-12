@@ -1,90 +1,56 @@
-Carrier1Boat1 lock true;
-Carrier1Boat1 setPhysicsCollisionFlag false;
-
-Carrier1Boat1 addAction [
-    "<t color='#0000ff'>Rappel Up</t>",
-    {
-        params ["_target", "_caller"];
-        [_target, _caller] spawn {
-            params ["_target", "_caller"];
-            private _rope = ropeCreate [Carrier1Boat1, "", Carrier1Rope1, [0, 0, 0], -1];
-            playSoundUI ["a3\sounds_f\air\sfx\sl_4hooksunlock.wss"];
-            sleep 1;
-
-            private _interval = 0;
-            private _startTime = serverTime;
-            private _startPos = getPosASL _target,
-            private _endPos = (getPosASL Carrier1Rope1) vectorAdd [0, 0, 1.5];
-
-            _caller switchMove "LadderRifleStatic";
-            _caller allowDamage false;
-            private _sound = playSoundUI ["a3\sounds_f\vehicles\air\noises\wind_open_int.wss", 0.5, 2, true];
-            while { alive _caller && _interval < 5 } do
-            {
-                sleep 0.0001;
-                _caller setVelocityTransformation [
-                    _startPos,
-                    _endPos,
-                    [0, 0, 0],
-                    [0, 0, 0],
-                    [0, 0, 1],
-                    [0, 0, 1],
-                    [0, 0, 1],
-                    [0, 0, 1],
-                    _interval / 5
-                ];
-                _interval = serverTime - _startTime;
-            };
-            stopSound _sound;
-            _caller setVehiclePosition [_endPos, [], 0, "CAN_COLLIDE"];
-            _caller switchMove "";
-            sleep 1;
-            ropeDestroy _rope;
-            _caller allowDamage true;
-        };
-    }
+private _rappelPairs = [
+    ["Carrier1Rappel1Marker", Carrier1Boat1, Carrier1Tire1],
+    ["Carrier1Rappel2Marker", Carrier1Boat2, Carrier1Tire2],
+    ["Carrier1Rappel3Marker", Carrier1Boat3, Carrier1Tire3],
+    ["Carrier1Rappel4Marker", Carrier1Boat4, Carrier1Tire4]
 ];
 
-Carrier1Rope1 addAction [
-    "<t color='#0000ff'>Rappel Down</t>",
-    {
-        params ["_target", "_caller"];
-        [_target, _caller] spawn {
-            params ["_target", "_caller"];
-            private _rope = ropeCreate [Carrier1Boat1, "", Carrier1Rope1, [0, 0, 0], -1];
-            playSoundUI ["a3\sounds_f\air\sfx\sl_4hooksunlock.wss"];
-            sleep 1;
+{
+    private _marker = _x # 0;
+    private _boat = _x # 1;
+    private _tire = _x # 2;
 
-            private _interval = 0;
-            private _startTime = serverTime;
-            private _startPos = getPosASL Carrier1Rope1;
-            private _endPos = getPosASL Carrier1Boat1,
+    createMarkerLocal [_marker, _boat];
+    _marker setMarkerTypeLocal "loc_Quay";
+    _marker setMarkerTextLocal "Carrier Rappel Point";
+    _marker setMarkerAlphaLocal 0;
 
-            _caller switchMove "LadderRifleStatic";
-            _caller allowDamage false;
-            private _sound = playSoundUI ["a3\sounds_f\vehicles\air\noises\wind_open_int.wss", 0.5, 2, true];
-            while { alive _caller && _interval < 5 } do
-            {
-                sleep 0.0001;
-                _caller setVelocityTransformation [
-                    _startPos,
-                    _endPos,
-                    [0, 0, 0],
-                    [0, 0, 0],
-                    [0, 0, 1],
-                    [0, 0, 1],
-                    [0, 0, 1],
-                    [0, 0, 1],
-                    _interval / 5
-                ];
-                _interval = serverTime - _startTime;
-            };
-            stopSound _sound;
-            _caller setVehiclePosition [_endPos, [], 0, "CAN_COLLIDE"];
-            _caller switchMove "";
-            sleep 1;
-            ropeDestroy _rope;
-            _caller allowDamage true;
-        };
-    }
-];
+    _boat lock true;
+    _boat setPhysicsCollisionFlag false;
+
+    _boat addAction [
+        "<t color='#0000ff'>Rappel Up</t>",
+        {
+            params ["_target", "_caller", "_actionId", "_arguments"];
+
+            private _boat = _arguments # 0;
+            private _tire = _arguments # 1;
+            [_caller, _boat, _tire, true] spawn WL2_fnc_rappel;
+        },
+        [_boat, _tire],
+        6,
+        true,
+        true,
+        "",
+        "vehicle player == player && !(player getVariable ['WL2_rappelling', false])",
+        20
+    ];
+
+    _tire addAction [
+        "<t color='#0000ff'>Rappel Down</t>",
+        {
+            params ["_target", "_caller", "_actionId", "_arguments"];
+
+            private _boat = _arguments # 0;
+            private _tire = _arguments # 1;
+            [_caller, _boat, _tire, false] spawn WL2_fnc_rappel;
+        },
+        [_boat, _tire],
+        6,
+        true,
+        true,
+        "",
+        "vehicle player == player && !(player getVariable ['WL2_rappelling', false])",
+        20
+    ];
+} forEach _rappelPairs;

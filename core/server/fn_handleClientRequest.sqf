@@ -322,9 +322,10 @@ if (_action == "10K") exitWith {
 
 if (_action == "updateZeus") exitWith {
 	if (getPlayerUID _sender in (getArray (missionConfigFile >> "adminIDs"))) then {
+		private _allEntities = entities [[], ["Logic"], true];
+		private _allNonLocalEntities = _allEntities select { owner _x != 0 };
 		{
-			_l = (vehicles + allUnits) select {(typeOf _x != "Logic") && {(alive _x) && {side group _x != civilian}}};
-			_x addCuratorEditableObjects [_l, true];
+			_x addCuratorEditableObjects [_allNonLocalEntities, true];
 		} forEach allCurators;
 	};
 };
