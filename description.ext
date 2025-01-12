@@ -42,6 +42,7 @@ BIS_WL_sectorVotingDuration = 30;
 
 BIS_WL_scanCost = 750;
 BIS_WL_fastTravelCostContested = 200;
+WL_airAssaultCost = 100;
 BIS_WL_fastTravelCostSquadLeader = 10;
 BIS_WL_orderFTVehicleCost = 200;
 BIS_WL_fundsTransferCost = 2000;

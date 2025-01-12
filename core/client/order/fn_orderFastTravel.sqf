@@ -1,6 +1,6 @@
 #include "..\..\warlords_constants.inc"
 
-params ["_toContested"];
+params ["_fastTravelMode"];
 
 "Destination" call WL2_fnc_announcer;
 [toUpper localize "STR_A3_WL_popup_destination"] spawn WL2_fnc_smoothText;
@@ -8,7 +8,7 @@ params ["_toContested"];
 "RequestMenu_close" call WL2_fnc_setupUI;
 if !(visibleMap) then {
 	processDiaryLink createDiaryLink ["Map", player, ""];
-	if (_toContested) then {
+	if (_fastTravelMode != 0) then {
 		WL_CONTROL_MAP ctrlMapAnimAdd [0, BIS_WL_mapSizeIndex / 75, WL_TARGET_FRIENDLY];
 	} else {
 		WL_CONTROL_MAP ctrlMapAnimAdd [0, 0.3, player];
@@ -17,14 +17,23 @@ if !(visibleMap) then {
 };
 BIS_WL_targetSector = objNull;
 private _selectionBefore = BIS_WL_currentSelection;
-BIS_WL_currentSelection = if (_toContested) then {WL_ID_SELECTION_FAST_TRAVEL_CONTESTED} else {WL_ID_SELECTION_FAST_TRAVEL};
+BIS_WL_currentSelection = switch (_fastTravelMode) do {
+	case 0: {
+		WL_ID_SELECTION_FAST_TRAVEL
+	};
+	case 1;
+	case 2: {
+		WL_ID_SELECTION_FAST_TRAVEL_CONTESTED
+	};
+};
+
 WL_MapBusy pushBack "orderFastTravel";
-private _action = if (_toContested) then {"travelling_contested"} else {"travelling"};
+
 private _marker = "";
 private _markerText = "";
 
-if (_toContested) then {
-	private _fastTravelConflict = call WL2_fnc_fastTravelConflictMarker;
+if (_fastTravelMode != 0) then {
+	private _fastTravelConflict = _fastTravelMode call WL2_fnc_fastTravelConflictMarker;
 	_marker = _fastTravelConflict # 0;
 	_markerText = _fastTravelConflict # 1;
 };
@@ -49,9 +58,7 @@ if (isNull BIS_WL_targetSector) exitWith {
 	WL_MapBusy = WL_MapBusy - ["orderFastTravel"];
 };
 
-// private _isCarrierSector = count (BIS_WL_targetSector getVariable ["WL_aircraftCarrier", []]) > 0;
-private _isAirfieldSector = "A" in (BIS_WL_targetSector getVariable ["BIS_WL_services", []]);
-[_toContested, _marker, _isAirfieldSector] call WL2_fnc_executeFastTravel;
+[_fastTravelMode, _marker] call WL2_fnc_executeFastTravel;
 
 deleteMarkerLocal _marker;
 deleteMarkerLocal _markerText;

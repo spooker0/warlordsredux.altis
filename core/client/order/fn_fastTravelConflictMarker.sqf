@@ -1,7 +1,8 @@
 #include "..\..\warlords_constants.inc"
 
-private _isCarrierSector = count (WL_TARGET_FRIENDLY getVariable ["WL_aircraftCarrier", []]) > 0;
-if (_isCarrierSector) exitWith {
+params ["_fastTravelMode"];
+
+if (_fastTravelMode == 2) exitWith {
     private _objective = WL_TARGET_FRIENDLY getVariable "objectAreaComplete";
     private _marker = createMarkerLocal ["localMarker", _objective # 0];
     _marker setMarkerShapeLocal "RECTANGLE";

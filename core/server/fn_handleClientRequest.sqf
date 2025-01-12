@@ -104,7 +104,7 @@ if (_action == "orderArsenal") exitWith {
 };
 
 if (_action == "fastTravelContested") exitWith {
-	_cost = (getMissionConfigValue ["BIS_WL_fastTravelCostContested", 200]);
+	_cost = _param1;
 	_hasFunds = (playerFunds >= _cost);
 	if (_hasFunds) then {
 		(-_cost) call WL2_fnc_fundsDatabaseWrite;
