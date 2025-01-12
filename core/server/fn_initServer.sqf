@@ -103,9 +103,10 @@ call WL2_fnc_processRunways;
 if !(["(EU) #11", serverName] call BIS_fnc_inString) then {
 	0 spawn {
 		while {!BIS_WL_missionEnd} do {
-			_allEntities = entities [[], ["Logic"], true];
+			private _allEntities = entities [[], ["Logic"], true];
+			private _allNonLocalEntities = _allEntities select { owner _x != 0 };
 			{
-				_x addCuratorEditableObjects [_allEntities, true];
+				_x addCuratorEditableObjects [_allNonLocalEntities, true];
 			} forEach allCurators;
 			sleep 30;
 		};

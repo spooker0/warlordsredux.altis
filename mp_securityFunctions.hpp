@@ -242,6 +242,10 @@ class CfgRemoteExec {
 			allowedTargets = 2;
 		};
 
+		class reportRemoteTarget {
+			allowedTargets = 0;
+		};
+
 		class setMass {
 			allowedTargets = 0;
 		};
