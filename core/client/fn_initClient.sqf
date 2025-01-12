@@ -135,7 +135,6 @@ _mrkrTargetFriendly setMarkerColorLocal BIS_WL_colorMarkerFriendly;
 } forEach [_mrkrTargetEnemy, _mrkrTargetFriendly];
 
 0 spawn WL2_fnc_clientEH;
-player spawn APS_fnc_setupProjectiles;
 call WL2_fnc_arsenalSetup;
 
 0 spawn {
