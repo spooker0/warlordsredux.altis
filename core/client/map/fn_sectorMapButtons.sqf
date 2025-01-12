@@ -37,7 +37,7 @@ if (_eligibleFastTravel && _sector in _eligibleSectors) then {
             (_x getVariable ["BIS_WL_owner", independent]) == (side (group player))
         };
         if (_eligibleFastTravel && _sector in _eligibleSectors) then {
-            [false, ""] spawn WL2_fnc_executeFastTravel;
+            [0, ""] spawn WL2_fnc_executeFastTravel;
         } else {
             playSoundUI "AddItemFailed";
         };
@@ -56,10 +56,35 @@ if (_eligibleFastTravelConflict && _sectorIsTarget) then {
         private _sectorIsTarget = _sector == WL_TARGET_FRIENDLY;
         if (_eligibleFastTravelConflict && _sectorIsTarget) then {
             0 spawn {
-                private _fastTravelConflictCall = call WL2_fnc_fastTravelConflictMarker;
+                private _fastTravelConflictCall = 1 call WL2_fnc_fastTravelConflictMarker;
                 private _marker = _fastTravelConflictCall # 0;
-                private _isAirfieldSector = "A" in (BIS_WL_targetSector getVariable ["BIS_WL_services", []]);
-                [true, _marker, _isAirfieldSector] call WL2_fnc_executeFastTravel;
+                [1, _marker] call WL2_fnc_executeFastTravel;
+                deleteMarkerLocal _marker;
+
+                private _markerText = _fastTravelConflictCall # 1;
+                deleteMarkerLocal _markerText;
+            };
+        } else {
+            playSoundUI "AddItemFailed";
+        };
+    }, true] call WL2_fnc_addTargetMapButton;
+};
+
+private _airAssaultCost = getMissionConfigValue ["WL_airAssaultCost", 100];
+private _eligibleAirAssault = (["FTAirAssault", [], "", "", "", [], _airAssaultCost, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
+private _sectorIsTarget = _sector == WL_TARGET_FRIENDLY;
+if (_eligibleAirAssault && _sectorIsTarget) then {
+    private _airAssaultText = format ["AIR ASSAULT (%1%2)", _moneySign, _airAssaultCost];
+    [_airAssaultText, {
+        params ["_sector"];
+        BIS_WL_targetSector = _sector;
+        private _eligibleAirAssault = (["FTAirAssault", [], "", "", "", [], _airAssaultCost, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
+        private _sectorIsTarget = _sector == WL_TARGET_FRIENDLY;
+        if (_eligibleAirAssault && _sectorIsTarget) then {
+            0 spawn {
+                private _fastTravelConflictCall = 2 call WL2_fnc_fastTravelConflictMarker;
+                private _marker = _fastTravelConflictCall # 0;
+                [2, _marker] call WL2_fnc_executeFastTravel;
                 deleteMarkerLocal _marker;
 
                 private _markerText = _fastTravelConflictCall # 1;

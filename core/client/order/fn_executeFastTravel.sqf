@@ -1,4 +1,4 @@
-params ["_toContested", "_marker", ["_isAirfieldSector", false]];
+params ["_fastTravelMode", "_marker"];
 
 titleCut ["", "BLACK OUT", 1];
 openMap [false, false];
@@ -10,14 +10,12 @@ sleep 1;
 
 private _destination = [];
 private _sectorPos = (BIS_WL_targetSector getVariable "objectAreaComplete") # 0;
-if (_toContested) then {
-	if (_isAirfieldSector) then {
-		private _randomPos = _marker call BIS_fnc_randomPosTrigger;
-		private _distance = _randomPos distance2D BIS_WL_targetSector;
-		private _height = _sectorPos # 2;
-		_height = _height max 100;
-		_destination = [_randomPos # 0, _randomPos # 1, _height + _distance * 0.5];
-	} else {
+
+switch (_fastTravelMode) do {
+	case 0: {
+		_destination = selectRandom ([BIS_WL_targetSector, 0, true] call WL2_fnc_findSpawnPositions);
+	};
+	case 1: {
 		_destination = ([_marker, 0, true] call WL2_fnc_findSpawnPositions) select {
 			private _pos = _x;
 			BIS_WL_allSectors findIf {
@@ -29,11 +27,18 @@ if (_toContested) then {
 		} else {
 			markerPos _marker;
 		};
-	};
 
-	[player, "fastTravelContested", _destination] remoteExec ["WL2_fnc_handleClientRequest", 2];
-} else {
-	_destination = selectRandom ([BIS_WL_targetSector, 0, true] call WL2_fnc_findSpawnPositions);
+		[player, "fastTravelContested", getMissionConfigValue ["BIS_WL_fastTravelCostContested", 200]] remoteExec ["WL2_fnc_handleClientRequest", 2];
+	};
+	case 2: {
+		private _randomPos = _marker call BIS_fnc_randomPosTrigger;
+		private _distance = _randomPos distance2D BIS_WL_targetSector;
+		private _height = _sectorPos # 2;
+		_height = _height max 100;
+		_destination = [_randomPos # 0, _randomPos # 1, _height + _distance * 0.5];
+
+		[player, "fastTravelContested", getMissionConfigValue ["WL_airAssaultCost", 100]] remoteExec ["WL2_fnc_handleClientRequest", 2];
+	};
 };
 
 private _tagAlong = (units player) select {
@@ -45,7 +50,7 @@ private _tagAlong = (units player) select {
 };
 
 private _directionToSector = _destination getDir _sectorPos;
-if (_isAirfieldSector && _toContested) then {
+if (_fastTravelMode == 2) then {
 	{
 		_x setPosASL _destination;
 		private _parachuteAI = createVehicle ["Steerable_Parachute_F", ASLtoATL _destination, [], 0, "CAN_COLLIDE"];

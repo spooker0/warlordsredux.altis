@@ -22,9 +22,10 @@ switch (_className) do {
     case "LastLoadout": {"RequestMenu_close" call WL2_fnc_setupUI; [player, "lastLoadout"] remoteExec ["WL2_fnc_handleClientRequest", 2]};
     case "SaveLoadout": {"save" call WL2_fnc_orderSavedLoadout};
     case "SavedLoadout": {"RequestMenu_close" call WL2_fnc_setupUI; [player, "savedLoadout"] remoteExec ["WL2_fnc_handleClientRequest", 2]};
-    case "Scan": {0 spawn WL2_fnc_orderSectorScan};
-    case "FTSeized": {false spawn WL2_fnc_orderFastTravel};
-    case "FTConflict": {true spawn WL2_fnc_orderFastTravel};
+    case "Scan": { 0 spawn WL2_fnc_orderSectorScan };
+    case "FTSeized": { 0 spawn WL2_fnc_orderFastTravel };
+    case "FTConflict": { 1 spawn WL2_fnc_orderFastTravel };
+    case "FTAirAssault": { 2 spawn WL2_fnc_orderFastTravel };
     case "FTSquadLeader": {
         ["ftSquadLeader"] spawn SQD_fnc_client;
         private _ftNextUseVar = format ["BIS_WL_FTSLNextUse_%1", getPlayerUID player];
