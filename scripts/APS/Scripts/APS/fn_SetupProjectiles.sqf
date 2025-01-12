@@ -1,5 +1,10 @@
+private _alreadyAdded = _this getVariable ["APS_fireEventHandlerAdded", false];
+if (_alreadyAdded) exitWith {};
+_this setVariable ["APS_fireEventHandlerAdded", true];
+
 _this addEventHandler ["Fired", {
 	params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
+
 	WAS_fired = true;
 	if !((typeOf _projectile) in APS_ProjectileMap) exitWith { true };
 
