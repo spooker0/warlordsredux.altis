@@ -17,7 +17,7 @@ private _carrierSectors = _sector select {
 if (count _carrierSectors > 0) then {
 	_sector = _carrierSectors # 0;
 
-	private _carrierSettings = _sector getVariable ["WL_aircraftCarrier", []];
+	private _carrierSettings = (_sector getVariable ["WL_aircraftCarrier", []]) # 0;
 	{
 		private _potentialSpawn = _x;
 		private _potentialSpawnPos = getPosATL _potentialSpawn;

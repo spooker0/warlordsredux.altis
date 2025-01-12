@@ -45,9 +45,7 @@ private _unitsPool = serverNamespace getVariable ["WL2_populateUnitPoolList", []
 
 private _infantryGroups = [];
 private _infantryUnits = [];
-private _camoNets = (allMissionObjects "Land_CanvasCover_01_F") select {
-    _x distance2D _carrier < 500;
-};
+private _spawnLocations = (_sector getVariable ["WL_aircraftCarrier", []]) # 1;
 
 private _spawned = 0;
 {
@@ -85,9 +83,7 @@ private _spawned = 0;
     };
 
     _infantryGroup setBehaviour "COMBAT";
-
-    _net hideObject false;
-} forEach (_camoNets call BIS_fnc_arrayShuffle);
+} forEach (_spawnLocations call BIS_fnc_arrayShuffle);
 
 [_infantryUnits + _airDefenses, _sector] spawn WL2_fnc_assetRelevanceCheck;
 
