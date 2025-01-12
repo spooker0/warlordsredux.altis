@@ -63,4 +63,52 @@ class AirDefense {
         killReward = 600;
         loadable[] = {0, -2, 1};
     };
+
+    class O_SAM_System_04_UP_F {
+        name = "S-750 Rhea (UP)";
+        description = "Long range surface-to-air missile system, capable of engaging aircraft and helicopters, upgraded for more ammo. Effective range: >10km.";
+        spawn = "O_SAM_System_04_F";
+        variant = 1;
+
+        cost = 12000;
+        requirements[] = {};
+        offset[] = {0, 6, 0};
+        rearm = 450;
+        killReward = 700;
+        loadable[] = {0, 0, 1};
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {};
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "magazine_Missile_s750_x4"
+            };
+            addWeapons[] = {};
+        };
+    };
+
+    class O_SAM_System_02_UP_F {
+        name = "Mk21 Centurion (UP)";
+        description = "Medium range surface-to-air missile system, capable of engaging aircraft and helicopters, upgraded for more ammo. Effective range: ~10km.";
+        spawn = "B_SAM_System_02_F";
+        variant = 1;
+
+        cost = 20000;
+        requirements[] = {};
+        offset[] = {0, 5.3, 0};
+        rearm = 600;
+        killReward = 700;
+        loadable[] = {0, -2, 1};
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {};
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "magazine_Missile_rim162_x8"
+            };
+            addWeapons[] = {};
+        };
+    };
 };
