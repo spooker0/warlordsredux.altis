@@ -345,8 +345,7 @@ if (_asset isKindOf "Man") then {
 				};
 
 				if (_height > 5 && alive _unit) then {
-					private _parachute = createVehicle ["Steerable_Parachute_F", position _unit, [], 0, "CAN_COLLIDE"];
-					_unit moveInDriver _parachute;
+					[_unit] spawn WL2_fnc_parachuteSetup;
 				};
 			};
 		}];

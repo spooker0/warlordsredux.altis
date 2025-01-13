@@ -30,7 +30,7 @@ if (_ret) then {
 	private _isInHomeBase = player inArea (_homeBase getVariable "objectAreaComplete");
 	private _nearbyEnemies = count _enemiesNearPlayer > 0 && !_isInHomeBase;
 
-	private _excludeForIndependent = ["Scan", "FTConflict", "FTAirAssault", "TargetReset", "forfeitVote", "RespawnVic", "RespawnVicFT", "RespawnPod", "RespawnPodFT", "switchToGreen"];
+	private _excludeForIndependent = ["Scan", "FTConflict", "FTAirAssault", "FTAirAssaultVehicle", "TargetReset", "forfeitVote", "RespawnVic", "RespawnVicFT", "RespawnPod", "RespawnPodFT", "switchToGreen"];
 	if (BIS_WL_playerSide == independent && _class in _excludeForIndependent) exitWith {
 		_ret = false;
 		_tooltip = "This action is not available for Independents.";
@@ -45,6 +45,21 @@ if (_ret) then {
 		case "FTConflict";
 		case "FTAirAssault": {
 			if (vehicle player != player) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_fasttravel_restr3"};
+			if (isNull WL_TARGET_FRIENDLY) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_no_conflict"};
+			if (WL_TARGET_FRIENDLY in WL_BASES) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_fasttravel_restr1"};
+			if !(WL_TARGET_FRIENDLY in (BIS_WL_sectorsArray # 1)) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_fasttravel_restr5"};
+			if (BIS_WL_currentSelection == WL_ID_SELECTION_FAST_TRAVEL) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_menu_resetvoting_restr1"};
+			if (_nearbyEnemies) exitWith {_ret = false; _tooltip =  localize "STR_A3_WL_fasttravel_restr4"};
+		};
+		case "FTAirAssaultVehicle": {
+			private _vehicle = vehicle player;
+			private _isInVehicle = _vehicle != player;
+			private _isGroundVehicle = _vehicle isKindOf "LandVehicle";
+			private _isInDriverSeat = (driver _vehicle) == player;
+			if (!_isInVehicle || !_isGroundVehicle || !_isInDriverSeat) exitWith {
+				_ret = false;
+				_tooltip = "You must be in the driver seat of a ground vehicle."
+			};
 			if (isNull WL_TARGET_FRIENDLY) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_no_conflict"};
 			if (WL_TARGET_FRIENDLY in WL_BASES) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_fasttravel_restr1"};
 			if !(WL_TARGET_FRIENDLY in (BIS_WL_sectorsArray # 1)) exitWith {_ret = false; _tooltip = localize "STR_A3_WL_fasttravel_restr5"};

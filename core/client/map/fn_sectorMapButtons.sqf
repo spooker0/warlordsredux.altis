@@ -22,104 +22,144 @@ private _sectorName = _sector getVariable ["BIS_WL_name", "Sector"];
 _titleBar ctrlSetStructuredText parseText format ["<t align='center' font='PuristaBold'>%1</t>", toUpper _sectorName];
 _titleBar ctrlCommit 0;
 
-private _moneySign = [BIS_WL_playerSide] call WL2_fnc_getMoneySign;
-
-private _eligibleFastTravel = (["FTSeized", [], "", "", "", [], 0, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
-private _eligibleSectors = (BIS_WL_sectorsArray # 2) select {
-    (_x getVariable ["BIS_WL_owner", independent]) == (side (group player))
+// Fast Travel Seized Button
+private _fastTravelSeizedCondition = {
+    params ["_sector"];
+    private _eligibleSectors = (BIS_WL_sectorsArray # 2) select {
+        (_x getVariable ["BIS_WL_owner", independent]) == (side (group player))
+    };
+    _sector in _eligibleSectors;
 };
-if (_eligibleFastTravel && _sector in _eligibleSectors) then {
-    ["FAST TRAVEL (FREE)", {
-        params ["_sector"];
-        BIS_WL_targetSector = _sector;
-        private _eligibleFastTravel = (["FTSeized", [], "", "", "", [], 0, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
-        private _eligibleSectors = (BIS_WL_sectorsArray # 2) select {
-            (_x getVariable ["BIS_WL_owner", independent]) == (side (group player))
-        };
-        if (_eligibleFastTravel && _sector in _eligibleSectors) then {
-            [0, ""] spawn WL2_fnc_executeFastTravel;
-        } else {
-            playSoundUI "AddItemFailed";
-        };
-    }, true] call WL2_fnc_addTargetMapButton;
+private _fastTravelSeizedExecute = {
+    params ["_sector"];
+    BIS_WL_targetSector = _sector;
+    [0, ""] spawn WL2_fnc_executeFastTravel;
 };
+[
+    "FAST TRAVEL",
+    _fastTravelSeizedExecute,
+    true,
+    _fastTravelSeizedCondition,
+    [
+        0,
+        "FTSeized",
+        "Strategy"
+    ]
+] call WL2_fnc_addTargetMapButton;
 
-private _fastTravelConflictCost = getMissionConfigValue ["BIS_WL_fastTravelCostContested", 200];
-private _eligibleFastTravelConflict = (["FTConflict", [], "", "", "", [], _fastTravelConflictCost, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
-private _sectorIsTarget = _sector == WL_TARGET_FRIENDLY;
-if (_eligibleFastTravelConflict && _sectorIsTarget) then {
-    private _fastTravelText = format ["FAST TRAVEL CONTESTED (%1%2)", _moneySign, _fastTravelConflictCost];
-    [_fastTravelText, {
-        params ["_sector"];
-        BIS_WL_targetSector = _sector;
-        private _eligibleFastTravelConflict = (["FTConflict", [], "", "", "", [], _fastTravelConflictCost, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
-        private _sectorIsTarget = _sector == WL_TARGET_FRIENDLY;
-        if (_eligibleFastTravelConflict && _sectorIsTarget) then {
-            0 spawn {
-                private _fastTravelConflictCall = 1 call WL2_fnc_fastTravelConflictMarker;
-                private _marker = _fastTravelConflictCall # 0;
-                [1, _marker] call WL2_fnc_executeFastTravel;
-                deleteMarkerLocal _marker;
-
-                private _markerText = _fastTravelConflictCall # 1;
-                deleteMarkerLocal _markerText;
-            };
-        } else {
-            playSoundUI "AddItemFailed";
-        };
-    }, true] call WL2_fnc_addTargetMapButton;
+// Fast Travel Conflict Button
+private _fastTravelConflictCondition = {
+    params ["_sector"];
+    _sector == WL_TARGET_FRIENDLY;
 };
+private _fastTravelConflictExecute = {
+    params ["_sector"];
+    BIS_WL_targetSector = _sector;
 
-private _airAssaultCost = getMissionConfigValue ["WL_airAssaultCost", 100];
-private _eligibleAirAssault = (["FTAirAssault", [], "", "", "", [], _airAssaultCost, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
-private _sectorIsTarget = _sector == WL_TARGET_FRIENDLY;
-if (_eligibleAirAssault && _sectorIsTarget) then {
-    private _airAssaultText = format ["AIR ASSAULT (%1%2)", _moneySign, _airAssaultCost];
-    [_airAssaultText, {
-        params ["_sector"];
-        BIS_WL_targetSector = _sector;
-        private _eligibleAirAssault = (["FTAirAssault", [], "", "", "", [], _airAssaultCost, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
-        private _sectorIsTarget = _sector == WL_TARGET_FRIENDLY;
-        if (_eligibleAirAssault && _sectorIsTarget) then {
-            0 spawn {
-                private _fastTravelConflictCall = 2 call WL2_fnc_fastTravelConflictMarker;
-                private _marker = _fastTravelConflictCall # 0;
-                [2, _marker] call WL2_fnc_executeFastTravel;
-                deleteMarkerLocal _marker;
+    private _fastTravelConflictCall = 1 call WL2_fnc_fastTravelConflictMarker;
+    private _marker = _fastTravelConflictCall # 0;
+    [1, _marker] call WL2_fnc_executeFastTravel;
+    deleteMarkerLocal _marker;
 
-                private _markerText = _fastTravelConflictCall # 1;
-                deleteMarkerLocal _markerText;
-            };
-        } else {
-            playSoundUI "AddItemFailed";
-        };
-    }, true] call WL2_fnc_addTargetMapButton;
+    private _markerText = _fastTravelConflictCall # 1;
+    deleteMarkerLocal _markerText;
 };
+[
+    "FAST TRAVEL CONTESTED",
+    _fastTravelConflictExecute,
+    true,
+    _fastTravelConflictCondition,
+    [
+        getMissionConfigValue ["BIS_WL_fastTravelCostContested", 200],
+        "FTConflict",
+        "Strategy"
+    ]
+] call WL2_fnc_addTargetMapButton;
 
-private _scanCost = getMissionConfigValue ["BIS_WL_scanCost", 750];
-private _eligibleScan = (["Scan", [], "", "", "", [], _scanCost, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
-private _allScannableSectors = BIS_WL_sectorsArray # 3;
-private _lastScanEligible = serverTime - (getMissionConfigValue ["BIS_WL_scanCooldown", 300]);
-private _availableSectors = _allScannableSectors select {
-    _x getVariable [format ["BIS_WL_lastScanEnd_%1", BIS_WL_playerSide], -9999] < _lastScanEligible
+// Air Assault Button
+private _airAssaultCondition = {
+    params ["_sector"];
+    _sector == WL_TARGET_FRIENDLY;
 };
-if (_eligibleScan && _sector in _availableSectors) then {
-    private _scanText = format ["SECTOR SCAN (%1%2)", _moneySign, _scanCost];
-    [_scanText, {
-        params ["_sector"];
-        private _eligibleScan = (["Scan", [], "", "", "", [], _scanCost, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
-        private _allScannableSectors = BIS_WL_sectorsArray # 3;
-        private _lastScanEligible = serverTime - (getMissionConfigValue ["BIS_WL_scanCooldown", 300]);
-        private _availableSectors = _allScannableSectors select {
-            _x getVariable [format ["BIS_WL_lastScanEnd_%1", BIS_WL_playerSide], -9999] < _lastScanEligible
-        };
-        if (_eligibleScan && _sector in _availableSectors) then {
-            [player, "scan", [], _sector] remoteExec ["WL2_fnc_handleClientRequest", 2];
-        } else {
-            playSoundUI "AddItemFailed";
-        };
-    }, true] call WL2_fnc_addTargetMapButton;
+private _airAssaultExecute = {
+    params ["_sector"];
+    BIS_WL_targetSector = _sector;
+
+    private _fastTravelConflictCall = 2 call WL2_fnc_fastTravelConflictMarker;
+    private _marker = _fastTravelConflictCall # 0;
+    [2, _marker] call WL2_fnc_executeFastTravel;
+    deleteMarkerLocal _marker;
+
+    private _markerText = _fastTravelConflictCall # 1;
+    deleteMarkerLocal _markerText;
 };
+[
+    "AIR ASSAULT",
+    _airAssaultExecute,
+    true,
+    _airAssaultCondition,
+    [
+        getMissionConfigValue ["WL_airAssaultCost", 100],
+        "FTAirAssault",
+        "Strategy"
+    ]
+] call WL2_fnc_addTargetMapButton;
+
+// Vehicle Air Assault Button
+private _vehicleAirAssaultCondition = {
+    params ["_sector"];
+    _sector == WL_TARGET_FRIENDLY;
+};
+private _vehicleAirAssaultExecute = {
+    params ["_sector"];
+    BIS_WL_targetSector = _sector;
+
+    private _fastTravelConflictCall = 3 call WL2_fnc_fastTravelConflictMarker;
+    private _marker = _fastTravelConflictCall # 0;
+    [3, _marker] call WL2_fnc_executeFastTravel;
+    deleteMarkerLocal _marker;
+
+    private _markerText = _fastTravelConflictCall # 1;
+    deleteMarkerLocal _markerText;
+};
+[
+    "VEHICLE AIR ASSAULT",
+    _vehicleAirAssaultExecute,
+    true,
+    _vehicleAirAssaultCondition,
+    [
+        getMissionConfigValue ["WL_vehicleAirAssaultCost", 1000],
+        "FTAirAssaultVehicle",
+        "Strategy"
+    ]
+] call WL2_fnc_addTargetMapButton;
+
+// Scan Button
+private _scanCondition = {
+    params ["_sector"];
+    private _allScannableSectors = BIS_WL_sectorsArray # 3;
+    private _lastScanEligible = serverTime - (getMissionConfigValue ["BIS_WL_scanCooldown", 300]);
+    private _availableSectors = _allScannableSectors select {
+        _x getVariable [format ["BIS_WL_lastScanEnd_%1", BIS_WL_playerSide], -9999] < _lastScanEligible
+    };
+    _sector in _availableSectors;
+};
+private _scanExecute = {
+    params ["_sector"];
+    BIS_WL_targetSector = _sector;
+    [player, "scan", [], _sector] remoteExec ["WL2_fnc_handleClientRequest", 2];
+};
+[
+    "SECTOR SCAN",
+    _scanExecute,
+    true,
+    _scanCondition,
+    [
+        getMissionConfigValue ["BIS_WL_scanCost", 750],
+        "Scan",
+        "Strategy"
+    ]
+] call WL2_fnc_addTargetMapButton;
 
 [_dialog, _offsetX, _offsetY, _menuButtons] spawn {
     params ["_dialog", "_originalMouseX", "_originalMouseY", "_menuButtons"];

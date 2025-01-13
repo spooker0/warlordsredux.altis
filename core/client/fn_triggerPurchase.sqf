@@ -26,6 +26,7 @@ switch (_className) do {
     case "FTSeized": { 0 spawn WL2_fnc_orderFastTravel };
     case "FTConflict": { 1 spawn WL2_fnc_orderFastTravel };
     case "FTAirAssault": { 2 spawn WL2_fnc_orderFastTravel };
+    case "FTAirAssaultVehicle": { 3 spawn WL2_fnc_orderFastTravel };
     case "FTSquadLeader": {
         ["ftSquadLeader"] spawn SQD_fnc_client;
         private _ftNextUseVar = format ["BIS_WL_FTSLNextUse_%1", getPlayerUID player];

@@ -22,7 +22,8 @@ BIS_WL_currentSelection = switch (_fastTravelMode) do {
 		WL_ID_SELECTION_FAST_TRAVEL
 	};
 	case 1;
-	case 2: {
+	case 2;
+	case 3: {
 		WL_ID_SELECTION_FAST_TRAVEL_CONTESTED
 	};
 };

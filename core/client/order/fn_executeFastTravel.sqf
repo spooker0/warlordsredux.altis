@@ -34,10 +34,18 @@ switch (_fastTravelMode) do {
 		private _randomPos = _marker call BIS_fnc_randomPosTrigger;
 		private _distance = _randomPos distance2D BIS_WL_targetSector;
 		private _height = _sectorPos # 2;
-		_height = _height max 100;
+		_height = _height max 250;
 		_destination = [_randomPos # 0, _randomPos # 1, _height + _distance * 0.5];
 
 		[player, "fastTravelContested", getMissionConfigValue ["WL_airAssaultCost", 100]] remoteExec ["WL2_fnc_handleClientRequest", 2];
+	};
+	case 3: {
+		private _randomPos = _marker call BIS_fnc_randomPosTrigger;
+		private _distance = _randomPos distance2D BIS_WL_targetSector;
+		private _height = 400;
+		_destination = [_randomPos # 0, _randomPos # 1, _height + _distance * 0.5];
+
+		[player, "fastTravelContested", getMissionConfigValue ["WL_vehicleAirAssaultCost", 1000]] remoteExec ["WL2_fnc_handleClientRequest", 2];
 	};
 };
 
@@ -50,26 +58,60 @@ private _tagAlong = (units player) select {
 };
 
 private _directionToSector = _destination getDir _sectorPos;
-if (_fastTravelMode == 2) then {
-	{
-		_x setPosASL _destination;
-		private _parachuteAI = createVehicle ["Steerable_Parachute_F", ASLtoATL _destination, [], 0, "CAN_COLLIDE"];
-		_x moveInDriver _parachuteAI;
-		_parachuteAI setDir _directionToSector;
-	} forEach _tagAlong;
 
-	player setPosASL _destination;
-	private _parachute = createVehicle ["Steerable_Parachute_F", ASLtoATL _destination, [], 0, "CAN_COLLIDE"];
-	player moveInDriver _parachute;
-	_parachute setDir _directionToSector;
-} else {
-	{
-		_x setVehiclePosition [_destination, [], 3, "NONE"];
-	} forEach _tagAlong;
-	player setVehiclePosition [_destination, [], 0, "NONE"];
+switch (_fastTravelMode) do {
+	case 0;
+	case 1: {
+		{
+			_x setVehiclePosition [_destination, [], 3, "NONE"];
+		} forEach _tagAlong;
+		player setVehiclePosition [_destination, [], 0, "NONE"];
 
-	player setDir _directionToSector;
+		player setDir _directionToSector;
+	};
+	case 2: {
+		{
+			_x setPosASL _destination;
+			_x setDir _directionToSector;
+			[_x] spawn WL2_fnc_parachuteSetup;
+		} forEach _tagAlong;
+
+		player setPosASL _destination;
+		player setDir _directionToSector;
+		[player] spawn WL2_fnc_parachuteSetup;
+	};
+	case 3: {
+		private _vehicle = vehicle player;
+		_vehicle setPosASL _destination;
+		_vehicle setDir _directionToSector;
+
+		private _parachuteClass = switch (BIS_WL_playerSide) do {
+			case west: {
+				"I_Parachute_02_F";
+			};
+			case east: {
+				"O_Parachute_02_F";
+			};
+			case independent: {
+				"I_Parachute_02_F";
+			};
+		};
+
+		private _parachute = createVehicle [_parachuteClass, ASLtoATL _destination, [], 0, "NONE"];
+		_parachute setDir _directionToSector;
+		_vehicle attachTo [_parachute];
+		[_vehicle, _parachute] spawn {
+			params ["_vehicle", "_parachute"];
+			waitUntil {
+				sleep 1;
+				(getPosATL _vehicle # 2) < 5
+			};
+			detach _vehicle;
+			deleteVehicle _parachute;
+		};
+	};
 };
+
 sleep 1;
 
 titleCut ["", "BLACK IN", 1];

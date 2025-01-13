@@ -2,14 +2,19 @@
 
 params ["_fastTravelMode"];
 
-if (_fastTravelMode == 2) exitWith {
-    private _objective = WL_TARGET_FRIENDLY getVariable "objectAreaComplete";
-    private _marker = createMarkerLocal ["localMarker", _objective # 0];
-    _marker setMarkerShapeLocal "RECTANGLE";
-    _marker setMarkerColorLocal BIS_WL_colorMarkerFriendly;
-    _marker setMarkerDirLocal (_objective # 3);
-    _marker setMarkerSizeLocal [_objective # 1, _objective # 2];
-	[_marker, ""];
+private _offset = switch (_fastTravelMode) do {
+    case 0: {
+        WL_FAST_TRAVEL_OFFSET
+    };
+    case 1: {
+        WL_FAST_TRAVEL_OFFSET
+    };
+    case 2: {
+        250
+    };
+    case 3: {
+        500
+    };
 };
 
 private _startArr = (synchronizedObjects WL_TARGET_FRIENDLY) select {
@@ -28,7 +33,7 @@ private _size = if (_area # 3) then {
     (_area # 0) max (_area # 1);
 };
 
-private _marker = createMarkerLocal ["localMarker", [WL_TARGET_FRIENDLY, _size + WL_FAST_TRAVEL_OFFSET, WL_TARGET_FRIENDLY getDir _start] call BIS_fnc_relPos];
+private _marker = createMarkerLocal ["localMarker", [WL_TARGET_FRIENDLY, _size + _offset, WL_TARGET_FRIENDLY getDir _start] call BIS_fnc_relPos];
 _marker setMarkerShapeLocal "RECTANGLE";
 _marker setMarkerColorLocal BIS_WL_colorMarkerFriendly;
 _marker setMarkerDirLocal (WL_TARGET_FRIENDLY getDir _start);
