@@ -1,3 +1,5 @@
+#include "..\..\warlords_constants.inc"
+
 params ["_asset"];
 
 private _deployActionId = _asset addAction [
@@ -11,12 +13,7 @@ private _deployActionId = _asset addAction [
             playSound "AddItemFailed";
         };
 
-        private _timeRemainingParent = 10 - (serverTime - (_asset getVariable ["WL2_lastLoadedTime", 0]));
-        if (_timeRemainingParent > 0) exitWith {
-            systemChat format ["Please wait %1 seconds to load/unload. (This prevents despawning.)", round _timeRemainingParent];
-            playSound "AddItemFailed";
-        };
-        _asset setVariable ["WL2_lastLoadedTime", serverTime];
+        _asset setVariable ["WL2_loadingAsset", true, true];
 
         private _assetLoadedItem = _asset getVariable ["WL2_loadedItem", objNull];
         if (isNull _assetLoadedItem) then {
@@ -26,61 +23,56 @@ private _deployActionId = _asset addAction [
             if (count _nearLoadableEntities > 0) then {
                 private _assetToLoad = _nearLoadableEntities select 0;
 
-                private _timeRemainingChild = 10 - (serverTime - (_assetToLoad getVariable ["WL2_lastLoadedTime", 0]));
-                if (_timeRemainingChild > 0) exitWith {
-                    systemChat format ["Please wait %1 seconds to load/unload. (This prevents despawning.)", round _timeRemainingChild];
-                    playSound "AddItemFailed";
-                };
-                _assetToLoad setVariable ["WL2_lastLoadedTime", serverTime];
-
-                if ((_asset canVehicleCargo _assetToLoad) # 0) then {
+                private _offset = if ((_asset canVehicleCargo _assetToLoad) # 0) then {
                     _asset setVehicleCargo _assetToLoad;
                     private _offset = _asset getRelPos _assetToLoad;
                     objNull setVehicleCargo _assetToLoad;
-                    _assetToLoad attachTo [_asset, _offset];
+                    _offset;
                 } else {
-                    private _offset = _eligibilityQuery # 2;
-                    _assetToLoad attachTo [_asset, _offset];
+                    _eligibilityQuery # 2;
                 };
+
+                [true, [_asset, _assetToLoad, _offset]] remoteExec ["WL2_fnc_attachDetach", 2];
 
                 [_asset, _assetToLoad, true] call WL2_fnc_attachVehicle;
             };
         } else {
-            _asset setVariable ["WL2_loadingAsset", true];
-            private _desiredPosRelative = [8, 0, 0];
-            private _desiredPosRelativeHigh = [0, 0, 1] vectorAdd _desiredPosRelative;
-            private _desiredPosWorld = _asset modelToWorld _desiredPosRelative;
-            private _desiredPosWorldZero = [_desiredPosWorld # 0, _desiredPosWorld # 1, 0];
+            [_asset, _assetLoadedItem] spawn {
+                params ["_asset", "_assetLoadedItem"];
 
-            private _isPosInWater = surfaceIsWater [_desiredPosWorldZero # 0, _desiredPosWorldZero # 1];
-            if (_isPosInWater) exitWith {
-                systemChat "Deploying in water is not allowed!";
-                playSound "AddItemFailed";
+                private _assetLoadedItemClass = typeOf _assetLoadedItem;
+                private _orderedClass = _assetLoadedItem getVariable ["WL2_orderedClass", _assetLoadedItemClass];
+                private _distanceToVehicle = player distance2D _asset;
+                private _offset = [0, _distanceToVehicle, 0];
+                private _deploymentResult = [_assetLoadedItemClass, _orderedClass, _offset, 10, true] call WL2_fnc_deployment;
+
+                if !(_deploymentResult # 0) exitWith {
+                    playSound "AddItemFailed";
+                    _asset setVariable ["WL2_loadingAsset", false, true];
+                };
+
+                private _position =  _deploymentResult # 1;
+                private _direction = direction player;
+                private _class = typeOf _assetLoadedItem;
+                private _nearbyEntities = [_assetLoadedItemClass, AGLtoASL _position, _direction, "dontcheckuid", [_asset, _assetLoadedItem]] call WL2_fnc_grieferCheck;
+
+                if (count _nearbyEntities > 0) exitWith {
+                    private _nearbyObjectName = [_nearbyEntities # 0] call WL2_fnc_getAssetTypeName;
+                    systemChat format ["Deploying too close to %1!", _nearbyObjectName];
+                    playSound "AddItemFailed";
+                    _asset setVariable ["WL2_loadingAsset", false, true];
+                };
+
+                [false, [_asset, _assetLoadedItem, _position, _direction]] remoteExec ["WL2_fnc_attachDetach", 2];
+
+                [_asset, _assetLoadedItem, false] call WL2_fnc_attachVehicle;
             };
-
-            private _direction = direction _assetLoadedItem;
-            private _class = typeOf _assetLoadedItem;
-            private _nearbyEntities = [_class, AGLtoASL _desiredPosWorldZero, _direction, "dontcheckuid", [_asset, _assetLoadedItem]] call WL2_fnc_grieferCheck;
-
-            if (count _nearbyEntities > 0) exitWith {
-                private _nearbyObjectName = [_nearbyEntities # 0] call WL2_fnc_getAssetTypeName;
-                systemChat format ["Deploying too close to %1!", _nearbyObjectName];
-                playSound "AddItemFailed";
-            };
-
-            _assetLoadedItem attachTo [_asset, _desiredPosRelativeHigh];
-            detach _assetLoadedItem;
-
-            private _assetLoadedItemPos = getPos _assetLoadedItem;
-            _assetLoadedItem setPos [_assetLoadedItemPos # 0, _assetLoadedItemPos # 1, 0];
-
-            [_asset, _assetLoadedItem, false] call WL2_fnc_attachVehicle;
         };
 	},
 	[],
 	5,
 	false,
-	false,
+	true,
 	"",
 	"([_target, _this] call WL2_fnc_deployableEligibility) # 0",
 	30,

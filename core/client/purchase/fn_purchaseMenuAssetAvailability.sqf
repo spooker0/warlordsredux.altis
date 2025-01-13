@@ -97,9 +97,6 @@ if (_ret) then {
 				[WL2_fnc_checkIndependents],
 				[WL2_fnc_checkInFriendlySector],
 				[WL2_fnc_checkGroundVehicleDriver],
-				[WL2_fnc_checkTargetSelected],
-				[WL2_fnc_checkTargetEnemyBase],
-				[WL2_fnc_checkTargetUnlinked],
 				[WL2_fnc_checkNearbyEnemies]
 			]
 		};

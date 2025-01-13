@@ -88,6 +88,10 @@ class CfgRemoteExec {
 			allowedTargets = 0;
 		};
 
+		class WL2_fnc_attachDetach {
+			allowedTargets = 0;
+		};
+
 		class WL2_fnc_killRewardHandle {
 			allowedTargets = 2;
 		};

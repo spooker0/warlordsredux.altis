@@ -29,7 +29,7 @@ if (_isAttaching) then {
 
     private _assetChildren = _asset getVariable ["WL2_children", []];
     _assetChildren pushBack _childAsset;
-    _asset setVariable ["WL2_children", _assetChildren, [2, clientOwner]];
+    _asset setVariable ["WL2_children", _assetChildren, true];
 } else {
     private _ropes = ropes _asset;
     {

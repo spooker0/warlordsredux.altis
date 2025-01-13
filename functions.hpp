@@ -312,6 +312,7 @@ class CfgFunctions {
 		class Server {
 			file = "core\server";
 			class assetRelevanceCheck {};
+			class attachDetach {};
 			class calcImbalance {};
 			class changeSectorOwnership {};
 			class createUAVCrew {};
