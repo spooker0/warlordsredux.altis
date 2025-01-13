@@ -8,8 +8,8 @@ private _parachuteActionId = _unit addAction [
 ];
 
 waitUntil {
-    sleep 1;
-    !alive _unit || (getPosATL _unit # 2) < 100 || vehicle _unit != _unit;
+    sleep 0.2;
+    !alive _unit || (getPosATL _unit # 2) < 100 || (getPosASL _unit # 2) < 100 || vehicle _unit != _unit;
 };
 
 if (alive _unit && vehicle _unit == _unit) then {

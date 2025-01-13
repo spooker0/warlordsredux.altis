@@ -53,7 +53,7 @@ if (!isNull WL_AssetActionTarget) then {
 };
 
 // Draw sector selector
-if (!isNull WL_SectorActionTarget && isNull BIS_WL_highlightedSector) then {
+if (!isNull WL_SectorActionTarget && isNull BIS_WL_highlightedSector && WL_SectorActionTargetActive) then {
 	_m drawIcon [
 		"A3\ui_f\data\map\groupicons\selector_selectedMission_ca.paa",
 		call WL2_fnc_iconColor,

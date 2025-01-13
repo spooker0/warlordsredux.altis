@@ -5,9 +5,30 @@ if (MAP_CONTROL == -1) exitWith {};
 
 private _sector = (_this # 1) getVariable ["BIS_WL_sector", objNull];
 
+private _conditions = [
+	"fastTravelSeized",
+	"fastTravelConflict",
+	"airAssault",
+	"vehicleParadrop",
+	"scan"
+];
+private _sectorHasOptions = false;
+{
+	private _condition = _x;
+	if ([_sector, _condition] call WL2_fnc_mapButtonConditions) then {
+		_sectorHasOptions = true;
+	};
+} forEach _conditions;
+WL_SectorActionTargetActive = _sectorHasOptions;
+
 if (isNull _sector) exitWith {BIS_WL_highlightedSector = objNull; ((ctrlParent WL_CONTROL_MAP) getVariable "BIS_sectorInfoBox") ctrlShow FALSE; ((ctrlParent WL_CONTROL_MAP) getVariable "BIS_sectorInfoBox") ctrlEnable FALSE};
 
-private _selectionActive = BIS_WL_currentSelection in [WL_ID_SELECTION_ORDERING_AIRCRAFT, WL_ID_SELECTION_FAST_TRAVEL, WL_ID_SELECTION_FAST_TRAVEL_CONTESTED, WL_ID_SELECTION_SCAN];
+private _selectionActive = BIS_WL_currentSelection in [
+	WL_ID_SELECTION_ORDERING_AIRCRAFT,
+	WL_ID_SELECTION_FAST_TRAVEL,
+	WL_ID_SELECTION_FAST_TRAVEL_CONTESTED,
+	WL_ID_SELECTION_SCAN
+];
 private _votingActive = WL_VotePhase != 0;
 private _services = (_sector getVariable "BIS_WL_services");
 private _airstrip = "A" in _services;

@@ -40,12 +40,10 @@ switch (_fastTravelMode) do {
 		[player, "fastTravelContested", getMissionConfigValue ["WL_airAssaultCost", 100]] remoteExec ["WL2_fnc_handleClientRequest", 2];
 	};
 	case 3: {
-		private _randomPos = _marker call BIS_fnc_randomPosTrigger;
-		private _distance = _randomPos distance2D BIS_WL_targetSector;
-		private _height = 400;
-		_destination = [_randomPos # 0, _randomPos # 1, _height + _distance * 0.5];
+		private _safeSpot = selectRandom ([BIS_WL_targetSector, 0, true] call WL2_fnc_findSpawnPositions);
+		_destination = [_safeSpot # 0, _safeSpot # 1, 100];
 
-		[player, "fastTravelContested", getMissionConfigValue ["WL_vehicleAirAssaultCost", 1000]] remoteExec ["WL2_fnc_handleClientRequest", 2];
+		[player, "fastTravelContested", getMissionConfigValue ["WL_vehicleParadropCost", 1000]] remoteExec ["WL2_fnc_handleClientRequest", 2];
 	};
 };
 

@@ -1,6 +1,6 @@
 #include "..\..\warlords_constants.inc"
 
-private _dialog = findDisplay 46 createDisplay "RscDisplayEmpty";
+private _display = findDisplay 46 createDisplay "RscDisplayEmpty";
 
 getMousePosition params ["_mouseX", "_mouseY"];
 
@@ -9,12 +9,12 @@ private _offsetY = _mouseY + 0.04;
 
 private _menuButtons = [];
 
-WL2_TargetButtonSetup = [_dialog, _menuButtons, _offsetX, _offsetY];
+WL2_TargetButtonSetup = [_display, _menuButtons, _offsetX, _offsetY];
 
 private _sector = WL_SectorActionTarget;
 WL_ActionTarget = WL_SectorActionTarget;
 
-private _titleBar = _dialog ctrlCreate ["RscStructuredText", -1];
+private _titleBar = _display ctrlCreate ["RscStructuredText", -1];
 _titleBar ctrlSetPosition [_offsetX, _offsetY - 0.05, 0.4, 0.05];
 _titleBar ctrlSetBackgroundColor [0.3, 0.3, 0.3, 1];
 _titleBar ctrlSetTextColor [0.7, 0.7, 1, 1];
@@ -23,13 +23,6 @@ _titleBar ctrlSetStructuredText parseText format ["<t align='center' font='Puris
 _titleBar ctrlCommit 0;
 
 // Fast Travel Seized Button
-private _fastTravelSeizedCondition = {
-    params ["_sector"];
-    private _eligibleSectors = (BIS_WL_sectorsArray # 2) select {
-        (_x getVariable ["BIS_WL_owner", independent]) == (side (group player))
-    };
-    _sector in _eligibleSectors;
-};
 private _fastTravelSeizedExecute = {
     params ["_sector"];
     BIS_WL_targetSector = _sector;
@@ -39,7 +32,7 @@ private _fastTravelSeizedExecute = {
     "FAST TRAVEL",
     _fastTravelSeizedExecute,
     true,
-    _fastTravelSeizedCondition,
+    "fastTravelSeized",
     [
         0,
         "FTSeized",
@@ -48,10 +41,6 @@ private _fastTravelSeizedExecute = {
 ] call WL2_fnc_addTargetMapButton;
 
 // Fast Travel Conflict Button
-private _fastTravelConflictCondition = {
-    params ["_sector"];
-    _sector == WL_TARGET_FRIENDLY;
-};
 private _fastTravelConflictExecute = {
     params ["_sector"];
     BIS_WL_targetSector = _sector;
@@ -68,7 +57,7 @@ private _fastTravelConflictExecute = {
     "FAST TRAVEL CONTESTED",
     _fastTravelConflictExecute,
     true,
-    _fastTravelConflictCondition,
+    "fastTravelConflict",
     [
         getMissionConfigValue ["BIS_WL_fastTravelCostContested", 200],
         "FTConflict",
@@ -77,10 +66,6 @@ private _fastTravelConflictExecute = {
 ] call WL2_fnc_addTargetMapButton;
 
 // Air Assault Button
-private _airAssaultCondition = {
-    params ["_sector"];
-    _sector == WL_TARGET_FRIENDLY;
-};
 private _airAssaultExecute = {
     params ["_sector"];
     BIS_WL_targetSector = _sector;
@@ -97,7 +82,7 @@ private _airAssaultExecute = {
     "AIR ASSAULT",
     _airAssaultExecute,
     true,
-    _airAssaultCondition,
+    "airAssault",
     [
         getMissionConfigValue ["WL_airAssaultCost", 100],
         "FTAirAssault",
@@ -105,45 +90,25 @@ private _airAssaultExecute = {
     ]
 ] call WL2_fnc_addTargetMapButton;
 
-// Vehicle Air Assault Button
-private _vehicleAirAssaultCondition = {
-    params ["_sector"];
-    _sector == WL_TARGET_FRIENDLY;
-};
-private _vehicleAirAssaultExecute = {
+// Vehicle Paradrop Button
+private _vehicleParadropExecute = {
     params ["_sector"];
     BIS_WL_targetSector = _sector;
-
-    private _fastTravelConflictCall = 3 call WL2_fnc_fastTravelConflictMarker;
-    private _marker = _fastTravelConflictCall # 0;
-    [3, _marker] call WL2_fnc_executeFastTravel;
-    deleteMarkerLocal _marker;
-
-    private _markerText = _fastTravelConflictCall # 1;
-    deleteMarkerLocal _markerText;
+    [3, ""] call WL2_fnc_executeFastTravel;
 };
 [
-    "VEHICLE AIR ASSAULT",
-    _vehicleAirAssaultExecute,
+    "VEHICLE PARADROP",
+    _vehicleParadropExecute,
     true,
-    _vehicleAirAssaultCondition,
+    "vehicleParadrop",
     [
-        getMissionConfigValue ["WL_vehicleAirAssaultCost", 1000],
-        "FTAirAssaultVehicle",
+        getMissionConfigValue ["WL_vehicleParadropCost", 1000],
+        "FTParadropVehicle",
         "Strategy"
     ]
 ] call WL2_fnc_addTargetMapButton;
 
 // Scan Button
-private _scanCondition = {
-    params ["_sector"];
-    private _allScannableSectors = BIS_WL_sectorsArray # 3;
-    private _lastScanEligible = serverTime - (getMissionConfigValue ["BIS_WL_scanCooldown", 300]);
-    private _availableSectors = _allScannableSectors select {
-        _x getVariable [format ["BIS_WL_lastScanEnd_%1", BIS_WL_playerSide], -9999] < _lastScanEligible
-    };
-    _sector in _availableSectors;
-};
 private _scanExecute = {
     params ["_sector"];
     BIS_WL_targetSector = _sector;
@@ -153,7 +118,7 @@ private _scanExecute = {
     "SECTOR SCAN",
     _scanExecute,
     true,
-    _scanCondition,
+    "scan",
     [
         getMissionConfigValue ["BIS_WL_scanCost", 750],
         "Scan",
@@ -161,8 +126,8 @@ private _scanExecute = {
     ]
 ] call WL2_fnc_addTargetMapButton;
 
-[_dialog, _offsetX, _offsetY, _menuButtons] spawn {
-    params ["_dialog", "_originalMouseX", "_originalMouseY", "_menuButtons"];
+[_display, _offsetX, _offsetY, _menuButtons] spawn {
+    params ["_display", "_originalMouseX", "_originalMouseY", "_menuButtons"];
     private _keepDialog = true;
     private _menuHeight = (count _menuButtons) * 0.05;
     private _startTime = serverTime;
@@ -182,11 +147,11 @@ private _scanExecute = {
     };
 
     WL_AssetActionTarget = objNull;
-    _dialog closeDisplay 1;
+    _display closeDisplay 1;
 };
 
 if (count _menuButtons == 0) then {
-    _dialog closeDisplay 1;
+    _display closeDisplay 1;
 };
 
 WL2_TargetButtonSetup = [obNull, [], 0, 0];

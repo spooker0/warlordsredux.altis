@@ -1,9 +1,9 @@
-params ["_textLabel", "_action", "_actionClose", ["_actionCondition", nil], ["_costCondition", []]];
+params ["_textLabel", "_action", "_actionClose", ["_actionCondition", ""], ["_costCondition", []]];
 // _costCondition = [amount, name, category]
 
 scopeName "targetButtonScope";
-if !(isNil "_actionCondition") then {
-    private _result = [WL_ActionTarget] call _actionCondition;
+if (_actionCondition != "") then {
+    private _result = [WL_ActionTarget, _actionCondition] call WL2_fnc_mapButtonConditions;
     if (!_result) then {
         breakOut "targetButtonScope";
     };
@@ -69,8 +69,8 @@ _button ctrlAddEventHandler ["ButtonClick", {
         };
     };
 
-    if !(isNil "_actionCondition") then {
-        private _result = [_target] call _actionCondition;
+    if (_actionCondition != "") then {
+        private _result = [_target, _actionCondition] call WL2_fnc_mapButtonConditions;
         if (!_result) then {
             playSoundUI ["AddItemFailed"];
             systemChat "Action expired.";
