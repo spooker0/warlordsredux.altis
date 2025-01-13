@@ -139,6 +139,8 @@ class CfgFunctions {
 			class jammerToggle {};
 			class jammerUpdate {};
 			class logisticsAddAction {};
+			class parachuteAction {};
+			class parachuteSetup {};
 			class purchaseMenuAssetAvailability {};
 			class purchaseMenuGetUIScale {};
 			class purchaseMenuHandleDLC {};
@@ -322,6 +324,7 @@ class CfgFunctions {
 			class action {};
 			class buildMenu {};
 			class clientEquip {};
+			class getLevelInfo {};
 			class init {};
 			class levelUp {};
 			class onRespawn {};

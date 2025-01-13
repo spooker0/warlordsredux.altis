@@ -5,13 +5,16 @@ params ["_uid", "_score"];
 if (!WLC_ENABLED) exitWith {};
 if !(isServer) exitWith {};
 
-private _previousScore = WLC_Scores getOrDefault [_uid, 0];
-private _previousLevel = floor (_previousScore / 1000);
-private _newLevel = floor (_score / 1000);
-if (_newLevel > _previousLevel) then {
-    private _player = (allPlayers select {getPlayerUID _x == _uid}) # 0;
-    [_newLevel] remoteExec ["WLC_fnc_levelUp", _player];
-};
+private _player = ((call BIS_fnc_listPlayers) select {
+    getPlayerUID _x == _uid
+}) # 0;
 
+private _previousLevel = ["getLevel", _player] call WLC_fnc_getLevelInfo;
 WLC_Scores set [_uid, _score];
 publicVariable "WLC_Scores";
+private _newLevel = ["getLevel", _player] call WLC_fnc_getLevelInfo;
+
+diag_log format ["Previous: %1, New: %2", _previousLevel, _newLevel];
+if (_newLevel > _previousLevel) then {
+    [_newLevel] remoteExec ["WLC_fnc_levelUp", _player];
+};

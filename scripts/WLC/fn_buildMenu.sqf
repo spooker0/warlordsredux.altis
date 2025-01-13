@@ -24,9 +24,9 @@ private _controlMap = createHashMapFromArray [
     [WLC_HELMET_SELECT, "Helmet"]
 ];
 
-private _score = WLC_Scores getOrDefault [getPlayerUID player, 0];
-private _level = floor (_score / 1000);
-private _nextLevelScore = (_level + 1) * 1000;
+private _level = ["getLevel", player] call WLC_fnc_getLevelInfo;
+private _score = ["getScore", player] call WLC_fnc_getLevelInfo;
+private _nextLevelScore = ["getNextLevelScore", player] call WLC_fnc_getLevelInfo;
 
 private _levelDisplay = _display displayCtrl WLC_LEVEL_TEXT;
 _levelDisplay ctrlSetText format ["Level %1 (%2/%3)", _level, _score, _nextLevelScore];
