@@ -45,7 +45,7 @@ for "_i" from 0 to ((lbSize _purchase_items) - 1) do {
 		};
 
 		_purchase_items lbSetColor [_i, _color];
-		_purchase_items lbSetTooltip [_i, _availability # 1];
+		_purchase_items lbSetTooltip [_i, format ["%1", parseText (_availability # 1)]];
 	} else {
 		private _color = if (_variant != 0) then {
 			[1, 0.85, 0.5, 1]

@@ -330,11 +330,6 @@ if (_action == "updateZeus") exitWith {
 	};
 };
 
-if (_action == "switchToGreen") exitWith {
-	call WL2_fnc_updateVehicleList;
-	call WL2_fnc_calcImbalance;
-};
-
 if (_action == "droneExplode") then {
 	private _drone = vehicle _param1;
 	private _expl = createVehicle ["IEDUrbanBig_Remote_Ammo", getPos _drone, [], 0, "FLY"];

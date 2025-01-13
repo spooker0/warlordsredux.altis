@@ -10,7 +10,7 @@ private _offset = switch (_fastTravelMode) do {
         WL_FAST_TRAVEL_OFFSET
     };
     case 2: {
-        250
+        200
     };
     case 3: {
         500

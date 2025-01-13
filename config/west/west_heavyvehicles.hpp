@@ -261,7 +261,7 @@ class HeavyVehicles {
         description = "IFV-6X Puma is a variant of the IFV-6a Cheetah armed with Defender missiles.";
         spawn = "B_APC_Tracked_01_AA_F";
         variant = 1;
-        cost = 8000;
+        cost = 9000;
         requirements[] = {};
         rearm = 450;
         killReward = 600;

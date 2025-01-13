@@ -31,6 +31,14 @@ switch (BIS_WL_currentSelection) do {
         BIS_WL_selection_showLinks = false;
         BIS_WL_selection_dimSectors = true;
     };
+    case WL_ID_SELECTION_FAST_TRAVEL_VEHICLE: {
+        BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 2) select {
+            private _services = _x getVariable ["BIS_WL_services", []];
+            "A" in _services || "H" in _services
+        };
+        BIS_WL_selection_showLinks = false;
+        BIS_WL_selection_dimSectors = true;
+    };
     case WL_ID_SELECTION_ORDERING_AIRCRAFT: {
         BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 2) select {
             BIS_WL_orderedAssetRequirements isEqualTo (BIS_WL_orderedAssetRequirements arrayIntersect (_x getVariable "BIS_WL_services"))

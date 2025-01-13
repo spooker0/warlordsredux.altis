@@ -8,6 +8,9 @@ _asset = createVehicle [_class, (_pos vectorAdd [0,0,3]), [], 0, "CAN_COLLIDE"];
 
 private _defaultMags = magazinesAllTurrets _asset;
 _asset setVariable ["BIS_WL_defaultMagazines", _defaultMags, true];
+
+_asset setDir (getDir _sender);
+
 _asset setVariable ["WLM_savedDefaultMags", _defaultMags, true];
 
 _asset lock false;

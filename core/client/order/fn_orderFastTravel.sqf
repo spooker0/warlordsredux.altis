@@ -22,9 +22,11 @@ BIS_WL_currentSelection = switch (_fastTravelMode) do {
 		WL_ID_SELECTION_FAST_TRAVEL
 	};
 	case 1;
-	case 2;
-	case 3: {
+	case 2: {
 		WL_ID_SELECTION_FAST_TRAVEL_CONTESTED
+	};
+	case 3: {
+		WL_ID_SELECTION_FAST_TRAVEL_VEHICLE
 	};
 };
 
@@ -33,7 +35,7 @@ WL_MapBusy pushBack "orderFastTravel";
 private _marker = "";
 private _markerText = "";
 
-if (_fastTravelMode != 0) then {
+if (_fastTravelMode in [1, 2]) then {
 	private _fastTravelConflict = _fastTravelMode call WL2_fnc_fastTravelConflictMarker;
 	_marker = _fastTravelConflict # 0;
 	_markerText = _fastTravelConflict # 1;
