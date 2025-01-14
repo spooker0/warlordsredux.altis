@@ -135,7 +135,7 @@ if (_ret) then {
 				[WL2_fnc_checkResetSectorTimer]
 			]
 		};
-		case "forfeitVote": {
+		case "ForfeitVote": {
 			[
 				[WL2_fnc_checkIndependents],
 				[WL2_fnc_checkSurrender]
