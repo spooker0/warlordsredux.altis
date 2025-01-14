@@ -80,8 +80,6 @@ switch (_fastTravelMode) do {
 	};
 	case 3: {
 		private _vehicle = vehicle player;
-		_vehicle setPosATL _destination;
-		_vehicle setDir _directionToSector;
 
 		private _parachuteClass = switch (BIS_WL_playerSide) do {
 			case west: {
