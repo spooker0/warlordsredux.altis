@@ -49,7 +49,7 @@ waitUntil {
 };
 
 if (isNull BIS_WL_targetSector) exitWith {
-	if (BIS_WL_currentSelection in [WL_ID_SELECTION_FAST_TRAVEL, WL_ID_SELECTION_FAST_TRAVEL_CONTESTED]) then {
+	if (BIS_WL_currentSelection in [WL_ID_SELECTION_FAST_TRAVEL, WL_ID_SELECTION_FAST_TRAVEL_CONTESTED, WL_ID_SELECTION_FAST_TRAVEL_VEHICLE]) then {
 		BIS_WL_currentSelection = WL_ID_SELECTION_NONE;
 	};
 	"Canceled" call WL2_fnc_announcer;
@@ -66,7 +66,7 @@ if (isNull BIS_WL_targetSector) exitWith {
 deleteMarkerLocal _marker;
 deleteMarkerLocal _markerText;
 
-if (BIS_WL_currentSelection in [WL_ID_SELECTION_FAST_TRAVEL, WL_ID_SELECTION_FAST_TRAVEL_CONTESTED]) then {
+if (BIS_WL_currentSelection in [WL_ID_SELECTION_FAST_TRAVEL, WL_ID_SELECTION_FAST_TRAVEL_CONTESTED, WL_ID_SELECTION_FAST_TRAVEL_VEHICLE]) then {
 	BIS_WL_currentSelection = _selectionBefore;
 };
 

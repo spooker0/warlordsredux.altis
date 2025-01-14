@@ -34,7 +34,8 @@ switch (BIS_WL_currentSelection) do {
     case WL_ID_SELECTION_FAST_TRAVEL_VEHICLE: {
         BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 2) select {
             private _services = _x getVariable ["BIS_WL_services", []];
-            "A" in _services || "H" in _services
+            private _isCarrierSector = count (_x getVariable ["WL_aircraftCarrier", []]) > 0;
+            ("A" in _services || "H" in _services) && !_isCarrierSector
         };
         BIS_WL_selection_showLinks = false;
         BIS_WL_selection_dimSectors = true;

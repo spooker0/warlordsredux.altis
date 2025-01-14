@@ -41,7 +41,7 @@ switch (_fastTravelMode) do {
 	};
 	case 3: {
 		private _safeSpot = selectRandom ([BIS_WL_targetSector, 0, true] call WL2_fnc_findSpawnPositions);
-		_destination = [_safeSpot # 0, _safeSpot # 1, 100];
+		_destination = [_safeSpot # 0, _safeSpot # 1, 150];
 
 		[player, "fastTravelContested", getMissionConfigValue ["WL_vehicleParadropCost", 1000]] remoteExec ["WL2_fnc_handleClientRequest", 2];
 	};
@@ -80,7 +80,7 @@ switch (_fastTravelMode) do {
 	};
 	case 3: {
 		private _vehicle = vehicle player;
-		_vehicle setPosASL _destination;
+		_vehicle setPosATL _destination;
 		_vehicle setDir _directionToSector;
 
 		private _parachuteClass = switch (BIS_WL_playerSide) do {
@@ -95,9 +95,9 @@ switch (_fastTravelMode) do {
 			};
 		};
 
-		private _parachute = createVehicle [_parachuteClass, ASLtoATL _destination, [], 0, "NONE"];
+		private _parachute = createVehicle [_parachuteClass, _destination, [], 0, "NONE"];
 		_parachute setDir _directionToSector;
-		_vehicle attachTo [_parachute];
+		_vehicle attachTo [_parachute, [0, 0, 0]];
 		[_vehicle, _parachute] spawn {
 			params ["_vehicle", "_parachute"];
 			waitUntil {
