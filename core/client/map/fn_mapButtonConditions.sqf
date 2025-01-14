@@ -16,7 +16,8 @@ switch (_conditionName) do {
     case "vehicleParadrop": {
         private _sectorAvailable = _sector in (BIS_WL_sectorsArray # 2);
         private _services = _sector getVariable ["BIS_WL_services", []];
-        _sectorAvailable && ("A" in _services || "H" in _services);
+        private _isCarrierSector = count (_sector getVariable ["WL_aircraftCarrier", []]) > 0;
+        _sectorAvailable && ("A" in _services || "H" in _services) && !_isCarrierSector;
     };
     case "scan": {
         private _allScannableSectors = BIS_WL_sectorsArray # 3;

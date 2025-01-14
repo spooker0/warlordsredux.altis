@@ -135,8 +135,8 @@ private _side = side _owner;
             _effect ppEffectForceInNVG true;
             _effect ppEffectCommit 0;
             missionNamespace setVariable ["BIS_WL_filmGrainPriority", _priority + 1];
+            _effect;
         };
-        _effect;
     };
 
     private _filmGrain = call _initFilmGrain;
@@ -225,7 +225,9 @@ private _side = side _owner;
     _indicator ctrlSetText "";
     _indicator ctrlSetBackgroundColor [0, 0, 0, 0];
 
-    _filmGrain ppEffectEnable false;
-    _filmGrain ppEffectCommit 0;
-    ppEffectDestroy _filmGrain;
+    if (!isNil "_filmGrain") then {
+        _filmGrain ppEffectEnable false;
+        _filmGrain ppEffectCommit 0;
+        ppEffectDestroy _filmGrain;
+    };
 };

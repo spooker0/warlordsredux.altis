@@ -1,4 +1,4 @@
-params ["_class", "_orderedClass", "_offset", "_range", "_ignoreSector"];
+params ["_class", "_orderedClass", "_offset", "_range", "_ignoreSector", ["_originalAsset", objNull]];
 
 private _asset = createSimpleObject [_class, AGLToASL (player modelToWorld _offset), true];
 
@@ -100,10 +100,17 @@ uiNamespace setVariable ['BIS_WL_deployKeyHandle', nil];
 _offset set [1, _asset distance2D player];
 detach _asset;
 _p = getPosATL _asset;
+
+private _offset = [0, 0, 0];
+if (!isNull _originalAsset) then {
+    _asset attachTo [_originalAsset];
+    _offset = _originalAsset getRelPos _asset;
+};
+
 deleteVehicle _asset;
 
 [player, "assembly", false] call WL2_fnc_hintHandle;
 
 private _canStillOrderVehicle = !([_originalPosition, _range, _ignoreSector] call WL2_fnc_cancelVehicleOrder);
 
-[BIS_WL_spacePressed && _canStillOrderVehicle, _p];
+[BIS_WL_spacePressed && _canStillOrderVehicle, _p, _offset];

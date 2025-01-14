@@ -34,7 +34,7 @@ private _deployActionId = _asset addAction [
 
                 [true, [_asset, _assetToLoad, _offset]] remoteExec ["WL2_fnc_attachDetach", 2];
 
-                [_asset, _assetToLoad, true] call WL2_fnc_attachVehicle;
+
             };
         } else {
             [_asset, _assetLoadedItem] spawn {
@@ -44,7 +44,7 @@ private _deployActionId = _asset addAction [
                 private _orderedClass = _assetLoadedItem getVariable ["WL2_orderedClass", _assetLoadedItemClass];
                 private _distanceToVehicle = player distance2D _asset;
                 private _offset = [0, _distanceToVehicle, 0];
-                private _deploymentResult = [_assetLoadedItemClass, _orderedClass, _offset, 10, true] call WL2_fnc_deployment;
+                private _deploymentResult = [_assetLoadedItemClass, _orderedClass, _offset, 10, true, _asset] call WL2_fnc_deployment;
 
                 if !(_deploymentResult # 0) exitWith {
                     playSound "AddItemFailed";
@@ -63,9 +63,8 @@ private _deployActionId = _asset addAction [
                     _asset setVariable ["WL2_loadingAsset", false, true];
                 };
 
-                [false, [_asset, _assetLoadedItem, _position, _direction]] remoteExec ["WL2_fnc_attachDetach", 2];
-
-                [_asset, _assetLoadedItem, false] call WL2_fnc_attachVehicle;
+                private _offset = _deploymentResult # 2;
+                [false, [_asset, _assetLoadedItem, _offset, _position, _direction]] remoteExec ["WL2_fnc_attachDetach", 2];
             };
         };
 	},
