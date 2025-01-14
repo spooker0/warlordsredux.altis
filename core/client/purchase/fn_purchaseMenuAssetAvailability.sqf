@@ -73,6 +73,15 @@ private _allConditions = [
 private _resultAllConditions = [_allConditions] call _checkConditions;
 _failures append _resultAllConditions;
 
+private _findCurrentOwnedSector = (BIS_WL_sectorsArray # 0) select {
+	player inArea (_x getVariable "objectAreaComplete")
+};
+private _sector = if (count _findCurrentOwnedSector > 0) then {
+	_findCurrentOwnedSector # 0;
+} else {
+	objNull;
+};
+
 if (_ret) then {
 	private _conditions = switch (_class) do {
 		case "FTSeized": {
@@ -95,7 +104,7 @@ if (_ret) then {
 		case "FTParadropVehicle": {
 			[
 				[WL2_fnc_checkIndependents],
-				[WL2_fnc_checkInFriendlySector],
+				[WL2_fnc_checkInAirliftSector, [_sector]],
 				[WL2_fnc_checkGroundVehicleDriver],
 				[WL2_fnc_checkNearbyEnemies],
 				[WL2_fnc_checkParadropCooldown]
@@ -220,15 +229,6 @@ if (_ret) then {
 			if (_category == "Strategy") then {
 				[]
 			} else {
-				private _findCurrentOwnedSector = (BIS_WL_sectorsArray # 0) select {
-					player inArea (_x getVariable "objectAreaComplete")
-				};
-				private _sector = if (count _findCurrentOwnedSector > 0) then {
-					_findCurrentOwnedSector # 0;
-				} else {
-					objNull;
-				};
-
 				private _assetConditions = [
 					[WL2_fnc_checkRequirements, [_sector, _requirements]],
 					[WL2_fnc_checkInfantryAvailable, [_class]],

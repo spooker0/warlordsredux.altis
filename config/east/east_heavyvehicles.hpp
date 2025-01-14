@@ -82,13 +82,15 @@ class HeavyVehicles {
                 "4Rnd_Titan_long_missiles_O"
             };
             removeWeapons[] = {
-                "missiles_titan_AA"
+                "missiles_titan_AA",
+                "autocannon_35mm"
             };
             addMagazines[] = {
                 "4Rnd_GAA_missiles",
                 "4Rnd_GAA_missiles"
             };
             addWeapons[] = {
+                "autocannon_35mm",
                 "missiles_titan_AA"
             };
         };
@@ -191,13 +193,15 @@ class HeavyVehicles {
                 "4Rnd_Titan_long_missiles_O"
             };
             removeWeapons[] = {
-                "missiles_titan_AA"
+                "missiles_titan_AA",
+                "autocannon_35mm"
             };
             addMagazines[] = {
                 "magazine_Missile_s750_x4",
                 "680Rnd_35mm_AA_shells_Tracer_Green"
             };
             addWeapons[] = {
+                "autocannon_35mm",
                 "weapon_s750Launcher"
             };
         };

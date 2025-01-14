@@ -254,6 +254,7 @@ class CfgFunctions {
 			class checkFunds {};
 			class checkGreenSwitch {};
 			class checkGroundVehicleDriver {};
+			class checkInAirliftSector {};
 			class checkIndependents {};
 			class checkInfantryAvailable {};
 			class checkInFriendlySector {};
