@@ -229,7 +229,7 @@ private _strategyArr = [
 		[],
 		"Fast Travel Vehicle Paradrop",
 		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
-		"Move your vehicle to a friendly helipad or airfield sector by paradropping it."
+		"Move your vehicle to a friendly sector from a helipad/airfield sector by paradropping it."
 	], [
 		"RespawnVicFT",
 		0,

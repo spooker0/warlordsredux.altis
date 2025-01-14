@@ -206,16 +206,20 @@ class HeavyVehicles {
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
             removeMagazines[] = {
-                "4Rnd_Titan_long_missiles"
+                "4Rnd_Titan_long_missiles",
+                "680Rnd_35mm_AA_shells_Tracer_Red"
             };
             removeWeapons[] = {
-                "missiles_titan_AA"
+                "missiles_titan_AA",
+                "autocannon_35mm"
             };
             addMagazines[] = {
                 "4Rnd_GAA_missiles",
-                "4Rnd_GAA_missiles"
+                "4Rnd_GAA_missiles",
+                "680Rnd_35mm_AA_shells_Tracer_Red"
             };
             addWeapons[] = {
+                "autocannon_35mm",
                 "missiles_titan_AA"
             };
         };
@@ -274,13 +278,15 @@ class HeavyVehicles {
                 "4Rnd_Titan_long_missiles"
             };
             removeWeapons[] = {
-                "missiles_titan_AA"
+                "missiles_titan_AA",
+                "autocannon_35mm"
             };
             addMagazines[] = {
                 "magazine_Missile_mim145_x4",
                 "680Rnd_35mm_AA_shells_Tracer_Red"
             };
             addWeapons[] = {
+                "autocannon_35mm",
                 "weapon_mim145Launcher"
             };
         };

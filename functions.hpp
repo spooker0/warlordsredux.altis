@@ -251,10 +251,10 @@ class CfgFunctions {
 			class checkDead {};
 			class checkFastTravelRespawn {};
 			class checkFastTravelSL {};
-			class checkFTSLCooldown {};
 			class checkFunds {};
 			class checkGreenSwitch {};
 			class checkGroundVehicleDriver {};
+			class checkInAirliftSector {};
 			class checkIndependents {};
 			class checkInfantryAvailable {};
 			class checkInFriendlySector {};
@@ -262,6 +262,7 @@ class CfgFunctions {
 			class checkIsOrdering {};
 			class checkLastLoadout {};
 			class checkNearbyEnemies {};
+			class checkParadropCooldown {};
 			class checkPlayerInVehicle {};
 			class checkRequirements {};
 			class checkResetSectorTimer {};
