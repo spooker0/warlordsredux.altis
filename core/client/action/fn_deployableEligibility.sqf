@@ -1,5 +1,6 @@
 params ["_asset", "_caller"];
 private _isLoading = _asset getVariable ["WL2_loadingAsset", false];
+private _isPointing = cursorObject == _asset;
 private _hasAccess = ([_asset, _caller, "full"] call WL2_fnc_accessControl) # 0;
 private _callerID = getPlayerID _caller;
 private _loadedItem = _asset getVariable ["WL2_loadedItem", objNull];
@@ -37,4 +38,4 @@ private _offset = if (_hasNearLoadable) then {
 // 0: eligible
 // 1: near loadables
 // 2: offset
-[_hasAccess && !_isLoading && alive _asset && (_hasLoadedItem || _hasNearLoadable), _sortedNearLoadable, _offset];
+[_isPointing && _hasAccess && !_isLoading && alive _asset && (_hasLoadedItem || _hasNearLoadable), _sortedNearLoadable, _offset];
