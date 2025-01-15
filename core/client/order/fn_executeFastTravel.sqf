@@ -44,7 +44,7 @@ switch (_fastTravelMode) do {
 		_destination = [_safeSpot # 0, _safeSpot # 1, 50];
 
         private _paradropNextUseVar = format ["WL_paradropNextUse_%1", getPlayerUID player];
-        missionNamespace setVariable [_paradropNextUseVar, serverTime + 600];
+        missionNamespace setVariable [_paradropNextUseVar, serverTime + 30];
 
 		[player, "fastTravelContested", getMissionConfigValue ["WL_vehicleParadropCost", 1000]] remoteExec ["WL2_fnc_handleClientRequest", 2];
 	};
