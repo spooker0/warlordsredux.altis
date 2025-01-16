@@ -6,6 +6,7 @@ private _sectorCaptureValue = _sectorValue min 10;
 private _minCaptureTime = linearConversion [5, 30, _sectorValue, 20, 50, true];
 
 private _lastTime = serverTime;
+private _fullClientUpdateInterval = serverTime;
 while { !BIS_WL_missionEnd } do {
 	private _originalOwner = _sector getVariable ["BIS_WL_owner", independent];
 
@@ -16,8 +17,12 @@ while { !BIS_WL_missionEnd } do {
 	_lastTime = serverTime;
 	private _progressMovement = _actualTimeElapsed / _minCaptureTime;
 
-	private _info = _sector call WL2_fnc_getCapValues;
-	private _sortedInfo = [_info, [], { _x # 1 }, "DESCEND"] call BIS_fnc_sortBy;
+	private _sortedInfo = _sector call WL2_fnc_getCapValues;
+
+	if (serverTime - _fullClientUpdateInterval > 3) then {
+		_sector setVariable ["WL_captureDetails", _sortedInfo, true];
+		_fullClientUpdateInterval = serverTime;
+	};
 
 	private _topEntry = _sortedInfo # 0;
 	private _winner = _topEntry # 0;
@@ -38,15 +43,16 @@ while { !BIS_WL_missionEnd } do {
 		_winner = _originalOwner;
 	};
 
+	private _scoreGap = _winningScore - _secondScore;
+	private _movement = _progressMovement * ((1.0 min (_scoreGap / _sectorCaptureValue)) min 0.1);
+
 	if (_winner == _capturingTeam) then {
 		if (_capturingTeam != _originalOwner) then {
-			private _scoreGap = _winningScore - _secondScore;
-			private _movement = _progressMovement * (1.0 min (_scoreGap / _sectorCaptureValue));
 			_captureProgress = _captureProgress + _movement;
 		};
 	} else {
 		if (_captureProgress > 0) then {
-			_captureProgress = _captureProgress - _progressMovement * 0.5;
+			_captureProgress = _captureProgress - _movement * 0.5;
 		} else {
 			if (_winner != independent) then {
 				_captureProgress = 0;

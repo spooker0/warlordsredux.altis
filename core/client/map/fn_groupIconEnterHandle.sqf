@@ -55,20 +55,28 @@ private _revealed = _side in (_sector getVariable ["BIS_WL_revealedBy", []]);
 private _captureScoreText = "";
 if (!_revealed) then {
 	_percentage = 0;
-} else {
-	private _info = _sector call WL2_fnc_getCapValues;
-	private _sortedInfo = [_info, [], { _x # 1 }, "DESCEND"] call BIS_fnc_sortBy;
+};
 
-	private _scoreTexts = [];
-	{
-		private _team = _x # 0;
-		private _score = _x # 1;
-		if (_score > 0) then {
-			_scoreTexts pushBack format ["<t color='%1'>%2</t>", [_team] call _getTeamColor, _score];
-		};
-	} forEach _sortedInfo;
+private _info = _sector getVariable ["WL_captureDetails", []];
+if (count _info > 0) then {
+	private _teamInfo = (_info select {
+		_x # 0 == BIS_WL_playerSide
+	}) # 0;
 
-	_captureScoreText = _scoreTexts joinString " | ";
+	if (_teamInfo # 1 > 0) then {
+		private _sortedInfo = [_info, [], { _x # 1 }, "DESCEND"] call BIS_fnc_sortBy;
+
+		private _scoreTexts = [];
+		{
+			private _team = _x # 0;
+			private _score = _x # 1;
+			if (_score > 0) then {
+				_scoreTexts pushBack format ["<t color='%1'>%2</t>", [_team] call _getTeamColor, floor _score];
+			};
+		} forEach _sortedInfo;
+
+		_captureScoreText = _scoreTexts joinString " vs. ";
+	};
 };
 
 private _capturingTeam = _sector getVariable ["BIS_WL_capturingTeam", independent];
@@ -120,8 +128,8 @@ private _sectorInfoText = [
 		""
 	},
 
-	if (_percentage > 0) then {
-		format ["<t color='%1'>%2%3</t> (%4)", _color, floor (_percentage * 100), "%", _captureScoreText]
+	if (_percentage > 0 || count _info > 0) then {
+		format ["<t color='%1'>%2%3</t> (%4)<br/>", _color, floor (_percentage * 100), "%", _captureScoreText]
 	} else {
 		""
 	}
