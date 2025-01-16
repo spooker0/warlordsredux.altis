@@ -58,10 +58,11 @@ if (!_revealed) then {
 };
 
 private _info = _sector getVariable ["WL_captureDetails", []];
-if (count _info > 0) then {
-	private _teamInfo = (_info select {
-		_x # 0 == BIS_WL_playerSide
-	}) # 0;
+private _myTeamInfo = _info select {
+	_x # 0 == BIS_WL_playerSide && _x # 1 > 0
+};
+if (count _myTeamInfo > 0) then {
+	private _teamInfo = _myTeamInfo # 0;
 
 	if (_teamInfo # 1 > 0) then {
 		private _sortedInfo = [_info, [], { _x # 1 }, "DESCEND"] call BIS_fnc_sortBy;
@@ -76,6 +77,7 @@ if (count _info > 0) then {
 		} forEach _sortedInfo;
 
 		_captureScoreText = _scoreTexts joinString " vs. ";
+		_captureScoreText = format ["(%1)", _captureScoreText];
 	};
 };
 
@@ -128,8 +130,8 @@ private _sectorInfoText = [
 		""
 	},
 
-	if (_percentage > 0 || count _info > 0) then {
-		format ["<t color='%1'>%2%3</t> (%4)<br/>", _color, floor (_percentage * 100), "%", _captureScoreText]
+	if (_percentage > 0 || count _myTeamInfo > 0) then {
+		format ["<t color='%1'>%2%3</t> %4<br/>", _color, floor (_percentage * 100), "%", _captureScoreText]
 	} else {
 		""
 	}
