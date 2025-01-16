@@ -74,6 +74,12 @@ if (BIS_WL_selection_showLinks) then {
     } forEach BIS_WL_sectorLinks;
 };
 
+private _targetedSector = WL_SectorActionTarget;
+private _sectorLinks = WL_linkSectorMarkers getOrDefault [hashValue _targetedSector, []];
+{
+    _x setMarkerAlphaLocal 1;
+} forEach _sectorLinks;
+
 {
     private _alpha = if (BIS_WL_selection_dimSectors && !(_x in BIS_WL_selection_availableSectors)) then {
         WL_CONNECTING_LINE_ALPHA_MIN;

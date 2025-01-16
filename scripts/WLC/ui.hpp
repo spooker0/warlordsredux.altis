@@ -282,5 +282,12 @@ class WLC_MenuUI {
             h = 0.05;
             style = ST_CENTER;
         };
+        class WLC_CostDisplay: RscStructuredText {
+            idc = WLC_COST_TEXT;
+            x = 0;
+            y = -0.045;
+            w = 0.95;
+            h = 0.05;
+        };
     };
 };

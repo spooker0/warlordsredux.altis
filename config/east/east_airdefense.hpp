@@ -64,8 +64,8 @@ class AirDefense {
         loadable[] = {0, -2, 1};
     };
 
-    class O_SAM_System_04_UP_F {
-        name = "S-750 Rhea (UP)";
+    class O_SAM_System_04_M_F {
+        name = "S-750M Rhea II";
         description = "Long range surface-to-air missile system, capable of engaging aircraft and helicopters, upgraded for more ammo. Effective range: >10km.";
         spawn = "O_SAM_System_04_F";
         variant = 1;

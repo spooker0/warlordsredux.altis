@@ -98,16 +98,18 @@ switch (_type) do {
 
         player removeWeapon (handgunWeapon player);
 
-        {
-            [_x] call _checkForSpace;
-            player addMagazine _x;
-        } forEach _magazines;
+        if (_item != "none") then {
+            {
+                [_x] call _checkForSpace;
+                player addMagazine _x;
+            } forEach _magazines;
 
-        player addWeapon _item;
+            player addWeapon _item;
 
-        {
-            player addHandgunItem _x;
-        } forEach _attachments;
+            {
+                player addHandgunItem _x;
+            } forEach _attachments;
+        };
     };
     case "Launcher": {
         private _oldMagazines = compatibleMagazines (secondaryWeapon player);
@@ -131,4 +133,9 @@ switch (_type) do {
         };
     };
     default {};
+};
+
+private _backpackItems = backpackItems player;
+if (count _backpackItems == 0) then {
+    removeBackpack player;
 };

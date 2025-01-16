@@ -33,6 +33,7 @@ _levelDisplay ctrlSetText format ["Level %1 (%2/%3)", _level, _score, _nextLevel
 
 private _moneySign = [_side] call WL2_fnc_getMoneySign;
 
+private _sumCost = 0;
 {
     private _select = _display displayCtrl _x;
     private _type = _y;
@@ -51,8 +52,8 @@ private _moneySign = [_side] call WL2_fnc_getMoneySign;
 
         private _cost = _customization getOrDefault ["cost", 0];
         private _displayName = if (_cost > 0) then {
-            // format ["%1 [%2%3]", _name, _moneySign, _cost];
-            continue;
+            format ["%1 [%2%3]", _name, _moneySign, _cost];
+            // continue;
         } else {
             _name;
         };
@@ -93,11 +94,14 @@ private _moneySign = [_side] call WL2_fnc_getMoneySign;
     } forEach _customizationList;
     _select lbSortBy ["VALUE", false];
 
-    private _customizationData = player getVariable [format ["WLC_%1", _type], ""];
+    private _customizationData = profileNamespace getVariable [format ["WLC_%1", _type], ""];
     if (_customizationData != "") then {
         for "_index" from 0 to lbSize _select - 1 do {
-            if (_select lbData _index == _customizationData) then {
+            private _class = _select lbData _index;
+            if (_class == _customizationData) then {
                 _select lbSetCurSel _index;
+                private _cost = (_customizationList getOrDefault [_class, createHashMap]) getOrDefault ["cost", 0];
+                _sumCost = _sumCost + _cost;
                 break;
             };
         };
@@ -107,3 +111,12 @@ private _moneySign = [_side] call WL2_fnc_getMoneySign;
 
     _select ctrlAddEventHandler ["LBSelChanged", format ["[_this # 0, _this # 1, '%1'] spawn WLC_fnc_onSelection", _type]];
 } forEach _controlMap;
+
+private _funds = (missionNamespace getVariable "fundsDatabaseClients") getOrDefault [getPlayerUID player, 0];
+private _affordColor = if (_funds >= _sumCost) then {
+    "#FFFFFF";
+} else {
+    "#FF0000";
+};
+private _costDisplay = _display displayCtrl WLC_COST_TEXT;
+_costDisplay ctrlSetStructuredText parseText format ["<t align='right'>Total Cost: <t color='%1'>%2%3</t></t>", _affordColor, _moneySign, _sumCost];

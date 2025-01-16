@@ -33,7 +33,8 @@ private _squadActionId = player addAction[_squadActionText, { [true] call SQD_fn
 player setUserActionText [_squadActionId, _squadActionText, "<img size='2' image='\a3\ui_f\data\igui\cfg\simpletasks\types\meet_ca.paa'/>"];
 
 player setVariable ["BIS_WL_isOrdering", false, [2, clientOwner]];
-0 spawn WL2_fnc_factionBasedClientInit;
+0 call WL2_fnc_factionBasedClientInit;
+0 spawn WLC_fnc_onRespawn;
 
 private _penaltyCheck = profileNameSpace getVariable ["teamkill_penalty", createHashMap];
 private _sessionID = missionNamespace getVariable ["sessionID", -1];

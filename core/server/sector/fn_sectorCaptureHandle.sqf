@@ -1,8 +1,9 @@
 params ["_sector"];
 
 private _area = _sector getVariable "objectArea";
-private _size = (_area # 0) * (_area # 1) * (if (_area # 3) then { 4 } else { pi });
-private _seizingTime = (30 max (_size / 2500)) min 90;
+private _sectorValue = _sector getVariable ["BIS_WL_value", 50];
+private _sectorCaptureValue = _sectorValue min 10;
+private _minCaptureTime = linearConversion [5, 30, _sectorValue, 20, 50, true];
 
 private _lastTime = serverTime;
 while { !BIS_WL_missionEnd } do {
@@ -13,7 +14,7 @@ while { !BIS_WL_missionEnd } do {
 
 	private _actualTimeElapsed = serverTime - _lastTime;
 	_lastTime = serverTime;
-	private _progressMovement = _actualTimeElapsed / _seizingTime;
+	private _progressMovement = _actualTimeElapsed / _minCaptureTime;
 
 	private _info = _sector call WL2_fnc_getCapValues;
 	private _sortedInfo = [_info, [], { _x # 1 }, "DESCEND"] call BIS_fnc_sortBy;
@@ -23,11 +24,15 @@ while { !BIS_WL_missionEnd } do {
 	private _winningScore = _topEntry # 1;
 
 	private _secondEntry = _sortedInfo # 1;
+	private _secondWinner = _secondEntry # 0;
+	private _secondScore = _secondEntry # 1;
 
-	if (_winningScore == _secondEntry # 1) then {
+	if (_winningScore == _secondScore) then {
 		_winner = independent;
 		_winningScore = 100;
 	};
+
+	// systemChat format ["Winner: %1 (%2), Loser: %3 (%4), Progress: %5", _winner, _winningScore, _secondWinner, _secondScore, _captureProgress];
 
 	if (_winningScore == 0) then {
 		_winner = _originalOwner;
@@ -35,7 +40,9 @@ while { !BIS_WL_missionEnd } do {
 
 	if (_winner == _capturingTeam) then {
 		if (_capturingTeam != _originalOwner) then {
-			_captureProgress = _captureProgress + _progressMovement;
+			private _scoreGap = _winningScore - _secondScore;
+			private _movement = _progressMovement * (1.0 min (_scoreGap / _sectorCaptureValue));
+			_captureProgress = _captureProgress + _movement;
 		};
 	} else {
 		if (_captureProgress > 0) then {
@@ -46,6 +53,10 @@ while { !BIS_WL_missionEnd } do {
 				_capturingTeam = _winner;
 			};
 		};
+	};
+
+	if (_captureProgress < 0) then {
+		_captureProgress = 0;
 	};
 
 	if (_captureProgress >= 1) then {
