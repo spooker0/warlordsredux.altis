@@ -56,5 +56,6 @@ switch (_locality) do {
 		WL_GEAR_BUY_MENU = false;
 		WL_TEMP_BUY_MENU = false;
 		WL_VotePhase = 0;
+		WL_linkSectorMarkers = createHashmap;
 	};
 };

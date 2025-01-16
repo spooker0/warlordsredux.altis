@@ -33,6 +33,10 @@ if !(["(EU) #11", serverName] call BIS_fnc_inString) then {
 		private _score = ["getScore", player] call WLC_fnc_getLevelInfo;
 		[getPlayerUID player, _score + 10000] remoteExec ["WLC_fnc_setScore", 2];
 	}, [], 5, true, false];
+	_flag addAction ["<t color = '#ffff00'>(Debug) Add Score +100,000</t>", {
+		private _score = ["getScore", player] call WLC_fnc_getLevelInfo;
+		[getPlayerUID player, _score + 100000] remoteExec ["WLC_fnc_setScore", 2];
+	}, [], 5, true, false];
 	_flag addAction ["<t color = '#ffff00'>(Debug) Set Instant Respawn</t>", {
 		setPlayerRespawnTime 1;
 	}, [], 5];

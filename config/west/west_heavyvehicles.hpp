@@ -17,6 +17,23 @@ class HeavyVehicles {
         aps = 2;
     }; // "IFV-6c Panther"
 
+    class B_APC_tracked_03_cannon_F {
+        name = "FV-720 Mora";
+        spawn = "I_APC_tracked_03_cannon_F";
+        cost = 2500;
+        requirements[] = {};
+        textures[] = {
+            "A3\Armor_F_Enoch\apc_tracked_03\data\apc_tracked_03_ext_eaf_co.paa",
+            "A3\Armor_F_Enoch\apc_tracked_03\data\apc_tracked_03_ext2_eaf_co.paa",
+            "A3\Armor_F_Enoch\apc_tracked_03\Data\camonet_EAF_green_CO.paa",
+            "A3\Armor_F_Enoch\apc_tracked_03\data\cage_EAF_CO.paa"
+        };
+        rearm = 500;
+        killReward = 400;
+        capValue = 4;
+        aps = 2;
+    };
+
     class B_APC_Wheeled_03_cannon_F {
         cost = 2900;
         requirements[] = {};
@@ -139,8 +156,9 @@ class HeavyVehicles {
     };
 
     class B_AFV_Wheeled_01_export_cannon_F {
-        cost = 3500;
-        name = "Rhino MGS (Export)";
+        cost = 3700;
+        name = "Rhino MGS-E";
+        description = "Rhino MGS-E is a variant of the Rhino MGS armed with a weaker 105mm cannon.";
         spawn = "B_AFV_Wheeled_01_up_cannon_F";
         variant = 1;
         requirements[] = {};
@@ -167,23 +185,6 @@ class HeavyVehicles {
                 "cannon_105mm_VTOL_01"
             };
         };
-    };
-
-    class B_APC_tracked_03_cannon_F {
-        name = "FV-720 Mora";
-        spawn = "I_APC_tracked_03_cannon_F";
-        cost = 2500;
-        requirements[] = {};
-        textures[] = {
-            "A3\Armor_F_Enoch\apc_tracked_03\data\apc_tracked_03_ext_eaf_co.paa",
-            "A3\Armor_F_Enoch\apc_tracked_03\data\apc_tracked_03_ext2_eaf_co.paa",
-            "A3\Armor_F_Enoch\apc_tracked_03\Data\camonet_EAF_green_CO.paa",
-            "A3\Armor_F_Enoch\apc_tracked_03\data\cage_EAF_CO.paa"
-        };
-        rearm = 500;
-        killReward = 400;
-        capValue = 4;
-        aps = 2;
     };
 
     class B_AFV_Wheeled_01_cannon_F {

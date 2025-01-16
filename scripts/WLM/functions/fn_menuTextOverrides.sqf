@@ -45,7 +45,9 @@ private _overrideMagazineNames = createHashMapFromArray [
     ["120Rnd_CMFlare_Chaff_Magazine", "Countermeasures"],
     ["192Rnd_CMFlare_Chaff_Magazine", "Countermeasures"],
     ["1000Rnd_Gatling_30mm_Plane_CAS_01_F", "30mm Gatling"],
-    ["500Rnd_Cannon_30mm_Plane_CAS_02_F", "30mm Gatling"]
+    ["500Rnd_Cannon_30mm_Plane_CAS_02_F", "30mm Gatling"],
+    ["60Rnd_20mm_HE_shells", "20mm HE Shells"],
+    ["60Rnd_20mm_AP_shells", "20mm AP Shells"]
 ];
 
 // Override magazine descriptions

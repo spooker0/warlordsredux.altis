@@ -1,7 +1,8 @@
 #include "..\..\warlords_constants.inc"
 
 BIS_WL_sectorLinks = [];
-_i = 0;
+WL_linkSectorMarkers = createHashmap;
+private _i = 0;
 
 {
 	_sector = _x;
@@ -67,13 +68,24 @@ _i = 0;
 			_center = [((_pos1 # 0) + (_pos2 # 0)) / 2, ((_pos1 # 1) + (_pos2 # 1)) / 2];
 			_size = ((_pos1 distance2D _pos2) / 2) - 150;
 			_dir = _pos1 getDir _pos2;
-			_mrkr = createMarkerLocal [format ["BIS_WL_linkMrkr_%1", _i], _center];
-			_mrkr setMarkerAlphaLocal WL_CONNECTING_LINE_ALPHA_MAX;
-			_mrkr setMarkerShapeLocal "RECTANGLE";
-			_mrkr setMarkerDirLocal _dir;
-			_mrkr setMarkerSizeLocal [WL_CONNECTING_LINE_AXIS, _size];
-			BIS_WL_sectorLinks pushBack _mrkr;
-			{_x setVariable ["BIS_WL_linkMarkerIndex", _i]} forEach [_sector, _neighbor];
+			private _linkMarker = createMarkerLocal [format ["BIS_WL_linkMrkr_%1", _i], _center];
+			_linkMarker setMarkerAlphaLocal WL_CONNECTING_LINE_ALPHA_MAX;
+			_linkMarker setMarkerShapeLocal "RECTANGLE";
+			_linkMarker setMarkerDirLocal _dir;
+			_linkMarker setMarkerSizeLocal [WL_CONNECTING_LINE_AXIS, _size];
+			BIS_WL_sectorLinks pushBack _linkMarker;
+
+			private _existingSectorMarkers = WL_linkSectorMarkers getOrDefault [hashValue _sector, []];
+			_existingSectorMarkers pushBack _linkMarker;
+			WL_linkSectorMarkers set [hashValue _sector, _existingSectorMarkers];
+
+			private _existingNeighborMarkers = WL_linkSectorMarkers getOrDefault [hashValue _neighbor, []];
+			_existingNeighborMarkers pushBack _linkMarker;
+			WL_linkSectorMarkers set [hashValue _neighbor, _existingNeighborMarkers];
+
+			{
+				_x setVariable ["BIS_WL_linkMarkerIndex", _i];
+			} forEach [_sector, _neighbor];
 			_i = _i + 1;
 		};
 	} forEach _neighbors;

@@ -1,12 +1,12 @@
 params ["_sector"];
 
 private _sideArr = [west, east, independent];
-private _sidesEligibleForCapture = createHashMap;
+private _sideCaptureModifier = createHashMap;
 {
 	private _side = _x;
 
 	if (_side == independent) then {
-		_sidesEligibleForCapture set [_side, true];
+		_sideCaptureModifier set [_side, 2];
 		continue;
 	};
 
@@ -16,7 +16,7 @@ private _sidesEligibleForCapture = createHashMap;
 	};
 	private _hasConnection = count _connectedNeighboringSectors > 0;
 	if (!_hasConnection) then {
-		_sidesEligibleForCapture set [_side, false];
+		_sideCaptureModifier set [_side, 0];
 		continue;
 	};
 
@@ -26,11 +26,11 @@ private _sidesEligibleForCapture = createHashMap;
 	private _sideCurrentTarget = missionNamespace getVariable (format ["BIS_WL_currentTarget_%1", _side]);
 	private _isCurrentTarget = _sideCurrentTarget == _sector;
 	if (!_isPreviousOwner && !_isCurrentTarget) then {
-		_sidesEligibleForCapture set [_side, false];
+		_sideCaptureModifier set [_side, 0];
 		continue;
 	};
 
-	_sidesEligibleForCapture set [_side, true];
+	_sideCaptureModifier set [_side, count _connectedNeighboringSectors];
 } forEach _sideArr;
 
 private _relevantEntities = entities [["LandVehicle", "Man"], ["Logic"], true, true];
@@ -48,27 +48,22 @@ private _allInArea = _relevantEntities inAreaArray _sectorAO;
 
 private _eligibleEntitiesInArea = _allInArea select {
 	private _unit = _x;
+	// Tested:
+	// Underwater = negative Z
+	// Swimming on water surface = ~0
+	// Clipped under rocks = ~0, nothing to do about it
+	// Standing on top of rocks = ~0
+	// Standing on top of building/>1 floor = ~0
+	// Climbing ladder = altitude above ground
+	// Flying = altitude above ground
 
-	if !(_sidesEligibleForCapture getOrDefault [side group _unit, false]) then {
-		false
+	private _isCarrierSector = count (_sector getVariable ["WL_aircraftCarrier", []]) > 0;
+
+	if (_isCarrierSector) then {
+		getPosASL _unit # 2 > 10;
 	} else {
-		// Tested:
-		// Underwater = negative Z
-		// Swimming on water surface = ~0
-		// Clipped under rocks = ~0, nothing to do about it
-		// Standing on top of rocks = ~0
-		// Standing on top of building/>1 floor = ~0
-		// Climbing ladder = altitude above ground
-		// Flying = altitude above ground
-
-		private _isCarrierSector = count (_sector getVariable ["WL_aircraftCarrier", []]) > 0;
-
-		if (_isCarrierSector) then {
-			getPosASL _unit # 2 > 10;
-		} else {
-			private _zAboveGeneric = (getPos _unit) # 2;
-			_zAboveGeneric > -2 && _zAboveGeneric < 50;
-		};
+		private _zAboveGeneric = (getPos _unit) # 2;
+		_zAboveGeneric > -2 && _zAboveGeneric < 50;
 	};
 };
 
@@ -80,11 +75,7 @@ private _sideCapValues = createHashMap;
 	private _side = side group _unit;
 
 	private _points = if (_unit isKindOf "Man" && !(typeOf _unit in _disallowManList)) then {
-		if (_side == independent) then {
-			2;
-		} else {
-			1;
-		};
+		1;
 	} else {
 		private _aliveCrew = (crew _unit) select { alive _x && !(typeOf _x in _disallowManList) };
 		private _crewCount = count _aliveCrew;
@@ -112,6 +103,7 @@ _sideArr apply {
         0;
     };
     private _sideScore = _sideCapValues getOrDefault [_side, 0];
+	private _sideModifier = _sideCaptureModifier getOrDefault [_side, 0];
 
-	[_side, _sideScore + _tiebreaker];
+	[_side, _sideScore * _sideModifier + _tiebreaker];
 };

@@ -19,6 +19,10 @@ if (typeName _requirements == "STRING") then {
 };
 switch (_className) do {
     case "Arsenal": {if (isNull (findDisplay 602)) then {"RequestMenu_close" call WL2_fnc_setupUI; [player, "orderArsenal"] remoteExec ["WL2_fnc_handleClientRequest", 2]} else {playSound "AddItemFailed"}};
+    case "Customization": {
+        "RequestMenu_close" call WL2_fnc_setupUI;
+        0 spawn WLC_fnc_buildMenu;
+    };
     case "LastLoadout": {"RequestMenu_close" call WL2_fnc_setupUI; [player, "lastLoadout"] remoteExec ["WL2_fnc_handleClientRequest", 2]};
     case "SaveLoadout": {"save" call WL2_fnc_orderSavedLoadout};
     case "SavedLoadout": {"RequestMenu_close" call WL2_fnc_setupUI; [player, "savedLoadout"] remoteExec ["WL2_fnc_handleClientRequest", 2]};

@@ -1,4 +1,12 @@
 class Secondary {
+    class None {
+        name = "None";
+        item = "none";
+        level = 0;
+        magazines[] = {};
+        attachments[] = {};
+    };
+
     class Rook40 {
         name = "Rook-40";
         item = "hgun_Rook40_F";
