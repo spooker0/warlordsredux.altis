@@ -53,4 +53,13 @@ private _rappelPairs = [
         "vehicle player == player && !(player getVariable ['WL2_rappelling', false])",
         20
     ];
+
+    [_boat] spawn {
+        params ["_boat"];
+        private _originalBoatPosition = getPosASL _boat;
+        while { alive _boat } do {
+            sleep 60;
+            _boat setVehiclePosition [_originalBoatPosition, [], 0, "CAN_COLLIDE"];
+        };
+    };
 } forEach _rappelPairs;
