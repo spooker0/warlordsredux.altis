@@ -12,7 +12,7 @@ params ["_data", "_side", "_sender"];
     private _cost = _customization getOrDefault ["cost", 0];
     private _item = _customization getOrDefault ["item", ""];
     private _level = _customization getOrDefault ["level", 0];
-    private _playerLevel = ["getLevel", player] call WLC_fnc_getLevelInfo;
+    private _playerLevel = ["getLevel", _sender] call WLC_fnc_getLevelInfo;
 
     if (_level <= _playerLevel && _cost >= 0 && playerFunds >= _cost && _item != "") then {
         private _uid = getPlayerUID _sender;
