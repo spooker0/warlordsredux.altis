@@ -93,7 +93,7 @@ private _sideCapValues = createHashMap;
 
 // Return format: [[side, points]...]
 // Example: [[west, 5], [east, 3], [independent, 2]]
-_sideArr apply {
+private _info = _sideArr apply {
 	private _side = _x;
 
     private _originalOwner = _sector getVariable ["BIS_WL_owner", independent];
@@ -107,3 +107,5 @@ _sideArr apply {
 
 	[_side, _sideScore * _sideModifier + _tiebreaker];
 };
+private _sortedInfo = [_info, [], { _x # 1 }, "DESCEND"] call BIS_fnc_sortBy;
+_sortedInfo;

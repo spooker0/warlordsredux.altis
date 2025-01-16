@@ -175,6 +175,7 @@ private _teamVariable = switch (_side) do {
 	case west: { "BIS_WL_westOwnedVehicles" };
 	case east: { "BIS_WL_eastOwnedVehicles" };
 	case independent: { "BIS_WL_guerOwnedVehicles" };
+	default { "" };
 };
 private _sideVehicles = missionNamespace getVariable [_teamVariable, []];
 private _vehiclesOnSide = vehicles select { count crew _x > 0 && side _x == _side };
