@@ -3,9 +3,17 @@
 params ["_showWarning"];
 
 private _asset = uiNamespace getVariable "WLM_asset";
+private _display = findDisplay WLM_DISPLAY;
+
+private _access = [_asset, player, "full"] call WL2_fnc_accessControl;
+if !(_access # 0) exitWith {
+    systemChat format ["Can't apply loadout: %1", _access # 1];
+    playSound "AddItemFailed";
+    _display closeDisplay 1;
+};
+
 private _pylonConfig = configFile >> "CfgVehicles" >> typeOf _asset >> "Components" >> "TransportPylonsComponent";
 private _pylonsInfo = configProperties [_pylonConfig >> "pylons"];
-private _display = findDisplay WLM_DISPLAY;
 
 private _currentPylonInfo = getAllPylonsInfo _asset;
 private _eligibleFreeRearm = [_asset, true] call WLM_fnc_calculateFreeRearmEligibility;

@@ -354,6 +354,7 @@ class CfgFunctions {
 			class orderAir {};
 			class orderGround {};
 			class orderWater {};
+			class processOrder {};
 		};
 	};
 	class WLC {

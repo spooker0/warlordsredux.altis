@@ -13,6 +13,12 @@ private _assetLocation = if (count _assetSector > 0) then {
 private _result = ["Delete asset", format ["Are you sure you would like to delete: %1 @ %2", _displayName, _assetLocation], "Yes", "Cancel"] call WL2_fnc_prompt;
 
 if (_result) then {
+	private _access = [_target, player, "full"] call WL2_fnc_accessControl;
+	if !(_access # 0) exitWith {
+		systemChat format ["Can't remove: %1", _access # 1];
+		playSound "AddItemFailed";
+	};
+
 	if (!alive player) exitWith {
 		systemChat "You are dead!";
 		playSound "AddItemFailed";

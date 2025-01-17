@@ -283,7 +283,7 @@ class SectorDefense {
         description = "Static AA Launcher (UP) is an upgraded variant of the Static AA Launcher.";
         spawn = "B_static_AA_F";
         variant = 1;
-        cost = 600;
+        cost = 850;
         requirements[] = {};
         offset[] = {0, 3, 0};
         rearm = 300;
@@ -299,7 +299,6 @@ class SectorDefense {
                 "missiles_titan_static"
             };
             addMagazines[] = {
-                "4Rnd_70mm_SAAMI_missiles",
                 "4Rnd_70mm_SAAMI_missiles",
                 "4Rnd_70mm_SAAMI_missiles"
             };

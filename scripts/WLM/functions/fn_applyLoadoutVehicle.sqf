@@ -3,11 +3,18 @@
 params ["_showWarning"];
 
 private _asset = uiNamespace getVariable "WLM_asset";
+private _display = findDisplay WLM_DISPLAY;
+
+private _access = [_asset, player, "full"] call WL2_fnc_accessControl;
+if !(_access # 0) exitWith {
+    systemChat format ["Can't apply loadout: %1", _access # 1];
+    playSound "AddItemFailed";
+    _display closeDisplay 1;
+};
 
 private _eligibleFreeRearm = [_asset, false] call WLM_fnc_calculateFreeRearmEligibility;
 
 if (_showWarning && !_eligibleFreeRearm) exitWith {
-    private _display = findDisplay WLM_DISPLAY;
     private _confirmDialog = _display createDisplay "WLM_Modal_Dialog";
 
     private _titleControl = _confirmDialog displayCtrl WLM_MODAL_TITLE;
