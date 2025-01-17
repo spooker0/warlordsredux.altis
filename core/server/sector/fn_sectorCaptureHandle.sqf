@@ -44,7 +44,8 @@ while { !BIS_WL_missionEnd } do {
 	};
 
 	private _scoreGap = _winningScore - _secondScore;
-	private _movement = _progressMovement * ((1.0 min (_scoreGap / _sectorCaptureValue)) min 0.1);
+	private _movementMultiplier = linearConversion [0, 20, _scoreGap, 0.1, 1, true];
+	private _movement = _progressMovement * _movementMultiplier;
 
 	if (_winner == _capturingTeam) then {
 		if (_capturingTeam != _originalOwner) then {

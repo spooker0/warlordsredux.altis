@@ -142,6 +142,11 @@ class FixedWing {
         };
         rearm = 900;
         killReward = 600;
+
+        allowPylonMagazines[] = {
+            "PylonRack_3Rnd_LG_scalpel",
+            "PylonRack_Missile_AMRAAM_C_x2"
+        };
     }; // "A-149 Gryphon"
 
     class B_Plane_Fighter_01_F {
