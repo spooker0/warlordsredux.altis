@@ -17,6 +17,42 @@ class HeavyVehicles {
         aps = 2;
     }; // "IFV-6c Panther"
 
+    class B_APC_Tracked_01_SHORAD_F {
+        cost = 2400;
+        name = "IFV-6E Jaguar";
+        spawn = "B_APC_Tracked_01_AA_F";
+        variant = 1;
+        description = "IFV-6E Jaguar is a lightly armed variant of the IFV-6a Cheetah for short range air defense.";
+        requirements[] = {};
+        rearm = 400;
+        killReward = 350;
+        capValue = 4;
+        aps = 2;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {
+                "4Rnd_Titan_long_missiles",
+                "680Rnd_35mm_AA_shells_Tracer_Red"
+            };
+            removeWeapons[] = {
+                "missiles_titan_AA",
+                "autocannon_35mm"
+            };
+            addMagazines[] = {
+                "4Rnd_70mm_SAAMI_missiles",
+                "4Rnd_70mm_SAAMI_missiles",
+                "60Rnd_30mm_MP_shells_Tracer_Green",
+                "60Rnd_30mm_MP_shells_Tracer_Green",
+                "60Rnd_30mm_MP_shells_Tracer_Green"
+            };
+            addWeapons[] = {
+                "autocannon_30mm_RCWS",
+                "missiles_SAAMI"
+            };
+        };
+    };
+
     class B_APC_tracked_03_cannon_F {
         name = "FV-720 Mora";
         spawn = "I_APC_tracked_03_cannon_F";

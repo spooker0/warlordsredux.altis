@@ -3,6 +3,14 @@
 params ["_showWarning"];
 
 private _asset = uiNamespace getVariable "WLM_asset";
+private _display = findDisplay WLM_DISPLAY;
+
+private _access = [_asset, player, "full"] call WL2_fnc_accessControl;
+if !(_access # 0) exitWith {
+    systemChat format ["Can't rearm: %1", _access # 1];
+    playSound "AddItemFailed";
+    _display closeDisplay 1;
+};
 
 private _cooldown = ((_asset getVariable "BIS_WL_nextRearm") - serverTime) max 0;
 private _nearbyVehicles = (_asset nearObjects ["All", WL_MAINTENANCE_RADIUS]) select { alive _x };
@@ -21,8 +29,6 @@ if (player distance _asset > WL_MAINTENANCE_RADIUS) exitWith {
 };
 
 private _pylonsInfo = getAllPylonsInfo _asset;
-
-private _display = findDisplay WLM_DISPLAY;
 
 // determine if our desired pylons match the vehicle's pylons
 private _allPylonsMatch = true;

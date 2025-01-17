@@ -1,5 +1,5 @@
 class Primary {
-    // MX
+    // Katiba
     class Katiba_ARCO {
         name = "Katiba (ARCO)";
         item = "arifle_Katiba_F";

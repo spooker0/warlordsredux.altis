@@ -3,6 +3,14 @@
 params ["_showWarning"];
 
 private _asset = uiNamespace getVariable "WLM_asset";
+private _display = findDisplay WLM_DISPLAY;
+
+private _access = [_asset, player, "full"] call WL2_fnc_accessControl;
+if !(_access # 0) exitWith {
+    systemChat format ["Can't rearm: %1", _access # 1];
+    playSound "AddItemFailed";
+    _display closeDisplay 1;
+};
 
 private _cooldown = ((_asset getVariable "BIS_WL_nextRearm") - serverTime) max 0;
 private _nearbyVehicles = (_asset nearObjects ["All", WL_MAINTENANCE_RADIUS]) select { alive _x };
@@ -28,8 +36,6 @@ private _pylonMismatch = false;
 
 // disabled for now
 if (_showWarning && _pylonMismatch) exitWith {
-    private _display = findDisplay WLM_DISPLAY;
-
     private _confirmDialog = _display createDisplay "WLM_Modal_Dialog";
     private _confirmButtonControl = _confirmDialog displayCtrl WLM_MODAL_CONFIRM_BUTTON;
     private _cancelButtonControl = _confirmDialog displayCtrl WLM_MODAL_EXIT_BUTTON;
