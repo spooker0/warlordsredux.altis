@@ -26,7 +26,7 @@ class HeavyVehicles {
         requirements[] = {};
         rearm = 400;
         killReward = 350;
-        capValue = 4;
+        capValue = 2;
         aps = 2;
 
         class Gunner: WLTurretDefaults {

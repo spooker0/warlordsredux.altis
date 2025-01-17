@@ -17,7 +17,7 @@ class HeavyVehicles {
         requirements[] = {};
         rearm = 400;
         killReward = 350;
-        capValue = 4;
+        capValue = 2;
         aps = 2;
 
         class Gunner: WLTurretDefaults {
@@ -174,7 +174,7 @@ class HeavyVehicles {
     // };
 
     class O_MBT_02_cannon_export_F {
-        cost = 5800;
+        cost = 5500;
         name = "T-100E Badger";
         description = "T-100E Badger is a downgraded export variant of the T-100 Varsuk.";
         spawn = "O_MBT_02_cannon_F";
