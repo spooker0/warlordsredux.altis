@@ -1,6 +1,6 @@
-params ["_asset", "_caller"];
+params ["_asset", "_caller", "_slingloading"];
 private _isLoading = _asset getVariable ["WL2_loadingAsset", false];
-private _isPointing = cursorObject == _asset;
+private _isPointing = cursorObject == _asset || _slingloading;
 private _hasAccess = ([_asset, _caller, "full"] call WL2_fnc_accessControl) # 0;
 private _callerID = getPlayerID _caller;
 private _loadedItem = _asset getVariable ["WL2_loadedItem", objNull];

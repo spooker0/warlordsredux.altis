@@ -16,6 +16,20 @@ private _responsiblePlayer = if (isNull _lastHitter) then {
     _lastHitter
 };
 
+if (isPlayer _unit && _unit != _responsiblePlayer) then {
+    private _killMessage = if (isPlayer _responsiblePlayer) then {
+        private _ffText = if (side group _unit == side group _responsiblePlayer) then {
+            " (Friendly fire)"
+        } else {
+            ""
+        };
+        format["%1 was killed by %2.%3", name _unit, name _responsiblePlayer, _ffText];
+    } else {
+        format["%1 was killed.", name _unit];
+    };
+    [_killMessage] remoteExec ["systemChat", 0];
+};
+
 if !(isNull _responsiblePlayer) then {
     _unit setVariable ["WL_lastHitter", objNull, true];
 

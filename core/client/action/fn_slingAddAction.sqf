@@ -13,7 +13,7 @@ private _slingActionId = _asset addAction [
                 playSound "AddItemFailed";
             };
 
-            private _eligibilityQuery = [_asset, _caller] call WL2_fnc_deployableEligibility;
+            private _eligibilityQuery = [_asset, _caller, true] call WL2_fnc_deployableEligibility;
             private _nearLoadableEntities = _eligibilityQuery # 1;
 
             if (count _nearLoadableEntities > 0) then {
@@ -35,7 +35,7 @@ private _slingActionId = _asset addAction [
 	false,
 	false,
 	"",
-	"([_target, _this] call WL2_fnc_deployableEligibility) # 0",
+	"([_target, _this, true] call WL2_fnc_deployableEligibility) # 0",
 	30,
 	false
 ];
