@@ -8,8 +8,8 @@
     {},
     {},
     {
-		private _unit = cursorTarget;
-		[_unit] remoteExec ["WL2_fnc_revive", _unit];
+        private _unit = cursorTarget;
+        [_unit] remoteExec ["WL2_fnc_revive", _unit];
     },
     {},
     [],
@@ -29,7 +29,12 @@
     {},
     {},
     {
-		forceRespawn player;
+        private _waitedTime = player getVariable ["WL_unconsciousTime", 0];
+        private _originalRespawnTime = getMissionConfigValue ["respawnDelay", 30];
+        private _newRespawnTime = (_originalRespawnTime - _waitedTime) max 5;
+        setPlayerRespawnTime _newRespawnTime;
+        player setVariable ["WL_unconsciousTime", 0];
+        forceRespawn player;
     },
     {},
     [],
@@ -38,3 +43,6 @@
     false,
     true
 ] call BIS_fnc_holdActionAdd;
+
+player setCaptive false;
+setPlayerRespawnTime (getMissionConfigValue ["respawnDelay", 30]);
