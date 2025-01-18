@@ -17,7 +17,7 @@ private _deployActionId = _asset addAction [
 
         private _assetLoadedItem = _asset getVariable ["WL2_loadedItem", objNull];
         if (isNull _assetLoadedItem) then {
-            private _eligibilityQuery = [_asset, _caller] call WL2_fnc_deployableEligibility;
+            private _eligibilityQuery = [_asset, _caller, false] call WL2_fnc_deployableEligibility;
             private _nearLoadableEntities = _eligibilityQuery # 1;
 
             if (count _nearLoadableEntities > 0) then {
@@ -33,8 +33,6 @@ private _deployActionId = _asset addAction [
                 };
 
                 [true, [_asset, _assetToLoad, _offset]] remoteExec ["WL2_fnc_attachDetach", 2];
-
-
             };
         } else {
             [_asset, _assetLoadedItem] spawn {
@@ -73,7 +71,7 @@ private _deployActionId = _asset addAction [
 	false,
 	true,
 	"",
-	"([_target, _this] call WL2_fnc_deployableEligibility) # 0",
+	"([_target, _this, false] call WL2_fnc_deployableEligibility) # 0",
 	30,
 	false
 ];

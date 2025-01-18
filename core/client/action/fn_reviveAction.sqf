@@ -5,13 +5,21 @@
     "\a3\ui_f\data\igui\cfg\revive\overlayIcons\u100_ca.paa",
     "isPlayer cursorTarget && lifeState cursorTarget == 'INCAPACITATED' && side group cursorTarget == side group player && cursorTarget distance2D player < 3",
     "isPlayer cursorTarget && lifeState cursorTarget == 'INCAPACITATED' && side group cursorTarget == side group player && cursorTarget distance2D player < 3",
-    {},
+    {
+        private _soundId = playSoundUI ["a3\sounds_f\characters\ingame\ainvpknlmstpslaywrfldnon_medic.wss"];
+        player setVariable ["WL_reviveSound", _soundId];
+    },
     {},
     {
         private _unit = cursorTarget;
         [_unit] remoteExec ["WL2_fnc_revive", _unit];
     },
-    {},
+    {
+        private _soundId = player getVariable ["WL_reviveSound", -1];
+        if (_soundId != -1) then {
+            stopSound _soundId;
+        };
+    },
     [],
     5,
     100,
