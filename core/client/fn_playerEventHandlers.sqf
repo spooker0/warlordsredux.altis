@@ -87,9 +87,16 @@ player addEventHandler ["HandleDamage", {
 			[_unit] spawn {
 				params ["_unit"];
 				private _startTime = serverTime;
-				while { alive _unit } do {
-					_unit setVariable ["WL_unconsciousTime", serverTime - _startTime];
+				private _downTime = 0;
+				while { alive _unit && _downTime < 90 } do {
+					_downTime = serverTime - _startTime;
+					hintSilent format ["Downed for %1", _downTime];
+					_unit setVariable ["WL_unconsciousTime", _downTime];
 					sleep 1;
+				};
+				hintSilent "";
+				if (alive _unit) then {
+					forceRespawn _unit;
 				};
 			};
 			if (damage _unit < 0.99) then {

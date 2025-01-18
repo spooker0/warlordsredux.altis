@@ -3,8 +3,8 @@
     "<t color='#00ff00'>Revive<t>",
     "\a3\ui_f\data\igui\cfg\revive\overlayIcons\u100_ca.paa",
     "\a3\ui_f\data\igui\cfg\revive\overlayIcons\u100_ca.paa",
-    "isPlayer cursorTarget && lifeState cursorTarget == 'INCAPACITATED' && side group cursorTarget == side group player",
-    "isPlayer cursorTarget && lifeState cursorTarget == 'INCAPACITATED' && side group cursorTarget == side group player",
+    "isPlayer cursorTarget && lifeState cursorTarget == 'INCAPACITATED' && side group cursorTarget == side group player && cursorTarget distance2D player < 3",
+    "isPlayer cursorTarget && lifeState cursorTarget == 'INCAPACITATED' && side group cursorTarget == side group player && cursorTarget distance2D player < 3",
     {},
     {},
     {
@@ -45,4 +45,5 @@
 ] call BIS_fnc_holdActionAdd;
 
 player setCaptive false;
+player setVariable ["WL2_alreadyHandled", false, 2];
 setPlayerRespawnTime (getMissionConfigValue ["respawnDelay", 30]);
