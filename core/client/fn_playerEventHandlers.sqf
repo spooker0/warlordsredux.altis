@@ -83,6 +83,15 @@ player addEventHandler ["HandleDamage", {
 		if (_damage >= 1) then {
 			_unit setUnconscious true;
 			_unit setCaptive true;
+			moveOut _unit;
+			[_unit] spawn {
+				params ["_unit"];
+				private _startTime = serverTime;
+				while { alive _unit } do {
+					_unit setVariable ["WL_unconsciousTime", serverTime - _startTime];
+					sleep 1;
+				};
+			};
 			if (damage _unit < 0.99) then {
 				[_unit, _source, _instigator] remoteExec ["WL2_fnc_handleEntityRemoval", 2];
 			};

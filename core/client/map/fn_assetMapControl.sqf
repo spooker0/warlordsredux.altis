@@ -102,6 +102,7 @@ addMissionEventHandler ["Map", {
 				params ["_units", "_pos", "_alt", "_shift"];
 				if (_shift) exitWith {};
 				if (!alive player) exitWith {};
+				if (lifeState player == "INCAPACITATED") exitWith {};
 
 				if (count WL_MapBusy > 0) exitWith {};
 
