@@ -33,7 +33,6 @@
         private _originalRespawnTime = getMissionConfigValue ["respawnDelay", 30];
         private _newRespawnTime = (_originalRespawnTime - _waitedTime) max 5;
         setPlayerRespawnTime _newRespawnTime;
-        player setVariable ["WL_unconsciousTime", 0];
         forceRespawn player;
     },
     {},
@@ -46,4 +45,5 @@
 
 player setCaptive false;
 player setVariable ["WL2_alreadyHandled", false, 2];
+player setVariable ["WL_unconsciousTime", 0];
 setPlayerRespawnTime (getMissionConfigValue ["respawnDelay", 30]);

@@ -104,5 +104,20 @@ class RotaryWing {
         allowPylonMagazines[] = {
             "PylonRack_Missile_HARM_x1"
         };
+
+        class Pilot: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {};
+            removeWeapons[] = {
+                "CMFlareLauncher"
+            };
+            addMagazines[] = {
+                "240Rnd_CMFlare_Chaff_Magazine",
+                "240Rnd_CMFlare_Chaff_Magazine"
+            };
+            addWeapons[] = {
+                "CMFlareLauncher_Singles"
+            };
+        };
     }; // "AH-99 Blackfoot"
 };

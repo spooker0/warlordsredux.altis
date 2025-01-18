@@ -15,14 +15,20 @@ _magazineTypes = [
 	"Chemlight_red"
 ];
 
-if (side player == west) then {
-	player linkItem "B_UavTerminal";
-};
-if (side player == east) then {
-	player linkItem "O_UavTerminal";
-};
-if (side player == independent) then {
-	player linkItem "I_UavTerminal";
+{
+	player removeMagazines _x;
+} forEach _magazineTypes;
+
+switch (side group player) do {
+	case west: {
+		player linkItem "B_UavTerminal";
+	};
+	case east: {
+		player linkItem "O_UavTerminal";
+	};
+	case independent: {
+		player linkItem "I_UavTerminal";
+	};
 };
 
 {

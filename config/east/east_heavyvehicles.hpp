@@ -8,42 +8,6 @@ class HeavyVehicles {
         aps = 2;
     }; // "MSE-3 Marid"
 
-    class O_APC_Tracked_02_SHORAD_F {
-        cost = 2400;
-        name = "ZSU-29 Indus";
-        description = "ZSU-29 Indus is a lightly armed variant of the ZSU-39 Tigris for short range air defense.";
-        spawn = "O_APC_Tracked_02_AA_F";
-        variant = 1;
-        requirements[] = {};
-        rearm = 400;
-        killReward = 350;
-        capValue = 2;
-        aps = 2;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {
-                "4Rnd_Titan_long_missiles",
-                "680Rnd_35mm_AA_shells_Tracer_Green"
-            };
-            removeWeapons[] = {
-                "missiles_titan_AA",
-                "autocannon_35mm"
-            };
-            addMagazines[] = {
-                "4Rnd_70mm_SAAMI_missiles",
-                "4Rnd_70mm_SAAMI_missiles",
-                "60Rnd_30mm_MP_shells_Tracer_Green",
-                "60Rnd_30mm_MP_shells_Tracer_Green",
-                "60Rnd_30mm_MP_shells_Tracer_Green"
-            };
-            addWeapons[] = {
-                "autocannon_30mm_RCWS",
-                "missiles_SAAMI"
-            };
-        };
-    };
-
     class O_APC_Wheeled_02_rcws_v2_m_F {
         name = "MSE-3M Marid Autocannon";
         description = "MSE-3M Marid is a variant of the MSE-3 Marid armed with a 30mm autocannon.";

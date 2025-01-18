@@ -86,6 +86,9 @@ player addEventHandler ["HandleDamage", {
 			moveOut _unit;
 			[_unit] spawn {
 				params ["_unit"];
+				private _unconsciousTime = _unit getVariable ["WL_unconsciousTime", 0];
+				if (_unconsciousTime > 0) exitWith {};
+
 				private _startTime = serverTime;
 				private _downTime = 0;
 				while { alive _unit && lifeState _unit == "INCAPACITATED" && _downTime < 90 } do {
@@ -97,6 +100,7 @@ player addEventHandler ["HandleDamage", {
 				hintSilent "";
 				_downTime = serverTime - _startTime;
 				if (_downTime >= 90) then {
+					setPlayerRespawnTime 5;
 					forceRespawn _unit;
 				};
 			};
