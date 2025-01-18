@@ -88,20 +88,19 @@ player addEventHandler ["HandleDamage", {
 				params ["_unit"];
 				private _startTime = serverTime;
 				private _downTime = 0;
-				while { alive _unit && _downTime < 90 } do {
+				while { alive _unit && lifeState _unit == "INCAPACITATED" && _downTime < 90 } do {
 					_downTime = serverTime - _startTime;
-					hintSilent format ["Downed for %1", _downTime];
+					hintSilent format ["Downed for %1", round _downTime];
 					_unit setVariable ["WL_unconsciousTime", _downTime];
 					sleep 1;
 				};
 				hintSilent "";
-				if (alive _unit) then {
+				_downTime = serverTime - _startTime;
+				if (_downTime >= 90) then {
 					forceRespawn _unit;
 				};
 			};
-			if (damage _unit < 0.99) then {
-				[_unit, _source, _instigator] remoteExec ["WL2_fnc_handleEntityRemoval", 2];
-			};
+			[_unit, _source, _instigator] remoteExec ["WL2_fnc_handleEntityRemoval", 2];
 			0.99;
 		} else {
 			_damage;
