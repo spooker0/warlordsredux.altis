@@ -32,6 +32,14 @@ class CfgRemoteExec {
 			allowedTargets = 1;
 		};
 
+		class WL2_fnc_revive {
+			allowedTargets = 0;
+		};
+
+		class WL2_fnc_handleEntityRemoval {
+			allowedTargets = 2;
+		};
+
 		class WL2_fnc_deployableAddAction {
 			allowedTargets = 1;
 		};

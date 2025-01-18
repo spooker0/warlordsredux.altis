@@ -64,7 +64,7 @@ _button ctrlAddEventHandler ["ButtonClick", {
         private _checker = [_name, [], "", "", "", [], _amount, _category] call WL2_fnc_purchaseMenuAssetAvailability;
         if !(_checker # 0) then {
             playSoundUI ["AddItemFailed"];
-            systemChat (_checker # 1);
+            systemChat ((_checker # 1) joinString ", ");
             breakOut "buttonClickScope";
         };
     };

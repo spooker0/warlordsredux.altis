@@ -108,6 +108,7 @@ if (_displayClass == "OSD") then {
 } else {
 	if (_displayClass == "RequestMenu_open") then {
 		if (WL_GEAR_BUY_MENU) exitWith {};
+		if (lifeState player == "INCAPACITATED") exitWith {};
 
 		disableSerialization;
 
@@ -358,7 +359,7 @@ if (_displayClass == "OSD") then {
 					"RequestMenu_close" call WL2_fnc_setupUI;
 				};
 			} else {
-				systemChat format ["Invalid buy action: %1", _availability # 1];
+				systemChat format ["Invalid buy action: %1", (_availability # 1) joinString ", "];
 				playSound "AddItemFailed";
 			};
 		}];

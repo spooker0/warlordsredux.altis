@@ -1,6 +1,6 @@
 params ["_unit", "_responsiblePlayer", "_killer"];
 
-if (_unit != player || alive player) exitWith {};
+if (_unit != player || (alive player && lifeState player != "INCAPACITATED")) exitWith {};
 if ((_killer == _unit || isNull _killer) && !isNull _responsiblePlayer) then {
     _killer = _responsiblePlayer;
 };
@@ -208,7 +208,7 @@ showScoretable 1;
 
 waitUntil {
     sleep 0.2;
-    alive player;
+    alive player && lifeState player != "INCAPACITATED";
 };
 
 _killedByTitle ctrlSetText "";
