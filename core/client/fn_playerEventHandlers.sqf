@@ -71,11 +71,25 @@ player addEventHandler ["Killed", {
 
 player addEventHandler ["HandleDamage", {
 	params ["_unit", "_selection", "_damage", "_source", "_projectile", "_hitIndex", "_instigator", "_hitPoint", "_directHit"];
-	_base = (([BIS_WL_base1, BIS_WL_base2] select {(_x getVariable "BIS_WL_owner") == (side group _unit)}) # 0);
-	if ((_unit inArea (_base getVariable "objectAreaComplete")) && {!(_base getVariable ["BIS_WL_baseUnderAttack", false])}) then {
+	private _homeBase = ([BIS_WL_base1, BIS_WL_base2] select {
+		(_x getVariable "BIS_WL_owner") == (side group _unit)
+	}) # 0;
+	private _baseUnderAttack = _homeBase getVariable ["BIS_WL_baseUnderAttack", false];
+	private _inHomeBase = _unit inArea (_homeBase getVariable "objectAreaComplete");
+
+	if (_inHomeBase && !_baseUnderAttack) then {
 		0;
 	} else {
-		_damage;
+		if (_damage >= 1) then {
+			_unit setUnconscious true;
+			_unit setCaptive true;
+			if (damage _unit < 0.99) then {
+				[_unit, _source, _instigator] remoteExec ["WL2_fnc_handleEntityRemoval", 2];
+			};
+			0.99;
+		} else {
+			_damage;
+		};
 	};
 }];
 

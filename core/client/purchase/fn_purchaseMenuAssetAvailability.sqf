@@ -254,7 +254,7 @@ if (_ret) then {
 
 	if (count _failures > 0) exitWith {
 		_ret = false;
-		_tooltip = _failures joinString "\n";
+		_tooltip = _failures;
 	};
 };
 

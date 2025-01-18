@@ -10,4 +10,7 @@ switch (_team) do {
     case INDEPENDENT: {
         "$"
     };
+    default {
+        "$"
+    };
 };

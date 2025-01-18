@@ -24,6 +24,8 @@ if !(isNull _instigator) then {
     // Check if the responsible leader is a player
     if (isPlayer _responsibleLeader) then {
         _ret = _responsibleLeader;
+    } else {
+        _ret = _instigator;
     };
 };
 

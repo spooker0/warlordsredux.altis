@@ -111,6 +111,7 @@ class CfgFunctions {
 			class prompt {};
 			class rappel {};
 			class repackMagazines {};
+			class revive {};
 			class rita {};
 			class sideToFaction {};
 			class spectrumAction {};
@@ -150,6 +151,7 @@ class CfgFunctions {
 			class repairAction {};
 			class repairActionEligibility {};
 			class respawnBagAction {};
+			class reviveAction {};
 			class slingAddAction {};
 			class vehicleLockAction {};
 			class vehicleLockUpdate {};
