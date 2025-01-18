@@ -18,18 +18,20 @@ if (_isAttaching) then {
     [_childAsset, false] remoteExec ["setAutonomous", 0];
     [_childAsset, true] remoteExec ["lock", _childAsset];
 
-    private _enemyGroups = allGroups select {side _x == BIS_WL_enemySide};
+    private _side = _asset call WL2_fnc_getAssetSide;
+
+    private _enemyGroups = allGroups select { side _x != _side };
     {
         _x forgetTarget _childAsset;
     } forEach _enemyGroups;
-    private _enemyUnits = allUnits select {side _x == BIS_WL_enemySide};
+    private _enemyUnits = allUnits select { side _x != _side };
     {
         _x forgetTarget _childAsset;
     } forEach _enemyUnits;
 
     private _assetChildren = _asset getVariable ["WL2_children", []];
     _assetChildren pushBack _childAsset;
-    _asset setVariable ["WL2_children", _assetChildren, [2, clientOwner]];
+    _asset setVariable ["WL2_children", _assetChildren, true];
 } else {
     private _ropes = ropes _asset;
     {

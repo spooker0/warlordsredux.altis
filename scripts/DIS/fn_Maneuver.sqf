@@ -1,6 +1,6 @@
 #include "SAM.inc"
 
-params ["_projectile"];
+params ["_projectile", "_unit"];
 
 [_projectile] spawn {
     params ["_projectile"];
@@ -20,14 +20,14 @@ params ["_projectile"];
     };
 };
 
-[_projectile] spawn {
-    params ["_projectile"];
+[_projectile, _unit] spawn {
+    params ["_projectile", "_unit"];
     sleep 1;
     while { alive _projectile } do {
         sleep 0.5;
         private _missileTarget = missileTarget _projectile;
         private _missileTargetSide = _missileTarget getVariable ["BIS_WL_ownerAssetSide", side _missileTarget];
-        private _projectileSide = side (group player);
+        private _projectileSide = side (group _unit);
         if (_missileTargetSide == _projectileSide) exitWith {
             triggerAmmo _projectile;
         };

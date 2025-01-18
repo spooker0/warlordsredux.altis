@@ -53,7 +53,7 @@ if (!isNull WL_AssetActionTarget) then {
 };
 
 // Draw sector selector
-if (!isNull WL_SectorActionTarget && isNull BIS_WL_highlightedSector) then {
+if (!isNull WL_SectorActionTarget && isNull BIS_WL_highlightedSector && WL_SectorActionTargetActive) then {
 	_m drawIcon [
 		"A3\ui_f\data\map\groupicons\selector_selectedMission_ca.paa",
 		call WL2_fnc_iconColor,
@@ -175,6 +175,7 @@ private _teamVariable = switch (_side) do {
 	case west: { "BIS_WL_westOwnedVehicles" };
 	case east: { "BIS_WL_eastOwnedVehicles" };
 	case independent: { "BIS_WL_guerOwnedVehicles" };
+	default { "" };
 };
 private _sideVehicles = missionNamespace getVariable [_teamVariable, []];
 private _vehiclesOnSide = vehicles select { count crew _x > 0 && side _x == _side };

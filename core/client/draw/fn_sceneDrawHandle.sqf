@@ -50,8 +50,16 @@ addMissionEventHandler ["Draw3D", {
 	};
 	{
 		private _isInMySquad = ["isInMySquad", [getPlayerID _x]] call SQD_fnc_client;
-		_color = if (_isInMySquad) then { [0.5, 0.5, 1, 0.8] } else { [1, 1, 1, 0.8] };
-		_size = if (_isInMySquad) then { 0.04 } else { 0.03 };
+		private _color = if (lifeState _x == "INCAPACITATED") then {
+			[1, 0, 0, 0.8]
+		} else {
+			if (_isInMySquad) then {
+				[0.5, 0.5, 1, 0.8]
+			} else {
+				[1, 1, 1, 0.8]
+			};
+		};
+		private _size = if (_isInMySquad) then { 0.04 } else { 0.03 };
 
 		drawIcon3D [
 			"A3\ui_f\data\igui\cfg\islandmap\iconplayer_ca.paa",

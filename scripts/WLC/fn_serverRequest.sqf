@@ -11,7 +11,10 @@ params ["_data", "_side", "_sender"];
 
     private _cost = _customization getOrDefault ["cost", 0];
     private _item = _customization getOrDefault ["item", ""];
-    if (_cost >= 0 && playerFunds >= _cost && _item != "") then {
+    private _level = _customization getOrDefault ["level", 0];
+    private _playerLevel = ["getLevel", _sender] call WLC_fnc_getLevelInfo;
+
+    if (_level <= _playerLevel && _cost >= 0 && playerFunds >= _cost && _item != "") then {
         private _uid = getPlayerUID _sender;
         (-_cost) call WL2_fnc_fundsDatabaseWrite;
         [_type, _customization] remoteExec ["WLC_fnc_clientEquip", _sender];

@@ -1,121 +1,121 @@
 class Primary {
-    // MX
-    class MX_RCO {
-        name = "MX (RCO)";
-        item = "arifle_MX_F";
+    // Katiba
+    class Katiba_ARCO {
+        name = "Katiba (ARCO)";
+        item = "arifle_Katiba_F";
         level = 0;
         magazines[] = {
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer"
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
-    class MX_Holo {
-        name = "MX (Holo)";
-        item = "arifle_MX_F";
+    class Katiba_ACO {
+        name = "Katiba (ACO)";
+        item = "arifle_Katiba_F";
         level = 0;
         magazines[] = {
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer"
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
-    class MX_MOS {
-        name = "MX (MOS)";
-        item = "arifle_MX_F";
+    class Katiba_DMS {
+        name = "Katiba (DMS)";
+        item = "arifle_Katiba_F";
         level = 1;
         magazines[] = {
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer"
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
-    class MX_AMS {
-        name = "MX (AMS)";
-        item = "arifle_MX_F";
+    class Katiba_Kahlia {
+        name = "Katiba (Kahlia)";
+        item = "arifle_Katiba_F";
         level = 2;
         magazines[] = {
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer"
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
 
-    // MXC
-    class MXC_RCO {
-        name = "MXC (RCO)";
-        item = "arifle_MXC_F";
+    // Katiba Carbine
+    class KatibaC_ARCO {
+        name = "Katiba Carbine (ARCO)";
+        item = "arifle_Katiba_C_F";
         level = 3;
         cost = 20;
         magazines[] = {
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer"
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
-    class MXC_Holo {
-        name = "MXC (Holo)";
-        item = "arifle_MXC_F";
+    class MXC_ACO {
+        name = "Katiba Carbine (ACO)";
+        item = "arifle_Katiba_C_F";
         level = 3;
         cost = 20;
         magazines[] = {
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer"
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer",
+            "30Rnd_65x39_caseless_green_mag_Tracer"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
 
     // Sting
-    class Sting_RCO {
-        name = "Sting (RCO)";
+    class Sting_ARCO {
+        name = "Sting (ARCO)";
         item = "SMG_02_F";
         level = 4;
         cost = 20;
@@ -127,13 +127,13 @@ class Primary {
             "30Rnd_9x21_Mag_SMG_02"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_L"
         };
     };
-    class Sting_Holo {
-        name = "Sting (Holo)";
+    class Sting_ACO {
+        name = "Sting (ACO)";
         item = "SMG_02_F";
         level = 4;
         cost = 20;
@@ -145,15 +145,15 @@ class Primary {
             "30Rnd_9x21_Mag_SMG_02"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_L"
         };
     };
 
     // Protector
-    class Protector_RCO {
-        name = "Protector (RCO)";
+    class Protector_ARCO {
+        name = "Protector (ARCO)";
         item = "SMG_05_F";
         level = 5;
         cost = 20;
@@ -165,13 +165,13 @@ class Primary {
             "30Rnd_9x21_Mag_SMG_02"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_L"
         };
     };
-    class Protector_Holo {
-        name = "Protector (Holo)";
+    class Protector_ACO {
+        name = "Protector (ACO)";
         item = "SMG_05_F";
         level = 5;
         cost = 20;
@@ -183,15 +183,15 @@ class Primary {
             "30Rnd_9x21_Mag_SMG_02"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_L"
         };
     };
 
     // Vermin
-    class Vermin_RCO {
-        name = "Vermin (RCO)";
+    class Vermin_ARCO {
+        name = "Vermin (ARCO)";
         item = "SMG_01_F";
         level = 6;
         cost = 20;
@@ -203,12 +203,12 @@ class Primary {
             "30Rnd_45ACP_Mag_SMG_01"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "muzzle_snds_acp"
         };
     };
-    class Vermin_Holo {
-        name = "Vermin (Holo)";
+    class Vermin_ACO {
+        name = "Vermin (ACO)";
         item = "SMG_01_F";
         level = 6;
         cost = 20;
@@ -220,14 +220,14 @@ class Primary {
             "30Rnd_45ACP_Mag_SMG_01"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "muzzle_snds_acp"
         };
     };
 
     // ADR-97 TR
-    class ADR97_TR_RCO {
-        name = "ADR-97 TR (RCO)";
+    class ADR97_TR_ARCO {
+        name = "ADR-97 TR (ARCO)";
         item = "SMG_03_TR_khaki";
         level = 7;
         cost = 20;
@@ -239,13 +239,13 @@ class Primary {
             "50Rnd_570x28_SMG_03"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_570"
         };
     };
-    class ADR97_TR_Holo {
-        name = "ADR-97 TR (Holo)";
+    class ADR97_TR_ACO {
+        name = "ADR-97 TR (ACO)";
         item = "SMG_03_TR_khaki";
         level = 7;
         cost = 20;
@@ -257,15 +257,15 @@ class Primary {
             "50Rnd_570x28_SMG_03"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_570"
         };
     };
 
     // Promet GL
-    class Promet_GL_RCO {
-        name = "Promet GL (RCO)";
+    class Promet_GL_ARCO {
+        name = "Promet GL (ARCO)";
         item = "arifle_MSBS65_GL_F";
         level = 8;
         cost = 20;
@@ -281,13 +281,13 @@ class Primary {
             "1Rnd_HE_Grenade_shell"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
-    class Promet_GL_Holo {
-        name = "Promet GL (Holo)";
+    class Promet_GL_ACO {
+        name = "Promet GL (ACO)";
         item = "arifle_MSBS65_GL_F";
         level = 8;
         cost = 20;
@@ -303,13 +303,13 @@ class Primary {
             "1Rnd_HE_Grenade_shell"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
-    class Promet_GL_MOS {
-        name = "Promet GL (MOS)";
+    class Promet_GL_DMS {
+        name = "Promet GL (DMS)";
         item = "arifle_MSBS65_GL_F";
         level = 9;
         cost = 20;
@@ -325,13 +325,13 @@ class Primary {
             "1Rnd_HE_Grenade_shell"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
-    class Promet_GL_AMS {
-        name = "Promet GL (AMS)";
+    class Promet_GL_Kahlia {
+        name = "Promet GL (Kahlia)";
         item = "arifle_MSBS65_GL_F";
         level = 10;
         cost = 20;
@@ -347,15 +347,15 @@ class Primary {
             "1Rnd_HE_Grenade_shell"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
 
     // Promet SG
-    class Promet_SG_RCO {
-        name = "Promet SG (RCO)";
+    class Promet_SG_ARCO {
+        name = "Promet SG (ARCO)";
         item = "arifle_MSBS65_UBS_F";
         level = 11;
         cost = 50;
@@ -372,13 +372,13 @@ class Primary {
             "6Rnd_12Gauge_Slug"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
-    class Promet_SG_Holo {
-        name = "Promet SG (Holo)";
+    class Promet_SG_ACO {
+        name = "Promet SG (ACO)";
         item = "arifle_MSBS65_UBS_F";
         level = 11;
         cost = 50;
@@ -395,13 +395,13 @@ class Primary {
             "6Rnd_12Gauge_Slug"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
-    class Promet_SG_MOS {
-        name = "Promet SG (MOS)";
+    class Promet_SG_DMS {
+        name = "Promet SG (DMS)";
         item = "arifle_MSBS65_UBS_F";
         level = 12;
         cost = 50;
@@ -418,13 +418,13 @@ class Primary {
             "6Rnd_12Gauge_Slug"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
-    class Promet_SG_AMS {
-        name = "Promet SG (AMS)";
+    class Promet_SG_Kahlia {
+        name = "Promet SG (Kahlia)";
         item = "arifle_MSBS65_UBS_F";
         level = 13;
         cost = 50;
@@ -441,15 +441,15 @@ class Primary {
             "6Rnd_12Gauge_Slug"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
 
     // SPAR-16
-    class SPAR16_RCO {
-        name = "SPAR-16 (RCO)";
+    class SPAR16_ARCO {
+        name = "SPAR-16 (ARCO)";
         item = "arifle_SPAR_01_GL_blk_F";
         level = 14;
         cost = 50;
@@ -461,13 +461,13 @@ class Primary {
             "1Rnd_HE_Grenade_shell"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_M"
         };
     };
-    class SPAR16_Holo {
-        name = "SPAR-16 (Holo)";
+    class SPAR16_ACO {
+        name = "SPAR-16 (ACO)";
         item = "arifle_SPAR_01_GL_blk_F";
         level = 14;
         cost = 50;
@@ -479,13 +479,13 @@ class Primary {
             "1Rnd_HE_Grenade_shell"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_M"
         };
     };
-    class SPAR16_MOS {
-        name = "SPAR-16 (MOS)";
+    class SPAR16_DMS {
+        name = "SPAR-16 (DMS)";
         item = "arifle_SPAR_01_GL_blk_F";
         level = 15;
         cost = 50;
@@ -497,13 +497,13 @@ class Primary {
             "1Rnd_HE_Grenade_shell"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_M"
         };
     };
-    class SPAR16_AMS {
-        name = "SPAR-16 (AMS)";
+    class SPAR16_Kahlia {
+        name = "SPAR-16 (Kahlia)";
         item = "arifle_SPAR_01_GL_blk_F";
         level = 16;
         cost = 50;
@@ -515,15 +515,15 @@ class Primary {
             "1Rnd_HE_Grenade_shell"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_M"
         };
     };
 
     // AK-12
-    class AK12_RCO {
-        name = "AK-12 (RCO)";
+    class AK12_ARCO {
+        name = "AK-12 (ARCO)";
         item = "arifle_AK12_GL_F";
         level = 17;
         cost = 50;
@@ -539,13 +539,13 @@ class Primary {
             "1Rnd_HE_Grenade_shell"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
-    class AK12_Holo {
-        name = "AK-12 (Holo)";
+    class AK12_ACO {
+        name = "AK-12 (ACO)";
         item = "arifle_AK12_GL_F";
         level = 17;
         cost = 50;
@@ -561,13 +561,13 @@ class Primary {
             "1Rnd_HE_Grenade_shell"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
-    class AK12_MOS {
-        name = "AK-12 (MOS)";
+    class AK12_DMS {
+        name = "AK-12 (DMS)";
         item = "arifle_AK12_GL_F";
         level = 18;
         cost = 50;
@@ -583,13 +583,13 @@ class Primary {
             "1Rnd_HE_Grenade_shell"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
-    class AK12_AMS {
-        name = "AK-12 (AMS)";
+    class AK12_Kahlia {
+        name = "AK-12 (Kahlia)";
         item = "arifle_AK12_GL_F";
         level = 19;
         cost = 50;
@@ -605,15 +605,15 @@ class Primary {
             "1Rnd_HE_Grenade_shell"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
 
     // CAR-95-1
-    class CAR95_1_RCO {
-        name = "CAR-95-1 (RCO)";
+    class CAR95_1_ARCO {
+        name = "CAR-95-1 (ARCO)";
         item = "arifle_CTARS_blk_F";
         level = 20;
         cost = 50;
@@ -623,13 +623,13 @@ class Primary {
             "100Rnd_580x42_hex_Mag_Tracer_F"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_58_blk_F"
         };
     };
-    class CAR95_1_Holo {
-        name = "CAR-95-1 (Holo)";
+    class CAR95_1_ACO {
+        name = "CAR-95-1 (ACO)";
         item = "arifle_CTARS_blk_F";
         level = 20;
         cost = 50;
@@ -639,13 +639,13 @@ class Primary {
             "100Rnd_580x42_hex_Mag_Tracer_F"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_58_blk_F"
         };
     };
-    class CAR95_1_MOS {
-        name = "CAR-95-1 (MOS)";
+    class CAR95_1_DMS {
+        name = "CAR-95-1 (DMS)";
         item = "arifle_CTARS_blk_F";
         level = 21;
         cost = 50;
@@ -655,13 +655,13 @@ class Primary {
             "100Rnd_580x42_hex_Mag_Tracer_F"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_58_blk_F"
         };
     };
-    class CAR95_1_AMS {
-        name = "CAR-95-1 (AMS)";
+    class CAR95_1_Kahlia {
+        name = "CAR-95-1 (Kahlia)";
         item = "arifle_CTARS_blk_F";
         level = 22;
         cost = 50;
@@ -671,15 +671,15 @@ class Primary {
             "100Rnd_580x42_hex_Mag_Tracer_F"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_58_blk_F"
         };
     };
 
     // Type-115
-    class Type115_RCO {
-        name = "Type-115 (RCO)";
+    class Type115_ARCO {
+        name = "Type-115 (ARCO)";
         item = "arifle_ARX_blk_F";
         level = 23;
         cost = 50;
@@ -695,13 +695,13 @@ class Primary {
             "10Rnd_50BW_Mag_F"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_h"
         };
     };
-    class Type115_Holo {
-        name = "Type-115 (Holo)";
+    class Type115_ACO {
+        name = "Type-115 (ACO)";
         item = "arifle_ARX_blk_F";
         level = 23;
         cost = 50;
@@ -717,13 +717,13 @@ class Primary {
             "10Rnd_50BW_Mag_F"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_h"
         };
     };
-    class Type115_MOS {
-        name = "Type-115 (MOS)";
+    class Type115_DMS {
+        name = "Type-115 (DMS)";
         item = "arifle_ARX_blk_F";
         level = 24;
         cost = 50;
@@ -739,13 +739,13 @@ class Primary {
             "10Rnd_50BW_Mag_F"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_h"
         };
     };
-    class Type115_AMS {
-        name = "Type-115 (AMS)";
+    class Type115_Kahlia {
+        name = "Type-115 (Kahlia)";
         item = "arifle_ARX_blk_F";
         level = 25;
         cost = 50;
@@ -761,15 +761,15 @@ class Primary {
             "10Rnd_50BW_Mag_F"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_h"
         };
     };
 
     // MX SW
-    class MX_SW_RCO {
-        name = "MX SW (RCO)";
+    class MX_SW_ARCO {
+        name = "MX SW (ARCO)";
         item = "arifle_MX_SW_F";
         level = 26;
         cost = 50;
@@ -779,13 +779,13 @@ class Primary {
             "100Rnd_65x39_caseless_mag_Tracer"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
-    class MX_SW_Holo {
-        name = "MX SW (Holo)";
+    class MX_SW_ACO {
+        name = "MX SW (ACO)";
         item = "arifle_MX_SW_F";
         level = 26;
         cost = 50;
@@ -795,13 +795,13 @@ class Primary {
             "100Rnd_65x39_caseless_mag_Tracer"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
-    class MX_SW_MOS {
-        name = "MX SW (MOS)";
+    class MX_SW_DMS {
+        name = "MX SW (DMS)";
         item = "arifle_MX_SW_F";
         level = 27;
         cost = 50;
@@ -811,13 +811,13 @@ class Primary {
             "100Rnd_65x39_caseless_mag_Tracer"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
-    class MX_SW_AMS {
-        name = "MX SW (AMS)";
+    class MX_SW_Kahlia {
+        name = "MX SW (Kahlia)";
         item = "arifle_MX_SW_F";
         level = 27;
         cost = 50;
@@ -827,15 +827,15 @@ class Primary {
             "100Rnd_65x39_caseless_mag_Tracer"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
 
     // RPK-12
-    class RPK12_RCO {
-        name = "RPK-12 (RCO)";
+    class RPK12_ARCO {
+        name = "RPK-12 (ARCO)";
         item = "arifle_RPK12_F";
         level = 28;
         cost = 50;
@@ -845,13 +845,13 @@ class Primary {
             "75rnd_762x39_AK12_Mag_Tracer_F"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
-    class RPK12_Holo {
-        name = "RPK-12 (Holo)";
+    class RPK12_ACO {
+        name = "RPK-12 (ACO)";
         item = "arifle_RPK12_F";
         level = 28;
         cost = 50;
@@ -861,13 +861,13 @@ class Primary {
             "75rnd_762x39_AK12_Mag_Tracer_F"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
-    class RPK12_MOS {
-        name = "RPK-12 (MOS)";
+    class RPK12_DMS {
+        name = "RPK-12 (DMS)";
         item = "arifle_RPK12_F";
         level = 29;
         cost = 50;
@@ -877,13 +877,13 @@ class Primary {
             "75rnd_762x39_AK12_Mag_Tracer_F"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
-    class RPK12_AMS {
-        name = "RPK-12 (AMS)";
+    class RPK12_Kahlia {
+        name = "RPK-12 (Kahlia)";
         item = "arifle_RPK12_F";
         level = 29;
         cost = 50;
@@ -893,15 +893,15 @@ class Primary {
             "75rnd_762x39_AK12_Mag_Tracer_F"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
 
     // LIM-85
-    class LIM85_RCO {
-        name = "LIM-85 (RCO)";
+    class LIM85_ARCO {
+        name = "LIM-85 (ARCO)";
         item = "LMG_03_F";
         level = 30;
         cost = 50;
@@ -910,13 +910,13 @@ class Primary {
             "200Rnd_556x45_Box_Tracer_F"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_M"
         };
     };
-    class LIM85_Holo {
-        name = "LIM-85 (Holo)";
+    class LIM85_ACO {
+        name = "LIM-85 (ACO)";
         item = "LMG_03_F";
         level = 30;
         cost = 50;
@@ -925,13 +925,13 @@ class Primary {
             "200Rnd_556x45_Box_Tracer_F"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_M"
         };
     };
-    class LIM85_MOS {
-        name = "LIM-85 (MOS)";
+    class LIM85_DMS {
+        name = "LIM-85 (DMS)";
         item = "LMG_03_F";
         level = 31;
         cost = 50;
@@ -940,13 +940,13 @@ class Primary {
             "200Rnd_556x45_Box_Tracer_F"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_M"
         };
     };
-    class LIM85_AMS {
-        name = "LIM-85 (AMS)";
+    class LIM85_Kahlia {
+        name = "LIM-85 (Kahlia)";
         item = "LMG_03_F";
         level = 31;
         cost = 50;
@@ -955,15 +955,15 @@ class Primary {
             "200Rnd_556x45_Box_Tracer_F"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_M"
         };
     };
 
     // Zafir
-    class Zafir_RCO {
-        name = "Zafir (RCO)";
+    class Zafir_ARCO {
+        name = "Zafir (ARCO)";
         item = "LMG_Zafir_F";
         level = 32;
         cost = 50;
@@ -972,12 +972,12 @@ class Primary {
             "150Rnd_762x54_Box_Tracer"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR"
         };
     };
-    class Zafir_Holo {
-        name = "Zafir (Holo)";
+    class Zafir_ACO {
+        name = "Zafir (ACO)";
         item = "LMG_Zafir_F";
         level = 32;
         cost = 50;
@@ -986,12 +986,12 @@ class Primary {
             "150Rnd_762x54_Box_Tracer"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR"
         };
     };
-    class Zafir_MOS {
-        name = "Zafir (MOS)";
+    class Zafir_DMS {
+        name = "Zafir (DMS)";
         item = "LMG_Zafir_F";
         level = 33;
         cost = 50;
@@ -1000,12 +1000,12 @@ class Primary {
             "150Rnd_762x54_Box_Tracer"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR"
         };
     };
-    class Zafir_AMS {
-        name = "Zafir (AMS)";
+    class Zafir_Kahlia {
+        name = "Zafir (Kahlia)";
         item = "LMG_Zafir_F";
         level = 33;
         cost = 50;
@@ -1014,14 +1014,14 @@ class Primary {
             "150Rnd_762x54_Box_Tracer"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR"
         };
     };
 
     // SPMG
-    class SPMG_RCO {
-        name = "SPMG (RCO)";
+    class SPMG_ARCO {
+        name = "SPMG (ARCO)";
         item = "MMG_02_camo_F";
         level = 34;
         cost = 75;
@@ -1030,13 +1030,13 @@ class Primary {
             "130Rnd_338_Mag"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_338_sand"
         };
     };
-    class SPMG_Holo {
-        name = "SPMG (Holo)";
+    class SPMG_ACO {
+        name = "SPMG (ACO)";
         item = "MMG_02_camo_F";
         level = 34;
         cost = 75;
@@ -1045,13 +1045,13 @@ class Primary {
             "130Rnd_338_Mag"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_338_sand"
         };
     };
-    class SPMG_MOS {
-        name = "SPMG (MOS)";
+    class SPMG_DMS {
+        name = "SPMG (DMS)";
         item = "MMG_02_camo_F";
         level = 35;
         cost = 75;
@@ -1060,13 +1060,13 @@ class Primary {
             "130Rnd_338_Mag"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_338_sand"
         };
     };
-    class SPMG_AMS {
-        name = "SPMG (AMS)";
+    class SPMG_Kahlia {
+        name = "SPMG (Kahlia)";
         item = "MMG_02_camo_F";
         level = 35;
         cost = 75;
@@ -1075,15 +1075,15 @@ class Primary {
             "130Rnd_338_Mag"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_338_sand"
         };
     };
 
     // Navid
-    class Navid_RCO {
-        name = "Navid (RCO)";
+    class Navid_ARCO {
+        name = "Navid (ARCO)";
         item = "MMG_01_hex_F";
         level = 36;
         cost = 75;
@@ -1092,13 +1092,13 @@ class Primary {
             "150Rnd_93x64_Mag"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_93mmg"
         };
     };
-    class Navid_Holo {
-        name = "Navid (Holo)";
+    class Navid_ACO {
+        name = "Navid (ACO)";
         item = "MMG_01_hex_F";
         level = 36;
         cost = 75;
@@ -1107,13 +1107,13 @@ class Primary {
             "150Rnd_93x64_Mag"
         };
         attachments[] = {
-            "optic_Holosight",
+            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_93mmg"
         };
     };
-    class Navid_MOS {
-        name = "Navid (MOS)";
+    class Navid_DMS {
+        name = "Navid (DMS)";
         item = "MMG_01_hex_F";
         level = 37;
         cost = 75;
@@ -1122,13 +1122,13 @@ class Primary {
             "150Rnd_93x64_Mag"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_93mmg"
         };
     };
-    class Navid_AMS {
-        name = "Navid (AMS)";
+    class Navid_Kahlia {
+        name = "Navid (Kahlia)";
         item = "MMG_01_hex_F";
         level = 37;
         cost = 75;
@@ -1137,15 +1137,15 @@ class Primary {
             "150Rnd_93x64_Mag"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_93mmg"
         };
     };
 
     // MXM
-    class MXM_RCO {
-        name = "MXM (RCO)";
+    class MXM_ARCO {
+        name = "MXM (ARCO)";
         item = "arifle_MXM_F";
         level = 38;
         cost = 50;
@@ -1158,7 +1158,7 @@ class Primary {
             "30Rnd_65x39_caseless_mag_Tracer"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
@@ -1182,8 +1182,8 @@ class Primary {
             "muzzle_snds_H"
         };
     };
-    class MXM_MOS {
-        name = "MXM (MOS)";
+    class MXM_DMS {
+        name = "MXM (DMS)";
         item = "arifle_MXM_F";
         level = 38;
         cost = 50;
@@ -1196,13 +1196,13 @@ class Primary {
             "30Rnd_65x39_caseless_mag_Tracer"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
-    class MXM_AMS {
-        name = "MXM (AMS)";
+    class MXM_Kahlia {
+        name = "MXM (Kahlia)";
         item = "arifle_MXM_F";
         level = 38;
         cost = 50;
@@ -1215,15 +1215,15 @@ class Primary {
             "30Rnd_65x39_caseless_mag_Tracer"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
 
     // Rahim 7.62
-    class Rahim_762_RCO {
-        name = "Rahim 7.62 (RCO)";
+    class Rahim_762_ARCO {
+        name = "Rahim 7.62 (ARCO)";
         item = "srifle_DMR_01_F";
         level = 39;
         cost = 50;
@@ -1236,7 +1236,7 @@ class Primary {
             "10Rnd_762x54_Mag"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
@@ -1260,8 +1260,8 @@ class Primary {
             "muzzle_snds_B"
         };
     };
-    class Rahim_762_MOS {
-        name = "Rahim 7.62 (MOS)";
+    class Rahim_762_DMS {
+        name = "Rahim 7.62 (DMS)";
         item = "srifle_DMR_01_F";
         level = 39;
         cost = 50;
@@ -1274,13 +1274,13 @@ class Primary {
             "10Rnd_762x54_Mag"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
-    class Rahim_762_AMS {
-        name = "Rahim 7.62 (AMS)";
+    class Rahim_762_Kahlia {
+        name = "Rahim 7.62 (Kahlia)";
         item = "srifle_DMR_01_F";
         level = 39;
         cost = 50;
@@ -1293,15 +1293,15 @@ class Primary {
             "10Rnd_762x54_Mag"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
 
     // MK1 EMR
-    class MK1_EMR_RCO {
-        name = "MK1 EMR (RCO)";
+    class MK1_EMR_ARCO {
+        name = "MK1 EMR (ARCO)";
         item = "srifle_DMR_03_F";
         level = 40;
         cost = 50;
@@ -1314,7 +1314,7 @@ class Primary {
             "20Rnd_762x51_Mag"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
@@ -1338,8 +1338,8 @@ class Primary {
             "muzzle_snds_B"
         };
     };
-    class MK1_EMR_MOS {
-        name = "MK1 EMR (MOS)";
+    class MK1_EMR_DMS {
+        name = "MK1 EMR (DMS)";
         item = "srifle_DMR_03_F";
         level = 40;
         cost = 50;
@@ -1352,13 +1352,13 @@ class Primary {
             "20Rnd_762x51_Mag"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
-    class MK1_EMR_AMS {
-        name = "MK1 EMR (AMS)";
+    class MK1_EMR_Kahlia {
+        name = "MK1 EMR (Kahlia)";
         item = "srifle_DMR_03_F";
         level = 40;
         cost = 50;
@@ -1371,15 +1371,15 @@ class Primary {
             "20Rnd_762x51_Mag"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
 
     // SPAR-17
-    class SPAR17_RCO {
-        name = "SPAR-17 (RCO)";
+    class SPAR17_ARCO {
+        name = "SPAR-17 (ARCO)";
         item = "arifle_SPAR_03_snd_F";
         level = 41;
         cost = 50;
@@ -1392,7 +1392,7 @@ class Primary {
             "20Rnd_762x51_Mag"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
@@ -1416,8 +1416,8 @@ class Primary {
             "muzzle_snds_B"
         };
     };
-    class SPAR17_MOS {
-        name = "SPAR-17 (MOS)";
+    class SPAR17_DMS {
+        name = "SPAR-17 (DMS)";
         item = "arifle_SPAR_03_snd_F";
         level = 41;
         cost = 50;
@@ -1430,13 +1430,13 @@ class Primary {
             "20Rnd_762x51_Mag"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
-    class SPAR17_AMS {
-        name = "SPAR-17 (AMS)";
+    class SPAR17_Kahlia {
+        name = "SPAR-17 (Kahlia)";
         item = "arifle_SPAR_03_snd_F";
         level = 41;
         cost = 50;
@@ -1449,15 +1449,15 @@ class Primary {
             "20Rnd_762x51_Mag"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
 
     // ASP-1 Kir
-    class ASP1_Kir_RCO {
-        name = "ASP-1 Kir (RCO)";
+    class ASP1_Kir_ARCO {
+        name = "ASP-1 Kir (ARCO)";
         item = "srifle_DMR_04_F";
         level = 42;
         cost = 75;
@@ -1470,7 +1470,7 @@ class Primary {
             "10Rnd_127x54_Mag"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR"
         };
     };
@@ -1492,8 +1492,8 @@ class Primary {
             "acc_pointer_IR"
         };
     };
-    class ASP1_Kir_MOS {
-        name = "ASP-1 Kir (MOS)";
+    class ASP1_Kir_DMS {
+        name = "ASP-1 Kir (DMS)";
         item = "srifle_DMR_04_F";
         level = 42;
         cost = 75;
@@ -1506,12 +1506,12 @@ class Primary {
             "10Rnd_127x54_Mag"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR"
         };
     };
-    class ASP1_Kir_AMS {
-        name = "ASP-1 Kir (AMS)";
+    class ASP1_Kir_Kahlia {
+        name = "ASP-1 Kir (Kahlia)";
         item = "srifle_DMR_04_F";
         level = 42;
         cost = 75;
@@ -1524,14 +1524,14 @@ class Primary {
             "10Rnd_127x54_Mag"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR"
         };
     };
 
     // MAR-10
-    class MAR10_RCO {
-        name = "MAR-10 (RCO)";
+    class MAR10_ARCO {
+        name = "MAR-10 (ARCO)";
         item = "srifle_DMR_02_camo_F";
         level = 43;
         cost = 75;
@@ -1544,7 +1544,7 @@ class Primary {
             "10Rnd_338_Mag"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_338_black"
         };
@@ -1568,8 +1568,8 @@ class Primary {
             "muzzle_snds_338_black"
         };
     };
-    class MAR10_MOS {
-        name = "MAR-10 (MOS)";
+    class MAR10_DMS {
+        name = "MAR-10 (DMS)";
         item = "srifle_DMR_02_camo_F";
         level = 43;
         cost = 75;
@@ -1582,13 +1582,13 @@ class Primary {
             "10Rnd_338_Mag"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_338_black"
         };
     };
-    class MAR10_AMS {
-        name = "MAR-10 (AMS)";
+    class MAR10_Kahlia {
+        name = "MAR-10 (Kahlia)";
         item = "srifle_DMR_02_camo_F";
         level = 43;
         cost = 75;
@@ -1601,15 +1601,15 @@ class Primary {
             "10Rnd_338_Mag"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_338_black"
         };
     };
 
     // Cyrus
-    class Cyrus_RCO {
-        name = "Cyrus (RCO)";
+    class Cyrus_ARCO {
+        name = "Cyrus (ARCO)";
         item = "srifle_DMR_05_tan_F";
         level = 44;
         cost = 75;
@@ -1622,7 +1622,7 @@ class Primary {
             "10Rnd_93x64_DMR_05_Mag"
         };
         attachments[] = {
-            "optic_Hamr",
+            "optic_Arco",
             "acc_pointer_IR",
             "muzzle_snds_93mmg"
         };
@@ -1646,8 +1646,8 @@ class Primary {
             "muzzle_snds_93mmg"
         };
     };
-    class Cyrus_MOS {
-        name = "Cyrus (MOS)";
+    class Cyrus_DMS {
+        name = "Cyrus (DMS)";
         item = "srifle_DMR_05_tan_F";
         level = 44;
         cost = 75;
@@ -1660,13 +1660,13 @@ class Primary {
             "10Rnd_93x64_DMR_05_Mag"
         };
         attachments[] = {
-            "optic_SOS",
+            "optic_DMS",
             "acc_pointer_IR",
             "muzzle_snds_93mmg"
         };
     };
-    class Cyrus_AMS {
-        name = "Cyrus (AMS)";
+    class Cyrus_Kahlia {
+        name = "Cyrus (Kahlia)";
         item = "srifle_DMR_05_tan_F";
         level = 44;
         cost = 75;
@@ -1679,15 +1679,15 @@ class Primary {
             "10Rnd_93x64_DMR_05_Mag"
         };
         attachments[] = {
-            "optic_AMS_snd",
+            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_93mmg"
         };
     };
 
     // M320 LRR
-    class M320_LRR_RCO {
-        name = "M320 LRR (RCO)";
+    class M320_LRR_ARCO {
+        name = "M320 LRR (ARCO)";
         item = "srifle_LRR_F";
         level = 45;
         cost = 100;
@@ -1700,11 +1700,11 @@ class Primary {
             "7Rnd_408_Mag"
         };
         attachments[] = {
-            "optic_Hamr"
+            "optic_Arco"
         };
     };
     class M320_LRR_LRPS {
-        name = "M320 LRR (Holo)";
+        name = "M320 LRR (ACO)";
         item = "srifle_LRR_F";
         level = 45;
         cost = 100;
@@ -1720,8 +1720,8 @@ class Primary {
             "optic_LRPS"
         };
     };
-    class M320_LRR_MOS {
-        name = "M320 LRR (MOS)";
+    class M320_LRR_DMS {
+        name = "M320 LRR (DMS)";
         item = "srifle_LRR_F";
         level = 45;
         cost = 100;
@@ -1734,11 +1734,11 @@ class Primary {
             "7Rnd_408_Mag"
         };
         attachments[] = {
-            "optic_SOS"
+            "optic_DMS"
         };
     };
-    class M320_LRR_AMS {
-        name = "M320 LRR (AMS)";
+    class M320_LRR_Kahlia {
+        name = "M320 LRR (Kahlia)";
         item = "srifle_LRR_F";
         level = 45;
         cost = 100;
@@ -1751,13 +1751,13 @@ class Primary {
             "7Rnd_408_Mag"
         };
         attachments[] = {
-            "optic_AMS_snd"
+            "optic_KHS_blk"
         };
     };
 
     // GM6 Lynx
-    class GM6_Lynx_RCO {
-        name = "GM6 Lynx (RCO)";
+    class GM6_Lynx_ARCO {
+        name = "GM6 Lynx (ARCO)";
         item = "srifle_GM6_F";
         level = 46;
         cost = 100;
@@ -1770,7 +1770,7 @@ class Primary {
             "5Rnd_127x108_APDS_Mag"
         };
         attachments[] = {
-            "optic_Hamr"
+            "optic_Arco"
         };
     };
     class GM6_Lynx_LRPS {
@@ -1790,8 +1790,8 @@ class Primary {
             "optic_LRPS"
         };
     };
-    class GM6_Lynx_MOS {
-        name = "GM6 Lynx (MOS)";
+    class GM6_Lynx_DMS {
+        name = "GM6 Lynx (DMS)";
         item = "srifle_GM6_F";
         level = 46;
         cost = 100;
@@ -1804,11 +1804,11 @@ class Primary {
             "5Rnd_127x108_APDS_Mag"
         };
         attachments[] = {
-            "optic_SOS"
+            "optic_DMS"
         };
     };
-    class GM6_Lynx_AMS {
-        name = "GM6 Lynx (AMS)";
+    class GM6_Lynx_Kahlia {
+        name = "GM6 Lynx (Kahlia)";
         item = "srifle_GM6_F";
         level = 46;
         cost = 100;
@@ -1821,7 +1821,7 @@ class Primary {
             "5Rnd_127x108_APDS_Mag"
         };
         attachments[] = {
-            "optic_AMS_snd"
+            "optic_KHS_blk"
         };
     };
 };

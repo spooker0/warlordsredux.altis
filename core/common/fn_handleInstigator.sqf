@@ -20,10 +20,12 @@ if (isNull _instigator) then {
 
 if !(isNull _instigator) then {
     private _responsibleLeader = (_instigator getVariable ["BIS_WL_ownerAsset", "123"]) call BIS_fnc_getUnitByUID;
-    
+
     // Check if the responsible leader is a player
     if (isPlayer _responsibleLeader) then {
         _ret = _responsibleLeader;
+    } else {
+        _ret = _instigator;
     };
 };
 

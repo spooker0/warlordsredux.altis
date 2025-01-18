@@ -20,7 +20,7 @@ switch (BIS_WL_currentSelection) do {
         BIS_WL_selection_dimSectors = false;
     };
     case WL_ID_SELECTION_FAST_TRAVEL: {
-        BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 0) select {
+        BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 2) select {
             (_x getVariable ["BIS_WL_owner", independent]) == (side (group player))
         };
         BIS_WL_selection_showLinks = false;
@@ -31,8 +31,16 @@ switch (BIS_WL_currentSelection) do {
         BIS_WL_selection_showLinks = false;
         BIS_WL_selection_dimSectors = true;
     };
+    case WL_ID_SELECTION_FAST_TRAVEL_VEHICLE: {
+        BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 2) select {
+            private _isCarrierSector = count (_x getVariable ["WL_aircraftCarrier", []]) > 0;
+            !_isCarrierSector;
+        };
+        BIS_WL_selection_showLinks = false;
+        BIS_WL_selection_dimSectors = true;
+    };
     case WL_ID_SELECTION_ORDERING_AIRCRAFT: {
-        BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 0) select {
+        BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 2) select {
             BIS_WL_orderedAssetRequirements isEqualTo (BIS_WL_orderedAssetRequirements arrayIntersect (_x getVariable "BIS_WL_services"))
         };
         BIS_WL_selection_showLinks = false;
@@ -65,6 +73,12 @@ if (BIS_WL_selection_showLinks) then {
         _x setMarkerAlphaLocal 0;
     } forEach BIS_WL_sectorLinks;
 };
+
+private _targetedSector = WL_SectorActionTarget;
+private _sectorLinks = WL_linkSectorMarkers getOrDefault [hashValue _targetedSector, []];
+{
+    _x setMarkerAlphaLocal 1;
+} forEach _sectorLinks;
 
 {
     private _alpha = if (BIS_WL_selection_dimSectors && !(_x in BIS_WL_selection_availableSectors)) then {

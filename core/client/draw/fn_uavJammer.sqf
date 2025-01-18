@@ -38,6 +38,11 @@ private _side = side _owner;
 
         _asset setVariable ["BIS_WL_relevantJammers", _jammersInRange];
         _asset setVariable ["BIS_WL_relevantJammersActivating", _activatingInRange];
+
+        {
+            [BIS_WL_enemySide, [_asset, 10]] remoteExec ["reportRemoteTarget", BIS_WL_enemySide];
+        } forEach _jammersInRange;
+
         sleep 5;
     };
 };
@@ -124,12 +129,14 @@ private _side = side _owner;
     private _initFilmGrain = {
         private _priority = missionNamespace getVariable ["BIS_WL_filmGrainPriority", 2000];
         private _effect = ppEffectCreate ["filmGrain", _priority];
-        _effect ppEffectAdjust [1, 0];
-        _effect ppEffectEnable false;
-        _effect ppEffectForceInNVG true;
-        _effect ppEffectCommit 0;
-        missionNamespace setVariable ["BIS_WL_filmGrainPriority", _priority + 1];
-        _effect;
+        if (!isNil "_effect") then {
+            _effect ppEffectAdjust [1, 0];
+            _effect ppEffectEnable false;
+            _effect ppEffectForceInNVG true;
+            _effect ppEffectCommit 0;
+            missionNamespace setVariable ["BIS_WL_filmGrainPriority", _priority + 1];
+            _effect;
+        };
     };
 
     private _filmGrain = call _initFilmGrain;
@@ -147,6 +154,12 @@ private _side = side _owner;
     private _sensors = (listVehicleSensors _asset) apply { _x # 0 };
     private _sensorsDisabled = false;
     while { alive _asset } do {
+        if (isNil "_filmGrain") then {
+            _filmGrain = call _initFilmGrain;
+            sleep 10;
+            continue;
+        };
+
         private _jammerStrength = _asset getVariable ["BIS_WL_jammerStrength", 0];
 
         if (!isRemoteControlling player) then {
@@ -212,7 +225,9 @@ private _side = side _owner;
     _indicator ctrlSetText "";
     _indicator ctrlSetBackgroundColor [0, 0, 0, 0];
 
-    _filmGrain ppEffectEnable false;
-    _filmGrain ppEffectCommit 0;
-    ppEffectDestroy _filmGrain;
+    if (!isNil "_filmGrain") then {
+        _filmGrain ppEffectEnable false;
+        _filmGrain ppEffectCommit 0;
+        ppEffectDestroy _filmGrain;
+    };
 };

@@ -42,7 +42,7 @@ if (_asset isKindOf "Man") then {
 	private _assetActualType = _asset getVariable ["WL2_orderedClass", typeOf _asset];
 
 	[_asset] call APS_fnc_registerVehicle;
-	_asset call APS_fnc_setupProjectiles;
+	_asset remoteExec ["APS_fnc_setupProjectiles", 0, true];
 	_asset setVariable ["BIS_WL_nextRepair", 0, true];
 	_asset setVariable ["BIS_WL_ownerAssetSide", _side, true];
 	_asset setVariable ["WL2_massDefault", getMass _asset];
@@ -54,8 +54,6 @@ if (_asset isKindOf "Man") then {
 	0 remoteExec ["WL2_fnc_updateVehicleList", 2];
 
 	[_asset] remoteExec ["WL2_fnc_rearmAction", 0, true];
-
-	_asset setVariable ["WL2_lastLoadedTime", serverTime];
 
 	switch (typeOf _asset) do {
 		// Dazzlers
@@ -74,7 +72,7 @@ if (_asset isKindOf "Man") then {
 
 			// reduce height for demolish action
 			private _assetPos = getPosATL _asset;
-			_asset setPosATL [_assetPos select 0, _assetPos select 1, -8];
+			_asset setPosATL [_assetPos # 0, _assetPos # 1, _assetPos # 2 - 8];
 
 			// too hardy otherwise, start off at 10% health
 			_asset setDamage 0.9;
@@ -94,7 +92,8 @@ if (_asset isKindOf "Man") then {
 		case "B_Heli_Transport_03_F";
 		case "O_Heli_Light_02_unarmed_F";
 		case "O_Heli_Light_02_dynamicLoadout_F";
-		case "O_Heli_Transport_04_F": {
+		case "O_Heli_Transport_04_F";
+		case "I_Heli_Transport_02_F": {
 			[_asset] remoteExec ["WL2_fnc_slingAddAction", 0, true];
 		};
 
@@ -178,8 +177,10 @@ if (_asset isKindOf "Man") then {
 	};
 
 	if (unitIsUAV _asset) then {
-		if (profileNamespace getVariable ["MRTM_enableAuto", true]) then {
+		if (profileNamespace getVariable ["MRTM_enableAuto", true] && !isDedicated) then {
 			[_asset, false] remoteExec ["setAutonomous", 0];
+		} else {
+			[_asset, true] remoteExec ["setAutonomous", 0];
 		};
 		_asset setVariable ["BIS_WL_ownerUavAsset", _playerUID, true];
 		[_asset, _owner] spawn WL2_fnc_uavJammer;
@@ -328,7 +329,6 @@ if (_asset isKindOf "Man") then {
 
 			if (!_isEject) exitWith {};
 
-
 			[_vehicle, _unit] spawn {
 				params ["_vehicle", "_unit"];
 
@@ -343,8 +343,7 @@ if (_asset isKindOf "Man") then {
 				};
 
 				if (_height > 5 && alive _unit) then {
-					private _parachute = createVehicle ["Steerable_Parachute_F", position _unit, [], 0, "CAN_COLLIDE"];
-					_unit moveInDriver _parachute;
+					[_unit] spawn WL2_fnc_parachuteSetup;
 				};
 			};
 		}];
@@ -355,6 +354,16 @@ if (_asset isKindOf "Man") then {
 	};
 
 	[_asset] remoteExec ["WL2_fnc_claimAction", 0, true];
+
+	private _appearanceDefaults = profileNamespace getVariable ["WLM_appearanceDefaults", createHashmap];
+	private _assetAppearanceDefaults = _appearanceDefaults getOrDefault [_assetActualType, createHashmap];
+	{
+		if (_x == "camo") then {
+			[_asset, _y] call WLM_fnc_applyTexture;
+		} else {
+			[_x, _y, _asset] call WLM_fnc_applyCustomization;
+		};
+	} forEach _assetAppearanceDefaults;
 };
 
 [_asset] remoteExec ["WL2_fnc_removeAction", 0, true];

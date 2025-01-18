@@ -278,12 +278,22 @@ class SectorDefense {
         };
     };
 
+    class B_GMG_01_A_F {
+        name = "Mk32 GMG Auto Turret";
+        cost = 650;
+        requirements[] = {};
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        killReward = 150;
+        loadable[] = {0, -2.5, 0.4};
+    };
+
     class B_static_AA_UP_F {
         name = "Static AA Launcher (UP)";
         description = "Static AA Launcher (UP) is an upgraded variant of the Static AA Launcher.";
         spawn = "B_static_AA_F";
         variant = 1;
-        cost = 600;
+        cost = 1200;
         requirements[] = {};
         offset[] = {0, 3, 0};
         rearm = 300;
@@ -300,23 +310,12 @@ class SectorDefense {
             };
             addMagazines[] = {
                 "4Rnd_70mm_SAAMI_missiles",
-                "4Rnd_70mm_SAAMI_missiles",
                 "4Rnd_70mm_SAAMI_missiles"
             };
             addWeapons[] = {
                 "missiles_SAAMI"
             };
         };
-    };
-
-    class B_GMG_01_A_F {
-        name = "Mk32 GMG Auto Turret";
-        cost = 650;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
-        killReward = 150;
-        loadable[] = {0, -2.5, 0.4};
     };
 
     class Land_Communication_F {

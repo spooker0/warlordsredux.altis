@@ -157,7 +157,7 @@ if (_itemDone) then {
         playSound "AddItemOK";
         "RequestMenu_close" call WL2_fnc_setupUI;
     } else {
-        systemChat format ["Invalid buy action: %1", _availability # 1];
+        systemChat format ["Invalid buy action: %1", (_availability # 1) joinString ", "];
         playSound "AddItemFailed";
     };
 } else {

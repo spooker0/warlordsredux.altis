@@ -45,7 +45,7 @@ for "_i" from 0 to ((lbSize _purchase_items) - 1) do {
 		};
 
 		_purchase_items lbSetColor [_i, _color];
-		_purchase_items lbSetTooltip [_i, _availability # 1];
+		_purchase_items lbSetTooltip [_i, format ["%1", parseText ((_availability # 1) joinString "\n")]];
 	} else {
 		private _color = if (_variant != 0) then {
 			[1, 0.85, 0.5, 1]
@@ -124,6 +124,6 @@ if (count _assetDetails > 0) then {
 		uiNamespace setVariable ["BIS_WL_purchaseMenuItemAffordable", FALSE];
 		_purchase_request ctrlSetBackgroundColor [(_color # 0) * 0.5, (_color # 1) * 0.5, (_color # 2) * 0.5, _color # 3];
 		_purchase_request ctrlSetTextColor [0.5, 0.5, 0.5, 1];
-		_purchase_request ctrlSetTooltip (_availability # 1);
+		_purchase_request ctrlSetTooltip ((_availability # 1) joinString "\n");
 	};
 };

@@ -2,23 +2,14 @@ class CfgFunctions {
 	class MRTM {
 		class Default {
 			file = "scripts\MRTM";
-			class accept {};
-			class getLBPicture {};
-			class getLBText {};
-			class invite {};
-			class leaveGroup {};
-			class onButtonClick {};
 			class onChar {};
-			class onLBSelChanged {};
 			class onSliderChanged {};
-			class openGroupMenu {};
 			class openMenu {};
 			class settingsInit {};
 			class settingsMenu {};
 			class updateSettings {};
 			class updateViewDistance {};
 		};
-
 		class Debug {
 			file = "scripts\MRTMDebug";
 			class execCode {};
@@ -116,8 +107,11 @@ class CfgFunctions {
 			class pingFix {};
 			class pingFixInit {};
 			class playerEventHandlers {};
+			class prepareRappel {};
 			class prompt {};
+			class rappel {};
 			class repackMagazines {};
+			class revive {};
 			class rita {};
 			class sideToFaction {};
 			class spectrumAction {};
@@ -132,6 +126,8 @@ class CfgFunctions {
 			file = "core\client\action";
 			class arsenalSetup {};
 			class attachVehicle {};
+			class catapultAction {};
+			class catapultActionEligibility {};
 			class claimAction {};
 			class claimEligibility {};
 			class dazzlerAction {};
@@ -144,12 +140,8 @@ class CfgFunctions {
 			class jammerToggle {};
 			class jammerUpdate {};
 			class logisticsAddAction {};
-			class purchaseMenuAssetAvailability {};
-			class purchaseMenuGetUIScale {};
-			class purchaseMenuHandleDLC {};
-			class purchaseMenuRefresh {};
-			class purchaseMenuSetAssetDetails {};
-			class purchaseMenuSetItemsList {};
+			class parachuteAction {};
+			class parachuteSetup {};
 			class radarOperateAction {};
 			class radarOperateUpdate {};
 			class radarRotateAction {};
@@ -158,6 +150,8 @@ class CfgFunctions {
 			class removeAction {};
 			class repairAction {};
 			class repairActionEligibility {};
+			class respawnBagAction {};
+			class reviveAction {};
 			class slingAddAction {};
 			class vehicleLockAction {};
 			class vehicleLockUpdate {};
@@ -212,6 +206,7 @@ class CfgFunctions {
 			class groupIconLeaveHandle {};
 			class handleEnemyCapture {};
 			class handleSelectionState {};
+			class mapButtonConditions {};
 			class mapControlHandle {};
 			class sectorCaptureStatus {};
 			class sectorMapButtons {};
@@ -233,6 +228,7 @@ class CfgFunctions {
 			class cancelVehicleOrder {};
 			class deployment {};
 			class executeFastTravel {};
+			class fastTravelConflictMarker {};
 			class orderAircraft {};
 			class orderArsenal {};
 			class orderFastTravel {};
@@ -247,9 +243,52 @@ class CfgFunctions {
 			class orderVehicle {};
 			class requestPurchase {};
 		};
+		class ClientPurchase {
+			file = "core\client\purchase";
+			class checkAlliedPlayers {};
+			class checkAssetLimit {};
+			class checkBuyRespawn {};
+			class checkCarrierHeavy {};
+			class checkCommTower {};
+			class checkDead {};
+			class checkFastTravelRespawn {};
+			class checkFastTravelSL {};
+			class checkFunds {};
+			class checkGreenSwitch {};
+			class checkGroundVehicleDriver {};
+			class checkInAirliftSector {};
+			class checkIndependents {};
+			class checkInfantryAvailable {};
+			class checkInFriendlySector {};
+			class checkInventoryOpen {};
+			class checkIsOrdering {};
+			class checkLastLoadout {};
+			class checkNearbyEnemies {};
+			class checkParadropCooldown {};
+			class checkPlayerInVehicle {};
+			class checkRequirements {};
+			class checkResetSectorTimer {};
+			class checkResetVehicle {};
+			class checkSavedLoadout {};
+			class checkSelectedUnits {};
+			class checkSurrender {};
+			class checkTargetEnemyBase {};
+			class checkTargetSelected {};
+			class checkTargetUnlinked {};
+			class checkTent {};
+			class checkTentAction {};
+			class checkUAVLimit {};
+			class purchaseMenuAssetAvailability {};
+			class purchaseMenuGetUIScale {};
+			class purchaseMenuHandleDLC {};
+			class purchaseMenuRefresh {};
+			class purchaseMenuSetAssetDetails {};
+			class purchaseMenuSetItemsList {};
+		};
 		class Common {
 			file = "core\common";
 			class accessControl {};
+			class cleanupCarrier {};
 			class findSpawnPositions {};
 			class getAssetSide {};
 			class getAssetTypeName {};
@@ -276,6 +315,7 @@ class CfgFunctions {
 		class Server {
 			file = "core\server";
 			class assetRelevanceCheck {};
+			class attachDetach {};
 			class calcImbalance {};
 			class changeSectorOwnership {};
 			class createUAVCrew {};
@@ -293,7 +333,6 @@ class CfgFunctions {
 			class incomePayoff {};
 			class initServer {};
 			class killRewardHandle {};
-			class populateSector {};
 			class processRunways {};
 			class selectTarget {};
 			class serverEHs {};
@@ -307,6 +346,8 @@ class CfgFunctions {
 		class ServerSector {
 			file = "core\server\sector";
 			class getCapValues {};
+			class populateSector {};
+			class populateCarrierSector {};
 			class sectorCaptureHandle {};
 			class sectorsInitServer {};
 		};
@@ -315,6 +356,7 @@ class CfgFunctions {
 			class orderAir {};
 			class orderGround {};
 			class orderWater {};
+			class processOrder {};
 		};
 	};
 	class WLC {
@@ -323,6 +365,7 @@ class CfgFunctions {
 			class action {};
 			class buildMenu {};
 			class clientEquip {};
+			class getLevelInfo {};
 			class init {};
 			class levelUp {};
 			class onRespawn {};
@@ -337,6 +380,7 @@ class CfgFunctions {
 			class applyCustomization {};
 			class applyLoadoutAircraft {};
 			class applyLoadoutVehicle {};
+			class applyTexture {};
 			class applyPylon {};
 			class applyVehicle {};
 			class calculateFreeRearmEligibility {};

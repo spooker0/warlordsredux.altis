@@ -31,6 +31,12 @@ private _side = BIS_WL_playerSide;
 		};
 	} forEach (((list _revealTrigger) - (missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []])) select {(side group _x != _side) && {(alive _x) && {((side group _x) in BIS_WL_sidesArray)}}});
 } forEach BIS_WL_currentlyScannedSectors;
+
+private _deadPlayers = allPlayers select {
+	!alive _x &&
+	side group _x == _side &&
+	isNull objectParent _x
+};
 {
 	_m drawIcon [
 		"\a3\Ui_F_Curator\Data\CfgMarkers\kia_ca.paa",
@@ -45,7 +51,14 @@ private _side = BIS_WL_playerSide;
 		"PuristaBold",
 		"right"
 	];
-} forEach ((allPlayers) select {(!alive _x) && {(side group _x == _side) && {(isNull objectParent _x)}}});
+} forEach _deadPlayers;
+
+private _livePlayers = allPlayers select {
+	side group _x == _side &&
+	isNull objectParent _x &&
+	alive _x &&
+	_x != player
+};
 {
 	_size = call WL2_fnc_iconSize;
 	_m drawIcon [
@@ -61,7 +74,8 @@ private _side = BIS_WL_playerSide;
 		"PuristaBold",
 		"right"
 	];
-} forEach ((allPlayers) select {(side group _x == _side) && {(isNull objectParent _x) && {(alive _x) && {_x != player}}}});
+} forEach _livePlayers;
+
 {
 	_size = call WL2_fnc_iconSize;
 	if (!isNull _x) then {

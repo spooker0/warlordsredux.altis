@@ -9,7 +9,6 @@ _voteLocked = missionNamespace getVariable ["voteLocked", false];
 if (_voteLocked) exitWith {};
 
 private _side = BIS_WL_playerSide;
-private _moneySign = [_side] call WL2_fnc_getMoneySign;
 if (_displayClass == "OSD") then {
 	"OSDLayer" cutRsc ["RscTitleDisplayEmpty", "PLAIN"];
 	private _display = uiNamespace getVariable "RscTitleDisplayEmpty";
@@ -109,6 +108,7 @@ if (_displayClass == "OSD") then {
 } else {
 	if (_displayClass == "RequestMenu_open") then {
 		if (WL_GEAR_BUY_MENU) exitWith {};
+		if (lifeState player == "INCAPACITATED") exitWith {};
 
 		disableSerialization;
 
@@ -182,7 +182,7 @@ if (_displayClass == "OSD") then {
 		private _purchase_transfer_background = _myDisplay ctrlCreate ["RscText", 115];
 		private _purchase_transfer_units = _myDisplay ctrlCreate ["RscListBox", 116];
 		private _purchase_transfer_amount = _myDisplay ctrlCreate ["RscEdit", 117];
-		private _purchase_transfer_cp_title = _myDisplay ctrlCreate ["RscStructuredText", 118];
+		private _purchase_transfer_slider = _myDisplay ctrlCreate ["RscXSliderH", 118];
 		private _purchase_transfer_ok = _myDisplay ctrlCreate ["RscStructuredText", 119];
 		private _purchase_transfer_cancel = _myDisplay ctrlCreate ["RscStructuredText", 120];
 
@@ -210,10 +210,10 @@ if (_displayClass == "OSD") then {
 		_purchase_request ctrlSetPosition [_xDef + (_wDef / 4), _yDef + (_hDef * 0.805), _wDef / 2, _hDef * 0.045];
 		_purchase_transfer_background ctrlSetPosition [_xDef + (_wDef / 3), _yDef + (_hDef / 3), _wDef / 3, _hDef / 3];
 		_purchase_transfer_units ctrlSetPosition [_xDef + (_wDef / 3), _yDef + (_hDef / 3), _wDef / 6, _hDef / 3];
-		_purchase_transfer_amount ctrlSetPosition [_xDef + (_wDef / 3) + (_wDef / 6), _yDef + (_hDef * 0.425), _wDef / 12, _hDef * 0.035];
-		_purchase_transfer_cp_title ctrlSetPosition [_xDef + (_wDef / 3) + (_wDef / 6) + (_wDef / 12), _yDef + (_hDef * 0.425), _wDef / 12, _hDef * 0.035];
-		_purchase_transfer_ok ctrlSetPosition [_xDef + (_wDef / 3) + (_wDef / 6), _yDef + (_hDef * 0.5502), _wDef / 6, _hDef * 0.035];
-		_purchase_transfer_cancel ctrlSetPosition [_xDef + (_wDef / 3) + (_wDef / 6), _yDef + (_hDef * 0.59), _wDef / 6, _hDef * 0.035];
+		_purchase_transfer_amount ctrlSetPosition [_xDef + (_wDef / 3) + (_wDef / 6), _yDef + (_hDef * 0.425), _wDef / 6.5, _hDef * 0.035];
+		_purchase_transfer_slider ctrlSetPosition [_xDef + (_wDef / 3) + (_wDef / 6), _yDef + (_hDef * 0.46), _wDef / 6.5, _hDef * 0.025];
+		_purchase_transfer_ok ctrlSetPosition [_xDef + (_wDef / 3) + (_wDef / 6), _yDef + (_hDef * 0.5502), _wDef / 6.5, _hDef * 0.035];
+		_purchase_transfer_cancel ctrlSetPosition [_xDef + (_wDef / 3) + (_wDef / 6), _yDef + (_hDef * 0.59), _wDef / 6.5, _hDef * 0.035];
 
 		_purchase_frame ctrlSetText "a3\ui_f\data\igui\rsctitles\interlacing\interlacing_ca.paa";
 		_purchase_frame_top ctrlSetText "A3\ui_f\data\GUI\Rsc\RscMiniMapSmall\GPS_T_ca.paa";
@@ -233,7 +233,7 @@ if (_displayClass == "OSD") then {
 			_purchase_transfer_background,
 			_purchase_transfer_units,
 			_purchase_transfer_amount,
-			_purchase_transfer_cp_title,
+			_purchase_transfer_slider,
 			_purchase_transfer_ok,
 			_purchase_transfer_cancel
 		];
@@ -275,6 +275,8 @@ if (_displayClass == "OSD") then {
 		_purchase_transfer_background ctrlSetBackgroundColor [0, 0, 0, 1];
 		_purchase_transfer_ok ctrlSetBackgroundColor BIS_WL_colorFriendly;
 		_purchase_transfer_cancel ctrlSetBackgroundColor BIS_WL_colorFriendly;
+		_purchase_transfer_amount ctrlSetBackgroundColor [0.1, 0.1, 0.1, 1];
+		_purchase_transfer_slider ctrlSetBackgroundColor [0.5, 0.5, 0.5, 1];
 
 		{_x ctrlSetTextColor [0.65, 0.65, 0.65, 1]} forEach [
 			_purchase_title_assets,
@@ -286,7 +288,6 @@ if (_displayClass == "OSD") then {
 		_purchase_title_assets ctrlSetStructuredText parseText format ["<t size = '%2' align = 'center' shadow = '2'>%1</t>", localize "STR_A3_WL_purchase_menu_title_assets", (1.5 call WL2_fnc_purchaseMenuGetUIScale)];
 		_purchase_title_details ctrlSetStructuredText parseText format ["<t size = '%2' align = 'center' shadow = '2'>%1</t>", localize "STR_A3_WL_purchase_menu_title_detail", (1.5 call WL2_fnc_purchaseMenuGetUIScale)];
 		_purchase_request ctrlSetStructuredText parseText format ["<t font = 'PuristaLight' align = 'center' shadow = '2' size = '%2'>%1</t>", toUpper localize "STR_A3_WL_menu_request", (1.75 call WL2_fnc_purchaseMenuGetUIScale)];
-		_purchase_transfer_cp_title ctrlSetStructuredText parseText format ["<t align = 'center' size = '%2'>%1</t>", _moneySign, (1.25 call WL2_fnc_purchaseMenuGetUIScale)];
 		_purchase_transfer_ok ctrlSetStructuredText parseText format ["<t align = 'center' shadow = '2' size = '%2'>%1</t>", localize "STR_A3_WL_button_transfer", (1.25 call WL2_fnc_purchaseMenuGetUIScale)];
 		_purchase_transfer_cancel ctrlSetStructuredText parseText format ["<t align = 'center' shadow = '2' size = '%2'>%1</t>", localize "STR_disp_cancel", (1.25 call WL2_fnc_purchaseMenuGetUIScale)];
 
@@ -358,7 +359,7 @@ if (_displayClass == "OSD") then {
 					"RequestMenu_close" call WL2_fnc_setupUI;
 				};
 			} else {
-				systemChat format ["Invalid buy action: %1", _availability # 1];
+				systemChat format ["Invalid buy action: %1", (_availability # 1) joinString ", "];
 				playSound "AddItemFailed";
 			};
 		}];
@@ -413,6 +414,13 @@ if (_displayClass == "OSD") then {
 			} else {
 				playSound "AddItemFailed";
 			};
+		}];
+
+		_purchase_transfer_slider ctrlAddEventHandler ["SliderPosChanged", {
+			params ["_control", "_newValue"];
+			private _display = uiNamespace getVariable ["BIS_WL_purchaseMenuDisplay", displayNull];
+			private _purchase_transfer_amount = _display displayCtrl 117;
+			_purchase_transfer_amount ctrlSetText (str _newValue);
 		}];
 
 		_purchase_transfer_ok ctrlAddEventHandler ["MouseEnter", {

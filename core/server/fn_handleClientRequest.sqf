@@ -69,7 +69,7 @@ if (_action == "resetVehicle") exitWith {
 	if (_hasFunds) then {
 		(-_cost) call WL2_fnc_fundsDatabaseWrite;
 		_asset setDir _direction;
-		_asset setPosATL [_position select 0, _position select 1, 0];
+		_asset setVehiclePosition [_position, [], 0, "CAN_COLLIDE"];
 	};
 };
 
@@ -104,7 +104,7 @@ if (_action == "orderArsenal") exitWith {
 };
 
 if (_action == "fastTravelContested") exitWith {
-	_cost = (getMissionConfigValue ["BIS_WL_fastTravelCostContested", 200]);
+	_cost = _param1;
 	_hasFunds = (playerFunds >= _cost);
 	if (_hasFunds) then {
 		(-_cost) call WL2_fnc_fundsDatabaseWrite;
@@ -260,6 +260,14 @@ if (_action == "orderAI") exitWith {
 	(-_cost) call WL2_fnc_fundsDatabaseWrite;
 };
 
+if (_action == "orderRespawnBag") exitWith {
+	_cost = 50;
+	_hasFunds = (playerFunds >= _cost);
+	if (_hasFunds) then {
+		(-_cost) call WL2_fnc_fundsDatabaseWrite;
+	};
+};
+
 if (_action == "fundsTransfer") exitWith {
 	private _incomeBlocked = serverNamespace getVariable ["BIS_WL_incomeBlockedList", []];
 	private _transferCost = getMissionConfigValue ["BIS_WL_fundsTransferCost", 2000];
@@ -314,9 +322,10 @@ if (_action == "10K") exitWith {
 
 if (_action == "updateZeus") exitWith {
 	if (getPlayerUID _sender in (getArray (missionConfigFile >> "adminIDs"))) then {
+		private _allEntities = entities [[], ["Logic"], true];
+		private _allNonLocalEntities = _allEntities select { owner _x != 0 };
 		{
-			_l = (vehicles + allUnits) select {(typeOf _x != "Logic") && {(alive _x) && {side group _x != civilian}}};
-			_x addCuratorEditableObjects [_l, true];
+			_x addCuratorEditableObjects [_allNonLocalEntities, true];
 		} forEach allCurators;
 	};
 };

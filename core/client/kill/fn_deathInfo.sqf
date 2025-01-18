@@ -1,6 +1,6 @@
 params ["_unit", "_responsiblePlayer", "_killer"];
 
-if (_unit != player || alive player) exitWith {};
+if (_unit != player || (alive player && lifeState player != "INCAPACITATED")) exitWith {};
 if ((_killer == _unit || isNull _killer) && !isNull _responsiblePlayer) then {
     _killer = _responsiblePlayer;
 };
@@ -96,8 +96,6 @@ private _detectSensorText = if (count _findDetection > 0) then {
 };
 
 private _responsibleText = format ["<t size='1.7' color='%1'>%2 %3 %4</t>", _killerColor, _killerTeam, _responsiblePlayerName, _isAIText];
-
-showScoretable 0;
 
 private _killerVehicle = vehicle _killer;
 private _killerWeapon = currentWeapon _killer;
@@ -203,12 +201,11 @@ private _scoreText = format ["<t size='1' color='#ffffff'>%1</t><br/><t size='1.
 _rightDisplayText2 ctrlSetStructuredText parseText _scoreText;
 _rightDisplayText2 ctrlShow true;
 
-sleep (playerRespawnTime / 2);
-showScoretable 1;
+sleep 5;
 
 waitUntil {
     sleep 0.2;
-    alive player;
+    lifeState player != "INCAPACITATED";
 };
 
 _killedByTitle ctrlSetText "";
@@ -240,5 +237,3 @@ _rightDisplayText ctrlShow false;
 
 _rightDisplayText2 ctrlSetText "";
 _rightDisplayText2 ctrlShow false;
-
-showScoretable -1;

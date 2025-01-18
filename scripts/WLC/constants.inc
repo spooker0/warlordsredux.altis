@@ -1,7 +1,8 @@
 #include "..\..\core\warlords_constants.inc"
 #include "..\..\core\server_macros.inc"
 
-#define WLC_ENABLED false
+#define WLC_ENABLED true
+#define WLC_DEBUG false
 
 #define WLC_DISPLAY 12000
 
@@ -14,3 +15,4 @@
 #define WLC_HELMET_SELECT 12009
 
 #define WLC_LEVEL_TEXT 12010
+#define WLC_COST_TEXT 12011

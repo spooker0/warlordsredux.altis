@@ -5,7 +5,7 @@ class HeavyVehicles {
         rearm = 300;
 
         killReward = 240;
-        // vehicleSpawn = 1;
+        vehicleSpawn = 1;
         capValue = 4;
     };  // "AWC Nyx (Radar)"
 

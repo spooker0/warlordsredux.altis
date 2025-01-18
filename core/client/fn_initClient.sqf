@@ -135,7 +135,6 @@ _mrkrTargetFriendly setMarkerColorLocal BIS_WL_colorMarkerFriendly;
 } forEach [_mrkrTargetEnemy, _mrkrTargetFriendly];
 
 0 spawn WL2_fnc_clientEH;
-player spawn APS_fnc_setupProjectiles;
 call WL2_fnc_arsenalSetup;
 
 0 spawn {
@@ -324,3 +323,7 @@ missionNamespace setVariable [format ["BIS_WL2_minesDB_%1", getPlayerUID player]
 0 spawn WL2_fnc_avTerminal;
 
 0 spawn WL2_fnc_updateJammerMarkers;
+
+0 spawn WL2_fnc_cleanupCarrier;
+
+0 spawn WL2_fnc_reviveAction;

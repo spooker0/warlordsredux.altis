@@ -1,5 +1,14 @@
 #include "..\..\warlords_constants.inc"
-private _orderSelectionActive = BIS_WL_currentSelection in [WL_ID_SELECTION_ORDERING_AIRCRAFT, WL_ID_SELECTION_FAST_TRAVEL, WL_ID_SELECTION_FAST_TRAVEL_CONTESTED];
+
+if (isNil "MAP_CONTROL") exitWith {};
+if (MAP_CONTROL == -1) exitWith {};
+
+private _orderSelectionActive = BIS_WL_currentSelection in [
+	WL_ID_SELECTION_ORDERING_AIRCRAFT,
+	WL_ID_SELECTION_FAST_TRAVEL,
+	WL_ID_SELECTION_FAST_TRAVEL_CONTESTED,
+	WL_ID_SELECTION_FAST_TRAVEL_VEHICLE
+];
 private _scanSelectionActive = BIS_WL_currentSelection == WL_ID_SELECTION_SCAN;
 private _votingActive = WL_VotePhase != 0;
 

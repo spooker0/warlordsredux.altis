@@ -15,7 +15,7 @@ if (inputAction "cycleThrownItems" > 0.01 && !(isNull objectParent player)) exit
     true;
 };
 
-if (_key in actionKeys "Gear" && {!(missionNamespace getVariable ["BIS_WL_gearKeyPressed", false]) && alive player}) exitWith {
+if (_key in actionKeys "Gear" && {!(missionNamespace getVariable ["BIS_WL_gearKeyPressed", false]) && alive player && lifeState player != "INCAPACITATED"}) exitWith {
     if !(isNull (uiNamespace getVariable ["BIS_WL_purchaseMenuDisplay", displayNull])) then {
         "RequestMenu_close" call WL2_fnc_setupUI;
     } else {

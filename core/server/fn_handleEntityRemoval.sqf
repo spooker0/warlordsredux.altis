@@ -1,14 +1,19 @@
 params ["_unit", "_killer", "_instigator"];
 
+private _alreadyHandled = _unit getVariable ["WL2_alreadyHandled", false];
+if (_alreadyHandled) exitWith {};
+_unit setVariable ["WL2_alreadyHandled", true];
+
 private _children = _unit getVariable ["WL2_children", []];
 {
     deleteVehicle _x;
 } forEach _children;
 
-private _responsiblePlayer = [_killer, _instigator] call WL2_fnc_handleInstigator;
-if (isNull _responsiblePlayer || _unit == _responsiblePlayer) then {
-    // only use last hit if no direct killer is found OR if responsible player is the unit
-    _responsiblePlayer = _unit getVariable ["WL_lastHitter", objNull];
+private _lastHitter = _unit getVariable ["WL_lastHitter", objNull];
+private _responsiblePlayer = if (isNull _lastHitter) then {
+    [_killer, _instigator] call WL2_fnc_handleInstigator;
+} else {
+    _lastHitter
 };
 
 if !(isNull _responsiblePlayer) then {

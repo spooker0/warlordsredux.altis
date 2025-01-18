@@ -21,7 +21,7 @@ _potBases = (_potBases select {(_x distanceSqr _firstBase) > _baseDistanceMin});
 private _secondBase = selectRandom _potBases;
 
 // private _presetBase = BIS_WL_allSectors select {
-// 	_x getVariable ["BIS_WL_name", ""] in ["Airbase", "Airbase Compound"];
+// 	_x getVariable ["BIS_WL_name", ""] in ["Kavala", "AAC Airfield"];
 // };
 
 // _firstBase = _presetBase # 0;
@@ -100,6 +100,12 @@ waitUntil {!isNil "BIS_WL_base1" && {!isNil "BIS_WL_base2"}};
 	private _sectorVehiclesArray = [];
 	{
 		private _vehicle = _x;
+		if (_vehicle getVariable ["WL_excludeSectorSpawn", false]) then {
+			continue;
+		};
+		if !(_vehicle isKindOf "AllVehicles") then {
+			continue;
+		};
 		private _group = group effectiveCommander _vehicle;
 		private _array = [typeOf _vehicle, position _vehicle, direction _vehicle, locked _vehicle];
 		private _waypoints = +(waypoints _group);

@@ -21,7 +21,13 @@ private _baseArr = WL_BASES select {(_x getVariable ["BIS_WL_owner", sideUnknown
 	{_services pushBackUnique _x} forEach (_sector getVariable ["BIS_WL_services", []]);
 } forEach _owned;
 
-if (count _baseArr == 0) exitWith {[_owned, [], [], _unlocked, _income, _services, [], []]};
+if (_side == independent) exitWith {
+	[_owned, _owned, _owned, _owned, _income, _services, [], []];
+};
+
+if (count _baseArr == 0) exitWith {
+	[_owned, [], [], _unlocked, _income, _services, [], []]
+};
 
 private _base = _baseArr # 0;
 private _knots = [_base];
@@ -48,7 +54,7 @@ while {count _knots > 0} do {
 
 if (_fullRecalc) then {
 	_enemySectors = BIS_WL_allSectors - _unlocked;
-	
+
 	{
 		private _sector = _x;
 		private _zoneRestrictionAxis = (_sector getVariable ["BIS_WL_maxAxis", 0]);
@@ -56,7 +62,7 @@ if (_fullRecalc) then {
 			_zoneRestrictionTrigger = ((_sector getVariable ["BIS_WL_zoneRestrictionTrgs", []]) select {(_x getVariable ["BIS_WL_handledSide", independent]) == _side}) # 0;
 			_zoneRestrictionTrigger setTriggerArea [_zoneRestrictionAxis, _zoneRestrictionAxis, 0, false];
 		};
-		
+
 		if !(isNil "BIS_WL_playerSide") then {
 			if (_side == BIS_WL_playerSide) then {
 				_sector setVariable ["BIS_WL_borderWidth", _zoneRestrictionAxis];

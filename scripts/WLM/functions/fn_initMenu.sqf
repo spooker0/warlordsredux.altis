@@ -89,65 +89,37 @@ private _customTexturesList = [];
 private _defaultTextureList = getArray (_assetConfig >> "hiddenSelectionsTextures");
 
 private _side = side player;
-switch (typeOf _asset) do {
-    case "O_T_Truck_03_device_ghex_F";
-    case "O_Truck_03_device_F": {
-        if (_side == west) then {
-            _defaultTextureList = [
-                "#(argb,8,8,3)color(0.80,0.76,0.66,0.15)",
-                "#(argb,8,8,3)color(0.2,0.25,0.25,0.15)",
-                "#(argb,8,8,3)color(0.2,0.25,0.3,0.15)",
-                "#(argb,8,8,3)color(0.6,0.6,0.4,0.15)",
-                "\A3\Structures_F_EPC\Items\Electronics\Data\The_Device_02_CO.paa",
-                "\A3\Structures_F_EPC\Items\Electronics\Data\The_Device_03_CO.paa"
-            ];
-        };
-    };
-    case "B_Truck_01_flatbed_F": {
-        if (_side == east) then {
-            _defaultTextureList = getArray (_assetConfig >> "textureSources" >> "Olive" >> "textures");
-        };
-    };
-    case "I_Plane_Fighter_03_dynamicLoadout_F": {
-        _defaultTextureList = getArray (_assetConfig >> "textureSources" >> "Hex" >> "textures");
-    };
-    case "I_Plane_Fighter_04_F": {
-        _defaultTextureList = getArray (_assetConfig >> "textureSources" >> "DigitalCamoGrey" >> "textures");
-    };
-    case "I_Truck_02_MRL_F": {
-        _defaultTextureList = getArray (_assetConfig >> "textureSources" >> "Opfor" >> "textures");
-    };
-    case "B_APC_Wheeled_03_cannon_F": {
-        _defaultTextureList = [
-            "A3\armor_f_gamma\APC_Wheeled_03\Data\apc_wheeled_03_ext_co.paa",
-            "A3\armor_f_gamma\APC_Wheeled_03\Data\apc_wheeled_03_ext2_co.paa",
-            "A3\armor_f_gamma\APC_Wheeled_03\Data\rcws30_co.paa",
-            "A3\armor_f_gamma\APC_Wheeled_03\Data\apc_wheeled_03_ext_alpha_co.paa",
-            "A3\Armor_F\Data\camonet_AAF_FIA_green_CO.paa",
-            "A3\armor_f\data\cage_G3_co.paa"
-        ];
-    };
-    case "I_Heli_light_03_dynamicLoadout_F": {
-        _defaultTextureList = getArray (_assetConfig >> "textureSources" >> "EAF" >> "textures");
-    };
-    case "B_AAA_System_01_F";
-    case "B_SAM_System_01_F";
-    case "B_SAM_System_02_F": {
-        if (_side == east) then {
-            _defaultTextureList = getArray (_assetConfig >> "textureSources" >> "Green" >> "textures");
-        };
-    };
-};
 /*
 _customTexturesList pushBack [localize "STR_WLM_DEFAULT", _defaultTextureList, localize "STR_WLM_OFFICIAL"];
 _customTexturesList pushBack [format ["--- %1 ---", localize "STR_WLM_OFFICIAL"], "", ""];
 */
-private _additionalTextureSources = [_side] call WLM_fnc_textureLists;
 
+private _defaultIncluded = false;
+private _defaultTextures = getObjectTextures _asset;
+
+private _comparePaths = {
+    params ["_input1", "_input2"];
+    private _paths1 = (str _input1) regexReplace ["\\", ""];
+    private _paths2 = (str _input2) regexReplace ["\\", ""];
+    _paths1 == _paths2;
+};
+
+private _additionalTextureSources = [_side] call WLM_fnc_textureLists;
 {
     private _textureSource = _x;
-    _customTexturesList pushBack [_textureSource # 0, _textureSource # 1, localize "STR_WLM_OFFICIAL"];
+    private _textureName = _textureSource # 0;
+    private _textures = _textureSource # 1;
+    if ([_defaultTextures, _textures] call _comparePaths) then {
+        _defaultIncluded = true;
+        _customTexturesList pushBack [_textureName, _textures, "Current"];
+    } else {
+        _customTexturesList pushBack [_textureName, _textures, localize "STR_WLM_OFFICIAL"];
+    };
 } forEach _additionalTextureSources;
+
+if (!_defaultIncluded) then {
+    _customTexturesList pushBack [localize "STR_WLM_DEFAULT", _defaultTextures, localize "STR_WLM_OFFICIAL"];
+};
 
 /* Disabled as it doesn't fit into Warlords
 // Image textures
@@ -182,6 +154,8 @@ if (_side == east) then {
 */
 
 private _ignoreTextureSlots = ["aiming_dot", "CamoNet", "CamoSlat", "insignia", "number_01", "number_02", "number_03"];
+
+private _defaultTextureSelection = 0;
 private _customTexturesMap = createHashMap;
 {
     private _textureName = _x # 0;
@@ -195,6 +169,10 @@ private _customTexturesMap = createHashMap;
         _camoSelectControl lbSetData [_camoItem, _textureName];
         _camoSelectControl lbSetTooltip [_camoItem, _category];
 
+        if (_category == "Current") then {
+            _defaultTextureSelection = _camoItem;
+            _camoSelectControl lbSetColor [_camoItem, [0, 1, 0, 1]];
+        };
         continue;
     };
 
@@ -219,12 +197,17 @@ private _customTexturesMap = createHashMap;
     private _camoItem = _camoSelectControl lbAdd _textureName;
     _camoSelectControl lbSetData [_camoItem, _textureName];
     _camoSelectControl lbSetTooltip [_camoItem, _category];
+
+    if (_category == "Current") then {
+        _defaultTextureSelection = _camoItem;
+        _camoSelectControl lbSetColor [_camoItem, [0, 1, 0, 1]];
+    };
 } forEach _customTexturesList;
 
 uiNamespace setVariable ["WLM_assetTexturesMap", _customTexturesMap];
 uiNamespace setVariable ["WLM_assetTextureSlots", _textureSlots];
 
-_camoSelectControl lbSetCurSel 0;
+_camoSelectControl lbSetCurSel _defaultTextureSelection;
 _camoSelectControl ctrlAddEventHandler ["LBSelChanged", {
     params ["_control", "_lbCurSel", "_lbSelection"];
     private _asset = uiNamespace getVariable "WLM_asset";
@@ -238,11 +221,22 @@ _camoSelectControl ctrlAddEventHandler ["LBSelChanged", {
     };
 
     private _textureList = _texturesMap getOrDefault [_textureId, []];
+    private _applyTextures = createHashmap;
     {
         if (count _textureList <= _forEachIndex) exitWith {};
         private _texture = _textureList select _forEachIndex;
-        _asset setObjectTextureGlobal [_forEachIndex, _texture];
+        _applyTextures set [_forEachIndex, _texture];
     } forEach _textureSlots;
+
+    [_asset, _applyTextures] call WLM_fnc_applyTexture;
+
+    for "_i" from 0 to (lbSize _control - 1) do {
+        if (_i == _lbCurSel) then {
+            _control lbSetColor [_i, [0, 1, 0, 1]];
+        } else {
+            _control lbSetColor [_i, [1, 1, 1, 1]];
+        };
+    };
 
     // Colored turret texture
     // private _orderedClass = _asset getVariable ["WL2_orderedClass", typeOf _asset];
@@ -294,7 +288,8 @@ private _availableCustomizations = [];
 
 uiNamespace setVariable ["WLM_assetAvailableAnimations", _availableCustomizations];
 
-_customizationSelectControl lbAdd (localize "STR_WLM_CUSTOMIZATION");
+private _header = _customizationSelectControl lbAdd (localize "STR_WLM_CUSTOMIZATION");
+_customizationSelectControl lbSetData [_header, "header"];
 
 if (count _availableCustomizations > 0) then {
     private _everythingItem = _customizationSelectControl lbAdd (localize "STR_WLM_APPLY_ALL_EXTRAS");
@@ -314,14 +309,14 @@ if (count _availableCustomizations > 0) then {
 
 
 private _assetTurrets = [[-1]] + allTurrets _asset;
-private _hasSmoke = false;
+private _hasSmoke = [];
 {
     private _turretWeapons = _asset weaponsTurret _x;
     if ("SmokeLauncher" in _turretWeapons) exitWith {
-        _hasSmoke = true;
+        _hasSmoke = _x;
     };
 } forEach _assetTurrets;
-if (_hasSmoke) then {
+if (count _hasSmoke > 0) then {
     if ([0] in _assetTurrets) then {
         private _smokeGunnerItem = _customizationSelectControl lbAdd "Give Smoke to Gunner";
         _customizationSelectControl lbSetData [_smokeGunnerItem, "setSmokeToGunner"];
@@ -330,8 +325,10 @@ if (_hasSmoke) then {
         private _smokeCommanderItem = _customizationSelectControl lbAdd "Give Smoke to Commander";
         _customizationSelectControl lbSetData [_smokeCommanderItem, "setSmokeToCommander"];
     };
-    private _smokeDriverItem = _customizationSelectControl lbAdd "Give Smoke to Driver";
-    _customizationSelectControl lbSetData [_smokeDriverItem, "setSmokeToDriver"];
+    if ([-1] in _assetTurrets) then {
+        private _smokeDriverItem = _customizationSelectControl lbAdd "Give Smoke to Driver";
+        _customizationSelectControl lbSetData [_smokeDriverItem, "setSmokeToDriver"];
+    };
 };
 
 private _hornWeapons = ["AmbulanceHorn", "CarHorn", "TruckHorn", "TruckHorn2", "TruckHorn3", "SportCarHorn", "MiniCarHorn"];
@@ -354,7 +351,12 @@ _customizationSelectControl ctrlAddEventHandler ["LBSelChanged", {
         private _availableCustomizations = uiNamespace getVariable "WLM_assetAvailableAnimations";
         {
             private _customization = _x;
-            [_customization, true] call WLM_fnc_applyCustomization;
+            private _overrideState = if (["hide", _customization, false] call BIS_fnc_inString) then {
+                0
+            } else {
+                1
+            };
+            [_customization, _overrideState] call WLM_fnc_applyCustomization;
         } forEach (_availableCustomizations);
     } else {
         [_customization] call WLM_fnc_applyCustomization;
@@ -362,6 +364,80 @@ _customizationSelectControl ctrlAddEventHandler ["LBSelChanged", {
 
     _control lbSetCurSel 0;
 }];
+
+[_asset, _customizationSelectControl] spawn {
+    params ["_asset", "_control"];
+    while { !isNull _control } do {
+        private _assetTurrets = [[-1]] + allTurrets _asset;
+        private _hasSmoke = [];
+        {
+            private _turretWeapons = _asset weaponsTurret _x;
+            if ("SmokeLauncher" in _turretWeapons) exitWith {
+                _hasSmoke = _x;
+            };
+        } forEach _assetTurrets;
+
+        for "_i" from 0 to (lbSize _control - 1) do {
+            private _type = _control lbData _i;
+            switch (_type) do {
+                case "setSmokeToGunner": {
+                    if (_hasSmoke isEqualTo [0]) then {
+                        _control lbSetColor [_i, [0, 1, 0, 1]];
+                    } else {
+                        _control lbSetColor [_i, [1, 1, 1, 1]];
+                    };
+                };
+                case "setSmokeToCommander": {
+                    if (_hasSmoke isEqualTo [0, 0]) then {
+                        _control lbSetColor [_i, [0, 1, 0, 1]];
+                    } else {
+                        _control lbSetColor [_i, [1, 1, 1, 1]];
+                    };
+                };
+                case "setSmokeToDriver": {
+                    if (_hasSmoke isEqualTo [-1]) then {
+                        _control lbSetColor [_i, [0, 1, 0, 1]];
+                    } else {
+                        _control lbSetColor [_i, [1, 1, 1, 1]];
+                    };
+                };
+                case "header";
+                case "everything": {
+                    _control lbSetColor [_i, [1, 1, 1, 1]];
+                };
+                default {
+                    if (["setHornTo", _type] call BIS_fnc_inString) then {
+                        private _hornName = _type regexReplace ["setHornTo", ""];
+                        private _turretWeapons = _asset weaponsTurret [-1];
+                        if (_hornName in _turretWeapons) then {
+                            _control lbSetColor [_i, [0, 1, 0, 1]];
+                        } else {
+                            _control lbSetColor [_i, [1, 1, 1, 1]];
+                        };
+                    } else {
+                        private _customizationPhase = (_asset animationPhase _type) == 0;
+                        if (["hide", _type, false] call BIS_fnc_inString) then {
+                            _customizationPhase = !_customizationPhase;
+                        };
+
+                        if (_customizationPhase) then {
+                            _control lbSetColor [_i, [1, 0, 0, 1]];
+                        } else {
+                            _control lbSetColor [_i, [0, 1, 0, 1]];
+                        };
+                    };
+                };
+            };
+        };
+
+        sleep 1;
+    };
+};
+
+if (lbSize _customizationSelectControl == 1) then {
+    _customizationSelectControl ctrlShow false;
+    _customizationSelectControl ctrlCommit 0;
+};
 
 private _nonHornWeapons = [];
 {

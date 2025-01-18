@@ -12,6 +12,10 @@ class CfgRemoteExec {
 			allowedTargets = 2;
 		};
 
+		class APS_fnc_setupProjectiles {
+			allowedTargets = 0;
+		};
+
 		class WL2_fnc_claimAction {
 			allowedTargets = 1;
 		};
@@ -26,6 +30,14 @@ class CfgRemoteExec {
 
 		class WL2_fnc_rearmAction {
 			allowedTargets = 1;
+		};
+
+		class WL2_fnc_revive {
+			allowedTargets = 0;
+		};
+
+		class WL2_fnc_handleEntityRemoval {
+			allowedTargets = 2;
 		};
 
 		class WL2_fnc_deployableAddAction {
@@ -72,14 +84,6 @@ class CfgRemoteExec {
 			allowedTargets = 0;
 		};
 
-		class MRTM_fnc_invite {
-			allowedTargets = 2;
-		};
-
-		class MRTM_fnc_accept {
-			allowedTargets = 2;
-		};
-
 		class WL2_fnc_forgiveTeamkill {
 			allowedTargets = 2;
 		};
@@ -89,6 +93,10 @@ class CfgRemoteExec {
 		};
 
 		class WL2_fnc_forfeitHandle {
+			allowedTargets = 0;
+		};
+
+		class WL2_fnc_attachDetach {
 			allowedTargets = 0;
 		};
 
@@ -244,6 +252,10 @@ class CfgRemoteExec {
 
 		class setVelocityModelSpace {
 			allowedTargets = 2;
+		};
+
+		class reportRemoteTarget {
+			allowedTargets = 0;
 		};
 
 		class setMass {

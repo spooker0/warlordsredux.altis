@@ -10,4 +10,8 @@ class Spawn {
         killReward = 300;
         loadable[] = { 0, 0, 0 };
     }; // Huron Spawn
+
+    class Land_TentA_F {
+        garbageCollector = 1;
+    }; // Fast Travel Tent
 };

@@ -17,6 +17,23 @@ class HeavyVehicles {
         aps = 2;
     }; // "IFV-6c Panther"
 
+    class B_APC_tracked_03_cannon_F {
+        name = "FV-720 Mora";
+        spawn = "I_APC_tracked_03_cannon_F";
+        cost = 2500;
+        requirements[] = {};
+        textures[] = {
+            "A3\Armor_F_Enoch\apc_tracked_03\data\apc_tracked_03_ext_eaf_co.paa",
+            "A3\Armor_F_Enoch\apc_tracked_03\data\apc_tracked_03_ext2_eaf_co.paa",
+            "A3\Armor_F_Enoch\apc_tracked_03\Data\camonet_EAF_green_CO.paa",
+            "A3\Armor_F_Enoch\apc_tracked_03\data\cage_EAF_CO.paa"
+        };
+        rearm = 500;
+        killReward = 400;
+        capValue = 4;
+        aps = 2;
+    };
+
     class B_APC_Wheeled_03_cannon_F {
         cost = 2900;
         requirements[] = {};
@@ -138,54 +155,37 @@ class HeavyVehicles {
         };
     };
 
-    // class B_AFV_Wheeled_01_export_cannon_F {
-    //     cost = 3500;
-    //     name = "Rhino MGS (Export)";
-    //     spawn = "B_AFV_Wheeled_01_up_cannon_F";
-    //     variant = 1;
-    //     requirements[] = {};
-    //     rearm = 500;
-    //     killReward = 400;
-    //     capValue = 4;
-    //     aps = 2;
+    class B_AFV_Wheeled_01_export_cannon_F {
+        cost = 3700;
+        name = "Rhino MGS-E";
+        description = "Rhino MGS-E is a variant of the Rhino MGS armed with a weaker 105mm cannon.";
+        spawn = "B_AFV_Wheeled_01_up_cannon_F";
+        variant = 1;
+        requirements[] = {};
+        rearm = 500;
+        killReward = 400;
+        capValue = 4;
+        aps = 2;
 
-    //     class Gunner: WLTurretDefaults {
-    //         turret[] = { 0 };
-    //         removeMagazines[] = {
-    //             "12Rnd_120mm_APFSDS_shells_Tracer_Red",
-    //             "8Rnd_120mm_HE_shells_Tracer_Red",
-    //             "8Rnd_120mm_HEAT_MP_T_Red",
-    //             "4Rnd_120mm_LG_cannon_missiles"
-    //         };
-    //         removeWeapons[] = {
-    //             "cannon_120mm"
-    //         };
-    //         addMagazines[] = {
-    //             "40Rnd_105mm_APFSDS_T_Red",
-    //             "20Rnd_105mm_HEAT_MP_T_Red"
-    //         };
-    //         addWeapons[] = {
-    //             "cannon_105mm_VTOL_01"
-    //         };
-    //     };
-    // };
-
-    // class B_APC_tracked_03_cannon_F {
-    //     name = "FV-720 Mora";
-    //     spawn = "I_APC_tracked_03_cannon_F";
-    //     cost = 3600;
-    //     requirements[] = {};
-    //     textures[] = {
-    //         "A3\Armor_F_Enoch\apc_tracked_03\data\apc_tracked_03_ext_eaf_co.paa",
-    //         "A3\Armor_F_Enoch\apc_tracked_03\data\apc_tracked_03_ext2_eaf_co.paa",
-    //         "A3\Armor_F_Enoch\apc_tracked_03\Data\camonet_EAF_green_CO.paa",
-    //         "A3\Armor_F_Enoch\apc_tracked_03\data\cage_EAF_CO.paa"
-    //     };
-    //     rearm = 500;
-    //     killReward = 400;
-    //     capValue = 4;
-    //     aps = 2;
-    // };
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {
+                "12Rnd_120mm_APFSDS_shells_Tracer_Red",
+                "8Rnd_120mm_HE_shells_Tracer_Red",
+                "8Rnd_120mm_HEAT_MP_T_Red",
+                "4Rnd_120mm_LG_cannon_missiles"
+            };
+            removeWeapons[] = {
+                "cannon_120mm"
+            };
+            addMagazines[] = {
+                "40Rnd_105mm_APFSDS_T_Red"
+            };
+            addWeapons[] = {
+                "cannon_105mm_VTOL_01"
+            };
+        };
+    };
 
     class B_AFV_Wheeled_01_cannon_F {
         cost = 4500;
@@ -207,16 +207,20 @@ class HeavyVehicles {
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
             removeMagazines[] = {
-                "4Rnd_Titan_long_missiles"
+                "4Rnd_Titan_long_missiles",
+                "680Rnd_35mm_AA_shells_Tracer_Red"
             };
             removeWeapons[] = {
-                "missiles_titan_AA"
+                "missiles_titan_AA",
+                "autocannon_35mm"
             };
             addMagazines[] = {
                 "4Rnd_GAA_missiles",
-                "4Rnd_GAA_missiles"
+                "4Rnd_GAA_missiles",
+                "680Rnd_35mm_AA_shells_Tracer_Red"
             };
             addWeapons[] = {
+                "autocannon_35mm",
                 "missiles_titan_AA"
             };
         };
@@ -257,35 +261,37 @@ class HeavyVehicles {
         };
     }; // "M2A1 Slammer UP"
 
-    // class B_APC_Tracked_01_AA_UP_F {
-    //     name = "IFV-6X Puma";
-    //     description = "IFV-6X Puma is a variant of the IFV-6a Cheetah armed with Defender missiles.";
-    //     spawn = "B_APC_Tracked_01_AA_F";
-    //     variant = 1;
-    //     cost = 8000;
-    //     requirements[] = {};
-    //     rearm = 450;
-    //     killReward = 600;
-    //     capValue = 4;
-    //     aps = 2;
+    class B_APC_Tracked_01_AA_UP_F {
+        name = "IFV-6X Puma";
+        description = "IFV-6X Puma is a variant of the IFV-6a Cheetah armed with Defender missiles.";
+        spawn = "B_APC_Tracked_01_AA_F";
+        variant = 1;
+        cost = 9000;
+        requirements[] = {};
+        rearm = 450;
+        killReward = 600;
+        capValue = 4;
+        aps = 2;
 
-    //     class Gunner: WLTurretDefaults {
-    //         turret[] = { 0 };
-    //         removeMagazines[] = {
-    //             "4Rnd_Titan_long_missiles"
-    //         };
-    //         removeWeapons[] = {
-    //             "missiles_titan_AA"
-    //         };
-    //         addMagazines[] = {
-    //             "magazine_Missile_mim145_x4",
-    //             "680Rnd_35mm_AA_shells_Tracer_Red"
-    //         };
-    //         addWeapons[] = {
-    //             "weapon_mim145Launcher"
-    //         };
-    //     };
-    // };
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {
+                "4Rnd_Titan_long_missiles"
+            };
+            removeWeapons[] = {
+                "missiles_titan_AA",
+                "autocannon_35mm"
+            };
+            addMagazines[] = {
+                "magazine_Missile_mim145_x4",
+                "680Rnd_35mm_AA_shells_Tracer_Red"
+            };
+            addWeapons[] = {
+                "autocannon_35mm",
+                "weapon_mim145Launcher"
+            };
+        };
+    };
 
     class B_MBT_03_cannon_F {
         cost = 8000;

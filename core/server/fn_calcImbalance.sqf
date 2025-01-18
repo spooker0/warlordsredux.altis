@@ -10,7 +10,23 @@ _multiOpf = _fac0Percentage;
 missionNamespace setVariable ["blanceMultilplierOpf", _multiOpf];
 publicVariable "blanceMultilplierOpf";
 {
-	_incomeStandard = _x call WL2_fnc_income;
-	_actualIncome = round (_incomeStandard * (if (_x == west) then [{(missionNamespace getVariable "blanceMultilplierBlu")}, {(missionNamespace getVariable "blanceMultilplierOpf")}]));
-	if (_x == west) then [{serverNamespace setVariable ["actualIncomeBlu", _actualIncome]}, {serverNamespace setVariable ["actualIncomeOpf", _actualIncome]}]
+	private _multiplier = switch (_x) do {
+		case (west): {
+			missionNamespace getVariable "blanceMultilplierBlu"
+		};
+		case (east): {
+			missionNamespace getVariable "blanceMultilplierOpf"
+		};
+	};
+
+	private _incomeStandard = _x call WL2_fnc_income;
+	private _actualIncome = round (_incomeStandard * _multiplier);
+	switch (_x) do {
+		case (west): {
+			serverNamespace setVariable ["actualIncomeBlu", _actualIncome]
+		};
+		case (east): {
+			serverNamespace setVariable ["actualIncomeOpf", _actualIncome]
+		};
+	};
 } forEach BIS_WL_competingSides;
