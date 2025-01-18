@@ -21,7 +21,7 @@ private _index = _flag addAction [
 
 _flag setUserActionText [_index, "<t color = '#4bff58'>Customize Player</t>", "<img size='1.5' image='a3\ui_f\data\igui\cfg\simpletasks\types\backpack_ca.paa'/>"];
 
-if !(["(EU) #11", serverName] call BIS_fnc_inString) then {
+if (WLC_DEBUG) then {
 	_flag addAction ["<t color = '#ffff00'>(Debug) Reset Score/Level to 0</t>", {
 		[getPlayerUID player, 0] remoteExec ["WLC_fnc_setScore", 2];
 	}, [], 5, true, true];
