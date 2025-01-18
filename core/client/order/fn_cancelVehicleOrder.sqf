@@ -1,7 +1,7 @@
 params ["_originalPosition", "_limitDistance", "_ignoreSector"];
 
 private _enemiesNearPlayer = (allPlayers inAreaArray [player, 100, 100]) select {
-    _x != player && BIS_WL_playerSide != side group _x && alive _x
+    _x != player && BIS_WL_playerSide != side group _x && alive _x && lifeState _x != "INCAPACITATED"
 };
 private _homeBase = BIS_WL_playerSide call WL2_fnc_getSideBase;
 private _isInHomeBase = player inArea (_homeBase getVariable "objectAreaComplete");
