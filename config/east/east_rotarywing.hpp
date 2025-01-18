@@ -46,5 +46,23 @@ class RotaryWing {
             "PylonRack_12Rnd_PG_missiles",
             "PylonMissile_Missile_KH58_INT_x1"
         };
+
+        class Pilot: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {
+                "192Rnd_CMFlare_Chaff_Magazine"
+            };
+            removeWeapons[] = {
+                "CMFlareLauncher"
+            };
+            addMagazines[] = {
+                "240Rnd_CMFlare_Chaff_Magazine",
+                "240Rnd_CMFlare_Chaff_Magazine",
+                "240Rnd_CMFlare_Chaff_Magazine"
+            };
+            addWeapons[] = {
+                "CMFlareLauncher_Singles"
+            };
+        };
     }; // "Mi-48 Kajman"
 };

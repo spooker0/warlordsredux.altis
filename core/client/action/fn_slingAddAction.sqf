@@ -62,14 +62,6 @@ private _slingActionId = _asset addAction [
             {
                 moveOut _x;
             } forEach (crew _assetLoadedItem);
-        } else {
-            if (!slingLoadAssistantShown) then {
-                {
-                    if (ropeUnwound _x) then {
-                        ropeDestroy _x;
-                    };
-                } forEach (ropes _asset);
-            };
         };
 
         private _actionIcon = if (_hasLoad) then {
