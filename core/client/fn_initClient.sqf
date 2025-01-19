@@ -309,21 +309,15 @@ missionNamespace setVariable [format ["BIS_WL2_minesDB_%1", getPlayerUID player]
 	};
 };
 
+player spawn APS_fnc_setupProjectiles;
 0 spawn WL2_fnc_handleSelectionState;
-
 0 spawn WL2_fnc_handleKillFeedUpdate;
-
 0 spawn {
 	sleep 5;
 	[] call MRTM_fnc_updateViewDistance;
 };
-
 0 spawn WL2_fnc_interceptAction;
-
 0 spawn WL2_fnc_avTerminal;
-
 0 spawn WL2_fnc_updateJammerMarkers;
-
 0 spawn WL2_fnc_cleanupCarrier;
-
 0 spawn WL2_fnc_reviveAction;
