@@ -17,10 +17,13 @@ private _responsiblePlayer = if (isNull _lastHitter) then {
 };
 
 if (isPlayer _unit && _unit isKindOf "Man" && _unit != _responsiblePlayer) then {
+    _unit addPlayerScores [0, 0, 0, 0, 1];
     private _killMessage = if (isPlayer _responsiblePlayer) then {
         private _ffText = if (side group _unit == side group _responsiblePlayer) then {
+            _responsiblePlayer addPlayerScores [-1, 0, 0, 0, 0];
             " (Friendly fire)"
         } else {
+            _responsiblePlayer addPlayerScores [1, 0, 0, 0, 0];
             ""
         };
         format["%1 was killed by %2.%3", name _unit, name _responsiblePlayer, _ffText];
