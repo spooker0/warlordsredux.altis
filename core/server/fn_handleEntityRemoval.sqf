@@ -16,7 +16,7 @@ private _responsiblePlayer = if (isNull _lastHitter) then {
     _lastHitter
 };
 
-if (isPlayer _unit && _unit != _responsiblePlayer) then {
+if (isPlayer _unit && _unit isKindOf "Man" && _unit != _responsiblePlayer) then {
     private _killMessage = if (isPlayer _responsiblePlayer) then {
         private _ffText = if (side group _unit == side group _responsiblePlayer) then {
             " (Friendly fire)"
