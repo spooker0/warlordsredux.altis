@@ -26,7 +26,7 @@ private _squadLeader = allPlayers select {
 if !(isNull objectParent _squadLeader) exitWith {
     [false, localize "STR_SQUADS_fastTravelSquadLeaderInVehicle"];
 };
-if (!alive _squadLeader) exitWith {
+if (!alive _squadLeader || lifeState _squadLeader == "INCAPACITATED") exitWith {
     [false, localize "STR_SQUADS_fastTravelSquadLeaderUnavailable"];
 };
 

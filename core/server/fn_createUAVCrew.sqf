@@ -34,6 +34,7 @@ private _aiUnit = switch (_side) do {
 	private _unit = _assetGrp createUnit [_aiUnit, _pos, [], 0, "NONE"];
 	_unit moveInAny _asset;
 	if (!isNull _sender) then {
+		_unit setSkill 1;
 		_unit setVariable ["BIS_WL_ownerAsset", getPlayerUID _sender, [2, clientOwner]];
 	};
 } forEach _myArray;
