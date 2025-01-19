@@ -5,7 +5,9 @@ params ["_asset", ["_owner", objNull]];
 [_asset] call WL2_fnc_lastHitHandler;
 
 if (isServer) then {
-	_asset setSkill (0.2 + random 0.3);
+	if !(unitIsUAV _asset) then {
+		_asset setSkill (0.2 + random 0.3);
+	};
 
 	private _defaultMags = magazinesAllTurrets _asset;
 	_asset setVariable ["BIS_WL_defaultMagazines", _defaultMags, true];

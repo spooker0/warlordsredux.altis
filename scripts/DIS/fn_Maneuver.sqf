@@ -34,26 +34,20 @@ params ["_projectile", "_unit"];
     };
 };
 
-private _iteration = 0;
 private _maxAcceleration = (getNumber (configfile >> "CfgAmmo" >> typeOf _projectile >> "thrust")) / 10.0 * WL_SAM_ACCELERATION_FACTOR;
 private _maxSpeed = getNumber (configfile >> "CfgAmmo" >> typeOf _projectile >> "maxSpeed") * WL_SAM_MAX_SPEED_FACTOR;
-sleep 1;
+sleep 0.5;
 while { alive _projectile } do {
     private _currentVector = velocityModelSpace _projectile;
-
-    private _currentSpeed = _currentVector # 1;
-
-    if (_currentSpeed < _maxSpeed) then {
-        _currentSpeed = _currentSpeed + _maxAcceleration;
-
-        private _newVector = [
-            _currentVector # 0,
-            _currentSpeed,
-            _currentVector # 2
-        ];
-        _projectile setVelocityModelSpace _newVector;
-    };
-
-    _iteration = _iteration + 1;
-    sleep 0.1;
+    private _currentSpeed = (_currentVector # 1) + ((_maxAcceleration * 0.01) min _maxSpeed);
+    private _newVector = [
+        0,
+        _currentSpeed,
+        0
+    ];
+    _projectile setVelocityModelSpace _newVector;
+    private _angularVector = angularVelocityModelSpace _projectile;
+    private _newAngularVector = _angularVector vectorMultiply 10.0;
+    _projectile setAngularVelocityModelSpace _newAngularVector;
+    sleep 0.001;
 };
