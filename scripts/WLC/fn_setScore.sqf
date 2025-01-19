@@ -14,7 +14,6 @@ WLC_Scores set [_uid, _score];
 publicVariable "WLC_Scores";
 private _newLevel = ["getLevel", _player] call WLC_fnc_getLevelInfo;
 
-diag_log format ["Previous: %1, New: %2", _previousLevel, _newLevel];
 if (_newLevel > _previousLevel) then {
     [_newLevel] remoteExec ["WLC_fnc_levelUp", _player];
 };
