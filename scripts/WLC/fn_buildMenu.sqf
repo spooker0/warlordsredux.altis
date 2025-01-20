@@ -97,19 +97,22 @@ private _sumCost = 0;
     } forEach _customizationList;
     _select lbSortBy ["VALUE", false];
 
+    _select lbSetCurSel 0;
     private _customizationData = profileNamespace getVariable [format ["WLC_%1", _type], ""];
     if (_customizationData != "") then {
         for "_index" from 0 to lbSize _select - 1 do {
             private _class = _select lbData _index;
             if (_class == _customizationData) then {
-                _select lbSetCurSel _index;
-                private _cost = (_customizationList getOrDefault [_class, createHashMap]) getOrDefault ["cost", 0];
-                _sumCost = _sumCost + _cost;
+                private _customization = _customizationList getOrDefault [_class, createHashMap];
+                private _requiredLevel = _customization getOrDefault ["level", 0];
+                if (_requiredLevel <= _level) then {
+                    _select lbSetCurSel _index;
+                    private _cost = _customization getOrDefault ["cost", 0];
+                    _sumCost = _sumCost + _cost;
+                };
                 break;
             };
         };
-    } else {
-        _select lbSetCurSel 0;
     };
 
     _select ctrlAddEventHandler ["LBSelChanged", format ["[_this # 0, _this # 1, '%1'] spawn WLC_fnc_onSelection", _type]];
