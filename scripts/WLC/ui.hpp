@@ -23,6 +23,27 @@ class WLCListBox: RscListBox {
         border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa";
     };
     style = LB_TEXTURES;
+
+    x = 0.015;
+    y = 0.075;
+    w = 0.5;
+    h = 0.9;
+    rowHeight = 0.1;
+};
+
+class WLCSelectButton: RscButton {
+    y = 0.01;
+    h = 0.05;
+    style = ST_CENTER;
+    sizeEx = 0.035;
+    colorBackgroundActive[] = {0, 0.5, 0.5, 0.9};
+};
+
+class WLCAttachmentPic: RscPicture {
+    style = ST_PICTURE + ST_KEEP_ASPECT_RATIO;
+};
+class WLCAttachmentPicBg: RscText {
+    colorBackground[] = {0, 0, 0, 0.8};
 };
 
 class WLC_MenuUI {
@@ -166,112 +187,135 @@ class WLC_MenuUI {
             moving = 1;
         };
 
-        class WLC_PrimarySelectLabel: RscText {
-            idc = -1;
+        class WLC_PrimarySelectButton: WLCSelectButton {
+            idc = WLC_PRIMARY_SELECT_BUTTON;
             text = "Primary";
             x = 0.015;
-            y = 0.01;
-            w = 0.3;
-            h = 0.05;
-            style = ST_CENTER;
-            sizeEx = 0.05;
+            w = 0.15 - 0.015;
         };
         class WLC_PrimarySelect: WLCListBox {
             idc = WLC_PRIMARY_SELECT;
-			x = 0.015;
-			y = 0.075;
-			w = 0.3;
-			h = 0.4;
         };
 
-        class WLC_SecondarySelectLabel: RscText {
-            idc = -1;
+        class WLC_SecondarySelectButton: WLCSelectButton {
+            idc = WLC_SECONDARY_SELECT_BUTTON;
             text = "Secondary";
-            x = 0.345;
-            y = 0.01;
-            w = 0.3;
-            h = 0.05;
-            style = ST_CENTER;
-            sizeEx = 0.05;
+            x = 0.15 + 0.015;
+            w = 0.15 - 0.015;
         };
         class WLC_SecondarySelect: WLCListBox {
             idc = WLC_SECONDARY_SELECT;
-            x = 0.345;
-            y = 0.075;
-            w = 0.3;
-            h = 0.4;
         };
 
-        class WLC_LauncherSelectLabel: RscText {
-            idc = -1;
+        class WLC_LauncherSelectButton: WLCSelectButton {
+            idc = WLC_LAUNCHER_SELECT_BUTTON;
             text = "Launcher";
-            x = 0.675;
-            y = 0.01;
-            w = 0.3;
-            h = 0.05;
-            style = ST_CENTER;
-            sizeEx = 0.05;
+            x = 0.3 + 0.015;
+            w = 0.15 - 0.015;
         };
         class WLC_LauncherSelect: WLCListBox {
             idc = WLC_LAUNCHER_SELECT;
-            x = 0.675;
-            y = 0.075;
-            w = 0.3;
-            h = 0.4;
         };
 
-        class WLC_UniformSelectLabel: RscText {
-            idc = -1;
+        class WLC_UniformSelectButton: WLCSelectButton {
+            idc = WLC_UNIFORM_SELECT_BUTTON;
             text = "Uniform";
-            x = 0.015;
-            y = 0.51;
-            w = 0.3;
-            h = 0.05;
-            style = ST_CENTER;
-            sizeEx = 0.05;
+            x = 0.45 + 0.015;
+            w = 0.15 - 0.015;
         };
         class WLC_UniformSelect: WLCListBox {
             idc = WLC_UNIFORM_SELECT;
-            x = 0.015;
-            y = 0.575;
-            w = 0.3;
-            h = 0.4;
         };
 
-        class WLC_VestSelectLabel: RscText {
-            idc = -1;
+        class WLC_VestSelectButton: WLCSelectButton {
+            idc = WLC_VEST_SELECT_BUTTON;
             text = "Vest";
-            x = 0.345;
-            y = 0.51;
-            w = 0.3;
-            h = 0.05;
-            style = ST_CENTER;
-            sizeEx = 0.05;
+            x = 0.6 + 0.015;
+            w = 0.15 - 0.015;
         };
         class WLC_VestSelect: WLCListBox {
             idc = WLC_VEST_SELECT;
-            x = 0.345;
-            y = 0.575;
-            w = 0.3;
-            h = 0.4;
         };
 
-        class WLC_HelmetSelectLabel: RscText {
-            idc = -1;
+        class WLC_HelmetSelectButton: WLCSelectButton {
+            idc = WLC_HELMET_SELECT_BUTTON;
             text = "Helmet";
-            x = 0.675;
-            y = 0.51;
-            w = 0.3;
-            h = 0.05;
-            style = ST_CENTER;
-            sizeEx = 0.05;
+            x = 0.75 + 0.015;
+            w = 0.15 - 0.015;
         };
         class WLC_HelmetSelect: WLCListBox {
             idc = WLC_HELMET_SELECT;
-            x = 0.675;
-            y = 0.575;
-            w = 0.3;
-            h = 0.4;
+        };
+
+        class WLC_FullPictureDisplayBg: RscText {
+            idc = WLC_FULL_DISPLAY_BG;
+            x = 0.55;
+            y = 0.1;
+            w = 0.4;
+            h = 0.4 * 4 / 3 + 0.04;
+            colorBackground[] = {0, 0, 0, 0.8};
+        };
+        class WLC_FullPictureDisplay: RscPicture {
+            idc = WLC_FULL_DISPLAY;
+            x = 0.55;
+            y = 0.1;
+            w = 0.4;
+            h = 0.4 * 4 / 3;
+            style = ST_MULTI + ST_TITLE_BAR + ST_KEEP_ASPECT_RATIO;
+        };
+        class WLC_ItemMassDisplay: RscStructuredText {
+            idc = WLC_MASS_DISPLAY;
+            x = 0.55;
+            y = 0.68;
+            w = 0.4;
+            h = 0.1;
+        };
+
+        class WLC_WeaponPictureDisplayBg: RscText {
+            idc = WLC_WEAPON_DISPLAY_BG;
+            x = 0.55;
+            y = 0.1;
+            w = 0.39;
+            h = 0.2;
+            colorBackground[] = {0, 0, 0, 0.8};
+        };
+        class WLC_WeaponPictureDisplay: RscPicture {
+            idc = WLC_WEAPON_DISPLAY;
+            x = 0.57;
+            y = -0.05;
+            w = 0.35;
+            h = 0.35 * 4 / 3;
+            style = ST_MULTI + ST_TITLE_BAR + ST_KEEP_ASPECT_RATIO;
+        };
+        class WLC_WeaponPictureDisplayTooltipHelper: RscText {
+            idc = WLC_WEAPON_DISPLAY_TOOLTIP_HELPER;
+            text = "";
+            x = 0.55;
+            y = 0.1;
+            w = 0.39;
+            h = 0.2;
+        };
+
+        class WLC_WeaponAttachmentsDisplay: RscControlsGroup {
+            idc = WLC_ATTACHMENT_DISPLAY;
+            x = 0.55;
+            y = 0.36;
+            w = 0.45;
+            h = 0.14;
+        };
+        class WLC_MagazinesDisplay: RscControlsGroup {
+            idc = WLC_MAGAZINE_DISPLAY;
+            x = 0.55;
+            y = 0.53;
+            w = 0.45;
+            h = 0.25;
+        };
+        class WLC_ItemCostDisplay: RscStructuredText {
+            idc = WLC_COST_DISPLAY;
+            x = 0.55;
+            y = 0.78;
+            w = 0.45;
+            h = 0.1;
         };
 
         class WLC_LevelDisplay: RscText {

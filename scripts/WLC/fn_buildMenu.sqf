@@ -62,6 +62,9 @@ private _sumCost = 0;
         _select lbSetData [_index, _class];
         _select lbSetValue [_index, _requiredLevel];
 
+        private _actualClass = _customization getOrDefault ["item", _class];
+        _select lbSetPicture [_index, getText (configFile >> "CfgWeapons" >> _actualClass >> "picture")];
+
         if (_requiredLevel > _level) then {
             _select lbSetColor [_index, [1, 0, 0, 1]];
             _select lbSetText [_index, format ["(Lvl %1) %2", _requiredLevel, _displayName]];
@@ -110,6 +113,8 @@ private _sumCost = 0;
     };
 
     _select ctrlAddEventHandler ["LBSelChanged", format ["[_this # 0, _this # 1, '%1'] spawn WLC_fnc_onSelection", _type]];
+
+    _select ctrlShow false;
 } forEach _controlMap;
 
 private _funds = (missionNamespace getVariable "fundsDatabaseClients") getOrDefault [getPlayerUID player, 0];
@@ -120,3 +125,21 @@ private _affordColor = if (_funds >= _sumCost) then {
 };
 private _costDisplay = _display displayCtrl WLC_COST_TEXT;
 _costDisplay ctrlSetStructuredText parseText format ["<t align='right'>Total Cost: <t color='%1'>%2%3</t></t>", _affordColor, _moneySign, _sumCost];
+
+private _buttonMap = createHashMapFromArray [
+    [WLC_PRIMARY_SELECT_BUTTON, WLC_PRIMARY_SELECT],
+    [WLC_SECONDARY_SELECT_BUTTON, WLC_SECONDARY_SELECT],
+    [WLC_LAUNCHER_SELECT_BUTTON, WLC_LAUNCHER_SELECT],
+    [WLC_UNIFORM_SELECT_BUTTON, WLC_UNIFORM_SELECT],
+    [WLC_VEST_SELECT_BUTTON, WLC_VEST_SELECT],
+    [WLC_HELMET_SELECT_BUTTON, WLC_HELMET_SELECT]
+];
+
+{
+    private _button = _display displayCtrl _x;
+    private _select = _display displayCtrl _y;
+
+    _button ctrlAddEventHandler ["ButtonClick", "_this spawn WLC_fnc_onButtonSelect"];
+} forEach _buttonMap;
+
+[_display displayCtrl WLC_PRIMARY_SELECT_BUTTON] spawn WLC_fnc_onButtonSelect;
