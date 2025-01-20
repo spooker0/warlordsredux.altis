@@ -126,6 +126,7 @@ class CfgFunctions {
 			file = "core\client\action";
 			class arsenalSetup {};
 			class attachVehicle {};
+			class buyMenuAction {};
 			class catapultAction {};
 			class catapultActionEligibility {};
 			class claimAction {};
@@ -256,7 +257,6 @@ class CfgFunctions {
 			class checkFunds {};
 			class checkGreenSwitch {};
 			class checkGroundVehicleDriver {};
-			class checkInAirliftSector {};
 			class checkIndependents {};
 			class checkInfantryAvailable {};
 			class checkInFriendlySector {};
@@ -368,6 +368,7 @@ class CfgFunctions {
 			class getLevelInfo {};
 			class init {};
 			class levelUp {};
+			class onButtonSelect {};
 			class onRespawn {};
 			class onSelection {};
 			class serverRequest {};
@@ -388,6 +389,7 @@ class CfgFunctions {
 			class constructAircraftPylons {};
 			class constructPresetMenu {};
 			class constructVehicleMagazine {};
+			class getMagazineTooltip {};
 			class initMenu {};
 			class menuTextOverrides {};
 			class moveSmokes {};
