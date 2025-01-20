@@ -57,97 +57,84 @@ private _getItemTooltip = {
         format ["%1\n\n%2", _itemName, _protectionText];
     };
 };
-
+private _customizationData = _control lbData _lbCurSel;
 private _selectedValue = _control lbValue _lbCurSel;
 private _level = ["getLevel", player] call WLC_fnc_getLevelInfo;
-if (_selectedValue > _level) then {
-    private _customizationData = profileNamespace getVariable [format ["WLC_%1", _type], ""];
-    if (_customizationData != "") then {
-        for "_index" from 0 to lbSize _control - 1 do {
-            if (_control lbData _index == _customizationData) then {
-                _control lbSetCurSel _index;
-                break;
-            };
-        };
-    } else {
-        _control lbSetCurSel 0;
-    };
-} else {
-    private _customizationData = _control lbData _lbCurSel;
+if (_selectedValue <= _level) then {
     profileNamespace setVariable [format ["WLC_%1", _type], _customizationData];
-
-    private _customizationList = missionNamespace getVariable [format ["WLC_%1_%2", _type, BIS_WL_playerSide], createHashMap];
-    private _customization = _customizationList getOrDefault [_customizationData, createHashMap];
-    private _actualClass = _customization getOrDefault ["item", _customizationData];
-
-    if (_type in ["Primary", "Secondary", "Launcher"]) then {
-        _weaponDisplayBg ctrlShow true;
-
-        _weaponDisplay ctrlShow true;
-        _weaponDisplay ctrlSetText (getText (configFile >> "CfgWeapons" >> _actualClass >> "picture"));
-
-        _weaponDisplayTooltip ctrlShow true;
-        _weaponDisplayTooltip ctrlSetTooltip ([_actualClass] call WLM_fnc_getMagazineTooltip);
-
-        private _attachments = _customization getOrDefault ["attachments", []];
-        {
-            private _itemPosition = [_forEachIndex * (0.1 + 0.01), 0, 0.1, 0.1 * 4 / 3];
-
-            private _attachmentPicBg = _display ctrlCreate ["WLCAttachmentPicBg", -1, _attachmentDisplay];
-            _attachmentPicBg ctrlSetPosition _itemPosition;
-            _attachmentPicBg ctrlSetText "";
-            _attachmentPicBg ctrlCommit 0;
-
-            private _attachmentPic = _display ctrlCreate ["WLCAttachmentPic", -1, _attachmentDisplay];
-            _attachmentPic ctrlSetPosition _itemPosition;
-            _attachmentPic ctrlSetText (getText (configFile >> "CfgWeapons" >> _x >> "picture"));
-            _attachmentPic ctrlSetTooltip ([_x] call WLM_fnc_getMagazineTooltip);
-            _attachmentPic ctrlCommit 0;
-        } forEach _attachments;
-        _attachmentDisplay ctrlShow true;
-
-        private _magazines = _customization getOrDefault ["magazines", []];
-        {
-            private _row = floor (_forEachIndex / 5);
-            private _col = _forEachIndex % 5;
-            private _itemPosition = [_col * (0.07 + 0.01), _row * (0.07 + 0.03), 0.07, 0.07 * 4 / 3];
-
-            private _magPicBg = _display ctrlCreate ["WLCAttachmentPicBg", -1, _magDisplay];
-            _magPicBg ctrlSetPosition _itemPosition;
-            _magPicBg ctrlSetText "";
-            _magPicBg ctrlCommit 0;
-
-            private _magPic = _display ctrlCreate ["WLCAttachmentPic", -1, _magDisplay];
-            _magPic ctrlSetPosition _itemPosition;
-            _magPic ctrlSetText (getText (configFile >> "CfgMagazines" >> _x >> "picture"));
-            _magPic ctrlSetTooltip ([_x] call WLM_fnc_getMagazineTooltip);
-            _magPic ctrlCommit 0;
-        } forEach _magazines;
-        _magDisplay ctrlShow true;
-    };
-
-    if (_type in ["Uniform", "Vest", "Helmet"]) then {
-        _fullDisplayBg ctrlShow true;
-        _fullDisplay ctrlShow true;
-
-        _fullDisplay ctrlSetText (getText (configFile >> "CfgWeapons" >> _actualClass >> "picture"));
-        _fullDisplay ctrlSetTooltip ([_actualClass] call _getItemTooltip);
-
-        _massDisplay ctrlShow true;
-        private _mass = getNumber (configFile >> "CfgWeapons" >> _actualClass >> "ItemInfo" >> "mass");
-        _massDisplay ctrlSetStructuredText parseText format ["<t size='1.2'>Mass: %1 kg</t>", _mass];
-    };
-
-    private _level = _customization getOrDefault ["level", 0];
-    private _levelText = format ["Unlock: Level %1", _level];
-    private _cost = _customization getOrDefault ["cost", 0];
-    private _costText = if (_cost > 0) then {
-        format ["Cost: %1%2", _moneySign, _cost];
-    } else {
-        "";
-    };
-    _itemCostDisplay ctrlSetStructuredText parseText format ["<t size='1.2'>%1<br/>%2</t>", _levelText, _costText];
 };
+
+private _customizationList = missionNamespace getVariable [format ["WLC_%1_%2", _type, BIS_WL_playerSide], createHashMap];
+private _customization = _customizationList getOrDefault [_customizationData, createHashMap];
+private _actualClass = _customization getOrDefault ["item", _customizationData];
+
+if (_type in ["Primary", "Secondary", "Launcher"]) then {
+    _weaponDisplayBg ctrlShow true;
+
+    _weaponDisplay ctrlShow true;
+    _weaponDisplay ctrlSetText (getText (configFile >> "CfgWeapons" >> _actualClass >> "picture"));
+
+    _weaponDisplayTooltip ctrlShow true;
+    _weaponDisplayTooltip ctrlSetTooltip ([_actualClass] call WLM_fnc_getMagazineTooltip);
+
+    private _attachments = _customization getOrDefault ["attachments", []];
+    {
+        private _itemPosition = [_forEachIndex * (0.1 + 0.01), 0, 0.1, 0.1 * 4 / 3];
+
+        private _attachmentPicBg = _display ctrlCreate ["WLCAttachmentPicBg", -1, _attachmentDisplay];
+        _attachmentPicBg ctrlSetPosition _itemPosition;
+        _attachmentPicBg ctrlSetText "";
+        _attachmentPicBg ctrlCommit 0;
+
+        private _attachmentPic = _display ctrlCreate ["WLCAttachmentPic", -1, _attachmentDisplay];
+        _attachmentPic ctrlSetPosition _itemPosition;
+        _attachmentPic ctrlSetText (getText (configFile >> "CfgWeapons" >> _x >> "picture"));
+        _attachmentPic ctrlSetTooltip ([_x] call WLM_fnc_getMagazineTooltip);
+        _attachmentPic ctrlCommit 0;
+    } forEach _attachments;
+    _attachmentDisplay ctrlShow true;
+
+    private _magazines = _customization getOrDefault ["magazines", []];
+    {
+        private _row = floor (_forEachIndex / 5);
+        private _col = _forEachIndex % 5;
+        private _itemPosition = [_col * (0.07 + 0.01), _row * (0.07 + 0.03), 0.07, 0.07 * 4 / 3];
+
+        private _magPicBg = _display ctrlCreate ["WLCAttachmentPicBg", -1, _magDisplay];
+        _magPicBg ctrlSetPosition _itemPosition;
+        _magPicBg ctrlSetText "";
+        _magPicBg ctrlCommit 0;
+
+        private _magPic = _display ctrlCreate ["WLCAttachmentPic", -1, _magDisplay];
+        _magPic ctrlSetPosition _itemPosition;
+        _magPic ctrlSetText (getText (configFile >> "CfgMagazines" >> _x >> "picture"));
+        _magPic ctrlSetTooltip ([_x] call WLM_fnc_getMagazineTooltip);
+        _magPic ctrlCommit 0;
+    } forEach _magazines;
+    _magDisplay ctrlShow true;
+};
+
+if (_type in ["Uniform", "Vest", "Helmet"]) then {
+    _fullDisplayBg ctrlShow true;
+    _fullDisplay ctrlShow true;
+
+    _fullDisplay ctrlSetText (getText (configFile >> "CfgWeapons" >> _actualClass >> "picture"));
+    _fullDisplay ctrlSetTooltip ([_actualClass] call _getItemTooltip);
+
+    _massDisplay ctrlShow true;
+    private _mass = getNumber (configFile >> "CfgWeapons" >> _actualClass >> "ItemInfo" >> "mass");
+    _massDisplay ctrlSetStructuredText parseText format ["<t size='1.2'>Mass: %1 kg</t>", _mass];
+};
+
+private _level = _customization getOrDefault ["level", 0];
+private _levelText = format ["Unlock: Level %1", _level];
+private _cost = _customization getOrDefault ["cost", 0];
+private _costText = if (_cost > 0) then {
+    format ["Cost: %1%2", _moneySign, _cost];
+} else {
+    "";
+};
+_itemCostDisplay ctrlSetStructuredText parseText format ["<t size='1.2'>%1<br/>%2</t>", _levelText, _costText];
 
 // Refresh cost
 private _sumCost = 0;
