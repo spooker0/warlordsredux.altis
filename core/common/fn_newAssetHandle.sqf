@@ -99,6 +99,11 @@ if (_asset isKindOf "Man") then {
 			[_asset] remoteExec ["WL2_fnc_slingAddAction", 0, true];
 		};
 
+		case "B_Boat_Armed_01_minigun_F";
+		case "O_Boat_Armed_01_hmg_F": {
+			[_asset] spawn WL2_fnc_stabilizeBoatAction;
+		};
+
 		// Radars
 		case "B_Radar_System_01_F";
 		case "O_Radar_System_02_F";

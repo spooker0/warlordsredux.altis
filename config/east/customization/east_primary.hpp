@@ -4,70 +4,24 @@ class Primary {
         name = "Katiba (ARCO)";
         item = "arifle_Katiba_F";
         level = 0;
-        magazines[] = {
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer"
+
+        class Standard: WLCAmmo {
+            name = "Standard";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_green", 6 }
+            };
         };
+
+        class Tracers: WLCAmmo {
+            name = "Tracers";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_green_mag_Tracer", 6 }
+            };
+        };
+
+        #include "east_optics.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class Katiba_ACO {
-        name = "Katiba (ACO)";
-        item = "arifle_Katiba_F";
-        level = 0;
-        magazines[] = {
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer"
-        };
-        attachments[] = {
-            "optic_Aco",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class Katiba_DMS {
-        name = "Katiba (DMS)";
-        item = "arifle_Katiba_F";
-        level = 1;
-        magazines[] = {
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class Katiba_Kahlia {
-        name = "Katiba (Kahlia)";
-        item = "arifle_Katiba_F";
-        level = 2;
-        magazines[] = {
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
@@ -79,1749 +33,1202 @@ class Primary {
         item = "arifle_Katiba_C_F";
         level = 3;
         cost = 20;
-        magazines[] = {
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer"
+
+        class Standard: WLCAmmo {
+            level = 3;
+            name = "Standard";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_green", 6 }
+            };
         };
+
+        class Tracers: WLCAmmo {
+            level = 4;
+            name = "Tracers";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_green_mag_Tracer", 6 }
+            };
+        };
+
+        #include "east_optics_short.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class MXC_ACO {
-        name = "Katiba Carbine (ACO)";
-        item = "arifle_Katiba_C_F";
-        level = 3;
-        cost = 20;
-        magazines[] = {
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer",
-            "30Rnd_65x39_caseless_green_mag_Tracer"
-        };
-        attachments[] = {
-            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
 
     // Sting
-    class Sting_ARCO {
-        name = "Sting (ARCO)";
+    class Sting {
+        name = "Sting";
         item = "SMG_02_F";
         level = 4;
         cost = 20;
-        magazines[] = {
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02"
+
+        class Standard: WLCAmmo {
+            level = 4;
+            name = "Standard";
+            magazines[] = {
+                { "30Rnd_9x21_Mag_SMG_02", 5 }
+            };
         };
+
+        class ExtraLoad: WLCAmmo {
+            level = 5;
+            name = "Extra Load";
+            magazines[] = {
+                { "30Rnd_9x21_Mag_SMG_02", 10 }
+            };
+        };
+
+        class MaxLoad: WLCAmmo {
+            level = 6;
+            name = "Max Load";
+            magazines[] = {
+                { "30Rnd_9x21_Mag_SMG_02", 15 }
+            };
+        };
+
+        #include "east_optics_short.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_L"
-        };
-    };
-    class Sting_ACO {
-        name = "Sting (ACO)";
-        item = "SMG_02_F";
-        level = 4;
-        cost = 20;
-        magazines[] = {
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02"
-        };
-        attachments[] = {
-            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_L"
         };
     };
 
     // Protector
-    class Protector_ARCO {
-        name = "Protector (ARCO)";
+    class Protector {
+        name = "Protector";
         item = "SMG_05_F";
         level = 5;
         cost = 20;
-        magazines[] = {
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02"
+
+        class Standard: WLCAmmo {
+            level = 5;
+            name = "Standard";
+            magazines[] = {
+                { "30Rnd_9x21_Mag_SMG_02", 5 }
+            };
         };
+
+        class ExtraLoad: WLCAmmo {
+            level = 6;
+            name = "Extra Load";
+            magazines[] = {
+                { "30Rnd_9x21_Mag_SMG_02", 10 }
+            };
+        };
+
+        class MaxLoad: WLCAmmo {
+            level = 7;
+            name = "Max Load";
+            magazines[] = {
+                { "30Rnd_9x21_Mag_SMG_02", 15 }
+            };
+        };
+
+        #include "east_optics_short.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_L"
-        };
-    };
-    class Protector_ACO {
-        name = "Protector (ACO)";
-        item = "SMG_05_F";
-        level = 5;
-        cost = 20;
-        magazines[] = {
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02",
-            "30Rnd_9x21_Mag_SMG_02"
-        };
-        attachments[] = {
-            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_L"
         };
     };
 
     // Vermin
-    class Vermin_ARCO {
-        name = "Vermin (ARCO)";
+    class Vermin {
+        name = "Vermin";
         item = "SMG_01_F";
         level = 6;
         cost = 20;
-        magazines[] = {
-            "30Rnd_45ACP_Mag_SMG_01",
-            "30Rnd_45ACP_Mag_SMG_01",
-            "30Rnd_45ACP_Mag_SMG_01",
-            "30Rnd_45ACP_Mag_SMG_01",
-            "30Rnd_45ACP_Mag_SMG_01"
+
+        class Standard: WLCAmmo {
+            name = "Standard";
+            magazines[] = {
+                { "30Rnd_45ACP_Mag_SMG_01", 5 }
+            };
         };
+
+        class ExtraLoad: WLCAmmo {
+            level = 7;
+            name = "Extra Load";
+            magazines[] = {
+                { "30Rnd_45ACP_Mag_SMG_01", 10 }
+            };
+        };
+
+        class MaxLoad: WLCAmmo {
+            level = 8;
+            name = "Max Load";
+            magazines[] = {
+                { "30Rnd_45ACP_Mag_SMG_01", 15 }
+            };
+        };
+
+        #include "east_optics_short.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "muzzle_snds_acp"
-        };
-    };
-    class Vermin_ACO {
-        name = "Vermin (ACO)";
-        item = "SMG_01_F";
-        level = 6;
-        cost = 20;
-        magazines[] = {
-            "30Rnd_45ACP_Mag_SMG_01",
-            "30Rnd_45ACP_Mag_SMG_01",
-            "30Rnd_45ACP_Mag_SMG_01",
-            "30Rnd_45ACP_Mag_SMG_01",
-            "30Rnd_45ACP_Mag_SMG_01"
-        };
-        attachments[] = {
-            "optic_Aco",
             "muzzle_snds_acp"
         };
     };
 
     // ADR-97 TR
-    class ADR97_TR_ARCO {
-        name = "ADR-97 TR (ARCO)";
+    class ADR97_TR {
+        name = "ADR-97 TR";
         item = "SMG_03_TR_khaki";
         level = 7;
         cost = 20;
-        magazines[] = {
-            "50Rnd_570x28_SMG_03",
-            "50Rnd_570x28_SMG_03",
-            "50Rnd_570x28_SMG_03",
-            "50Rnd_570x28_SMG_03",
-            "50Rnd_570x28_SMG_03"
+
+        class Standard: WLCAmmo {
+            level = 7;
+            name = "Standard";
+            magazines[] = {
+                { "50Rnd_570x28_SMG_03", 5 }
+            };
         };
+
+        class ExtraLoad: WLCAmmo {
+            level = 8;
+            name = "Extra Load";
+            magazines[] = {
+                { "50Rnd_570x28_SMG_03", 10 }
+            };
+        };
+
+        class MaxLoad: WLCAmmo {
+            level = 9;
+            name = "Max Load";
+            magazines[] = {
+                { "50Rnd_570x28_SMG_03", 15 }
+            };
+        };
+
+        #include "east_optics_short.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_570"
-        };
-    };
-    class ADR97_TR_ACO {
-        name = "ADR-97 TR (ACO)";
-        item = "SMG_03_TR_khaki";
-        level = 7;
-        cost = 20;
-        magazines[] = {
-            "50Rnd_570x28_SMG_03",
-            "50Rnd_570x28_SMG_03",
-            "50Rnd_570x28_SMG_03",
-            "50Rnd_570x28_SMG_03",
-            "50Rnd_570x28_SMG_03"
-        };
-        attachments[] = {
-            "optic_Aco",
             "acc_pointer_IR",
             "muzzle_snds_570"
         };
     };
 
     // Promet GL
-    class Promet_GL_ARCO {
-        name = "Promet GL (ARCO)";
+    class Promet_GL {
+        name = "Promet GL";
         item = "arifle_MSBS65_GL_F";
         level = 8;
         cost = 20;
-        magazines[] = {
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell"
+
+        class Standard: WLCAmmo {
+            level = 8;
+            name = "Standard";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag", 6 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
         };
+
+        class Tracers: WLCAmmo {
+            level = 9;
+            name = "Tracers";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag_Tracer", 6 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 10;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag", 9 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class ExtraAmmoTracers: WLCAmmo {
+            level = 11;
+            name = "Tracers, Extra Ammo";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag_Tracer", 9 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class ExtraGrenades: WLCAmmo {
+            level = 12;
+            name = "Extra Grenades";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag", 6 },
+                { "1Rnd_HE_Grenade_shell", 6 }
+            };
+        };
+
+        class ExtraGrenadesTracers: WLCAmmo {
+            level = 13;
+            name = "Tracers, Extra Grenades";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag_Tracer", 6 },
+                { "1Rnd_HE_Grenade_shell", 6 }
+            };
+        };
+
+        class MaxGrenades: WLCAmmo {
+            level = 14;
+            name = "Max Grenades";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag", 3 },
+                { "1Rnd_HE_Grenade_shell", 9 }
+            };
+        };
+
+        class MaxGrenadesTracers: WLCAmmo {
+            level = 15;
+            name = "Tracers, Max Grenades";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag_Tracer", 3 },
+                { "1Rnd_HE_Grenade_shell", 9 }
+            };
+        };
+
+        #include "east_optics.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class Promet_GL_ACO {
-        name = "Promet GL (ACO)";
-        item = "arifle_MSBS65_GL_F";
-        level = 8;
-        cost = 20;
-        magazines[] = {
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell"
-        };
-        attachments[] = {
-            "optic_Aco",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class Promet_GL_DMS {
-        name = "Promet GL (DMS)";
-        item = "arifle_MSBS65_GL_F";
-        level = 9;
-        cost = 20;
-        magazines[] = {
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class Promet_GL_Kahlia {
-        name = "Promet GL (Kahlia)";
-        item = "arifle_MSBS65_GL_F";
-        level = 10;
-        cost = 20;
-        magazines[] = {
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
 
     // Promet SG
-    class Promet_SG_ARCO {
-        name = "Promet SG (ARCO)";
+    class Promet_SG {
+        name = "Promet SG";
         item = "arifle_MSBS65_UBS_F";
         level = 11;
         cost = 50;
-        magazines[] = {
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "6Rnd_12Gauge_Pellets",
-            "6Rnd_12Gauge_Pellets",
-            "6Rnd_12Gauge_Slug",
-            "6Rnd_12Gauge_Slug"
+
+        class Standard: WLCAmmo {
+            level = 11;
+            name = "Standard";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag", 6 },
+                { "6Rnd_12Gauge_Pellets", 2 },
+                { "6Rnd_12Gauge_Slug", 2 }
+            };
         };
+
+        class Tracers: WLCAmmo {
+            level = 12;
+            name = "Tracers";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag_Tracer", 6 },
+                { "6Rnd_12Gauge_Pellets", 2 },
+                { "6Rnd_12Gauge_Slug", 2 }
+            };
+        };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 13;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag", 9 },
+                { "6Rnd_12Gauge_Pellets", 2 },
+                { "6Rnd_12Gauge_Slug", 2 }
+            };
+        };
+
+        class ExtraAmmoTracers: WLCAmmo {
+            level = 14;
+            name = "Tracers, Extra Ammo";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag_Tracer", 9 },
+                { "6Rnd_12Gauge_Pellets", 2 },
+                { "6Rnd_12Gauge_Slug", 2 }
+            };
+        };
+
+        class SlugsOnly: WLCAmmo {
+            level = 15;
+            name = "Slugs Only";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag", 6 },
+                { "6Rnd_12Gauge_Slug", 6 }
+            };
+        };
+
+        class TracersSlugsOnly: WLCAmmo {
+            level = 16;
+            name = "Tracers, Slugs Only";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag_Tracer", 6 },
+                { "6Rnd_12Gauge_Slug", 6 }
+            };
+        };
+
+        class PelletsOnly: WLCAmmo {
+            level = 17;
+            name = "Pellets Only";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag", 6 },
+                { "6Rnd_12Gauge_Pellets", 6 }
+            };
+        };
+
+        class TracersPelletsOnly: WLCAmmo {
+            level = 18;
+            name = "Tracers, Pellets Only";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_msbs_mag_Tracer", 6 },
+                { "6Rnd_12Gauge_Pellets", 6 }
+            };
+        };
+
+        #include "east_optics.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class Promet_SG_ACO {
-        name = "Promet SG (ACO)";
-        item = "arifle_MSBS65_UBS_F";
-        level = 11;
-        cost = 50;
-        magazines[] = {
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "6Rnd_12Gauge_Pellets",
-            "6Rnd_12Gauge_Pellets",
-            "6Rnd_12Gauge_Slug",
-            "6Rnd_12Gauge_Slug"
-        };
-        attachments[] = {
-            "optic_Aco",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class Promet_SG_DMS {
-        name = "Promet SG (DMS)";
-        item = "arifle_MSBS65_UBS_F";
-        level = 12;
-        cost = 50;
-        magazines[] = {
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "6Rnd_12Gauge_Pellets",
-            "6Rnd_12Gauge_Pellets",
-            "6Rnd_12Gauge_Slug",
-            "6Rnd_12Gauge_Slug"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class Promet_SG_Kahlia {
-        name = "Promet SG (Kahlia)";
-        item = "arifle_MSBS65_UBS_F";
-        level = 13;
-        cost = 50;
-        magazines[] = {
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "30Rnd_65x39_caseless_msbs_mag_Tracer",
-            "6Rnd_12Gauge_Pellets",
-            "6Rnd_12Gauge_Pellets",
-            "6Rnd_12Gauge_Slug",
-            "6Rnd_12Gauge_Slug"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
 
     // SPAR-16
-    class SPAR16_ARCO {
-        name = "SPAR-16 (ARCO)";
+    class SPAR16 {
+        name = "SPAR-16 GL";
         item = "arifle_SPAR_01_GL_blk_F";
         level = 14;
         cost = 50;
-        magazines[] = {
-            "150Rnd_556x45_Drum_Mag_Tracer_F",
-            "150Rnd_556x45_Drum_Mag_Tracer_F",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell"
+
+        class Standard: WLCAmmo {
+            level = 14;
+            name = "Standard";
+            magazines[] = {
+                { "30Rnd_556x45_Stanag", 6 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
         };
+
+        class Tracers: WLCAmmo {
+            level = 15;
+            name = "Tracers";
+            magazines[] = {
+                { "30Rnd_556x45_Stanag_Tracer_Red", 2 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class DrumMags: WLCAmmo {
+            level = 16;
+            name = "Drum Mags";
+            magazines[] = {
+                { "150Rnd_556x45_Drum_Mag_F", 2 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class TracersDrumMags: WLCAmmo {
+            level = 17;
+            name = "Tracers, Drum Mags";
+            magazines[] = {
+                { "150Rnd_556x45_Drum_Mag_Tracer_F", 2 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class ExtraAmmo : WLCAmmo {
+            level = 18;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "30Rnd_556x45_Stanag", 9 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class TracersExtraAmmo: WLCAmmo {
+            level = 19;
+            name = "Tracers, Extra Ammo";
+            magazines[] = {
+                { "30Rnd_556x45_Stanag_Tracer_Red", 9 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class DrumMagsExtraAmmo: WLCAmmo {
+            level = 20;
+            name = "Drum Mags, Extra Ammo";
+            magazines[] = {
+                { "150Rnd_556x45_Drum_Mag_F", 4 },
+                { "1Rnd_HE_Grenade_shell", 6 }
+            };
+        };
+
+        class TracersDrumMagsExtraAmmo: WLCAmmo {
+            level = 21;
+            name = "Tracers, Drum Mags, Extra Ammo";
+            magazines[] = {
+                { "150Rnd_556x45_Drum_Mag_Tracer_F", 4 },
+                { "1Rnd_HE_Grenade_shell", 6 }
+            };
+        };
+
+        #include "east_optics.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_M"
-        };
-    };
-    class SPAR16_ACO {
-        name = "SPAR-16 (ACO)";
-        item = "arifle_SPAR_01_GL_blk_F";
-        level = 14;
-        cost = 50;
-        magazines[] = {
-            "150Rnd_556x45_Drum_Mag_Tracer_F",
-            "150Rnd_556x45_Drum_Mag_Tracer_F",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell"
-        };
-        attachments[] = {
-            "optic_Aco",
-            "acc_pointer_IR",
-            "muzzle_snds_M"
-        };
-    };
-    class SPAR16_DMS {
-        name = "SPAR-16 (DMS)";
-        item = "arifle_SPAR_01_GL_blk_F";
-        level = 15;
-        cost = 50;
-        magazines[] = {
-            "150Rnd_556x45_Drum_Mag_Tracer_F",
-            "150Rnd_556x45_Drum_Mag_Tracer_F",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_M"
-        };
-    };
-    class SPAR16_Kahlia {
-        name = "SPAR-16 (Kahlia)";
-        item = "arifle_SPAR_01_GL_blk_F";
-        level = 16;
-        cost = 50;
-        magazines[] = {
-            "150Rnd_556x45_Drum_Mag_Tracer_F",
-            "150Rnd_556x45_Drum_Mag_Tracer_F",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_M"
         };
     };
 
     // AK-12
-    class AK12_ARCO {
-        name = "AK-12 (ARCO)";
+    class AK12 {
+        name = "AK-12";
         item = "arifle_AK12_GL_F";
         level = 17;
         cost = 50;
-        magazines[] = {
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell"
+
+        class Standard: WLCAmmo {
+            level = 17;
+            name = "Standard";
+            magazines[] = {
+                { "30Rnd_762x39_AK12_Mag_F", 6 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
         };
+
+        class Tracers: WLCAmmo {
+            level = 18;
+            name = "Tracers";
+            magazines[] = {
+                { "30Rnd_762x39_AK12_Mag_Tracer_F", 6 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class DrumMags: WLCAmmo {
+            level = 19;
+            name = "Drum Mags";
+            magazines[] = {
+                { "75rnd_762x39_AK12_Mag_F", 2 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class TracersDrumMags: WLCAmmo {
+            level = 20;
+            name = "Tracers, Drum Mags";
+            magazines[] = {
+                { "75rnd_762x39_AK12_Mag_Tracer_F", 2 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class ExtraAmmo : WLCAmmo {
+            level = 21;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "30Rnd_762x39_AK12_Mag_F", 9 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class TracersExtraAmmo: WLCAmmo {
+            level = 22;
+            name = "Tracers, Extra Ammo";
+            magazines[] = {
+                { "30Rnd_762x39_AK12_Mag_Tracer_F", 9 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class DrumMagsExtraAmmo: WLCAmmo {
+            level = 23;
+            name = "Drum Mags, Extra Ammo";
+            magazines[] = {
+                { "75rnd_762x39_AK12_Mag_F", 4 },
+                { "1Rnd_HE_Grenade_shell", 6 }
+            };
+        };
+
+        class TracersDrumMagsExtraAmmo: WLCAmmo {
+            level = 24;
+            name = "Tracers, Drum Mags, Extra Ammo";
+            magazines[] = {
+                { "75rnd_762x39_AK12_Mag_Tracer_F", 4 },
+                { "1Rnd_HE_Grenade_shell", 6 }
+            };
+        };
+
+        #include "east_optics.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class AK12_ACO {
-        name = "AK-12 (ACO)";
-        item = "arifle_AK12_GL_F";
-        level = 17;
-        cost = 50;
-        magazines[] = {
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell"
-        };
-        attachments[] = {
-            "optic_Aco",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class AK12_DMS {
-        name = "AK-12 (DMS)";
-        item = "arifle_AK12_GL_F";
-        level = 18;
-        cost = 50;
-        magazines[] = {
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class AK12_Kahlia {
-        name = "AK-12 (Kahlia)";
-        item = "arifle_AK12_GL_F";
-        level = 19;
-        cost = 50;
-        magazines[] = {
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "30Rnd_762x39_AK12_Mag_Tracer_F",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell",
-            "1Rnd_HE_Grenade_shell"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
 
     // CAR-95-1
-    class CAR95_1_ARCO {
-        name = "CAR-95-1 (ARCO)";
+    class CAR95_1 {
+        name = "CAR-95-1";
         item = "arifle_CTARS_blk_F";
         level = 20;
         cost = 50;
-        magazines[] = {
-            "100Rnd_580x42_hex_Mag_Tracer_F",
-            "100Rnd_580x42_hex_Mag_Tracer_F",
-            "100Rnd_580x42_hex_Mag_Tracer_F"
+
+        class Standard: WLCAmmo {
+            level = 20;
+            name = "Standard";
+            magazines[] = {
+                { "100Rnd_580x42_Mag_F", 3 }
+            };
         };
+
+        class Tracers: WLCAmmo {
+            level = 21;
+            name = "Tracers";
+            magazines[] = {
+                { "100Rnd_580x42_Mag_Tracer_F", 3 }
+            };
+        };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 22;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "100Rnd_580x42_Mag_F", 6 }
+            };
+        };
+
+        class TracersExtraAmmo: WLCAmmo {
+            level = 23;
+            name = "Tracers, Extra Ammo";
+            magazines[] = {
+                { "100Rnd_580x42_Mag_Tracer_F", 6 }
+            };
+        };
+
+        #include "east_optics.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_58_blk_F"
-        };
-    };
-    class CAR95_1_ACO {
-        name = "CAR-95-1 (ACO)";
-        item = "arifle_CTARS_blk_F";
-        level = 20;
-        cost = 50;
-        magazines[] = {
-            "100Rnd_580x42_hex_Mag_Tracer_F",
-            "100Rnd_580x42_hex_Mag_Tracer_F",
-            "100Rnd_580x42_hex_Mag_Tracer_F"
-        };
-        attachments[] = {
-            "optic_Aco",
-            "acc_pointer_IR",
-            "muzzle_snds_58_blk_F"
-        };
-    };
-    class CAR95_1_DMS {
-        name = "CAR-95-1 (DMS)";
-        item = "arifle_CTARS_blk_F";
-        level = 21;
-        cost = 50;
-        magazines[] = {
-            "100Rnd_580x42_hex_Mag_Tracer_F",
-            "100Rnd_580x42_hex_Mag_Tracer_F",
-            "100Rnd_580x42_hex_Mag_Tracer_F"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_58_blk_F"
-        };
-    };
-    class CAR95_1_Kahlia {
-        name = "CAR-95-1 (Kahlia)";
-        item = "arifle_CTARS_blk_F";
-        level = 22;
-        cost = 50;
-        magazines[] = {
-            "100Rnd_580x42_hex_Mag_Tracer_F",
-            "100Rnd_580x42_hex_Mag_Tracer_F",
-            "100Rnd_580x42_hex_Mag_Tracer_F"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_58_blk_F"
         };
     };
 
     // Type-115
-    class Type115_ARCO {
-        name = "Type-115 (ARCO)";
+    class Type115 {
+        name = "Type-115";
         item = "arifle_ARX_blk_F";
         level = 23;
         cost = 50;
-        magazines[] = {
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "10Rnd_50BW_Mag_F",
-            "10Rnd_50BW_Mag_F",
-            "10Rnd_50BW_Mag_F"
+
+        class Standard: WLCAmmo {
+            level = 23;
+            name = "Standard";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_green", 6 },
+                { "10Rnd_50BW_Mag_F", 3 }
+            };
         };
+
+        class Tracers: WLCAmmo {
+            level = 24;
+            name = "Tracers";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_green_mag_Tracer", 6 },
+                { "10Rnd_50BW_Mag_F", 3 }
+            };
+        };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 25;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_green", 9 },
+                { "10Rnd_50BW_Mag_F", 3 }
+            };
+        };
+
+        class TracersExtraAmmo: WLCAmmo {
+            level = 26;
+            name = "Tracers, Extra Ammo";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_green_mag_Tracer", 9 },
+                { "10Rnd_50BW_Mag_F", 3 }
+            };
+        };
+
+        class Extra50: WLCAmmo {
+            level = 27;
+            name = "Extra .50";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_green", 6 },
+                { "10Rnd_50BW_Mag_F", 6 }
+            };
+        };
+
+        class TracersExtra50: WLCAmmo {
+            level = 28;
+            name = "Tracers, Extra .50";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_green_mag_Tracer", 6 },
+                { "10Rnd_50BW_Mag_F", 6 }
+            };
+        };
+
+        #include "east_optics.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_h"
-        };
-    };
-    class Type115_ACO {
-        name = "Type-115 (ACO)";
-        item = "arifle_ARX_blk_F";
-        level = 23;
-        cost = 50;
-        magazines[] = {
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "10Rnd_50BW_Mag_F",
-            "10Rnd_50BW_Mag_F",
-            "10Rnd_50BW_Mag_F"
-        };
-        attachments[] = {
-            "optic_Aco",
-            "acc_pointer_IR",
-            "muzzle_snds_h"
-        };
-    };
-    class Type115_DMS {
-        name = "Type-115 (DMS)";
-        item = "arifle_ARX_blk_F";
-        level = 24;
-        cost = 50;
-        magazines[] = {
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "10Rnd_50BW_Mag_F",
-            "10Rnd_50BW_Mag_F",
-            "10Rnd_50BW_Mag_F"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_h"
-        };
-    };
-    class Type115_Kahlia {
-        name = "Type-115 (Kahlia)";
-        item = "arifle_ARX_blk_F";
-        level = 25;
-        cost = 50;
-        magazines[] = {
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "30Rnd_65x39_caseless_green",
-            "10Rnd_50BW_Mag_F",
-            "10Rnd_50BW_Mag_F",
-            "10Rnd_50BW_Mag_F"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_h"
         };
     };
 
     // MX SW
-    class MX_SW_ARCO {
-        name = "MX SW (ARCO)";
+    class MX_SW {
+        name = "MX SW";
         item = "arifle_MX_SW_F";
         level = 26;
         cost = 50;
-        magazines[] = {
-            "100Rnd_65x39_caseless_mag_Tracer",
-            "100Rnd_65x39_caseless_mag_Tracer",
-            "100Rnd_65x39_caseless_mag_Tracer"
+
+        class Standard: WLCAmmo {
+            level = 26;
+            name = "Standard";
+            magazines[] = {
+                { "100Rnd_65x39_caseless_mag", 3 }
+            };
         };
+
+        class Tracers: WLCAmmo {
+            level = 27;
+            name = "Tracers";
+            magazines[] = {
+                { "100Rnd_65x39_caseless_mag_Tracer", 3 }
+            };
+        };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 28;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "100Rnd_65x39_caseless_mag", 6 }
+            };
+        };
+
+        class TracersExtraAmmo: WLCAmmo {
+            level = 29;
+            name = "Tracers, Extra Ammo";
+            magazines[] = {
+                { "100Rnd_65x39_caseless_mag_Tracer", 6 }
+            };
+        };
+
+        #include "east_optics.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class MX_SW_ACO {
-        name = "MX SW (ACO)";
-        item = "arifle_MX_SW_F";
-        level = 26;
-        cost = 50;
-        magazines[] = {
-            "100Rnd_65x39_caseless_mag_Tracer",
-            "100Rnd_65x39_caseless_mag_Tracer",
-            "100Rnd_65x39_caseless_mag_Tracer"
-        };
-        attachments[] = {
-            "optic_Aco",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class MX_SW_DMS {
-        name = "MX SW (DMS)";
-        item = "arifle_MX_SW_F";
-        level = 27;
-        cost = 50;
-        magazines[] = {
-            "100Rnd_65x39_caseless_mag_Tracer",
-            "100Rnd_65x39_caseless_mag_Tracer",
-            "100Rnd_65x39_caseless_mag_Tracer"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class MX_SW_Kahlia {
-        name = "MX SW (Kahlia)";
-        item = "arifle_MX_SW_F";
-        level = 27;
-        cost = 50;
-        magazines[] = {
-            "100Rnd_65x39_caseless_mag_Tracer",
-            "100Rnd_65x39_caseless_mag_Tracer",
-            "100Rnd_65x39_caseless_mag_Tracer"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
 
     // RPK-12
-    class RPK12_ARCO {
-        name = "RPK-12 (ARCO)";
+    class RPK12 {
+        name = "RPK-12";
         item = "arifle_RPK12_F";
         level = 28;
         cost = 50;
-        magazines[] = {
-            "75rnd_762x39_AK12_Mag_Tracer_F",
-            "75rnd_762x39_AK12_Mag_Tracer_F",
-            "75rnd_762x39_AK12_Mag_Tracer_F"
+
+        class Standard: WLCAmmo {
+            level = 28;
+            name = "Standard";
+            magazines[] = {
+                { "75rnd_762x39_AK12_Mag_F", 3 }
+            };
         };
+
+        class Tracers: WLCAmmo {
+            level = 29;
+            name = "Tracers";
+            magazines[] = {
+                { "75rnd_762x39_AK12_Mag_Tracer_F", 3 }
+            };
+        };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 30;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "75rnd_762x39_AK12_Mag_F", 6 }
+            };
+        };
+
+        class TracersExtraAmmo: WLCAmmo {
+            level = 31;
+            name = "Tracers, Extra Ammo";
+            magazines[] = {
+                { "75rnd_762x39_AK12_Mag_Tracer_F", 6 }
+            };
+        };
+
+        #include "east_optics.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class RPK12_ACO {
-        name = "RPK-12 (ACO)";
-        item = "arifle_RPK12_F";
-        level = 28;
-        cost = 50;
-        magazines[] = {
-            "75rnd_762x39_AK12_Mag_Tracer_F",
-            "75rnd_762x39_AK12_Mag_Tracer_F",
-            "75rnd_762x39_AK12_Mag_Tracer_F"
-        };
-        attachments[] = {
-            "optic_Aco",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class RPK12_DMS {
-        name = "RPK-12 (DMS)";
-        item = "arifle_RPK12_F";
-        level = 29;
-        cost = 50;
-        magazines[] = {
-            "75rnd_762x39_AK12_Mag_Tracer_F",
-            "75rnd_762x39_AK12_Mag_Tracer_F",
-            "75rnd_762x39_AK12_Mag_Tracer_F"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class RPK12_Kahlia {
-        name = "RPK-12 (Kahlia)";
-        item = "arifle_RPK12_F";
-        level = 29;
-        cost = 50;
-        magazines[] = {
-            "75rnd_762x39_AK12_Mag_Tracer_F",
-            "75rnd_762x39_AK12_Mag_Tracer_F",
-            "75rnd_762x39_AK12_Mag_Tracer_F"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
 
     // LIM-85
-    class LIM85_ARCO {
-        name = "LIM-85 (ARCO)";
+    class LIM85 {
+        name = "LIM-85";
         item = "LMG_03_F";
         level = 30;
         cost = 50;
-        magazines[] = {
-            "200Rnd_556x45_Box_Tracer_F",
-            "200Rnd_556x45_Box_Tracer_F"
+
+        class Standard: WLCAmmo {
+            level = 30;
+            name = "Standard";
+            magazines[] = {
+                { "200Rnd_556x45_Box_F", 2 }
+            };
         };
+
+        class Tracers: WLCAmmo {
+            level = 31;
+            name = "Tracers";
+            magazines[] = {
+                { "200Rnd_556x45_Box_Tracer_F", 2 }
+            };
+        };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 32;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "200Rnd_556x45_Box_F", 4 }
+            };
+        };
+
+        class TracersExtraAmmo: WLCAmmo {
+            level = 33;
+            name = "Tracers, Extra Ammo";
+            magazines[] = {
+                { "200Rnd_556x45_Box_Tracer_F", 4 }
+            };
+        };
+
+        #include "east_optics.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_M"
-        };
-    };
-    class LIM85_ACO {
-        name = "LIM-85 (ACO)";
-        item = "LMG_03_F";
-        level = 30;
-        cost = 50;
-        magazines[] = {
-            "200Rnd_556x45_Box_Tracer_F",
-            "200Rnd_556x45_Box_Tracer_F"
-        };
-        attachments[] = {
-            "optic_Aco",
-            "acc_pointer_IR",
-            "muzzle_snds_M"
-        };
-    };
-    class LIM85_DMS {
-        name = "LIM-85 (DMS)";
-        item = "LMG_03_F";
-        level = 31;
-        cost = 50;
-        magazines[] = {
-            "200Rnd_556x45_Box_Tracer_F",
-            "200Rnd_556x45_Box_Tracer_F"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_M"
-        };
-    };
-    class LIM85_Kahlia {
-        name = "LIM-85 (Kahlia)";
-        item = "LMG_03_F";
-        level = 31;
-        cost = 50;
-        magazines[] = {
-            "200Rnd_556x45_Box_Tracer_F",
-            "200Rnd_556x45_Box_Tracer_F"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_M"
         };
     };
 
     // Zafir
-    class Zafir_ARCO {
-        name = "Zafir (ARCO)";
+    class Zafir {
+        name = "Zafir";
         item = "LMG_Zafir_F";
         level = 32;
         cost = 50;
-        magazines[] = {
-            "150Rnd_762x54_Box_Tracer",
-            "150Rnd_762x54_Box_Tracer"
+
+        class Standard: WLCAmmo {
+            level = 32;
+            name = "Standard";
+            magazines[] = {
+                { "150Rnd_762x54_Box", 2 }
+            };
         };
+
+        class Tracers: WLCAmmo {
+            level = 33;
+            name = "Tracers";
+            magazines[] = {
+                { "150Rnd_762x54_Box_Tracer", 2 }
+            };
+        };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 34;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "150Rnd_762x54_Box", 4 }
+            };
+        };
+
+        class TracersExtraAmmo: WLCAmmo {
+            level = 35;
+            name = "Tracers, Extra Ammo";
+            magazines[] = {
+                { "150Rnd_762x54_Box_Tracer", 4 }
+            };
+        };
+
+        #include "east_optics.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR"
-        };
-    };
-    class Zafir_ACO {
-        name = "Zafir (ACO)";
-        item = "LMG_Zafir_F";
-        level = 32;
-        cost = 50;
-        magazines[] = {
-            "150Rnd_762x54_Box_Tracer",
-            "150Rnd_762x54_Box_Tracer"
-        };
-        attachments[] = {
-            "optic_Aco",
-            "acc_pointer_IR"
-        };
-    };
-    class Zafir_DMS {
-        name = "Zafir (DMS)";
-        item = "LMG_Zafir_F";
-        level = 33;
-        cost = 50;
-        magazines[] = {
-            "150Rnd_762x54_Box_Tracer",
-            "150Rnd_762x54_Box_Tracer"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR"
-        };
-    };
-    class Zafir_Kahlia {
-        name = "Zafir (Kahlia)";
-        item = "LMG_Zafir_F";
-        level = 33;
-        cost = 50;
-        magazines[] = {
-            "150Rnd_762x54_Box_Tracer",
-            "150Rnd_762x54_Box_Tracer"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR"
         };
     };
 
     // SPMG
-    class SPMG_ARCO {
-        name = "SPMG (ARCO)";
+    class SPMG {
+        name = "SPMG";
         item = "MMG_02_camo_F";
         level = 34;
         cost = 75;
-        magazines[] = {
-            "130Rnd_338_Mag",
-            "130Rnd_338_Mag"
+
+        class Standard: WLCAmmo {
+            level = 34;
+            name = "Standard";
+            magazines[] = {
+                { "130Rnd_338_Mag", 2 }
+            };
         };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 35;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "130Rnd_338_Mag", 4 }
+            };
+        };
+
+        #include "east_optics.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_338_sand"
-        };
-    };
-    class SPMG_ACO {
-        name = "SPMG (ACO)";
-        item = "MMG_02_camo_F";
-        level = 34;
-        cost = 75;
-        magazines[] = {
-            "130Rnd_338_Mag",
-            "130Rnd_338_Mag"
-        };
-        attachments[] = {
-            "optic_Aco",
-            "acc_pointer_IR",
-            "muzzle_snds_338_sand"
-        };
-    };
-    class SPMG_DMS {
-        name = "SPMG (DMS)";
-        item = "MMG_02_camo_F";
-        level = 35;
-        cost = 75;
-        magazines[] = {
-            "130Rnd_338_Mag",
-            "130Rnd_338_Mag"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_338_sand"
-        };
-    };
-    class SPMG_Kahlia {
-        name = "SPMG (Kahlia)";
-        item = "MMG_02_camo_F";
-        level = 35;
-        cost = 75;
-        magazines[] = {
-            "130Rnd_338_Mag",
-            "130Rnd_338_Mag"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_338_sand"
         };
     };
 
     // Navid
-    class Navid_ARCO {
-        name = "Navid (ARCO)";
+    class Navid {
+        name = "Navid";
         item = "MMG_01_hex_F";
         level = 36;
         cost = 75;
-        magazines[] = {
-            "150Rnd_93x64_Mag",
-            "150Rnd_93x64_Mag"
+
+        class Standard: WLCAmmo {
+            level = 36;
+            name = "Standard";
+            magazines[] = {
+                { "150Rnd_93x64_Mag", 2 }
+            };
         };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 37;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "150Rnd_93x64_Mag", 4 }
+            };
+        };
+
+        #include "east_optics.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_93mmg"
-        };
-    };
-    class Navid_ACO {
-        name = "Navid (ACO)";
-        item = "MMG_01_hex_F";
-        level = 36;
-        cost = 75;
-        magazines[] = {
-            "150Rnd_93x64_Mag",
-            "150Rnd_93x64_Mag"
-        };
-        attachments[] = {
-            "optic_Aco",
-            "acc_pointer_IR",
-            "muzzle_snds_93mmg"
-        };
-    };
-    class Navid_DMS {
-        name = "Navid (DMS)";
-        item = "MMG_01_hex_F";
-        level = 37;
-        cost = 75;
-        magazines[] = {
-            "150Rnd_93x64_Mag",
-            "150Rnd_93x64_Mag"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_93mmg"
-        };
-    };
-    class Navid_Kahlia {
-        name = "Navid (Kahlia)";
-        item = "MMG_01_hex_F";
-        level = 37;
-        cost = 75;
-        magazines[] = {
-            "150Rnd_93x64_Mag",
-            "150Rnd_93x64_Mag"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_93mmg"
         };
     };
 
     // MXM
-    class MXM_ARCO {
-        name = "MXM (ARCO)";
+    class MXM {
+        name = "MXM";
         item = "arifle_MXM_F";
         level = 38;
         cost = 50;
-        magazines[] = {
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer"
+
+        class Standard: WLCAmmo {
+            level = 38;
+            name = "Standard";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_mag", 6 }
+            };
         };
+
+        class Tracers: WLCAmmo {
+            level = 39;
+            name = "Tracers";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_mag_Tracer", 6 }
+            };
+        };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 40;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_mag", 9 }
+            };
+        };
+
+        class TracersExtraAmmo: WLCAmmo {
+            level = 41;
+            name = "Tracers, Extra Ammo";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_mag_Tracer", 9 }
+            };
+        };
+
+        #include "east_optics_long.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class MXM_LRPS {
-        name = "MXM (LRPS)";
-        item = "arifle_MXM_F";
-        level = 38;
-        cost = 50;
-        magazines[] = {
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer"
-        };
-        attachments[] = {
-            "optic_LRPS",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class MXM_DMS {
-        name = "MXM (DMS)";
-        item = "arifle_MXM_F";
-        level = 38;
-        cost = 50;
-        magazines[] = {
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_H"
-        };
-    };
-    class MXM_Kahlia {
-        name = "MXM (Kahlia)";
-        item = "arifle_MXM_F";
-        level = 38;
-        cost = 50;
-        magazines[] = {
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer",
-            "30Rnd_65x39_caseless_mag_Tracer"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_H"
         };
     };
 
     // Rahim 7.62
-    class Rahim_762_ARCO {
-        name = "Rahim 7.62 (ARCO)";
+    class Rahim_762 {
+        name = "Rahim 7.62";
         item = "srifle_DMR_01_F";
         level = 39;
         cost = 50;
-        magazines[] = {
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag"
+
+        class Standard: WLCAmmo {
+            level = 39;
+            name = "Standard";
+            magazines[] = {
+                { "10Rnd_762x54_Mag", 6 }
+            };
         };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 40;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "10Rnd_762x54_Mag", 9 }
+            };
+        };
+
+        #include "east_optics_long.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class Rahim_762_LRPS {
-        name = "Rahim 7.62 (LRPS)";
-        item = "srifle_DMR_01_F";
-        level = 39;
-        cost = 50;
-        magazines[] = {
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag"
-        };
-        attachments[] = {
-            "optic_LRPS",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class Rahim_762_DMS {
-        name = "Rahim 7.62 (DMS)";
-        item = "srifle_DMR_01_F";
-        level = 39;
-        cost = 50;
-        magazines[] = {
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class Rahim_762_Kahlia {
-        name = "Rahim 7.62 (Kahlia)";
-        item = "srifle_DMR_01_F";
-        level = 39;
-        cost = 50;
-        magazines[] = {
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag",
-            "10Rnd_762x54_Mag"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
 
     // MK1 EMR
-    class MK1_EMR_ARCO {
-        name = "MK1 EMR (ARCO)";
+    class MK1_EMR {
+        name = "MK1 EMR";
         item = "srifle_DMR_03_F";
         level = 40;
         cost = 50;
-        magazines[] = {
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag"
+
+        class Standard: WLCAmmo {
+            level = 40;
+            name = "Standard";
+            magazines[] = {
+                { "20Rnd_762x51_Mag", 6 }
+            };
         };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 41;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "20Rnd_762x51_Mag", 9 }
+            };
+        };
+
+        #include "east_optics_long.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class MK1_EMR_LRPS {
-        name = "MK1 EMR (LRPS)";
-        item = "srifle_DMR_03_F";
-        level = 40;
-        cost = 50;
-        magazines[] = {
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag"
-        };
-        attachments[] = {
-            "optic_LRPS",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class MK1_EMR_DMS {
-        name = "MK1 EMR (DMS)";
-        item = "srifle_DMR_03_F";
-        level = 40;
-        cost = 50;
-        magazines[] = {
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class MK1_EMR_Kahlia {
-        name = "MK1 EMR (Kahlia)";
-        item = "srifle_DMR_03_F";
-        level = 40;
-        cost = 50;
-        magazines[] = {
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
 
     // SPAR-17
-    class SPAR17_ARCO {
-        name = "SPAR-17 (ARCO)";
+    class SPAR17 {
+        name = "SPAR-17";
         item = "arifle_SPAR_03_snd_F";
         level = 41;
         cost = 50;
-        magazines[] = {
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag"
+        class Standard: WLCAmmo {
+            level = 41;
+            name = "Standard";
+            magazines[] = {
+                { "20Rnd_762x51_Mag", 6 }
+            };
         };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 41;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "20Rnd_762x51_Mag", 9 }
+            };
+        };
+
+        #include "east_optics_long.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class SPAR17_LRPS {
-        name = "SPAR-17 (LRPS)";
-        item = "arifle_SPAR_03_snd_F";
-        level = 41;
-        cost = 50;
-        magazines[] = {
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag"
-        };
-        attachments[] = {
-            "optic_LRPS",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class SPAR17_DMS {
-        name = "SPAR-17 (DMS)";
-        item = "arifle_SPAR_03_snd_F";
-        level = 41;
-        cost = 50;
-        magazines[] = {
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_B"
-        };
-    };
-    class SPAR17_Kahlia {
-        name = "SPAR-17 (Kahlia)";
-        item = "arifle_SPAR_03_snd_F";
-        level = 41;
-        cost = 50;
-        magazines[] = {
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag",
-            "20Rnd_762x51_Mag"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_B"
         };
     };
 
     // ASP-1 Kir
-    class ASP1_Kir_ARCO {
-        name = "ASP-1 Kir (ARCO)";
+    class ASP1_Kir {
+        name = "ASP-1 Kir";
         item = "srifle_DMR_04_F";
         level = 42;
         cost = 75;
-        magazines[] = {
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag"
+
+        class Standard: WLCAmmo {
+            level = 42;
+            name = "Standard";
+            magazines[] = {
+                { "10Rnd_127x54_Mag", 6 }
+            };
         };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 43;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "10Rnd_127x54_Mag", 9 }
+            };
+        };
+
+        #include "east_optics_long.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR"
-        };
-    };
-    class ASP1_Kir_LRPS {
-        name = "ASP-1 Kir (LRPS)";
-        item = "srifle_DMR_04_F";
-        level = 42;
-        cost = 75;
-        magazines[] = {
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag"
-        };
-        attachments[] = {
-            "optic_LRPS",
-            "acc_pointer_IR"
-        };
-    };
-    class ASP1_Kir_DMS {
-        name = "ASP-1 Kir (DMS)";
-        item = "srifle_DMR_04_F";
-        level = 42;
-        cost = 75;
-        magazines[] = {
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR"
-        };
-    };
-    class ASP1_Kir_Kahlia {
-        name = "ASP-1 Kir (Kahlia)";
-        item = "srifle_DMR_04_F";
-        level = 42;
-        cost = 75;
-        magazines[] = {
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag",
-            "10Rnd_127x54_Mag"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR"
         };
     };
 
     // MAR-10
-    class MAR10_ARCO {
-        name = "MAR-10 (ARCO)";
+    class MAR10 {
+        name = "MAR-10";
         item = "srifle_DMR_02_camo_F";
         level = 43;
         cost = 75;
-        magazines[] = {
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag"
+
+        class Standard: WLCAmmo {
+            level = 43;
+            name = "Standard";
+            magazines[] = {
+                { "10Rnd_338_Mag", 6 }
+            };
         };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 44;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "10Rnd_338_Mag", 9 }
+            };
+        };
+
+        #include "east_optics_long.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_338_black"
-        };
-    };
-    class MAR10_LRPS {
-        name = "MAR-10 (LRPS)";
-        item = "srifle_DMR_02_camo_F";
-        level = 43;
-        cost = 75;
-        magazines[] = {
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag"
-        };
-        attachments[] = {
-            "optic_LRPS",
-            "acc_pointer_IR",
-            "muzzle_snds_338_black"
-        };
-    };
-    class MAR10_DMS {
-        name = "MAR-10 (DMS)";
-        item = "srifle_DMR_02_camo_F";
-        level = 43;
-        cost = 75;
-        magazines[] = {
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_338_black"
-        };
-    };
-    class MAR10_Kahlia {
-        name = "MAR-10 (Kahlia)";
-        item = "srifle_DMR_02_camo_F";
-        level = 43;
-        cost = 75;
-        magazines[] = {
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag",
-            "10Rnd_338_Mag"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_338_black"
         };
     };
 
     // Cyrus
-    class Cyrus_ARCO {
-        name = "Cyrus (ARCO)";
+    class Cyrus {
+        name = "Cyrus";
         item = "srifle_DMR_05_tan_F";
         level = 44;
         cost = 75;
-        magazines[] = {
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag"
+
+        class Standard: WLCAmmo {
+            level = 44;
+            name = "Standard";
+            magazines[] = {
+                { "10Rnd_93x64_DMR_05_Mag", 6 }
+            };
         };
+
+        class ExtraAmmo: WLCAmmo {
+            level = 45;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "10Rnd_93x64_DMR_05_Mag", 9 }
+            };
+        };
+
+        #include "east_optics_long.hpp"
+
         attachments[] = {
-            "optic_Arco",
-            "acc_pointer_IR",
-            "muzzle_snds_93mmg"
-        };
-    };
-    class Cyrus_LRPS {
-        name = "Cyrus (LRPS)";
-        item = "srifle_DMR_05_tan_F";
-        level = 44;
-        cost = 75;
-        magazines[] = {
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag"
-        };
-        attachments[] = {
-            "optic_LRPS",
-            "acc_pointer_IR",
-            "muzzle_snds_93mmg"
-        };
-    };
-    class Cyrus_DMS {
-        name = "Cyrus (DMS)";
-        item = "srifle_DMR_05_tan_F";
-        level = 44;
-        cost = 75;
-        magazines[] = {
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag"
-        };
-        attachments[] = {
-            "optic_DMS",
-            "acc_pointer_IR",
-            "muzzle_snds_93mmg"
-        };
-    };
-    class Cyrus_Kahlia {
-        name = "Cyrus (Kahlia)";
-        item = "srifle_DMR_05_tan_F";
-        level = 44;
-        cost = 75;
-        magazines[] = {
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag",
-            "10Rnd_93x64_DMR_05_Mag"
-        };
-        attachments[] = {
-            "optic_KHS_blk",
             "acc_pointer_IR",
             "muzzle_snds_93mmg"
         };
     };
 
     // M320 LRR
-    class M320_LRR_ARCO {
-        name = "M320 LRR (ARCO)";
+    class M320_LRR {
+        name = "M320 LRR";
         item = "srifle_LRR_F";
         level = 45;
         cost = 100;
-        magazines[] = {
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag"
+
+        class Standard: WLCAmmo {
+            level = 45;
+            name = "Standard";
+            magazines[] = {
+                { "7Rnd_408_Mag", 6 }
+            };
         };
-        attachments[] = {
-            "optic_Arco"
+
+        class ExtraAmmo: WLCAmmo {
+            level = 46;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "7Rnd_408_Mag", 9 }
+            };
         };
-    };
-    class M320_LRR_LRPS {
-        name = "M320 LRR (ACO)";
-        item = "srifle_LRR_F";
-        level = 45;
-        cost = 100;
-        magazines[] = {
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag"
-        };
-        attachments[] = {
-            "optic_LRPS"
-        };
-    };
-    class M320_LRR_DMS {
-        name = "M320 LRR (DMS)";
-        item = "srifle_LRR_F";
-        level = 45;
-        cost = 100;
-        magazines[] = {
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag"
-        };
-        attachments[] = {
-            "optic_DMS"
-        };
-    };
-    class M320_LRR_Kahlia {
-        name = "M320 LRR (Kahlia)";
-        item = "srifle_LRR_F";
-        level = 45;
-        cost = 100;
-        magazines[] = {
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag",
-            "7Rnd_408_Mag"
-        };
-        attachments[] = {
-            "optic_KHS_blk"
-        };
+
+        #include "east_optics_long.hpp"
+
+        attachments[] = {};
     };
 
     // GM6 Lynx
-    class GM6_Lynx_ARCO {
-        name = "GM6 Lynx (ARCO)";
+    class GM6_Lynx {
+        name = "GM6 Lynx";
         item = "srifle_GM6_F";
         level = 46;
         cost = 100;
-        magazines[] = {
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag"
+
+        class Standard: WLCAmmo {
+            level = 46;
+            name = "Standard";
+            magazines[] = {
+                { "5Rnd_127x108_Mag", 6 }
+            };
         };
-        attachments[] = {
-            "optic_Arco"
+
+        class ExtraAmmo: WLCAmmo {
+            level = 47;
+            name = "Extra Ammo";
+            magazines[] = {
+                { "5Rnd_127x108_Mag", 9 }
+            };
         };
-    };
-    class GM6_Lynx_LRPS {
-        name = "GM6 Lynx (LRPS)";
-        item = "srifle_GM6_F";
-        level = 46;
-        cost = 100;
-        magazines[] = {
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag"
+
+        class APDS: WLCAmmo {
+            level = 48;
+            name = "APDS";
+            magazines[] = {
+                { "5Rnd_127x108_APDS_Mag", 6 }
+            };
         };
-        attachments[] = {
-            "optic_LRPS"
+
+        class APDSExtraAmmo: WLCAmmo {
+            level = 49;
+            name = "APDS, Extra Ammo";
+            magazines[] = {
+                { "5Rnd_127x108_APDS_Mag", 9 }
+            };
         };
-    };
-    class GM6_Lynx_DMS {
-        name = "GM6 Lynx (DMS)";
-        item = "srifle_GM6_F";
-        level = 46;
-        cost = 100;
-        magazines[] = {
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag"
-        };
-        attachments[] = {
-            "optic_DMS"
-        };
-    };
-    class GM6_Lynx_Kahlia {
-        name = "GM6 Lynx (Kahlia)";
-        item = "srifle_GM6_F";
-        level = 46;
-        cost = 100;
-        magazines[] = {
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag",
-            "5Rnd_127x108_APDS_Mag"
-        };
-        attachments[] = {
-            "optic_KHS_blk"
-        };
+
+        #include "east_optics_long.hpp"
+
+        attachments[] = {};
     };
 };

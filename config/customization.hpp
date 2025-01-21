@@ -1,3 +1,5 @@
+class WLCAmmo {};
+class WLCAttachment {};
 class CfgWLCCustomization {
     class WEST {
         #include "west\customization\west_primary.hpp"
