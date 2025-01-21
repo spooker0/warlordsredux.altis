@@ -23,12 +23,18 @@ class WLCListBox: RscListBox {
         border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa";
     };
     style = LB_TEXTURES;
+};
 
+class WLCItemListBox: WLCListBox {
     x = 0.015;
     y = 0.075;
     w = 0.5;
     h = 0.9;
     rowHeight = 0.1;
+};
+
+class WLCComboBox: RscCombo {
+
 };
 
 class WLCSelectButton: RscButton {
@@ -193,7 +199,7 @@ class WLC_MenuUI {
             x = 0.015;
             w = 0.15 - 0.015;
         };
-        class WLC_PrimarySelect: WLCListBox {
+        class WLC_PrimarySelect: WLCItemListBox {
             idc = WLC_PRIMARY_SELECT;
         };
 
@@ -203,7 +209,7 @@ class WLC_MenuUI {
             x = 0.15 + 0.015;
             w = 0.15 - 0.015;
         };
-        class WLC_SecondarySelect: WLCListBox {
+        class WLC_SecondarySelect: WLCItemListBox {
             idc = WLC_SECONDARY_SELECT;
         };
 
@@ -213,7 +219,7 @@ class WLC_MenuUI {
             x = 0.3 + 0.015;
             w = 0.15 - 0.015;
         };
-        class WLC_LauncherSelect: WLCListBox {
+        class WLC_LauncherSelect: WLCItemListBox {
             idc = WLC_LAUNCHER_SELECT;
         };
 
@@ -223,7 +229,7 @@ class WLC_MenuUI {
             x = 0.45 + 0.015;
             w = 0.15 - 0.015;
         };
-        class WLC_UniformSelect: WLCListBox {
+        class WLC_UniformSelect: WLCItemListBox {
             idc = WLC_UNIFORM_SELECT;
         };
 
@@ -233,7 +239,7 @@ class WLC_MenuUI {
             x = 0.6 + 0.015;
             w = 0.15 - 0.015;
         };
-        class WLC_VestSelect: WLCListBox {
+        class WLC_VestSelect: WLCItemListBox {
             idc = WLC_VEST_SELECT;
         };
 
@@ -243,7 +249,7 @@ class WLC_MenuUI {
             x = 0.75 + 0.015;
             w = 0.15 - 0.015;
         };
-        class WLC_HelmetSelect: WLCListBox {
+        class WLC_HelmetSelect: WLCItemListBox {
             idc = WLC_HELMET_SELECT;
         };
 
@@ -296,20 +302,37 @@ class WLC_MenuUI {
             h = 0.2;
         };
 
+        class WLC_WeaponAttachmentsSelector: WLCComboBox {
+            idc = WLC_WEAPON_ATTACHMENT_SELECT;
+            x = 0.55;
+            y = 0.31;
+            w = 0.3;
+            h = 0.045;
+        };
         class WLC_WeaponAttachmentsDisplay: RscControlsGroup {
             idc = WLC_ATTACHMENT_DISPLAY;
             x = 0.55;
-            y = 0.36;
+            y = 0.37;
             w = 0.45;
-            h = 0.14;
+            h = 0.1;
+        };
+
+        class WLC_MagazinesSelector: WLCComboBox {
+            idc = WLC_MAGAZINE_SELECT;
+            x = 0.55;
+            y = 0.48;
+            w = 0.3;
+            h = 0.05;
+            rowHeight = 0.04;
         };
         class WLC_MagazinesDisplay: RscControlsGroup {
             idc = WLC_MAGAZINE_DISPLAY;
             x = 0.55;
-            y = 0.53;
+            y = 0.54;
             w = 0.45;
             h = 0.25;
         };
+
         class WLC_ItemCostDisplay: RscStructuredText {
             idc = WLC_COST_DISPLAY;
             x = 0.55;

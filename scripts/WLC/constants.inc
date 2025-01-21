@@ -2,7 +2,7 @@
 #include "..\..\core\server_macros.inc"
 
 #define WLC_ENABLED true
-#define WLC_DEBUG false
+#define WLC_DEBUG true
 
 #define WLC_DISPLAY 12000
 
@@ -34,3 +34,6 @@
 #define WLC_WEAPON_DISPLAY_BG 12024
 #define WLC_WEAPON_DISPLAY_TOOLTIP_HELPER 12025
 #define WLC_MASS_DISPLAY 12026
+
+#define WLC_WEAPON_ATTACHMENT_SELECT 12027
+#define WLC_MAGAZINE_SELECT 12028

@@ -154,6 +154,7 @@ class CfgFunctions {
 			class respawnBagAction {};
 			class reviveAction {};
 			class slingAddAction {};
+			class stabilizeBoatAction {};
 			class vehicleLockAction {};
 			class vehicleLockUpdate {};
 		};
@@ -363,6 +364,8 @@ class CfgFunctions {
 		class Default {
 			file = "scripts\WLC";
 			class action {};
+			class buildAmmo {};
+			class buildAttachments {};
 			class buildMenu {};
 			class clientEquip {};
 			class getLevelInfo {};
@@ -373,6 +376,7 @@ class CfgFunctions {
 			class onSelection {};
 			class serverRequest {};
 			class setScore {};
+			class updateItemCost {};
 		};
 	};
 	class WLM {

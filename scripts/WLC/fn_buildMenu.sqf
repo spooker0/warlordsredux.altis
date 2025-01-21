@@ -70,29 +70,7 @@ private _sumCost = 0;
             _select lbSetText [_index, format ["(Lvl %1) %2", _requiredLevel, _displayName]];
         };
 
-        private _mags = _customization getOrDefault ["magazines", []];
-        private _magsDisplay = if (count _mags > 0) then {
-            private _magStrings = _mags apply {
-                format [" + %1", [_x] call WL2_fnc_getMagazineName];
-            };
-            format ["\nMagazines:\n%1\n", _magStrings joinString "\n"];
-        } else {
-            "";
-        };
-
-        private _attachments = _customization getOrDefault ["attachments", []];
-        private _attachmentsDisplay = if (count _attachments > 0) then {
-            private _attachmentStrings = _attachments apply {
-                private _attachmentName = getText (configFile >> "CfgWeapons" >> _x >> "displayName");
-                format [" + %1", _attachmentName];
-            };
-            format ["\nAttachments:\n%1\n", _attachmentStrings joinString "\n"];
-        } else {
-            "";
-        };
-
-        // private _tooltip = format ["%1\nUnlock: Level %2\nCost: %3%4\n%5%6", _name, _requiredLevel, _moneySign, _cost, _magsDisplay, _attachmentsDisplay];
-        private _tooltip = format ["%1\nUnlock: Level %2\n%3%4", _name, _requiredLevel, _magsDisplay, _attachmentsDisplay];
+        private _tooltip = format ["%1\nUnlock: Level %2\nCost: %3%4", _name, _requiredLevel, _moneySign, _cost];
         _select lbSetTooltip [_index, _tooltip];
     } forEach _customizationList;
     _select lbSortBy ["VALUE", false];

@@ -11,4 +11,12 @@ private _data = createHashMap;
     _data set [_type, _customizationData];
 } forEach ["Uniform", "Vest", "Helmet", "Primary", "Secondary", "Launcher"];
 
+{
+    private _type = _x;
+    private _attachmentData = profileNamespace getVariable [format ["WLC_%1_Attach", _type], ""];
+    private _ammoData = profileNamespace getVariable [format ["WLC_%1_Ammo", _type], ""];
+    _data set [_type + "Attachment", _attachmentData];
+    _data set [_type + "Ammo", _ammoData];
+} forEach ["Primary", "Secondary", "Launcher"];
+
 [_data, _side, player] remoteExec ["WLC_fnc_serverRequest", 2];
