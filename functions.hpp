@@ -163,6 +163,7 @@ class CfgFunctions {
 			class drawJammerCircle {};
 			class getDir {};
 			class getPos {};
+			class helmetInterface {};
 			class iconColor {};
 			class iconDrawGPS {};
 			class iconDrawMap {};

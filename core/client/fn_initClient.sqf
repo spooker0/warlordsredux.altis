@@ -322,3 +322,4 @@ player spawn APS_fnc_setupProjectiles;
 0 spawn WL2_fnc_cleanupCarrier;
 0 spawn WL2_fnc_buyMenuAction;
 0 spawn WL2_fnc_reviveAction;
+0 spawn WL2_fnc_helmetInterface;

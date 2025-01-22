@@ -137,19 +137,6 @@ if (_action == "scan") exitWith {
 		_param2 setVariable ["BIS_WL_revealTrigger", _revealTrigger, true];
 		[_param2, _side] remoteExec ["WL2_fnc_sectorScanHandle", [0, -2] select isDedicated];
 
-		[_revealTrigger, _side] spawn {
-			params ["_revealTrigger", "_side"];
-			while {alive _revealTrigger} do {
-				private _allDetected = list _revealTrigger;
-				{
-					if (side group _x != _side) then {
-						_side reportRemoteTarget [_x, 5];
-					};
-				} forEach _allDetected;
-				sleep 5;
-			};
-		};
-
 		waitUntil {sleep 0.25; BIS_WL_competingSides findIf {(_param2 getVariable [format ["BIS_WL_lastScanEnd_%1", _x], -9999]) > serverTime} == -1};
 		deleteVehicle _revealTrigger;
 		_param2 setVariable ["BIS_WL_revealTrigger", nil, true];
