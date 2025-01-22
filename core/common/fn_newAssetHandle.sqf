@@ -57,6 +57,17 @@ if (_asset isKindOf "Man") then {
 
 	[_asset] remoteExec ["WL2_fnc_rearmAction", 0, true];
 
+	// HMD missile alert system
+	_asset addEventHandler ["IncomingMissile", {
+		params ["_target", "_ammo", "_vehicle", "_instigator", "_missile"];
+		private _incomingMissiles = _target getVariable ["WL_incomingMissle", []];
+		_incomingMissiles pushBack _missile;
+		_incomingMissiles = _incomingMissiles select {
+			alive _x;
+		};
+		_target setVariable ["WL_incomingMissle", _incomingMissiles, true];
+	}];
+
 	switch (typeOf _asset) do {
 		// Dazzlers
 		case "O_T_Truck_03_device_ghex_F";
