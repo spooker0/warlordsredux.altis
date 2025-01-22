@@ -17,12 +17,22 @@ sleep WL_TIMEOUT_SHORT;
 
 _mapClickEH = addMissionEventHandler ["MapSingleClick", {
 	params ["_units", "_pos", "_alt", "_shift"];
-	if (surfaceIsWater _pos) then {
-		BIS_WL_waterDropPos = _pos;
-	} else {
-		playSound "AddItemFailed";
+	_thisArgs params ["_cost"];
+
+	private _nearOwnedSectors = (BIS_WL_sectorsArray # 0) select {
+		_pos distance _x < 4000;
 	};
-}];
+	if (count _nearOwnedSectors == 0 && _cost > 1000) then {
+		playSound "AddItemFailed";
+		systemChat "Heavy boat must be within 4km of an owned sector.";
+	} else {
+		if (surfaceIsWater _pos) then {
+			BIS_WL_waterDropPos = _pos;
+		} else {
+			playSound "AddItemFailed";
+		};
+	};
+}, [_cost]];
 
 waitUntil {
 	sleep WL_TIMEOUT_MIN;
