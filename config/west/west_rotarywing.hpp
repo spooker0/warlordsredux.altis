@@ -3,6 +3,17 @@ class RotaryWing {
         cost = 300;
         requirements[] = {"H"};
         killReward = 100;
+        class Pilot: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {};
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "240Rnd_CMFlare_Chaff_Magazine"
+            };
+            addWeapons[] = {
+                "CMFlareLauncher"
+            };
+        };
     }; // "MH-9 Hummingbird"
 
     class B_Heli_Transport_01_F {
@@ -76,6 +87,19 @@ class RotaryWing {
         requirements[] = {"H"};
         rearm = 300;
         killReward = 200;
+
+        class Pilot: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {};
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "240Rnd_CMFlare_Chaff_Magazine"
+            };
+            addWeapons[] = {
+                "CMFlareLauncher"
+            };
+        };
+
     }; // "AH-9 Pawnee"
 
     class B_Heli_light_03_dynamicLoadout_F {

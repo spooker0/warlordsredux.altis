@@ -124,9 +124,20 @@ addMissionEventHandler ["Draw3D", {
         private _missile = _x;
         private _missilePos = _missile modelToWorldVisual [0, 0, 0];
         private _distance = player distance _missile;
+        private _color = switch true do {
+            case (_distance > 5000): {
+                [1, 1, 1, 1]
+            };
+            case (_distance > 2500): {
+                [1, 1, 0, 1]
+            };
+            default {
+                [1, 0, 0, 1]
+            };
+        };
         drawIcon3D [
             "\A3\ui_f\data\IGUI\RscCustomInfo\Sensors\Targets\missile_ca.paa",
-            [1, 0, 0, 1],
+            _color,
             _missilePos,
             0.8,
             0.8,
@@ -151,7 +162,7 @@ while { !BIS_WL_missionEnd } do {
     };
 
     private _vehicleSensors = listVehicleSensors _vehicle;
-    private _inAllowedVehicle = count _vehicleSensors > 0;
+    private _inAllowedVehicle = _vehicle isKindOf "Air" || count _vehicleSensors > 0;
 
     WL_HelmetInterface = _isPilotHelmet && _inAllowedVehicle;
 };
