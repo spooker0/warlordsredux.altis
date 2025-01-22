@@ -25,6 +25,7 @@ class RotaryWing {
         requirements[] = {"H"};
         offset[] = {0, 10, 0};
         killReward = 125;
+        hasHMD = 1;
     }; // "PO-30 Orca (Unarmed)"
 
     class O_Heli_Light_02_dynamicLoadout_F {
@@ -33,6 +34,7 @@ class RotaryWing {
         offset[] = {0, 10, 0};
         killReward = 300;
         rearm = 300;
+        hasHMD = 1;
     }; // "PO-30 Orca"
 
     class O_Heli_Attack_02_dynamicLoadout_F {
@@ -46,6 +48,7 @@ class RotaryWing {
             "PylonRack_12Rnd_PG_missiles",
             "PylonMissile_Missile_KH58_INT_x1"
         };
+        hasHMD = 1;
 
         class Pilot: WLTurretDefaults {
             turret[] = { -1 };

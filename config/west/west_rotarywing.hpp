@@ -3,17 +3,6 @@ class RotaryWing {
         cost = 300;
         requirements[] = {"H"};
         killReward = 100;
-        class Pilot: WLTurretDefaults {
-            turret[] = { -1 };
-            removeMagazines[] = {};
-            removeWeapons[] = {};
-            addMagazines[] = {
-                "240Rnd_CMFlare_Chaff_Magazine"
-            };
-            addWeapons[] = {
-                "CMFlareLauncher"
-            };
-        };
     }; // "MH-9 Hummingbird"
 
     class B_Heli_Transport_01_F {
@@ -42,6 +31,8 @@ class RotaryWing {
         offset[] = {0, 11, 0};
         killReward = 200;
         rearm = 300;
+
+        hasHMD = 1;
 
         class LeftGunner: WLTurretDefaults {
             turret[] = { 1 };
@@ -87,19 +78,6 @@ class RotaryWing {
         requirements[] = {"H"};
         rearm = 300;
         killReward = 200;
-
-        class Pilot: WLTurretDefaults {
-            turret[] = { -1 };
-            removeMagazines[] = {};
-            removeWeapons[] = {};
-            addMagazines[] = {
-                "240Rnd_CMFlare_Chaff_Magazine"
-            };
-            addWeapons[] = {
-                "CMFlareLauncher"
-            };
-        };
-
     }; // "AH-9 Pawnee"
 
     class B_Heli_light_03_dynamicLoadout_F {
@@ -107,6 +85,9 @@ class RotaryWing {
         name = "WY-55 Hellcat";
         description = "WY-55 Hellcat is a light attack helicopter.";
         spawn = "I_Heli_light_03_dynamicLoadout_F";
+
+        hasHMD = 1;
+
         requirements[] = {"H"};
         textures[] = {
             "\A3\Air_F_Enoch\Heli_Light_03\data\Heli_Light_03_base_EAF_CO.paa",
@@ -128,6 +109,7 @@ class RotaryWing {
         allowPylonMagazines[] = {
             "PylonRack_Missile_HARM_x1"
         };
+        hasHMD = 1;
 
         class Pilot: WLTurretDefaults {
             turret[] = { -1 };

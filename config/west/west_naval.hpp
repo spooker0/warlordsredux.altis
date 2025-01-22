@@ -29,7 +29,7 @@ class Naval {
         description = "Riverine Command Boat is an upgraded, heavily-armed variant of the Speedboat.";
         spawn = "B_Boat_Armed_01_minigun_F";
         variant = 1;
-        cost = 1000;
+        cost = 1500;
         requirements[] = {"W"};
         rearm = 400;
         killReward = 100;

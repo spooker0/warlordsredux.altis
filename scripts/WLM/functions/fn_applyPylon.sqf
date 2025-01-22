@@ -54,7 +54,3 @@ private _assetTurrets = (allTurrets _asset) + [[-1]];
         };
     } forEach _weaponsInTurret;
 } forEach _assetTurrets;
-
-_asset setVehicleReceiveRemoteTargets true;
-_asset setVehicleReportRemoteTargets true;
-_asset setVehicleReportOwnPosition true;

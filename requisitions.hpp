@@ -28,6 +28,7 @@ class CfgVehicleClassName {
 
     disallowMagazines[] = array;     // CfgMagazine classes to disallow in the vehicle.
     allowPylonMagazines[] = array;   // CfgMagazine classes to allow on pylons of aircraft.
+    hasHMD = number (0|1);           // Whether the vehicle supports the helmet mounted display system.
 
     WLTurretDefaults[] = classes;    // Turret defaults allows replacing weapons/ammo from a turret of a vehicle.
 };
