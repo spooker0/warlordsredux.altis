@@ -3,6 +3,7 @@
 params ["_asset", ["_owner", objNull]];
 
 [_asset] call WL2_fnc_lastHitHandler;
+_asset setVariable ["WL_spawnedAsset", true, true];
 
 if (isServer) then {
 	if !(unitIsUAV _asset) then {
@@ -56,6 +57,10 @@ if (_asset isKindOf "Man") then {
 	0 remoteExec ["WL2_fnc_updateVehicleList", 2];
 
 	[_asset] remoteExec ["WL2_fnc_rearmAction", 0, true];
+
+	_asset setVehicleReceiveRemoteTargets true;
+	_asset setVehicleReportRemoteTargets true;
+	_asset setVehicleReportOwnPosition true;
 
 	// HMD missile alert system
 	_asset addEventHandler ["IncomingMissile", {

@@ -19,6 +19,7 @@ class RemoteControl {
         requirements[] = {};
         offset[] = {0, 3, 0};
         killReward = 100;
+        hasHMD = 1;
     }; // AR-2
 
     class B_UGV_01_rcws_F {
@@ -46,6 +47,8 @@ class RemoteControl {
         offset[] = {0, 3, 0};
         killReward = 200;
         rearm = 300;
+
+        hasHMD = 1;
 
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
@@ -105,6 +108,7 @@ class RemoteControl {
         requirements[] = {"A"};
         rearm = 300;
         killReward = 600;
+        hasHMD = 1;
     }; // "Greyhawk"
 
     class B_T_UAV_03_dynamicLoadout_F {
@@ -112,6 +116,9 @@ class RemoteControl {
         requirements[] = {"H"};
         rearm = 600;
         killReward = 600;
+
+        hasHMD = 1;
+
         class Pilot: WLTurretDefaults {
             turret[] = { -1 };
             removeMagazines[] = {
