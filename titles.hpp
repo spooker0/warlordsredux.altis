@@ -1,5 +1,47 @@
-class RscTitles
-{
+// deliberately outside titles
+class RscWLLoadingScreen {
+	idd = -1;
+	duration = 10e10;
+	fadein = 0;
+	fadeout = 0;
+	name = "loading screen";
+	onLoad = "uiNamespace setVariable ['RscWLLoadingScreen', _this select 0];";
+	class controlsBackground {
+		class LoadingBackground : RscText {
+			x = safezoneXAbs;
+			y = safezoneY;
+			w = safezoneWAbs;
+			h = safezoneH;
+			text = "";
+			colorText[] = { 0, 0, 0, 0 };
+			colorBackground[] = { 0.1, 0.1, 0.1, 1 };
+		};
+		class WLReduxLogo : RscPicture {
+			style = 48 + 0x800; // ST_PICTURE + ST_KEEP_ASPECT_RATIO
+			x = 0;
+			y = 0;
+			w = 1;
+			h = 1;
+			text = "img\wl_logo_ca.paa";
+		};
+	};
+
+	class controls {
+		class Title1 : RscText {
+			idc = 101;
+			style = 2;
+			x = 0;
+			y = 0;
+			w = 1;
+			h = 0.1;
+			sizeEx = 0.05;
+			colorText[] = { 1, 1, 1, 1 };
+			text = "$STR_LOADING"; // "Loading" text in the middle of the screen
+		};
+	};
+};
+
+class RscTitles {
 	#include "scripts\GF_Earplugs\GF_Earplugs_HPP.hpp"
 
 	class RscJammingIndicator {
