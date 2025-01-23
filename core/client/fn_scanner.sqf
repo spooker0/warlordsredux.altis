@@ -2,6 +2,9 @@
 
 params ["_asset"];
 
+if (isNil "WL_ScannerUnits") then {
+    WL_ScannerUnits = [];
+};
 WL_ScannerUnits = WL_ScannerUnits + [_asset];
 while { alive _asset } do {
     private _assetSide = [_asset] call WL2_fnc_getAssetSide;

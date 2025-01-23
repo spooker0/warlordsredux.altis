@@ -5,9 +5,19 @@ _owner = owner _warlord;
 
 private _uid = "";
 while { _uid == "" } do {
-	private _playerUID = getPlayerUID _warlord;
-	if (!isNil "_playerUID" && _playerUID != "") then {
-		_uid = _playerUID;
+	private _playerUid = getPlayerUID _warlord;
+	if (!isNil "_playerUid" && {_playerUid != ""}) then {
+		_uid = _playerUid;
+	} else {
+		diag_log "Cannot find player UID, retrying...";
+	};
+
+	private _playerId = getPlayerID _warlord;
+	private _playerUidFromId = _playerId getUserInfo 2;
+	if (!isNil "_playerUidFromId" && {_playerUidFromId != ""}) then {
+		_uid = _playerUidFromId;
+	} else {
+		diag_log "Cannot find player UID from ID, retrying...";
 	};
 	sleep 0.5;
 };

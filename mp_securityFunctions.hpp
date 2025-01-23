@@ -24,6 +24,10 @@ class CfgRemoteExec {
 			allowedTargets = 1;
 		};
 
+		class WL2_fnc_scanner {
+			allowedTargets = 0;
+		};
+
 		class WL2_fnc_removeAction {
 			allowedTargets = 1;
 		};
