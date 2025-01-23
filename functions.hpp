@@ -113,6 +113,7 @@ class CfgFunctions {
 			class repackMagazines {};
 			class revive {};
 			class rita {};
+			class scanner {};
 			class sideToFaction {};
 			class spectrumAction {};
 			class teammatesAvailability {};

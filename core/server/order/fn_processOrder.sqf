@@ -102,6 +102,26 @@ private _turretOverridesForVehicle = _turretOverrides getOrDefault [_orderedClas
 	};
 } forEach _turretOverridesForVehicle;
 
+private _disallowListForPylon = missionNamespace getVariable ["WL2_disallowMagazinesForVehicle", createHashMap];
+private _disallowListForAsset = _disallowListForPylon getOrDefault [_orderedClass, []];
+{
+	private _disallowedMagazine = _x;
+	{
+		private _pylonIndex = _x # 0;
+		private _pylonMagazine = _x # 3;
+		if (_pylonMagazine == _disallowedMagazine) then {
+			_asset setPylonLoadout [_pylonIndex, ""];
+			private _assetWeapons = weapons _asset;
+			_assetWeapons = _assetWeapons select {
+				_disallowedMagazine in (compatibleMagazines _x);
+			};
+			{
+				_asset removeWeaponGlobal _x;
+			} forEach _assetWeapons;
+		};
+	} forEach (getAllPylonsInfo _asset);
+} forEach _disallowListForAsset;
+
 private _defaultMags = magazinesAllTurrets _asset;
 _asset setVariable ["BIS_WL_defaultMagazines", _defaultMags, true];
 _asset setVariable ["WLM_savedDefaultMags", _defaultMags, true];

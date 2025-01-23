@@ -103,6 +103,31 @@ class RemoteControl {
         };
     };
 
+    class O_UAV_02_recon_F {
+        cost = 2000;
+        name = "KH-3R Fenghuang (Recon)";
+        description = "Fenghuang (Recon) is an unarmed variant of the Fenghuang with a powerful scanner.";
+        spawn = "O_UAV_02_dynamicLoadout_F";
+        requirements[] = {"A"};
+        rearm = 300;
+        killReward = 400;
+        hasHMD = 1;
+        hasScanner = 1;
+
+        disallowMagazines[] = {
+            "PylonRack_12Rnd_PG_missiles",
+            "PylonRack_1Rnd_Missile_AA_04_F",
+            "PylonRack_1Rnd_AAA_missiles",
+            "PylonRack_1Rnd_LG_scalpel",
+            "PylonRack_3Rnd_LG_scalpel",
+            "PylonRack_7Rnd_Rocket_04_HE_F",
+            "PylonRack_7Rnd_Rocket_04_AP_F",
+            "PylonRack_12Rnd_missiles",
+            "PylonMissile_1Rnd_Bomb_04_F",
+            "PylonMissile_1Rnd_Mk82_F"
+        };
+    };
+
     class O_T_UAV_04_CAS_F {
         cost = 6000;
         requirements[] = {"A"};
