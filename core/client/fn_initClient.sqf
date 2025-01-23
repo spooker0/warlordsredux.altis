@@ -1,6 +1,6 @@
 #include "..\warlords_constants.inc"
 
-startLoadingScreen ["Loading...", "RscWLLoadingScreen"];
+["client_init"] call BIS_fnc_startLoadingScreen;
 
 WL_LoadingState = 0;
 0 spawn {
@@ -10,15 +10,16 @@ WL_LoadingState = 0;
 	private _indicator = _loadingScreen displayCtrl 101;
 
 	private _stepText = "";
+	private _totalLoadSteps = 12;
 	waitUntil {
 		sleep 0.1;
-		_stepText = format ["Client Loading Step %1/10", WL_LoadingState];
+		_stepText = format ["Client Loading Step %1/%2", WL_LoadingState, _totalLoadSteps];
 		_indicator ctrlSetText _stepText;
-		serverTime - _startTime > 60 || WL_LoadingState >= 10
+		serverTime - _startTime > 60 || WL_LoadingState >= _totalLoadSteps
 	};
 
-	if (WL_LoadingState < 10) exitWith {
-		endLoadingScreen;
+	if (WL_LoadingState < _totalLoadSteps) exitWith {
+		["client_init"] call BIS_fnc_endLoadingScreen;
 		"BlockScreen" setDebriefingText [
 			"Load Failed",
 			format ["It seems that client loading has failed to complete in time. It was stuck on %1. Please rejoin from the lobby. Thanks for understanding.", _stepText],
@@ -53,8 +54,10 @@ if ((call BIS_fnc_admin) == 0) then {
 			missionNamespace getVariable _switch
 		}
 	};
+	WL_LoadingState = 2;
+
 	if (missionNamespace getVariable _switch) exitWith {
-		endLoadingScreen;
+		["client_init"] call BIS_fnc_endLoadingScreen;
 		"BlockScreen" setDebriefingText ["Switch Teams", localize "STR_A3_WL_switch_teams_info", localize "STR_A3_WL_switch_teams"];
 		endMission "BlockScreen";
 		forceEnd;
@@ -66,8 +69,10 @@ if ((call BIS_fnc_admin) == 0) then {
 			missionNamespace getVariable _imb
 		}
 	};
+	WL_LoadingState = 3;
+
 	if (missionNamespace getVariable _imb) exitWith {
-		endLoadingScreen;
+		["client_init"] call BIS_fnc_endLoadingScreen;
 		"BlockScreen" setDebriefingText ["Switch Teams", "It seems that the teams are not balanced, please head back to the lobby and join the other team, Thank you.", "Teams are imbalanced."];
 		endMission "BlockScreen";
 		forceEnd;
@@ -78,16 +83,16 @@ if ((call BIS_fnc_admin) == 0) then {
 	if ((_list findIf {
 		[_x, _text] call BIS_fnc_inString
 	}) != -1) exitWith {
-		endLoadingScreen;
+		["client_init"] call BIS_fnc_endLoadingScreen;
 		"BlockScreen" setDebriefingText ["Admin", localize "STR_A3_nameFilter_info", localize "STR_A3_nameFilter"];
 		endMission "BlockScreen";
 		forceEnd;
 	};
 };
-WL_LoadingState = 2;
+WL_LoadingState = 4;
 
 if !(BIS_WL_playerSide in BIS_WL_sidesArray) exitWith {
-	endLoadingScreen;
+	["client_init"] call BIS_fnc_endLoadingScreen;
 	"BlockScreen" setDebriefingText ["Error", "Your unit is not a Warlords competitor", "Warlords Mission Error."];
 	endMission "BlockScreen";
 	forceEnd;
@@ -120,7 +125,7 @@ setCurrentChannel 1;
 enableEnvironment [false, true];
 
 call MRTM_fnc_settingsInit;
-WL_LoadingState = 3;
+WL_LoadingState = 5;
 
 uiNamespace setVariable ["BIS_WL_purchaseMenuLastSelection", [0, 0, 0]];
 uiNamespace setVariable ["activeControls", []];
@@ -134,13 +139,13 @@ if !(_uid in (getArray (missionConfigFile >> "adminIDs"))) then {
 if !(isServer) then {
 	"setup" call WL2_fnc_handleRespawnMarkers;
 };
-WL_LoadingState = 4;
+WL_LoadingState = 6;
 
 call WL2_fnc_sectorsInitClient;
-WL_LoadingState = 5;
+WL_LoadingState = 7;
 
 ["client", true] call WL2_fnc_updateSectorArrays;
-WL_LoadingState = 6;
+WL_LoadingState = 8;
 
 private _specialStateArray = (BIS_WL_sectorsArray # 6) + (BIS_WL_sectorsArray # 7);
 {
@@ -150,7 +155,7 @@ private _specialStateArray = (BIS_WL_sectorsArray # 6) + (BIS_WL_sectorsArray # 
 if !(isServer) then {
 	BIS_WL_playerSide call WL2_fnc_parsePurchaseList;
 };
-WL_LoadingState = 7;
+WL_LoadingState = 9;
 
 0 spawn WL2_fnc_sectorCaptureStatus;
 0 spawn {
@@ -176,7 +181,7 @@ _mrkrTargetFriendly setMarkerColorLocal BIS_WL_colorMarkerFriendly;
 
 0 spawn WL2_fnc_clientEH;
 call WL2_fnc_arsenalSetup;
-WL_LoadingState = 8;
+WL_LoadingState = 10;
 
 0 spawn {
 	waitUntil {
@@ -195,7 +200,7 @@ call WL2_fnc_refreshCurrentTargetData;
 call WL2_fnc_sceneDrawHandle;
 call WL2_fnc_targetResetHandle;
 [player, "init"] spawn WL2_fnc_hintHandle;
-WL_LoadingState = 9;
+WL_LoadingState = 11;
 
 ["OSD"] spawn WL2_fnc_setupUI;
 0 spawn WL2_fnc_timer;
@@ -244,9 +249,9 @@ WL_LoadingState = 9;
 0 spawn WL2_fnc_mapIcons;
 
 0 spawn GFE_fnc_earplugs;
-WL_LoadingState = 10;
+WL_LoadingState = 12;
 
-endLoadingScreen;
+["client_init"] call BIS_fnc_endLoadingScreen;
 "Initialized" call WL2_fnc_announcer;
 [toUpper localize "STR_A3_WL_popup_init"] spawn WL2_fnc_smoothText;
 0 spawn WL2_fnc_welcome;

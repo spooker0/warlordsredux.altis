@@ -1,3 +1,7 @@
+uiNamespace setVariable ["WL_HelmetInterfaceLaserIcons", []];
+uiNamespace setVariable ["WL_HelmetInterfaceTargetVehicleIcons", []];
+uiNamespace setVariable ["WL_HelmetInterfaceTargetInfantryIcons", []];
+
 addMissionEventHandler ["Draw3D", {
     if !(WL_HelmetInterface) exitWith {};
 
@@ -85,7 +89,7 @@ addMissionEventHandler ["Draw3D", {
         sleep 0.1;
 
         if !(WL_HelmetInterface) then {
-            sleep 5;
+            sleep 1;
             continue;
         };
 
@@ -125,12 +129,15 @@ addMissionEventHandler ["Draw3D", {
         if (_vehicle == player) then {
             _vehicle = getConnectedUAV player;
         };
-        if (isNull _vehicle) exitWith {};
+        if (isNull _vehicle) then {
+            sleep 1;
+            continue;
+        };
         private _sensorTargets = (getSensorTargets _vehicle) apply {
             _x # 0;
         };
         private _remoteTargets = ((listRemoteTargets _side) select {
-            _x # 1 > -30;
+            _x # 1 > -10;
         }) apply {
             _x # 0;
         };
@@ -140,7 +147,8 @@ addMissionEventHandler ["Draw3D", {
             alive _x &&
             lifeState _x != "INCAPACITATED" &&
             _x getVariable ["WL_spawnedAsset", false] &&
-            _x distance _vehicle < 5000
+            _x distance _vehicle < 5000 &&
+            _x != _vehicle;
         };
 
         private _targetInfantryIcons = [];
@@ -204,7 +212,7 @@ addMissionEventHandler ["Draw3D", {
 
 0 spawn {
     while { !BIS_WL_missionEnd } do {
-        sleep 5;
+        sleep 1;
 
         // private _helmet = headgear player;
         // private _isPilotHelmet = ["Pilot", _helmet] call BIS_fnc_inString;

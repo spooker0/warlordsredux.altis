@@ -62,16 +62,24 @@ if (_asset isKindOf "Man") then {
 	_asset setVehicleReportRemoteTargets true;
 	_asset setVehicleReportOwnPosition true;
 
-	// HMD missile alert system
-	_asset addEventHandler ["IncomingMissile", {
-		params ["_target", "_ammo", "_vehicle", "_instigator", "_missile"];
-		private _incomingMissiles = _target getVariable ["WL_incomingMissle", []];
-		_incomingMissiles pushBack _missile;
-		_incomingMissiles = _incomingMissiles select {
-			alive _x;
-		};
-		_target setVariable ["WL_incomingMissle", _incomingMissiles, true];
-	}];
+	private _hasHMDMap = missionNamespace getVariable ["WL2_hasHMD", createHashMap];
+	if (_hasHMDMap getOrDefault [_assetActualType, false]) then {
+		// HMD missile alert system
+		_asset addEventHandler ["IncomingMissile", {
+			params ["_target", "_ammo", "_vehicle", "_instigator", "_missile"];
+			private _incomingMissiles = _target getVariable ["WL_incomingMissle", []];
+			_incomingMissiles pushBack _missile;
+			_incomingMissiles = _incomingMissiles select {
+				alive _x;
+			};
+			_target setVariable ["WL_incomingMissle", _incomingMissiles, true];
+		}];
+	};
+
+	private _hasScannerMap = missionNamespace getVariable ["WL2_hasScanner", createHashMap];
+	if (_hasScannerMap getOrDefault [_assetActualType, false]) then {
+		[_asset] remoteExec ["WL2_fnc_scanner", 0, true];
+	};
 
 	switch (typeOf _asset) do {
 		// Dazzlers

@@ -58,5 +58,6 @@ switch (_locality) do {
 		WL_VotePhase = 0;
 		WL_linkSectorMarkers = createHashmap;
 		WL_HelmetInterface = false;
+		WL_ScannerUnits = [];
 	};
 };

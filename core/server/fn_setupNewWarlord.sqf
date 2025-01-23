@@ -3,12 +3,21 @@ params ["_warlord"];
 _warlord setVariable ["BIS_WL_detectedByServer", true];
 _owner = owner _warlord;
 
-private _uid = getPlayerUID _warlord;
-while {_uid == ""} do {
-	_uid = getPlayerUID _warlord;
-	if (_uid == "") then {
-		private _playerId = getPlayerID _warlord;
-		_uid = _playerId getUserInfo 2;
+private _uid = "";
+while { _uid == "" } do {
+	private _playerUid = getPlayerUID _warlord;
+	if (!isNil "_playerUid" && {_playerUid != ""}) then {
+		_uid = _playerUid;
+	} else {
+		diag_log "Cannot find player UID, retrying...";
+	};
+
+	private _playerId = getPlayerID _warlord;
+	private _playerUidFromId = _playerId getUserInfo 2;
+	if (!isNil "_playerUidFromId" && {_playerUidFromId != ""}) then {
+		_uid = _playerUidFromId;
+	} else {
+		diag_log "Cannot find player UID from ID, retrying...";
 	};
 	sleep 0.5;
 };
@@ -28,12 +37,12 @@ _pList = serverNamespace getVariable "playerList";
 _boundToTeam = (_pList getOrDefault [_uid, [false]]) # 0;
 if (_boundToTeam) then {
 	_correctSide = ((_pList get _uid) # 1) == _sideW;
-	missionNamespace setVariable [_varSwitch, (!_correctSide), _owner];
+	missionNamespace setVariable [_varSwitch, !_correctSide, _owner];
+	missionNamespace setVariable [_varImb, false, _owner];
 
 	if (_correctSide) then {
 		_warlord setVariable ["BIS_WL_ownerAsset", _uid, true];
 		_warlord setVariable ["WL2_accessControl", 0, true];
-		missionNamespace setVariable [_varImb, false, _owner];
 		_friendlyFireVarName = format ["BIS_WL_%1_friendlyKillPenaltyEnd", _uid];
 		if ((serverNamespace getVariable _friendlyFireVarName) > serverTime) then {
 			[(serverNamespace getVariable _friendlyFireVarName)] remoteExec ["WL2_fnc_friendlyFireHandleClient", _owner];
@@ -47,14 +56,12 @@ if (_boundToTeam) then {
 		_enemyside = ([west, east] select {_x != _sideW}) # 0;
 		_enemyCnt = playersNumber _enemyside;
 		_imb = ((_friendlyCnt - _enemyCnt) > 3);
-		if (_imb) then {
-			missionNamespace setVariable [_varImb, _imb, _owner];
-		} else {
+		missionNamespace setVariable [_varImb, _imb, _owner];
+		if (!_imb) then {
 			_warlord setVariable ["BIS_WL_ownerAsset", _uid, true];
 			_warlord setVariable ["WL2_accessControl", 0, true];
 			_pList set [_uid, [true, _sideW]];
 			serverNamespace setVariable ["playerList", _pList];
-			missionNamespace setVariable [_varImb, _imb, _owner];
 		};
 	} else {
 		_warlord setVariable ["BIS_WL_ownerAsset", _uid, true];

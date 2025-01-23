@@ -1,6 +1,6 @@
 #include "..\warlords_constants.inc"
 
-startLoadingScreen ["Loading...", "RscWLLoadingScreen"];
+["server_init"] call BIS_fnc_startLoadingScreen;
 
 {createCenter _x} forEach [west, east, resistance, civilian];
 west setFriend [east, 0];
@@ -113,4 +113,4 @@ if !(["(EU) #11", serverName] call BIS_fnc_inString) then {
 	};
 };
 
-endLoadingScreen;
+["server_init"] call BIS_fnc_endLoadingScreen;
