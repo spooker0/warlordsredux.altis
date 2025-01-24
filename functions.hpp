@@ -129,6 +129,8 @@ class CfgFunctions {
 			class buyMenuAction {};
 			class catapultAction {};
 			class catapultActionEligibility {};
+			class controlGunnerAction {};
+			class controlGunnerEligibility {};
 			class claimAction {};
 			class claimEligibility {};
 			class dazzlerAction {};

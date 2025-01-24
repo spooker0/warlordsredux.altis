@@ -36,7 +36,7 @@ private _fastTravelSeizedExecute = {
     [
         0,
         "FTSeized",
-        "Strategy"
+        "Fast Travel"
     ]
 ] call WL2_fnc_addTargetMapButton;
 
@@ -61,7 +61,7 @@ private _fastTravelConflictExecute = {
     [
         getMissionConfigValue ["BIS_WL_fastTravelCostContested", 200],
         "FTConflict",
-        "Strategy"
+        "Fast Travel"
     ]
 ] call WL2_fnc_addTargetMapButton;
 
@@ -86,7 +86,7 @@ private _airAssaultExecute = {
     [
         getMissionConfigValue ["WL_airAssaultCost", 100],
         "FTAirAssault",
-        "Strategy"
+        "Fast Travel"
     ]
 ] call WL2_fnc_addTargetMapButton;
 
@@ -104,7 +104,7 @@ private _vehicleParadropExecute = {
     [
         getMissionConfigValue ["WL_vehicleParadropCost", 1000],
         "FTParadropVehicle",
-        "Strategy"
+        "Fast Travel"
     ]
 ] call WL2_fnc_addTargetMapButton;
 
@@ -122,7 +122,7 @@ private _scanExecute = {
     [
         getMissionConfigValue ["BIS_WL_scanCost", 750],
         "Scan",
-        "Strategy"
+        "Fast Travel"
     ]
 ] call WL2_fnc_addTargetMapButton;
 

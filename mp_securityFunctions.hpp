@@ -56,6 +56,10 @@ class CfgRemoteExec {
 			allowedTargets = 1;
 		};
 
+		class WL2_fnc_controlGunnerAction {
+			allowedTargets = 0;
+		};
+
 		class WL2_fnc_dazzlerAction {
 			allowedTargets = 1;
 		};
