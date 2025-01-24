@@ -68,36 +68,6 @@ class HeavyVehicles {
         };
     }; // "BTR-K Kamysh"
 
-    class O_APC_Tracked_02_AA_F {
-        cost = 5000;
-        requirements[] = {};
-        rearm = 500;
-        killReward = 350;
-        capValue = 4;
-        aps = 2;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {
-                "4Rnd_Titan_long_missiles_O",
-                "680Rnd_35mm_AA_shells_Tracer_Green"
-            };
-            removeWeapons[] = {
-                "missiles_titan_AA",
-                "autocannon_35mm"
-            };
-            addMagazines[] = {
-                "4Rnd_GAA_missiles",
-                "4Rnd_GAA_missiles",
-                "680Rnd_35mm_AA_shells_Tracer_Green"
-            };
-            addWeapons[] = {
-                "autocannon_35mm",
-                "missiles_titan_AA"
-            };
-        };
-    }; // "ZSU-39 Tigris"
-
     // class O_APC_Tracked_02_heavy_F {
     //     name = "BMP-K Kamysh";
     //     spawn = "O_APC_Tracked_02_cannon_F";
@@ -176,38 +146,6 @@ class HeavyVehicles {
         capValue = 4;
         aps = 3;
     }; // "T-100 Varsuk"
-
-    class O_APC_Tracked_02_AA_M_F {
-        name = "ZSU-49 Euphrates";
-        description = "ZSU-49 Euphrates is a variant of the ZSU-39 Tigris armed with Rhea missiles.";
-        spawn = "O_APC_Tracked_02_AA_F";
-        variant = 1;
-        cost = 9000;
-        requirements[] = {};
-        rearm = 450;
-        killReward = 600;
-        capValue = 4;
-        aps = 2;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {
-                "4Rnd_Titan_long_missiles_O"
-            };
-            removeWeapons[] = {
-                "missiles_titan_AA",
-                "autocannon_35mm"
-            };
-            addMagazines[] = {
-                "magazine_Missile_s750_x4",
-                "680Rnd_35mm_AA_shells_Tracer_Green"
-            };
-            addWeapons[] = {
-                "autocannon_35mm",
-                "weapon_s750Launcher"
-            };
-        };
-    };
 
     class O_MBT_04_cannon_F {
         cost = 11000;
