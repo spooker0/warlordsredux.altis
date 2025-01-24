@@ -9,7 +9,7 @@ private _actionId = _asset addAction [
         private _newScannerOn = !_scannerOn;
         _asset setVariable ["WL_scannerOn", _newScannerOn, true];
 		private _consumption = if (_asset isKindOf "LandVehicle") then {
-			200;
+			25;
 		} else {
 			50;
 		};

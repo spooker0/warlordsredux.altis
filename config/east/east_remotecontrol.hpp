@@ -105,8 +105,8 @@ class RemoteControl {
 
     class O_UAV_02_recon_F {
         cost = 2000;
-        name = "KH-3R Fenghuang (Recon)";
-        description = "Fenghuang (Recon) is an unarmed variant of the Fenghuang with a powerful scanner.";
+        name = "K40R (Recon)";
+        description = "K40R (Recon) is an unarmed variant of the K40 Ababil-3 with a powerful scanner.";
         spawn = "O_UAV_02_dynamicLoadout_F";
         requirements[] = {"A"};
         rearm = 300;
@@ -124,7 +124,13 @@ class RemoteControl {
             "PylonRack_7Rnd_Rocket_04_AP_F",
             "PylonRack_12Rnd_missiles",
             "PylonMissile_1Rnd_Bomb_04_F",
-            "PylonMissile_1Rnd_Mk82_F"
+            "PylonMissile_1Rnd_Mk82_F",
+            "PylonRack_20Rnd_Rocket_03_HE_F",
+            "PylonRack_20Rnd_Rocket_03_AP_F",
+            "PylonMissile_1Rnd_LG_scalpel",
+            "PylonRack_19Rnd_Rocket_Skyfire",
+            "PylonMissile_1Rnd_Bomb_03_F",
+            "PylonRack_1Rnd_Missile_AA_03_F"
         };
     };
 

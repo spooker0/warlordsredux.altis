@@ -68,4 +68,57 @@ class RotaryWing {
             };
         };
     }; // "Mi-48 Kajman"
+
+    class O_Heli_Attack_02_sead_F {
+        name = "Mi-48 Kajman (SEAD)";
+        spawn = "O_Heli_Attack_02_dynamicLoadout_F";
+        cost = 12000;
+        requirements[] = {"H"};
+        offset[] = {0, 11, 0};
+        rearm = 700;
+        killReward = 550;
+        variant = 1;
+
+        disallowMagazines[] = {
+            "PylonMissile_1Rnd_LG_scalpel",
+            "PylonRack_3Rnd_LG_scalpel",
+            "PylonRack_4Rnd_LG_scalpel",
+            "PylonWeapon_300Rnd_20mm_shells",
+            "PylonRack_20Rnd_Rocket_03_HE_F",
+            "PylonRack_20Rnd_Rocket_03_AP_F",
+            "PylonRack_19Rnd_Rocket_Skyfire",
+            "PylonRack_1Rnd_Missile_AA_03_F",
+            "PylonRack_1Rnd_Missile_AGM_01_F",
+            "PylonMissile_1Rnd_Bomb_03_F",
+            "PylonMissile_1Rnd_BombCluster_02_F"
+        };
+        hasHMD = 1;
+
+        class Pilot: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {};
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "240Rnd_CMFlare_Chaff_Magazine",
+                "240Rnd_CMFlare_Chaff_Magazine",
+                "240Rnd_CMFlare_Chaff_Magazine",
+                "magazine_Missile_KH58_x1",
+                "magazine_Missile_KH58_x1",
+                "magazine_Missile_KH58_x1",
+                "magazine_Missile_KH58_x1",
+                "magazine_Missile_KH58_x1",
+                "magazine_Missile_KH58_x1",
+                "magazine_Missile_KH58_x1",
+                "magazine_Missile_KH58_x1",
+                "magazine_Missile_KH58_x1",
+                "magazine_Missile_KH58_x1",
+                "magazine_Missile_KH58_x1",
+                "magazine_Missile_KH58_x1"
+            };
+            addWeapons[] = {
+                "CMFlareLauncher_Singles",
+                "weapon_KH58Launcher"
+            };
+        };
+    };
 };

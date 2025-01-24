@@ -92,9 +92,29 @@ if (!isNull WL_SectorActionTarget && isNull BIS_WL_highlightedSector && WL_Secto
 
 private _scannerUnits = vehicles select {
 	alive _x &&
+	isEngineOn _x &&
 	(_x getVariable ["WL_scannerOn", false]) &&
 	[_x] call WL2_fnc_getAssetSide == _side
 };
+
+{
+	private _assetPos = _x modelToWorldVisual [0, 0, 0];
+    private _assetHeight = _assetPos # 2;
+	if (_assetHeight > 2000) then {
+		continue;
+	};
+    private _scanRadius = ((_assetHeight * 2) min 1000) max 100;
+
+	_m drawEllipse [
+		_assetPos,
+		_scanRadius,
+		_scanRadius,
+		0,
+		[0, 1, 1, 1],
+		"#(rgb,8,8,3)color(0,1,1,0.15)"
+	];
+} forEach _scannerUnits;
+
 private _allScannedObjects = [];
 {
 	private _scannedObjects = _x getVariable ["WL_scannedObjects", []];
@@ -122,24 +142,6 @@ _allScannedObjects = _allScannedObjects arrayIntersect _allScannedObjects; // el
 		"right"
 	];
 } forEach _allScannedObjects;
-
-{
-	private _assetPos = _x modelToWorldVisual [0, 0, 0];
-    private _assetHeight = _assetPos # 2;
-	if (_assetHeight > 2000) then {
-		continue;
-	};
-    private _scanRadius = ((_assetHeight * 2) min 1000) max 100;
-
-	_m drawEllipse [
-		_assetPos,
-		_scanRadius,
-		_scanRadius,
-		0,
-		[0, 1, 1, 1],
-		"#(rgb,8,8,3)color(0,1,1,0.15)"
-	];
-} forEach _scannerUnits;
 
 _control = (findDisplay 12) displayCtrl 51;
 _draw = (ctrlMapScale _control) < 0.3;
