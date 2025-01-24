@@ -78,7 +78,7 @@ if (_asset isKindOf "Man") then {
 
 	private _hasScannerMap = missionNamespace getVariable ["WL2_hasScanner", createHashMap];
 	if (_hasScannerMap getOrDefault [_assetActualType, false]) then {
-		[_asset] remoteExec ["WL2_fnc_scanner", 0, true];
+		[_asset] remoteExec ["WL2_fnc_scannerAction", 0, true];
 	};
 
 	switch (typeOf _asset) do {
