@@ -180,27 +180,17 @@ class LightVehicles {
                 "missiles_titan_static"
             };
             addMagazines[] = {
-                "2Rnd_GAT_missiles",
-                "2Rnd_GAT_missiles",
-                "2Rnd_GAT_missiles",
-                "2Rnd_GAT_missiles",
-                "2Rnd_GAT_missiles",
-                "2Rnd_GAT_missiles",
-                "2Rnd_GAT_missiles",
-                "2Rnd_GAT_missiles",
-                "2Rnd_GAT_missiles",
-                "2Rnd_GAT_missiles"
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles"
             };
             addWeapons[] = {
-                "missiles_titan"
+                "missiles_Firefist"
             };
         };
-
-        disallowMagazines[] = {
-            "4Rnd_GAA_missiles",
-            "5Rnd_GAT_missiles",
-        };
-    }; // "Prowler (AT UP)"
+    };
 
     class B_MRAP_01_gmg_F {
         cost = 1250;

@@ -1,4 +1,32 @@
 class AirDefense {
+    class B_static_AA_F {
+        cost = 300;
+        requirements[] = {};
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        killReward = 100;
+        loadable[] = {0, -2.5, 0.2};
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {};
+            removeWeapons[] = {
+                "missiles_titan_static"
+            };
+            addMagazines[] = {
+                "1Rnd_GAA_missiles",
+                "1Rnd_GAA_missiles",
+                "1Rnd_GAA_missiles",
+                "1Rnd_GAA_missiles",
+                "1Rnd_GAA_missiles",
+                "1Rnd_GAA_missiles"
+            };
+            addWeapons[] = {
+                "missiles_titan_static"
+            };
+        };
+    }; // "Static Titan Launcher (AA) [NATO]"
+
     class B_Radar_System_01_F {
         description = "Long range radar system, capable of detecting and tracking vehicles within line of sight at up to 16km.";
         cost = 1000;
@@ -18,6 +46,38 @@ class AirDefense {
         loadable[] = {0, -1, 1.7};
     }; // "Praetorian 1C"
 
+    class B_APC_Tracked_01_AA_F {
+        cost = 5000;
+        requirements[] = {};
+        rearm = 500;
+        killReward = 350;
+        capValue = 4;
+        aps = 2;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {
+                "4Rnd_Titan_long_missiles",
+                "680Rnd_35mm_AA_shells_Tracer_Red"
+            };
+            removeWeapons[] = {
+                "missiles_titan_AA",
+                "autocannon_35mm"
+            };
+            addMagazines[] = {
+                "4Rnd_70mm_SAAMI_missiles",
+                "4Rnd_70mm_SAAMI_missiles",
+                "4Rnd_70mm_SAAMI_missiles",
+                "4Rnd_70mm_SAAMI_missiles",
+                "680Rnd_35mm_AA_shells_Tracer_Red"
+            };
+            addWeapons[] = {
+                "autocannon_35mm",
+                "missiles_SAAMI"
+            };
+        };
+    }; // "IFV-6a Cheetah"
+
     class B_SAM_System_03_F {
         description = "Long range surface-to-air missile system, capable of engaging aircraft and helicopters. Effective range: >10km.";
         cost = 8000;
@@ -27,6 +87,38 @@ class AirDefense {
         killReward = 500;
         loadable[] = {0, 0, 1};
     }; // "MIM-145 Defender"
+
+    class B_APC_Tracked_01_AA_UP_F {
+        name = "IFV-6X Puma";
+        description = "IFV-6X Puma is a variant of the IFV-6a Cheetah armed with Defender missiles.";
+        spawn = "B_APC_Tracked_01_AA_F";
+        variant = 1;
+        cost = 9000;
+        requirements[] = {};
+        rearm = 450;
+        killReward = 600;
+        capValue = 4;
+        aps = 2;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {
+                "4Rnd_Titan_long_missiles"
+            };
+            removeWeapons[] = {
+                "missiles_titan_AA",
+                "autocannon_35mm"
+            };
+            addMagazines[] = {
+                "magazine_Missile_mim145_x4",
+                "680Rnd_35mm_AA_shells_Tracer_Red"
+            };
+            addWeapons[] = {
+                "autocannon_35mm",
+                "weapon_mim145Launcher"
+            };
+        };
+    };
 
     class B_SAM_System_01_F {
         description = "Short range surface-to-air missile system, capable of engaging aircraft and helicopters. Effective range: 4km.";
@@ -47,52 +139,4 @@ class AirDefense {
         killReward = 600;
         loadable[] = {0, -2, 1};
     }; // "Mk21 Centurion"
-
-    class B_SAM_System_03_UP_F {
-        name = "MIM-145 Defender (UP)";
-        description = "Long range surface-to-air missile system, capable of engaging aircraft and helicopters, upgraded for more ammo. Effective range: >10km.";
-        spawn = "B_SAM_System_03_F";
-        variant = 1;
-
-        cost = 12000;
-        requirements[] = {};
-        offset[] = {0, 6, 0};
-        rearm = 450;
-        killReward = 700;
-        loadable[] = {0, 0, 1};
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {};
-            addMagazines[] = {
-                "magazine_Missile_mim145_x4"
-            };
-            addWeapons[] = {};
-        };
-    };
-
-    class B_SAM_System_02_UP_F {
-        name = "Mk21 Centurion (UP)";
-        description = "Medium range surface-to-air missile system, capable of engaging aircraft and helicopters, upgraded for more ammo. Effective range: ~10km.";
-        spawn = "B_SAM_System_02_F";
-        variant = 1;
-
-        cost = 20000;
-        requirements[] = {};
-        offset[] = {0, 5.3, 0};
-        rearm = 600;
-        killReward = 800;
-        loadable[] = {0, -2, 1};
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {};
-            addMagazines[] = {
-                "magazine_Missile_rim162_x8"
-            };
-            addWeapons[] = {};
-        };
-    };
 };
