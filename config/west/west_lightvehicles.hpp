@@ -262,4 +262,18 @@ class LightVehicles {
         capValue = 1;
         aps = 4;
     }; // "Tempest Device"
+
+    class B_E_Offroad_01_comms_F {
+        name = "Offroad (Recon)";
+        description = "Offroad (Recon) is a variant of the Offroad with a powerful scanner.";
+        spawn = "I_E_Offroad_01_comms_F";
+        cost = 1700;
+        requirements[] = {};
+        offset[] = {0, 5, 0};
+        rearm = 120;
+        killReward = 200;
+        capValue = 1;
+        hasHMD = 1;
+        hasScanner = 1;
+    };
 };

@@ -67,7 +67,7 @@ addMissionEventHandler ["EntityCreated", {
 			_laserTarget setVariable ["WL_laserPlayer", _ownerPlayer, true];
 			breakTo "MainEntityCreated";
 		};
-	} forEach allPlayers;
+	} forEach (call BIS_fnc_listPlayers);
 	{
 		private _vehicle = _x;
 		{

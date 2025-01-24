@@ -90,15 +90,18 @@ if (!isNull WL_SectorActionTarget && isNull BIS_WL_highlightedSector && WL_Secto
 	} forEach (((list _revealTrigger) - (missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []])) select {(side group _x != _side) && {(alive _x) && {((side group _x) in BIS_WL_sidesArray)}}});
 } forEach BIS_WL_currentlyScannedSectors;
 
-private _scannedUnits = [];
-{
-	private _scanned = _x getVariable ["WL_scannedObjects", []];
-	_scannedUnits append _scanned;
-} forEach WL_ScannerUnits;
-WL_ScannerUnits = WL_ScannerUnits select {
-	alive _x;
+private _scannerUnits = vehicles select {
+	alive _x &&
+	(_x getVariable ["WL_scannerOn", false]) &&
+	[_x] call WL2_fnc_getAssetSide == _side
 };
-_scannedUnits = _scannedUnits arrayIntersect _scannedUnits;
+private _allScannedObjects = [];
+{
+	private _scannedObjects = _x getVariable ["WL_scannedObjects", []];
+	_allScannedObjects append _scannedObjects;
+} forEach _scannerUnits;
+_allScannedObjects = _allScannedObjects arrayIntersect _allScannedObjects; // eliminate duplicates
+
 {
 	private _size = call WL2_fnc_iconSize;
 	_m drawIcon [
@@ -118,12 +121,15 @@ _scannedUnits = _scannedUnits arrayIntersect _scannedUnits;
 		"PuristaBold",
 		"right"
 	];
-} forEach _scannedUnits;
+} forEach _allScannedObjects;
 
 {
 	private _assetPos = _x modelToWorldVisual [0, 0, 0];
     private _assetHeight = _assetPos # 2;
-    private _scanRadius = (_assetHeight * 2) min 1000;
+	if (_assetHeight > 2000) then {
+		continue;
+	};
+    private _scanRadius = ((_assetHeight * 2) min 1000) max 100;
 
 	_m drawEllipse [
 		_assetPos,
@@ -131,9 +137,9 @@ _scannedUnits = _scannedUnits arrayIntersect _scannedUnits;
 		_scanRadius,
 		0,
 		[0, 1, 1, 1],
-		""
+		"#(rgb,8,8,3)color(0,1,1,0.15)"
 	];
-} forEach WL_ScannerUnits;
+} forEach _scannerUnits;
 
 _control = (findDisplay 12) displayCtrl 51;
 _draw = (ctrlMapScale _control) < 0.3;

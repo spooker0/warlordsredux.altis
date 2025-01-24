@@ -113,7 +113,6 @@ class CfgFunctions {
 			class repackMagazines {};
 			class revive {};
 			class rita {};
-			class scanner {};
 			class sideToFaction {};
 			class spectrumAction {};
 			class teammatesAvailability {};
@@ -154,6 +153,8 @@ class CfgFunctions {
 			class repairActionEligibility {};
 			class respawnBagAction {};
 			class reviveAction {};
+			class scanner {};
+			class scannerAction {};
 			class slingAddAction {};
 			class stabilizeBoatAction {};
 			class vehicleLockAction {};

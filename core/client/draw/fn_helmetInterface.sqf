@@ -110,6 +110,10 @@ addMissionEventHandler ["Draw3D", {
         {
             private _target = _x;
             private _responsiblePlayer = _target getVariable ["WL_laserPlayer", objNull];
+            private _playerName = name _responsiblePlayer;
+            if (_playerName == "Error: No vehicle") then {
+                _playerName = "";
+            };
             _laserIcons pushBack [
                 "\A3\ui_f\data\IGUI\RscCustomInfo\Sensors\Targets\LaserTarget_ca.paa",
                 [1, 0, 0, 1],
@@ -117,7 +121,7 @@ addMissionEventHandler ["Draw3D", {
                 1,
                 1,
                 45,
-                name _responsiblePlayer,
+                _playerName,
                 0,
                 0.05,
                 "RobotoCondensedBold"
@@ -172,6 +176,9 @@ addMissionEventHandler ["Draw3D", {
             private _assetName = if (_targetSide == _side) then {
                 private _ownerPlayer = (_target getVariable ["BIS_WL_ownerAsset", "123"]) call BIS_fnc_getUnitByUID;
                 private _ownerName = name _ownerPlayer;
+                if (_ownerName == "Error: No vehicle") then {
+                    _ownerName = "";
+                };
                 format ["%1 (%2)", _assetTypeName, _ownerName];
             } else {
                 _assetTypeName;
@@ -213,9 +220,6 @@ addMissionEventHandler ["Draw3D", {
 0 spawn {
     while { !BIS_WL_missionEnd } do {
         sleep 1;
-
-        // private _helmet = headgear player;
-        // private _isPilotHelmet = ["Pilot", _helmet] call BIS_fnc_inString;
 
         private _vehicle = vehicle player;
         if (_vehicle == player) then {
