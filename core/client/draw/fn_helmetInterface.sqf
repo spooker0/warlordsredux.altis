@@ -161,13 +161,15 @@ addMissionEventHandler ["Draw3D", {
             private _target = _x;
             private _targetIsInfantry = _target isKindOf "Man";
             private _targetSide = [_target] call WL2_fnc_getAssetSide;
-            private _targetColor = if (_targetSide == _side) then {
-                [0, 0, 1, 1]
-            } else {
-                if (count crew _target > 0) then {
-                    [1, 0, 0, 1]
-                } else {
-                    [1, 1, 1, 1]
+            private _targetColor = switch (_targetSide) do {
+                case west: {
+                    [0, 0.3, 0.6, 1]
+                };
+                case east: {
+                    [0.5, 0, 0, 1]
+                };
+                case independent: {
+                    [0, 0.5, 0, 1]
                 };
             };
 
@@ -204,11 +206,13 @@ addMissionEventHandler ["Draw3D", {
                     _target modelToWorldVisual (getCenterOfMass _target),
                     0.8,
                     0.8,
-                    0,
+                    2,
                     _assetName,
                     true,
                     0.035,
-                    "RobotoCondensedBold"
+                    "RobotoCondensedBold",
+                    "center",
+                    true
                 ];
             };
         } forEach _targets;
