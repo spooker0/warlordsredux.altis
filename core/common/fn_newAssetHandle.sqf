@@ -128,6 +128,12 @@ if (_asset isKindOf "Man") then {
 			[_asset] spawn WL2_fnc_stabilizeBoatAction;
 		};
 
+		case "I_Heli_light_03_dynamicLoadout_F";
+		case "B_Heli_Attack_01_dynamicLoadout_F";
+		case "O_Heli_Attack_02_dynamicLoadout_F": {
+			[_asset] remoteExec ["WL2_fnc_controlGunnerAction", 0, true];
+		};
+
 		// Radars
 		case "B_Radar_System_01_F";
 		case "O_Radar_System_02_F";
