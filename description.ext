@@ -80,6 +80,7 @@ class Header
 
 #include "scripts\WLC\ui.hpp"
 #include "config\customization.hpp"
+#include "config\tasks.hpp"
 
 class CfgUnitInsignia
 {

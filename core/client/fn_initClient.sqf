@@ -368,6 +368,6 @@ player spawn APS_fnc_setupProjectiles;
 0 spawn WL2_fnc_avTerminal;
 0 spawn WL2_fnc_updateJammerMarkers;
 0 spawn WL2_fnc_cleanupCarrier;
-0 spawn WL2_fnc_buyMenuAction;
 0 spawn WL2_fnc_reviveAction;
 0 spawn WL2_fnc_helmetInterface;
+0 spawn WLT_fnc_init;

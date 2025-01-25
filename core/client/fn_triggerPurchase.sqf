@@ -96,6 +96,8 @@ switch (_className) do {
                 } else {
                     playSound "assemble_target";
                     [player, "resetVehicle", _vehicle, _position, _direction] remoteExec ["WL2_fnc_handleClientRequest", 2];
+
+                    ["TaskResetVehicle"] call WLT_fnc_taskComplete;
                 };
             } else {
                 playSound "AddItemFailed";
@@ -156,6 +158,7 @@ switch (_className) do {
         [player, "orderRespawnBag"] remoteExec ["WL2_fnc_handleClientRequest", 2];
         call WL2_fnc_respawnBagAction;
         "RequestMenu_close" call WL2_fnc_setupUI;
+        ["TaskBuyTent"] call WLT_fnc_taskComplete;
     };
     case "RespawnBagFT": {
         private _respawnBag = player getVariable ["WL2_respawnBag", objNull];
@@ -172,6 +175,8 @@ switch (_className) do {
 
             deleteVehicle _respawnBag;
             player setVariable ["WL2_respawnBag", objNull];
+
+            ["TaskFastTravelTent"] call WLT_fnc_taskComplete;
         };
         "RequestMenu_close" call WL2_fnc_setupUI;
     };

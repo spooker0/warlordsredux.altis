@@ -126,7 +126,6 @@ class CfgFunctions {
 			file = "core\client\action";
 			class arsenalSetup {};
 			class attachVehicle {};
-			class buyMenuAction {};
 			class catapultAction {};
 			class catapultActionEligibility {};
 			class controlGunnerAction {};
@@ -411,6 +410,17 @@ class CfgFunctions {
 			class textureLists {};
 			class textureSlots {};
 			class wipePylonSaves {};
+		};
+	};
+
+	class WLT {
+		class Default {
+			file = "Scripts\WLT";
+			class handleParentTask {};
+			class init {};
+			class taskComplete {};
+			class taskEligible {};
+			class taskStart {};
 		};
 	};
 };
