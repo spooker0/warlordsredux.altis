@@ -40,6 +40,8 @@ if (_showWarning && !_eligibleFreeRearm) exitWith {
     }];
 };
 
+["TaskModifyVehicle"] call WLT_fnc_taskComplete;
+
 private _magTurretsToRemove = [];
 private _turrets = [[-1]] + allTurrets _asset;
 {

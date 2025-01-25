@@ -44,3 +44,11 @@ if (WLC_DEBUG) then {
 		setPlayerRespawnTime (getMissionConfigValue ["respawnDelay", 30]);
 	}, [], 5];
 };
+
+_flag addAction ["<t color = '#ffff00'>(Debug) Reset Tasks</t>", {
+    profileNamespace setVariable ["WLT_TaskCompletionStatuses", createHashMap];
+	{
+		player removeSimpleTask _x;
+	} forEach (simpleTasks player);
+	[] call WLT_fnc_init;
+}, [], 5];

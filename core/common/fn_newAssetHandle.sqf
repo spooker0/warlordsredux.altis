@@ -81,6 +81,21 @@ if (_asset isKindOf "Man") then {
 		[_asset] remoteExec ["WL2_fnc_scannerAction", 0, true];
 	};
 
+	// handle WLT
+	switch (_assetActualType) do {
+		case "B_Quadbike_01_F";
+		case "O_Quadbike_01_F";
+		case "I_Quadbike_01_F": {
+			["TaskBuyQuad"] call WLT_fnc_taskComplete;
+		};
+
+		case "B_G_Offroad_01_armed_F";
+		case "O_G_Offroad_01_armed_F";
+		case "I_G_Offroad_01_armed_F": {
+			["TaskBuyTechnical"] call WLT_fnc_taskComplete;
+		};
+	};
+
 	switch (typeOf _asset) do {
 		// Dazzlers
 		case "O_T_Truck_03_device_ghex_F";
