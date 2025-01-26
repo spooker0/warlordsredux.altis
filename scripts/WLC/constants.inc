@@ -2,7 +2,7 @@
 #include "..\..\core\server_macros.inc"
 
 #define WLC_ENABLED true
-#define WLC_DEBUG true
+#define WLC_DEBUG false
 
 #define WLC_DISPLAY 12000
 
