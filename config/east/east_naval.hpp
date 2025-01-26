@@ -34,6 +34,10 @@ class Naval {
         rearm = 400;
         killReward = 100;
 
+        disallowMagazines[] = {
+            "4Rnd_GAA_missiles"
+        };
+
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
             removeMagazines[] = {

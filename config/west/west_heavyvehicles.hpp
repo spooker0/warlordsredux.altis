@@ -7,24 +7,24 @@ class HeavyVehicles {
         capValue = 3;
         aps = 2;
 
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {
-                "96Rnd_40mm_G_belt"
-            };
-            removeWeapons[] = {
-                "GMG_40mm"
-            };
-            addMagazines[] = {
-                "60Rnd_30mm_APFSDS_shells_Tracer_Red",
-                "60Rnd_30mm_APFSDS_shells_Tracer_Red",
-                "140Rnd_30mm_MP_shells_Tracer_Red",
-                "140Rnd_30mm_MP_shells_Tracer_Red"
-            };
-            addWeapons[] = {
-                "autocannon_30mm_CTWS"
-            };
-        };
+        // class Gunner: WLTurretDefaults {
+        //     turret[] = { 0 };
+        //     removeMagazines[] = {
+        //         "96Rnd_40mm_G_belt"
+        //     };
+        //     removeWeapons[] = {
+        //         "GMG_40mm"
+        //     };
+        //     addMagazines[] = {
+        //         "60Rnd_30mm_APFSDS_shells_Tracer_Red",
+        //         "60Rnd_30mm_APFSDS_shells_Tracer_Red",
+        //         "140Rnd_30mm_MP_shells_Tracer_Red",
+        //         "140Rnd_30mm_MP_shells_Tracer_Red"
+        //     };
+        //     addWeapons[] = {
+        //         "autocannon_30mm_CTWS"
+        //     };
+        // };
     }; // "IFV-6c Panther"
 
     class B_APC_Tracked_01_CRV_F {

@@ -9,11 +9,7 @@ private _findParentTask = (simpleTasks player) select {
 };
 if (count _findParentTask == 0) then {
     private _newParentTask = player createSimpleTask [_parentTask];
-    _newParentTask setSimpleTaskDescription [
-        "",
-        _parentTask,
-        ""
-    ];
+    _newParentTask setSimpleTaskDescription ["", _parentTask, ""];
     _newParentTask setTaskState "Assigned";
     _newParentTask;
 } else {

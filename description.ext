@@ -34,8 +34,8 @@ weaponholderLimit = 50; //50
 weaponholderRemovalMinTime = 30; //3600
 weaponholderRemovalMaxTime = 180; //36000
 
-disposalCheckPeriod = 15; //5
-minPlayerDistance[] = {0, 0, 0};    //0,0,0
+disposalCheckPeriod = 20;
+minPlayerDistance[] = {150, 300, 075, 0600, 1800, 0300};
 
 BIS_WL_sectorResetTimeout = 300;
 BIS_WL_sectorVotingDuration = 30;

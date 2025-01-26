@@ -38,6 +38,7 @@ _asset addEventHandler ["GetIn", {
 	private _access = [_vehicle, _unit, _role] call WL2_fnc_accessControl;
 	if !(_access # 0) then {
 		moveOut _unit;
+		systemChat format ["Vehicle locked. (%1)", _access # 1];
 	};
 }];
 
@@ -49,6 +50,7 @@ _asset addEventHandler ["SeatSwitched", {
 		private _access = [_vehicle, _unit1, _unit1Role] call WL2_fnc_accessControl;
 		if !(_access # 0) then {
 			moveOut _unit1;
+			systemChat format ["Seat locked. (%1)", _access # 1];
 		};
 	};
 
@@ -57,6 +59,7 @@ _asset addEventHandler ["SeatSwitched", {
 		private _access = [_vehicle, _unit2, _unit2Role] call WL2_fnc_accessControl;
 		if !(_access # 0) then {
 			moveOut _unit2;
+			systemChat format ["Seat locked. (%1)", _access # 1];
 		};
 	};
 }];

@@ -15,9 +15,18 @@ class TaskLeaveSquad: WLTaskTutorialSquads {
 
 class TaskJoinSquad: WLTaskTutorialSquads {
     name = "Join Squad";
-    description = "Ask a squad leader to invite you to their squad, then accept their invite.";
+    description = "Ask a squad leader to invite you to their squad, then accept their invite. Squad members can see each other from further away and being in an active, well-performing squad increases your passive income.";
     prerequisites[] = {
         "TaskLeaveSquad"
     };
     reward = 500;
+};
+
+class TaskFastTravelSquad: WLTaskTutorialSquads {
+    description = "Fast travel to your squad leader by using the asset buy menu (Hold %1 key) -> Fast Travel -> Fast Travel to Squad Leader.";
+    prerequisites[] = {
+        "TaskJoinSquad",
+        "TaskFastTravelSeized"
+    };
+    reward = 100;
 };

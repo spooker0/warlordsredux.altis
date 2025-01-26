@@ -28,6 +28,13 @@ if (_asset isKindOf "Man") then {
 		_manpowerRefreshTimers pushBack [serverTime + WL_MANPOWER_REFRESH_COOLDOWN, _asset];
 		missionNamespace setVariable [_refreshTimerVar, _manpowerRefreshTimers, true];
 
+		switch (typeof _asset) do {
+			case "B_soldier_repair_F";
+			case "O_soldier_repair_F": {
+				["TaskBuyRepair"] call WLT_fnc_taskComplete;
+			};
+		};
+
 		call WL2_fnc_teammatesAvailability;
 	};
 } else {
@@ -93,6 +100,17 @@ if (_asset isKindOf "Man") then {
 		case "O_G_Offroad_01_armed_F";
 		case "I_G_Offroad_01_armed_F": {
 			["TaskBuyTechnical"] call WLT_fnc_taskComplete;
+		};
+
+		case "B_MBT_01_cannon_F";
+		case "B_MBT_01_TUSK_F";
+		case "B_MBT_03_cannon_F";
+		case "O_MBT_02_cannon_export_F";
+		case "O_MBT_02_cannon_F";
+		case "O_MBT_04_cannon_F";
+		case "O_MBT_04_command_F";
+		case "O_MBT_04_nato_F": {
+			["TaskBuyMBT"] call WLT_fnc_taskComplete;
 		};
 	};
 

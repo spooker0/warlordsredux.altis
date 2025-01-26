@@ -13,6 +13,9 @@ if (isNull (findDisplay 8000)) then {
 	} forEach _d;
 	createDialog "MRTM_settingsMenu";
 };
+
+["TaskThirdPerson"] call WLT_fnc_taskComplete;
+
 disableSerialization;
 
 _display = findDisplay 8000;

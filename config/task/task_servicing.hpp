@@ -45,3 +45,13 @@ class TaskResetVehicle: WLTaskTutorialServicing {
     };
     reward = 200;
 };
+
+class TaskRefuelVehicle: WLTaskTutorialServicing {
+    name = "Refuel Vehicle";
+    description = "Find a refuel point (refuel vehicle/pod/crate or a gas station) and refuel a vehicle.";
+    onStart = "addMissionEventHandler ['Service', {['TaskRefuelVehicle'] call WLT_fnc_taskComplete;}];"
+    prerequisites[] = {
+        "TaskResetVehicle"
+    };
+    reward = 200;
+};
