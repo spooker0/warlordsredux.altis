@@ -39,7 +39,7 @@ class TaskCombinedArmsAir: WLTaskCombinedArms {
 
 class TaskCombinedArmsOperation: WLTaskCombinedArms {
     name = "Combined Arms Offensive";
-    description = "Destroy an assortment of enemies and vehicles to complete this task."
+    description = "Destroy an assortment of enemies and vehicles to complete this task.";
     prerequisites[] = {
         "TaskCombinedArmsAir"
     };

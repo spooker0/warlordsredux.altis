@@ -23,7 +23,7 @@ _task setTaskState "Assigned";
 
 private _mute = profileNamespace getVariable ["MRTM_muteTaskNotifications", false];
 if (!_mute && !_init) then {
-    ["TaskAssigned", ["", _taskName]] call BIS_fnc_showNotification;
+    [_taskName] call WLT_fnc_addNotification;
 };
 
 private _onStart = _taskData getOrDefault ["onStart", 0];

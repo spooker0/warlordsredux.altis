@@ -23,7 +23,11 @@ class TaskJoinSquad: WLTaskTutorialSquads {
 };
 
 class TaskFastTravelSquad: WLTaskTutorialSquads {
+    name = "Fast Travel to Squad Leader";
     description = "Fast travel to your squad leader by using the asset buy menu (Hold %1 key) -> Fast Travel -> Fast Travel to Squad Leader.";
+    args[] = {
+        "actionKeysNames 'gear'"
+    };
     prerequisites[] = {
         "TaskJoinSquad",
         "TaskFastTravelSeized"

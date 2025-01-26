@@ -26,7 +26,6 @@ if (_init) then {
     if (count _findTask > 0) then {
         private _task = _findTask # 0;
         _task setTaskState "Succeeded";
-        ["TaskSucceeded", ["", taskName _task]] call BIS_fnc_showNotification;
 
         private _taskReward = _taskData getOrDefault ["reward", 0];
         if (_taskReward > 0) then {
@@ -36,6 +35,9 @@ if (_init) then {
                 [_uid, _newScore] call WLC_fnc_setScore;
             };
         };
+
+        private _message = format ["%1 (+%2XP)", taskName _task, _taskReward];
+        ["TaskSucceeded", ["", _message]] call BIS_fnc_showNotification;
 
         _taskCompletion set [_taskId, true];
         profileNamespace setVariable ["WLT_TaskCompletionStatuses", _taskCompletion];
