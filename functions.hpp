@@ -418,6 +418,7 @@ class CfgFunctions {
 			file = "Scripts\WLT";
 			class handleParentTask {};
 			class init {};
+			class killRewardTaskHandle {};
 			class taskComplete {};
 			class taskEligible {};
 			class taskStart {};

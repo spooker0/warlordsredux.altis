@@ -5,5 +5,5 @@ private _responsiblePlayer = _shooter getVariable ["BIS_WL_ownerAsset", "123"] c
 if (isPlayer _responsiblePlayer) then {
     private _uid = getPlayerUID _responsiblePlayer;
     _reward call WL2_fnc_fundsDatabaseWrite;
-    [objNull, _reward, localize "STR_A3_active_protection_system"] remoteExec ["WL2_fnc_killRewardClient", _responsiblePlayer];
+    [objNull, _reward, "Active protection system"] remoteExec ["WL2_fnc_killRewardClient", _responsiblePlayer];
 };

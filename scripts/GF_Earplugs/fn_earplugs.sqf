@@ -19,18 +19,19 @@ _display displayAddEventHandler["KeyDown", {
 	_keyPlug1 = 0xD2;
 
 	if (_key isEqualTo _keyPlug1) then {
+		["TaskEarplugs"] call WLT_fnc_taskComplete;
 		if (!(_soundvolume isEqualto 0.1) or !(_soundvolume isEqualto 0.1)) then {
 			//________________ EARPLUGS IN ________________
 			"GF_Earplugs" cutRsc ["Rsc_GF_Earplugs", "PLAIN"];
-			titleText ["<t color='#339933' size='2'font='PuristaBold'>EARPLUGS IN</t>", "PLAIN DOWN", -1, true, true];	
-			1 fadeSound 0.1;		
+			titleText ["<t color='#339933' size='2'font='PuristaBold'>EARPLUGS IN</t>", "PLAIN DOWN", -1, true, true];
+			1 fadeSound 0.1;
 		};
-			
-		if ((_soundvolume isEqualto 0.1) or (_soundvolume isEqualto 0.1)) then {		
-			
-			//________________ EARPLUGS OUT ________________			
-			"GF_Earplugs" cutText ["", "PLAIN"];			
-			titleText ["<t color='#FF3333' size='2'font='PuristaBold'>EARPLUGS OUT</t>", "PLAIN DOWN", -1, true, true];	
+
+		if ((_soundvolume isEqualto 0.1) or (_soundvolume isEqualto 0.1)) then {
+
+			//________________ EARPLUGS OUT ________________
+			"GF_Earplugs" cutText ["", "PLAIN"];
+			titleText ["<t color='#FF3333' size='2'font='PuristaBold'>EARPLUGS OUT</t>", "PLAIN DOWN", -1, true, true];
 			1 fadeSound 0.5;
 		};
 	};

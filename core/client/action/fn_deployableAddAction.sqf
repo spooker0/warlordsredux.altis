@@ -21,6 +21,7 @@ private _deployActionId = _asset addAction [
             private _nearLoadableEntities = _eligibilityQuery # 1;
 
             if (count _nearLoadableEntities > 0) then {
+                ['TaskLoadDeployable'] call WLT_fnc_taskComplete;
                 private _assetToLoad = _nearLoadableEntities select 0;
 
                 private _offset = if ((_asset canVehicleCargo _assetToLoad) # 0) then {
