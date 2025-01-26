@@ -44,7 +44,7 @@ class welcomeScreen
 		{
 			idc = 9005;
 			deletable = 0;
-			text = "Warlords Redux v2.6.6";
+			text = "Warlords Redux v2.6.7";
 			x = 0.288594 * safezoneW + safezoneX;
 			y = 0.225 * safezoneH + safezoneY;
 			w = 0.149531 * safezoneW;
