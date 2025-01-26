@@ -416,6 +416,7 @@ class CfgFunctions {
 	class WLT {
 		class Default {
 			file = "Scripts\WLT";
+			class addNotification {};
 			class handleParentTask {};
 			class init {};
 			class killRewardTaskHandle {};

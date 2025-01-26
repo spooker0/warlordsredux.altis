@@ -49,7 +49,7 @@ class TaskResetVehicle: WLTaskTutorialServicing {
 class TaskRefuelVehicle: WLTaskTutorialServicing {
     name = "Refuel Vehicle";
     description = "Find a refuel point (refuel vehicle/pod/crate or a gas station) and refuel a vehicle.";
-    onStart = "addMissionEventHandler ['Service', {['TaskRefuelVehicle'] call WLT_fnc_taskComplete;}];"
+    onStart = "addMissionEventHandler ['Service', {['TaskRefuelVehicle'] call WLT_fnc_taskComplete;}];";
     prerequisites[] = {
         "TaskResetVehicle"
     };

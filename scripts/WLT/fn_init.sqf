@@ -38,6 +38,8 @@ private _tasks = createHashMap;
 missionNamespace setVariable ["WLT_tasks", _tasks];
 WLT_stats = createHashMap;
 
+WLT_notifications = 0;
+
 ["INIT", true] call WLT_fnc_taskComplete;
 
 0 spawn {
@@ -71,6 +73,7 @@ WLT_stats = createHashMap;
                         private _trackerId = _x getOrDefault ["id", ""];
                         private _trackerThreshold = _x getOrDefault ["threshold", 0];
                         private _trackerCurrent = WLT_stats getOrDefault [_trackerId, 0];
+                        _trackerCurrent = _trackerCurrent min _trackerThreshold;
 
                         private _trackerDisplay = format ["%1: %2/%3", _trackerId, _trackerCurrent, _trackerThreshold];
                         _progressTrackerDisplay pushBack _trackerDisplay;
@@ -93,3 +96,26 @@ WLT_stats = createHashMap;
         } forEach (simpleTasks player);
     };
 };
+
+#if WLT_DEBUG_MODE == 1
+// Debug code
+0 spawn {
+    private _tasks = missionNamespace getVariable ["WLT_tasks", createHashMap];
+    while {!BIS_WL_missionEnd} do {
+        {
+            private _task = _x;
+            if !(taskState _task in ["Succeeded", "Assigned"]) then {
+                {
+                    private _taskData = _y;
+                    if (_taskData getOrDefault ["name", ""] == taskName _task) then {
+                        [_x] call WLT_fnc_taskComplete;
+                    };
+                } forEach _tasks;
+            };
+            // player createDiaryLink ["Test", _x, "test"]
+        } forEach (simpleTasks player);
+
+        sleep 2;
+    };
+};
+#endif
