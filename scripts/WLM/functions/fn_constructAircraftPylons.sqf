@@ -94,4 +94,10 @@ private _currentAssetPylonInfo = getAllPylonsInfo _asset;
 
     _selectUserBox ctrlAddEventHandler ["ButtonClick", "_this call WLM_fnc_switchUser"];
     _selectUserBox ctrlCommit 0;
+
+    if (count _allowedMagazines == 0) then {
+        _selectBox ctrlShow false;
+        _selectUserBox ctrlShow false;
+        continue;
+    };
 } forEach _pylonsInfo;

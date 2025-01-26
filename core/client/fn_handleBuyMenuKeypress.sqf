@@ -8,6 +8,7 @@ _tempBuyKey pushBack DIK_NUMPADSLASH;
 if (_key in _tempBuyKey) exitWith {
     WL_TEMP_BUY_MENU = true;
     hint "Entering buy code...";
+    ["TaskQuickBuyShortcut"] call WLT_fnc_taskComplete;
 };
 
 if (!WL_GEAR_BUY_MENU && !WL_TEMP_BUY_MENU) exitWith {
@@ -156,6 +157,8 @@ if (_itemDone) then {
         systemChat format ["Selected [%1]: %2", _newCode, _displayName];
         playSound "AddItemOK";
         "RequestMenu_close" call WL2_fnc_setupUI;
+
+        ["TaskQuickBuy"] call WLT_fnc_taskComplete;
     } else {
         systemChat format ["Invalid buy action: %1", (_availability # 1) joinString ", "];
         playSound "AddItemFailed";

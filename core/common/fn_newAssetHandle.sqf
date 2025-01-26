@@ -3,6 +3,7 @@
 params ["_asset", ["_owner", objNull]];
 
 [_asset] call WL2_fnc_lastHitHandler;
+_asset setVariable ["WL_spawnedAsset", true, true];
 
 if (isServer) then {
 	if !(unitIsUAV _asset) then {
@@ -27,7 +28,44 @@ if (_asset isKindOf "Man") then {
 		_manpowerRefreshTimers pushBack [serverTime + WL_MANPOWER_REFRESH_COOLDOWN, _asset];
 		missionNamespace setVariable [_refreshTimerVar, _manpowerRefreshTimers, true];
 
+		switch (typeof _asset) do {
+			case "B_soldier_repair_F";
+			case "O_soldier_repair_F": {
+				["TaskBuyRepair"] call WLT_fnc_taskComplete;
+			};
+		};
+
 		call WL2_fnc_teammatesAvailability;
+
+		// Prevent AI shenanigans
+		// Allow for now, to prevent the false negative issues.
+		// _asset addEventHandler ["GetInMan", {
+		// 	params ["_vehicle", "_role", "_unit", "_turret"];
+		// 	private _access = [_vehicle, _unit, _role] call WL2_fnc_accessControl;
+		// 	if !(_access # 0) then {
+		// 		moveOut _unit;
+		// 	};
+		// }];
+
+		// _asset addEventHandler ["SeatSwitchedMan", {
+		// 	params ["_unit1", "_unit2", "_vehicle"];
+
+		// 	if (!isNull _unit1) then {
+		// 		private _unit1Role = (assignedVehicleRole _unit1) # 0;
+		// 		private _access = [_vehicle, _unit1, _unit1Role] call WL2_fnc_accessControl;
+		// 		if !(_access # 0) then {
+		// 			moveOut _unit1;
+		// 		};
+		// 	};
+
+		// 	if (!isNull _unit2) then {
+		// 		private _unit2Role = (assignedVehicleRole _unit2) # 0;
+		// 		private _access = [_vehicle, _unit2, _unit2Role] call WL2_fnc_accessControl;
+		// 		if !(_access # 0) then {
+		// 			moveOut _unit2;
+		// 		};
+		// 	};
+		// }];
 	};
 } else {
 	private _side = if (isPlayer _owner) then {
@@ -44,7 +82,12 @@ if (_asset isKindOf "Man") then {
 	private _assetActualType = _asset getVariable ["WL2_orderedClass", typeOf _asset];
 
 	[_asset] call APS_fnc_registerVehicle;
+
 	_asset remoteExec ["APS_fnc_setupProjectiles", 0, true];
+	[_asset] remoteExec ["WL2_fnc_rearmAction", 0, true];
+	[_asset] remoteExec ["WL2_fnc_repairAction", 0, true];
+	[_asset] remoteExec ["WL2_fnc_claimAction", 0, true];
+
 	_asset setVariable ["BIS_WL_nextRepair", 0, true];
 	_asset setVariable ["BIS_WL_ownerAssetSide", _side, true];
 	_asset setVariable ["WL2_massDefault", getMass _asset];
@@ -55,7 +98,54 @@ if (_asset isKindOf "Man") then {
 	missionNamespace setVariable [_var, _vehicles, [2, clientOwner]];
 	0 remoteExec ["WL2_fnc_updateVehicleList", 2];
 
-	[_asset] remoteExec ["WL2_fnc_rearmAction", 0, true];
+	_asset setVehicleReceiveRemoteTargets true;
+	_asset setVehicleReportRemoteTargets true;
+	_asset setVehicleReportOwnPosition true;
+
+	private _hasHMDMap = missionNamespace getVariable ["WL2_hasHMD", createHashMap];
+	if (_hasHMDMap getOrDefault [_assetActualType, false]) then {
+		// HMD missile alert system
+		_asset addEventHandler ["IncomingMissile", {
+			params ["_target", "_ammo", "_vehicle", "_instigator", "_missile"];
+			private _incomingMissiles = _target getVariable ["WL_incomingMissle", []];
+			_incomingMissiles pushBack _missile;
+			_incomingMissiles = _incomingMissiles select {
+				alive _x;
+			};
+			_target setVariable ["WL_incomingMissle", _incomingMissiles, true];
+		}];
+	};
+
+	private _hasScannerMap = missionNamespace getVariable ["WL2_hasScanner", createHashMap];
+	if (_hasScannerMap getOrDefault [_assetActualType, false]) then {
+		[_asset] remoteExec ["WL2_fnc_scannerAction", 0, true];
+	};
+
+	// handle WLT
+	switch (_assetActualType) do {
+		case "B_Quadbike_01_F";
+		case "O_Quadbike_01_F";
+		case "I_Quadbike_01_F": {
+			["TaskBuyQuad"] call WLT_fnc_taskComplete;
+		};
+
+		case "B_G_Offroad_01_armed_F";
+		case "O_G_Offroad_01_armed_F";
+		case "I_G_Offroad_01_armed_F": {
+			["TaskBuyTechnical"] call WLT_fnc_taskComplete;
+		};
+
+		case "B_MBT_01_cannon_F";
+		case "B_MBT_01_TUSK_F";
+		case "B_MBT_03_cannon_F";
+		case "O_MBT_02_cannon_export_F";
+		case "O_MBT_02_cannon_F";
+		case "O_MBT_04_cannon_F";
+		case "O_MBT_04_command_F";
+		case "O_MBT_04_nato_F": {
+			["TaskBuyMBT"] call WLT_fnc_taskComplete;
+		};
+	};
 
 	switch (typeOf _asset) do {
 		// Dazzlers
@@ -98,6 +188,17 @@ if (_asset isKindOf "Man") then {
 		case "I_Heli_Transport_02_F": {
 			[_asset] remoteExec ["WL2_fnc_slingAddAction", 0, true];
 		};
+
+		case "B_Boat_Armed_01_minigun_F";
+		case "O_Boat_Armed_01_hmg_F": {
+			[_asset] spawn WL2_fnc_stabilizeBoatAction;
+		};
+
+		// case "I_Heli_light_03_dynamicLoadout_F";
+		// case "B_Heli_Attack_01_dynamicLoadout_F";
+		// case "O_Heli_Attack_02_dynamicLoadout_F": {
+		// 	[_asset] remoteExec ["WL2_fnc_controlGunnerAction", 0, true];
+		// };
 
 		// Radars
 		case "B_Radar_System_01_F";
@@ -219,8 +320,6 @@ if (_asset isKindOf "Man") then {
 			};
 		};
 	};
-
-	[_asset] remoteExec ["WL2_fnc_repairAction", 0, true];
 
 	if (getNumber (configFile >> "CfgVehicles" >> typeOf _asset >> "transportAmmo") > 0) then {
 		[_asset, 0] remoteExec ["setAmmoCargo", 0];
@@ -354,8 +453,6 @@ if (_asset isKindOf "Man") then {
 	if ("hide_rail" in (animationNames _asset)) then {
 		_asset animateSource ["hide_rail", 0];
 	};
-
-	[_asset] remoteExec ["WL2_fnc_claimAction", 0, true];
 
 	private _appearanceDefaults = profileNamespace getVariable ["WLM_appearanceDefaults", createHashmap];
 	private _assetAppearanceDefaults = _appearanceDefaults getOrDefault [_assetActualType, createHashmap];

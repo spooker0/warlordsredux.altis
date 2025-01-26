@@ -32,6 +32,8 @@ class RotaryWing {
         killReward = 200;
         rearm = 300;
 
+        hasHMD = 1;
+
         class LeftGunner: WLTurretDefaults {
             turret[] = { 1 };
             removeMagazines[] = {
@@ -83,6 +85,14 @@ class RotaryWing {
         name = "WY-55 Hellcat";
         description = "WY-55 Hellcat is a light attack helicopter.";
         spawn = "I_Heli_light_03_dynamicLoadout_F";
+
+        hasHMD = 1;
+
+        allowPylonMagazines[] = {
+            "PylonRack_Missile_HARM_x1",
+            "PylonRack_19Rnd_Rocket_Skyfire"
+        };
+
         requirements[] = {"H"};
         textures[] = {
             "\A3\Air_F_Enoch\Heli_Light_03\data\Heli_Light_03_base_EAF_CO.paa",
@@ -104,6 +114,7 @@ class RotaryWing {
         allowPylonMagazines[] = {
             "PylonRack_Missile_HARM_x1"
         };
+        hasHMD = 1;
 
         class Pilot: WLTurretDefaults {
             turret[] = { -1 };
@@ -120,4 +131,50 @@ class RotaryWing {
             };
         };
     }; // "AH-99 Blackfoot"
+
+    class B_Heli_Attack_01_sead_F {
+        name = "AH-99 Blackfoot (SEAD)";
+        cost = 14000;
+        spawn = "B_Heli_Attack_01_dynamicLoadout_F";
+        requirements[] = {"H"};
+        offset[] = {0, 10, 0};
+        rearm = 700;
+        killReward = 550;
+        variant = 1;
+
+        disallowMagazines[] = {
+            "PylonMissile_1Rnd_AAA_missiles",
+            "PylonMissile_1Rnd_LG_scalpel",
+            "PylonRack_12Rnd_PG_missiles",
+            "PylonRack_12Rnd_missiles"
+        };
+        hasHMD = 1;
+
+        class Pilot: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {};
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "240Rnd_CMFlare_Chaff_Magazine",
+                "240Rnd_CMFlare_Chaff_Magazine",
+                "240Rnd_CMFlare_Chaff_Magazine",
+                "magazine_Missile_HARM_x1",
+                "magazine_Missile_HARM_x1",
+                "magazine_Missile_HARM_x1",
+                "magazine_Missile_HARM_x1",
+                "magazine_Missile_HARM_x1",
+                "magazine_Missile_HARM_x1",
+                "magazine_Missile_HARM_x1",
+                "magazine_Missile_HARM_x1",
+                "magazine_Missile_HARM_x1",
+                "magazine_Missile_HARM_x1",
+                "magazine_Missile_HARM_x1",
+                "magazine_Missile_HARM_x1"
+            };
+            addWeapons[] = {
+                "CMFlareLauncher_Singles",
+                "weapon_HARMLauncher"
+            };
+        };
+    };
 };

@@ -35,7 +35,3 @@ private _weaponsByTurret = createHashMap;
 } forEach _weaponsByTurret;
 
 _asset spawn APS_fnc_rearmAPS;
-
-_asset setVehicleReceiveRemoteTargets true;
-_asset setVehicleReportRemoteTargets true;
-_asset setVehicleReportOwnPosition true;

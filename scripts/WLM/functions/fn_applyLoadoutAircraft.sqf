@@ -61,10 +61,6 @@ private _attachments = [];
     _attachments pushBack [_attachment, _turret];
 } forEach _pylonsInfo;
 
-_asset setVehicleReceiveRemoteTargets true;
-_asset setVehicleReportRemoteTargets true;
-_asset setVehicleReportOwnPosition true;
-
 _asset setVariable ["WLM_assetAttachments", _attachments, true];
 
 [_asset, _eligibleFreeRearm] remoteExec ["WLM_fnc_applyPylon", [_asset, player]];

@@ -13,6 +13,9 @@ if (isNull (findDisplay 8000)) then {
 	} forEach _d;
 	createDialog "MRTM_settingsMenu";
 };
+
+["TaskThirdPerson"] call WLT_fnc_taskComplete;
+
 disableSerialization;
 
 _display = findDisplay 8000;
@@ -45,3 +48,4 @@ ctrlEnable [8014, !(profileNamespace getVariable ["MRTM_syncObjects", true])];
 (_display displayCtrl 8030) cbSetChecked (profileNamespace getVariable ["MRTM_disableMissileCameras", false]);
 (_display displayCtrl 8031) cbSetChecked (profileNamespace getVariable ["MRTM_showMarkers", true]);
 (_display displayCtrl 8032) cbSetChecked (profileNamespace getVariable ["MRTM_noVoiceSpeaker", false]);
+(_display displayCtrl 8033) cbSetChecked (profileNamespace getVariable ["MRTM_muteTaskNotifications", false]);

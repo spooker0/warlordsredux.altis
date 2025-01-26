@@ -27,6 +27,7 @@ if (!isPlayer _asset && (_asset getVariable ["BIS_WL_ownerAsset", "123"]) == get
         params ["_asset"];
         if ((_asset getVariable ["BIS_WL_ownerAsset", "123"]) == getPlayerUID player) then {
             _asset spawn WL2_fnc_deleteAssetFromMap;
+            ["TaskMapAssetControls"] call WLT_fnc_taskComplete;
         } else {
             playSoundUI ["AddItemFailed"];
             systemChat "You do not own this asset.";
@@ -167,7 +168,7 @@ if (unitIsUAV _asset && getConnectedUAV player != _asset && _access # 0) then {
 };
 
 private _fastTravelSLCost = getMissionConfigValue ["BIS_WL_fastTravelCostSquadLeader", 10];
-private _eligibleFastTravelSL = (["FTSquadLeader", [], "", "", "", [], _fastTravelSLCost, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
+private _eligibleFastTravelSL = (["FTSquadLeader", [], "", "", "", [], _fastTravelSLCost, "Fast Travel"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
 private _mySquadLeader = ['getMySquadLeader'] call SQD_fnc_client;
 private _isMySquadLeader = getPlayerID _asset == _mySquadLeader;
 private _moneySign = [BIS_WL_playerSide] call WL2_fnc_getMoneySign;
@@ -176,7 +177,7 @@ if (isPlayer _asset && _eligibleFastTravelSL && _isMySquadLeader) then {
     [_fastTravelText, {
         params ["_asset"];
         private _fastTravelSLCost = getMissionConfigValue ["BIS_WL_fastTravelCostSquadLeader", 10];
-        private _eligibleFastTravelSL = (["FTSquadLeader", [], "", "", "", [], _fastTravelSLCost, "Strategy"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
+        private _eligibleFastTravelSL = (["FTSquadLeader", [], "", "", "", [], _fastTravelSLCost, "Fast Travel"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
         private _mySquadLeader = ['getMySquadLeader'] call SQD_fnc_client;
         private _isMySquadLeader = getPlayerID _asset == _mySquadLeader;
         if (isPlayer _asset && _eligibleFastTravelSL && _isMySquadLeader) then {

@@ -22,6 +22,8 @@ private _actionId = player addAction [
             call WL2_fnc_respawnBagAction;
         };
 
+        ["TaskPlaceTent"] call WLT_fnc_taskComplete;
+
         private _previousRespawnBag = player getVariable ["WL2_respawnBag", objNull];
         if (!isNull _previousRespawnBag) then {
             player setVariable ["WL2_respawnBag", objNull];

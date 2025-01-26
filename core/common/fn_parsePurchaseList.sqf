@@ -25,7 +25,7 @@ private _savedLoadoutHandled = FALSE;
 
 	if (isClass (_preset >> str _side)) then {
 		{
-			if (_x == "Strategy") exitWith {};
+			if (_x in ["Fast Travel", "Strategy"]) exitWith {};
 
 			_index = _forEachIndex;
 			_category = _x;
@@ -195,15 +195,8 @@ private _savedLoadoutHandled = FALSE;
 	};
 } forEach BIS_WL_purchaseListTemplate;
 
-private _strategyArr = [
+private _fastTravelArr = [
 	[
-		"Scan",
-		getMissionConfigValue ["BIS_WL_scanCost", 750],
-		[],
-		localize "STR_A3_WL_param4_title",
-		"\A3\Data_F_Warlords\Data\preview_scan.jpg",
-		localize "STR_A3_WL_menu_scan_info"
-	], [
 		"FTSeized",
 		0,
 		[],
@@ -280,6 +273,18 @@ private _strategyArr = [
 		"Fast Travel to Tent (Free)",
 		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
 		""
+	]
+];
+_sortedArray pushBack _fastTravelArr;
+
+private _strategyArr = [
+	[
+		"Scan",
+		getMissionConfigValue ["BIS_WL_scanCost", 750],
+		[],
+		localize "STR_A3_WL_param4_title",
+		"\A3\Data_F_Warlords\Data\preview_scan.jpg",
+		localize "STR_A3_WL_menu_scan_info"
 	], [
 		"FundsTransfer",
 		getMissionConfigValue ["BIS_WL_fundsTransferCost", 2000],

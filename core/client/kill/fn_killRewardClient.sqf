@@ -7,13 +7,12 @@ private _displayName = "";
 
 private _side = BIS_WL_playerSide;
 
+private _unitType = typeOf _unit;
 if (_customText != "") then {
 	_displayText = format ["%1", _customText];
 } else {
-	private _unitType = if (typeOf _unit == "") then {
-		_unitTypeName
-	} else {
-		typeOf _unit
+	if (_unitType == "") then {
+		_unitType = _unitTypeName;
 	};
 
 	if (_unitType isKindOf "Man") then {
@@ -24,6 +23,8 @@ if (_customText != "") then {
 	};
 	_displayText = format [_displayText, _displayName];
 };
+
+[_customText, _unitType] call WLT_fnc_killRewardTaskHandle;
 
 // map: displayText => [repetition, points, customColor, timestamp]
 private _killRewardMap = uiNamespace getVariable ["WL_killRewardMap", createHashMap];

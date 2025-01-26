@@ -15,3 +15,5 @@ private _vic = ["B_Truck_01_medical_F", "O_Truck_03_medical_F"] select _side;
 	sleep 1;
 	titleCut ["", "BLACK IN", 1];
 } forEach ((entities _vic) select {alive _x});
+
+["TaskFastTravelFTVehicle"] call WLT_fnc_taskComplete;

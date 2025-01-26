@@ -29,10 +29,14 @@ class Naval {
         description = "Alligator Attack Boat is an upgraded, heavily-armed variant of the Speedboat.";
         spawn = "O_Boat_Armed_01_hmg_F";
         variant = 1;
-        cost = 1000;
+        cost = 1500;
         requirements[] = {"W"};
         rearm = 400;
         killReward = 100;
+
+        disallowMagazines[] = {
+            "4Rnd_GAA_missiles"
+        };
 
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };

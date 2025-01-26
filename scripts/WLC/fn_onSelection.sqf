@@ -5,6 +5,10 @@ params ["_control", "_lbCurSel", "_type"];
 private _display = findDisplay WLC_DISPLAY;
 if (isNull _display) exitWith {};
 
+uiNamespace setVariable ["WLC_selectedType", _type];
+uiNamespace setVariable ["WLC_selectedControl", _control];
+uiNamespace setVariable ["WLC_selectedItem", _lbCurSel];
+
 private _fullDisplayBg = _display displayCtrl WLC_FULL_DISPLAY_BG;
 private _weaponDisplayBg = _display displayCtrl WLC_WEAPON_DISPLAY_BG;
 private _weaponDisplayTooltip = _display displayCtrl WLC_WEAPON_DISPLAY_TOOLTIP_HELPER;
@@ -15,6 +19,9 @@ private _attachmentDisplay = _display displayCtrl WLC_ATTACHMENT_DISPLAY;
 private _magDisplay = _display displayCtrl WLC_MAGAZINE_DISPLAY;
 private _itemCostDisplay = _display displayCtrl WLC_COST_DISPLAY;
 private _massDisplay = _display displayCtrl WLC_MASS_DISPLAY;
+
+private _variantDisplay = _display displayCtrl WLC_WEAPON_ATTACHMENT_SELECT;
+private _loadoutDisplay = _display displayCtrl WLC_MAGAZINE_SELECT;
 
 {
     ctrlDelete _x;
@@ -31,12 +38,15 @@ _weaponDisplay ctrlShow false;
 _weaponDisplayTooltip ctrlShow false;
 _attachmentDisplay ctrlShow false;
 _magDisplay ctrlShow false;
+_variantDisplay ctrlShow false;
+_loadoutDisplay ctrlShow false;
+
+_variantDisplay ctrlRemoveAllEventHandlers "LBSelChanged";
+_loadoutDisplay ctrlRemoveAllEventHandlers "LBSelChanged";
 
 if (_lbCurSel <= 0) exitWith {
     profileNamespace setVariable [format ["WLC_%1", _type], ""];
 };
-
-private _moneySign = [BIS_WL_playerSide] call WL2_fnc_getMoneySign;
 
 private _getItemTooltip = {
     params ["_item"];
@@ -59,14 +69,19 @@ private _getItemTooltip = {
 };
 private _customizationData = _control lbData _lbCurSel;
 private _selectedValue = _control lbValue _lbCurSel;
-private _level = ["getLevel", player] call WLC_fnc_getLevelInfo;
-if (_selectedValue <= _level) then {
+private _playerLevel = ["getLevel", player] call WLC_fnc_getLevelInfo;
+if (_selectedValue <= _playerLevel) then {
     profileNamespace setVariable [format ["WLC_%1", _type], _customizationData];
 };
 
 private _customizationList = missionNamespace getVariable [format ["WLC_%1_%2", _type, BIS_WL_playerSide], createHashMap];
 private _customization = _customizationList getOrDefault [_customizationData, createHashMap];
 private _actualClass = _customization getOrDefault ["item", _customizationData];
+
+private _level = _customization getOrDefault ["level", 0];
+private _cost = _customization getOrDefault ["cost", 0];
+[_cost, _level] call WLC_fnc_updateItemCost;
+private _moneySign = [BIS_WL_playerSide] call WL2_fnc_getMoneySign;
 
 if (_type in ["Primary", "Secondary", "Launcher"]) then {
     _weaponDisplayBg ctrlShow true;
@@ -77,40 +92,73 @@ if (_type in ["Primary", "Secondary", "Launcher"]) then {
     _weaponDisplayTooltip ctrlShow true;
     _weaponDisplayTooltip ctrlSetTooltip ([_actualClass] call WLM_fnc_getMagazineTooltip);
 
-    private _attachments = _customization getOrDefault ["attachments", []];
+    lbClear _variantDisplay;
+    private _selectedVariant = profileNamespace getVariable [format ["WLC_%1_Attach", _type], ""];
+    private _variantIndex = -1;
+    private _variants = _customization getOrDefault ["variants", createHashMap];
+
+    private _variantsSorted = [_variants toArray false, [], {
+        (_x # 1) getOrDefault ["cost", 0];
+    }] call BIS_fnc_sortBy;
     {
-        private _itemPosition = [_forEachIndex * (0.1 + 0.01), 0, 0.1, 0.1 * 4 / 3];
+        private _variant = _x # 0;
+        private _variantEntry = _x # 1;
+        private _variantName = _variantEntry getOrDefault ["name", ""];
+        private _variantAttachments = _variantEntry getOrDefault ["attachments", []];
+        private _index = _variantDisplay lbAdd _variantName;
+        _variantDisplay lbSetData [_index, _variant];
 
-        private _attachmentPicBg = _display ctrlCreate ["WLCAttachmentPicBg", -1, _attachmentDisplay];
-        _attachmentPicBg ctrlSetPosition _itemPosition;
-        _attachmentPicBg ctrlSetText "";
-        _attachmentPicBg ctrlCommit 0;
-
-        private _attachmentPic = _display ctrlCreate ["WLCAttachmentPic", -1, _attachmentDisplay];
-        _attachmentPic ctrlSetPosition _itemPosition;
-        _attachmentPic ctrlSetText (getText (configFile >> "CfgWeapons" >> _x >> "picture"));
-        _attachmentPic ctrlSetTooltip ([_x] call WLM_fnc_getMagazineTooltip);
-        _attachmentPic ctrlCommit 0;
-    } forEach _attachments;
+        if (_variant == _selectedVariant) then {
+            _variantIndex = _index;
+        };
+    } forEach _variantsSorted;
+    _variantDisplay ctrlAddEventHandler ["LBSelChanged", "_this call WLC_fnc_buildAttachments"];
+    _variantDisplay lbSetCurSel _variantIndex;
+    _variantDisplay ctrlShow (count _variants > 0);
     _attachmentDisplay ctrlShow true;
 
-    private _magazines = _customization getOrDefault ["magazines", []];
+    _loadoutDisplay ctrlShow true;
+    lbClear _loadoutDisplay;
+
+    private _selectedLoadout = profileNamespace getVariable [format ["WLC_%1_Ammo", _type], ""];
+    private _loadoutIndex = 0;
+    private _loadouts = _customization getOrDefault ["loadouts", createHashMap];
+
+    private _loadoutSorted = [_loadouts toArray false, [], {
+        private _item = _x # 1;
+        private _cost = _item getOrDefault ["cost", 0];
+        private _level = _item getOrDefault ["level", 0];
+        _level * 100 + _cost;
+    }] call BIS_fnc_sortBy;
     {
-        private _row = floor (_forEachIndex / 5);
-        private _col = _forEachIndex % 5;
-        private _itemPosition = [_col * (0.07 + 0.01), _row * (0.07 + 0.03), 0.07, 0.07 * 4 / 3];
+        private _loadout = _x # 0;
+        private _loadoutEntry = _x # 1;
+        private _loadoutName = _loadoutEntry getOrDefault ["name", ""];
+        private _loadoutMags = _loadoutEntry getOrDefault ["magazines", []];
+        private _loadoutCost = _loadoutEntry getOrDefault ["cost", 0];
+        private _loadoutLevel = _loadoutEntry getOrDefault ["level", 0];
 
-        private _magPicBg = _display ctrlCreate ["WLCAttachmentPicBg", -1, _magDisplay];
-        _magPicBg ctrlSetPosition _itemPosition;
-        _magPicBg ctrlSetText "";
-        _magPicBg ctrlCommit 0;
+        private _displayName = if (_loadoutCost > 0) then {
+            format ["%1 [%2%3]", _loadoutName, _moneySign, _loadoutCost];
+        } else {
+            _loadoutName;
+        };
 
-        private _magPic = _display ctrlCreate ["WLCAttachmentPic", -1, _magDisplay];
-        _magPic ctrlSetPosition _itemPosition;
-        _magPic ctrlSetText (getText (configFile >> "CfgMagazines" >> _x >> "picture"));
-        _magPic ctrlSetTooltip ([_x] call WLM_fnc_getMagazineTooltip);
-        _magPic ctrlCommit 0;
-    } forEach _magazines;
+        private _index = _loadoutDisplay lbAdd _displayName;
+        _loadoutDisplay lbSetData [_index, _loadout];
+        _loadoutDisplay lbSetValue [_index, _loadoutCost];
+
+        if (_loadoutLevel > _playerLevel) then {
+            _loadoutDisplay lbSetColor [_index, [1, 0, 0, 1]];
+            _loadoutDisplay lbSetText [_index, format ["(Lvl %1) %2", _loadoutLevel, _displayName]];
+        };
+
+        if (_loadout == _selectedLoadout) then {
+            _loadoutIndex = _index;
+        };
+    } forEach _loadoutSorted;
+    _loadoutDisplay ctrlAddEventHandler ["LBSelChanged", "_this call WLC_fnc_buildAmmo"];
+    _loadoutDisplay lbSetCurSel _loadoutIndex;
     _magDisplay ctrlShow true;
 };
 
@@ -125,44 +173,3 @@ if (_type in ["Uniform", "Vest", "Helmet"]) then {
     private _mass = getNumber (configFile >> "CfgWeapons" >> _actualClass >> "ItemInfo" >> "mass");
     _massDisplay ctrlSetStructuredText parseText format ["<t size='1.2'>Mass: %1 kg</t>", _mass];
 };
-
-private _level = _customization getOrDefault ["level", 0];
-private _levelText = format ["Unlock: Level %1", _level];
-private _cost = _customization getOrDefault ["cost", 0];
-private _costText = if (_cost > 0) then {
-    format ["Cost: %1%2", _moneySign, _cost];
-} else {
-    "";
-};
-_itemCostDisplay ctrlSetStructuredText parseText format ["<t size='1.2'>%1<br/>%2</t>", _levelText, _costText];
-
-// Refresh cost
-private _sumCost = 0;
-{
-    private _select = _display displayCtrl (_x # 0);
-    private _thisType = _x # 1;
-    private _customizationList = missionNamespace getVariable [format ["WLC_%1_%2", _thisType, BIS_WL_playerSide], createHashMap];
-
-    private _lbCurSelForType = lbCurSel _select;
-    private _customizationData = _select lbData _lbCurSelForType;
-    private _customization = _customizationList getOrDefault [_customizationData, createHashMap];
-    private _cost = _customization getOrDefault ["cost", 0];
-
-    _sumCost = _sumCost + _cost;
-} forEach [
-    [WLC_PRIMARY_SELECT, "Primary"],
-    [WLC_SECONDARY_SELECT, "Secondary"],
-    [WLC_LAUNCHER_SELECT, "Launcher"],
-    [WLC_UNIFORM_SELECT, "Uniform"],
-    [WLC_VEST_SELECT, "Vest"],
-    [WLC_HELMET_SELECT, "Helmet"]
-];
-
-private _funds = (missionNamespace getVariable "fundsDatabaseClients") getOrDefault [getPlayerUID player, 0];
-private _affordColor = if (_funds >= _sumCost) then {
-    "#FFFFFF";
-} else {
-    "#FF0000";
-};
-private _costDisplay = _display displayCtrl WLC_COST_TEXT;
-_costDisplay ctrlSetStructuredText parseText format ["<t align='right'>Total Cost: <t color='%1'>%2%3</t></t>", _affordColor, _moneySign, _sumCost];

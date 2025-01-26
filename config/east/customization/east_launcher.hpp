@@ -1,260 +1,255 @@
 class Launcher {
-    class RPG7_Double {
-        name = "RPG-7, 2x";
+    class RPG7 {
+        name = "RPG-7";
         item = "launch_RPG7_F";
         level = 3;
         cost = 15;
-        magazines[] = {
-            "RPG7_F",
-            "RPG7_F"
+
+        class Double: WLCAmmo {
+            name = "1x RPG";
+            level = 3;
+            cost = 15;
+            magazines[] = {
+                { "RPG7_F", 2 }
+            };
+        };
+
+        class Light: WLCAmmo {
+            name = "4x RPG";
+            level = 3;
+            cost = 25;
+            magazines[] = {
+                { "RPG7_F", 4 }
+            };
+        };
+
+        class Heavy: WLCAmmo {
+            name = "8x RPG";
+            level = 6;
+            cost = 100;
+            magazines[] = {
+                { "RPG7_F", 8 }
+            };
         };
     };
-    class RPG7_Light {
-        name = "RPG-7, 4x";
-        item = "launch_RPG7_F";
-        level = 3;
-        cost = 25;
-        magazines[] = {
-            "RPG7_F",
-            "RPG7_F",
-            "RPG7_F",
-            "RPG7_F"
-        };
-    };
-    class RPG7_Heavy {
-        name = "RPG-7, 8x";
-        item = "launch_RPG7_F";
-        level = 6;
-        cost = 100;
-        magazines[] = {
-            "RPG7_F",
-            "RPG7_F",
-            "RPG7_F",
-            "RPG7_F",
-            "RPG7_F",
-            "RPG7_F",
-            "RPG7_F",
-            "RPG7_F"
-        };
-    };
-    class RPG42_HE_Single {
-        name = "RPG-42, 1x HE";
+
+    class RPG42 {
+        name = "RPG-42";
         item = "launch_RPG32_F";
         level = 9;
-        cost = 25;
-        magazines[] = {
-            "RPG32_HE_F"
+        cost = 20;
+
+        class RPG42_HE_Single: WLCAmmo {
+            name = "1x HE";
+            level = 9;
+            cost = 25;
+            magazines[] = {
+                { "RPG32_HE_F", 1 }
+            };
+        };
+
+        class RPG42_HE_Light: WLCAmmo {
+            name = "2x HE";
+            level = 9;
+            cost = 50;
+            magazines[] = {
+                { "RPG32_HE_F", 2 }
+            };
+        };
+
+        class RPG42_HE_Heavy: WLCAmmo {
+            name = "5x HE";
+            level = 12;
+            cost = 100;
+            magazines[] = {
+                { "RPG32_HE_F", 5 }
+            };
+        };
+
+        class RPG42_HEAT_Single: WLCAmmo {
+            name = "1x HEAT";
+            level = 15;
+            cost = 40;
+            magazines[] = {
+                { "RPG32_F", 1 }
+            };
+        };
+
+        class RPG42_HEAT_Light: WLCAmmo {
+            name = "2x HEAT";
+            level = 15;
+            cost = 75;
+            magazines[] = {
+                { "RPG32_F", 2 }
+            };
+        };
+
+        class RPG42_HEAT_Heavy: WLCAmmo {
+            name = "5x HEAT";
+            level = 18;
+            cost = 150;
+            magazines[] = {
+                { "RPG32_F", 5 }
+            };
         };
     };
-    class RPG42_HE_Light {
-        name = "RPG-42, 2x HE";
-        item = "launch_RPG32_F";
-        level = 9;
-        cost = 50;
-        magazines[] = {
-            "RPG32_HE_F",
-            "RPG32_HE_F"
-        };
-    };
-    class RPG42_HE_Heavy {
-        name = "RPG-42, 5x HE";
-        item = "launch_RPG32_F";
-        level = 12;
-        cost = 100;
-        magazines[] = {
-            "RPG32_HE_F",
-            "RPG32_HE_F",
-            "RPG32_HE_F",
-            "RPG32_HE_F",
-            "RPG32_HE_F"
-        };
-    };
-    class RPG42_HEAT_Single {
-        name = "RPG-42, 1x HEAT";
-        item = "launch_RPG32_F";
-        level = 15;
-        cost = 40;
-        magazines[] = {
-            "RPG32_F"
-        };
-    };
-    class RPG42_HEAT_Light {
-        name = "RPG-42, 2x HEAT";
-        item = "launch_RPG32_F";
-        level = 15;
-        cost = 75;
-        magazines[] = {
-            "RPG32_F",
-            "RPG32_F"
-        };
-    };
-    class RPG42_HEAT_Heavy {
-        name = "RPG-42, 5x HEAT";
-        item = "launch_RPG32_F";
-        level = 18;
-        cost = 150;
-        magazines[] = {
-            "RPG32_F",
-            "RPG32_F",
-            "RPG32_F",
-            "RPG32_F",
-            "RPG32_F"
-        };
-    };
-    class PCML_Single {
-        name = "PCML, 1x";
+
+    class PCML {
+        name = "PCML";
         item = "launch_NLAW_F";
         level = 21;
-        cost = 40;
-        magazines[] = {
-            "NLAW_F"
+
+        class PCML_Single: WLCAmmo {
+            name = "1x";
+            level = 21;
+            cost = 40;
+            magazines[] = {
+                { "NLAW_F", 1 }
+            };
+        };
+
+        class PCML_Light: WLCAmmo {
+            name = "2x";
+            level = 21;
+            cost = 75;
+            magazines[] = {
+                { "NLAW_F", 2 }
+            };
+        };
+
+        class PCML_Heavy: WLCAmmo {
+            name = "5x";
+            level = 24;
+            cost = 150;
+            magazines[] = {
+                { "NLAW_F", 5 }
+            };
         };
     };
-    class PCML_Light {
-        name = "PCML, 2x";
-        item = "launch_NLAW_F";
-        level = 21;
-        cost = 75;
-        magazines[] = {
-            "NLAW_F",
-            "NLAW_F"
-        };
-    };
-    class PCML_Heavy {
-        name = "PCML, 5x";
-        item = "launch_NLAW_F";
-        level = 24;
-        cost = 150;
-        magazines[] = {
-            "NLAW_F",
-            "NLAW_F",
-            "NLAW_F",
-            "NLAW_F",
-            "NLAW_F"
-        };
-    };
-    class Vorona_HEAT_Single {
-        name = "Vorona, 1x HEAT";
-        item = "launch_O_Vorona_brown_F";
+
+    class Vorona {
+        name = "Vorona";
+        item = "launch_O_Vorona_green_F";
         level = 27;
-        cost = 50;
-        magazines[] = {
-            "Vorona_HEAT"
+
+        class HEAT_Single: WLCAmmo {
+            name = "1x HEAT";
+            level = 27;
+            cost = 50;
+            magazines[] = {
+                { "Vorona_HEAT", 1 }
+            };
+        };
+
+        class HEAT_Light: WLCAmmo {
+            name = "2x HEAT";
+            level = 27;
+            cost = 100;
+            magazines[] = {
+                { "Vorona_HEAT", 2 }
+            };
+        };
+
+        class HEAT_Heavy: WLCAmmo {
+            name = "4x HEAT";
+            level = 30;
+            cost = 200;
+            magazines[] = {
+                { "Vorona_HEAT", 4 }
+            };
+        };
+
+        class HE_Single: WLCAmmo {
+            name = "1x HE";
+            level = 33;
+            cost = 50;
+            magazines[] = {
+                { "Vorona_HE", 1 }
+            };
+        };
+
+        class HE_Light: WLCAmmo {
+            name = "2x HE";
+            level = 33;
+            cost = 100;
+            magazines[] = {
+                { "Vorona_HE", 2 }
+            };
+        };
+
+        class HE_Heavy: WLCAmmo {
+            name = "4x HE";
+            level = 36;
+            cost = 200;
+            magazines[] = {
+                { "Vorona_HE", 4 }
+            };
         };
     };
-    class Vorona_HEAT_Light {
-        name = "Vorona, 2x HEAT";
-        item = "launch_O_Vorona_brown_F";
-        level = 27;
-        cost = 100;
-        magazines[] = {
-            "Vorona_HEAT",
-            "Vorona_HEAT"
-        };
-    };
-    class Vorona_HEAT_Heavy {
-        name = "Vorona, 4x HEAT";
-        item = "launch_O_Vorona_brown_F";
-        level = 30;
-        cost = 200;
-        magazines[] = {
-            "Vorona_HEAT",
-            "Vorona_HEAT",
-            "Vorona_HEAT",
-            "Vorona_HEAT"
-        };
-    };
-    class Vorona_HE_Single {
-        name = "Vorona, 1x HE";
-        item = "launch_O_Vorona_brown_F";
-        level = 33;
-        cost = 50;
-        magazines[] = {
-            "Vorona_HE"
-        };
-    };
-    class Vorona_HE_Light {
-        name = "Vorona, 2x HE";
-        item = "launch_O_Vorona_brown_F";
-        level = 33;
-        cost = 100;
-        magazines[] = {
-            "Vorona_HE",
-            "Vorona_HE"
-        };
-    };
-    class Vorona_HE_Heavy {
-        name = "Vorona, 4x HE";
-        item = "launch_O_Vorona_brown_F";
-        level = 36;
-        cost = 200;
-        magazines[] = {
-            "Vorona_HE",
-            "Vorona_HE",
-            "Vorona_HE",
-            "Vorona_HE"
-        };
-    };
-    class Titan_AA_Single {
-        name = "Titan, 1x AA";
+
+    class Titan_AA {
+        name = "Titan AA";
         item = "launch_B_Titan_F";
         level = 39;
-        cost = 50;
-        magazines[] = {
-            "Titan_AA"
+
+        class AA_Single: WLCAmmo {
+            name = "1x AA";
+            level = 39;
+            cost = 50;
+            magazines[] = {
+                { "Titan_AA", 1 }
+            };
+        };
+
+        class AA_Light: WLCAmmo {
+            name = "2x AA";
+            level = 39;
+            cost = 100;
+            magazines[] = {
+                { "Titan_AA", 2 }
+            };
+        };
+
+        class AA_Heavy: WLCAmmo {
+            name = "4x AA";
+            level = 42;
+            cost = 200;
+            magazines[] = {
+                { "Titan_AA", 4 }
+            };
         };
     };
-    class Titan_AA_Light {
-        name = "Titan, 2x AA";
-        item = "launch_B_Titan_F";
-        level = 39;
-        cost = 100;
-        magazines[] = {
-            "Titan_AA",
-            "Titan_AA"
-        };
-    };
-    class Titan_AA_Heavy {
-        name = "Titan, 4x AA";
-        item = "launch_B_Titan_F";
-        level = 42;
-        cost = 200;
-        magazines[] = {
-            "Titan_AA",
-            "Titan_AA",
-            "Titan_AA",
-            "Titan_AA"
-        };
-    };
-    class Titan_AT_Single {
-        name = "Titan, 1x AT";
+
+    class Titan {
+        name = "Titan";
         item = "launch_B_Titan_short_F";
         level = 45;
-        cost = 50;
-        magazines[] = {
-            "Titan_AT"
+
+        class AT_Single: WLCAmmo {
+            name = "1x AT";
+            level = 45;
+            cost = 50;
+            magazines[] = {
+                { "Titan_AT", 1 }
+            };
         };
-    };
-    class Titan_AT_Light {
-        name = "Titan, 2x AT";
-        item = "launch_B_Titan_short_F";
-        level = 45;
-        cost = 100;
-        magazines[] = {
-            "Titan_AT",
-            "Titan_AT"
+
+        class AT_Light: WLCAmmo {
+            name = "2x AT";
+            level = 45;
+            cost = 100;
+            magazines[] = {
+                { "Titan_AT", 2 }
+            };
         };
-    };
-    class Titan_AT_Heavy {
-        name = "Titan, 4x AT";
-        item = "launch_B_Titan_short_F";
-        level = 48;
-        cost = 200;
-        magazines[] = {
-            "Titan_AT",
-            "Titan_AT",
-            "Titan_AT",
-            "Titan_AT"
+
+        class AT_Heavy: WLCAmmo {
+            name = "4x AT";
+            level = 48;
+            cost = 200;
+            magazines[] = {
+                { "Titan_AT", 4 }
+            };
         };
     };
 };

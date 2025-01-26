@@ -102,6 +102,14 @@ inGameUISetEventHandler ["Action", '
                 false;
             };
         };
+        case "SwitchToUAVDriver": {
+            if (isNull getConnectedUAVUnit player) then {
+                player remoteControl objNull;
+                true;
+            } else {
+                false;
+            };
+        };
         default {
             false;
         };

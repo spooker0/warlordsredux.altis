@@ -21,14 +21,14 @@ private _actionText = if (_isActive) then {
 private _outerMarkerName = format ["BIS_WL_jammerMarkerOuter_%1", netId _asset];
 if (_isActive) then {
     _asset setFuelConsumptionCoef 5;
-    _outerMarkerName setMarkerAlpha 1;
+    _outerMarkerName setMarkerAlphaLocal 1;
 } else {
     if (_isActivating) then {
         _asset setFuelConsumptionCoef 5;
-        _outerMarkerName setMarkerAlpha 1;
+        _outerMarkerName setMarkerAlphaLocal 1;
     } else {
         _asset setFuelConsumptionCoef 1;
-        _outerMarkerName setMarkerAlpha 0;
+        _outerMarkerName setMarkerAlphaLocal 0;
     };
 };
 

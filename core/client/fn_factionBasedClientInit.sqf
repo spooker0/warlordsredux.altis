@@ -22,12 +22,18 @@ _magazineTypes = [
 switch (side group player) do {
 	case west: {
 		player linkItem "B_UavTerminal";
+		player addMagazineGlobal "Laserbatteries";
+		player addWeaponGlobal "Laserdesignator";
 	};
 	case east: {
 		player linkItem "O_UavTerminal";
+		player addMagazineGlobal "Laserbatteries";
+		player addWeaponGlobal "Laserdesignator_02";
 	};
 	case independent: {
 		player linkItem "I_UavTerminal";
+		player addMagazineGlobal "Laserbatteries";
+		player addWeaponGlobal "Laserdesignator_03";
 	};
 };
 

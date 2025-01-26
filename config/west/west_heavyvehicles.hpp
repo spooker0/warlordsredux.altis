@@ -1,4 +1,32 @@
 class HeavyVehicles {
+    class B_APC_Tracked_01_rcws_F {
+        cost = 1300;
+        requirements[] = {};
+        rearm = 400;
+        killReward = 300;
+        capValue = 3;
+        aps = 2;
+
+        // class Gunner: WLTurretDefaults {
+        //     turret[] = { 0 };
+        //     removeMagazines[] = {
+        //         "96Rnd_40mm_G_belt"
+        //     };
+        //     removeWeapons[] = {
+        //         "GMG_40mm"
+        //     };
+        //     addMagazines[] = {
+        //         "60Rnd_30mm_APFSDS_shells_Tracer_Red",
+        //         "60Rnd_30mm_APFSDS_shells_Tracer_Red",
+        //         "140Rnd_30mm_MP_shells_Tracer_Red",
+        //         "140Rnd_30mm_MP_shells_Tracer_Red"
+        //     };
+        //     addWeapons[] = {
+        //         "autocannon_30mm_CTWS"
+        //     };
+        // };
+    }; // "IFV-6c Panther"
+
     class B_APC_Tracked_01_CRV_F {
         cost = 1700;
         requirements[] = {};
@@ -7,15 +35,6 @@ class HeavyVehicles {
         capValue = 2;
         aps = 2;
     }; // "CRV-6e Bobcat"
-
-    class B_APC_Tracked_01_rcws_F {
-        cost = 1800;
-        requirements[] = {};
-        rearm = 400;
-        killReward = 300;
-        capValue = 3;
-        aps = 2;
-    }; // "IFV-6c Panther"
 
     class B_APC_tracked_03_cannon_F {
         name = "FV-720 Mora";
@@ -196,36 +215,6 @@ class HeavyVehicles {
         aps = 2;
     }; // "Rhino MGS"
 
-    class B_APC_Tracked_01_AA_F {
-        cost = 5000;
-        requirements[] = {};
-        rearm = 500;
-        killReward = 350;
-        capValue = 4;
-        aps = 2;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {
-                "4Rnd_Titan_long_missiles",
-                "680Rnd_35mm_AA_shells_Tracer_Red"
-            };
-            removeWeapons[] = {
-                "missiles_titan_AA",
-                "autocannon_35mm"
-            };
-            addMagazines[] = {
-                "4Rnd_GAA_missiles",
-                "4Rnd_GAA_missiles",
-                "680Rnd_35mm_AA_shells_Tracer_Red"
-            };
-            addWeapons[] = {
-                "autocannon_35mm",
-                "missiles_titan_AA"
-            };
-        };
-    }; // "IFV-6a Cheetah"
-
     class B_AFV_Wheeled_01_up_cannon_F {
         cost = 5000;
         requirements[] = {};
@@ -260,38 +249,6 @@ class HeavyVehicles {
             "4Rnd_120mm_LG_cannon_missiles"
         };
     }; // "M2A1 Slammer UP"
-
-    class B_APC_Tracked_01_AA_UP_F {
-        name = "IFV-6X Puma";
-        description = "IFV-6X Puma is a variant of the IFV-6a Cheetah armed with Defender missiles.";
-        spawn = "B_APC_Tracked_01_AA_F";
-        variant = 1;
-        cost = 9000;
-        requirements[] = {};
-        rearm = 450;
-        killReward = 600;
-        capValue = 4;
-        aps = 2;
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {
-                "4Rnd_Titan_long_missiles"
-            };
-            removeWeapons[] = {
-                "missiles_titan_AA",
-                "autocannon_35mm"
-            };
-            addMagazines[] = {
-                "magazine_Missile_mim145_x4",
-                "680Rnd_35mm_AA_shells_Tracer_Red"
-            };
-            addWeapons[] = {
-                "autocannon_35mm",
-                "weapon_mim145Launcher"
-            };
-        };
-    };
 
     class B_MBT_03_cannon_F {
         cost = 8000;

@@ -1,5 +1,4 @@
-class RscTitles
-{
+class RscTitles {
 	#include "scripts\GF_Earplugs\GF_Earplugs_HPP.hpp"
 
 	class RscJammingIndicator {

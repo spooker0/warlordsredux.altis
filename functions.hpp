@@ -126,9 +126,10 @@ class CfgFunctions {
 			file = "core\client\action";
 			class arsenalSetup {};
 			class attachVehicle {};
-			class buyMenuAction {};
 			class catapultAction {};
 			class catapultActionEligibility {};
+			class controlGunnerAction {};
+			class controlGunnerEligibility {};
 			class claimAction {};
 			class claimEligibility {};
 			class dazzlerAction {};
@@ -153,7 +154,10 @@ class CfgFunctions {
 			class repairActionEligibility {};
 			class respawnBagAction {};
 			class reviveAction {};
+			class scanner {};
+			class scannerAction {};
 			class slingAddAction {};
+			class stabilizeBoatAction {};
 			class vehicleLockAction {};
 			class vehicleLockUpdate {};
 		};
@@ -162,6 +166,7 @@ class CfgFunctions {
 			class drawJammerCircle {};
 			class getDir {};
 			class getPos {};
+			class helmetInterface {};
 			class iconColor {};
 			class iconDrawGPS {};
 			class iconDrawMap {};
@@ -363,6 +368,8 @@ class CfgFunctions {
 		class Default {
 			file = "scripts\WLC";
 			class action {};
+			class buildAmmo {};
+			class buildAttachments {};
 			class buildMenu {};
 			class clientEquip {};
 			class getLevelInfo {};
@@ -373,6 +380,7 @@ class CfgFunctions {
 			class onSelection {};
 			class serverRequest {};
 			class setScore {};
+			class updateItemCost {};
 		};
 	};
 	class WLM {
@@ -402,6 +410,19 @@ class CfgFunctions {
 			class textureLists {};
 			class textureSlots {};
 			class wipePylonSaves {};
+		};
+	};
+
+	class WLT {
+		class Default {
+			file = "Scripts\WLT";
+			class addNotification {};
+			class handleParentTask {};
+			class init {};
+			class killRewardTaskHandle {};
+			class taskComplete {};
+			class taskEligible {};
+			class taskStart {};
 		};
 	};
 };

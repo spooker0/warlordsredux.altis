@@ -22,6 +22,7 @@ switch (_className) do {
     case "Customization": {
         "RequestMenu_close" call WL2_fnc_setupUI;
         0 spawn WLC_fnc_buildMenu;
+        ["TaskCustomization"] call WLT_fnc_taskComplete;
     };
     case "LastLoadout": {"RequestMenu_close" call WL2_fnc_setupUI; [player, "lastLoadout"] remoteExec ["WL2_fnc_handleClientRequest", 2]};
     case "SaveLoadout": {"save" call WL2_fnc_orderSavedLoadout};
@@ -35,6 +36,7 @@ switch (_className) do {
         ["ftSquadLeader"] spawn SQD_fnc_client;
         private _ftNextUseVar = format ["BIS_WL_FTSLNextUse_%1", getPlayerUID player];
         missionNamespace setVariable [_ftNextUseVar, serverTime + WL_FAST_TRAVEL_SQUAD_LEADER_RATE];
+        ["TaskFastTravelSquad"] call WLT_fnc_taskComplete;
     };
     case "FundsTransfer": {
         call WL2_fnc_orderFundsTransfer;
@@ -96,6 +98,8 @@ switch (_className) do {
                 } else {
                     playSound "assemble_target";
                     [player, "resetVehicle", _vehicle, _position, _direction] remoteExec ["WL2_fnc_handleClientRequest", 2];
+
+                    ["TaskResetVehicle"] call WLT_fnc_taskComplete;
                 };
             } else {
                 playSound "AddItemFailed";
@@ -156,6 +160,7 @@ switch (_className) do {
         [player, "orderRespawnBag"] remoteExec ["WL2_fnc_handleClientRequest", 2];
         call WL2_fnc_respawnBagAction;
         "RequestMenu_close" call WL2_fnc_setupUI;
+        ["TaskBuyTent"] call WLT_fnc_taskComplete;
     };
     case "RespawnBagFT": {
         private _respawnBag = player getVariable ["WL2_respawnBag", objNull];
@@ -172,6 +177,8 @@ switch (_className) do {
 
             deleteVehicle _respawnBag;
             player setVariable ["WL2_respawnBag", objNull];
+
+            ["TaskFastTravelTent"] call WLT_fnc_taskComplete;
         };
         "RequestMenu_close" call WL2_fnc_setupUI;
     };

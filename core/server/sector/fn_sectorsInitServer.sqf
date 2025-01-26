@@ -21,7 +21,7 @@ _potBases = (_potBases select {(_x distanceSqr _firstBase) > _baseDistanceMin});
 private _secondBase = selectRandom _potBases;
 
 // private _presetBase = BIS_WL_allSectors select {
-// 	_x getVariable ["BIS_WL_name", ""] in ["Kavala", "AAC Airfield"];
+// 	_x getVariable ["BIS_WL_name", ""] in ["Airbase", "AAC Airfield"];
 // };
 
 // _firstBase = _presetBase # 0;

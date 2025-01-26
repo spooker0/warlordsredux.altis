@@ -226,7 +226,7 @@ if (_ret) then {
 			]
 		};
 		default {
-			if (_category == "Strategy") then {
+			if (_category in ["Fast Travel", "Strategy"]) then {
 				[]
 			} else {
 				private _assetConditions = [

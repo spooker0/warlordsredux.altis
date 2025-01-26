@@ -22,6 +22,8 @@ private _removeActionID = _asset addAction [
 				deleteGroup _grp;
 			};
 			deleteVehicle _unit;
+
+			["TaskDeleteVehicle"] call WLT_fnc_taskComplete;
 		};
 	},
 	[],

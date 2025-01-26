@@ -9,6 +9,10 @@ private _lockActionId = _asset addAction [
 		_asset setVariable ["WL2_accessControl", _newAccess, true];
 		[_asset, _lockActionId] call WL2_fnc_vehicleLockUpdate;
 		playSound3D ["a3\sounds_f\sfx\objects\upload_terminal\terminal_lock_close.wss", _asset, false, getPosASL _asset, 1, 1, 0, 0];
+
+		if (_newAccess == 6) then {
+			["TaskLockPersonal"] call WLT_fnc_taskComplete;
+		};
 	},
 	[],
 	-97,
@@ -27,32 +31,3 @@ private _lockActionId = _asset addAction [
         sleep 1;
     };
 };
-
-// Prevent AI shenanigans
-_asset addEventHandler ["GetIn", {
-	params ["_vehicle", "_role", "_unit", "_turret"];
-	private _access = [_vehicle, _unit, _role] call WL2_fnc_accessControl;
-	if !(_access # 0) then {
-		moveOut _unit;
-	};
-}];
-
-_asset addEventHandler ["SeatSwitched", {
-	params ["_vehicle", "_unit1", "_unit2"];
-
-	if (!isNull _unit1) then {
-		private _unit1Role = (assignedVehicleRole _unit1) # 0;
-		private _access = [_vehicle, _unit1, _unit1Role] call WL2_fnc_accessControl;
-		if !(_access # 0) then {
-			moveOut _unit1;
-		};
-	};
-
-	if (!isNull _unit2) then {
-		private _unit2Role = (assignedVehicleRole _unit2) # 0;
-		private _access = [_vehicle, _unit2, _unit2Role] call WL2_fnc_accessControl;
-		if !(_access # 0) then {
-			moveOut _unit2;
-		};
-	};
-}];

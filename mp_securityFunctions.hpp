@@ -24,6 +24,10 @@ class CfgRemoteExec {
 			allowedTargets = 1;
 		};
 
+		class WL2_fnc_scannerAction {
+			allowedTargets = 0;
+		};
+
 		class WL2_fnc_removeAction {
 			allowedTargets = 1;
 		};
@@ -50,6 +54,10 @@ class CfgRemoteExec {
 
 		class WL2_fnc_jammerAction {
 			allowedTargets = 1;
+		};
+
+		class WL2_fnc_controlGunnerAction {
+			allowedTargets = 0;
 		};
 
 		class WL2_fnc_dazzlerAction {
@@ -263,6 +271,10 @@ class CfgRemoteExec {
 		};
 
 		class setAutonomous {
+			allowedTargets = 0;
+		};
+
+		class setFuelConsumptionCoef {
 			allowedTargets = 0;
 		};
 	};

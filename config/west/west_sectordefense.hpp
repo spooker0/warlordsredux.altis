@@ -152,34 +152,6 @@ class SectorDefense {
     //     };
     // };
 
-    class B_static_AA_F {
-        cost = 300;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
-        killReward = 100;
-        loadable[] = {0, -2.5, 0.2};
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {
-                "missiles_titan_static"
-            };
-            addMagazines[] = {
-                "1Rnd_GAA_missiles",
-                "1Rnd_GAA_missiles",
-                "1Rnd_GAA_missiles",
-                "1Rnd_GAA_missiles",
-                "1Rnd_GAA_missiles",
-                "1Rnd_GAA_missiles"
-            };
-            addWeapons[] = {
-                "missiles_titan_static"
-            };
-        };
-    }; // "Static Titan Launcher (AA) [NATO]"
-
     class B_static_AT_F {
         cost = 300;
         requirements[] = {};
@@ -286,36 +258,6 @@ class SectorDefense {
         rearm = 300;
         killReward = 150;
         loadable[] = {0, -2.5, 0.4};
-    };
-
-    class B_static_AA_UP_F {
-        name = "Static AA Launcher (UP)";
-        description = "Static AA Launcher (UP) is an upgraded variant of the Static AA Launcher.";
-        spawn = "B_static_AA_F";
-        variant = 1;
-        cost = 1200;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
-        killReward = 200;
-        loadable[] = {0, -2.5, 0.2};
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {
-                "1Rnd_GAA_missiles"
-            };
-            removeWeapons[] = {
-                "missiles_titan_static"
-            };
-            addMagazines[] = {
-                "4Rnd_70mm_SAAMI_missiles",
-                "4Rnd_70mm_SAAMI_missiles"
-            };
-            addWeapons[] = {
-                "missiles_SAAMI"
-            };
-        };
     };
 
     class Land_Communication_F {

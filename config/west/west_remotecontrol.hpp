@@ -19,6 +19,7 @@ class RemoteControl {
         requirements[] = {};
         offset[] = {0, 3, 0};
         killReward = 100;
+        hasHMD = 1;
     }; // AR-2
 
     class B_UGV_01_rcws_F {
@@ -46,6 +47,8 @@ class RemoteControl {
         offset[] = {0, 3, 0};
         killReward = 200;
         rearm = 300;
+
+        hasHMD = 1;
 
         class Gunner: WLTurretDefaults {
             turret[] = { 0 };
@@ -100,11 +103,36 @@ class RemoteControl {
         };
     };
 
+    class B_UAV_02_recon_F {
+        cost = 2000;
+        name = "MQ-4R Greyhawk (Recon)";
+        description = "Greyhawk (Recon) is an unarmed variant of the Greyhawk with a powerful scanner.";
+        spawn = "B_UAV_02_dynamicLoadout_F";
+        requirements[] = {"A"};
+        rearm = 300;
+        killReward = 400;
+        hasHMD = 1;
+        hasScanner = 1;
+        disallowMagazines[] = {
+            "PylonRack_12Rnd_PG_missiles",
+            "PylonRack_1Rnd_Missile_AA_04_F",
+            "PylonRack_1Rnd_AAA_missiles",
+            "PylonRack_1Rnd_LG_scalpel",
+            "PylonRack_3Rnd_LG_scalpel",
+            "PylonRack_7Rnd_Rocket_04_HE_F",
+            "PylonRack_7Rnd_Rocket_04_AP_F",
+            "PylonRack_12Rnd_missiles",
+            "PylonMissile_1Rnd_Bomb_04_F",
+            "PylonMissile_1Rnd_Mk82_F"
+        };
+    }; // "Greyhawk"
+
     class B_UAV_02_dynamicLoadout_F {
         cost = 8000;
         requirements[] = {"A"};
         rearm = 300;
         killReward = 600;
+        hasHMD = 1;
     }; // "Greyhawk"
 
     class B_T_UAV_03_dynamicLoadout_F {
@@ -112,6 +140,9 @@ class RemoteControl {
         requirements[] = {"H"};
         rearm = 600;
         killReward = 600;
+
+        hasHMD = 1;
+
         class Pilot: WLTurretDefaults {
             turret[] = { -1 };
             removeMagazines[] = {
