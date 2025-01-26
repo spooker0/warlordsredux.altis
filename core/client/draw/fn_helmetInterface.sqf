@@ -85,6 +85,8 @@ addMissionEventHandler ["Draw3D", {
 }];
 
 0 spawn {
+    private _categoryMap = missionNamespace getVariable ["WL2_categories", createHashMap];
+
     while { !BIS_WL_missionEnd } do {
         sleep 0.1;
 
@@ -188,25 +190,35 @@ addMissionEventHandler ["Draw3D", {
 
             if (_targetIsInfantry) then {
                 _targetInfantryIcons pushBack [
-                    "\A3\ui_f\data\IGUI\RscCustomInfo\Sensors\Targets\MarkedTarget_ca.paa",
+                    "\A3\ui_f\data\IGUI\RscCustomInfo\Sensors\Targets\UnknownGround_ca.paa",
                     _targetColor,
                     _target modelToWorldVisual (_target selectionPosition "spine2"),
-                    0.6,
-                    0.6,
-                    0,
+                    0.5,
+                    0.5,
+                    45,
                     _assetName,
                     true,
                     0.03,
                     "RobotoCondensedBold"
                 ];
             } else {
+                private _assetActualType = _target getVariable ["WL2_orderedClass", typeof _target];
+                private _assetCategory = _categoryMap getOrDefault [_assetActualType, "Other"];
+
+                private _targetIcon = if (_assetCategory == "AirDefense") then {
+                    "\A3\ui_f\data\IGUI\RscCustomInfo\Sensors\Targets\ActiveSensor_ca.paa"
+                    // "\A3\ui_f\data\IGUI\Cfg\Cursors\lock_target_ca.paa"
+                } else {
+                    "\A3\ui_f\data\IGUI\Cfg\Cursors\lock_target_ca.paa"
+                };
+
                 _targetVehicleIcons pushBack [
-                    "\A3\ui_f\data\IGUI\RscCustomInfo\Sensors\Targets\MarkedTarget_ca.paa",
+                    _targetIcon,
                     _targetColor,
                     _target modelToWorldVisual (getCenterOfMass _target),
-                    0.8,
-                    0.8,
-                    2,
+                    1.5,
+                    1.5,
+                    0,
                     _assetName,
                     true,
                     0.035,

@@ -36,6 +36,35 @@ if (_asset isKindOf "Man") then {
 		};
 
 		call WL2_fnc_teammatesAvailability;
+
+		// Prevent AI shenanigans
+		_asset addEventHandler ["GetInMan", {
+			params ["_vehicle", "_role", "_unit", "_turret"];
+			private _access = [_vehicle, _unit, _role] call WL2_fnc_accessControl;
+			if !(_access # 0) then {
+				moveOut _unit;
+			};
+		}];
+
+		_asset addEventHandler ["SeatSwitchedMan", {
+			params ["_unit1", "_unit2", "_vehicle"];
+
+			if (!isNull _unit1) then {
+				private _unit1Role = (assignedVehicleRole _unit1) # 0;
+				private _access = [_vehicle, _unit1, _unit1Role] call WL2_fnc_accessControl;
+				if !(_access # 0) then {
+					moveOut _unit1;
+				};
+			};
+
+			if (!isNull _unit2) then {
+				private _unit2Role = (assignedVehicleRole _unit2) # 0;
+				private _access = [_vehicle, _unit2, _unit2Role] call WL2_fnc_accessControl;
+				if !(_access # 0) then {
+					moveOut _unit2;
+				};
+			};
+		}];
 	};
 } else {
 	private _side = if (isPlayer _owner) then {
@@ -52,7 +81,12 @@ if (_asset isKindOf "Man") then {
 	private _assetActualType = _asset getVariable ["WL2_orderedClass", typeOf _asset];
 
 	[_asset] call APS_fnc_registerVehicle;
+
 	_asset remoteExec ["APS_fnc_setupProjectiles", 0, true];
+	[_asset] remoteExec ["WL2_fnc_rearmAction", 0, true];
+	[_asset] remoteExec ["WL2_fnc_repairAction", 0, true];
+	[_asset] remoteExec ["WL2_fnc_claimAction", 0, true];
+
 	_asset setVariable ["BIS_WL_nextRepair", 0, true];
 	_asset setVariable ["BIS_WL_ownerAssetSide", _side, true];
 	_asset setVariable ["WL2_massDefault", getMass _asset];
@@ -62,8 +96,6 @@ if (_asset isKindOf "Man") then {
 	_vehicles pushBack _asset;
 	missionNamespace setVariable [_var, _vehicles, [2, clientOwner]];
 	0 remoteExec ["WL2_fnc_updateVehicleList", 2];
-
-	[_asset] remoteExec ["WL2_fnc_rearmAction", 0, true];
 
 	_asset setVehicleReceiveRemoteTargets true;
 	_asset setVehicleReportRemoteTargets true;
@@ -288,8 +320,6 @@ if (_asset isKindOf "Man") then {
 		};
 	};
 
-	[_asset] remoteExec ["WL2_fnc_repairAction", 0, true];
-
 	if (getNumber (configFile >> "CfgVehicles" >> typeOf _asset >> "transportAmmo") > 0) then {
 		[_asset, 0] remoteExec ["setAmmoCargo", 0];
 		_amount = 10000;
@@ -422,8 +452,6 @@ if (_asset isKindOf "Man") then {
 	if ("hide_rail" in (animationNames _asset)) then {
 		_asset animateSource ["hide_rail", 0];
 	};
-
-	[_asset] remoteExec ["WL2_fnc_claimAction", 0, true];
 
 	private _appearanceDefaults = profileNamespace getVariable ["WLM_appearanceDefaults", createHashmap];
 	private _assetAppearanceDefaults = _appearanceDefaults getOrDefault [_assetActualType, createHashmap];
