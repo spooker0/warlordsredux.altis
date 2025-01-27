@@ -1,5 +1,7 @@
 params ["_unit", "_reward", ["_customText", ""], ["_customColor", "#228b22"], ["_unitTypeName", ""]];
 
+if (isDedicated) exitWith {};
+
 disableSerialization;
 
 private _displayText = "";
