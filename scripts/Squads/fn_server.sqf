@@ -101,7 +101,7 @@ switch (_action) do {
                 if (_hasAnyRemaining) then {
                     private _newSquadLeader = _members select 0;
                     private _newSLPlayer = _allPlayers select { getPlayerID _x == _newSquadLeader } select 0;
-                    ["promoted", [_newSquadLeader]] remoteExec ["SQD_fnc_client", _newSLPlayer];
+                    ["promoted", []] remoteExec ["SQD_fnc_client", _newSLPlayer];
                     _squad set [1, _newSquadLeader];
                 };
             };
@@ -125,7 +125,7 @@ switch (_action) do {
             private _squad = _squads select 0;
 
             private _newSLPlayer = _allPlayers select { getPlayerID _x == _playerId } select 0;
-            ["promoted", [_newSquadLeader]] remoteExec ["SQD_fnc_client", _newSLPlayer];
+            ["promoted", []] remoteExec ["SQD_fnc_client", _newSLPlayer];
 
             _squad set [1, _playerId];
             _message = format ["Player %1 promoted to Squad Leader of %2", _playerId, (_squad select 0)];

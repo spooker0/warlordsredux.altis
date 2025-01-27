@@ -15,7 +15,7 @@ if (_result) then {
     missionNamespace setVariable [format ["BIS_WL_forfeitOrderedBy_%1", _side], name player, true];
     player setVariable ["BIS_WL_forfeitVote", 1, [2, clientOwner]];
 
-    [_side] remoteExec ["WL2_fnc_forfeitHandle", [0, -2] select isDedicated];
+    [_side] remoteExec ["WL2_fnc_forfeitHandle", 0];
     [_side] remoteExec ["WL2_fnc_forfeitHandleServer", 2];
 } else {
     playSound "AddItemFailed";
