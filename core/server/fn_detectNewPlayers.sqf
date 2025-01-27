@@ -1,6 +1,5 @@
 while { !BIS_WL_missionEnd } do {
-	private _allPlayers = call BIS_fnc_listPlayers;
-	private _newPlayers = _allPlayers select {
+	private _newPlayers = allPlayers select {
 		(!isNull _x) && !(_x getVariable ["BIS_WL_detectedByServer", false])
 	};
 
