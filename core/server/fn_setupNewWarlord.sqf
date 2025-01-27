@@ -3,6 +3,7 @@ params ["_warlord"];
 _warlord setVariable ["BIS_WL_detectedByServer", true];
 _owner = owner _warlord;
 
+private _startTime = serverTime;
 private _uid = "";
 while { _uid == "" } do {
 	private _playerUid = getPlayerUID _warlord;
@@ -20,6 +21,20 @@ while { _uid == "" } do {
 		diag_log "Cannot find player UID from ID, retrying...";
 	};
 	sleep 0.5;
+
+	if ((serverTime - _startTime) > 30) then {
+		diag_log "Cannot find player UID for over 30 seconds.";
+		break;
+	};
+
+	if (isNull _warlord) then {
+		diag_log "Cannot find player UID, warlord is null, aborting.";
+		break;
+	};
+};
+
+if (_uid == "") exitWith {
+	diag_log "Cannot find player UID, aborting.";
 };
 
 private _pFunds = (serverNamespace getVariable "fundsDatabase") getOrDefault [_uid, -1];
