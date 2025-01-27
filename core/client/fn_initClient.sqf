@@ -254,7 +254,7 @@ WL_LoadingState = 12;
 ["client_init"] call BIS_fnc_endLoadingScreen;
 "Initialized" call WL2_fnc_announcer;
 [toUpper localize "STR_A3_WL_popup_init"] spawn WL2_fnc_smoothText;
-0 spawn WL2_fnc_welcome;
+// 0 spawn WL2_fnc_welcome;
 
 0 spawn {
 	_markers = BIS_WL_playerSide call WL2_fnc_getRespawnMarkers;
@@ -367,7 +367,9 @@ player spawn APS_fnc_setupProjectiles;
 0 spawn WL2_fnc_interceptAction;
 0 spawn WL2_fnc_avTerminal;
 0 spawn WL2_fnc_updateJammerMarkers;
-0 spawn WL2_fnc_cleanupCarrier;
+if (!isServer) then {
+	0 spawn WL2_fnc_cleanupCarrier;
+};
 0 spawn WL2_fnc_reviveAction;
 0 spawn WL2_fnc_helmetInterface;
 0 spawn WLT_fnc_init;

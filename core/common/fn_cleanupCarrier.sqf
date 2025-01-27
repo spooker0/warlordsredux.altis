@@ -67,7 +67,7 @@ private _carriers = [Carrier1];
     _carrier setVariable ["WL_carrierSector", _sector];
 
     private _carrierProps = (allMissionObjects "") select {
-        _x inArea (_sector getVariable "objectAreaComplete") && damage _x == 0.5;
+        _x inArea (_sector getVariable "objectAreaComplete") && { damage _x == 0.5 };
     };
     _carrier setVariable ["WL_carrierProps", _carrierProps];
 } forEach _carriers;
