@@ -12,16 +12,30 @@ _this addEventHandler ["Fired", {
 	_this spawn APS_fnc_firedProjectile;
 
 	if (_ammo == "ammo_Missile_HARM" || _ammo == "ammo_Missile_KH58") then {
+		[_projectile, _unit] call DIS_fnc_startMissileCamera;
 		if (isNull (missileTarget _projectile)) then {
+			// fire on launcher
+			private _launcher = _unit getVariable ["WL_incomingLauncherLastKnown", objNull];
+			if (alive _launcher) exitWith {
+				_projectile setMissileTarget [_launcher, true];
+			};
+
 			private _samTargets = [];
+			// locking SAMs
 			private _sensorThreats = getSensorThreats _unit;
 			{
 				_x params ["_threat", "_type", "_sensors"];
 				private _isInAngle = [getPosATL _projectile, getDir _projectile, 120, getPosATL _threat] call BIS_fnc_inAngleSector;
-				if (_isInAngle && _type == "locked" && "radar" in _sensors) then {
+				if (_isInAngle && _type in ["locked", "marked"] && "radar" in _sensors) then {
 					_samTargets pushBack (vehicle _threat);
 				};
 			} forEach _sensorThreats;
+			if (count _samTargets > 0) exitWith {
+				private _sortedSamTargets = [_samTargets, [], { _unit distance _x }, "ASCEND"] call BIS_fnc_sortBy;
+				_projectile setMissileTarget [_sortedSamTargets # 0, true];
+			};
+
+			// radar on sensor
 			private _allAssetTargets = getSensorTargets _unit;
 			{
 				_x params ["_target", "_type", "_relationship", "_detectionSource"];
@@ -30,13 +44,10 @@ _this addEventHandler ["Fired", {
 					_samTargets pushBack (_x # 0);
 				};
 			} forEach _allAssetTargets;
-			private _sortedSamTargets = [_samTargets, [], { _unit distance _x }, "ASCEND"] call BIS_fnc_sortBy;
-
 			if (count _samTargets > 0) then {
+				private _sortedSamTargets = [_samTargets, [], { _unit distance _x }, "ASCEND"] call BIS_fnc_sortBy;
 				_projectile setMissileTarget [_sortedSamTargets # 0, true];
 			};
 		};
-
-		[_projectile, _unit] call DIS_fnc_startMissileCamera;
 	};
 }];

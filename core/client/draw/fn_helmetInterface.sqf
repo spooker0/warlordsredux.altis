@@ -45,17 +45,25 @@ addMissionEventHandler ["Draw3D", {
     if (_vehicle == player) then {
         _vehicle = getConnectedUAV player;
     };
-    if (isNull _vehicle) exitWith {};
+    if (!alive _vehicle) exitWith {};
 
-    private _incomingMissiles = _vehicle getVariable ["WL_incomingMissle", []];
+    private _incomingMissiles = _vehicle getVariable ["WL_incomingMissiles", []];
     _incomingMissiles = _incomingMissiles select {
         alive _x;
     };
     {
         private _missile = _x;
         private _missilePos = _missile modelToWorldVisual [0, 0, 0];
-        private _distance = player distance _missile;
+        private _distance = _vehicle distance _missile;
+
+        private _relDir = _missile getRelDir _vehicle;
+        private _missileApproaching = _relDir < 90 || _relDir > 270;
+        _missile setVariable ["WL_missileApproaching", _missileApproaching];
+
         private _color = switch true do {
+            case (!_missileApproaching): {
+                [0, 0, 0, 1]
+            };
             case (_distance > 5000): {
                 [1, 1, 1, 1]
             };
@@ -82,6 +90,47 @@ addMissionEventHandler ["Draw3D", {
             true
         ];
     } forEach _incomingMissiles;
+
+    private _approachingMissiles = _incomingMissiles select {
+        alive _x && _x getVariable ["WL_missileApproaching", false]
+    };
+    private _lastKnownLauncher = _vehicle getVariable ["WL_incomingLauncherLastKnown", objNull];
+    if (count _approachingMissiles > 0 && alive _lastKnownLauncher) then {
+        private _lastKnownLauncherPos = _lastKnownLauncher modelToWorldVisual [0, 0, 0];
+        private _targetSide = [_lastKnownLauncher] call WL2_fnc_getAssetSide;
+
+        private _opacity = if (serverTime % 0.2 > 0.1) then {
+            1
+        } else {
+            0
+        };
+        private _targetColor = switch (_targetSide) do {
+            case west: {
+                [0, 0.3, 0.6, _opacity]
+            };
+            case east: {
+                [0.5, 0, 0, _opacity]
+            };
+            case independent: {
+                [0, 0.5, 0, _opacity]
+            };
+        };
+
+        drawIcon3D [
+            "\A3\ui_f\data\IGUI\RscCustomInfo\Sensors\Targets\ActiveSensor_ca.paa",
+            _targetColor,
+            _lastKnownLauncherPos,
+            1.5,
+            1.5,
+            0,
+            "LAUNCH DETECTED",
+            true,
+            0.035,
+            "RobotoCondensedBold",
+            "center",
+            true
+        ];
+    };
 }];
 
 0 spawn {
@@ -135,7 +184,7 @@ addMissionEventHandler ["Draw3D", {
         if (_vehicle == player) then {
             _vehicle = getConnectedUAV player;
         };
-        if (isNull _vehicle) then {
+        if (!alive _vehicle) then {
             sleep 1;
             continue;
         };
@@ -159,9 +208,21 @@ addMissionEventHandler ["Draw3D", {
 
         private _targetInfantryIcons = [];
         private _targetVehicleIcons = [];
+
+        private _incomingMissiles = _vehicle getVariable ["WL_incomingMissiles", []];
+        private _approachingMissiles = _incomingMissiles select {
+            alive _x && _x getVariable ["WL_missileApproaching", false]
+        };
+        private _hasApproachingMissiles = count _approachingMissiles > 0;
         {
             private _target = _x;
             private _targetIsInfantry = _target isKindOf "Man";
+
+            private _lastKnownLauncher = _vehicle getVariable ["WL_incomingLauncherLastKnown", objNull];
+            if (_hasApproachingMissiles && _lastKnownLauncher == _target) then {
+                continue;
+            };
+
             private _targetSide = [_target] call WL2_fnc_getAssetSide;
             private _targetColor = switch (_targetSide) do {
                 case west: {
@@ -207,7 +268,6 @@ addMissionEventHandler ["Draw3D", {
 
                 private _targetIcon = if (_assetCategory == "AirDefense") then {
                     "\A3\ui_f\data\IGUI\RscCustomInfo\Sensors\Targets\ActiveSensor_ca.paa"
-                    // "\A3\ui_f\data\IGUI\Cfg\Cursors\lock_target_ca.paa"
                 } else {
                     "\A3\ui_f\data\IGUI\Cfg\Cursors\lock_target_ca.paa"
                 };
@@ -230,6 +290,35 @@ addMissionEventHandler ["Draw3D", {
         } forEach _targets;
         uiNamespace setVariable ["WL_HelmetInterfaceTargetInfantryIcons", _targetInfantryIcons];
         uiNamespace setVariable ["WL_HelmetInterfaceTargetVehicleIcons", _targetVehicleIcons];
+
+        private _incomingMissiles = _vehicle getVariable ["WL_incomingMissiles", []];
+        private _warningPlayed = player getVariable ["WL_missileWarningPlayed", -100];
+        private _lockedMissiles = _incomingMissiles select {
+            alive _x && _x getVariable ["WL_missileApproaching", true];
+        };
+        if (count _lockedMissiles > 0 && serverTime - _warningPlayed > 1.5) then {
+            private _lastMissile = _lockedMissiles # (count _lockedMissiles - 1);
+            private _relDir = _vehicle getRelDir _lastMissile;
+            private _angleReadout = switch (true) do {
+                case (_relDir < 45 || _relDir > 315): {
+                    0
+                };
+                case (_relDir < 135): {
+                    90
+                };
+                case (_relDir < 225): {
+                    180
+                };
+                default {
+                    270
+                };
+            };
+
+            private _soundFile = format ["incMissile_%1", _angleReadout];
+            playSoundUI [_soundFile, 5];
+
+            player setVariable ["WL_missileWarningPlayed", serverTime];
+        };
     };
 };
 
