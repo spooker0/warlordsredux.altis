@@ -2,7 +2,7 @@
 
 params ["_sector"];
 
-setViewDistance 4500;
+// setViewDistance 4500;
 
 private _sectorMarker = _sector getVariable "objectAreaComplete";
 private _carrier = ((8 allObjects 0) select {
@@ -12,32 +12,32 @@ private _carrier = ((8 allObjects 0) select {
 private _airDefenseGroup = createGroup independent;
 _airDefenseGroup deleteGroupWhenEmpty true;
 private _airDefenses = [];
-{
-    _x params ["_type", "_pos", "_dir", "_lock", "_waypoints"];
-    private _vehicle = [[_pos # 0, _pos # 1, 500], _type, _type, _dir, objNull] call WL2_fnc_createUAVCrew;
-    _vehicle allowDamage false;
-    _vehicle setDamage 0;
+// {
+//     _x params ["_type", "_pos", "_dir", "_lock", "_waypoints"];
+//     private _vehicle = [[_pos # 0, _pos # 1, 500], _type, _type, _dir, objNull] call WL2_fnc_createUAVCrew;
+//     _vehicle allowDamage false;
+//     _vehicle setDamage 0;
 
-    _vehicle setVehicleReportRemoteTargets true;
-    _vehicle setVehicleReceiveRemoteTargets true;
-    _vehicle setVehicleReportOwnPosition true;
-    _vehicle setVehicleRadar 1;
+//     _vehicle setVehicleReportRemoteTargets true;
+//     _vehicle setVehicleReceiveRemoteTargets true;
+//     _vehicle setVehicleReportOwnPosition true;
+//     _vehicle setVehicleRadar 1;
 
-    _vehicle lock true;
+//     _vehicle lock true;
 
-    _vehicle call WL2_fnc_newAssetHandle;
-    _airDefenses pushBack _vehicle;
+//     _vehicle call WL2_fnc_newAssetHandle;
+//     _airDefenses pushBack _vehicle;
 
-    [_vehicle] joinSilent _airDefenseGroup;
-    {
-        _x call WL2_fnc_newAssetHandle;
-        _x setSkill 1;
-        [_x] joinSilent _airDefenseGroup;
-        _airDefenses pushBack _x;
-    } forEach (crew _vehicle);
-} forEach (_sector getVariable ["BIS_WL_vehiclesToSpawn", []]);
-_airDefenseGroup setBehaviourStrong "COMBAT";
-_airDefenseGroup setCombatMode "RED";
+//     [_vehicle] joinSilent _airDefenseGroup;
+//     {
+//         _x call WL2_fnc_newAssetHandle;
+//         _x setSkill 1;
+//         [_x] joinSilent _airDefenseGroup;
+//         _airDefenses pushBack _x;
+//     } forEach (crew _vehicle);
+// } forEach (_sector getVariable ["BIS_WL_vehiclesToSpawn", []]);
+// _airDefenseGroup setBehaviourStrong "COMBAT";
+// _airDefenseGroup setCombatMode "RED";
 
 // _sector setVariable ["BIS_WL_vehiclesToSpawn", nil];
 
@@ -87,34 +87,34 @@ private _spawned = 0;
 
 [_infantryUnits + _airDefenses, _sector] spawn WL2_fnc_assetRelevanceCheck;
 
-[_sector, _airDefenses, _infantryGroups] spawn {
-    params ["_sector", "_airDefenses", "_infantryGroups"];
-    while { _sector getVariable ["BIS_WL_owner", sideUnknown] == independent } do {
-        sleep 1;
-    };
+// [_sector, _airDefenses, _infantryGroups] spawn {
+//     params ["_sector", "_airDefenses", "_infantryGroups"];
+//     while { _sector getVariable ["BIS_WL_owner", sideUnknown] == independent } do {
+//         sleep 1;
+//     };
 
-    setViewDistance 1600;
-};
+//     setViewDistance 1600;
+// };
 
-[_sector, _airDefenses] spawn {
-    params ["_sector", "_airDefenses"];
-    private _sectorArea = _sector getVariable "objectAreaComplete";
-    private _sectorPos = _sectorArea # 0;
-    while { _sector getVariable ["BIS_WL_owner", sideUnknown] == independent } do {
-        {
-            [_x, 1] remoteExec ["setVehicleAmmo", _x];
-        } forEach _airDefenses;
+// [_sector, _airDefenses] spawn {
+//     params ["_sector", "_airDefenses"];
+//     private _sectorArea = _sector getVariable "objectAreaComplete";
+//     private _sectorPos = _sectorArea # 0;
+//     while { _sector getVariable ["BIS_WL_owner", sideUnknown] == independent } do {
+//         {
+//             [_x, 1] remoteExec ["setVehicleAmmo", _x];
+//         } forEach _airDefenses;
 
-        {
-            private _vehiclePosition = getPosATL _x;
-            if ((_vehiclePosition # 2 > 50) && (_sectorPos distance2D _vehiclePosition < 6000)) then {
-                independent reportRemoteTarget [_x, 30];
-                if (side group _x != independent) then {
-                    _x confirmSensorTarget [independent, true];
-                };
-            };
-        } forEach vehicles;
+//         {
+//             private _vehiclePosition = getPosATL _x;
+//             if ((_vehiclePosition # 2 > 50) && (_sectorPos distance2D _vehiclePosition < 6000)) then {
+//                 independent reportRemoteTarget [_x, 30];
+//                 if (side group _x != independent) then {
+//                     _x confirmSensorTarget [independent, true];
+//                 };
+//             };
+//         } forEach vehicles;
 
-        sleep 15;
-    };
-};
+//         sleep 15;
+//     };
+// };
