@@ -1,5 +1,7 @@
 #include "constants.inc"
 
+if (isDedicated) exitWith {};
+
 sleep 8;
 
 // Task Structure
