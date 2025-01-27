@@ -100,6 +100,30 @@ class FixedWing {
         killReward = 300;
     }; // "V-44 X Blackfish (Vic)"
 
+    class B_T_VTOL_01_recon_F {
+        name = "V-44 X Blackfish (Recon)";
+        description = "V-44 X Blackfish (Recon) is a variant of the V-44 X Blackfish with a powerful scanner.";
+        spawn = "B_T_VTOL_01_infantry_F";
+        cost = 2500;
+        requirements[] = {"A"};
+        killReward = 300;
+        hasHMD = 1;
+        hasScanner = 1;
+        class Pilot: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {};
+            removeWeapons[] = {
+                "CMFlareLauncher_Triples"
+            };
+            addMagazines[] = {
+                "240Rnd_CMFlare_Chaff_Magazine"
+            };
+            addWeapons[] = {
+                "CMFlareLauncher_Singles"
+            };
+        };
+    };
+
     class B_T_VTOL_01_armed_F {
         cost = 8000;
         requirements[] = {"A"};

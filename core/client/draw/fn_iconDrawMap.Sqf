@@ -75,6 +75,7 @@ if (!isNull WL_SectorActionTarget && isNull BIS_WL_highlightedSector && WL_Secto
 					case west: { [0, 0.3, 0.6, 0.9] };
 					case east: { [0.5, 0, 0, 0.9] };
 					case independent: { [0, 0.6, 0, 0.9] };
+					default { [1, 1, 1, 0] };
 				},
 				call WL2_fnc_getPos,
 				_size,
@@ -130,6 +131,7 @@ _allScannedObjects = _allScannedObjects arrayIntersect _allScannedObjects; // el
 			case west: { [0, 0.3, 0.6, 0.9] };
 			case east: { [0.5, 0, 0, 0.9] };
 			case independent: { [0, 0.6, 0, 0.9] };
+			default { [1, 1, 1, 0] };
 		},
 		call WL2_fnc_getPos,
 		_size,
