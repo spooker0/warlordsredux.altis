@@ -2,6 +2,7 @@
 
 params ["_side"];
 
+if (isServer) exitWith {};
 if (BIS_WL_playerSide != _side) exitWith {};
 
 _varNameVoting = format ["BIS_WL_forfeitVotingSince_%1", BIS_WL_playerSide];
@@ -34,6 +35,9 @@ BIS_WL_forfeitVoteEH2 = (findDisplay 46) displayAddEventHandler ["KeyDown", {
 	};
 }];
 
-waitUntil {sleep WL_TIMEOUT_SHORT; serverTime >= ((missionNamespace getVariable _varNameVoting) + 30) || {(player getVariable ["BIS_WL_forfeitVote", -1]) != -1}};
+waitUntil {
+	sleep WL_TIMEOUT_SHORT;
+	serverTime >= ((missionNamespace getVariable _varNameVoting) + 30) || {(player getVariable ["BIS_WL_forfeitVote", -1]) != -1}
+};
 
 [player, "forfeitVoting", FALSE] call WL2_fnc_hintHandle;
