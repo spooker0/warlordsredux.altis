@@ -100,9 +100,11 @@ switch (_action) do {
                 private _hasAnyRemaining = count _members > 0;
                 if (_hasAnyRemaining) then {
                     private _newSquadLeader = _members select 0;
-                    private _newSLPlayer = _allPlayers select { getPlayerID _x == _newSquadLeader } select 0;
-                    ["promoted", []] remoteExec ["SQD_fnc_client", _newSLPlayer];
-                    _squad set [1, _newSquadLeader];
+                    private _newSLPlayer = (_allPlayers select { getPlayerID _x == _newSquadLeader }) # 0;
+                    if (!isNil "_newSLPlayer" && {!isNull _newSLPlayer}) then {
+                        ["promoted", []] remoteExec ["SQD_fnc_client", _newSLPlayer];
+                        _squad set [1, _newSquadLeader];
+                    };
                 };
             };
         } forEach _squads;

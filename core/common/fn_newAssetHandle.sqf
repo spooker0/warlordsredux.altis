@@ -3,7 +3,6 @@
 params ["_asset", ["_owner", objNull]];
 
 [_asset] call WL2_fnc_lastHitHandler;
-_asset setVariable ["WL_spawnedAsset", true, true];
 
 if (isServer) then {
 	if !(unitIsUAV _asset) then {
@@ -465,4 +464,8 @@ if (_asset isKindOf "Man") then {
 	} forEach _assetAppearanceDefaults;
 };
 
-[_asset] remoteExec ["WL2_fnc_removeAction", 0, true];
+if (!isNull _owner) then {
+	[_asset] remoteExec ["WL2_fnc_removeAction", 0, true];
+};
+
+_asset setVariable ["WL_spawnedAsset", true, true];

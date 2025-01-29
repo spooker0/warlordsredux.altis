@@ -32,7 +32,7 @@ if (_init) then {
             private _uid = getPlayerUID player;
             private _newScore = (WLC_Scores getOrDefault [_uid, 0]) + _taskReward;
             if (typeName _newScore == "scalar") then {
-                [_uid, _newScore] call WLC_fnc_setScore;
+                [_uid, _newScore] remoteExec ["WLC_fnc_setScore", 2];
             };
         };
 
