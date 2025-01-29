@@ -46,7 +46,7 @@ player setVariable ["voteLocked", false, true];
 waitUntil {
 	!(isNil "BIS_WL_playerSide")
 };
-if ((call BIS_fnc_admin) == 0) then {
+if ((call BIS_fnc_admin) == 0 && WL_STOP_TEAM_SWITCH) then {
 	private _uid = getPlayerUID player;
 	private _switch = format ["teamBlocked_%1", _uid];
 	waitUntil {
@@ -88,6 +88,15 @@ if ((call BIS_fnc_admin) == 0) then {
 		endMission "BlockScreen";
 		forceEnd;
 	};
+} else {
+	// player addAction [
+	// 	"<t color='#ff0000'>Spectate</t>",
+	// 	{
+	// 		0 spawn WL2_fnc_spectator;
+	// 	},
+	// 	[],
+	// 	-200
+	// ];
 };
 WL_LoadingState = 4;
 
@@ -254,7 +263,6 @@ WL_LoadingState = 12;
 ["client_init"] call BIS_fnc_endLoadingScreen;
 "Initialized" call WL2_fnc_announcer;
 [toUpper localize "STR_A3_WL_popup_init"] spawn WL2_fnc_smoothText;
-// 0 spawn WL2_fnc_welcome;
 
 0 spawn {
 	_markers = BIS_WL_playerSide call WL2_fnc_getRespawnMarkers;

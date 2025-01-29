@@ -61,7 +61,7 @@ addMissionEventHandler ["Draw3D", {
         _missile setVariable ["WL_missileApproaching", _missileApproaching];
 
         private _color = switch true do {
-            case (!_missileApproaching): {
+            case (!_missileApproaching || (missileState _missile) # 1 == "LOST"): {
                 [0, 0, 0, 1]
             };
             case (_distance > 5000): {
@@ -266,18 +266,21 @@ addMissionEventHandler ["Draw3D", {
                 private _assetActualType = _target getVariable ["WL2_orderedClass", typeof _target];
                 private _assetCategory = _categoryMap getOrDefault [_assetActualType, "Other"];
 
-                private _targetIcon = if (_assetCategory == "AirDefense") then {
-                    "\A3\ui_f\data\IGUI\RscCustomInfo\Sensors\Targets\ActiveSensor_ca.paa"
+                private _targetIcon = "";
+                private _targetIconSize = 1.6;
+                if (_assetCategory == "AirDefense") then {
+                    _targetIcon = "\A3\ui_f\data\map\markers\nato\b_antiair.paa";
+                    _targetIconSize = 1.2;
                 } else {
-                    "\A3\ui_f\data\IGUI\Cfg\Cursors\lock_target_ca.paa"
+                    _targetIcon = "\A3\ui_f\data\IGUI\Cfg\Cursors\lock_target_ca.paa";
                 };
 
                 _targetVehicleIcons pushBack [
                     _targetIcon,
                     _targetColor,
                     _target modelToWorldVisual (getCenterOfMass _target),
-                    1.5,
-                    1.5,
+                    _targetIconSize,
+                    _targetIconSize,
                     0,
                     _assetName,
                     true,

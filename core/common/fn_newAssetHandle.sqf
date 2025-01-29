@@ -3,7 +3,6 @@
 params ["_asset", ["_owner", objNull]];
 
 [_asset] call WL2_fnc_lastHitHandler;
-_asset setVariable ["WL_spawnedAsset", true, true];
 
 if (isServer) then {
 	if !(unitIsUAV _asset) then {
@@ -292,8 +291,8 @@ if (_asset isKindOf "Man") then {
 
 		private _assetGrp = group _asset;
 		private _assetTypeName = [_asset] call WL2_fnc_getAssetTypeName;
-		_assetGrp setGroupIdGlobal [format ["%1#%2#%3", name _owner, _assetTypeName, groupId _assetGrp]];
-
+		_assetGrp setVariable ["WL2_assetOwner", _owner, true];
+		_assetGrp setVariable ["WL2_assetTypeName", _assetTypeName, true];
 		[_asset] call WL2_fnc_uavConnectRefresh;
 	};
 
@@ -466,4 +465,8 @@ if (_asset isKindOf "Man") then {
 	} forEach _assetAppearanceDefaults;
 };
 
-[_asset] remoteExec ["WL2_fnc_removeAction", 0, true];
+if (!isNull _owner) then {
+	[_asset] remoteExec ["WL2_fnc_removeAction", 0, true];
+};
+
+_asset setVariable ["WL_spawnedAsset", true, true];

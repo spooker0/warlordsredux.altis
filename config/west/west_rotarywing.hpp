@@ -84,7 +84,7 @@ class RotaryWing {
         name = "AH-9 Pawnee Block II";
         description = "AH-9 Pawnee Block II is a variant of the AH-9 Pawnee with advanced avionics.";
         spawn = "B_Heli_Light_01_dynamicLoadout_F";
-        cost = 4000;
+        cost = 5500;
         variant = 1;
         requirements[] = {"H"};
         textures[] = {
@@ -162,7 +162,7 @@ class RotaryWing {
                 "CMFlareLauncher"
             };
             addMagazines[] = {
-                "240Rnd_CMFlare_Chaff_Magazine"
+                "192Rnd_CMFlare_Chaff_Magazine"
             };
             addWeapons[] = {
                 "CMFlareLauncher_Singles"
@@ -195,8 +195,7 @@ class RotaryWing {
     //             "CMFlareLauncher"
     //         };
     //         addMagazines[] = {
-    //             "240Rnd_CMFlare_Chaff_Magazine",
-    //             "240Rnd_CMFlare_Chaff_Magazine",
+    //             "192Rnd_CMFlare_Chaff_Magazine",
     //             "magazine_Missile_HARM_x1",
     //             "magazine_Missile_HARM_x1",
     //             "magazine_Missile_HARM_x1",

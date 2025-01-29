@@ -6,8 +6,8 @@ private _enemySide = playersNumber BIS_WL_enemySide;
 if (_countSide < 10) exitWith {
 	[false, format ["%1/10 Players", _countSide]];
 };
-if (_countSide > (_enemySide - 5)) exitWith {
-	[false, "Player numbers not imbalanced enough."];
+if (_countSide < (_enemySide - 5)) exitWith {
+	[true, ""];
 };
 
 private _forfeitVotingVar = format ["BIS_WL_forfeitVotingSince_%1", BIS_WL_playerSide];
