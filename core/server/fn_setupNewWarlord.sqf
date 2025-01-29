@@ -3,7 +3,7 @@ params ["_warlord"];
 _warlord setVariable ["BIS_WL_detectedByServer", true];
 _owner = owner _warlord;
 
-private _startTime = serverTime;
+private _iterations = 0;
 private _uid = "";
 while { _uid == "" } do {
 	private _playerUid = getPlayerUID _warlord;
@@ -22,9 +22,11 @@ while { _uid == "" } do {
 	};
 	sleep 0.5;
 
-	if ((serverTime - _startTime) > 30) then {
+	if (_iterations > 60) then {
 		diag_log "Cannot find player UID for over 30 seconds.";
 		break;
+	} else {
+		_iterations = _iterations + 1;
 	};
 
 	if (isNull _warlord) then {

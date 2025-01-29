@@ -16,7 +16,7 @@ if (WLT_notifications == 0) then {
         };
 
         if (WLT_notifications > 1) then {
-            private _message = format ["%1 new tasks assigned. (Press: %2)", WLT_notifications, actionKeysNames "diary"];
+            private _message = format [localize "STR_WLT_startHint", WLT_notifications, actionKeysNames "diary"];
             ["TaskAssigned", ["", _message]] call BIS_fnc_showNotification;
         } else {
             ["TaskAssigned", ["", _notification]] call BIS_fnc_showNotification;

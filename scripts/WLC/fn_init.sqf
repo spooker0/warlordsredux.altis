@@ -86,7 +86,7 @@ if (isServer) then {
         while { !BIS_WL_missionEnd } do {
             profileNamespace setVariable ["WLC_Scores", WLC_Scores];
             saveProfileNamespace;
-            sleep 5;
+            sleep 60;
         };
     };
 } else {

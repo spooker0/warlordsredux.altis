@@ -1,6 +1,6 @@
 class TaskCombinedArmsAPS: WLTaskCombinedArms {
-    name = "Active Protection System";
-    description = "Armored vehicles have active protection systems that protect against a limited number of incoming munitions. Lighter vehicles have APS that protect against fewer types of munitions and have less charges. Heavy tanks can have up to 6 APS charges that protect against almost all rockets and missiles. For this task, trigger the active protection system of any enemy armored vehicle.";
+    name = $STR_WLT_taskCombinedArmsAPSName;
+    description = $STR_WLT_taskCombinedArmsAPSDesc;
     prerequisites[] = {
         "TaskEngageFive"
     };
@@ -12,8 +12,8 @@ class TaskCombinedArmsAPS: WLTaskCombinedArms {
 };
 
 class TaskCombinedArmsArmor: WLTaskCombinedArms {
-    name = "Destroy Enemy Armor";
-    description = "Armored vehicles with active protection systems are not invincible. They can be depleted by firing multiple missiles at the same target. Medium APS systems can be depleted with four munitions. Alternatively, they can be bypassed with kinetic munitions like tank or cannon shells, or by getting very close to the enemy (within 30M). For this task, destroy an enemy armored vehicle that carries a medium or heavier APS.";
+    name = $STR_WLT_taskCombinedArmsArmorName;
+    description = $STR_WLT_taskCombinedArmsArmorDesc;
     prerequisites[] = {
         "TaskCombinedArmsAPS"
     };
@@ -25,8 +25,8 @@ class TaskCombinedArmsArmor: WLTaskCombinedArms {
 };
 
 class TaskCombinedArmsAir: WLTaskCombinedArms {
-    name = "Destroy Enemy Air";
-    description = "Enemy helicopters and planes are a threat to ground forces. They can be effectively destroyed with anti-air missiles or autocannons.";
+    name = $STR_WLT_taskCombinedArmsAirName;
+    description = $STR_WLT_taskCombinedArmsAirDesc;
     prerequisites[] = {
         "TaskCombinedArmsArmor"
     };
@@ -38,8 +38,8 @@ class TaskCombinedArmsAir: WLTaskCombinedArms {
 };
 
 class TaskCombinedArmsOperation: WLTaskCombinedArms {
-    name = "Combined Arms Offensive";
-    description = "Destroy an assortment of enemies and vehicles to complete this task.";
+    name = $STR_WLT_taskCombinedArmsOperationName;
+    description = $STR_WLT_taskCombinedArmsOperationDesc;
     prerequisites[] = {
         "TaskCombinedArmsAir"
     };
@@ -63,8 +63,8 @@ class TaskCombinedArmsOperation: WLTaskCombinedArms {
 };
 
 class TaskCombinedArmsCampaign: WLTaskCombinedArms {
-    name = "Combined Arms Campaign";
-    description = "Destroy a large assortment of enemies and vehicles to complete this task.";
+    name = $STR_WLT_taskCombinedArmsCampaignName;
+    description = $STR_WLT_taskCombinedArmsCampaignDesc;
     prerequisites[] = {
         "TaskCombinedArmsOperation"
     };

@@ -162,9 +162,9 @@ while {_i < _garrisonSize} do {
 	private _cnt = (count allPlayers) max 1;
 
 	private _i2 = 0;
-	private _groupPosArr = _spawnPosArr select {(_pos distanceSqr _x) < (150 * 150)};
 	for "_i2" from 0 to _grpSize do {
-		private _newUnit = _newGrp createUnit [selectRandom _unitsPool, selectRandom _groupPosArr, [], 0, "NONE"];
+		private _newUnit = _newGrp createUnit [selectRandom _unitsPool, _pos, [], 100, "NONE"];
+		_newUnit setVehiclePosition [getPosATL _newUnit, [], 0, "CAN_COLLIDE"];
 		_newUnit call WL2_fnc_newAssetHandle;
 		_infantryUnits pushBack _newUnit;
 
