@@ -1,6 +1,6 @@
 #include "constants.inc"
 
-params ["_type", "_data"];
+params ["_type", "_data", "_cost"];
 
 private _item = _data getOrDefault ["item", ""];
 private _magazines = _data getOrDefault ["magazines", []];
@@ -10,7 +10,6 @@ private _checkForSpace = {
     params ["_toAdd"];
     private _backpacks = if (BIS_WL_playerSide == west) then {
         [
-            "B_Messenger_Coyote_F",
             "B_AssaultPack_mcamo",
             "B_FieldPack_cbr",
             "B_TacticalPack_mcamo",
@@ -20,7 +19,6 @@ private _checkForSpace = {
         ];
     } else {
         [
-            "B_Messenger_Coyote_F",
             "B_AssaultPack_ocamo",
             "B_FieldPack_ocamo",
             "B_TacticalPack_ocamo",

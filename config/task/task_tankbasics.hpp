@@ -1,6 +1,6 @@
 class TaskBuyMBT: WLTaskTankBasics {
-    name = "Buy MBT";
-    description = "Buy any main battle tank.";
+    name = $STR_WLT_taskBuyMBTName;
+    description = $STR_WLT_taskBuyMBTDesc;
     prerequisites[] = {
         "TaskCombinedArmsArmor"
     };
@@ -8,8 +8,8 @@ class TaskBuyMBT: WLTaskTankBasics {
 };
 
 class TaskBuyRepair: WLTaskTankBasics {
-    name = "Recruit Repair Specialist";
-    description = "Buy a repair specialist in the infantry buy menu.";
+    name = $STR_WLT_taskBuyRepairName;
+    description = $STR_WLT_taskBuyRepairDesc;
     prerequisites[] = {
         "TaskBuyMBT"
     };
@@ -17,8 +17,8 @@ class TaskBuyRepair: WLTaskTankBasics {
 };
 
 class TaskStaffTank: WLTaskTankBasics {
-    name = "Hop in";
-    description = "Order your infantry to get in your tank. First, select the infantry with the F-keys or with tilde(`). Then, look at the tank and order them to get in.";
+    name = $STR_WLT_taskStaffTankName;
+    description = $STR_WLT_taskStaffTankDesc;
     onStart = "group player addEventHandler ['CommandChanged', { if (_this # 1 == 'GET IN') then {['TaskStaffTank'] call WLT_fnc_taskComplete;}; }];";
     prerequisites[] = {
         "TaskBuyRepair"
@@ -27,8 +27,8 @@ class TaskStaffTank: WLTaskTankBasics {
 };
 
 class TaskStaffRepair: WLTaskTankBasics {
-    name = "Combat Repairs";
-    description = "Order your repair specialist to repair your tank. First, order them out of the vehicle. Then, select them and press the 6 key, and order them to repair a damaged vehicle.";
+    name = $STR_WLT_taskStaffRepairName;
+    description = $STR_WLT_taskStaffRepairDesc;
     onStart = "group player addEventHandler ['CommandChanged', { if (_this # 1 == 'REPAIR VEHICLE') then {['TaskStaffRepair'] call WLT_fnc_taskComplete;}; }];";
     prerequisites[] = {
         "TaskStaffTank"
@@ -37,8 +37,8 @@ class TaskStaffRepair: WLTaskTankBasics {
 };
 
 class TaskTankAce: WLTaskTankBasics {
-    name = "Tank Ace";
-    description = "Destroy 5 heavy armor.";
+    name = $STR_WLT_taskTankAceName;
+    description = $STR_WLT_taskTankAceDesc;
     prerequisites[] = {
         "TaskStaffRepair"
     };

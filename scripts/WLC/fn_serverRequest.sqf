@@ -1,7 +1,8 @@
 #include "constants.inc"
 
-params ["_data", "_side", "_sender"];
+params ["_data", "_side", "_sender", "_lastLoadout"];
 
+private _totalCost = 0;
 {
     private _type = _x;
     if !(_x in ["Uniform", "Vest", "Helmet", "Primary", "Secondary", "Launcher"]) then {
@@ -38,9 +39,22 @@ params ["_data", "_side", "_sender"];
         _level = _level max (_loadout getOrDefault ["level", 0]);
     };
 
+    if (_item in (_lastLoadout # 0)) then {
+        _cost = 0;
+    };
+
     if (_level <= _playerLevel && _cost >= 0 && playerFunds >= _cost && _item != "") then {
         private _uid = getPlayerUID _sender;
         (-_cost) call WL2_fnc_fundsDatabaseWrite;
-        [_type, _custom] remoteExec ["WLC_fnc_clientEquip", _sender];
+        _totalCost = _totalCost + _cost;
+        [_type, _custom, _cost] remoteExec ["WLC_fnc_clientEquip", _sender];
     };
 } forEach _data;
+
+private _message = if (_totalCost > 0) then {
+    private _moneySign = [_side] call WL2_fnc_getMoneySign;
+    format ["Equipment and customizations applied for %1%2.", _moneySign, _totalCost];
+} else {
+     "Equipment and customizations applied for free.";
+};
+[_message] remoteExec ["systemChat", _sender];

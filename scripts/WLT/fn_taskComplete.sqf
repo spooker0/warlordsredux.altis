@@ -88,8 +88,8 @@ if (_init) then {
         private _tasks = (simpleTasks player) select {
             taskState _x == "Assigned" && count (taskChildren _x) == 0
         };
-        private _notification = format ["%1 tasks assigned. (Press: %2)", count _tasks, actionKeysNames "diary"];
+        private _notification = format [localize "STR_WLT_startHint", count _tasks, actionKeysNames "diary"];
         ["TaskAssigned", ["", _notification]] call BIS_fnc_showNotification;
-        hintSilent format ["%1 tasks assigned. Press %2 to view your tasks.", count _tasks, actionKeysNames "diary"];
+        hintSilent _notification;
     };
 };

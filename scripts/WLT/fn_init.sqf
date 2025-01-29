@@ -14,9 +14,16 @@ private _tasksClasses = "'WLTask' in ([_x, true] call BIS_fnc_returnParents)" co
 private _tasks = createHashMap;
 {
     private _taskData = createHashMap;
-    _taskData set ["name", getText (_x >> "name")];
+
+    private _taskNameArgs = [getText (_x >> "name")];
+    private _nameArgs = getArray (_x >> "nameArgs");
+    {
+        _taskNameArgs pushBack  _x;
+    } forEach _nameArgs;
+    _taskData set ["name", format _taskNameArgs];
+
     _taskData set ["description", getText (_x >> "description")];
-    _taskData set ["args", (getArray (_x >> "args")) apply {
+    _taskData set ["descArgs", (getArray (_x >> "descArgs")) apply {
         compile _x;
     }];
     _taskData set ["prerequisites", getArray (_x >> "prerequisites")];
@@ -58,15 +65,15 @@ WLT_notifications = 0;
 
                 private _taskName = _taskData getOrDefault ["name", ""];
                 private _taskDesc = _taskData getOrDefault ["description", ""];
-                private _descArgs = _taskData getOrDefault ["args", []];
+                private _descArgs = _taskData getOrDefault ["descArgs", []];
                 private _taskReward = _taskData getOrDefault ["reward", 0];
 
                 if (_taskName == taskName _task) then {
-                    private _compiledArgs = [_taskDesc];
+                    private _compiledDescArgs = [_taskDesc];
                     {
-                        _compiledArgs pushBack (call _x);
+                        _compiledDescArgs pushBack (call _x);
                     } forEach _descArgs;
-                    private _descDisplay = format ["%1<br/><br/>Reward: %2XP", format _compiledArgs, _taskReward];
+                    private _descDisplay = format ["%1<br/><br/>%2: %3XP", format _compiledDescArgs, localize "STR_WLT_reward", _taskReward];
 
                     private _progressTrackerDisplay = [];
                     private _progressTrackers = _taskData getOrDefault ["progressTrackers", []];
@@ -89,7 +96,7 @@ WLT_notifications = 0;
                     };
 
                     if (!taskCompleted _task && count _progressTrackerDisplay > 0) then {
-                        _descDisplay = format ["%1<br/><br/>Progress<br/>%2", _descDisplay, _progressTrackerDisplay joinString "<br/>"];
+                        _descDisplay = format ["%1<br/><br/>%2<br/>%3", _descDisplay, localize "STR_WLT_progress", _progressTrackerDisplay joinString "<br/>"];
                     };
 
                     _task setSimpleTaskDescription [_descDisplay, _taskName, ""];

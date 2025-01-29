@@ -1,6 +1,6 @@
 class TaskEngageOne: WLTaskEngage {
-    name = "Kill an Enemy Soldier";
-    description = "Good luck.";
+    name = $STR_WLT_taskEngageOneName;
+    description = $STR_WLT_taskEngageOneDesc;
     prerequisites[] = {
         "TaskBuyQuad"
     };
@@ -13,8 +13,8 @@ class TaskEngageOne: WLTaskEngage {
 };
 
 class TaskEngageFive: WLTaskEngage {
-    name = "Kill 5 Enemy Soldiers";
-    description = "Friendlies do not count.";
+    name = $STR_WLT_taskEngageFiveName;
+    description = $STR_WLT_taskEngageFiveDesc;
     prerequisites[] = {
         "TaskEngageOne"
     };
@@ -27,8 +27,8 @@ class TaskEngageFive: WLTaskEngage {
 };
 
 class TaskEngageThirty: WLTaskEngage {
-    name = "Kill 30 Enemy Soldiers";
-    description = "Progress not saved between rounds.";
+    name = $STR_WLT_taskEngageThirtyName;
+    description = $STR_WLT_taskEngageThirtyDesc;
     prerequisites[] = {
         "TaskEngageFive"
     };
@@ -41,8 +41,8 @@ class TaskEngageThirty: WLTaskEngage {
 };
 
 class TaskEngageOfficer: WLTaskEngage {
-    name = "Decapitation Strike";
-    description = "Kill an officer.";
+    name = $STR_WLT_taskEngageOfficerName;
+    description = $STR_WLT_taskEngageOfficerDesc;
     prerequisites[] = {
         "TaskEngageThirty"
     };
@@ -55,8 +55,8 @@ class TaskEngageOfficer: WLTaskEngage {
 };
 
 class TaskEngageSniper: WLTaskEngage {
-    name = "Eagle Eye";
-    description = "Kill 3 snipers.";
+    name = $STR_WLT_taskEngageSniperName;
+    description = $STR_WLT_taskEngageSniperDesc;
     prerequisites[] = {
         "TaskEngageOfficer"
     };
@@ -69,8 +69,8 @@ class TaskEngageSniper: WLTaskEngage {
 };
 
 class TaskEngageAT: WLTaskEngage {
-    name = "Protect the Tanks";
-    description = "Kill 3 AT missile specialists.";
+    name = $STR_WLT_taskEngageATName;
+    description = $STR_WLT_taskEngageATDesc;
     prerequisites[] = {
         "TaskEngageSniper"
     };
@@ -83,8 +83,8 @@ class TaskEngageAT: WLTaskEngage {
 };
 
 class TaskEngageAA: WLTaskEngage {
-    name = "Clear the Skies";
-    description = "Kill 3 AA missile specialists.";
+    name = $STR_WLT_taskEngageAAName;
+    description = $STR_WLT_taskEngageAADesc;
     prerequisites[] = {
         "TaskEngageSniper"
     };
