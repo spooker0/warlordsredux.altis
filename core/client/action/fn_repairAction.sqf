@@ -28,12 +28,14 @@ private _actionID = _asset addAction [
 
 [_asset, _actionID] spawn {
     params ["_asset", "_actionID"];
+    private _assetTypeName = [_asset] call WL2_fnc_getAssetTypeName;
     while { alive _asset } do {
         private _repairCooldown = ((_asset getVariable "BIS_WL_nextRepair") - serverTime) max 0;
         private _actionText = if (_repairCooldown == 0) then {
-            format ["<t color = '#4bff58'>%1</t>", localize "STR_repair"];
+            format ["<t color = '#4bff58'>%1 %2</t>", localize "STR_repair", _assetTypeName];
         } else {
-            format ["<t color = '#7e7e7e'><t align = 'left'>%1</t><t align = 'right'>%2     </t></t>", localize "STR_repair", [_repairCooldown, "MM:SS"] call BIS_fnc_secondsToString];
+            private _cooldownText = [_repairCooldown, "MM:SS"] call BIS_fnc_secondsToString;
+            format ["<t color = '#7e7e7e'><t align = 'left'>%1 %2</t><t align = 'right'>%3     </t></t>", localize "STR_repair", _assetTypeName, _cooldownText];
         };
         private _actionImage = format ["<img size='2' color = '%1' image='\A3\ui_f\data\IGUI\Cfg\Actions\repair_ca.paa'/>", if (_repairCooldown == 0) then {"#ffffff"} else {"#7e7e7e"}];
         _asset setUserActionText [_actionID, _actionText, _actionImage];
