@@ -31,9 +31,37 @@ private _ammoToSet = if (_rearm) then {
     _asset setAmmoOnPylon [_pylonName, _ammoToSet];
 } forEach _pylonsToSet;
 
-_asset setVehicleAmmo _ammoToSet;
-
 private _assetTurrets = (allTurrets _asset) + [[-1]];
+
+{
+    private _turret = _x;
+
+    // collect all non-pylon magazines
+    private _assetMagazines = _asset magazinesTurret [_turret, true];
+    private _pylonMagazines = ((getAllPylonsInfo _asset) select {
+        (_x # 2) isEqualTo _turret
+    }) apply {
+        _x # 3;
+    };
+    {
+        private _match = _assetMagazines find _x;
+        if (_match >= 0) then {
+            _assetMagazines deleteAt _match;
+        };
+    } forEach _pylonMagazines;
+
+    {
+        private _magazine = _x;
+        private _maxMagazine = getNumber (configFile >> "CfgMagazines" >> _magazine >> "count");
+        private _ammo = _maxMagazine * _ammoToSet;
+        _asset setMagazineTurretAmmo [_x, _ammo, _turret];
+    } forEach _assetMagazines;
+} forEach _assetTurrets;
+
+if (_rearm) then {
+    _asset setVehicleAmmo 1;
+};
+
 {
     private _turret = _x;
     private _weaponsInTurret = _asset weaponsTurret _turret;

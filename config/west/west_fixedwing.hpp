@@ -104,7 +104,7 @@ class FixedWing {
         name = "V-44 X Blackfish (Recon)";
         description = "V-44 X Blackfish (Recon) is a variant of the V-44 X Blackfish with a powerful scanner.";
         spawn = "B_T_VTOL_01_infantry_F";
-        cost = 2500;
+        cost = 3000;
         requirements[] = {"A"};
         killReward = 300;
         hasHMD = 1;

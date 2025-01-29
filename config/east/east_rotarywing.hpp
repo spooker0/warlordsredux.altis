@@ -32,7 +32,7 @@ class RotaryWing {
         name = "Mi-290 Taru (Recon)";
         description = "Mi-290 Taru (Recon) is a variant of the Mi-290 Taru with a powerful scanner.";
         spawn = "O_Heli_Transport_04_box_F";
-        cost = 2000;
+        cost = 2500;
         requirements[] = {"H"};
         offset[] = {0, 10, 0};
         killReward = 125;
@@ -47,7 +47,6 @@ class RotaryWing {
                 "CMFlareLauncher"
             };
             addMagazines[] = {
-                "240Rnd_CMFlare_Chaff_Magazine",
                 "240Rnd_CMFlare_Chaff_Magazine"
             };
             addWeapons[] = {
@@ -84,14 +83,11 @@ class RotaryWing {
 
         class Pilot: WLTurretDefaults {
             turret[] = { -1 };
-            removeMagazines[] = {
-                "192Rnd_CMFlare_Chaff_Magazine"
-            };
+            removeMagazines[] = { };
             removeWeapons[] = {
                 "CMFlareLauncher"
             };
             addMagazines[] = {
-                "240Rnd_CMFlare_Chaff_Magazine",
                 "240Rnd_CMFlare_Chaff_Magazine"
             };
             addWeapons[] = {

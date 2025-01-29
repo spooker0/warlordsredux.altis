@@ -113,6 +113,7 @@ class CfgFunctions {
 			class repackMagazines {};
 			class revive {};
 			class rita {};
+			class spectator {};
 			class sideToFaction {};
 			class spectrumAction {};
 			class teammatesAvailability {};
@@ -163,6 +164,7 @@ class CfgFunctions {
 		};
 		class ClientDraw {
 			file = "core\client\draw";
+			class drawAssetName {};
 			class drawJammerCircle {};
 			class getDir {};
 			class getPos {};

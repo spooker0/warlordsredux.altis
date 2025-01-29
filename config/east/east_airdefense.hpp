@@ -52,11 +52,15 @@ class AirDefense {
         loadable[] = {0, -1, 1.7};
     };
 
-    class O_APC_Tracked_02_AA_F {
-        cost = 5000;
+    class O_APC_Tracked_02_AA_E_F {
+        name = "ZSU-38 Yangtze";
+        description = "ZSU-38 Yangtze is a variant of the ZSU-39 Tigris armed with SAAMI missiles.";
+        spawn = "O_APC_Tracked_02_AA_F";
+        variant = 1;
+        cost = 4500;
         requirements[] = {};
-        rearm = 500;
-        killReward = 350;
+        rearm = 450;
+        killReward = 600;
         capValue = 4;
         aps = 2;
 
@@ -80,6 +84,36 @@ class AirDefense {
             addWeapons[] = {
                 "autocannon_35mm",
                 "missiles_SAAMI"
+            };
+        };
+    };
+
+    class O_APC_Tracked_02_AA_F {
+        cost = 5000;
+        requirements[] = {};
+        rearm = 500;
+        killReward = 350;
+        capValue = 4;
+        aps = 2;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {
+                "4Rnd_Titan_long_missiles_O",
+                "680Rnd_35mm_AA_shells_Tracer_Green"
+            };
+            removeWeapons[] = {
+                "missiles_titan_AA",
+                "autocannon_35mm"
+            };
+            addMagazines[] = {
+                "4Rnd_GAA_missiles",
+                "4Rnd_GAA_missiles",
+                "680Rnd_35mm_AA_shells_Tracer_Green"
+            };
+            addWeapons[] = {
+                "autocannon_35mm",
+                "missiles_titan_AA"
             };
         };
     }; // "ZSU-39 Tigris"

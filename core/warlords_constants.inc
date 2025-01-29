@@ -49,3 +49,4 @@
 #define WL_HARD_AI_MODE false
 #define WL_MANPOWER_REFRESH_COOLDOWN 300
 #define WL_FACTION_THREE_ENABLED false
+#define WL_STOP_TEAM_SWITCH false

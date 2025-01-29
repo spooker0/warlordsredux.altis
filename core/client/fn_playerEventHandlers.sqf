@@ -17,6 +17,12 @@ player addEventHandler ["GetInMan", {
 	if ((_vehicle getVariable "BIS_WL_ownerAsset") == (getPlayerUID player)) then {
 		_vehicle setVariable ["BIS_WL_lastActive", 0];
 	};
+	[_vehicle] spawn WL2_fnc_drawAssetName;
+}];
+
+player addEventHandler ["SeatSwitchedMan", {
+	params ["_unit1", "_unit2", "_vehicle"];
+	[_vehicle] spawn WL2_fnc_drawAssetName;
 }];
 
 player addEventHandler ["InventoryOpened",{

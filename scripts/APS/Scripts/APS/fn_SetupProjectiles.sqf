@@ -17,7 +17,17 @@ _this addEventHandler ["Fired", {
 			// fire on launcher
 			private _launcher = _unit getVariable ["WL_incomingLauncherLastKnown", objNull];
 			if (alive _launcher) exitWith {
-				_projectile setMissileTarget [_launcher, true];
+				if (_launcher isKindOf "Man") then {
+					_projectile setMissileTarget [_launcher, true];
+
+					[_projectile] spawn {
+						params ["_projectile"];
+						sleep 2;
+						_projectile setMissileTarget objNull;
+					};
+				} else {
+					_projectile setMissileTarget [_launcher, true];
+				};
 			};
 
 			private _samTargets = [];

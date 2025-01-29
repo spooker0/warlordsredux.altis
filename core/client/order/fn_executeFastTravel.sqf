@@ -4,12 +4,16 @@ titleCut ["", "BLACK OUT", 1];
 openMap [false, false];
 
 "Fast_travel" call WL2_fnc_announcer;
-[toUpper format [localize "STR_A3_WL_popup_travelling", BIS_WL_targetSector getVariable "BIS_WL_name"], nil, 3] spawn WL2_fnc_smoothText;
 
 sleep 1;
 
 private _destination = [];
-private _sectorPos = (BIS_WL_targetSector getVariable "objectAreaComplete") # 0;
+private _sectorPos = if (isNil "BIS_WL_targetSector") then {
+	[0, 0, 0];
+} else {
+	[toUpper format [localize "STR_A3_WL_popup_travelling", BIS_WL_targetSector getVariable "BIS_WL_name"], nil, 3] spawn WL2_fnc_smoothText;
+	(BIS_WL_targetSector getVariable "objectAreaComplete") # 0;
+};
 
 switch (_fastTravelMode) do {
 	case 0: {
@@ -47,6 +51,12 @@ switch (_fastTravelMode) do {
         missionNamespace setVariable [_paradropNextUseVar, serverTime + 600];
 
 		[player, "fastTravelContested", getMissionConfigValue ["WL_vehicleParadropCost", 1000]] remoteExec ["WL2_fnc_handleClientRequest", 2];
+	};
+	case 4: {
+		private _respawnBag = player getVariable ["WL2_respawnBag", objNull];
+        if (!isNull _respawnBag) then {
+            _destination = getPosATL _respawnBag;
+        };
 	};
 };
 
@@ -111,6 +121,28 @@ switch (_fastTravelMode) do {
 			deleteVehicle _parachute;
 		};
 	};
+	case 4: {
+        if (count _destination > 0) then {
+            private _oldPlayerPos = getPosASL player;
+            player setVehiclePosition [_destination, [], 0, "NONE"];
+            private _newPos = getPosATL player;
+
+            if (abs ((_destination # 2) - (_newPos # 2)) > 5) then {
+                systemChat "Your tent was left in an invalid spot. Make sure to place it in an open spot outside next time.";
+                player setPosASL _oldPlayerPos;
+            } else {
+				{
+					_x setVehiclePosition [_destination, [], 3, "NONE"];
+				} forEach _tagAlong;
+			};
+
+			private _respawnBag = player getVariable ["WL2_respawnBag", objNull];
+			if (!isNull _respawnBag) then {
+				deleteVehicle _respawnBag;
+			};
+            player setVariable ["WL2_respawnBag", objNull];
+        };
+	};
 };
 
 sleep 1;
@@ -129,5 +161,8 @@ switch (_fastTravelMode) do {
 	};
 	case 3: {
 		["TaskVehicleParadrop"] call WLT_fnc_taskComplete;
+	};
+	case 4: {
+		["TaskFastTravelTent"] call WLT_fnc_taskComplete;
 	};
 };

@@ -14,6 +14,14 @@ private _isInCarrierSector = count (BIS_WL_allSectors select {
     player inArea (_x getVariable "objectAreaComplete") && count (_x getVariable ["WL_aircraftCarrier", []]) > 0
 }) > 0;
 
+private _movedTooFar = if (_isInCarrierSector) then {
+    count (BIS_WL_allSectors select {
+        _originalPosition inArea (_x getVariable "objectAreaComplete") && count (_x getVariable ["WL_aircraftCarrier", []]) > 0
+    }) == 0
+} else {
+    (_originalPosition distance2D player) > _limitDistance
+};
+
 private _isInvalidPosition = if (_isInCarrierSector) then {
     (getPosASL player) # 2 < 5
 } else {
@@ -26,4 +34,4 @@ lifeState player == "INCAPACITATED" ||
 (_nearbyEnemies && !_ignoreSector) ||
 _isInvalidPosition ||
 (_isOutOfSector && !_ignoreSector) ||
-(!_isInCarrierSector && (_originalPosition distance2D player) > _limitDistance);
+_movedTooFar;

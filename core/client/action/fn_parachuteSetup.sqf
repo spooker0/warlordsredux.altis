@@ -12,7 +12,8 @@ waitUntil {
     !alive _unit || (getPosATL _unit # 2) < 100 || (getPosASL _unit # 2) < 100 || vehicle _unit != _unit;
 };
 
+_unit removeAction _parachuteActionId;
+
 if (alive _unit && vehicle _unit == _unit) then {
-    _unit removeAction _parachuteActionId;
     [objNull, _unit, -1, []] call WL2_fnc_parachuteAction;
 };

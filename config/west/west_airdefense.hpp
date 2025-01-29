@@ -46,11 +46,15 @@ class AirDefense {
         loadable[] = {0, -1, 1.7};
     }; // "Praetorian 1C"
 
-    class B_APC_Tracked_01_AA_F {
-        cost = 5000;
+    class B_APC_Tracked_01_AA_E_F {
+        name = "IFV-SAAMI Jaguar";
+        description = "IFV-SAAMI Jaguar is a variant of the IFV-6a Cheetah armed with SAAMI missiles.";
+        spawn = "B_APC_Tracked_01_AA_F";
+        variant = 1;
+        cost = 4500;
         requirements[] = {};
-        rearm = 500;
-        killReward = 350;
+        rearm = 450;
+        killReward = 300;
         capValue = 4;
         aps = 2;
 
@@ -74,6 +78,36 @@ class AirDefense {
             addWeapons[] = {
                 "autocannon_35mm",
                 "missiles_SAAMI"
+            };
+        };
+    };
+
+    class B_APC_Tracked_01_AA_F {
+        cost = 5000;
+        requirements[] = {};
+        rearm = 500;
+        killReward = 350;
+        capValue = 4;
+        aps = 2;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            removeMagazines[] = {
+                "4Rnd_Titan_long_missiles",
+                "680Rnd_35mm_AA_shells_Tracer_Red"
+            };
+            removeWeapons[] = {
+                "missiles_titan_AA",
+                "autocannon_35mm"
+            };
+            addMagazines[] = {
+                "4Rnd_GAA_missiles",
+                "4Rnd_GAA_missiles",
+                "680Rnd_35mm_AA_shells_Tracer_Red"
+            };
+            addWeapons[] = {
+                "autocannon_35mm",
+                "missiles_titan_AA"
             };
         };
     }; // "IFV-6a Cheetah"
