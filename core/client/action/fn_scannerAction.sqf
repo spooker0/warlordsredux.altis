@@ -13,7 +13,11 @@ private _actionId = _asset addAction [
 		private _consumption = if (_asset isKindOf "LandVehicle") then {
 			25;
 		} else {
-			50;
+			if (_awacs) then {
+				5;
+			} else {
+				50;
+			};
 		};
         if (_newScannerOn) then {
 			[_asset, _consumption] remoteExec ["setFuelConsumptionCoef", _asset];
