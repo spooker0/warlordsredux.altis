@@ -118,7 +118,12 @@ if (_asset isKindOf "Man") then {
 
 	private _hasScannerMap = missionNamespace getVariable ["WL2_hasScanner", createHashMap];
 	if (_hasScannerMap getOrDefault [_assetActualType, false]) then {
-		[_asset] remoteExec ["WL2_fnc_scannerAction", 0, true];
+		[_asset, false] remoteExec ["WL2_fnc_scannerAction", 0, true];
+	};
+
+	private _hasAWACSMap = missionNamespace getVariable ["WL2_hasAWACS", createHashMap];
+	if (_hasAWACSMap getOrDefault [_assetActualType, false]) then {
+		[_asset, true] remoteExec ["WL2_fnc_scannerAction", 0, true];
 	};
 
 	// handle WLT

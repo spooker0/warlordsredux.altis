@@ -101,14 +101,14 @@ class FixedWing {
     }; // "V-44 X Blackfish (Vic)"
 
     class B_T_VTOL_01_recon_F {
-        name = "V-44 X Blackfish (Recon)";
-        description = "V-44 X Blackfish (Recon) is a variant of the V-44 X Blackfish with a powerful scanner.";
+        name = "V-44 X Blackfish (AWACS)";
+        description = "V-44 X Blackfish (AWACS) is a variant of the V-44 X Blackfish with a powerful air radar.";
         spawn = "B_T_VTOL_01_infantry_F";
-        cost = 3000;
+        cost = 3800;
         requirements[] = {"A"};
         killReward = 300;
         hasHMD = 1;
-        hasScanner = 1;
+        hasAWACS = 1;
         class Pilot: WLTurretDefaults {
             turret[] = { -1 };
             removeMagazines[] = {};

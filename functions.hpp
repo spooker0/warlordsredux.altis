@@ -31,6 +31,8 @@ class CfgFunctions {
 		};
 		class APS {
 			file = "scripts\APS\Scripts\APS";
+			class lagProtection {};
+			class lagProtectionServer {};
 			class setupProjectiles {};
 			class firedProjectile {};
 			class serverHandleAPS {};
@@ -176,6 +178,7 @@ class CfgFunctions {
 			class iconText {};
 			class iconTextSectorScan {};
 			class iconType {};
+			class isScannerMunition {};
 			class mapIcons {};
 			class refreshCurrentTargetData {};
 			class refreshOSD {};

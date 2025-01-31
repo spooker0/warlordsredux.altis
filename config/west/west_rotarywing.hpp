@@ -113,7 +113,7 @@ class RotaryWing {
                 "PylonWeapon_300Rnd_20mm_shells"
             };
             addWeapons[] = {
-                "CMFlareLauncher_Singles",
+                "CMFlareLauncher",
                 "Twin_Cannon_20mm_gunpod"
             };
         };

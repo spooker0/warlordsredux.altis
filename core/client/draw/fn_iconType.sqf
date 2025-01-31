@@ -1,3 +1,7 @@
+if ([_x] call WL2_fnc_isScannerMunition) exitWith {
+	"\A3\ui_f\data\IGUI\RscCustomInfo\Sensors\Targets\missile_ca.paa";
+};
+
 private _vt = typeOf (vehicle _x);
 _i = getText (configFile >> 'CfgVehicles' >> _vt >> 'icon');
 if ((getPlayerChannel _x) in [1,2]) then {

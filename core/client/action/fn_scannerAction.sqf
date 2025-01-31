@@ -1,10 +1,12 @@
 #include "..\..\warlords_constants.inc"
-params ["_asset"];
+params ["_asset", "_awacs"];
 
 private _actionId = _asset addAction [
 	"SCANNER: INITIALIZING",
 	{
-        params ["_asset", "_caller", "_actionId"];
+        params ["_asset", "_caller", "_actionId", "_args"];
+		private _awacs = _args # 0;
+
         private _scannerOn = _asset getVariable ["WL_scannerOn", false];
         private _newScannerOn = !_scannerOn;
         _asset setVariable ["WL_scannerOn", _newScannerOn, true];
@@ -18,9 +20,9 @@ private _actionId = _asset addAction [
         } else {
 			[_asset, 1] remoteExec ["setFuelConsumptionCoef", _asset];
         };
-		[_asset, _actionId] call WL2_fnc_scanner;
+		[_asset, _actionId, _awacs] call WL2_fnc_scanner;
 	},
-	[],
+	[_awacs],
 	99,
 	false,
 	false,
@@ -30,10 +32,14 @@ private _actionId = _asset addAction [
 	false
 ];
 
-[_asset, _actionId] spawn {
-	params ["_asset", "_actionId"];
+[_asset, _actionId, _awacs] spawn {
+	params ["_asset", "_actionId", "_awacs"];
 	while { alive _asset } do {
-        [_asset, _actionId] call WL2_fnc_scanner;
-		sleep 2;
+        [_asset, _actionId, _awacs] call WL2_fnc_scanner;
+		if (_awacs) then {
+			sleep 0.5;
+		} else {
+			sleep 2;
+		};
 	};
 };

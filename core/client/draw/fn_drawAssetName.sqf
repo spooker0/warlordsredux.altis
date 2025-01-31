@@ -12,11 +12,10 @@ params ["_vehicle"];
     };
 };
 
-private _displays = uiNamespace getVariable ["IGUI_displays", []];
-private _unitInfo = (_displays select { (ctrlIDD _x) == 300 }) # 0;
+private _unitInfo = uiNamespace getVariable ["RscUnitInfo", displayNull];
 waitUntil {
     sleep 0.1;
-    _unitInfo = (_displays select { (ctrlIDD _x) == 300 }) # 0;
+    _unitInfo = uiNamespace getVariable ["RscUnitInfo", displayNull];
     !isNull _unitInfo;
 };
 
@@ -37,9 +36,10 @@ private _vehicleType = typeof _vehicle;
 private _vehicleActualType = _vehicle getVariable ["WL2_orderedClass", _vehicleType];
 if (_vehicleActualType != _vehicleType) then {
     private _assetTypeName = [_vehicle] call WL2_fnc_getAssetTypeName;
+    private _existingPosition = ctrlPosition (_unitInfo displayCtrl 1000);
 
     private _newControl = _unitInfo ctrlCreate ["RscText", -1];
-    _newControl ctrlSetPosition (ctrlPosition _existingControl);
+    _newControl ctrlSetPosition _existingPosition;
     _newControl ctrlSetBackgroundColor [0.5, 0.5, 0.5, 1];
     _newControl ctrlSetTextColor (ctrlTextColor _existingControl);
     _newControl ctrlSetFontHeight (ctrlFontHeight _existingControl);

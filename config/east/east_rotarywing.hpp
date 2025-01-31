@@ -28,31 +28,49 @@ class RotaryWing {
         hasHMD = 1;
     }; // "PO-30 Orca (Unarmed)"
 
-    class O_Heli_Transport_04_recon_F {
-        name = "Mi-290 Taru (Recon)";
-        description = "Mi-290 Taru (Recon) is a variant of the Mi-290 Taru with a powerful scanner.";
-        spawn = "O_Heli_Transport_04_box_F";
-        cost = 2500;
+    // class O_Heli_Transport_04_recon_F {
+    //     name = "Mi-290 Taru (Recon)";
+    //     description = "Mi-290 Taru (Recon) is a variant of the Mi-290 Taru with a powerful scanner.";
+    //     spawn = "O_Heli_Transport_04_box_F";
+    //     cost = 2500;
+    //     requirements[] = {"H"};
+    //     offset[] = {0, 10, 0};
+    //     killReward = 125;
+    //     hasHMD = 1;
+    //     hasScanner = 1;
+    //     class Pilot: WLTurretDefaults {
+    //         turret[] = { -1 };
+    //         removeMagazines[] = {
+    //             "168Rnd_CMFlare_Chaff_Magazine"
+    //         };
+    //         removeWeapons[] = {
+    //             "CMFlareLauncher"
+    //         };
+    //         addMagazines[] = {
+    //             "240Rnd_CMFlare_Chaff_Magazine"
+    //         };
+    //         addWeapons[] = {
+    //             "CMFlareLauncher_Singles"
+    //         };
+    //     };
+    // };
+
+    class O_Heli_Transport_02_AWACS_F {
+        name = "CH-49 Mohawk (AWACS)";
+        description = "CH-49 Mohawk (AWACS) is a variant of the CH-49 Mohawk with a powerful air radar.";
+        spawn = "I_Heli_Transport_02_F";
+        cost = 3800;
         requirements[] = {"H"};
         offset[] = {0, 10, 0};
-        killReward = 125;
-        hasHMD = 1;
-        hasScanner = 1;
-        class Pilot: WLTurretDefaults {
-            turret[] = { -1 };
-            removeMagazines[] = {
-                "168Rnd_CMFlare_Chaff_Magazine"
-            };
-            removeWeapons[] = {
-                "CMFlareLauncher"
-            };
-            addMagazines[] = {
-                "240Rnd_CMFlare_Chaff_Magazine"
-            };
-            addWeapons[] = {
-                "CMFlareLauncher_Singles"
-            };
+        textures[] = {
+            "A3\Air_F_Beta\Heli_Transport_02\Data\Skins\Heli_Transport_02_1_DAHOMAN_CO.paa",
+            "A3\Air_F_Beta\Heli_Transport_02\Data\Skins\Heli_Transport_02_2_DAHOMAN_CO.paa",
+            "A3\Air_F_Beta\Heli_Transport_02\Data\Skins\Heli_Transport_02_3_DAHOMAN_CO.paa",
+            "A3\Air_F_Beta\Heli_Transport_02\Data\Heli_Transport_02_int_02_CO.paa"
         };
+        killReward = 300;
+        hasHMD = 1;
+        hasAWACS = 1;
     };
 
     class O_Heli_Light_02_dynamicLoadout_F {

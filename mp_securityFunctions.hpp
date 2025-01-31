@@ -8,6 +8,10 @@ class CfgRemoteExec {
 			allowedTargets = 0;
 		};
 
+		class APS_fnc_lagProtectionServer {
+			allowedTargets = 2;
+		};
+
 		class APS_fnc_serverHandleAPS {
 			allowedTargets = 2;
 		};

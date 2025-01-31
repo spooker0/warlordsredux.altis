@@ -94,26 +94,37 @@ if (!isNull WL_SectorActionTarget && isNull BIS_WL_highlightedSector && WL_Secto
 private _scannerUnits = vehicles select {
 	alive _x &&
 	isEngineOn _x &&
-	(_x getVariable ["WL_scannerOn", false]) &&
+	((_x getVariable ["WL_scannerOn", false]) || (_x getVariable ["WL_awacsOn", false])) &&
 	[_x] call WL2_fnc_getAssetSide == _side
 };
 
+private _scale = 6.4 * worldSize / 8192 * ctrlMapScale _m;
+
+private _hasAWACSMap = missionNamespace getVariable ["WL2_hasAWACS", createHashMap];
 {
 	private _assetPos = _x modelToWorldVisual [0, 0, 0];
-    private _assetHeight = _assetPos # 2;
-	if (_assetHeight > 2000) then {
-		continue;
+    private _scanRadius = _x getVariable ["WL_scanRadius", 100];
+    private _assetActualType = _x getVariable ["WL2_orderedClass", typeOf _x];
+	if (_hasAWACSMap getOrDefault [_assetActualType, false]) then {
+		private _size = _scanRadius / _scale;
+		_m drawIcon [
+			"\a3\ui_f\data\IGUI\RscCustomInfo\Sensors\Sectors\sector120_ca.paa",
+			[1, 1, 1, 1],
+			_assetPos,
+			_size,
+			_size,
+			getDirVisual _x
+		];
+	} else {
+		_m drawEllipse [
+			_assetPos,
+			_scanRadius,
+			_scanRadius,
+			0,
+			[0, 1, 1, 1],
+			"#(rgb,8,8,3)color(0,1,1,0.15)"
+		];
 	};
-    private _scanRadius = ((_assetHeight * 2) min 1000) max 100;
-
-	_m drawEllipse [
-		_assetPos,
-		_scanRadius,
-		_scanRadius,
-		0,
-		[0, 1, 1, 1],
-		"#(rgb,8,8,3)color(0,1,1,0.15)"
-	];
 } forEach _scannerUnits;
 
 private _allScannedObjects = [];
@@ -124,14 +135,21 @@ private _allScannedObjects = [];
 _allScannedObjects = _allScannedObjects arrayIntersect _allScannedObjects; // eliminate duplicates
 
 {
-	private _size = call WL2_fnc_iconSize;
+	if (isNull _x) then { continue; };
+	private _size = call WL2_fnc_iconSize * 1.2;
 	_m drawIcon [
 		call WL2_fnc_iconType,
 		switch ([_x] call WL2_fnc_getAssetSide) do {
 			case west: { [0, 0.3, 0.6, 0.9] };
 			case east: { [0.5, 0, 0, 0.9] };
 			case independent: { [0, 0.6, 0, 0.9] };
-			default { [1, 1, 1, 0] };
+			default {
+				if ([_x] call WL2_fnc_isScannerMunition) then {
+					[1, 1, 1, 1]
+				} else {
+					[1, 1, 1, 0]
+				};
+			};
 		},
 		call WL2_fnc_getPos,
 		_size,
@@ -139,7 +157,7 @@ _allScannedObjects = _allScannedObjects arrayIntersect _allScannedObjects; // el
 		call WL2_fnc_getDir,
 		_x call WL2_fnc_iconTextSectorScan,
 		1,
-		0.043,
+		0.06,
 		"PuristaBold",
 		"right"
 	];
