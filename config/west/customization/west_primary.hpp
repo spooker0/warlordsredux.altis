@@ -27,6 +27,70 @@ class Primary {
         };
     };
 
+    // MX GL
+    class MX_GL {
+        name = "MX GL";
+        item = "arifle_MX_GL_F";
+        level = 1;
+        cost = 20;
+
+        class Standard: WLCAmmo {
+            name = "Standard";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_mag", 6 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class Tracers: WLCAmmo {
+            name = "Tracers";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_mag_Tracer", 6 }
+            };
+        };
+
+        class ExtraAmmo: WLCAmmo {
+            name = "Extra Ammo";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_mag", 9 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class TracersExtraAmmo: WLCAmmo {
+            name = "Tracers, Extra Ammo";
+            magazines[] = {
+                { "30Rnd_65x39_caseless_mag_Tracer", 9 },
+                { "1Rnd_HE_Grenade_shell", 3 }
+            };
+        };
+
+        class Grenadier: WLCAmmo {
+            name = "Extra Grenades";
+            level = 30;
+            magazines[] = {
+                { "30Rnd_65x39_caseless_mag", 6 },
+                { "3Rnd_HE_Grenade_shell", 6 }
+            };
+        };
+
+        class TracersGrenadier: WLCAmmo {
+            name = "Tracers, Extra Grenades";
+            level = 31;
+            magazines[] = {
+                { "30Rnd_65x39_caseless_mag_Tracer", 6 },
+                { "3Rnd_HE_Grenade_shell", 6 }
+            };
+        };
+
+        #include "west_optics.hpp"
+
+        attachments[] = {
+            "acc_pointer_IR",
+            "muzzle_snds_H"
+        };
+    };
+
     // MXC
     class MXC {
         name = "MXC";
