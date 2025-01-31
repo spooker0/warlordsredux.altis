@@ -26,6 +26,7 @@ private _disallowMagazinesForVehicle = createHashMap;
 private _allowPylonMagazines = createHashMap;
 private _hasHMD = createHashMap;
 private _hasScanner = createHashMap;
+private _hasAWACS = createHashMap;
 
 private _turretOverridesHashMap = createHashMap;
 
@@ -64,6 +65,7 @@ private _requisitionPresets = BIS_WL_purchaseListTemplate;
 				private _requisitionAllowPylonMagazines = getArray (_x >> "allowPylonMagazines");
 				private _requisitionHasHMD = getNumber (_x >> "hasHMD");
 				private _requisitionHasScanner = getNumber (_x >> "hasScanner");
+				private _requisitionHasAWACS = getNumber (_x >> "hasAWACS");
 
 				private _requisitionUnitSpawn = getNumber (_x >> "unitSpawn");
 				private _requisitionVehicleSpawn = getNumber (_x >> "vehicleSpawn");
@@ -169,6 +171,10 @@ private _requisitionPresets = BIS_WL_purchaseListTemplate;
 					_hasScanner set [_requisitonName, true];
 				};
 
+				if (_requisitionHasAWACS != 0) then {
+					_hasAWACS set [_requisitonName, true];
+				};
+
 				if (count _requisitionTurretOverrides > 0) then {
 					_turretOverridesHashMap set [_requisitonName, _requisitionTurretOverrides];
 				};
@@ -228,5 +234,6 @@ missionNamespace setVariable ["WL2_disallowMagazinesForVehicle", _disallowMagazi
 missionNamespace setVariable ["WL2_allowPylonMagazines", _allowPylonMagazines];
 missionNamespace setVariable ["WL2_hasHMD", _hasHMD];
 missionNamespace setVariable ["WL2_hasScanner", _hasScanner];
+missionNamespace setVariable ["WL2_hasAWACS", _hasAWACS];
 missionNamespace setVariable ["WL2_rearmTimers", _rearmTimerHashMap];
 missionNamespace setVariable ["WL2_turretOverrides", _turretOverridesHashMap];
