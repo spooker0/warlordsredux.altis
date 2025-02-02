@@ -19,11 +19,11 @@ class TaskDestroyProwlerAT: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyHunterHMG: WLTaskSearchAndDestroy {
-    nameArgs[] = {"Hunter (HMG)"};
-    descArgs[] = {"'Hunter (HMG)'"};
+    nameArgs[] = {"Hunter HMG"};
+    descArgs[] = {"'Hunter HMG'"};
     reward = 200;
     class DestroyTracker: WLProgressTracker {
-        id = "Kill: Hunter (HMG)";
+        id = "Kill: Hunter HMG";
         threshold = 1;
     };
 };
@@ -169,11 +169,11 @@ class TaskDestroyQilinAT: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyIfritHMG: WLTaskSearchAndDestroy {
-    nameArgs[] = {"Ifrit (HMG)"};
-    descArgs[] = {"'Ifrit (HMG)'"};
+    nameArgs[] = {"Ifrit HMG"};
+    descArgs[] = {"'Ifrit HMG'"};
     reward = 200;
     class DestroyTracker: WLProgressTracker {
-        id = "Kill: Ifrit (HMG)";
+        id = "Kill: Ifrit HMG";
         threshold = 1;
     };
 };
@@ -304,16 +304,6 @@ class TaskDestroyDeviceTruck: WLTaskSearchAndDestroy {
     reward = 300;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: Tempest (Device)";
-        threshold = 1;
-    };
-};
-
-class TaskDestroyOffroadRecon: WLTaskSearchAndDestroy {
-    nameArgs[] = {"Offroad (Recon)"};
-    description = $STR_WLT_taskDestroyOffroadReconDesc;
-    reward = 300;
-    class DestroyTracker: WLProgressTracker {
-        id = "Kill: Offroad (Recon)";
         threshold = 1;
     };
 };

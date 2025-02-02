@@ -117,6 +117,13 @@ if (_ret) then {
 				[WL2_fnc_checkFastTravelSL]
 			]
 		};
+		case "FTSquad": {
+			[
+				[WL2_fnc_checkPlayerInVehicle],
+				[WL2_fnc_checkNearbyEnemies],
+				[WL2_fnc_checkFastTravelSquad]
+			]
+		};
 		case "LastLoadout": {
 			[
 				[WL2_fnc_checkPlayerInVehicle],

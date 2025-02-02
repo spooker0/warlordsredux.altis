@@ -9,6 +9,7 @@ _this addEventHandler ["Fired", {
 
 	if !(local _projectile) exitWith { true };
 	// [_projectile] spawn APS_fnc_lagProtection;
+	[_projectile] spawn APS_fnc_projectileStateUpdate;
 
 	if !((typeOf _projectile) in APS_ProjectileMap) exitWith { true };
 	_this spawn APS_fnc_firedProjectile;

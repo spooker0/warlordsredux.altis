@@ -38,6 +38,40 @@ class HeavyVehicles {
         };
     };
 
+    class O_APC_Tracked_02_recon_F {
+        name = "BTR-K Kamysh (Recon)";
+        description = "BTR-K Kamysh (Recon) is a variant of the BTR-K Kamysh armed with a powerful scanner.";
+        spawn = "O_APC_Tracked_02_cannon_F";
+        variant = 1;
+        cost = 2700;
+        requirements[] = {};
+        rearm = 500;
+        killReward = 300;
+        capValue = 3;
+        aps = 2;
+
+        hasHMD = 1;
+        hasScanner = 1;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            hideTurret = 1;
+            removeMagazines[] = {
+                "2Rnd_GAT_missiles_O",
+                "140Rnd_30mm_MP_shells_Tracer_Green",
+                "60Rnd_30mm_APFSDS_shells_Tracer_Green",
+                "200Rnd_762x51_Belt_Green"
+            };
+            removeWeapons[] = {
+                "missiles_titan",
+                "autocannon_30mm_CTWS",
+                "LMG_coax_ext"
+            };
+            addMagazines[] = {};
+            addWeapons[] = {};
+        };
+    };
+
     class O_APC_Tracked_02_cannon_F {
         cost = 3200;
         requirements[] = {};

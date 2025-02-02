@@ -41,6 +41,7 @@ Note 2: The order of operation is remove magazines, remove weapons, add magazine
 class NameItAnything: WLTurretDefaults {
     turret[] = { 0 };                // Turret path to modify.
     reloadOverride = number;         // Override the reload time of the vehicle's weapons. Can only be shorter than default, and only single weapon turrets.
+    hideTurret = number (0|1);       // Hide the turret.
     removeMagazines[] = {            // CfgMagazine classes to remove.
         "magazine_classname",        // Note: For now, we remove all magazines of this class from the turret.
         ...

@@ -4141,23 +4141,6 @@
             <Chinesesimp>摧毁Tempest设备卡车以完成此任务。完全激活时，设备卡车可以抵御导弹并干扰无人机。</Chinesesimp>
             <Chinese>摧毁Tempest设备卡车以完成此任务。完全激活时，设备卡车可以抵御导弹并干扰无人机。</Chinese>
         </Key>
-        <Key ID="STR_WLT_taskDestroyOffroadReconDesc">
-            <Original>Destroy an Offroad (Recon) to complete this task. Reconnaissance vehicles are equipped with a scanner that consume fuel to reveal nearby enemies.</Original>
-            <English>Destroy an Offroad (Recon) to complete this task. Reconnaissance vehicles are equipped with a scanner that consume fuel to reveal nearby enemies.</English>
-            <Czech>Zničte vozidlo Offroad (průzkum), abyste splnili tento úkol. Vozidla pro průzkum jsou vybavena skenerem, který spotřebovává palivo a odhaluje nepřátele v okolí.</Czech>
-            <French>Détruisez un Offroad (Reconnaissance) pour accomplir cette tâche. Les véhicules de reconnaissance sont équipés d'un scanner qui consomme du carburant pour révéler les ennemis à proximité.</French>
-            <German>Zerstören Sie ein Offroad-Fahrzeug (Aufklärung), um diese Aufgabe zu erfüllen. Aufklärungsfahrzeuge sind mit einem Scanner ausgestattet, der Kraftstoff verbraucht, um nahegelegene Feinde zu enthüllen.</German>
-            <Italian>Distruggi un Offroad (Ricognizione) per completare questo compito. I veicoli da ricognizione sono dotati di uno scanner che consuma carburante per rivelare i nemici nelle vicinanze.</Italian>
-            <Polish>Zniszcz pojazd Offroad (Rozpoznanie), aby ukończyć to zadanie. Pojazdy rozpoznawcze są wyposażone w skaner, który zużywa paliwo, aby ujawnić pobliskich wrogów.</Polish>
-            <Portuguese>Destrua um Offroad (Reconhecimento) para completar esta tarefa. Os veículos de reconhecimento são equipados com um scanner que consome combustível para revelar inimigos próximos.</Portuguese>
-            <Russian>Уничтожьте Offroad (Разведка), чтобы выполнить это задание. Разведывательные транспортные средства оснащены сканером, который расходует топливо для выявления ближайших врагов.</Russian>
-            <Spanish>Destruye un Offroad (Reconocimiento) para completar esta tarea. Los vehículos de reconocimiento están equipados con un escáner que consume combustible para revelar a los enemigos cercanos.</Spanish>
-            <Turkish>Bu görevi tamamlamak için bir Offroad (Keşif) aracını yok edin. Keşif araçları, yakındaki düşmanları ortaya çıkarmak için yakıt tüketen bir tarayıcı ile donatılmıştır.</Turkish>
-            <Korean>이 작업을 완료하려면 Offroad (정찰) 차량을 파괴하세요. 정찰 차량은 연료를 소모하여 근처의 적을 드러내는 스캐너가 장착되어 있습니다.</Korean>
-            <Japanese>このタスクを完了するにはオフロード（偵察）を破壊してください。偵察車両は、近くの敵を明らかにするために燃料を消費するスキャナーを備えています。</Japanese>
-            <Chinesesimp>摧毁越野（侦察）以完成此任务。侦察车辆配备了扫描器，消耗燃料以揭示附近的敌人。</Chinesesimp>
-            <Chinese>摧毁越野（侦察）以完成此任务。侦察车辆配备了扫描器，消耗燃料以揭示附近的敌人。</Chinese>
-        </Key>
         <Key ID="STR_WLT_taskBuyTechnicalName">
             <Original>Buy Offroad (HMG)</Original>
             <English>Buy Offroad (HMG)</English>

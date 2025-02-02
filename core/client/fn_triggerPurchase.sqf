@@ -35,7 +35,7 @@ switch (_className) do {
     case "FTSquadLeader": {
         ["ftSquadLeader"] spawn SQD_fnc_client;
         private _ftNextUseVar = format ["BIS_WL_FTSLNextUse_%1", getPlayerUID player];
-        missionNamespace setVariable [_ftNextUseVar, serverTime + WL_FAST_TRAVEL_SQUAD_LEADER_RATE];
+        missionNamespace setVariable [_ftNextUseVar, serverTime + WL_FAST_TRAVEL_SQUAD_TIMER];
         ["TaskFastTravelSquad"] call WLT_fnc_taskComplete;
     };
     case "FundsTransfer": {

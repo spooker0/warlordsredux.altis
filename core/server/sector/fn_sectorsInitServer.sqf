@@ -21,11 +21,11 @@ _potBases = (_potBases select {(_x distanceSqr _firstBase) > _baseDistanceMin});
 private _secondBase = selectRandom _potBases;
 
 private _presetBase = BIS_WL_allSectors select {
-	_x getVariable ["BIS_WL_name", ""] in ["Airbase", "AAC Airfield"];
+	_x getVariable ["BIS_WL_name", ""] in ["AAC Airfield", "Kavala"];
 };
 
-_firstBase = _presetBase # 0;
-_secondBase = _presetBase # 1;
+_firstBase = _presetBase # 1;
+_secondBase = _presetBase # 0;
 
 missionNamespace setVariable ["BIS_WL_base1", _firstBase, true];
 missionNamespace setVariable ["BIS_WL_base2", _secondBase, true];
@@ -40,7 +40,11 @@ waitUntil {!isNil "BIS_WL_base1" && {!isNil "BIS_WL_base2"}};
 	_base setVariable ["BIS_WL_previousOwners", [_side], true];
 	_base setVariable ["BIS_WL_revealedBy", [_side], true];
 	_pos = (position _x) findEmptyPosition [0, 20, "FlagPole_F"];
-	_posFinal = if (count _pos == 0) then {_arr} else {_pos};
+	_posFinal = if (count _pos == 0) then {
+		position _x
+	} else {
+		_pos
+	};
 	private _flag = createVehicle ["FlagPole_F", _posFinal, [], 0,"CAN_COLLIDE"];
 	if (_side == west) then {
 		_flag setFlagTexture "\A3\Data_F\Flags\flag_NATO_CO.paa";
