@@ -7,6 +7,8 @@ private _center = _area # 0;
 private _axisA = 0;
 private _axisB = 0;
 
+private _carrierSector = objNull;
+
 switch (typeName _center) do {
 	case typeName []: {
 		_axisA = _area # 1;
@@ -31,10 +33,20 @@ switch (typeName _center) do {
 				_area = (_center getVariable "objectAreaComplete");
 				_axisA = _area # 1;
 				_axisB = _area # 2;
+
+				if (count (_center getVariable ["WL_aircraftCarrier", []]) > 0) then {
+					_carrierSector = _center;
+				};
 			}
 		};
 		_center = position _center;
 	};
+};
+
+if (!isNull _carrierSector) exitWith {
+	private _carrierInfo = _carrierSector getVariable ["WL_aircraftCarrier", []];
+	private _baseSpots = (_carrierInfo # 1) apply { getPosATL _x };
+	_baseSpots + _baseSpots + _baseSpots;
 };
 
 _rimArea = [];

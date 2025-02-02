@@ -246,6 +246,13 @@ private _fastTravelArr = [
 		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
 		localize "STR_SQUADS_fastTravelToSquadLeader"
 	], [
+		"RespawnBagFT",
+		0,
+		[],
+		"Fast Travel to Tent (Free)",
+		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
+		""
+	], [
 		"RespawnVic",
 		getMissionConfigValue ["BIS_WL_orderFTVehicleCost", 200],
 		[],
@@ -266,13 +273,6 @@ private _fastTravelArr = [
 		"Purchase Fast Travel Tent",
 		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
 		"Buy a deployable sleeping bag that respawns you at its location."
-	], [
-		"RespawnBagFT",
-		0,
-		[],
-		"Fast Travel to Tent (Free)",
-		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
-		""
 	]
 ];
 _sortedArray pushBack _fastTravelArr;

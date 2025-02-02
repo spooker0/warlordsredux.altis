@@ -42,6 +42,7 @@ private _turretOverridesForVehicle = _turretOverrides getOrDefault [_orderedClas
 	private _addMagazines = getArray (_turretOverride >> "addMagazines");
 	private _addWeapons = getArray (_turretOverride >> "addWeapons");
 	private _reloadOverride = getNumber (_turretOverride >> "reloadOverride");
+	private _hideTurret = getNumber (_turretOverride >> "hideTurret");
 
 	{
 		_asset removeMagazinesTurret [_x, _turret];
@@ -99,6 +100,10 @@ private _turretOverridesForVehicle = _turretOverrides getOrDefault [_orderedClas
 				[_unit, _weapon, _turret, _reloadTime] remoteExec ["WL2_fnc_reloadOverride", _gunner];
 			};
 		}];
+	};
+
+	if (_hideTurret != 0) then {
+		_asset animateSource ["HideTurret", 1, true];
 	};
 } forEach _turretOverridesForVehicle;
 

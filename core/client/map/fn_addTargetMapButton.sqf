@@ -31,7 +31,7 @@ private _costText = if (count _costCondition > 0) then {
         private _moneySign = [BIS_WL_playerSide] call WL2_fnc_getMoneySign;
         format [" (%1%2)", _moneySign, _costCondition # 0];
     } else {
-        "(FREE)";
+        " (FREE)";
     };
 } else {
     "";

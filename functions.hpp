@@ -33,6 +33,7 @@ class CfgFunctions {
 			file = "scripts\APS\Scripts\APS";
 			class lagProtection {};
 			class lagProtectionServer {};
+			class projectileStateUpdate {};
 			class setupProjectiles {};
 			class firedProjectile {};
 			class serverHandleAPS {};
@@ -264,6 +265,7 @@ class CfgFunctions {
 			class checkDead {};
 			class checkFastTravelRespawn {};
 			class checkFastTravelSL {};
+			class checkFastTravelSquad {};
 			class checkFunds {};
 			class checkGreenSwitch {};
 			class checkGroundVehicleDriver {};

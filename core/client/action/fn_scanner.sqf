@@ -37,14 +37,14 @@ if (_assetSide != side group player) exitWith {};
 
 private _assetPos = _asset modelToWorldVisual [0, 0, 0];
 private _assetHeight = _assetPos # 2;
-if (_assetHeight > 2000) exitWith {
+if (!_awacs && _assetHeight > 2000) exitWith {
     _asset setVariable ["WL_scannedObjects", []];
 };
 
 private _scanRadius = if (_awacs) then {
     10000;
 } else {
-    ((_assetHeight * 2) min 1000) max 100;
+    ((_assetHeight * 2) min 1000) max 150;
 };
 _asset setVariable ["WL_scanRadius", _scanRadius];
 
