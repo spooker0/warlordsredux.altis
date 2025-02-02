@@ -95,7 +95,10 @@ waitUntil {
     BIS_WL_spacePressed || BIS_WL_backspacePressed;
 };
 
-(findDisplay 46) displayRemoveEventHandler ["KeyDown", uiNamespace getVariable "BIS_WL_deployKeyHandle"];
+private _deployKeyHandle = uiNamespace getVariable ["BIS_WL_deployKeyHandle", nil];
+if !(isNil "_deployKeyHandle") then {
+    (findDisplay 46) displayRemoveEventHandler ["KeyDown", _deployKeyHandle];
+};
 uiNamespace setVariable ['BIS_WL_deployKeyHandle', nil];
 _offset set [1, _asset distance2D player];
 detach _asset;

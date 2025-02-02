@@ -32,7 +32,6 @@ addMissionEventHandler ["Map", {
 					(_x distance2D _pos) < _radius
 				};
 
-				private _squadLeaderID = ['getMySquadLeader'] call SQD_fnc_client;
 				private _selectableUnits = allUnits select {
 					!(typeOf _x in ["B_UAV_AI", "O_UAV_AI", "I_UAV_AI"]) &&
 					isNull objectParent _x &&
@@ -42,8 +41,8 @@ addMissionEventHandler ["Map", {
 					(
 						// independent units (unclaimed)
 						(side group player == independent && _x isKindOf "Man" && (_x getVariable ["BIS_WL_ownerAsset", "123"]) == "123") ||
-						// squad leader
-						(isPlayer _x && getPlayerID _x == _squadLeaderID) ||
+						// is a regular player
+						(isPlayer _x) ||
 						// my units
 						(_x getVariable ["BIS_WL_ownerAsset", "123"]) == getPlayerUID player
 					)

@@ -26,7 +26,7 @@ private _actionId = player addAction [
 
         private _previousRespawnBag = player getVariable ["WL2_respawnBag", objNull];
         if (!isNull _previousRespawnBag) then {
-            player setVariable ["WL2_respawnBag", objNull];
+            player setVariable ["WL2_respawnBag", objNull, [2, clientOwner]];
             deleteVehicle _previousRespawnBag;
         };
 
@@ -44,7 +44,7 @@ private _actionId = player addAction [
             call WL2_fnc_respawnBagAction;
         };
 
-        player setVariable ["WL2_respawnBag", _freshTent];
+        player setVariable ["WL2_respawnBag", _freshTent, [2, clientOwner]];
 
         _freshTent enableWeaponDisassembly false;
         playSoundUI ["a3\ui_f\data\sound\cfgnotifications\communicationmenuitemadded.wss"];
