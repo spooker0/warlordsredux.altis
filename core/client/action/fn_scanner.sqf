@@ -1,6 +1,6 @@
 #include "..\..\warlords_constants.inc"
 
-params ["_asset", "_actionId", "_awacs"];
+params ["_asset", "_actionId", "_awacs", "_iteration"];
 
 private _scannerOn = _asset getVariable ["WL_scannerOn", false];
 
@@ -57,6 +57,7 @@ private _relevantVehicles = if (_awacs) then {
         private _vehiclePos = _x modelToWorldVisual [0, 0, 0];
         _x isKindOf "Air" &&
         _vehiclePos # 2 > 50 &&
+        _assetHeight > _vehiclePos # 2 &&
         [_assetPos, getDir _asset, 120, _vehiclePos] call BIS_fnc_inAngleSector;
     };
     _munitions + _airVehicles
@@ -84,7 +85,13 @@ private _scannedObjects = _vehiclesInRadius select {
 } forEach _scannedObjects;
 
 if (getConnectedUAV player == _asset || vehicle player == _asset) then {
-    playSoundUI ["radarTargetLost"];
+    if (_awacs) then {
+        if (_iteration % 4 == 0) then {
+            playSoundUI ["radarTargetLost", 2, 1, true];
+        };
+    } else {
+        playSoundUI ["radarTargetLost", 2, 1, true];
+    };
 };
 
 _asset setVariable ["WL_scannedObjects", _scannedObjects];

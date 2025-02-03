@@ -97,9 +97,9 @@ if (_asset isKindOf "Man") then {
 	missionNamespace setVariable [_var, _vehicles, [2, clientOwner]];
 	0 remoteExec ["WL2_fnc_updateVehicleList", 2];
 
-	_asset setVehicleReceiveRemoteTargets true;
-	_asset setVehicleReportRemoteTargets true;
-	_asset setVehicleReportOwnPosition true;
+	[_asset, true] remoteExec ["setVehicleReceiveRemoteTargets", _asset, true];
+	[_asset, true] remoteExec ["setVehicleReportRemoteTargets", _asset, true];
+	[_asset, true] remoteExec ["setVehicleReportOwnPosition", _asset, true];
 
 	private _hasHMDMap = missionNamespace getVariable ["WL2_hasHMD", createHashMap];
 	if (_hasHMDMap getOrDefault [_assetActualType, false]) then {

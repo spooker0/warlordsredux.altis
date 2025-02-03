@@ -281,5 +281,17 @@ class CfgRemoteExec {
 		class setFuelConsumptionCoef {
 			allowedTargets = 0;
 		};
+
+		class setVehicleReceiveRemoteTargets {
+			allowedTargets = 0;
+		};
+
+		class setVehicleReportRemoteTargets {
+			allowedTargets = 0;
+		};
+
+		class setVehicleReportOwnPosition {
+			allowedTargets = 0;
+		};
 	};
 };

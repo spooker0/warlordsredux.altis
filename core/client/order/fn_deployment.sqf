@@ -31,6 +31,16 @@ if (count _camo == 0) then {
     };
 } forEach _assetAppearanceDefaults;
 
+private _turretOverrides = missionNamespace getVariable ["WL2_turretOverrides", createHashMap];
+private _turretOverridesForVehicle = _turretOverrides getOrDefault [_orderedClass, []];
+{
+	private _turretOverride = _x;
+	private _hideTurret = getNumber (_turretOverride >> "hideTurret");
+	if (_hideTurret != 0) then {
+		_asset animateSource ["HideTurret", 1, true];
+	};
+} forEach _turretOverridesForVehicle;
+
 [player, "assembly"] call WL2_fnc_hintHandle;
 
 BIS_WL_spacePressed = false;

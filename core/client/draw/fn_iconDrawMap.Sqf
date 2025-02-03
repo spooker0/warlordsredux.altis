@@ -98,10 +98,10 @@ private _scannerUnits = vehicles select {
 	[_x] call WL2_fnc_getAssetSide == _side
 };
 
-private _scale = 6.4 * worldSize / 8192 * ctrlMapScale _m;
-
 private _hasAWACSMap = missionNamespace getVariable ["WL2_hasAWACS", createHashMap];
+private _scale = 6.4 * worldSize / 8192 * ctrlMapScale _m;
 {
+	if (isNull _x) then { continue; };
 	private _assetPos = _x modelToWorldVisual [0, 0, 0];
     private _scanRadius = _x getVariable ["WL_scanRadius", 100];
     private _assetActualType = _x getVariable ["WL2_orderedClass", typeOf _x];
@@ -109,7 +109,7 @@ private _hasAWACSMap = missionNamespace getVariable ["WL2_hasAWACS", createHashM
 		private _size = _scanRadius / _scale;
 		_m drawIcon [
 			"\a3\ui_f\data\IGUI\RscCustomInfo\Sensors\Sectors\sector120_ca.paa",
-			[1, 1, 1, 1],
+			[1, 1, 1, 0.3],
 			_assetPos,
 			_size,
 			_size,
@@ -122,7 +122,7 @@ private _hasAWACSMap = missionNamespace getVariable ["WL2_hasAWACS", createHashM
 			_scanRadius,
 			0,
 			[0, 1, 1, 1],
-			"#(rgb,8,8,3)color(0,1,1,0.15)"
+			"#(rgb,1,1,1)color(0,1,1,0.15)"
 		];
 	};
 } forEach _scannerUnits;
@@ -163,8 +163,8 @@ _allScannedObjects = _allScannedObjects arrayIntersect _allScannedObjects; // el
 	];
 } forEach _allScannedObjects;
 
-_control = (findDisplay 12) displayCtrl 51;
-_draw = (ctrlMapScale _control) < 0.3;
+private _control = (findDisplay 12) displayCtrl 51;
+private _draw = (ctrlMapScale _control) < 0.3;
 {
 	_m drawIcon [
 		"\a3\Ui_F_Curator\Data\CfgMarkers\kia_ca.paa",
