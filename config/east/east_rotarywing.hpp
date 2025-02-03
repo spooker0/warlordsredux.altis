@@ -79,11 +79,6 @@ class RotaryWing {
         offset[] = {0, 10, 0};
         killReward = 300;
         rearm = 300;
-        hasHMD = 1;
-
-        allowPylonMagazines[] = {
-            "PylonMissile_Missile_KH58_INT_x1"
-        };
     }; // "PO-30 Orca"
 
     class O_Heli_Attack_02_dynamicLoadout_F {

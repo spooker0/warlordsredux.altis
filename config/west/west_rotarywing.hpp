@@ -95,7 +95,6 @@ class RotaryWing {
         hasHMD = 1;
 
         allowPylonMagazines[] = {
-            "PylonRack_Missile_HARM_x1",
             "PylonRack_3Rnd_LG_scalpel"
         };
 
@@ -108,7 +107,7 @@ class RotaryWing {
                 "M134_minigun"
             };
             addMagazines[] = {
-                "240Rnd_CMFlare_Chaff_Magazine",
+                "168Rnd_CMFlare_Chaff_Magazine",
                 "PylonWeapon_300Rnd_20mm_shells",
                 "PylonWeapon_300Rnd_20mm_shells"
             };
