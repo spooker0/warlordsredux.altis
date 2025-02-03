@@ -30,7 +30,7 @@ private _actionID = _asset addAction [
     params ["_asset", "_actionID"];
     private _assetTypeName = [_asset] call WL2_fnc_getAssetTypeName;
     while { alive _asset } do {
-        private _repairCooldown = ((_asset getVariable "BIS_WL_nextRepair") - serverTime) max 0;
+        private _repairCooldown = ((_asset getVariable ["BIS_WL_nextRepair", 0]) - serverTime) max 0;
         private _actionText = if (_repairCooldown == 0) then {
             format ["<t color = '#4bff58'>%1 %2</t>", localize "STR_repair", _assetTypeName];
         } else {

@@ -24,7 +24,7 @@ private _actionId = _asset addAction [
         } else {
 			[_asset, 1] remoteExec ["setFuelConsumptionCoef", _asset];
         };
-		[_asset, _actionId, _awacs] call WL2_fnc_scanner;
+		[_asset, _actionId, _awacs, 0] call WL2_fnc_scanner;
 	},
 	[_awacs],
 	99,
@@ -38,12 +38,14 @@ private _actionId = _asset addAction [
 
 [_asset, _actionId, _awacs] spawn {
 	params ["_asset", "_actionId", "_awacs"];
+	private _iteration = 0;
 	while { alive _asset } do {
-        [_asset, _actionId, _awacs] call WL2_fnc_scanner;
+        [_asset, _actionId, _awacs, _iteration] call WL2_fnc_scanner;
 		if (_awacs) then {
 			sleep 0.5;
 		} else {
 			sleep 2;
 		};
+		_iteration = _iteration + 1;
 	};
 };

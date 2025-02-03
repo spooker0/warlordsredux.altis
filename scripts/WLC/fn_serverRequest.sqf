@@ -14,8 +14,12 @@ private _totalCost = 0;
     private _customizationMap = missionNamespace getVariable [format ["WLC_%1_%2", _type, _side], createHashMap];
     private _customization = _customizationMap getOrDefault [_customizationData, createHashMap];
 
-    private _cost = _customization getOrDefault ["cost", 0];
     private _item = _customization getOrDefault ["item", ""];
+    private _cost = if (_item in (_lastLoadout # 0)) then {
+        0;
+    } else {
+        _customization getOrDefault ["cost", 0];
+    };
     private _level = _customization getOrDefault ["level", 0];
     private _playerLevel = ["getLevel", _sender] call WLC_fnc_getLevelInfo;
 
@@ -35,12 +39,49 @@ private _totalCost = 0;
         private _magazines = _custom getOrDefault ["magazines", []];
         _magazines append (_loadout getOrDefault ["magazines", []]);
         _custom set ["magazines", _magazines];
-        _cost = _cost + (_loadout getOrDefault ["cost", 0]);
-        _level = _level max (_loadout getOrDefault ["level", 0]);
-    };
 
-    if (_item in (_lastLoadout # 0)) then {
-        _cost = 0;
+        private _loadoutCost = _loadout getOrDefault ["cost", 0];
+        if (_loadoutCost > 0 && count _magazines > 0) then {
+            private _lastMagazines = [];
+            if (count (_lastLoadout # 1) >= 5) then {
+                private _launcherAmmo = _lastLoadout # 1 # 4;
+                if (count _launcherAmmo > 0) then {
+                    _lastMagazines pushBack (_launcherAmmo # 0)
+                };
+            };
+            {
+                private _storage = _lastLoadout # _x;
+                if (count _storage < 2) then {
+                    continue;
+                };
+                {
+                    private _item = _x # 0;
+                    private _amount = _x # 1;
+                    for "_i" from 1 to _amount do {
+                        _lastMagazines pushBack _item;
+                    };
+                } forEach (_storage # 1);
+            } forEach [3, 4, 5];
+
+            private _addMagazines = [];
+            private _magazinesToAdd = +_magazines;
+            {
+                private _magazine = _x;
+                private _findIndex = _lastMagazines findIf {
+                    _x == _magazine
+                };
+                if (_findIndex == -1) then {
+                    _addMagazines pushBack _magazine;
+                } else {
+                    _lastMagazines deleteAt _findIndex;
+                };
+            } forEach _magazinesToAdd;
+            private _addedMagazines = count _addMagazines / count _magazines;
+            _loadoutCost = round (_loadoutCost * _addedMagazines);
+        };
+
+        _cost = _cost + _loadoutCost;
+        _level = _level max (_loadout getOrDefault ["level", 0]);
     };
 
     if (_level <= _playerLevel && _cost >= 0 && playerFunds >= _cost && _item != "") then {
