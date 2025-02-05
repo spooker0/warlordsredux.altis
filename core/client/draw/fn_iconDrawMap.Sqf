@@ -95,7 +95,7 @@ private _scannerUnits = vehicles select {
 	alive _x &&
 	isEngineOn _x &&
 	((_x getVariable ["WL_scannerOn", false]) || (_x getVariable ["WL_awacsOn", false])) &&
-	[_x] call WL2_fnc_getAssetSide == _side
+	local _x
 };
 
 private _hasAWACSMap = missionNamespace getVariable ["WL2_hasAWACS", createHashMap];
