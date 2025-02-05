@@ -20,6 +20,10 @@ class CfgRemoteExec {
 			allowedTargets = 0;
 		};
 
+		class WL2_fnc_lagMessageHandler {
+			allowedTargets = 2;
+		};
+
 		class WL2_fnc_claimAction {
 			allowedTargets = 1;
 		};

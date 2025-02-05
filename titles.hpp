@@ -1,6 +1,31 @@
 class RscTitles {
 	#include "scripts\GF_Earplugs\GF_Earplugs_HPP.hpp"
 
+	class RscLagMessageDisplay {
+		idd = -1;
+		movingEnable = 0;
+		duration = 1e+011;
+		name = "RscLagMessageDisplay";
+		onLoad = "uiNamespace setVariable ['RscLagMessageDisplay', _this select 0];";
+		class controls {
+			class RscLagMessageDisplayText {
+				idc = 10000;
+				type = CT_STATIC;
+				style = ST_MULTI;
+				x = safeZoneX;
+				y = safeZoneY;
+				w = safeZoneW;
+				h = safeZoneH;
+				sizeEx = 0.03;
+				colorBackground[] = {0, 0, 0, 0};
+				colorText[] = {1, 1, 1, 1};
+				lineSpacing = 1;
+				font = "PuristaMedium";
+				text = "";
+			};
+		};
+	};
+
 	class RscJammingIndicator {
 		idd = -1;
 		movingEnable = 0;

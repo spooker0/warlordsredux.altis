@@ -105,6 +105,7 @@ class CfgFunctions {
 			class hintHandle {};
 			class initClient {};
 			class interceptAction {};
+			class lagMessageDisplay {};
 			class mineLimitHint {};
 			class onPause {};
 			class pingFix {};
@@ -345,6 +346,7 @@ class CfgFunctions {
 			class incomePayoff {};
 			class initServer {};
 			class killRewardHandle {};
+			class lagMessageHandler {};
 			class processRunways {};
 			class selectTarget {};
 			class serverEHs {};

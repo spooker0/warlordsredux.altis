@@ -133,3 +133,15 @@ addMissionEventHandler ["EntityRespawned", {
 		removeAllActions _oldEntity;
 	};
 }];
+
+addMissionEventHandler ["HandleChatMessage", {
+	params ["_channel", "_owner", "_from", "_text"];
+	_text = toLower _text;
+	_list = getArray (missionConfigFile >> "adminFilter");
+
+	if (_owner == clientOwner) then {
+		if (_text == "!lag") then {
+			[player] remoteExec ["WL2_fnc_lagMessageHandler", 2];
+		};
+	};
+}];

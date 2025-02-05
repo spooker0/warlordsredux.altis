@@ -42,7 +42,7 @@ addMissionEventHandler ["Map", {
 						// independent units (unclaimed)
 						(side group player == independent && _x isKindOf "Man" && (_x getVariable ["BIS_WL_ownerAsset", "123"]) == "123") ||
 						// is a regular player
-						(isPlayer _x) ||
+						(isPlayer _x && (side group _x == side group player)) ||
 						// my units
 						(_x getVariable ["BIS_WL_ownerAsset", "123"]) == getPlayerUID player
 					)
