@@ -1,20 +1,13 @@
 #include "constants.inc"
 
-params ["_uid", "_score"];
+params ["_score"];
 
 if (!WLC_ENABLED) exitWith {};
-if !(isServer) exitWith {};
 
-private _player = ((call BIS_fnc_listPlayers) select {
-    getPlayerUID _x == _uid
-}) # 0;
-if (isNil "_player") exitWith {};
-
-private _previousLevel = ["getLevel", _player] call WLC_fnc_getLevelInfo;
-WLC_Scores set [_uid, _score];
-publicVariable "WLC_Scores";
-private _newLevel = ["getLevel", _player] call WLC_fnc_getLevelInfo;
+private _previousLevel = ["getLevel"] call WLC_fnc_getLevelInfo;
+profileNamespace setVariable ["WLC_Score", _score];
+private _newLevel = ["getLevel"] call WLC_fnc_getLevelInfo;
 
 if (_newLevel > _previousLevel) then {
-    [_newLevel] remoteExec ["WLC_fnc_levelUp", _player];
+    [_newLevel] spawn WLC_fnc_levelUp;
 };

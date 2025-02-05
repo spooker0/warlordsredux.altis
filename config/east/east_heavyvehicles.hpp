@@ -47,7 +47,7 @@ class HeavyVehicles {
         requirements[] = {};
         rearm = 500;
         killReward = 300;
-        capValue = 3;
+        capValue = 1;
         aps = 2;
 
         hasHMD = 1;

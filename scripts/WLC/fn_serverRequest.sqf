@@ -1,6 +1,8 @@
 #include "constants.inc"
 
-params ["_data", "_side", "_sender", "_lastLoadout"];
+params ["_data", "_side", "_lastLoadout"];
+
+private _playerFunds = (missionNamespace getVariable "fundsDatabaseClients") get (getPlayerUID player);
 
 private _totalCost = 0;
 {
@@ -21,7 +23,7 @@ private _totalCost = 0;
         _customization getOrDefault ["cost", 0];
     };
     private _level = _customization getOrDefault ["level", 0];
-    private _playerLevel = ["getLevel", _sender] call WLC_fnc_getLevelInfo;
+    private _playerLevel = ["getLevel"] call WLC_fnc_getLevelInfo;
 
     private _custom = +_customization;
     if (_type in ["Primary", "Secondary", "Launcher"]) then {
@@ -84,11 +86,10 @@ private _totalCost = 0;
         _level = _level max (_loadout getOrDefault ["level", 0]);
     };
 
-    if (_level <= _playerLevel && _cost >= 0 && playerFunds >= _cost && _item != "") then {
-        private _uid = getPlayerUID _sender;
-        (-_cost) call WL2_fnc_fundsDatabaseWrite;
+    if (_level <= _playerLevel && _cost >= 0 && _playerFunds >= _cost && _item != "") then {
+        [player, "equip", _cost] remoteExec ["WL2_fnc_handleClientRequest", 2];
         _totalCost = _totalCost + _cost;
-        [_type, _custom, _cost] remoteExec ["WLC_fnc_clientEquip", _sender];
+        [_type, _custom, _cost] call WLC_fnc_clientEquip;
     };
 } forEach _data;
 
@@ -98,4 +99,4 @@ private _message = if (_totalCost > 0) then {
 } else {
      "Equipment and customizations applied for free.";
 };
-[_message] remoteExec ["systemChat", _sender];
+systemChat _message;

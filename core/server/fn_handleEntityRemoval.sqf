@@ -9,11 +9,10 @@ private _children = _unit getVariable ["WL2_children", []];
     deleteVehicle _x;
 } forEach _children;
 
-private _lastHitter = _unit getVariable ["WL_lastHitter", objNull];
-private _responsiblePlayer = if (isNull _lastHitter) then {
-    [_killer, _instigator] call WL2_fnc_handleInstigator;
-} else {
-    _lastHitter
+private _responsiblePlayer = [_killer, _instigator] call WL2_fnc_handleInstigator;
+if (isNull _responsiblePlayer) then {
+    private _lastHitter = _unit getVariable ["WL_lastHitter", objNull];
+    _responsiblePlayer = _lastHitter;
 };
 
 if (isPlayer _unit && _unit isKindOf "Man" && _unit != _responsiblePlayer) then {
@@ -33,7 +32,7 @@ if (isPlayer _unit && _unit isKindOf "Man" && _unit != _responsiblePlayer) then 
     [_killMessage] remoteExec ["systemChat", 0];
 };
 
-if !(isNull _responsiblePlayer) then {
+if (!isNull _responsiblePlayer && { isPlayer _responsiblePlayer }) then {
     _unit setVariable ["WL_lastHitter", objNull, true];
 
     // must be sync calls, type info may disappear in next frame

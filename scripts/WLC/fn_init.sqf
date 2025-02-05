@@ -71,48 +71,6 @@ private _customizationConfig = missionConfigFile >> "CfgWLCCustomization";
 } forEach [west, east];
 
 if (isServer) then {
-    private _scores = profileNamespace getVariable ["WLC_Scores", createHashMap];
-    if (count _scores == 0) then {
-        // status: 0 = unknown, 1 = initializing, 2 = initialized
-        missionNamespace setVariable ["WLC_status", 1, true];
-        WLC_Scores = createHashMap;
-    } else {
-        missionNamespace setVariable ["WLC_status", 2, true];
-        WLC_Scores = profileNamespace getVariable ["WLC_Scores", createHashMap];
-    };
-    publicVariable "WLC_Scores";
-
-    0 spawn {
-        while { !BIS_WL_missionEnd } do {
-            profileNamespace setVariable ["WLC_Scores", WLC_Scores];
-            saveProfileNamespace;
-            sleep 60;
-        };
-    };
-} else {
-    0 spawn {
-        waitUntil {
-            !isNull player && player == player
-        };
-        private _status = missionNamespace getVariable ["WLC_status", 0];
-        waitUntil {
-            sleep 1;
-            _status = missionNamespace getVariable ["WLC_status", 0];
-            _status != 0;
-        };
-        if (_status == 1) then {
-            private _myScore = profileNamespace getVariable ["WLC_ScoreBackup", 0];
-            private _uid = getPlayerUID player;
-            [_uid, _myScore] remoteExec ["WLC_fnc_setScore", 2];
-        };
-    };
-
-    0 spawn {
-        while { !BIS_WL_missionEnd } do {
-            private _uid = getPlayerUID player;
-            private _myScore = WLC_Scores getOrDefault [_uid, 0];
-            profileNamespace setVariable ["WLC_ScoreBackup", _myScore];
-            sleep 5;
-        };
-    };
+    // Clean up last patch
+    profileNamespace setVariable ["WLC_Scores", createHashMap];
 };

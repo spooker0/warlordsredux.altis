@@ -69,7 +69,7 @@ private _getItemTooltip = {
 };
 private _customizationData = _control lbData _lbCurSel;
 private _selectedValue = _control lbValue _lbCurSel;
-private _playerLevel = ["getLevel", player] call WLC_fnc_getLevelInfo;
+private _playerLevel = ["getLevel"] call WLC_fnc_getLevelInfo;
 if (_selectedValue <= _playerLevel) then {
     profileNamespace setVariable [format ["WLC_%1", _type], _customizationData];
 };
