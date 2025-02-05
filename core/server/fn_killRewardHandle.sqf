@@ -57,14 +57,6 @@ _killReward call WL2_fnc_fundsDatabaseWrite;
 
 ["earnPoints", [_uid, _killReward]] call SQD_fnc_server;
 
-// WLC
-private _newScore = (WLC_Scores getOrDefault [_uid, 0]) + _killReward;
-if (typeName _newScore == "scalar") then {
-	[_uid, _newScore] call WLC_fnc_setScore;
-} else {
-	[_uid, _killReward] call WLC_fnc_setScore;
-};
-
 // Vehicle crew reward
 private _reward = round (_killReward / 4);
 private _vehicle = objectParent _responsibleLeader;
@@ -77,12 +69,4 @@ private _crew = (crew _vehicle) select {
 	[_unit, _reward] remoteExec ["WL2_fnc_killRewardClient", _x];
 
 	["earnPoints", [_uid, _reward]] call SQD_fnc_server;
-
-	// WLC
-	private _newScore = (WLC_Scores getOrDefault [_uid, 0]) + _reward;
-	if (typeName _newScore == "scalar") then {
-		[_uid, _newScore] call WLC_fnc_setScore;
-	} else {
-		[_uid, _reward] call WLC_fnc_setScore;
-	};
 } forEach _crew;

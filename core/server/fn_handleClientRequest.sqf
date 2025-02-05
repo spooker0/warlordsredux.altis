@@ -73,6 +73,11 @@ if (_action == "resetVehicle") exitWith {
 	};
 };
 
+if (_action == "equip") exitWith {
+	private _cost = _param1 max 0;
+	(-_cost) call WL2_fnc_fundsDatabaseWrite;
+};
+
 if (_action == "lastLoadout") exitWith {
 	_cost = (getMissionConfigValue ["BIS_WL_lastLoadoutCost", 100]);
 	_hasFunds = (playerFunds >= _cost);

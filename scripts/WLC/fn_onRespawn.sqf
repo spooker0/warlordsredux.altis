@@ -19,4 +19,4 @@ private _data = createHashMap;
     _data set [_type + "Ammo", _ammoData];
 } forEach ["Primary", "Secondary", "Launcher"];
 
-[_data, _side, player, BIS_WL_lastLoadout] remoteExec ["WLC_fnc_serverRequest", 2];
+[_data, _side, BIS_WL_lastLoadout] call WLC_fnc_serverRequest;
