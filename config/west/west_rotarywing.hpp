@@ -84,7 +84,7 @@ class RotaryWing {
         name = "AH-9 Pawnee Block II";
         description = "AH-9 Pawnee Block II is a variant of the AH-9 Pawnee with advanced avionics.";
         spawn = "B_Heli_Light_01_dynamicLoadout_F";
-        cost = 5500;
+        cost = 4000;
         variant = 1;
         requirements[] = {"H"};
         textures[] = {
