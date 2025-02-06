@@ -119,7 +119,7 @@ class RotaryWing {
     };
 
     class B_Heli_light_03_dynamicLoadout_F {
-        cost = 6000;
+        cost = 5000;
         name = "WY-55 Hellcat";
         description = "WY-55 Hellcat is a light attack helicopter.";
         spawn = "I_Heli_light_03_dynamicLoadout_F";

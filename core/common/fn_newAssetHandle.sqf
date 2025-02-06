@@ -301,13 +301,25 @@ if (_asset isKindOf "Man") then {
 		[_asset] call WL2_fnc_uavConnectRefresh;
 	};
 
-	private _notLockableVehicles = createHashMapFromArray [
+	private _respawnVehicles = createHashMapFromArray [
 		["B_Truck_01_medical_F", true],
 		["O_Truck_03_medical_F", true],
 		["Land_Pod_Heli_Transport_04_medevac_F", true],
 		["B_Slingload_01_Medevac_F", true]
 	];
-	if !(_notLockableVehicles getOrDefault [typeOf _asset, false]) then {
+	if (_respawnVehicles getOrDefault [typeOf _asset, false]) then {
+		[_asset] spawn {
+			params ["_asset"];
+			while { alive _asset } do {
+				private _assetPos = getPosASL _asset;
+				private _altitude = _assetPos # 2;
+				if (_altitude < 0 && surfaceIsWater _assetPos) then {
+					deleteVehicle _asset;
+				};
+				sleep 5;
+			};
+		};
+	} else {
 		if (_asset isKindOf "ReammoBox_F") then {
 			_asset setVariable ["WL2_accessControl", 2, true];
 		} else {

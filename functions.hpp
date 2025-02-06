@@ -76,6 +76,14 @@ class CfgFunctions {
 			class closeReportMenu {};
 		};
 	};
+	class POLL {
+		class Default {
+			file = "scripts\Poll";
+			class chatCommand {};
+			class openPoll {};
+			class vote {};
+		};
+	};
 	class SQD {
 		class Default {
 			file = "scripts\Squads";

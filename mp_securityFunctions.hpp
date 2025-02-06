@@ -172,6 +172,14 @@ class CfgRemoteExec {
 			allowedTargets = 2;
 		};
 
+		class POLL_fnc_openPoll {
+			allowedTargets = 0;
+		};
+
+		class POLL_fnc_vote {
+			allowedTargets = 0;
+		};
+
 		//Don't touch
 		class BIS_fnc_effectKilledAirDestruction {allowedTargets = 0; jip = 0;};
 		class BIS_fnc_effectKilledSecondaries {allowedTargets = 0; jip = 0;};
