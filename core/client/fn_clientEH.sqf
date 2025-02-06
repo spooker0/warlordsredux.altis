@@ -137,7 +137,6 @@ addMissionEventHandler ["EntityRespawned", {
 addMissionEventHandler ["HandleChatMessage", {
 	params ["_channel", "_owner", "_from", "_text"];
 	_text = toLower _text;
-	_list = getArray (missionConfigFile >> "adminFilter");
 
 	if (_owner == clientOwner) then {
 		if (_text == "!lag") then {
@@ -145,3 +144,5 @@ addMissionEventHandler ["HandleChatMessage", {
 		};
 	};
 }];
+
+call POLL_fnc_chatCommand;

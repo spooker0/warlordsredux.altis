@@ -53,6 +53,15 @@ class HeavyVehicles {
         aps = 2;
     };
 
+    class B_APC_Wheeled_01_cannon_F {
+        cost = 2700;
+        requirements[] = {};
+        rearm = 500;
+        killReward = 300;
+        capValue = 3;
+        aps = 2;
+    }; // "AMV-7 Marshall"
+
     class B_APC_Wheeled_01_recon_F {
         name = "AMV-7 Marshall (Recon)";
         description = "AMV-7 Marshall (Recon) is a variant of the AMV-7 Marshall armed with a powerful scanner.";
@@ -163,15 +172,6 @@ class HeavyVehicles {
     //         };
     //     };
     // };
-
-    class B_APC_Wheeled_01_cannon_F {
-        cost = 2900;
-        requirements[] = {};
-        rearm = 500;
-        killReward = 300;
-        capValue = 3;
-        aps = 2;
-    }; // "AMV-7 Marshall"
 
     class B_APC_Wheeled_01_cannon_up_F {
         name = "AMV-7 Marshall UP";
