@@ -58,6 +58,13 @@ switch (_fastTravelMode) do {
             _destination = getPosATL _respawnBag;
         };
 	};
+	case 5: {
+		private _sectorHQ = BIS_WL_targetSector getVariable ["WL_sectorHQ", objNull];
+		private _posArr = _sectorHQ buildingPos -1;
+		if (count _posArr > 0) then {
+			_destination = AGLtoASL (selectRandom _posArr);
+		};
+	};
 };
 
 private _tagAlong = (units player) select {
@@ -142,6 +149,13 @@ switch (_fastTravelMode) do {
 			};
             player setVariable ["WL2_respawnBag", objNull, [2, clientOwner]];
         };
+	};
+	case 5: {
+		{
+			_x setPosASL _destination;
+		} forEach _tagAlong;
+
+		player setPosASL _destination;
 	};
 };
 

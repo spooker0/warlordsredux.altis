@@ -35,4 +35,16 @@ switch (_conditionName) do {
         private _areInSquad = ["areInSquad", [getPlayerID _target, getPlayerID player]] call SQD_fnc_client;
         isPlayer _target && _areInSquad;
     };
+    case "fastTravelSectorHQ": {
+        private _findIsSectorHQ = (BIS_WL_sectorsArray # 2) select {
+            (_x getVariable ["WL_sectorHQ", objNull]) == _target
+        };
+        count _findIsSectorHQ > 0;
+    };
+    case "fastTravelSectorHQTarget": {
+        private _eligibleSectors = (BIS_WL_sectorsArray # 2) select {
+            !isNull (_x getVariable ["WL_sectorHQ", objNull])
+        };
+        _target in _eligibleSectors;
+    };
 };

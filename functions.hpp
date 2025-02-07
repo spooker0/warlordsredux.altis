@@ -285,6 +285,7 @@ class CfgFunctions {
 			class checkIsOrdering {};
 			class checkLastLoadout {};
 			class checkNearbyEnemies {};
+			class checkNoSectorHQ {};
 			class checkParadropCooldown {};
 			class checkPlayerInVehicle {};
 			class checkRequirements {};

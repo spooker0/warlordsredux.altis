@@ -220,6 +220,19 @@ if (_ret) then {
 				[WL2_fnc_checkTent]
 			]
 		};
+		case "BuySectorHQ": {
+			[
+				[WL2_fnc_checkPlayerInVehicle],
+				[WL2_fnc_checkNearbyEnemies],
+				[WL2_fnc_checkNoSectorHQ]
+			]
+		};
+		case "SectorHQFT": {
+			[
+				[WL2_fnc_checkPlayerInVehicle],
+				[WL2_fnc_checkNearbyEnemies]
+			]
+		};
 		case "ResetVehicle": {
 			[
 				[WL2_fnc_checkResetVehicle],
