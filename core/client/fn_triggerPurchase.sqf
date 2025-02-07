@@ -38,6 +38,38 @@ switch (_className) do {
         missionNamespace setVariable [_ftNextUseVar, serverTime + WL_FAST_TRAVEL_SQUAD_TIMER];
         ["TaskFastTravelSquad"] call WLT_fnc_taskComplete;
     };
+    case "BuySectorHQ": {
+        private _findCurrentSector = (BIS_WL_sectorsArray # 0) select {
+            player inArea (_x getVariable "objectAreaComplete")
+        };
+        private _currentSector = _findCurrentSector # 0;
+        private _sectorBuilding = nearestBuilding (getPosASL player);
+        _sectorBuilding allowDamage false;
+
+        private _sectorName = _currentSector getVariable ["BIS_WL_name", "Sector"];
+        private _markerName = format ["WL_sectorHQ_%1", _sectorName];
+        private _markerTextName = format ["WL_sectorHQText_%1", _sectorName];
+
+        private _sectorHQRadius = (boundingBoxReal _sectorBuilding) # 2;
+
+        private _sectorHQMarker = createMarkerLocal [_markerName, _sectorBuilding];
+        _sectorHQMarker setMarkerShapeLocal "ELLIPSE";
+        _sectorHQMarker setMarkerSizeLocal [_sectorHQRadius, _sectorHQRadius];
+        _sectorHQMarker setMarkerColorLocal "colorCivilian";
+        _sectorHQMarker setMarkerAlpha 0.3;
+
+        private _sectorHQTextMarker = createMarkerLocal [_markerTextName, _sectorBuilding];
+        _sectorHQTextMarker setMarkerShapeLocal "ICON";
+        _sectorHQTextMarker setMarkerTypeLocal "loc_Ruin";
+        _sectorHQTextMarker setMarkerColorLocal "colorCivilian";
+        _sectorHQTextMarker setMarkerText "HQ";
+
+        _currentSector setVariable ["WL_sectorHQ", _sectorBuilding, true];
+        _currentSector setVariable ["WL_sectorHQMarker", _sectorHQMarker];
+    };
+    case "SectorHQFT": {
+        5 spawn WL2_fnc_orderFastTravel;
+    };
     case "FundsTransfer": {
         call WL2_fnc_orderFundsTransfer;
         [player, "fundsTransferBill"] remoteExec ["WL2_fnc_handleClientRequest", 2]

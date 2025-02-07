@@ -204,6 +204,27 @@ private _fastTravelSquadmateExecute = {
     ]
 ] call WL2_fnc_addTargetMapButton;
 
+// Fast Travel Sector HQ
+private _fastTravelSectorHQExecute = {
+    params ["_asset"];
+    private _findSector = (BIS_WL_sectorsArray # 2) select {
+        (_x getVariable ["WL_sectorHQ", objNull]) == _asset
+    };
+    BIS_WL_targetSector = (_findSector # 0);
+    [5, ""] spawn WL2_fnc_executeFastTravel;
+};
+[
+    "FAST TRAVEL SECTOR HQ",
+    _fastTravelSectorHQExecute,
+    true,
+    "fastTravelSectorHQ",
+    [
+        0,
+        "SectorHQFT",
+        "Fast Travel"
+    ]
+] call WL2_fnc_addTargetMapButton;
+
 [_dialog, _offsetX, _offsetY, _menuButtons] spawn {
     params ["_dialog", "_originalMouseX", "_originalMouseY", "_menuButtons"];
     private _keepDialog = true;

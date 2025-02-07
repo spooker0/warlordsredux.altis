@@ -46,6 +46,13 @@ switch (BIS_WL_currentSelection) do {
         BIS_WL_selection_showLinks = false;
         BIS_WL_selection_dimSectors = true;
     };
+    case WL_ID_SELECTION_FAST_TRAVEL_HQ: {
+        BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 2) select {
+            !isNull (_x getVariable ["WL_sectorHQ", objNull])
+        };
+        BIS_WL_selection_showLinks = false;
+        BIS_WL_selection_dimSectors = true;
+    };
     case WL_ID_SELECTION_SCAN: {
         private _allScannableSectors = BIS_WL_sectorsArray # 3;
         private _lastScanEligible = serverTime - (getMissionConfigValue ["BIS_WL_scanCooldown", 300]);

@@ -253,6 +253,13 @@ private _fastTravelArr = [
 		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
 		""
 	], [
+		"SectorHQFT",
+		0,
+		[],
+		"Fast Travel to Sector HQ",
+		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
+		""
+	], [
 		"RespawnVic",
 		getMissionConfigValue ["BIS_WL_orderFTVehicleCost", 200],
 		[],
@@ -273,8 +280,20 @@ private _fastTravelArr = [
 		"Purchase Fast Travel Tent",
 		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
 		"Buy a deployable sleeping bag that respawns you at its location."
+	], [
+		"BuySectorHQ",
+		3000,
+		[],
+		"Purchase Sector HQ",
+		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
+		""
 	]
 ];
+if (!WL_SECTOR_HQ_ENABLE) then {
+	_fastTravelArr = _fastTravelArr select {
+		!(_x # 0 in ["SectorHQFT", "BuySectorHQ"])
+	};
+};
 _sortedArray pushBack _fastTravelArr;
 
 private _strategyArr = [
