@@ -78,6 +78,14 @@ if (_action == "equip") exitWith {
 	(-_cost) call WL2_fnc_fundsDatabaseWrite;
 };
 
+if (_action == "buySectorHQ") exitWith {
+	private _cost = 3000;
+	private _hasFunds = playerFunds >= _cost;
+	if (_hasFunds) then {
+		(-_cost) call WL2_fnc_fundsDatabaseWrite;
+	};
+};
+
 if (_action == "lastLoadout") exitWith {
 	_cost = (getMissionConfigValue ["BIS_WL_lastLoadoutCost", 100]);
 	_hasFunds = (playerFunds >= _cost);

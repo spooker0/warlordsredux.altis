@@ -66,6 +66,8 @@ switch (_className) do {
 
         _currentSector setVariable ["WL_sectorHQ", _sectorBuilding, true];
         _currentSector setVariable ["WL_sectorHQMarker", _sectorHQMarker];
+
+        [player, "buySectorHQ"] remoteExec ["WL2_fnc_handleClientRequest", 2];
     };
     case "SectorHQFT": {
         5 spawn WL2_fnc_orderFastTravel;
