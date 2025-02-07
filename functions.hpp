@@ -260,6 +260,7 @@ class CfgFunctions {
 			class orderLastLoadout {};
 			class orderNaval {};
 			class orderSavedLoadout {};
+			class orderSectorHQ {};
 			class orderSectorScan {};
 			class orderVehicle {};
 			class requestPurchase {};
