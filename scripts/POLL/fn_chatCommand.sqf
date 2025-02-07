@@ -13,13 +13,13 @@ addMissionEventHandler ["HandleChatMessage", {
     if (_owner != clientOwner) exitWith {};
 
     {
-        private _existingQuestion = missionNamespace getVariable ["POLL_question", ""];
-        if (_existingQuestion != "") exitWith {
-            private _message = format ["Can't change options when a poll is already active: %1", _existingQuestion];
-            systemChat _message;
-        };
-
         if ([_x, _text, false] call BIS_fnc_inString) then {
+            private _existingQuestion = missionNamespace getVariable ["POLL_question", ""];
+            if (_existingQuestion != "") exitWith {
+                private _message = format ["Can't change options when a poll is already active: %1", _existingQuestion];
+                systemChat _message;
+            };
+
             missionNamespace setVariable ["POLL_option" + str (_forEachIndex + 1), _text regexReplace [_x, ""], [2, clientOwner]];
         };
     } forEach [

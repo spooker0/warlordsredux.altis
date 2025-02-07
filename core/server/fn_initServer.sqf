@@ -59,14 +59,14 @@ call WL2_fnc_processRunways;
 0 spawn WL2_fnc_cleanupCarrier;
 
 0 spawn {
-	while {!BIS_WL_missionEnd} do {
+	while { !BIS_WL_missionEnd } do {
 		if (dayTime >= 18 || dayTime <= 6) then {
 			setTimeMultiplier 60;
 		} else {
 			setTimeMultiplier 1;
 		};
 
-		sleep 60;
+		uiSleep 60;
 	};
 };
 

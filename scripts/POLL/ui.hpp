@@ -1,12 +1,32 @@
 #include "constants.inc"
 
-class RscPollOption: RscButtonMRTM {
+class RscPollOption: RscShortcutButtonMRTM {
+    animTextureNormal = "#(argb,8,8,3)color(1,1,1,1)";
+	animTextureDisabled = "#(argb,8,8,3)color(1,1,1,1)";
+	animTextureOver = "#(argb,8,8,3)color(1,1,1,1)";
+	animTextureFocused = "#(argb,8,8,3)color(1,1,1,1)";
+	animTexturePressed = "#(argb,8,8,3)color(1,1,1,1)";
+	animTextureDefault = "#(argb,8,8,3)color(1,1,1,1)";
+	colorBackground[] = {0,0,0,0.8};
+	colorBackgroundFocused[] = {1,1,1,1};
+	colorBackground2[] = {0.75,0.75,0.75,1};
+	color[] = {1,1,1,1};
+	colorFocused[] = {0,0,0,1};
+	color2[] = {0,0,0,1};
+	colorText[] = {1,1,1,1};
+	colorDisabled[] = {1,1,1,0.25};
+
     sizeEx = 0.05;
-    colorBackground[] = {1, 1, 1, 0.2};
     w = 0.38;
-    h = 0.33;
+    h = 0.18;
     font = "PuristaMedium";
-    style = ST_CENTER + ST_MULTI;
+
+    class Attributes {
+		font = "PuristaLight";
+		color = "#E5E5E5";
+		align = "center";
+		shadow = "false";
+	};
 };
 
 class POLL_MenuUI {
@@ -178,14 +198,14 @@ class POLL_MenuUI {
         class POLL_Option3: RscPollOption {
             idc = POLL_OPTION_3;
             x = 0.1;
-            y = 0.6;
+            y = 0.45;
             text = "Option 3";
         };
 
         class POLL_Option4: RscPollOption {
             idc = POLL_OPTION_4;
             x = 0.5;
-            y = 0.6;
+            y = 0.45;
             text = "Option 4";
         };
     };
