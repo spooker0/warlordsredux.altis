@@ -233,7 +233,7 @@ class HeavyVehicles {
                 "40Rnd_105mm_APFSDS_T_Red"
             };
             addWeapons[] = {
-                "cannon_105mm_VTOL_01"
+                "cannon_105mm"
             };
         };
     };

@@ -27,7 +27,7 @@ private _minBound = _buildingBounds # 0;
 private _maxBound = _buildingBounds # 1;
 private _buildingArea = (_maxBound # 0 - _minBound # 0) * (_maxBound # 1 - _minBound # 1);
 if (_buildingArea < 100) exitWith {
-    [false, "The building you are nearest is too small to be a Sector HQ."];
+    [false, "The building you are nearest to is too small to be a Sector HQ."];
 };
 
 [true, ""];
