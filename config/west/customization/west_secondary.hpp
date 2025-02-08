@@ -171,10 +171,24 @@ class Secondary {
         cost = 50;
         magazines[] = {};
 
-        class Antenna: WLCAttachment {
-            name = "Antenna";
+        class LongRangeAntenna: WLCAttachment {
+            name = "SD Military Antenna";
+            attachments[] = {
+                "muzzle_antenna_01_f"
+            };
+        };
+
+        class RangeBoosterAntenna: WLCAttachment {
+            name = "Experimental Antenna";
             attachments[] = {
                 "muzzle_antenna_02_f"
+            };
+        };
+
+        class ShortRangeAntenna: WLCAttachment {
+            name = "SD Jammer Antenna";
+            attachments[] = {
+                "muzzle_antenna_03_f"
             };
         };
 

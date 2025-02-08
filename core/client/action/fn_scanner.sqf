@@ -86,11 +86,13 @@ private _scannedObjects = _vehiclesInRadius select {
 
 if (getConnectedUAV player == _asset || vehicle player == _asset) then {
     if (_awacs) then {
-        if (_iteration % 4 == 0) then {
+        if (_iteration % 8 == 0) then {
             playSoundUI ["radarTargetLost", 2, 1, true];
         };
     } else {
-        playSoundUI ["radarTargetLost", 2, 1, true];
+        if (_iteration % 2 == 0) then {
+            playSoundUI ["radarTargetLost", 2, 1, true];
+        };
     };
 };
 

@@ -1,41 +1,247 @@
 #include "..\warlords_constants.inc"
 
-[
-    player,
-    localize "STR_A3_jammer_send",
-    "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",
-    "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",
-    "currentWeapon player == 'hgun_esd_01_F'",
-    "currentWeapon player == 'hgun_esd_01_F'",
-    {},
-    {},
+if (isDedicated) exitWith {};
+
+uiNamespace setVariable ["WL_SpectrumIcons", []];
+
+addMissionEventHandler ["Draw3D", {
+    if !(WL_SpectrumInterface) exitWith {};
+
+    private _uavsInRange = uiNamespace getVariable ["WL_SpectrumIcons", []];
     {
-        0 spawn {
-            private _side = side player;
-            private _allEnemyUavs = allUnitsUAV select {
-                private _uavOwnerSide = _x getVariable ["BIS_WL_ownerAssetSide", sideUnknown];
-                _uavOwnerSide != _side && alive _x;
+        drawIcon3D _x;
+    } forEach _uavsInRange;
+}];
+
+0 spawn {
+    while { !BIS_WL_missionEnd } do {
+        if !(WL_SpectrumInterface) then {
+            sleep 1;
+            continue;
+        };
+
+        private _uavsInRange = player getVariable ["WL_SpectrumUavs", []];
+        if (count _uavsInRange == 0) then {
+            sleep 1;
+            continue;
+        };
+
+        private _sortedUavs = [_uavsInRange, [], {
+            _x getVariable ["WL_spectrumViewConeDistance", 1];
+        }, "ASCEND"] call BIS_fnc_sortBy;
+        private _closestUav = _sortedUavs # 0;
+        private _distance = _closestUav getVariable ["WL_spectrumViewConeDistance", 1];
+        if (_distance > 1) then {
+            sleep 1;
+            continue;
+        };
+
+        private _emMin = missionNamespace getVariable ["#EM_SelMin", 0];
+        private _signalStrength = linearConversion [0, 1, _distance, 100, 0, true];
+        missionNamespace setVariable ["#EM_Values", [_emMin + 0.5, _signalStrength]];
+
+        playSoundUI ["a3\ui_f\data\sound\readout\readouthideclick1.wss", 2, 1, true];
+        private _frequency = linearConversion [0, 0.5, _distance, 0.05, 1, true];
+        sleep _frequency;
+    };
+};
+
+0 spawn {
+    private _lockStatus = 0;
+    private _soundLoop = -1;
+
+    missionNamespace setVariable ["#EM_SelMin", 0];
+    missionNamespace setVariable ["#EM_SelMax", 1];
+
+    missionNamespace setVariable ["#EM_SMin", 0];
+    missionNamespace setVariable ["#EM_SMax", 100];
+
+    private _setSpectrum = {
+        params ["_minFreq", "_maxFreq", "_powerAtMin", "_powerAtMax"];
+        private _emMin = missionNamespace getVariable ["#EM_SelMin", 0];
+        private _emMax = missionNamespace getVariable ["#EM_SelMax", 0];
+
+        missionNamespace setVariable ["#EM_FMin", _minFreq];
+        missionNamespace setVariable ["#EM_FMax", _maxFreq];
+
+        if (_emMin > _maxFreq || _emMax < _minFreq) then {
+            _emMin = _minFreq;
+            _emMax = _minFreq + 1;
+        };
+
+        missionNamespace setVariable ["#EM_SelMin", _emMin];
+        missionNamespace setVariable ["#EM_SelMax", _emMax];
+
+        linearConversion [_minFreq, _maxFreq, _emMin, _powerAtMin, _powerAtMax, true];
+    };
+
+    while { !BIS_WL_missionEnd } do {
+        sleep 0.2;
+
+        WL_SpectrumInterface = currentWeapon player == "hgun_esd_01_F" && vehicle player == player;
+
+        if (WL_SpectrumInterface) then {
+            private _spectrumAttachment = ((weaponsItems player) select {
+                _x # 0 == "hgun_esd_01_F"
+            }) # 0 # 1;
+
+            private _weaponModifier = switch (_spectrumAttachment) do {
+                case "muzzle_antenna_01_f": {
+                    [70, 90, 2.5, 1.75] call _setSpectrum;
+                };
+                case "muzzle_antenna_02_f": {
+                    [350, 500, 1.5, 0.5] call _setSpectrum;
+                };
+                case "muzzle_antenna_03_f": {
+                    [432, 434, 0.75, 0.75] call _setSpectrum;
+                };
+                default {
+                    [390, 410, 1.2, 0.8] call _setSpectrum;
+                };
+            };
+            private _lockRange = WL_JAMMER_SPECTRUM_RANGE * _weaponModifier;
+            hintSilent format ["Spectrum Device\nMax Range: %1m\nLock Time: %2s", _lockRange, 0.8 * _weaponModifier];
+
+            private _uavsInRange = allUnitsUAV select {
+                _x distance2D player < WL_JAMMER_SPECTRUM_DETECT_RANGE &&
+                [_x] call WL2_fnc_getAssetSide != BIS_WL_playerSide &&
+                count lineIntersectsSurfaces [getPosASL _x, eyePos player, _x, player] == 0
             };
 
+            player setVariable ["WL_SpectrumUavs", _uavsInRange];
+
+            private _spectrumIcons = [];
             {
-                private _screenPosition = worldToScreen (ASLToAGL getPosASL _x);
+                private _targetSide = [_x] call WL2_fnc_getAssetSide;
+                private _color = switch (_targetSide) do {
+					case west: { [0, 0.3, 0.6, 0.9] };
+					case east: { [0.5, 0, 0, 0.9] };
+					case independent: { [0, 0.6, 0, 0.9] };
+					default { [1, 1, 1, 0] };
+                };
 
-                if (_screenPosition isEqualTo []) then { continue; };
-                if (_screenPosition # 0 < 0 || _screenPosition # 0 > 1 || _screenPosition # 1 < 0 || _screenPosition # 1 > 1) then { continue; };
+                private _targetPos = _x modelToWorldVisual [0, 0, 0];
+                private _distance = _x distance player;
 
-                private _distanceToPlayer = player distanceSqr _x;
-                if (_distanceToPlayer > (WL_JAMMER_SPECTRUM_RANGE * WL_JAMMER_SPECTRUM_RANGE)) then { continue; };
+                private _screenPos = worldToScreen _targetPos;
+                private _viewConeDistance = if (count _screenPos == 2) then {
+                    _screenPos distance2D [0.5, 0.5]
+                } else {
+                    1
+                };
+                _viewConeDistance = _viewConeDistance * (getObjectFOV player) * (_weaponModifier ^ 1.5);
+                _viewConeDistance = (_viewConeDistance min 0.5) * 2;
 
-                systemChat (localize "STR_A3_jammer_sent");
-                _x setVariable ["BIS_WL_spectrumJammed", true, true];
-                _x setVariable ["WL_lastHitter", player, 2];
-            } forEach _allEnemyUavs;
+                _x setVariable ["WL_spectrumViewConeDistance", _viewConeDistance];
+
+                private _randCone = if (_viewConeDistance < 0.05) then {
+                    0
+                } else {
+                    _viewConeDistance * _distance / 2;
+                };
+
+                _targetPos = [
+                    _targetPos # 0 + random [-_randCone, 0, _randCone],
+                    _targetPos # 1 + random [-_randCone, 0, _randCone],
+                    _targetPos # 2 + random [-_randCone, 0, _randCone]
+                ];
+
+                _spectrumIcons pushBack [
+                    "\A3\ui_f\data\IGUI\Cfg\Targeting\MarkedTarget_ca.paa",
+                    _color,
+                    _targetPos,
+                    2,
+                    2,
+                    0,
+                    "???",
+                    true,
+                    0.035,
+                    "RobotoCondensedBold",
+                    "center",
+                    true
+                ];
+            } forEach _uavsInRange;
+
+            private _findLockedUav = _uavsInRange findIf {
+                private _viewConeDistance = _x getVariable ["WL_spectrumViewConeDistance", 1];
+                _viewConeDistance < 0.05
+            };
+
+            if (_findLockedUav != -1) then {
+                private _lockedUav = _uavsInRange # _findLockedUav;
+                private _distance = _lockedUav distance player;
+                (_spectrumIcons # _findLockedUav) set [0, if (_distance < _lockRange) then {
+                    "\A3\ui_f\data\IGUI\Cfg\Targeting\HitConfirm_ca.paa"
+                } else {
+                    "\A3\ui_f\data\IGUI\Cfg\Targeting\MarkedTargetNoLos_ca.paa"
+                }];
+
+                private _assetTypeName = [_lockedUav] call WL2_fnc_getAssetTypeName;
+                private _distanceText = if (_distance < _lockRange) then {
+                    format ["%1 KM", (round (_distance / 100)) / 10]
+                } else {
+                    "OUT OF RANGE"
+                };
+                (_spectrumIcons # _findLockedUav) set [6, format ["%1 (%2)", _assetTypeName, _distanceText]];
+
+                if (_distance < _lockRange && inputAction "defaultAction" > 0) then {
+                    _lockStatus = _lockStatus + 1;
+                    missionNamespace setVariable ["#EM_Transmit", true];
+                    missionNamespace setVariable ["#EM_Progress", _lockStatus / (4 * _weaponModifier)];
+
+                    if (_lockStatus > (4 * _weaponModifier)) then {
+                        systemChat (localize "STR_A3_jammer_sent");
+
+                        _lockedUav setVariable ["BIS_WL_spectrumJammed", true, true];
+                        _lockedUav setVariable ["WL_lastHitter", player, 2];
+
+                        playSoundUI ["a3\sounds_f_decade\assets\props\linkterminal_01_node_1_f\terminal_captured.wss", 1, 1, true];
+
+                        _lockStatus = 0;
+                    };
+                } else {
+                    missionNamespace setVariable ["#EM_Transmit", false];
+                    missionNamespace setVariable ["#EM_Progress", 0];
+                    _lockStatus = 0;
+                };
+            } else {
+                missionNamespace setVariable ["#EM_Transmit", false];
+                missionNamespace setVariable ["#EM_Progress", 0];
+                _lockStatus = 0;
+            };
+
+            private _friendlyUavs = allUnitsUAV select {
+                _x distance2D player < WL_JAMMER_SPECTRUM_DETECT_RANGE &&
+                [_x] call WL2_fnc_getAssetSide == BIS_WL_playerSide
+            };
+            {
+                private _color = switch (BIS_WL_playerSide) do {
+					case west: { [0, 0.3, 0.6, 0.9] };
+					case east: { [0.5, 0, 0, 0.9] };
+                };
+                private _targetPos = _x modelToWorldVisual [0, 0, 0];
+                private _distance = _targetPos distance player;
+                private _assetTypeName = [_x] call WL2_fnc_getAssetTypeName;
+                private _distanceDisplay = format ["%1 KM", (round (_distance / 100)) / 10];
+                private _targetDisplay = format ["%1 (%2)", _assetTypeName, _distanceDisplay];
+
+                _spectrumIcons pushBack [
+                    "\A3\ui_f\data\IGUI\Cfg\Targeting\MarkedTargetNoLos_ca.paa",
+                    _color,
+                    _targetPos,
+                    2,
+                    2,
+                    0,
+                    _targetDisplay,
+                    true,
+                    0.035,
+                    "RobotoCondensedBold",
+                    "center",
+                    true
+                ];
+            } forEach _friendlyUavs;
+
+            uiNamespace setVariable ["WL_SpectrumIcons", _spectrumIcons];
         };
-    },
-    {},
-    [],
-    1,
-    100,
-    false,
-    false
-] call BIS_fnc_holdActionAdd;
+    };
+};

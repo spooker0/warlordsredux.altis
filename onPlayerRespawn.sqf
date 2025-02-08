@@ -53,7 +53,6 @@ if !((count _penaltyCheck) == 0) then {
 	};
 };
 
-call WL2_fnc_spectrumAction;
 0 spawn MRTM_fnc_settingsMenu;
 
 player spawn APS_fnc_setupProjectiles;
