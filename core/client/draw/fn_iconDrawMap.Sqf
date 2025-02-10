@@ -255,7 +255,11 @@ private _teamVariable = switch (_side) do {
 	case independent: { "BIS_WL_guerOwnedVehicles" };
 	default { "" };
 };
-private _sideVehicles = missionNamespace getVariable [_teamVariable, []];
+private _sideVehicles = if (_teamVariable != "") then {
+	missionNamespace getVariable [_teamVariable, []];
+} else {
+	[]
+};
 private _vehiclesOnSide = vehicles select { count crew _x > 0 && side _x == _side };
 _sideVehicles = _sideVehicles + _vehiclesOnSide;
 _sideVehicles = _sideVehicles arrayIntersect _sideVehicles;
