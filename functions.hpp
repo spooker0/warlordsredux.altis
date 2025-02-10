@@ -131,6 +131,7 @@ class CfgFunctions {
 			class teammatesAvailability {};
 			class timer {};
 			class triggerPurchase {};
+			class updateLevelDisplay {};
 			class wasMain {};
 			class welcome {};
 			class zoneRestrictionHandleClient {};

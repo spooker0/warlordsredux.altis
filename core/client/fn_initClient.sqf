@@ -381,3 +381,5 @@ if (!isServer) then {
 0 spawn WL2_fnc_reviveAction;
 0 spawn WL2_fnc_helmetInterface;
 0 spawn WLT_fnc_init;
+
+0 spawn WL2_fnc_updateLevelDisplay;
