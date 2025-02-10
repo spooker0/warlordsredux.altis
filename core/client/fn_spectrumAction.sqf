@@ -22,6 +22,7 @@ addMissionEventHandler ["Draw3D", {
 
         private _uavsInRange = player getVariable ["WL_SpectrumUavs", []];
         if (count _uavsInRange == 0) then {
+            missionNamespace setVariable ["#EM_Values", []];
             sleep 1;
             continue;
         };
@@ -41,7 +42,7 @@ addMissionEventHandler ["Draw3D", {
         missionNamespace setVariable ["#EM_Values", [_emMin + 0.5, _signalStrength]];
 
         playSoundUI ["a3\ui_f\data\sound\readout\readouthideclick1.wss", 2, 1, true];
-        private _frequency = linearConversion [0, 0.5, _distance, 0.05, 1, true];
+        private _frequency = linearConversion [0, 0.5, _distance, WL_JAMMER_SPECTRUM_DIFFICULTY, 1, true];
         sleep _frequency;
     };
 };
@@ -100,7 +101,7 @@ addMissionEventHandler ["Draw3D", {
                 };
             };
             private _lockRange = WL_JAMMER_SPECTRUM_RANGE * _weaponModifier;
-            hintSilent format ["Spectrum Device\nMax Range: %1m\nLock Time: %2s", _lockRange, 0.8 * _weaponModifier];
+            hintSilent format ["Spectrum Device\nMax Range: %1m\nLock Time: %2s", round _lockRange, (0.8 * _weaponModifier) toFixed 2];
 
             private _uavsInRange = allUnitsUAV select {
                 _x distance2D player < WL_JAMMER_SPECTRUM_DETECT_RANGE &&
@@ -134,7 +135,7 @@ addMissionEventHandler ["Draw3D", {
 
                 _x setVariable ["WL_spectrumViewConeDistance", _viewConeDistance];
 
-                private _randCone = if (_viewConeDistance < 0.05) then {
+                private _randCone = if (_viewConeDistance < WL_JAMMER_SPECTRUM_DIFFICULTY) then {
                     0
                 } else {
                     _viewConeDistance * _distance / 2;
@@ -143,7 +144,7 @@ addMissionEventHandler ["Draw3D", {
                 _targetPos = [
                     _targetPos # 0 + random [-_randCone, 0, _randCone],
                     _targetPos # 1 + random [-_randCone, 0, _randCone],
-                    _targetPos # 2 + random [-_randCone, 0, _randCone]
+                    _targetPos # 2 + random [-_randCone / 5, 0, _randCone / 5]
                 ];
 
                 _spectrumIcons pushBack [
@@ -164,7 +165,7 @@ addMissionEventHandler ["Draw3D", {
 
             private _findLockedUav = _uavsInRange findIf {
                 private _viewConeDistance = _x getVariable ["WL_spectrumViewConeDistance", 1];
-                _viewConeDistance < 0.05
+                _viewConeDistance < WL_JAMMER_SPECTRUM_DIFFICULTY
             };
 
             if (_findLockedUav != -1) then {
