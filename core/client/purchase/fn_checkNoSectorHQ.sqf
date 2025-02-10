@@ -14,7 +14,16 @@ if (count _findCurrentSector == 0) exitWith {
 //     [false, "Sector already has a sector HQ."];
 // };
 
-private _sectorBuilding = nearestObjects [player, ["House", "Building"], 50, true] # 0;
+private _buildings = nearestObjects [player, ["House", "Building"], 50, true];
+_buildings = _buildings select {
+    (_x getVariable ["BIS_WL_ownerAsset", "123"]) == "123"
+};
+
+if (count _buildings == 0) exitWith {
+    [false, "You are not in or near a building."];
+};
+
+private _sectorBuilding = _buildings # 0;
 
 private _buildingBounds = boundingBoxReal _sectorBuilding;
 private _sectorHQRadius = _buildingBounds # 2;
