@@ -61,8 +61,10 @@ switch (_fastTravelMode) do {
 	case 5: {
 		private _sectorHQ = BIS_WL_targetSector getVariable ["WL_sectorHQ", objNull];
 		private _posArr = _sectorHQ buildingPos -1;
-		if (count _posArr > 0) then {
-			_destination = AGLtoASL (selectRandom _posArr);
+		_destination = if (count _posArr > 0) then {
+			selectRandom _posArr;
+		} else {
+			getPosATL _sectorHQ;
 		};
 	};
 };
@@ -152,10 +154,10 @@ switch (_fastTravelMode) do {
 	};
 	case 5: {
 		{
-			_x setPosASL _destination;
+			_x setVehiclePosition [_destination, [], 3, "NONE"];
 		} forEach _tagAlong;
 
-		player setPosASL _destination;
+		player setVehiclePosition [_destination, [], 0, "NONE"];
 	};
 };
 

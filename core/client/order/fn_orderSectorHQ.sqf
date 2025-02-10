@@ -7,7 +7,17 @@ private _currentSector = _findCurrentSector # 0;
 
 private _oldSectorBuilding = _currentSector getVariable ["WL_sectorHQ", objNull];
 private _hasOldSectorBuilding = !isNull _oldSectorBuilding;
-private _sectorBuilding = nearestObjects [player, ["House", "Building"], 50, true] # 0;
+
+private _buildings = nearestObjects [player, ["House", "Building"], 50, true];
+_buildings = _buildings select {
+    (_x getVariable ["BIS_WL_ownerAsset", "123"]) == "123"
+};
+
+if (count _buildings == 0) exitWith {
+    playSoundUI ["AddItemFailed"];
+};
+
+private _sectorBuilding = _buildings # 0;
 
 private _sectorName = _currentSector getVariable ["BIS_WL_name", "sector"];
 private _sectorBuildingType = getText (configFile >> "CfgVehicles" >> typeOf _sectorBuilding >> "displayName");
@@ -17,7 +27,9 @@ if (_hasOldSectorBuilding) then {
 };
 private _result = [_message, "Create Sector HQ", "Create", "Cancel"] call BIS_fnc_guiMessage;
 
-if (!_result) exitWith {};
+if (!_result) exitWith {
+    playSoundUI ["AddItemFailed"];
+};
 
 if (_hasOldSectorBuilding) then {
     _oldSectorBuilding allowDamage true;
