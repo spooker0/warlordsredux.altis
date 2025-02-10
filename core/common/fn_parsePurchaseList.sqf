@@ -289,11 +289,13 @@ private _fastTravelArr = [
 		""
 	]
 ];
-if (!WL_SECTOR_HQ_ENABLE) then {
-	_fastTravelArr = _fastTravelArr select {
-		!(_x # 0 in ["SectorHQFT", "BuySectorHQ"])
-	};
+
+#if WL_SECTOR_HQ_ENABLE == 0
+_fastTravelArr = _fastTravelArr select {
+	!(_x # 0 in ["SectorHQFT", "BuySectorHQ"])
 };
+#endif
+
 _sortedArray pushBack _fastTravelArr;
 
 private _strategyArr = [
@@ -384,7 +386,7 @@ private _strategyArr = [
 	]
 ];
 
-if (WL_FACTION_THREE_ENABLED) then {
+#if WL_FACTION_THREE_ENABLED
 	_strategyArr pushBack [
 		"SwitchToGreen",
 		0,
@@ -393,7 +395,8 @@ if (WL_FACTION_THREE_ENABLED) then {
 		"\a3\data_f\flags\flag_green_co.paa",
 		"Switch to Green side"
 	];
-};
+#endif
+
 _sortedArray pushBack _strategyArr;
 
 missionNamespace setVariable [format ["BIS_WL_purchasable_%1", _side], _sortedArray];

@@ -50,6 +50,27 @@ class RscTitles {
 		};
 	};
 
+	class RscSpectrumIndicator {
+		idd = -1;
+		movingEnable = 0;
+		duration = 1e+011;
+		name = "RscSpectrumIndicator";
+		onLoad = "uiNamespace setVariable ['RscSpectrumIndicator', _this select 0];";
+		class controls {
+			class RscSpectrumIndicatorText: RscStructuredText {
+				idc = 17001;
+				x = 0;
+				y = 0;
+				w = 0.5;
+				h = 0.5;
+				colorBackground[] = {0, 0, 0, 0};
+				colorText[] = {1, 1, 1, 1};
+				font = "PuristaLight";
+				text = "";
+			};
+		};
+	};
+
 	class RscWLVoteDisplay {
 		idd = -1;
 		movingEnable = 0;

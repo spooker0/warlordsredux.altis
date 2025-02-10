@@ -230,7 +230,8 @@ if (_ret) then {
 		case "SectorHQFT": {
 			[
 				[WL2_fnc_checkPlayerInVehicle],
-				[WL2_fnc_checkNearbyEnemies]
+				[WL2_fnc_checkNearbyEnemies],
+				[WL2_fnc_checkSectorHQFT]
 			]
 		};
 		case "ResetVehicle": {

@@ -17,7 +17,14 @@ private _totalCost = 0;
     private _customization = _customizationMap getOrDefault [_customizationData, createHashMap];
 
     private _item = _customization getOrDefault ["item", ""];
-    private _cost = if (_item in (_lastLoadout # 0)) then {
+
+    private _loadoutMains = [];
+    {
+        _loadoutMains pushBack (_lastLoadout # _x # 0);
+    } forEach [0, 1, 2, 3, 4];
+    _loadoutMains pushBack (_lastLoadout # 6);
+
+    private _cost = if (_item in _loadoutMains) then {
         0;
     } else {
         _customization getOrDefault ["cost", 0];

@@ -7,11 +7,11 @@ if (leader _newGroup != _newUnit) then {
 	[_newGroup, _newUnit] remoteExec ["selectLeader", groupOwner _newGroup];
 };
 
-if (WL_FACTION_THREE_ENABLED) then {
-	if (side group player == independent) then {
-		"respawn_guerrila" setMarkerPosLocal ([independent] call WL2_fnc_getSideBase);
-	};
+#if WL_FACTION_THREE_ENABLED
+if (side group player == independent) then {
+	"respawn_guerrila" setMarkerPosLocal ([independent] call WL2_fnc_getSideBase);
 };
+#endif
 
 _var = format ["BIS_WL_ownedVehicles_%1", getPlayerUID _newUnit];
 _vics = missionNamespace getVariable [_var, []];

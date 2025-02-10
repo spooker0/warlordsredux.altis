@@ -73,20 +73,29 @@ addMissionEventHandler ["Draw3D", {
         missionNamespace setVariable ["#EM_SelMin", _emMin];
         missionNamespace setVariable ["#EM_SelMax", _emMax];
 
-        linearConversion [_minFreq, _maxFreq, _emMin, _powerAtMin, _powerAtMax, true];
+        [linearConversion [_minFreq, _maxFreq, _emMin, _powerAtMin, _powerAtMax, true], (_emMin + _emMax) / 2];
     };
+
+    private _display = uiNamespace getVariable ["RscSpectrumIndicator", objNull];
+    if (isNull _display) then {
+        "Spectrum" cutRsc ["RscSpectrumIndicator", "PLAIN", -1, false, true];
+        _display = uiNamespace getVariable "RscSpectrumIndicator";
+    };
+    private _indicator = _display displayCtrl 17001;
 
     while { !BIS_WL_missionEnd } do {
         sleep 0.2;
 
         WL_SpectrumInterface = currentWeapon player == "hgun_esd_01_F" && vehicle player == player;
 
-        if (WL_SpectrumInterface) then {
+        if (!WL_SpectrumInterface) then {
+            _indicator ctrlSetText "";
+        } else {
             private _spectrumAttachment = ((weaponsItems player) select {
                 _x # 0 == "hgun_esd_01_F"
             }) # 0 # 1;
 
-            private _weaponModifier = switch (_spectrumAttachment) do {
+            private _spectrumData = switch (_spectrumAttachment) do {
                 case "muzzle_antenna_01_f": {
                     [70, 90, 2.5, 1.75] call _setSpectrum;
                 };
@@ -97,11 +106,34 @@ addMissionEventHandler ["Draw3D", {
                     [432, 434, 0.75, 0.75] call _setSpectrum;
                 };
                 default {
-                    [390, 410, 1.2, 0.8] call _setSpectrum;
+                    [490, 500, 0.5, 0.45] call _setSpectrum;
                 };
             };
+            private _weaponModifier = _spectrumData # 0;
             private _lockRange = WL_JAMMER_SPECTRUM_RANGE * _weaponModifier;
-            hintSilent format ["Spectrum Device\nMax Range: %1m\nLock Time: %2s", round _lockRange, (0.8 * _weaponModifier) toFixed 2];
+
+
+            private _attachmentName = switch (_spectrumAttachment) do {
+                case "muzzle_antenna_01_f": {
+                    "SD Military Antenna"
+                };
+                case "muzzle_antenna_02_f": {
+                    "SD Experimental Antenna"
+                };
+                case "muzzle_antenna_03_f": {
+                    "SD Jammer Antenna"
+                };
+                default {
+                    "No Antenna"
+                };
+            };
+            _indicator ctrlSetStructuredText parseText format [
+                "<t align='center' size='1.4' shadow='2'>%1<br/>Frequency: %2MHz<br/>Max Range: %3m<br/>Lock Time: %4s</t>",
+                _attachmentName,
+                _spectrumData # 1,
+                round _lockRange,
+                (0.8 * _weaponModifier) toFixed 2
+            ];
 
             private _uavsInRange = allUnitsUAV select {
                 _x distance2D player < WL_JAMMER_SPECTRUM_DETECT_RANGE &&

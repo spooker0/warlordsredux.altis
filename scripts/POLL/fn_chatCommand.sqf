@@ -48,5 +48,7 @@ addMissionEventHandler ["HandleChatMessage", {
 
         missionNamespace setVariable ["POLL_question", _pollText, [2, clientOwner]];
         [_pollText, _option1, _option2, _option3, _option4] remoteExec ["POLL_fnc_openPoll", 0];
+
+        nil;
     };
 }];

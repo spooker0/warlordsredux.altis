@@ -46,7 +46,9 @@ player setVariable ["voteLocked", false, true];
 waitUntil {
 	!(isNil "BIS_WL_playerSide")
 };
-if ((call BIS_fnc_admin) == 0 && WL_STOP_TEAM_SWITCH) then {
+
+#if WL_STOP_TEAM_SWITCH
+if ((call BIS_fnc_admin) == 0) then {
 	private _uid = getPlayerUID player;
 	private _switch = format ["teamBlocked_%1", _uid];
 	waitUntil {
@@ -88,16 +90,21 @@ if ((call BIS_fnc_admin) == 0 && WL_STOP_TEAM_SWITCH) then {
 		endMission "BlockScreen";
 		forceEnd;
 	};
-} else {
-	// player addAction [
-	// 	"<t color='#ff0000'>Spectate</t>",
-	// 	{
-	// 		0 spawn WL2_fnc_spectator;
-	// 	},
-	// 	[],
-	// 	-200
-	// ];
 };
+#endif
+
+#if WL_SPECTATOR_ENABLED
+if ((call BIS_fnc_admin) == 0) then {
+	player addAction [
+		"<t color='#ff0000'>Spectate</t>",
+		{
+			0 spawn WL2_fnc_spectator;
+		},
+		[],
+		-200
+	];
+};
+#endif
 WL_LoadingState = 4;
 
 if !(BIS_WL_playerSide in BIS_WL_sidesArray) exitWith {
@@ -325,7 +332,7 @@ player setUserActionText [_squadActionId, _squadActionText, "<img size='2' image
 0 spawn WL2_fnc_captureList;
 0 spawn WL2_fnc_mineLimitHint;
 
-call WL2_fnc_spectrumAction;
+call WL2_fnc_spectrumInterface;
 
 call SQD_fnc_initClient;
 
