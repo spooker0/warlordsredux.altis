@@ -54,7 +54,6 @@ private _windowHitPointNames = _allHitPointNames select { "glass" in toLower _x 
 
 _sectorBuilding allowDamage false;
 
-private _sectorName = _currentSector getVariable ["BIS_WL_name", "Sector"];
 private _markerName = format ["WL_sectorHQ_%1", _sectorName];
 private _markerTextName = format ["WL_sectorHQText_%1", _sectorName];
 
