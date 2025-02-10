@@ -210,9 +210,11 @@ switch (_action) do {
             private _sum = 0;
             {
                 private _squadMemberId = _x;
-                private _squadMemberUid = (getUserInfo _squadMemberId) # 2;
-                private _points = WL_PlayerSquadContribution getOrDefault [_squadMemberUid, 0];
-                _sum = _sum + (_points max 1);
+                private _squadMemberUid = _squadMemberId getUserInfo 2;
+                if !(isNil "_squadMemberUid") then {
+                    private _points = WL_PlayerSquadContribution getOrDefault [_squadMemberUid, 0];
+                    _sum = _sum + (_points max 1);
+                };
             } forEach (_squad select 2);
             _sum max 1;
         };
