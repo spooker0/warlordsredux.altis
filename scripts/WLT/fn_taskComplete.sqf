@@ -29,10 +29,9 @@ if (_init) then {
 
         private _taskReward = _taskData getOrDefault ["reward", 0];
         if (_taskReward > 0) then {
-            private _uid = getPlayerUID player;
-            private _newScore = (WLC_Scores getOrDefault [_uid, 0]) + _taskReward;
+            private _newScore = (["getScore"] call WLC_fnc_getLevelInfo) + _taskReward;
             if (typeName _newScore == "scalar") then {
-                [_uid, _newScore] remoteExec ["WLC_fnc_setScore", 2];
+                [_newScore] call WLC_fnc_setScore;
             };
         };
 
