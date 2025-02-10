@@ -57,14 +57,4 @@ if !((count _penaltyCheck) == 0) then {
 
 player spawn APS_fnc_setupProjectiles;
 
-private _topLevelTutorialTasks = simpleTasks player select {
-	count taskChildren _x > 0 &&
-	["Tutorial", taskName _x] call BIS_fnc_inString
-};
-private _levelDisplay = if (count _topLevelTutorialTasks > 0) then {
-	"Recruit"
-} else {
-	private _playerLevel = ["getLevel"] call WLC_fnc_getLevelInfo;
-	format ["Level %1", _playerLevel];
-};
-player setVariable ["WL_playerLevel", _levelDisplay, true];
+0 spawn WL2_fnc_updateLevelDisplay;

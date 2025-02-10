@@ -197,6 +197,7 @@ private _draw = (ctrlMapScale _control) < 0.3;
 			"right"
 		];
 	};
+
 	_m drawIcon [
 		call WL2_fnc_iconType,
 		call WL2_fnc_iconColor,
@@ -204,7 +205,11 @@ private _draw = (ctrlMapScale _control) < 0.3;
 		_size,
 		_size,
 		call WL2_fnc_getDir,
-		if (_draw) then {name _x} else {""},
+		if (_draw) then {
+			private _levelDisplay = player getVariable ["WL_playerLevel", "Recruit"];
+			private _displayName = format ["%1 [%2]", name _x, _levelDisplay];
+			_displayName
+		} else {""},
 		1,
 		0.043,
 		"PuristaBold",
