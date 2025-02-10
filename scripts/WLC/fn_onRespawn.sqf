@@ -1,6 +1,6 @@
 #include "constants.inc"
 
-if (!WLC_ENABLED) exitWith {};
+if (WLC_ENABLED == 0) exitWith {};
 
 private _side = BIS_WL_playerSide;
 
@@ -19,4 +19,4 @@ private _data = createHashMap;
     _data set [_type + "Ammo", _ammoData];
 } forEach ["Primary", "Secondary", "Launcher"];
 
-[_data, _side, BIS_WL_lastLoadout] call WLC_fnc_serverRequest;
+[_data, _side, BIS_WL_lastLoadout] call WLC_fnc_processSelection;

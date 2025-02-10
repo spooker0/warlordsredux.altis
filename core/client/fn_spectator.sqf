@@ -1,5 +1,9 @@
 ["Initialize", [player, [], true]] call BIS_fnc_EGSpectator;
 
+// hide spectator on land
+player setPosASL [2304.97, 9243.11, 11.5];
+player allowDamage false;
+
 private _sectors = [BIS_WL_allSectors, [], { _x getVariable "BIS_WL_name" }, "ASCEND"] call BIS_fnc_sortBy;
 
 {
@@ -48,19 +52,7 @@ addMissionEventHandler ["Draw3D", {
 
         private _categoryMap = missionNamespace getVariable ["WL2_categories", createHashMap];
 
-        private _side = side group player;
-        private _laserTargetSide = switch (_side) do {
-            case west: {
-                "LaserTargetW"
-            };
-            case east: {
-                "LaserTargetE"
-            };
-            case independent: {
-                "LaserTargetI"
-            };
-        };
-        private _laserTargets = entities _laserTargetSide;
+        private _laserTargets = entities "LaserTarget";
         {
             private _target = _x;
             private _responsiblePlayer = _target getVariable ["WL_laserPlayer", objNull];
@@ -110,16 +102,12 @@ addMissionEventHandler ["Draw3D", {
 
             private _assetTypeName = [_target] call WL2_fnc_getAssetTypeName;
 
-            private _assetName = if (_targetSide == _side) then {
-                private _ownerPlayer = (_target getVariable ["BIS_WL_ownerAsset", "123"]) call BIS_fnc_getUnitByUID;
-                private _ownerName = name _ownerPlayer;
-                if (_ownerName == "Error: No vehicle") then {
-                    _ownerName = "";
-                };
-                format ["%1 (%2)", _assetTypeName, _ownerName];
-            } else {
-                _assetTypeName;
+            private _ownerPlayer = (_target getVariable ["BIS_WL_ownerAsset", "123"]) call BIS_fnc_getUnitByUID;
+            private _ownerName = name _ownerPlayer;
+            if (_ownerName == "Error: No vehicle") then {
+                _ownerName = "";
             };
+            private _assetName =  format ["%1 (%2)", _assetTypeName, _ownerName];
 
             private _distance = _cameraPos distance2D _target;
             if (_targetIsInfantry) then {
@@ -149,6 +137,9 @@ addMissionEventHandler ["Draw3D", {
                 private _assetActualType = _target getVariable ["WL2_orderedClass", typeof _target];
 
                 private _targetIcon = getText (configFile >> "CfgVehicles" >> typeOf _target >> "picture");
+                if (_targetIcon == "" || _targetIcon == "picturething") then {
+                    _targetIcon = "\A3\ui_f\data\IGUI\RscCustomInfo\Sensors\Targets\Air_ca.paa";
+                };
                 private _targetIconInfo = getTextureInfo _targetIcon;
                 private _targetIconRatio = _targetIconInfo # 0 / _targetIconInfo # 1;
 

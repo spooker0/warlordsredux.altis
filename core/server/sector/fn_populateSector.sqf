@@ -7,7 +7,8 @@ if (count (_sector getVariable ["BIS_WL_vehiclesToSpawn", []]) == 0) then {
 	private _roads = ((_sector nearRoads 400) select {count roadsConnectedTo _x > 0}) inAreaArray (_sector getVariable "objectAreaComplete");
 	if (count _roads > 0) then {
 		private _hasRadar = false;
-		private _numVehicleSpawn = if (WL_HARD_AI_MODE) then {
+		private _hardAIMode = WL_HARD_AI_MODE == 1;
+		private _numVehicleSpawn = if (_hardAIMode) then {
 			private _sectorValue = _sector getVariable ["BIS_WL_value", 50];
 			((_sectorValue / 5) max 1) min 4;
 		} else {
@@ -49,7 +50,7 @@ if (count (_sector getVariable ["BIS_WL_vehiclesToSpawn", []]) == 0) then {
 			};
 		};
 
-		if (_hasRadar && WL_HARD_AI_MODE) then {
+		if (_hasRadar && _hardAIMode) then {
 			private _samLocation = selectRandom ([_sector, 0, true] call WL2_fnc_findSpawnPositions);
 			private _createSamResult = [_samLocation, 0, "I_E_SAM_System_03_F", resistance] call BIS_fnc_spawnVehicle;
 			private _sam = _createSamResult select 0;

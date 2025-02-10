@@ -106,7 +106,7 @@ WLT_notifications = 0;
     };
 };
 
-#if WLT_DEBUG_MODE == 1
+#if WLT_DEBUG_MODE
 // Debug code
 0 spawn {
     private _tasks = missionNamespace getVariable ["WLT_tasks", createHashMap];

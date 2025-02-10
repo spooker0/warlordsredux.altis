@@ -1,3 +1,19 @@
+// Live: 0
+#define WL_HARD_AI_MODE 0
+#define WL_FACTION_THREE_ENABLED 0
+#define WLC_DEBUG 0
+#define WLT_DEBUG_MODE 0
+#define WL_AIRPORT_BASES 0
+#define WL_OVERRIDE_BASES 0
+#define WL_BASE_SELECTION_DEBUG 0
+#define WL_SPECTATOR_ENABLED 0
+
+// Live: 1
+#define WL_SECTOR_HQ_ENABLE 1
+#define WL_STOP_TEAM_SWITCH 1
+#define WLC_ENABLED 1
+
+// Live: do not change
 #define WL_RESPAWN_MARKERS_CNT 20
 #define WL_TIMEOUT_MIN 0.055 //25, 55 = 20 FPS + 3 MS + 2ms(for slop) to safely run scripts at 20 fps.
 #define WL_TIMEOUT_SHORT 0.25
@@ -49,8 +65,4 @@
 #define WL_JAMMER_SPECTRUM_DIFFICULTY 0.03
 #define WL_JAMMER_SENSOR_THRESHOLD 0.2
 #define WL_JAMMER_HARDLINE_RANGE 20
-#define WL_HARD_AI_MODE false
 #define WL_MANPOWER_REFRESH_COOLDOWN 300
-#define WL_FACTION_THREE_ENABLED false
-#define WL_STOP_TEAM_SWITCH false
-#define WL_SECTOR_HQ_ENABLE true

@@ -16,16 +16,16 @@ west setFriend [civilian, 1];
 east setFriend [civilian, 1];
 resistance setFriend [civilian, 1];
 
-if (WL_FACTION_THREE_ENABLED) then {
-	{
-		private _group = createGroup independent;
-		_group deleteGroupWhenEmpty true;
+#if WL_FACTION_THREE_ENABLED
+{
+	private _group = createGroup independent;
+	_group deleteGroupWhenEmpty true;
 
-		private _unit = _group createUnit ["I_Soldier_TL_F", [-1000, -1000, 0], [], 0, "NONE"];
-		_unit setVariable ["WL2_isPlayableGreen", true, true];
-		_unit allowDamage false;
-	} forEach [1, 2, 3, 4, 5];
-};
+	private _unit = _group createUnit ["I_Soldier_TL_F", [-1000, -1000, 0], [], 0, "NONE"];
+	_unit setVariable ["WL2_isPlayableGreen", true, true];
+	_unit allowDamage false;
+} forEach [1, 2, 3, 4, 5];
+#endif
 
 call SQD_fnc_initServer;
 

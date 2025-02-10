@@ -1,31 +1,56 @@
-//Use this line to simulate base locations on EU#11, while on test servers. FOR TESTING ONLY.
-//private _potBases = BIS_WL_allSectors select {(if (["(EU) #11", serverName] call BIS_fnc_inString) then {"A" in (_x getVariable ["BIS_WL_services", []])} else {(_x getVariable ["BIS_WL_canBeBase", true])}) && {!(_x in (profileNamespace getVariable ["BIS_WL_lastBases", []]))}};
-//Use this line to have "only" helipad zones not just airports. FOR TESTING ONLY.
-//private _potBases = BIS_WL_allSectors select {(if !(["(EU) #11", serverName] call BIS_fnc_inString) then {"H" in (_x getVariable ["BIS_WL_services", []]) && !("A" in (_x getVariable ["BIS_WL_services", []]))} else {(_x getVariable ["BIS_WL_canBeBase", true])}) && {!(_x in (profileNamespace getVariable ["BIS_WL_lastBases", []]))}};
+#include "..\..\warlords_constants.inc"
 
-//Use this line to set starting base based on sector service or default EU#11 ***This is the code for MAIN branch!!!***
-private _potBases = BIS_WL_allSectors select {(if !(["(EU) #11", serverName] call BIS_fnc_inString) then {"A" in (_x getVariable ["BIS_WL_services", []])} else {(_x getVariable ["BIS_WL_canBeBase", true])}) && {!(_x in (profileNamespace getVariable ["BIS_WL_lastBases", []]))}};
+private _baseData =
+#if WL_OVERRIDE_BASES
+	BIS_WL_allSectors select {
+		_x getVariable ["BIS_WL_name", ""] in ["Lakka Factory", "Airbase"];
+	};
+#else
+	[] call WL2_fnc_calcHomeBases;
+#endif
 
-private _firstBase = selectRandom _potBases;
+#if WL_BASE_SELECTION_DEBUG == 1
+private _baseProbabilityTable = [];
+for "_i" from 0 to 10000 do {
+	private _testData = [] call WL2_fnc_calcHomeBases;
+	private _firstBase = _testData # 0;
+	private _secondBase = _testData # 1;
 
-//_baseDistanceMin is hard coded for altis
-//For cross map dynamic scaling see pull request #204, worldsize for scaling
-//random but weighted towards _baseDistanceMid, the orginial hard coded value
-private _baseDistanceLow = (64000000 * 1); //8000 m^2
-private _baseDistanceHigh = (64000000 * 1.4); //max = 11200 m^2
-private _baseDistanceMid = 64000000;
-private _baseDistanceMin = random [_baseDistanceLow, _baseDistanceMid, _baseDistanceHigh];
+	private _firstEntry = _baseProbabilityTable findIf {
+		_x # 0 == _firstBase;
+	};
+	if (_firstEntry == -1) then {
+		_baseProbabilityTable pushBack [_firstBase, 1];
+	} else {
+		(_baseProbabilityTable # _firstEntry) set [1, (_baseProbabilityTable # _firstEntry) # 1 + 1];
+	};
 
-_potBases deleteAt (_potBases find _firstBase);
-_potBases = (_potBases select {(_x distanceSqr _firstBase) > _baseDistanceMin});
-private _secondBase = selectRandom _potBases;
-
-private _presetBase = BIS_WL_allSectors select {
-	_x getVariable ["BIS_WL_name", ""] in ["AAC Airfield", "Airbase"];
+	private _secondEntry = _baseProbabilityTable findIf {
+		_x # 0 == _secondBase;
+	};
+	if (_secondEntry == -1) then {
+		_baseProbabilityTable pushBack [_secondBase, 1];
+	} else {
+		(_baseProbabilityTable # _secondEntry) set [1, (_baseProbabilityTable # _secondEntry) # 1 + 1];
+	};
 };
 
-_firstBase = _presetBase # 1;
-_secondBase = _presetBase # 0;
+private _sortedSectorsArray = [_baseProbabilityTable, [], { _x # 1 }, "DESCEND"] call BIS_fnc_sortBy;
+
+diag_log "Base probability table:";
+{
+	private _getPairs = ([_x # 0] call WL2_fnc_calcHomeBases) # 2;
+	diag_log format ["%1: %2%%, Pairs: %3", (_x # 0) getVariable ["BIS_WL_name", ""], (_x # 1) / 20000 * 100, count _getPairs];
+} forEach _sortedSectorsArray;
+#endif
+
+private _firstBase = _baseData # 0;
+private _secondBase = _baseData # 1;
+
+#if WL_BASE_SELECTION_DEBUG == 1
+systemChat format ["First base: %1", _firstBase getVariable ["BIS_WL_name", ""]];
+systemChat format ["Second base: %1", _secondBase getVariable ["BIS_WL_name", ""]];
+#endif
 
 missionNamespace setVariable ["BIS_WL_base1", _firstBase, true];
 missionNamespace setVariable ["BIS_WL_base2", _secondBase, true];

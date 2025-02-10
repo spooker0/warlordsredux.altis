@@ -14,8 +14,8 @@ addMissionEventHandler ["Draw3D", {
 			"center",
 			TRUE
 		];
-		_droneView = getConnectedUAVUnit player;
-		_pos = getPosVisual (if (isNull(_droneView)) then { player } else { _droneView });
+		// _droneView = getConnectedUAVUnit player;
+		_pos = positionCameraToWorld [0, 0, 0];
 		_dist = _pos distance (missionNamespace getVariable format ["BIS_WL_currentTarget_%1", BIS_WL_playerSide]);
 		_units = "m";
 		_dist = ceil _dist;

@@ -1,9 +1,6 @@
 #include "..\..\core\warlords_constants.inc"
 #include "..\..\core\server_macros.inc"
 
-#define WLC_ENABLED true
-#define WLC_DEBUG true
-
 #define WLC_DISPLAY 12000
 
 #define WLC_CLOSE_BUTTON 12003

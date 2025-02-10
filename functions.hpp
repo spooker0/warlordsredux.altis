@@ -127,7 +127,7 @@ class CfgFunctions {
 			class rita {};
 			class spectator {};
 			class sideToFaction {};
-			class spectrumAction {};
+			class spectrumInterface {};
 			class teammatesAvailability {};
 			class timer {};
 			class triggerPurchase {};
@@ -294,6 +294,7 @@ class CfgFunctions {
 			class checkResetSectorTimer {};
 			class checkResetVehicle {};
 			class checkSavedLoadout {};
+			class checkSectorHQFT {};
 			class checkSelectedUnits {};
 			class checkSurrender {};
 			class checkTargetEnemyBase {};
@@ -370,6 +371,7 @@ class CfgFunctions {
 		};
 		class ServerSector {
 			file = "core\server\sector";
+			class calcHomeBases {};
 			class getCapValues {};
 			class populateSector {};
 			class populateCarrierSector {};
@@ -398,7 +400,7 @@ class CfgFunctions {
 			class onButtonSelect {};
 			class onRespawn {};
 			class onSelection {};
-			class serverRequest {};
+			class processSelection {};
 			class setScore {};
 			class updateItemCost {};
 		};

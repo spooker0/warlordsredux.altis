@@ -2,30 +2,34 @@
 
 params ["_question", "_option1", "_option2", "_option3", "_option4"];
 
-if (isDedicated) exitWith {
-    POLL_results = createHashMap;
+if (isServer) then {
+    0 spawn {
+        POLL_results = createHashMap;
+        private _startTime = serverTime;
 
-    private _startTime = serverTime;
-    waitUntil {
-        sleep 1;
-        serverTime > (_startTime + POLL_DURATION);
+        waitUntil {
+            sleep 1;
+            serverTime > (_startTime + POLL_DURATION);
+        };
+
+        private _results = [];
+        {
+            private _option = missionNamespace getVariable ["POLL_option" + str (_x + 1), str _x];
+            _results pushBack format ["%1: %2 votes", _option, count _y];
+        } forEach POLL_results;
+        private _question = missionNamespace getVariable ["POLL_question", ""];
+
+        private _message = format ["Poll results: %1 %2", _question, _results joinString ", "];
+        [_message] remoteExec ["systemChat", 0];
+
+        {
+            missionNamespace setVariable ["POLL_option" + str _x, "", true];
+        } forEach [1, 2, 3, 4];
+        missionNamespace setVariable ["POLL_question", "", true];
     };
-
-    private _results = [];
-    {
-        private _option = missionNamespace getVariable ["POLL_option" + str (_x + 1), str _x];
-        _results pushBack format ["%1: %2 votes", _option, count _y];
-    } forEach POLL_results;
-    private _question = missionNamespace getVariable ["POLL_question", ""];
-
-    private _message = format ["Poll results: %1 %2", _question, _results joinString ", "];
-    [_message] remoteExec ["systemChat", 0];
-
-    {
-        missionNamespace setVariable ["POLL_option" + str _x, "", true];
-    } forEach [1, 2, 3, 4];
-    missionNamespace setVariable ["POLL_question", "", true];
 };
+
+if (!hasInterface) exitWith {};
 
 private _display = findDisplay POLL_DISPLAY;
 
