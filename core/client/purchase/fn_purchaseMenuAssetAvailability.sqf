@@ -240,6 +240,9 @@ if (_ret) then {
 				[WL2_fnc_checkPlayerInVehicle]
 			]
 		};
+		case "Customization": {
+			[]
+		};
 		case "SwitchToGreen": {
 			[
 				[WL2_fnc_checkIndependents],

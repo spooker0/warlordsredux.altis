@@ -19,4 +19,7 @@ private _guerOwnedVehicles = [];
 
 missionNamespace setVariable ["BIS_WL_westOwnedVehicles", _westOwnedVehicles, true];
 missionNamespace setVariable ["BIS_WL_eastOwnedVehicles", _eastOwnedVehicles, true];
+
+#if WL_FACTION_THREE_ENABLED
 missionNamespace setVariable ["BIS_WL_guerOwnedVehicles", _guerOwnedVehicles, true];
+#endif
