@@ -21,7 +21,7 @@ private _sectorBuilding = _buildings # 0;
 
 private _sectorName = _currentSector getVariable ["BIS_WL_name", "sector"];
 private _sectorBuildingType = getText (configFile >> "CfgVehicles" >> typeOf _sectorBuilding >> "displayName");
-private _message = format ["Are you sure you want to create a sector HQ in %1 from: %2?", _sectorName, _sectorBuildingType];
+private _message = format ["Are you sure you want to create a Sector HQ in %1 from: %2?", _sectorName, _sectorBuildingType];
 if (_hasOldSectorBuilding) then {
     _message = format ["%1<br/><br/><t color='#ff0000'>This will replace the current sector HQ.</t>", _message];
 };
