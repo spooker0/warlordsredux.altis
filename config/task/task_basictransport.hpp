@@ -1,7 +1,7 @@
 class TaskBuyQuad: WLTaskTutorialBasicTransport {
-    name = "Buy Quad Bike";
-    description = "Buy a quad bike using the asset buy menu (Hold %1 key) -> Light Vehicles -> Quad Bike.";
-    args[] = {
+    name = $STR_WLT_taskBuyQuadName;
+    description = $STR_WLT_taskBuyQuadDesc;
+    descArgs[] = {
         "actionKeysNames 'gear'"
     };
     prerequisites[] = {};
@@ -9,8 +9,8 @@ class TaskBuyQuad: WLTaskTutorialBasicTransport {
 };
 
 class TaskLockPersonal: WLTaskTutorialBasicTransport {
-    name = "Lock Vehicle to Personal";
-    description = "Use the scroll wheel menu until you find the Access control option, and lock one of your vehicles to 'Personal'.";
+    name = $STR_WLT_taskLockPersonalName;
+    description = $STR_WLT_taskLockPersonalDesc;
     prerequisites[] = {
         "TaskBuyQuad"
     };
@@ -18,8 +18,8 @@ class TaskLockPersonal: WLTaskTutorialBasicTransport {
 };
 
 class TaskDeleteVehicle: WLTaskTutorialBasicTransport {
-    name = "Delete Vehicle";
-    description = "Use the scroll wheel menu until you find the Remove option, and delete one of your vehicles.";
+    name = $STR_WLT_taskDeleteVehicleName;
+    description = $STR_WLT_taskDeleteVehicleDesc;
     prerequisites[] = {
         "TaskLockPersonal"
     };

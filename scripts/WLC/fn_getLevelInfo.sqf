@@ -1,4 +1,4 @@
-params ["_op", "_player"];
+params ["_op"];
 
 private _ret = 0;
 
@@ -14,11 +14,10 @@ if (isNil "WLC_ScoreTable") then {
 
 switch (_op) do {
     case "getScore": {
-        private _score = WLC_Scores getOrDefault [getPlayerUID _player, 0];
-        _ret = _score;
+        _ret = profileNamespace getVariable ["WLC_Score", 0];
     };
     case "getLevel": {
-        private _score = ["getScore", _player] call WLC_fnc_getLevelInfo;
+        private _score = ["getScore"] call WLC_fnc_getLevelInfo;
         private _level = 0;
         while { _score > 0 } do {
             private _nextLevelReq = if (_level < count WLC_ScoreTable) then {
@@ -31,20 +30,24 @@ switch (_op) do {
                 _level = _level + 1;
             };
         };
-        _ret = _level;
+        _ret = _level min 100;
     };
     case "getNextLevelScore": {
-        private _level = ["getLevel", _player] call WLC_fnc_getLevelInfo;
-        private _score = 0;
-        for "_i" from 0 to _level do {
-            private _nextLevelReq = if (_i < count WLC_ScoreTable) then {
-                WLC_ScoreTable # _i;
-            } else {
-                5000;
+        private _level = ["getLevel"] call WLC_fnc_getLevelInfo;
+        if (_level == 100) then {
+            _ret = 0;
+        } else {
+            private _score = 0;
+            for "_i" from 0 to _level do {
+                private _nextLevelReq = if (_i < count WLC_ScoreTable) then {
+                    WLC_ScoreTable # _i;
+                } else {
+                    5000;
+                };
+                _score = _score + _nextLevelReq;
             };
-            _score = _score + _nextLevelReq;
+            _ret = _score;
         };
-        _ret = _score;
     };
 };
 

@@ -7,11 +7,11 @@ if (leader _newGroup != _newUnit) then {
 	[_newGroup, _newUnit] remoteExec ["selectLeader", groupOwner _newGroup];
 };
 
-if (WL_FACTION_THREE_ENABLED) then {
-	if (side group player == independent) then {
-		"respawn_guerrila" setMarkerPosLocal ([independent] call WL2_fnc_getSideBase);
-	};
+#if WL_FACTION_THREE_ENABLED
+if (side group player == independent) then {
+	"respawn_guerrila" setMarkerPosLocal ([independent] call WL2_fnc_getSideBase);
 };
+#endif
 
 _var = format ["BIS_WL_ownedVehicles_%1", getPlayerUID _newUnit];
 _vics = missionNamespace getVariable [_var, []];
@@ -53,7 +53,8 @@ if !((count _penaltyCheck) == 0) then {
 	};
 };
 
-call WL2_fnc_spectrumAction;
 0 spawn MRTM_fnc_settingsMenu;
 
 player spawn APS_fnc_setupProjectiles;
+
+0 spawn WL2_fnc_updateLevelDisplay;

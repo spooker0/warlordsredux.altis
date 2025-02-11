@@ -7,7 +7,7 @@ private _isTransporting = _uav getVariable ["WL2_transporting", false];
 private _uavLocation = getPosASL _uav;
 private _isPosInWater = surfaceIsWater [_uavLocation # 0, _uavLocation # 1] && _uavLocation # 2 < 0;
 if (_isPosInWater) then {
-    if !(player getVariable ["BIS_WL_isOrdering", false]) then {
+    if (_uav getVariable ["WL_spawnedAsset", false]) then {
         _uav setDamage 1;
         deleteVehicle _uav;
     };

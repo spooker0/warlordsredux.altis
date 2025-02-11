@@ -59,5 +59,6 @@ switch (_locality) do {
 		WL_linkSectorMarkers = createHashmap;
 		WL_HelmetInterface = false;
 		WL_ScannerUnits = [];
+		WL_SpectrumInterface = false;
 	};
 };

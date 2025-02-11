@@ -117,6 +117,13 @@ if (_ret) then {
 				[WL2_fnc_checkFastTravelSL]
 			]
 		};
+		case "FTSquad": {
+			[
+				[WL2_fnc_checkPlayerInVehicle],
+				[WL2_fnc_checkNearbyEnemies],
+				[WL2_fnc_checkFastTravelSquad]
+			]
+		};
 		case "LastLoadout": {
 			[
 				[WL2_fnc_checkPlayerInVehicle],
@@ -213,11 +220,28 @@ if (_ret) then {
 				[WL2_fnc_checkTent]
 			]
 		};
+		case "BuySectorHQ": {
+			[
+				[WL2_fnc_checkPlayerInVehicle],
+				[WL2_fnc_checkNearbyEnemies],
+				[WL2_fnc_checkNoSectorHQ]
+			]
+		};
+		case "SectorHQFT": {
+			[
+				[WL2_fnc_checkPlayerInVehicle],
+				[WL2_fnc_checkNearbyEnemies],
+				[WL2_fnc_checkSectorHQFT]
+			]
+		};
 		case "ResetVehicle": {
 			[
 				[WL2_fnc_checkResetVehicle],
 				[WL2_fnc_checkPlayerInVehicle]
 			]
+		};
+		case "Customization": {
+			[]
 		};
 		case "SwitchToGreen": {
 			[

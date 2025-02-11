@@ -3,8 +3,9 @@ Repository for all WL Task related configurations.
 
 class CfgTaskId {
     name = string;                  // Name of the task.
+    nameArgs[] = string[];          // Arguments for the task name.
     description = string;           // Description of the task.
-    args[] = string[];              // [Code] Arguments for the task description.
+    descArgs[] = string[];          // [Code] Arguments for the task description.
     onStart = string;               // [Code] Code to execute when the task is started.
     prerequisites[] = string[];     // Prerequisite class ids for the task.
     parentTask = string;            // Parent task class id for the task.
@@ -20,39 +21,41 @@ class WLProgressTracker {
 };
 
 class WLTaskTutorialBasicTransport: WLTask {
-    parentTask = "Tutorial: Basic Transport";
+    parentTask = $STR_WLT_categoryBasicTransport;
 };
 
 class WLTaskTutorialFastTravel: WLTask {
-    parentTask = "Tutorial: Fast Travel";
+    parentTask = $STR_WLT_categoryFastTravel;
 };
 
 class WLTaskTutorialServicing: WLTask {
-    parentTask = "Tutorial: Servicing";
+    parentTask = $STR_WLT_categoryServicing;
 };
 
 class WLTaskTutorialSquads: WLTask {
-    parentTask = "Tutorial: Squad";
+    parentTask = $STR_WLT_categorySquad;
 };
 
 class WLTaskTutorialUiMechanics: WLTask {
-    parentTask = "Tutorial: UI & Mechanics";
+    parentTask = $STR_WLT_categoryUIandMechanics;
 };
 
 class WLTaskEngage: WLTask {
-    parentTask = "Engage the Enemy";
+    parentTask = $STR_WLT_categoryEngageEnemy;
 };
 
 class WLTaskCombinedArms: WLTask {
-    parentTask = "Combined Arms Warfare";
+    parentTask = $STR_WLT_categoryCombinedArmsWarfare;
 };
 
 class WLTaskTankBasics: WLTaskCombinedArms {
-    parentTask = "Tank Basics";
+    parentTask = $STR_WLT_categoryTankBasics;
 };
 
 class WLTaskSearchAndDestroy: WLTask {
-    parentTask = "Search and Destroy";
+    name = $STR_WLT_taskSearchAndDestroyName;
+    description = $STR_WLT_taskSearchAndDestroyDesc;
+    parentTask = $STR_WLT_categorySearchDestroy;
     prerequisites[] = {
         "TaskCombinedArmsArmor"
     };

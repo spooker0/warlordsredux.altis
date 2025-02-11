@@ -147,15 +147,6 @@ class CfgDisabledCommands
         };
     };
 
-    class SETHITPOINTDAMAGE
-    {
-        class SYNTAX1
-        {
-            targets[] = {1,0,0};
-            args[] = {{"OBJECT"},{"ARRAY"}};
-        };
-    };
-
     class SETDAMMAGE
     {
         class SYNTAX1

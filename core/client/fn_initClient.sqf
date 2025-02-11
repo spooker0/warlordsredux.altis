@@ -46,6 +46,8 @@ player setVariable ["voteLocked", false, true];
 waitUntil {
 	!(isNil "BIS_WL_playerSide")
 };
+
+#if WL_STOP_TEAM_SWITCH
 if ((call BIS_fnc_admin) == 0) then {
 	private _uid = getPlayerUID player;
 	private _switch = format ["teamBlocked_%1", _uid];
@@ -89,6 +91,20 @@ if ((call BIS_fnc_admin) == 0) then {
 		forceEnd;
 	};
 };
+#endif
+
+#if WL_SPECTATOR_ENABLED
+if ((call BIS_fnc_admin) == 0) then {
+	player addAction [
+		"<t color='#ff0000'>Spectate</t>",
+		{
+			0 spawn WL2_fnc_spectator;
+		},
+		[],
+		-200
+	];
+};
+#endif
 WL_LoadingState = 4;
 
 if !(BIS_WL_playerSide in BIS_WL_sidesArray) exitWith {
@@ -254,7 +270,6 @@ WL_LoadingState = 12;
 ["client_init"] call BIS_fnc_endLoadingScreen;
 "Initialized" call WL2_fnc_announcer;
 [toUpper localize "STR_A3_WL_popup_init"] spawn WL2_fnc_smoothText;
-// 0 spawn WL2_fnc_welcome;
 
 0 spawn {
 	_markers = BIS_WL_playerSide call WL2_fnc_getRespawnMarkers;
@@ -317,7 +332,7 @@ player setUserActionText [_squadActionId, _squadActionText, "<img size='2' image
 0 spawn WL2_fnc_captureList;
 0 spawn WL2_fnc_mineLimitHint;
 
-call WL2_fnc_spectrumAction;
+call WL2_fnc_spectrumInterface;
 
 call SQD_fnc_initClient;
 
@@ -373,3 +388,5 @@ if (!isServer) then {
 0 spawn WL2_fnc_reviveAction;
 0 spawn WL2_fnc_helmetInterface;
 0 spawn WLT_fnc_init;
+
+0 spawn WL2_fnc_updateLevelDisplay;

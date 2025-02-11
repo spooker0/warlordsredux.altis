@@ -246,6 +246,20 @@ private _fastTravelArr = [
 		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
 		localize "STR_SQUADS_fastTravelToSquadLeader"
 	], [
+		"RespawnBagFT",
+		0,
+		[],
+		"Fast Travel to Tent (Free)",
+		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
+		""
+	], [
+		"SectorHQFT",
+		0,
+		[],
+		"Fast Travel to Sector HQ",
+		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
+		""
+	], [
 		"RespawnVic",
 		getMissionConfigValue ["BIS_WL_orderFTVehicleCost", 200],
 		[],
@@ -267,14 +281,21 @@ private _fastTravelArr = [
 		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
 		"Buy a deployable sleeping bag that respawns you at its location."
 	], [
-		"RespawnBagFT",
-		0,
+		"BuySectorHQ",
+		3000,
 		[],
-		"Fast Travel to Tent (Free)",
+		"Purchase Sector HQ",
 		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
 		""
 	]
 ];
+
+#if WL_SECTOR_HQ_ENABLE == 0
+_fastTravelArr = _fastTravelArr select {
+	!(_x # 0 in ["SectorHQFT", "BuySectorHQ"])
+};
+#endif
+
 _sortedArray pushBack _fastTravelArr;
 
 private _strategyArr = [
@@ -365,7 +386,7 @@ private _strategyArr = [
 	]
 ];
 
-if (WL_FACTION_THREE_ENABLED) then {
+#if WL_FACTION_THREE_ENABLED
 	_strategyArr pushBack [
 		"SwitchToGreen",
 		0,
@@ -374,7 +395,8 @@ if (WL_FACTION_THREE_ENABLED) then {
 		"\a3\data_f\flags\flag_green_co.paa",
 		"Switch to Green side"
 	];
-};
+#endif
+
 _sortedArray pushBack _strategyArr;
 
 missionNamespace setVariable [format ["BIS_WL_purchasable_%1", _side], _sortedArray];

@@ -43,3 +43,7 @@ WAS_score = true;
 if (profileNamespace getVariable ["MRTM_playKillSound", true]) then {
 	playSoundUI ["AddItemOK", 1, 1];
 };
+
+// WLC
+private _newScore = (["getScore"] call WLC_fnc_getLevelInfo) + _reward;
+[_newScore] call WLC_fnc_setScore;

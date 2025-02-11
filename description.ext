@@ -4,12 +4,13 @@
 #include "scripts\WLM\ui\WLM_pylons.hpp"
 #include "scripts\Squads\squadMenu.hpp"
 
-onLoadName = "Warlords Redux 2.6.7";
+onLoadName = "Warlords Redux 2.6.8";
 dev = "Jezuro + WSV";
 author = "Jezuro + WSV";
 allowFunctionsLog = 1;
 zeusCompositionScriptLevel = 2;
 adminIDs[] = {"76561198034106257", "76561198049721952", "76561197960667971"};
+pollstersIDs[] = {"76561198025492474"};
 
 //Settings
 respawn = 3;
@@ -78,6 +79,7 @@ class Header
 #include "sounds.hpp"
 #include "briefings.hpp"
 
+#include "scripts\POLL\ui.hpp"
 #include "scripts\WLC\ui.hpp"
 #include "config\customization.hpp"
 #include "config\tasks.hpp"

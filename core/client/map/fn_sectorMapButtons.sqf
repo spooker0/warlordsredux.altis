@@ -41,6 +41,24 @@ private _fastTravelSeizedExecute = {
     ]
 ] call WL2_fnc_addTargetMapButton;
 
+// Fast Travel Sector HQ
+private _fastTravelSectorHQExecute = {
+    params ["_sector"];
+    BIS_WL_targetSector = _sector;
+    [5, ""] spawn WL2_fnc_executeFastTravel;
+};
+[
+    "FAST TRAVEL SECTOR HQ",
+    _fastTravelSectorHQExecute,
+    true,
+    "fastTravelSectorHQTarget",
+    [
+        0,
+        "SectorHQFT",
+        "Fast Travel"
+    ]
+] call WL2_fnc_addTargetMapButton;
+
 // Fast Travel Conflict Button
 private _fastTravelConflictExecute = {
     params ["_sector"];

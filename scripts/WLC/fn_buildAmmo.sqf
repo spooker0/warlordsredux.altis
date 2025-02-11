@@ -43,7 +43,7 @@ private _currentLoadoutMags = _currentLoadout getOrDefault ["magazines", []];
 } forEach (_currentLoadoutMags + _magazines);
 
 private _requiredLevel = (_customization getOrDefault ["level", 0]) max (_currentLoadout getOrDefault ["level", 0]);
-private _playerLevel = ["getLevel", player] call WLC_fnc_getLevelInfo;
+private _playerLevel = ["getLevel"] call WLC_fnc_getLevelInfo;
 if (_requiredLevel <= _playerLevel) then {
     profileNamespace setVariable [format ["WLC_%1_Ammo", _selectedType], _selection];
 } else {

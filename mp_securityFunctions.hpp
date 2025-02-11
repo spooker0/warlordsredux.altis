@@ -8,12 +8,20 @@ class CfgRemoteExec {
 			allowedTargets = 0;
 		};
 
+		class APS_fnc_lagProtectionServer {
+			allowedTargets = 2;
+		};
+
 		class APS_fnc_serverHandleAPS {
 			allowedTargets = 2;
 		};
 
 		class APS_fnc_setupProjectiles {
 			allowedTargets = 0;
+		};
+
+		class WL2_fnc_lagMessageHandler {
+			allowedTargets = 2;
 		};
 
 		class WL2_fnc_claimAction {
@@ -140,26 +148,6 @@ class CfgRemoteExec {
 			allowedTargets = 0;
 		};
 
-		class WLC_fnc_action {
-			allowedTargets = 0;
-		};
-
-		class WLC_fnc_clientEquip {
-			allowedTargets = 0;
-		};
-
-		class WLC_fnc_levelUp {
-			allowedTargets = 0;
-		};
-
-		class WLC_fnc_serverRequest {
-			allowedTargets = 2;
-		};
-
-		class WLC_fnc_setScore {
-			allowedTargets = 2;
-		};
-
 		class WLM_fnc_applyPylon {
 			allowedTargets = 0;
 		};
@@ -182,6 +170,14 @@ class CfgRemoteExec {
 
 		class SQD_fnc_server {
 			allowedTargets = 2;
+		};
+
+		class POLL_fnc_openPoll {
+			allowedTargets = 0;
+		};
+
+		class POLL_fnc_vote {
+			allowedTargets = 0;
 		};
 
 		//Don't touch
@@ -275,6 +271,18 @@ class CfgRemoteExec {
 		};
 
 		class setFuelConsumptionCoef {
+			allowedTargets = 0;
+		};
+
+		class setVehicleReceiveRemoteTargets {
+			allowedTargets = 0;
+		};
+
+		class setVehicleReportRemoteTargets {
+			allowedTargets = 0;
+		};
+
+		class setVehicleReportOwnPosition {
 			allowedTargets = 0;
 		};
 	};

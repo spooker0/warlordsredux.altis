@@ -1,6 +1,6 @@
 class TaskDestroyHunter: WLTaskSearchAndDestroy {
-    name = "Kill: Hunter";
-    description = "Destroy a Hunter to complete this task.";
+    nameArgs[] = {"Hunter"};
+    descArgs[] = {"'Hunter'"};
     reward = 100;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: Hunter";
@@ -9,8 +9,8 @@ class TaskDestroyHunter: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyProwlerAT: WLTaskSearchAndDestroy {
-    name = "Kill: Prowler (AT)";
-    description = "Destroy a Prowler (AT) to complete this task.";
+    nameArgs[] = {"Prowler (AT)"};
+    descArgs[] = {"'Prowler (AT)'"};
     reward = 200;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: Prowler (AT)";
@@ -19,18 +19,18 @@ class TaskDestroyProwlerAT: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyHunterHMG: WLTaskSearchAndDestroy {
-    name = "Kill: Hunter (HMG)";
-    description = "Destroy a Hunter (HMG) to complete this task.";
+    nameArgs[] = {"Hunter HMG"};
+    descArgs[] = {"'Hunter HMG'"};
     reward = 200;
     class DestroyTracker: WLProgressTracker {
-        id = "Kill: Hunter (HMG)";
+        id = "Kill: Hunter HMG";
         threshold = 1;
     };
 };
 
 class TaskDestroyANMPQRadar: WLTaskSearchAndDestroy {
-    name = "Kill: AN/MPQ-105 Radar";
-    description = "Destroy an AN/MPQ-105 Radar to complete this task.";
+    nameArgs[] = {"AN/MPQ-105 Radar"};
+    descArgs[] = {"'AN/MPQ-105 Radar'"};
     reward = 300;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: AN/MPQ-105 Radar";
@@ -39,8 +39,8 @@ class TaskDestroyANMPQRadar: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyDefender: WLTaskSearchAndDestroy {
-    name = "Kill: MIM-145 Defender";
-    description = "Destroy a MIM-145 Defender to complete this task.";
+    nameArgs[] = {"MIM-145 Defender"};
+    descArgs[] = {"'MIM-145 Defender'"};
     reward = 300;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: MIM-145 Defender";
@@ -49,8 +49,8 @@ class TaskDestroyDefender: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyMarshall: WLTaskSearchAndDestroy {
-    name = "Kill: AMV-7 Marshall";
-    description = "Destroy an AMV-7 Marshall to complete this task.";
+    nameArgs[] = {"AMV-7 Marshall"};
+    descArgs[] = {"'AMV-7 Marshall'"};
     reward = 400;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: AMV-7 Marshall";
@@ -59,8 +59,8 @@ class TaskDestroyMarshall: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyRhino: WLTaskSearchAndDestroy {
-    name = "Kill: Rhino MGS";
-    description = "Destroy a Rhino MGS to complete this task.";
+    nameArgs[] = {"Rhino MGS"};
+    descArgs[] = {"'Rhino MGS'"};
     reward = 400;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: Rhino MGS";
@@ -69,8 +69,8 @@ class TaskDestroyRhino: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroySlammerUP: WLTaskSearchAndDestroy {
-    name = "Kill: M2A4 Slammer UP";
-    description = "Destroy an M2A4 Slammer UP to complete this task.";
+    nameArgs[] = {"M2A4 Slammer UP"};
+    descArgs[] = {"'M2A4 Slammer UP'"};
     reward = 500;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: M2A4 Slammer UP";
@@ -79,8 +79,8 @@ class TaskDestroySlammerUP: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroySandstorm: WLTaskSearchAndDestroy {
-    name = "Kill: M5 Sandstorm MLRS";
-    description = "Destroy an M5 Sandstorm MLRS to complete this task.";
+    nameArgs[] = {"M5 Sandstorm MLRS"};
+    descArgs[] = {"'M5 Sandstorm MLRS'"};
     reward = 500;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: M5 Sandstorm MLRS";
@@ -89,8 +89,8 @@ class TaskDestroySandstorm: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyRiverine: WLTaskSearchAndDestroy {
-    name = "Kill: Riverine Command Boat";
-    description = "Destroy a Riverine Command Boat to complete this task.";
+    nameArgs[] = {"Riverine Command Boat"};
+    descArgs[] = {"'Riverine Command Boat'"};
     reward = 500;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: Riverine Command Boat";
@@ -99,8 +99,8 @@ class TaskDestroyRiverine: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyPawnee: WLTaskSearchAndDestroy {
-    name = "Kill: AH-9 Pawnee";
-    description = "Destroy an AH-9 Pawnee to complete this task.";
+    nameArgs[] = {"AH-9 Pawnee"};
+    descArgs[] = {"'AH-9 Pawnee'"};
     reward = 300;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: AH-9 Pawnee";
@@ -109,8 +109,8 @@ class TaskDestroyPawnee: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyBlackfoot: WLTaskSearchAndDestroy {
-    name = "Kill: AH-99 Blackfoot";
-    description = "Destroy an AH-99 Blackfoot to complete this task.";
+    nameArgs[] = {"AH-99 Blackfoot"};
+    descArgs[] = {"'AH-99 Blackfoot'"};
     reward = 500;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: AH-99 Blackfoot";
@@ -119,8 +119,8 @@ class TaskDestroyBlackfoot: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyArmedBlackfish: WLTaskSearchAndDestroy {
-    name = "Kill: V-44 X Blackfish (Armed)";
-    description = "Destroy a V-44 X Blackfish (Armed) to complete this task.";
+    nameArgs[] = {"V-44 X Blackfish (Armed)"};
+    descArgs[] = {"'V-44 X Blackfish (Armed)'"};
     reward = 500;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: V-44 X Blackfish (Armed)";
@@ -129,8 +129,8 @@ class TaskDestroyArmedBlackfish: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyWipeout: WLTaskSearchAndDestroy {
-    name = "Kill: A-164 Wipeout (CAS)";
-    description = "Destroy an A-164 Wipeout (CAS) to complete this task.";
+    nameArgs[] = {"A-164 Wipeout (CAS)"};
+    descArgs[] = {"'A-164 Wipeout (CAS)'"};
     reward = 1000;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: A-164 Wipeout (CAS)";
@@ -139,8 +139,8 @@ class TaskDestroyWipeout: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyBlackWasp: WLTaskSearchAndDestroy {
-    name = "Kill: F/A-181 Black Wasp II";
-    description = "Destroy an F/A-181 Black Wasp II to complete this task.";
+    nameArgs[] = {"F/A-181 Black Wasp II"};
+    descArgs[] = {"'F/A-181 Black Wasp II'"};
     reward = 1500;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: F/A-181 Black Wasp II";
@@ -149,8 +149,8 @@ class TaskDestroyBlackWasp: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyIfrit: WLTaskSearchAndDestroy {
-    name = "Kill: Ifrit";
-    description = "Destroy an Ifrit to complete this task.";
+    nameArgs[] = {"Ifrit"};
+    descArgs[] = {"'Ifrit'"};
     reward = 100;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: Ifrit";
@@ -159,8 +159,8 @@ class TaskDestroyIfrit: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyQilinAT: WLTaskSearchAndDestroy {
-    name = "Kill: Qilin (AT)";
-    description = "Destroy a Qilin (AT) to complete this task.";
+    nameArgs[] = {"Qilin (AT)"};
+    descArgs[] = {"'Qilin (AT)'"};
     reward = 100;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: Qilin (AT)";
@@ -169,18 +169,18 @@ class TaskDestroyQilinAT: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyIfritHMG: WLTaskSearchAndDestroy {
-    name = "Kill: Ifrit (HMG)";
-    description = "Destroy an Ifrit (HMG) to complete this task.";
+    nameArgs[] = {"Ifrit HMG"};
+    descArgs[] = {"'Ifrit HMG'"};
     reward = 200;
     class DestroyTracker: WLProgressTracker {
-        id = "Kill: Ifrit (HMG)";
+        id = "Kill: Ifrit HMG";
         threshold = 1;
     };
 };
 
 class TaskDestroyMarid: WLTaskSearchAndDestroy {
-    name = "Kill: MSE-3 Marid";
-    description = "Destroy an MSE-3 Marid to complete this task.";
+    nameArgs[] = {"MSE-3 Marid"};
+    descArgs[] = {"'MSE-3 Marid'"};
     reward = 200;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: MSE-3 Marid";
@@ -189,8 +189,8 @@ class TaskDestroyMarid: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyCronusRadar: WLTaskSearchAndDestroy {
-    name = "Kill: R-750 Cronus Radar";
-    description = "Destroy an R-750 Cronus Radar to complete this task.";
+    nameArgs[] = {"R-750 Cronus Radar"};
+    descArgs[] = {"'R-750 Cronus Radar'"};
     reward = 300;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: R-750 Cronus Radar";
@@ -199,8 +199,8 @@ class TaskDestroyCronusRadar: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyRhea: WLTaskSearchAndDestroy {
-    name = "Kill: S-750 Rhea";
-    description = "Destroy an S-750 Rhea to complete this task.";
+    nameArgs[] = {"S-750 Rhea"};
+    descArgs[] = {"'S-750 Rhea'"};
     reward = 300;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: S-750 Rhea";
@@ -209,8 +209,8 @@ class TaskDestroyRhea: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyKamysh: WLTaskSearchAndDestroy {
-    name = "Kill: BTR-K Kamysh";
-    description = "Destroy a BTR-K Kamysh to complete this task.";
+    nameArgs[] = {"BTR-K Kamysh"};
+    descArgs[] = {"'BTR-K Kamysh'"};
     reward = 400;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: BTR-K Kamysh";
@@ -219,8 +219,8 @@ class TaskDestroyKamysh: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyVarsuk: WLTaskSearchAndDestroy {
-    name = "Kill: T-100 Varsuk";
-    description = "Destroy a T-100 Varsuk to complete this task.";
+    nameArgs[] = {"T-100 Varsuk"};
+    descArgs[] = {"'T-100 Varsuk'"};
     reward = 500;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: T-100 Varsuk";
@@ -229,8 +229,8 @@ class TaskDestroyVarsuk: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyAngaraK: WLTaskSearchAndDestroy {
-    name = "Kill: T-140K Angara";
-    description = "Destroy a T-140K Angara to complete this task.";
+    nameArgs[] = {"T-140K Angara"};
+    descArgs[] = {"'T-140K Angara'"};
     reward = 500;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: T-140K Angara";
@@ -239,8 +239,8 @@ class TaskDestroyAngaraK: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyZamakMRL: WLTaskSearchAndDestroy {
-    name = "Kill: Zamak MRL";
-    description = "Destroy a Zamak MRL to complete this task.";
+    nameArgs[] = {"Zamak MRL"};
+    descArgs[] = {"'Zamak MRL'"};
     reward = 500;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: Zamak MRL";
@@ -249,8 +249,8 @@ class TaskDestroyZamakMRL: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyAlligator: WLTaskSearchAndDestroy {
-    name = "Kill: Alligator Attack Boat";
-    description = "Destroy an Alligator Attack Boat to complete this task.";
+    nameArgs[] = {"Alligator Attack Boat"};
+    descArgs[] = {"'Alligator Attack Boat'"};
     reward = 500;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: Alligator Attack Boat";
@@ -259,8 +259,8 @@ class TaskDestroyAlligator: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyOrca: WLTaskSearchAndDestroy {
-    name = "Kill: PO-30 Orca";
-    description = "Destroy a PO-30 Orca to complete this task.";
+    nameArgs[] = {"PO-30 Orca"};
+    descArgs[] = {"'PO-30 Orca'"};
     reward = 500;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: PO-30 Orca";
@@ -269,8 +269,8 @@ class TaskDestroyOrca: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyKajman: WLTaskSearchAndDestroy {
-    name = "Kill: Mi-48 Kajman";
-    description = "Destroy a Mi-48 Kajman to complete this task.";
+    nameArgs[] = {"Mi-48 Kajman"};
+    descArgs[] = {"'Mi-48 Kajman'"};
     reward = 500;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: Mi-48 Kajman";
@@ -279,8 +279,8 @@ class TaskDestroyKajman: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyNeo: WLTaskSearchAndDestroy {
-    name = "Kill: To-199 Neophron (CAS)";
-    description = "Destroy a To-199 Neophron (CAS) to complete this task.";
+    nameArgs[] = {"To-199 Neophron (CAS)"};
+    descArgs[] = {"'To-199 Neophron (CAS)'"};
     reward = 1000;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: To-199 Neophron (CAS)";
@@ -289,8 +289,8 @@ class TaskDestroyNeo: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyShikra: WLTaskSearchAndDestroy {
-    name = "Kill: To-201 Shikra";
-    description = "Destroy a To-201 Shikra to complete this task.";
+    nameArgs[] = {"To-201 Shikra"};
+    descArgs[] = {"'To-201 Shikra'"};
     reward = 1500;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: To-201 Shikra";
@@ -299,21 +299,11 @@ class TaskDestroyShikra: WLTaskSearchAndDestroy {
 };
 
 class TaskDestroyDeviceTruck: WLTaskSearchAndDestroy {
-    name = "Kill: Tempest (Device)";
-    description = "Destroy a Tempest Device Truck to complete this task. When fully active, device trucks can repel guided missiles and jam drones.";
+    nameArgs[] = {"Tempest (Device)"};
+    description = $STR_WLT_taskDestroyDeviceTruckDesc;
     reward = 300;
     class DestroyTracker: WLProgressTracker {
         id = "Kill: Tempest (Device)";
-        threshold = 1;
-    };
-};
-
-class TaskDestroyOffroadRecon: WLTaskSearchAndDestroy {
-    name = "Kill: Offroad (Recon)";
-    description = "Destroy an Offroad (Recon) to complete this task. Reconnaissance vehicles are equipped with a scanner that consume fuel to reveal nearby enemies.";
-    reward = 300;
-    class DestroyTracker: WLProgressTracker {
-        id = "Kill: Offroad (Recon)";
         threshold = 1;
     };
 };

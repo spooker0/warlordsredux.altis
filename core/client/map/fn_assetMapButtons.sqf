@@ -167,26 +167,90 @@ if (unitIsUAV _asset && getConnectedUAV player != _asset && _access # 0) then {
     }, true] call WL2_fnc_addTargetMapButton;
 };
 
-private _fastTravelSLCost = getMissionConfigValue ["BIS_WL_fastTravelCostSquadLeader", 10];
-private _eligibleFastTravelSL = (["FTSquadLeader", [], "", "", "", [], _fastTravelSLCost, "Fast Travel"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
-private _mySquadLeader = ['getMySquadLeader'] call SQD_fnc_client;
-private _isMySquadLeader = getPlayerID _asset == _mySquadLeader;
-private _moneySign = [BIS_WL_playerSide] call WL2_fnc_getMoneySign;
-if (isPlayer _asset && _eligibleFastTravelSL && _isMySquadLeader) then {
-    private _fastTravelText = format ["FAST TRAVEL SL (%1%2)", _moneySign, _fastTravelSLCost];
-    [_fastTravelText, {
-        params ["_asset"];
-        private _fastTravelSLCost = getMissionConfigValue ["BIS_WL_fastTravelCostSquadLeader", 10];
-        private _eligibleFastTravelSL = (["FTSquadLeader", [], "", "", "", [], _fastTravelSLCost, "Fast Travel"] call WL2_fnc_purchaseMenuAssetAvailability) # 0;
-        private _mySquadLeader = ['getMySquadLeader'] call SQD_fnc_client;
-        private _isMySquadLeader = getPlayerID _asset == _mySquadLeader;
-        if (isPlayer _asset && _eligibleFastTravelSL && _isMySquadLeader) then {
-            ["ftSquadLeader"] spawn SQD_fnc_client;
-            private _ftNextUseVar = format ["BIS_WL_FTSLNextUse_%1", getPlayerUID player];
-            missionNamespace setVariable [_ftNextUseVar, serverTime + WL_FAST_TRAVEL_SQUAD_LEADER_RATE];
-        };
-    }, true] call WL2_fnc_addTargetMapButton;
+// Fast Travel SL Button
+private _fastTravelSLExecute = {
+    params ["_asset"];
+    ["ftSquadLeader"] spawn SQD_fnc_client;
+    private _ftNextUseVar = format ["BIS_WL_FTSLNextUse_%1", getPlayerUID player];
+    missionNamespace setVariable [_ftNextUseVar, serverTime + WL_FAST_TRAVEL_SQUAD_TIMER];
 };
+[
+    "FAST TRAVEL SL",
+    _fastTravelSLExecute,
+    true,
+    "fastTravelSL",
+    [
+        getMissionConfigValue ["BIS_WL_fastTravelCostSquadLeader", 10],
+        "FTSquadLeader",
+        "Fast Travel"
+    ]
+] call WL2_fnc_addTargetMapButton;
+
+// Fast Travel Squad Button
+private _fastTravelSquadmateExecute = {
+    params ["_asset"];
+    private _playerId = getPlayerID _asset;
+    ["ftSquad", [_playerId]] spawn SQD_fnc_client;
+};
+[
+    "FAST TRAVEL SQUAD",
+    _fastTravelSquadmateExecute,
+    true,
+    "fastTravelSquad",
+    [
+        0,
+        "FTSquad",
+        "Fast Travel"
+    ]
+] call WL2_fnc_addTargetMapButton;
+
+// Fast Travel Sector HQ
+private _fastTravelSectorHQExecute = {
+    params ["_asset"];
+    private _findSector = (BIS_WL_sectorsArray # 2) select {
+        (_x getVariable ["WL_sectorHQ", objNull]) == _asset
+    };
+    BIS_WL_targetSector = (_findSector # 0);
+    [5, ""] spawn WL2_fnc_executeFastTravel;
+};
+[
+    "FAST TRAVEL SECTOR HQ",
+    _fastTravelSectorHQExecute,
+    true,
+    "fastTravelSectorHQ",
+    [
+        0,
+        "SectorHQFT",
+        "Fast Travel"
+    ]
+] call WL2_fnc_addTargetMapButton;
+
+#if WL_SECTOR_HQ_DEBUG
+// Fast Travel Sector HQ Test
+private _fastTravelSectorHQTestExecute = {
+    params ["_asset"];
+    private _findSector = (BIS_WL_sectorsArray # 2) select {
+        (_x getVariable ["WL_sectorHQ", objNull]) == _asset
+    };
+    BIS_WL_targetSector = (_findSector # 0);
+    systemChat "Testing Sector HQ spawns. Force respawn to end test.";
+    while { alive player } do {
+        [5, ""] spawn WL2_fnc_executeFastTravel;
+        sleep 3;
+    };
+};
+[
+    "SECTOR HQ SPAWN TEST",
+    _fastTravelSectorHQTestExecute,
+    true,
+    "fastTravelSectorHQ",
+    [
+        0,
+        "SectorHQFT",
+        "Fast Travel"
+    ]
+] call WL2_fnc_addTargetMapButton;
+#endif
 
 [_dialog, _offsetX, _offsetY, _menuButtons] spawn {
     params ["_dialog", "_originalMouseX", "_originalMouseY", "_menuButtons"];

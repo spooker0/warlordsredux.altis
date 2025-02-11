@@ -451,6 +451,37 @@ if (count _nonHornWeapons == 0) exitWith {
 };
 
 _asset spawn {
+    params ["_asset"];
+
+    private _display = findDisplay WLM_DISPLAY;
+
+    private _applyButtonControl = _display displayCtrl WLM_APPLY_BUTTON;
+    private _applyOriginalTooltip = ctrlTooltip _applyButtonControl;
+	private _rearmButtonControl = _display displayCtrl WLM_REARM_BUTTON;
+    private _rearmOriginalTooltip = ctrlTooltip _rearmButtonControl;
+
+    while {!isNull _display} do {
+        private _nonLocalCrew = (crew _asset) select {
+            !(local _x);
+        };
+
+        if (count _nonLocalCrew > 0) then {
+            _applyButtonControl ctrlSetTooltip "Remove player gunners before rearming.";
+            _rearmButtonControl ctrlSetTooltip "Remove player gunners before rearming.";
+            _applyButtonControl ctrlEnable false;
+            _rearmButtonControl ctrlEnable false;
+        } else {
+            _applyButtonControl ctrlSetTooltip _applyOriginalTooltip;
+            _rearmButtonControl ctrlSetTooltip _rearmOriginalTooltip;
+            _applyButtonControl ctrlEnable true;
+            _rearmButtonControl ctrlEnable true;
+        };
+
+        sleep 1;
+    };
+};
+
+_asset spawn {
 	params ["_asset"];
     private _display = findDisplay WLM_DISPLAY;
     private _rearmButtonControl = _display displayCtrl WLM_REARM_BUTTON;

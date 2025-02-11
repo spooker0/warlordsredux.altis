@@ -1,7 +1,7 @@
 class TaskFastTravelSeized: WLTaskTutorialFastTravel {
-    name = "Fast Travel";
-    description = "Fast travel to an owned sector by using the asset buy menu (Hold %1 key) -> Fast Travel -> Fast Travel to Seized Sector.";
-    args[] = {
+    name = $STR_WLT_taskFastTravelSeizedName;
+    description = $STR_WLT_taskFastTravelSeizedDesc;
+    descArgs[] = {
         "actionKeysNames 'gear'"
     };
     prerequisites[] = {};
@@ -9,9 +9,9 @@ class TaskFastTravelSeized: WLTaskTutorialFastTravel {
 };
 
 class TaskFastTravelConflict: WLTaskTutorialFastTravel {
-    name = "Head to the Frontline";
-    description = "Fast travel to a sector in conflict by using the asset buy menu (Hold %1 key) -> Fast Travel -> Fast Travel to Contested Sector.";
-    args[] = {
+    name = $STR_WLT_taskFastTravelConflictName;
+    description = $STR_WLT_taskFastTravelConflictDesc;
+    descArgs[] = {
         "actionKeysNames 'gear'"
     };
     prerequisites[] = {
@@ -21,9 +21,9 @@ class TaskFastTravelConflict: WLTaskTutorialFastTravel {
 };
 
 class TaskFastTravelFTVehicle: WLTaskTutorialFastTravel {
-    name = "Use Spawn Truck";
-    description = "Fast travel to a spawn truck by using the asset buy menu (Hold %1 key) -> Fast Travel -> Fast Travel to Spawn Truck. If one does not exist on your team, you may need to purchase one first.";
-    args[] = {
+    name = $STR_WLT_taskFastTravelFTVehicleName;
+    description = $STR_WLT_taskFastTravelFTVehicleDesc;
+    descArgs[] = {
         "actionKeysNames 'gear'"
     };
     prerequisites[] = {
@@ -33,9 +33,9 @@ class TaskFastTravelFTVehicle: WLTaskTutorialFastTravel {
 };
 
 class TaskFastTravelFTPod: WLTaskTutorialFastTravel {
-    name = "Use Medical Pod";
-    description = "Fast travel to a medical pod by using the asset buy menu (Hold %1 key) -> Fast Travel -> Fast Travel to Medical Pod. If one does not exist on your team, you may need to purchase one first.";
-    args[] = {
+    name = $STR_WLT_taskFastTravelFTPodName;
+    description = $STR_WLT_taskFastTravelFTPodDesc;
+    descArgs[] = {
         "actionKeysNames 'gear'"
     };
     prerequisites[] = {
@@ -45,9 +45,9 @@ class TaskFastTravelFTPod: WLTaskTutorialFastTravel {
 };
 
 class TaskBuyTent: WLTaskTutorialFastTravel {
-    name = "Tents!";
-    description = "Purchase a fast travel tent by using the asset buy menu (Hold %1 key) -> Fast Travel -> Purchase Fast Travel Tent. Keep in mind that this tent is one use only, and you'll need to buy another if you lose it.";
-    args[] = {
+    name = $STR_WLT_taskBuyTentName;
+    description = $STR_WLT_taskBuyTentDesc;
+    descArgs[] = {
         "actionKeysNames 'gear'"
     };
     prerequisites[] = {
@@ -57,8 +57,8 @@ class TaskBuyTent: WLTaskTutorialFastTravel {
 };
 
 class TaskPlaceTent: WLTaskTutorialFastTravel {
-    name = "Deploy Tent";
-    description = "Once you have purchased a fast travel tent, you can place it by using your scroll wheel menu and selecting the Place Fast Travel Tent option.";
+    name = $STR_WLT_taskPlaceTentName;
+    description = $STR_WLT_taskPlaceTentDesc;
     prerequisites[] = {
         "TaskBuyTent"
     };
@@ -66,9 +66,9 @@ class TaskPlaceTent: WLTaskTutorialFastTravel {
 };
 
 class TaskFastTravelTent: WLTaskTutorialFastTravel {
-    name = "Go Camping";
-    description = "Fast travel to a fast travel tent by using the asset buy menu (Hold %1 key) -> Fast Travel -> Fast Travel to Fast Travel Tent. This consumes the fast travel tent.";
-    args[] = {
+    name = $STR_WLT_taskFastTravelTentName;
+    description = $STR_WLT_taskFastTravelTentDesc;
+    descArgs[] = {
         "actionKeysNames 'gear'"
     };
     prerequisites[] = {
@@ -78,9 +78,9 @@ class TaskFastTravelTent: WLTaskTutorialFastTravel {
 };
 
 class TaskAirAssault: WLTaskTutorialFastTravel {
-    name = "Airborne";
-    description = "Air assault to a sector by using the asset buy menu (Hold %1 key) -> Fast Travel -> Fast Travel Air Assault. You are expected to participate, not to survive.";
-    args[] = {
+    name = $STR_WLT_taskAirAssaultName;
+    description = $STR_WLT_taskAirAssaultDesc;
+    descArgs[] = {
         "actionKeysNames 'gear'"
     };
     prerequisites[] = {
@@ -90,9 +90,9 @@ class TaskAirAssault: WLTaskTutorialFastTravel {
 };
 
 class TaskVehicleParadrop: WLTaskTutorialFastTravel {
-    name = "Vehicle Paradrop";
-    description = "Paradrop a vehicle by using the asset buy menu (Hold %1 key) -> Fast Travel -> Fast Travel Vehicle Paradrop. It is advisable to pick a sector with flat, empty terrain and no enemies nearby.";
-    args[] = {
+    name = $STR_WLT_taskVehicleParadropName;
+    description = $STR_WLT_taskVehicleParadropDesc;
+    descArgs[] = {
         "actionKeysNames 'gear'"
     };
     prerequisites[] = {

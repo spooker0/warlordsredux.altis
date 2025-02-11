@@ -31,6 +31,9 @@ class CfgFunctions {
 		};
 		class APS {
 			file = "scripts\APS\Scripts\APS";
+			class lagProtection {};
+			class lagProtectionServer {};
+			class projectileStateUpdate {};
 			class setupProjectiles {};
 			class firedProjectile {};
 			class serverHandleAPS {};
@@ -73,6 +76,14 @@ class CfgFunctions {
 			class closeReportMenu {};
 		};
 	};
+	class POLL {
+		class Default {
+			file = "scripts\Poll";
+			class chatCommand {};
+			class openPoll {};
+			class vote {};
+		};
+	};
 	class SQD {
 		class Default {
 			file = "scripts\Squads";
@@ -102,6 +113,7 @@ class CfgFunctions {
 			class hintHandle {};
 			class initClient {};
 			class interceptAction {};
+			class lagMessageDisplay {};
 			class mineLimitHint {};
 			class onPause {};
 			class pingFix {};
@@ -113,11 +125,13 @@ class CfgFunctions {
 			class repackMagazines {};
 			class revive {};
 			class rita {};
+			class spectator {};
 			class sideToFaction {};
-			class spectrumAction {};
+			class spectrumInterface {};
 			class teammatesAvailability {};
 			class timer {};
 			class triggerPurchase {};
+			class updateLevelDisplay {};
 			class wasMain {};
 			class welcome {};
 			class zoneRestrictionHandleClient {};
@@ -163,6 +177,7 @@ class CfgFunctions {
 		};
 		class ClientDraw {
 			file = "core\client\draw";
+			class drawAssetName {};
 			class drawJammerCircle {};
 			class getDir {};
 			class getPos {};
@@ -174,6 +189,7 @@ class CfgFunctions {
 			class iconText {};
 			class iconTextSectorScan {};
 			class iconType {};
+			class isScannerMunition {};
 			class mapIcons {};
 			class refreshCurrentTargetData {};
 			class refreshOSD {};
@@ -245,6 +261,7 @@ class CfgFunctions {
 			class orderLastLoadout {};
 			class orderNaval {};
 			class orderSavedLoadout {};
+			class orderSectorHQ {};
 			class orderSectorScan {};
 			class orderVehicle {};
 			class requestPurchase {};
@@ -259,6 +276,7 @@ class CfgFunctions {
 			class checkDead {};
 			class checkFastTravelRespawn {};
 			class checkFastTravelSL {};
+			class checkFastTravelSquad {};
 			class checkFunds {};
 			class checkGreenSwitch {};
 			class checkGroundVehicleDriver {};
@@ -269,12 +287,14 @@ class CfgFunctions {
 			class checkIsOrdering {};
 			class checkLastLoadout {};
 			class checkNearbyEnemies {};
+			class checkNoSectorHQ {};
 			class checkParadropCooldown {};
 			class checkPlayerInVehicle {};
 			class checkRequirements {};
 			class checkResetSectorTimer {};
 			class checkResetVehicle {};
 			class checkSavedLoadout {};
+			class checkSectorHQFT {};
 			class checkSelectedUnits {};
 			class checkSurrender {};
 			class checkTargetEnemyBase {};
@@ -338,6 +358,7 @@ class CfgFunctions {
 			class incomePayoff {};
 			class initServer {};
 			class killRewardHandle {};
+			class lagMessageHandler {};
 			class processRunways {};
 			class selectTarget {};
 			class serverEHs {};
@@ -350,6 +371,7 @@ class CfgFunctions {
 		};
 		class ServerSector {
 			file = "core\server\sector";
+			class calcHomeBases {};
 			class getCapValues {};
 			class populateSector {};
 			class populateCarrierSector {};
@@ -378,7 +400,7 @@ class CfgFunctions {
 			class onButtonSelect {};
 			class onRespawn {};
 			class onSelection {};
-			class serverRequest {};
+			class processSelection {};
 			class setScore {};
 			class updateItemCost {};
 		};

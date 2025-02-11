@@ -104,8 +104,4 @@ class LightVehicles {
         vehicleSpawn = 1;
         aps = 1;
     };
-
-    class I_E_SAM_System_03_F {
-        killReward = 300;
-    };
 };

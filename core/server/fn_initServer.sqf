@@ -16,16 +16,16 @@ west setFriend [civilian, 1];
 east setFriend [civilian, 1];
 resistance setFriend [civilian, 1];
 
-if (WL_FACTION_THREE_ENABLED) then {
-	{
-		private _group = createGroup independent;
-		_group deleteGroupWhenEmpty true;
+#if WL_FACTION_THREE_ENABLED
+{
+	private _group = createGroup independent;
+	_group deleteGroupWhenEmpty true;
 
-		private _unit = _group createUnit ["I_Soldier_TL_F", [-1000, -1000, 0], [], 0, "NONE"];
-		_unit setVariable ["WL2_isPlayableGreen", true, true];
-		_unit allowDamage false;
-	} forEach [1, 2, 3, 4, 5];
-};
+	private _unit = _group createUnit ["I_Soldier_TL_F", [-1000, -1000, 0], [], 0, "NONE"];
+	_unit setVariable ["WL2_isPlayableGreen", true, true];
+	_unit allowDamage false;
+} forEach [1, 2, 3, 4, 5];
+#endif
 
 call SQD_fnc_initServer;
 
@@ -60,21 +60,17 @@ call WL2_fnc_processRunways;
 
 0 spawn {
 	while {!BIS_WL_missionEnd} do {
-		if (dayTime >= 18 || dayTime <= 6) then {
-			setTimeMultiplier 60;
-		} else {
-			setTimeMultiplier 1;
-		};
-
-		sleep 60;
-	};
-};
-
-0 spawn {
-	while {!BIS_WL_missionEnd} do {
 		_overcastPreset = random 1;
-		(7200 * timeMultiplier) setOvercast _overcastPreset;
-		waitUntil {sleep 600; 0 setFog 0; 10e10 setFog 0; 0 setRain 0; 10e10 setRain 0; simulWeatherSync; abs (overcast - _overcastPreset) < 0.2};
+		7200 setOvercast _overcastPreset;
+		waitUntil {
+			sleep 600;
+			0 setFog 0;
+			10e10 setFog 0;
+			0 setRain 0;
+			10e10 setRain 0;
+			simulWeatherSync;
+			abs (overcast - _overcastPreset) < 0.2
+		};
 	};
 };
 

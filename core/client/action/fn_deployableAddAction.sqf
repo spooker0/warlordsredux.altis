@@ -33,7 +33,7 @@ private _deployActionId = _asset addAction [
                     _eligibilityQuery # 2;
                 };
 
-                [true, [_asset, _assetToLoad, _offset]] remoteExec ["WL2_fnc_attachDetach", 2];
+                [true, [_asset, _assetToLoad, _offset]] remoteExec ["WL2_fnc_attachDetach", _assetToLoad];
             };
         } else {
             [_asset, _assetLoadedItem] spawn {
@@ -63,7 +63,7 @@ private _deployActionId = _asset addAction [
                 };
 
                 private _offset = _deploymentResult # 2;
-                [false, [_asset, _assetLoadedItem, _offset, _position, _direction]] remoteExec ["WL2_fnc_attachDetach", 2];
+                [false, [_asset, _assetLoadedItem, _offset, _position, _direction]] remoteExec ["WL2_fnc_attachDetach", _assetLoadedItem];
             };
         };
 	},

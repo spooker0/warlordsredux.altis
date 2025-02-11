@@ -53,6 +53,47 @@ class HeavyVehicles {
         aps = 2;
     };
 
+    class B_APC_Wheeled_01_cannon_F {
+        cost = 2700;
+        requirements[] = {};
+        rearm = 500;
+        killReward = 300;
+        capValue = 3;
+        aps = 2;
+    }; // "AMV-7 Marshall"
+
+    class B_APC_Wheeled_01_recon_F {
+        name = "AMV-7 Marshall (Recon)";
+        description = "AMV-7 Marshall (Recon) is a variant of the AMV-7 Marshall armed with a powerful scanner.";
+        spawn = "B_APC_Wheeled_01_cannon_F";
+        variant = 1;
+        cost = 2700;
+        requirements[] = {};
+        rearm = 500;
+        killReward = 300;
+        capValue = 1;
+        aps = 2;
+
+        hasHMD = 1;
+        hasScanner = 1;
+
+        class Gunner: WLTurretDefaults {
+            turret[] = { 0 };
+            hideTurret = 1;
+            removeMagazines[] = {
+                "60Rnd_40mm_GPR_Tracer_Red_shells",
+                "40Rnd_40mm_APFSDS_Tracer_Red_shells",
+                "200Rnd_762x51_Belt_Red"
+            };
+            removeWeapons[] = {
+                "autocannon_40mm_CTWS",
+                "LMG_coax"
+            };
+            addMagazines[] = {};
+            addWeapons[] = {};
+        };
+    };
+
     class B_APC_Wheeled_03_cannon_F {
         cost = 2900;
         requirements[] = {};
@@ -132,15 +173,6 @@ class HeavyVehicles {
     //     };
     // };
 
-    class B_APC_Wheeled_01_cannon_F {
-        cost = 2900;
-        requirements[] = {};
-        rearm = 500;
-        killReward = 300;
-        capValue = 3;
-        aps = 2;
-    }; // "AMV-7 Marshall"
-
     class B_APC_Wheeled_01_cannon_up_F {
         name = "AMV-7 Marshall UP";
         description = "AMV-7 Marshall UP is a variant of the AMV-7 Marshall armed with a larger magazine 40mm cannon.";
@@ -201,7 +233,7 @@ class HeavyVehicles {
                 "40Rnd_105mm_APFSDS_T_Red"
             };
             addWeapons[] = {
-                "cannon_105mm_VTOL_01"
+                "cannon_105mm"
             };
         };
     };

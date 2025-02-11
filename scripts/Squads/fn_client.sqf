@@ -176,7 +176,36 @@ switch (_action) do {
 
         sleep 1;
 
-        _tagAlong = (units player) select {
+        private _tagAlong = (units player) select {
+            (_x distance2D player <= 100) &&
+            (isNull objectParent _x) &&
+            alive _x &&
+            _x != player &&
+            _x getVariable ["BIS_WL_ownerAsset", "123"] == getPlayerUID player
+        };
+
+        {
+            _x setVehiclePosition [_destination, [], 5, "NONE"];
+        } forEach _tagAlong;
+
+        player setVehiclePosition [_destination, [], 5, "NONE"];
+
+        sleep 1;
+
+        titleCut ["", "BLACK IN", 1];
+    };
+    case "ftSquad": {
+        private _squadTarget = _params select 0;
+        private _squadTargetPlayer = _allPlayers select {getPlayerID _x == _squadTarget} select 0;
+
+        private _destination = getPosATL _squadTargetPlayer;
+
+        titleCut ["", "BLACK OUT", 1];
+        openMap [false, false];
+
+        sleep 1;
+
+        private _tagAlong = (units player) select {
             (_x distance2D player <= 100) &&
             (isNull objectParent _x) &&
             alive _x &&

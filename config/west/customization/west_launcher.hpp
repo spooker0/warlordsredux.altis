@@ -24,7 +24,7 @@ class Launcher {
 
         class HeavyHEAT55: WLCAmmo {
             name = "5x HEAT55";
-            level = 100;
+            level = 6;
             cost = 100;
             magazines[] = {
                 { "MRAWS_HEAT55_F", 5 }

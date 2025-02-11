@@ -31,6 +31,16 @@ if (count _camo == 0) then {
     };
 } forEach _assetAppearanceDefaults;
 
+private _turretOverrides = missionNamespace getVariable ["WL2_turretOverrides", createHashMap];
+private _turretOverridesForVehicle = _turretOverrides getOrDefault [_orderedClass, []];
+{
+	private _turretOverride = _x;
+	private _hideTurret = getNumber (_turretOverride >> "hideTurret");
+	if (_hideTurret != 0) then {
+		_asset animateSource ["HideTurret", 1, true];
+	};
+} forEach _turretOverridesForVehicle;
+
 [player, "assembly"] call WL2_fnc_hintHandle;
 
 BIS_WL_spacePressed = false;
@@ -95,7 +105,10 @@ waitUntil {
     BIS_WL_spacePressed || BIS_WL_backspacePressed;
 };
 
-(findDisplay 46) displayRemoveEventHandler ["KeyDown", uiNamespace getVariable "BIS_WL_deployKeyHandle"];
+private _deployKeyHandle = uiNamespace getVariable ["BIS_WL_deployKeyHandle", nil];
+if !(isNil "_deployKeyHandle") then {
+    (findDisplay 46) displayRemoveEventHandler ["KeyDown", _deployKeyHandle];
+};
 uiNamespace setVariable ['BIS_WL_deployKeyHandle', nil];
 _offset set [1, _asset distance2D player];
 detach _asset;

@@ -97,27 +97,33 @@ if (_asset isKindOf "Man") then {
 	missionNamespace setVariable [_var, _vehicles, [2, clientOwner]];
 	0 remoteExec ["WL2_fnc_updateVehicleList", 2];
 
-	_asset setVehicleReceiveRemoteTargets true;
-	_asset setVehicleReportRemoteTargets true;
-	_asset setVehicleReportOwnPosition true;
+	[_asset, true] remoteExec ["setVehicleReceiveRemoteTargets", _asset, true];
+	[_asset, true] remoteExec ["setVehicleReportRemoteTargets", _asset, true];
+	[_asset, true] remoteExec ["setVehicleReportOwnPosition", _asset, true];
 
 	private _hasHMDMap = missionNamespace getVariable ["WL2_hasHMD", createHashMap];
 	if (_hasHMDMap getOrDefault [_assetActualType, false]) then {
 		// HMD missile alert system
 		_asset addEventHandler ["IncomingMissile", {
 			params ["_target", "_ammo", "_vehicle", "_instigator", "_missile"];
-			private _incomingMissiles = _target getVariable ["WL_incomingMissle", []];
+			private _incomingMissiles = _target getVariable ["WL_incomingMissiles", []];
 			_incomingMissiles pushBack _missile;
 			_incomingMissiles = _incomingMissiles select {
 				alive _x;
 			};
-			_target setVariable ["WL_incomingMissle", _incomingMissiles, true];
+			_target setVariable ["WL_incomingMissiles", _incomingMissiles, true];
+			_target setVariable ["WL_incomingLauncherLastKnown", _vehicle, true];
 		}];
 	};
 
 	private _hasScannerMap = missionNamespace getVariable ["WL2_hasScanner", createHashMap];
 	if (_hasScannerMap getOrDefault [_assetActualType, false]) then {
-		[_asset] remoteExec ["WL2_fnc_scannerAction", 0, true];
+		[_asset, false] remoteExec ["WL2_fnc_scannerAction", 0, true];
+	};
+
+	private _hasAWACSMap = missionNamespace getVariable ["WL2_hasAWACS", createHashMap];
+	if (_hasAWACSMap getOrDefault [_assetActualType, false]) then {
+		[_asset, true] remoteExec ["WL2_fnc_scannerAction", 0, true];
 	};
 
 	// handle WLT
@@ -290,18 +296,30 @@ if (_asset isKindOf "Man") then {
 
 		private _assetGrp = group _asset;
 		private _assetTypeName = [_asset] call WL2_fnc_getAssetTypeName;
-		_assetGrp setGroupIdGlobal [format ["%1#%2#%3", name _owner, _assetTypeName, groupId _assetGrp]];
-
+		_assetGrp setVariable ["WL2_assetOwner", _owner, true];
+		_assetGrp setVariable ["WL2_assetTypeName", _assetTypeName, true];
 		[_asset] call WL2_fnc_uavConnectRefresh;
 	};
 
-	private _notLockableVehicles = createHashMapFromArray [
+	private _respawnVehicles = createHashMapFromArray [
 		["B_Truck_01_medical_F", true],
 		["O_Truck_03_medical_F", true],
 		["Land_Pod_Heli_Transport_04_medevac_F", true],
 		["B_Slingload_01_Medevac_F", true]
 	];
-	if !(_notLockableVehicles getOrDefault [typeOf _asset, false]) then {
+	if (_respawnVehicles getOrDefault [typeOf _asset, false]) then {
+		[_asset] spawn {
+			params ["_asset"];
+			while { alive _asset } do {
+				private _assetPos = getPosASL _asset;
+				private _altitude = _assetPos # 2;
+				if (_altitude < 0 && surfaceIsWater _assetPos) then {
+					deleteVehicle _asset;
+				};
+				sleep 5;
+			};
+		};
+	} else {
 		if (_asset isKindOf "ReammoBox_F") then {
 			_asset setVariable ["WL2_accessControl", 2, true];
 		} else {
