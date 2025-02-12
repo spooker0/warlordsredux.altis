@@ -24,9 +24,24 @@ if (_class isKindOf "Man") then {
 	private _deploymentResult = [_class, _orderedClass, _offset, 100, false] call WL2_fnc_deployment;
 
 	if (_deploymentResult # 0) then {
-		playSound "assemble_target";
 		private _pos = _deploymentResult # 1;
-		[player, "orderAsset", "vehicle", [_pos # 0, _pos # 1, 0], _orderedClass, direction player] remoteExec ["WL2_fnc_handleClientRequest", 2];
+
+		// Griefer check
+		private _uid = getPlayerUID player;
+		private _nearbyEntities = [_class, ATLToASL [_pos # 0, _pos # 1, 0], direction player, _uid, []] call WL2_fnc_grieferCheck;
+
+		if (count _nearbyEntities > 0) then {
+			private _nearbyObject = _nearbyEntities # 0;
+			private _nearbyObjectName = [_nearbyObject] call WL2_fnc_getAssetTypeName;
+			private _nearbyObjectPosition = getPosASL _nearbyObject;
+
+			playSound3D ["a3\3den\data\sound\cfgsound\notificationwarning.wss", objNull, false, _nearbyObjectPosition, 5];
+			systemChat format ["Too close to another %1!", _nearbyObjectName];
+			player setVariable ["BIS_WL_isOrdering", false, [2, clientOwner]];
+		} else {
+			playSound "assemble_target";
+			[player, "orderAsset", "vehicle", [_pos # 0, _pos # 1, 0], _orderedClass, direction player] remoteExec ["WL2_fnc_handleClientRequest", 2];
+		};
 	} else {
 		"Canceled" call WL2_fnc_announcer;
 		[toUpper localize "STR_A3_WL_deploy_canceled"] spawn WL2_fnc_smoothText;

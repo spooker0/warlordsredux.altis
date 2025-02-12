@@ -19,27 +19,6 @@ if (_action == "orderAsset") exitWith {
 	private _position = _param2;
 	private _orderedClass = _param3;
 
-	private _class = missionNamespace getVariable ["WL2_spawnClass", createHashMap] getOrDefault [_orderedClass, _orderedClass];
-
-	// Griefer check
-	private _nearbyEntities = [];
-	if !(_orderType in ["air", "naval"]) then {
-		private _direction = _param4;
-		_nearbyEntities = [_class, ATLToASL _position, _direction, _uid, []] call WL2_fnc_grieferCheck;
-	};
-
-	if (count _nearbyEntities > 0) exitWith {
-		private _owner = owner _sender;
-		_sender setVariable ["BIS_WL_isOrdering", false, [2, _owner]];
-
-		private _nearbyObject = _nearbyEntities # 0;
-		private _nearbyObjectName = [_nearbyObject] call WL2_fnc_getAssetTypeName;
-		private _nearbyObjectPosition = getPosASL _nearbyObject;
-
-		playSound3D ["a3\3den\data\sound\cfgsound\notificationwarning.wss", objNull, false, _nearbyObjectPosition, 5];
-		[format ["Too close to another %1!", _nearbyObjectName]] remoteExec ["systemChat", _owner];
-	};
-
 	private _cost = ((serverNamespace getVariable "WL2_costs") getOrDefault [_orderedClass, 50001]);
 	private _hasFunds = (playerFunds >= _cost);
 	if (_hasFunds) then {
