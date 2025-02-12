@@ -15,43 +15,69 @@ addMissionEventHandler ["GroupIconOverLeave", WL2_fnc_groupIconLeaveHandle];
 
 call WL2_fnc_playerEventHandlers;
 
-if ((getPlayerUID player) in (getArray (missionConfigFile >> "adminIDs"))) then {
-	addMissionEventHandler ["HandleChatMessage", {
-		params ["_channel", "_owner", "_from", "_text", "_person"];
-		_text = toLower _text;
-		_list = getArray (missionConfigFile >> "adminFilter");
-		_return = ((_list findIf {[_x, _text] call BIS_fnc_inString}) != -1);
+addMissionEventHandler ["HandleChatMessage", {
+	params ["_channel", "_owner", "_from", "_text", "_person", "_name"];
 
-		if (_owner == clientOwner) then {
-			_input = _text splitString " ";
-			_command = _input # 0;
-			_count = count _input;
-			if (_count == 1 && {_command == "!updateZeus"}) then {
-				[player, 'updateZeus'] remoteExec ['WL2_fnc_handleClientRequest', 2];
+	if (_owner == clientOwner) then {
+		private _uid = getPlayerUID player;
+		private _isAdmin = _uid in (getArray (missionConfigFile >> "adminIDs"));
+		private _isPollster = _uid in (getArray (missionConfigFile >> "pollstersIDs"));
+
+		if (_isAdmin && _text == "!updateZeus") then {
+			[player, 'updateZeus'] remoteExec ['WL2_fnc_handleClientRequest', 2];
+		};
+
+		if (_text == "!lag") then {
+			[player] remoteExec ["WL2_fnc_lagMessageHandler", 2];
+		};
+
+		if (_text == "!lowfps") then {
+			0 spawn {
+				private _messageTemplate = "Client FPS: %1\nClient FPS Min: %2\nEntities Count: %3\nScripts[1]: %4\nScripts[2]: %5\nScripts[3]: %6";
+				private _message = [_messageTemplate] call WL2_fnc_scriptCollector;
+				[_message] call WL2_fnc_lagMessageDisplay;
 			};
 		};
-		_senderLocked = _person getVariable ["voteLocked", false];
-		if (_senderLocked) then {
-			_senderLocked;
-		} else {
-			_return;
-		};
-	}];
-} else {
-	addMissionEventHandler ["HandleChatMessage", {
-		params ["_channel", "_owner", "_from", "_text"];
-		_text = toLower _text;
-		_list = getArray (missionConfigFile >> "adminFilter");
-		_return = ((_list findIf {[_x, _text] call BIS_fnc_inString}) != -1);
 
-		_senderLocked = _person getVariable ["voteLocked", false];
-		if (_senderLocked) then {
-			_senderLocked;
-		} else {
-			_return;
+		if (_isAdmin || _isPollster) then {
+			[_text] call POLL_fnc_chatCommand;
 		};
-	}];
-};
+	};
+
+	private _disallowList = getArray (missionConfigFile >> "adminFilter");
+	private _containsBannedWord = (_disallowList findIf {
+		[_x, toLower _text] call BIS_fnc_inString
+	}) != -1;
+	private _senderLocked = _person getVariable ["voteLocked", false];
+
+	private _voiceChannels = missionNamespace getVariable ["SQD_VoiceChannels", [-1, -1]];
+	private _sideCustomChannel = if (side group _person == WEST) then {
+		_voiceChannels # 0
+	} else {
+		_voiceChannels # 1
+	};
+
+	private _outOfSquad = if (_channel == (_sideCustomChannel + 5)) then {
+		private _playerId = getPlayerID _person;
+		private _isInMySquad = ["isInMySquad", [_playerId]] call SQD_fnc_client;
+		!_isInMySquad;
+	} else {
+		false;
+	};
+
+	private _block = _containsBannedWord || _senderLocked || _outOfSquad;
+	if (_block) then {
+		true;
+	} else {
+		if (_channel == 1) then {
+			private _playerLevel = _person getVariable ["WL_playerLevel", ""];
+			private _newFrom = format ["[%1] %2", _playerLevel, _name];
+			[_newFrom, _text];
+		} else {
+			false;
+		};
+	};
+}];
 
 0 spawn {
 	waituntil {sleep 0.1; !isnull (findDisplay 46)};
@@ -133,16 +159,3 @@ addMissionEventHandler ["EntityRespawned", {
 		removeAllActions _oldEntity;
 	};
 }];
-
-addMissionEventHandler ["HandleChatMessage", {
-	params ["_channel", "_owner", "_from", "_text"];
-	_text = toLower _text;
-
-	if (_owner == clientOwner) then {
-		if (_text == "!lag") then {
-			[player] remoteExec ["WL2_fnc_lagMessageHandler", 2];
-		};
-	};
-}];
-
-call POLL_fnc_chatCommand;

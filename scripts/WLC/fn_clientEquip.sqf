@@ -29,6 +29,7 @@ private _checkForSpace = {
     };
 
     private _index = 0;
+
     while { (_index < count _backpacks) && !(player canAdd _toAdd) } do {
         private _backpack = _backpacks # _index;
 
@@ -54,7 +55,8 @@ switch (_type) do {
         removeUniform player;
         player forceAddUniform _item;
         {
-            player addItemToUniform _x;
+            [_x] call _checkForSpace;
+            player addItem _x;
         } forEach _uniformItems;
     };
     case "Vest": {
@@ -62,7 +64,8 @@ switch (_type) do {
         removeVest player;
         player addVest _item;
         {
-            player addItemToVest _x;
+            [_x] call _checkForSpace;
+            player addItem _x;
         } forEach _vestItems;
     };
     case "Helmet": {

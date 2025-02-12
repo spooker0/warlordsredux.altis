@@ -57,7 +57,7 @@ class WLC_MenuUI {
     movingEnable = true;
     class controls {
         class WLC_Draggable: IGUIBackMRTM {
-            idc = 12001;
+            idc = WLC_DRAGGABLE;
             x = 0;
             y = -0.05;
             w = 1;
@@ -75,7 +75,7 @@ class WLC_MenuUI {
             style = ST_LEFT;
         };
         class WLC_Background: IGUIBackMRTM {
-            idc = 12002;
+            idc = WLC_BACKGROUND;
             x = 0;
             y = 0;
             w = 1;
@@ -93,7 +93,7 @@ class WLC_MenuUI {
             text = "a3\ui_f\data\igui\rsctitles\interlacing\interlacing_ca.paa";
         };
         class WLC_CloseButton: RscCheckboxMRTM {
-            idc = 12003;
+            idc = WLC_CLOSE_BUTTON;
             sizeEx = "0.021 / (getResolution select 5)";
             x = 1 - 0.0375;
             y = -0.05;
