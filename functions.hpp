@@ -330,6 +330,7 @@ class CfgFunctions {
 			class newAssetHandle {};
 			class parsePurchaseList {};
 			class reloadOverride {};
+			class scriptCollector {};
 			class slingloadInit {};
 			class sortSectorArrays {};
 			class tablesSetUp {};
