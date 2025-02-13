@@ -1,4 +1,4 @@
-#include "SAM.inc"
+#include "constants.inc"
 params ["_projectile", "_unit"];
 
 private _disableCamera = profileNamespace getVariable ["MRTM_disableMissileCameras", false];

@@ -2,7 +2,7 @@
 #include "ui\defines.hpp"
 #include "ui\controls.hpp"
 #include "scripts\WLM\ui\WLM_pylons.hpp"
-#include "scripts\Squads\squadMenu.hpp"
+#include "scripts\SQD\squadMenu.hpp"
 
 onLoadName = "Warlords Redux 2.6.8";
 dev = "Jezuro + WSV";

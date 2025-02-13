@@ -1152,7 +1152,7 @@ class MRTM_settingsMenu
 			w = 0.0567187 * safezoneW;
 			h = 0.022 * safezoneH;
 			font = "PuristaMedium";
-			action =  "(findDisplay 8000) closeDisplay 1; 0 spawn Fxr_fnc_openReportMenu;";
+			action =  "(findDisplay 8000) closeDisplay 1; 0 spawn FXR_fnc_openReportMenu;";
 		};
 	};
 };
@@ -1366,7 +1366,7 @@ class Fxr_ReportDialog
 			w = 0.0567187 * safezoneW;
 			h = 0.022 * safezoneH;
 			font = "PuristaMedium";
-			action = "0 spawn Fxr_fnc_closeReportMenu;0 spawn MRTM_fnc_openMenu;";
+			action = "0 spawn FXR_fnc_closeReportMenu;0 spawn MRTM_fnc_openMenu;";
 		};
 	};
 };

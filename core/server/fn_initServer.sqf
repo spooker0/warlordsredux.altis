@@ -53,7 +53,7 @@ if !(isDedicated) then {
 0 spawn WL2_fnc_zoneRestrictionHandleServer;
 0 spawn WL2_fnc_incomePayoff;
 0 spawn WL2_fnc_garbageCollector;
-0 spawn WL2_fnc_WLAC;
+0 spawn WL2_fnc_wlac;
 call WL2_fnc_processRunways;
 
 0 spawn WL2_fnc_cleanupCarrier;
