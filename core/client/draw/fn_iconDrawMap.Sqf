@@ -206,7 +206,7 @@ private _draw = (ctrlMapScale _control) < 0.3;
 		_size,
 		call WL2_fnc_getDir,
 		if (_draw) then {
-			private _levelDisplay = player getVariable ["WL_playerLevel", "Recruit"];
+			private _levelDisplay = _x getVariable ["WL_playerLevel", "Recruit"];
 			private _displayName = format ["%1 [%2]", name _x, _levelDisplay];
 			_displayName
 		} else {""},

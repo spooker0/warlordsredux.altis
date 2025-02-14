@@ -462,7 +462,7 @@ _asset spawn {
 
     while {!isNull _display} do {
         private _nonLocalCrew = (crew _asset) select {
-            !(local _x);
+            !(local _x) && !(typeof _x in ["B_UAV_AI", "O_UAV_AI", "I_UAV_AI"])
         };
 
         if (count _nonLocalCrew > 0) then {
