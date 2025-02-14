@@ -86,7 +86,9 @@ addMissionEventHandler ["Draw3D", {
     while { !BIS_WL_missionEnd } do {
         sleep 0.2;
 
-        WL_SpectrumInterface = currentWeapon player == "hgun_esd_01_F" && vehicle player == player;
+        WL_SpectrumInterface = currentWeapon player == "hgun_esd_01_F" &&
+            vehicle player == player &&
+            alive player && lifeState player != "INCAPACITATED";
 
         if (!WL_SpectrumInterface) then {
             _indicator ctrlSetText "";

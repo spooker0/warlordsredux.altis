@@ -1,5 +1,5 @@
 class RscTitles {
-	#include "scripts\GF_Earplugs\GF_Earplugs_HPP.hpp"
+	#include "scripts\GFE\GF_Earplugs_HPP.hpp"
 
 	class RscLagMessageDisplay {
 		idd = -1;

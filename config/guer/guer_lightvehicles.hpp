@@ -1,22 +1,19 @@
 class LightVehicles {
     class I_Quadbike_01_F {
-        cost = 20;
-        requirements[] = {};
-        killReward = 20;
         capValue = 1;
+        cost = 20;
+        killReward = 20;
+        requirements[] = {};
     }; // "Quad Bike"
 
     class I_G_Offroad_01_armed_F {
-        cost = 150;
-        requirements[] = {};
-        rearm = 120;
-        killReward = 150;
         capValue = 1;
+        cost = 150;
+        killReward = 150;
+        rearm = 120;
+        requirements[] = {};
 
         class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {};
             addMagazines[] = {
                 "100Rnd_127x99_mag_Tracer_Yellow",
                 "100Rnd_127x99_mag_Tracer_Yellow",
@@ -24,20 +21,20 @@ class LightVehicles {
                 "100Rnd_127x99_mag_Tracer_Yellow"
             };
             addWeapons[] = {};
+            removeMagazines[] = {};
+            removeWeapons[] = {};
+            turret[] = { 0 };
         };
     }; // "Offroad (HMG)"
 
     class I_C_Offroad_02_LMG_F {
-        cost = 200;
-        requirements[] = {};
-        rearm = 120;
-        killReward = 150;
         capValue = 1;
+        cost = 200;
+        killReward = 150;
+        rearm = 120;
+        requirements[] = {};
 
         class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {};
             addMagazines[] = {
                 "200Rnd_556x45_Box_Tracer_F",
                 "200Rnd_556x45_Box_Tracer_F",
@@ -48,60 +45,61 @@ class LightVehicles {
                 "200Rnd_556x45_Box_Tracer_F"
             };
             addWeapons[] = {};
+            removeMagazines[] = {};
+            removeWeapons[] = {};
+            turret[] = { 0 };
         };
     }; // "MB 4WD (LMG)"
 
     class I_MRAP_03_F {
-        cost = 300;
-        requirements[] = {};
-        killReward = 70;
         capValue = 1;
+        cost = 300;
+        killReward = 70;
+        requirements[] = {};
     }; // "Strider"
 
     class B_Truck_01_flatbed_F {
-        cost = 500;
-        requirements[] = {};
-        killReward = 80;
         capValue = 1;
+        cost = 500;
+        killReward = 80;
+        requirements[] = {};
     }; // "HEMTT Flatbed"
 
     class I_C_Offroad_02_AT_F {
-        cost = 500;
-        requirements[] = {};
-        rearm = 180;
-        killReward = 180;
         capValue = 1;
+        cost = 500;
+        killReward = 180;
+        rearm = 180;
+        requirements[] = {};
 
         class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {};
             addMagazines[] = {
                 "12Rnd_SPG9_HEAT"
             };
             addWeapons[] = {};
+            removeMagazines[] = {};
+            removeWeapons[] = {};
+            turret[] = { 0 };
         };
     }; // "MB 4WD (AT)"
 
     class I_MRAP_03_hmg_F {
-        cost = 900;
-        requirements[] = {};
-        rearm = 300;
-
-        killReward = 250;
-        capValue = 3;
-        vehicleSpawn = 1;
         aps = 1;
+        capValue = 3;
+        cost = 900;
+        killReward = 250;
+        rearm = 300;
+        requirements[] = {};
+        vehicleSpawn = 1;
     };
 
     class I_MRAP_03_gmg_F {
-        cost = 1200;
-        requirements[] = {};
-        rearm = 300;
-
-        killReward = 250;
-        capValue = 3;
-        vehicleSpawn = 1;
         aps = 1;
+        capValue = 3;
+        cost = 1200;
+        killReward = 250;
+        rearm = 300;
+        requirements[] = {};
+        vehicleSpawn = 1;
     };
 };

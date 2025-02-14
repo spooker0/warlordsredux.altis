@@ -1,61 +1,56 @@
 class SectorDefense {
     class Land_Razorwire_F {
         cost = 50;
-        requirements[] = {};
-        offset[] = {0, 5, 0};
         killReward = 30;
+        offset[] = {0, 5, 0};
+        requirements[] = {};
         structure = 1;
     };  // "Razor Wire Fence"
 
     class Land_BagFence_Round_F {
         cost = 50;
-        requirements[] = {};
-        offset[] = {0, 2, 0};
-        killReward = 30;
         demolishable = 1;
+        killReward = 30;
+        offset[] = {0, 2, 0};
+        requirements[] = {};
     };  // "Semi Circle Sand bags"
 
     class Land_DragonsTeeth_01_4x2_new_F {
         cost = 50;
-        requirements[] = {};
-        offset[] = {0, 5, 0};
-        killReward = 30;
         demolishable = 1;
+        killReward = 30;
+        offset[] = {0, 5, 0};
+        requirements[] = {};
         structure = 1;
     };  // "Tank barrier"
 
     class Land_HBarrierWall6_F {
         cost = 60;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        killReward = 30;
         demolishable = 1;
+        killReward = 30;
+        offset[] = {0, 3, 0};
+        requirements[] = {};
         structure = 1;
     }; // "H-barrier wall"
 
     class CamoNet_INDP_big_F {
         cost = 100;
-        requirements[] = {};
-        offset[] = {0, 6, 0};
-        killReward = 30;
         garbageCollect = 1;
+        killReward = 30;
+        offset[] = {0, 6, 0};
+        requirements[] = {};
         structure = 1;
     };  // "Camouflage Vehicle Cover (Hex)"
 
     class I_HMG_01_F {
         cost = 150;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
         killReward = 100;
         loadable[] = {0, -2.5, 0.4};
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        requirements[] = {};
 
         class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {
-                "HMG_static"
-            };
             addMagazines[] = {
                 "100Rnd_127x99_mag_Tracer_Green",
                 "100Rnd_127x99_mag_Tracer_Green",
@@ -65,32 +60,32 @@ class SectorDefense {
             addWeapons[] = {
                 "HMG_static"
             };
+            removeMagazines[] = {};
+            removeWeapons[] = {
+                "HMG_static"
+            };
+            turret[] = { 0 };
         };
     };  // "Mk30 HMG .50"
 
     class Land_IRMaskingCover_01_F {
         cost = 200;
-        requirements[] = {};
-        offset[] = {0, 8, 0};
-        killReward = 30;
         garbageCollect = 1;
+        killReward = 30;
+        offset[] = {0, 8, 0};
+        requirements[] = {};
         structure = 1;
     };  // "IR Masking Tent (Large)"
 
     class I_HMG_01_high_F {
         cost = 200;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
         killReward = 100;
         loadable[] = {0, -2.5, 0.8};
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        requirements[] = {};
 
         class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {
-                "HMG_static"
-            };
             addMagazines[] = {
                 "100Rnd_127x99_mag_Tracer_Green",
                 "100Rnd_127x99_mag_Tracer_Green",
@@ -100,41 +95,41 @@ class SectorDefense {
             addWeapons[] = {
                 "HMG_static"
             };
+            removeMagazines[] = {};
+            removeWeapons[] = {
+                "HMG_static"
+            };
+            turret[] = { 0 };
         };
     };  // "Mk30 HMG .50 (Raised)"
 
     class I_GMG_01_F {
         cost = 200;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
         killReward = 100;
         loadable[] = {0, -2.5, 0.4};
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        requirements[] = {};
     };  // "Mk32 GMG 20 mm"
 
     class I_GMG_01_high_F {
         cost = 250;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
         killReward = 100;
         loadable[] = {0, -2.5, 0.8};
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        requirements[] = {};
     };  // "Mk32 GMG 20 mm (Raised)"
 
     class I_static_AA_F {
         cost = 300;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
         killReward = 100;
         loadable[] = {0, -2.5, 0.2};
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        requirements[] = {};
 
         class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {
-                "missiles_titan_static"
-            };
             addMagazines[] = {
                 "1Rnd_GAA_missiles",
                 "1Rnd_GAA_missiles",
@@ -146,23 +141,23 @@ class SectorDefense {
             addWeapons[] = {
                 "missiles_titan_static"
             };
+            removeMagazines[] = {};
+            removeWeapons[] = {
+                "missiles_titan_static"
+            };
+            turret[] = { 0 };
         };
     };  // "Static Titan Launcher (AA) [AAF]"
 
     class I_static_AT_F {
         cost = 300;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
         killReward = 100;
         loadable[] = {0, -2.5, 0.2};
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        requirements[] = {};
 
         class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {
-                "missiles_titan_static"
-            };
             addMagazines[] = {
                 "1Rnd_GAT_missiles",
                 "1Rnd_GAT_missiles",
@@ -174,24 +169,24 @@ class SectorDefense {
             addWeapons[] = {
                 "missiles_titan_static"
             };
+            removeMagazines[] = {};
+            removeWeapons[] = {
+                "missiles_titan_static"
+            };
+            turret[] = { 0 };
         };
     };  // "Static Titan Launcher (AT) [AAF]"
 
     class I_HMG_01_A_F {
-        name = "Mk30 HMG Auto Turret";
         cost = 500;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
         killReward = 150;
         loadable[] = {0, -2.5, 0.4};
+        name = "Mk30 HMG Auto Turret";
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        requirements[] = {};
 
         class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            removeMagazines[] = {};
-            removeWeapons[] = {
-                "HMG_static"
-            };
             addMagazines[] = {
                 "100Rnd_127x99_mag_Tracer_Green",
                 "100Rnd_127x99_mag_Tracer_Green",
@@ -201,30 +196,30 @@ class SectorDefense {
             addWeapons[] = {
                 "HMG_static"
             };
+            removeMagazines[] = {};
+            removeWeapons[] = {
+                "HMG_static"
+            };
+            turret[] = { 0 };
         };
     };
 
     class I_static_AT_UP_F {
-        name = "Static AT Launcher (UP)";
-        description = "Static AT Launcher (UP) is an upgraded variant of the Static AT Launcher.";
-        spawn = "I_static_AT_F";
-        variant = 1;
         cost = 590;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
+        description = "Static AT Launcher (UP) is an upgraded variant of the Static AT Launcher.";
+        disallowMagazines[] = {
+            "4Rnd_GAA_missiles"
+        };
         killReward = 200;
         loadable[] = {0, -2.5, 0.2};
+        name = "Static AT Launcher (UP)";
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        requirements[] = {};
+        spawn = "I_static_AT_F";
+        variant = 1;
 
         class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
-            reloadOverride = 6;
-            removeMagazines[] = {
-                "1Rnd_GAT_missiles"
-            };
-            removeWeapons[] = {
-                "missiles_titan_static"
-            };
             addMagazines[] = {
                 "2Rnd_GAT_missiles",
                 "2Rnd_GAT_missiles",
@@ -240,33 +235,30 @@ class SectorDefense {
             addWeapons[] = {
                 "missiles_titan"
             };
-        };
-
-        disallowMagazines[] = {
-            "4Rnd_GAA_missiles"
-        };
-    };
-
-    class I_static_AA_UP_F {
-        name = "Static AA Launcher (UP)";
-        description = "Static AA Launcher (UP) is an upgraded variant of the Static AA Launcher.";
-        spawn = "I_static_AA_F";
-        variant = 1;
-        cost = 600;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
-        killReward = 200;
-        loadable[] = {0, -2.5, 0.2};
-
-        class Gunner: WLTurretDefaults {
-            turret[] = { 0 };
+            reloadOverride = 6;
             removeMagazines[] = {
-                "1Rnd_GAA_missiles"
+                "1Rnd_GAT_missiles"
             };
             removeWeapons[] = {
                 "missiles_titan_static"
             };
+            turret[] = { 0 };
+        };
+    };
+
+    class I_static_AA_UP_F {
+        cost = 600;
+        description = "Static AA Launcher (UP) is an upgraded variant of the Static AA Launcher.";
+        killReward = 200;
+        loadable[] = {0, -2.5, 0.2};
+        name = "Static AA Launcher (UP)";
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        requirements[] = {};
+        spawn = "I_static_AA_F";
+        variant = 1;
+
+        class Gunner: WLTurretDefaults {
             addMagazines[] = {
                 "4Rnd_70mm_SAAMI_missiles",
                 "4Rnd_70mm_SAAMI_missiles",
@@ -275,37 +267,44 @@ class SectorDefense {
             addWeapons[] = {
                 "missiles_SAAMI"
             };
+            removeMagazines[] = {
+                "1Rnd_GAA_missiles"
+            };
+            removeWeapons[] = {
+                "missiles_titan_static"
+            };
+            turret[] = { 0 };
         };
     };
 
     class I_GMG_01_A_F {
-        name = "Mk32 GMG Auto Turret";
         cost = 650;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 300;
         killReward = 150;
         loadable[] = {0, -2.5, 0.4};
+        name = "Mk32 GMG Auto Turret";
+        offset[] = {0, 3, 0};
+        rearm = 300;
+        requirements[] = {};
     };
 
     class Land_Communication_F {
-        name = "Jamming Tower";
-        description = "Jamming Tower can be used to jam enemy autonomous assets. It must be placed outside the home base in an owned sector.";
         cost = 2500;
-        requirements[] = {};
-        offset[] = {0, 6, 0};
-        killReward = 400;
-        garbageCollect = 1;
         demolishable = 1;
+        description = "Jamming Tower can be used to jam enemy autonomous assets. It must be placed outside the home base in an owned sector.";
+        garbageCollect = 1;
+        killReward = 400;
+        name = "Jamming Tower";
+        offset[] = {0, 6, 0};
+        requirements[] = {};
         structure = 1;
     };
 
     class I_Mortar_01_F {
         cost = 4000;
-        requirements[] = {};
-        offset[] = {0, 3, 0};
-        rearm = 900;
         killReward = 125;
         loadable[] = {0, -2.5, 0};
+        offset[] = {0, 3, 0};
+        rearm = 900;
+        requirements[] = {};
     };  // "Mortar"
 };

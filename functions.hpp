@@ -1,64 +1,27 @@
 class CfgFunctions {
-	class MRTM {
-		class Default {
-			file = "scripts\MRTM";
-			class onChar {};
-			class onSliderChanged {};
-			class openMenu {};
-			class settingsInit {};
-			class settingsMenu {};
-			class updateSettings {};
-			class updateViewDistance {};
-		};
-		class Debug {
-			file = "scripts\MRTMDebug";
-			class execCode {};
-			class openDebugMenu {};
-			class setReturnValue {};
-		};
-	};
-	class GFE {
-		class Default {
-			file = "scripts\GF_Earplugs";
-			class credits {};
-			class earplugs {};
-		};
-	};
 	class APS {
 		class Default {
-			file = "scripts\APS\Scripts";
+			file = "scripts\APS";
+			class active {};
 			class defineVehicles {};
-		};
-		class APS {
-			file = "scripts\APS\Scripts\APS";
+			class firedProjectile {};
+			class getDirection {};
+			class getMaxAmmo {};
+			class hasCharges {};
 			class lagProtection {};
 			class lagProtectionServer {};
+			class misguideMissile {};
 			class projectileStateUpdate {};
-			class setupProjectiles {};
-			class firedProjectile {};
-			class serverHandleAPS {};
-		};
-		class Management {
-			file = "scripts\APS\Scripts\Management";
 			class rearmAPS {};
 			class registerVehicle {};
-		};
-		class Misc {
-			file = "scripts\APS\Scripts\Misc";
-			class active {};
-			class getDirection {};
-			class hasCharges {};
-			class misguideMissile {};
 			class relDir2 {};
-			class getMaxAmmo {};
-		};
-		class Report {
-			file = "scripts\APS\Scripts\Report";
 			class report {};
+			class setupProjectiles {};
+			class serverHandleAPS {};
 		};
 	};
 	class DIS {
-		class SAM {
+		class Default {
 			file = "scripts\DIS";
 			class check {};
 			class frag {};
@@ -69,11 +32,33 @@ class CfgFunctions {
 			class startMissileCamera {};
 		};
 	};
-	class Fxr {
+	class FXR {
 		class Default {
-			file = "scripts\Fxr";
-			class openReportMenu {};
+			file = "scripts\FXR";
 			class closeReportMenu {};
+			class openReportMenu {};
+		};
+	};
+	class GFE {
+		class Default {
+			file = "scripts\GFE";
+			class credits {};
+			class earplugs {};
+		};
+	};
+	class MRTM {
+		class Default {
+			file = "scripts\MRTM";
+			class execCode {};
+			class onChar {};
+			class onSliderChanged {};
+			class openDebugMenu {};
+			class openMenu {};
+			class setReturnValue {};
+			class settingsInit {};
+			class settingsMenu {};
+			class updateSettings {};
+			class updateViewDistance {};
 		};
 	};
 	class POLL {
@@ -86,7 +71,7 @@ class CfgFunctions {
 	};
 	class SQD {
 		class Default {
-			file = "scripts\Squads";
+			file = "scripts\SQD";
 			class client {};
 			class initClient {};
 			class initServer {};
@@ -142,10 +127,10 @@ class CfgFunctions {
 			class attachVehicle {};
 			class catapultAction {};
 			class catapultActionEligibility {};
-			class controlGunnerAction {};
-			class controlGunnerEligibility {};
 			class claimAction {};
 			class claimEligibility {};
+			class controlGunnerAction {};
+			class controlGunnerEligibility {};
 			class dazzlerAction {};
 			class dazzlerToggle {};
 			class dazzlerUpdate {};
@@ -367,7 +352,7 @@ class CfgFunctions {
 			class targetResetHandleServer {};
 			class targetSelectionHandleServer {};
 			class updateVehicleList {};
-			class WLAC {};
+			class wlac {};
 			class zoneRestrictionHandleServer {};
 		};
 		class ServerSector {
