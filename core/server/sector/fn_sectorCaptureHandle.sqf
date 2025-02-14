@@ -3,7 +3,7 @@ params ["_sector"];
 private _area = _sector getVariable "objectArea";
 private _sectorValue = _sector getVariable ["BIS_WL_value", 50];
 private _sectorCaptureValue = _sectorValue min 10;
-private _minCaptureTime = linearConversion [5, 30, _sectorValue, 20, 50, true];
+private _minCaptureTime = linearConversion [5, 30, _sectorValue, 0.2, 0.5, true];
 
 private _lastTime = serverTime;
 private _fullClientUpdateInterval = serverTime;

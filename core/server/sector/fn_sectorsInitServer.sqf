@@ -3,13 +3,13 @@
 private _baseData =
 #if WL_OVERRIDE_BASES
 	BIS_WL_allSectors select {
-		_x getVariable ["BIS_WL_name", ""] in ["Lakka Factory", "Airbase"];
+		_x getVariable ["BIS_WL_name", ""] in ["AAC Airfield", "Airbase"];
 	};
 #else
 	[] call WL2_fnc_calcHomeBases;
 #endif
 
-#if WL_BASE_SELECTION_DEBUG == 1
+#if WL_BASE_SELECTION_DEBUG
 private _baseProbabilityTable = [];
 for "_i" from 0 to 10000 do {
 	private _testData = [] call WL2_fnc_calcHomeBases;
@@ -47,7 +47,7 @@ diag_log "Base probability table:";
 private _firstBase = _baseData # 0;
 private _secondBase = _baseData # 1;
 
-#if WL_BASE_SELECTION_DEBUG == 1
+#if WL_BASE_SELECTION_DEBUG
 systemChat format ["First base: %1", _firstBase getVariable ["BIS_WL_name", ""]];
 systemChat format ["Second base: %1", _secondBase getVariable ["BIS_WL_name", ""]];
 #endif
