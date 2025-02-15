@@ -1,3 +1,5 @@
+if (isDedicated) exitWith {};
+
 private _rappelPairs = [
     ["Carrier1Rappel1Marker", Carrier1Boat1, Carrier1Tire1],
     ["Carrier1Rappel2Marker", Carrier1Boat2, Carrier1Tire2],
