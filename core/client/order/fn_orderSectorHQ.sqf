@@ -32,27 +32,10 @@ if (!_result) exitWith {
 };
 
 if (_hasOldSectorBuilding) then {
-    _oldSectorBuilding allowDamage true;
+    [_oldSectorBuilding, false] remoteExec ["WL2_fnc_protectSectorHQ", 0, true];
     deleteMarker (_currentSector getVariable ["WL_sectorHQMarker", ""]);
     deleteMarker (_currentSector getVariable ["WL_sectorHQTextMarker", ""]);
-    _currentSector setVariable ["WL_sectorHQ", objNull, true];
-    _currentSector setVariable ["WL_sectorHQMarker", ""];
-    _currentSector setVariable ["WL_sectorHQTextMarker", ""];
 };
-
-_sectorBuilding setDamage 0;
-private _hitPoints = getAllHitPointsDamage _sectorBuilding;
-private _allHitPointNames = if (count _hitPoints > 0) then {
-    _hitPoints # 0;
-} else {
-    [];
-};
-private _windowHitPointNames = _allHitPointNames select { "glass" in toLower _x || "window" in toLower _x };
-{
-    _sectorBuilding setHitPointDamage [_x, 1]
-} forEach _windowHitPointNames;
-
-_sectorBuilding allowDamage false;
 
 private _markerName = format ["WL_sectorHQ_%1", _sectorName];
 private _markerTextName = format ["WL_sectorHQText_%1", _sectorName];
@@ -72,10 +55,11 @@ _sectorHQTextMarker setMarkerColorLocal "colorCivilian";
 _sectorHQTextMarker setMarkerText "HQ";
 
 _currentSector setVariable ["WL_sectorHQ", _sectorBuilding, true];
-_currentSector setVariable ["WL_sectorHQMarker", _sectorHQMarker];
-_currentSector setVariable ["WL_sectorHQTextMarker", _sectorHQTextMarker];
+_currentSector setVariable ["WL_sectorHQMarker", _sectorHQMarker, true];
+_currentSector setVariable ["WL_sectorHQTextMarker", _sectorHQTextMarker, true];
 
 [player, "buySectorHQ"] remoteExec ["WL2_fnc_handleClientRequest", 2];
+[_sectorBuilding] remoteExec ["WL2_fnc_prepareSectorHQ", 2];
 
 for "_i" from 1 to 10 do {
     if (random 1 > 0.5) then {

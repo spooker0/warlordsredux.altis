@@ -314,6 +314,8 @@ class CfgFunctions {
 			class missionEndHandle {};
 			class newAssetHandle {};
 			class parsePurchaseList {};
+			class prepareSectorHQ {};
+			class protectSectorHQ {};
 			class reloadOverride {};
 			class scriptCollector {};
 			class slingloadInit {};
