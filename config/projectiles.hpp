@@ -32,7 +32,8 @@ class WLProjectilesConfig {
             "ammo_Missile_rim162",              // Centurion
             "ammo_Missile_s750",                // Rhea
             "ammo_Missile_mim145",              // Defender
-            "M_70mm_SAAMI"                      // SAAMI
+            "M_70mm_SAAMI",                     // SAAMI
+            "M_Zephyr"                          // Zephyr
         };
         aps = 3;
         camera = 1;
