@@ -161,15 +161,6 @@ class HeavyVehicles {
         };
     };
 
-    class B_AFV_Wheeled_01_cannon_F {
-        aps = 2;
-        capValue = 4;
-        cost = 4500;
-        killReward = 450;
-        rearm = 500;
-        requirements[] = {};
-    }; // "Rhino MGS"
-
     class B_AFV_Wheeled_01_export_cannon_F {
         aps = 2;
         capValue = 4;
@@ -201,6 +192,15 @@ class HeavyVehicles {
             turret[] = { 0 };
         };
     };
+
+    class B_AFV_Wheeled_01_cannon_F {
+        aps = 2;
+        capValue = 4;
+        cost = 4500;
+        killReward = 450;
+        rearm = 500;
+        requirements[] = {};
+    }; // "Rhino MGS"
 
     class B_AFV_Wheeled_01_up_cannon_F {
         aps = 2;

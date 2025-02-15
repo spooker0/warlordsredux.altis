@@ -354,40 +354,6 @@ if (_asset isKindOf "Man") then {
 	private _rearmTime = (missionNamespace getVariable "WL2_rearmTimers") getOrDefault [(typeOf _asset), 600];
 	_asset setVariable ["BIS_WL_nextRearm", serverTime + _rearmTime, true];
 
-	if (_asset call DIS_fnc_check) then {
-		_asset spawn DIS_fnc_registerLauncher;
-
-		// Warning for turret ownership change
-		[_asset] spawn {
-			params ["_asset"];
-			private _weaponSafe = -1;
-			private _warned = false;
-			while { alive _asset && !_warned } do {
-				private _uavControl = UAVControl _asset;
-				private _isTurretTransferring = _uavControl # 1 != "" && !(_asset turretLocal [0]);
-				if (_isTurretTransferring && _weaponSafe == -1) then {
-					_weaponSafe = _asset addAction ["Weapon Safety", {
-						systemChat "Changing turret ownership (arma bug). Wait a few seconds before firing.";
-					}, [], 0, false, false, "DefaultAction", ""];
-				};
-				if (!_isTurretTransferring && _weaponSafe != -1) then {
-					_asset removeAction _weaponSafe;
-					_weaponSafe = -1;
-					_warned = true;
-				};
-				sleep 0.1;
-			};
-		};
-	};
-	if (typeOf _asset == "B_Ship_MRLS_01_F") then {
-		_asset addEventHandler ["Fired", {
-			params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
-			if (local _projectile) then {
-				[_projectile, _unit] call DIS_fnc_startMissileCamera;
-			};
-		}];
-	};
-
 	private _crewPosition = (fullCrew [_asset, "", true]) select {!("cargo" in _x)};
 	private _radarSensor = (listVehicleSensors _asset) select {{"ActiveRadarSensorComponent" in _x} forEach _x};
 	private _hasRadar = count _radarSensor > 0 && (count _crewPosition > 1 || unitIsUAV _asset);

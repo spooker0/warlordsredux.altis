@@ -5,7 +5,7 @@ params ["_projectile", "_unit"];
 private _originalPipViewDistance = getPiPViewDistance;
 setPiPViewDistance viewDistance;
 
-"APS_Camera" cutRsc ["RscTitleDisplayEmpty", "PLAIN", -1, false, true];
+"APS_Camera" cutRsc ["RscTitleDisplayEmpty", "PLAIN", -1, true, true];
 
 private _display = uiNamespace getVariable "RscTitleDisplayEmpty";
 
@@ -29,8 +29,7 @@ _pictureControl ctrlCommit 0;
 private _camera = "camera" camCreate (position _projectile);
 _camera cameraEffect ["Internal", "BACK TOP", "rtt1"];
 
-private _visionMode = (_unit currentVisionMode []) # 0;
-"rtt1" setPiPEffect [_visionMode];
+"rtt1" setPiPEffect [currentVisionMode player];
 
 uiNamespace setVariable ["APS_Camera_Cam", _camera];
 
@@ -54,8 +53,8 @@ _camera attachTo [_projectile];
             _opticsMode = !_opticsMode;
 
             if (_opticsMode) then {
-                _titleBar ctrlSetPosition [safezoneX, safezoneY, safezoneW, 0.05];
-                _pictureControl ctrlSetPosition [safezoneX, safeZoneY + 0.05, safeZoneW, safeZoneH - 0.05];
+                _titleBar ctrlSetPosition [safeZoneX / 2, safeZoneY / 2 - 0.05, safeZoneX + 1, 0.05];
+                _pictureControl ctrlSetPosition [safeZoneX / 2, safeZoneY / 2, 1 - safeZoneX, 1 - safeZoneY];
             } else {
                 _titleBar ctrlSetPosition _defaultTitlePosition;
                 _pictureControl ctrlSetPosition _defaultPicturePosition;
@@ -77,6 +76,8 @@ while { !_stop } do {
     private _disconnected = unitIsUAV _unit && isNull (getConnectedUAV player);
 
     _stop = isNull _projectile || !alive _projectile || _isDestroyed || _expired || _disconnected;
+
+    "rtt1" setPiPEffect [currentVisionMode player];
 
     if (!_stop) then {
         _lastKnownPosition = _projectilePosition;
