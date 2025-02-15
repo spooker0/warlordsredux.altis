@@ -53,7 +53,7 @@ _camera attachTo [_projectile];
             _opticsMode = !_opticsMode;
 
             if (_opticsMode) then {
-                _titleBar ctrlSetPosition [safeZoneX / 2, safeZoneY / 2 - 0.05, safeZoneX + 1, 0.05];
+                _titleBar ctrlSetPosition [safeZoneX / 2, safeZoneY / 2 - 0.05, 1 - safeZoneX, 0.05];
                 _pictureControl ctrlSetPosition [safeZoneX / 2, safeZoneY / 2, 1 - safeZoneX, 1 - safeZoneY];
             } else {
                 _titleBar ctrlSetPosition _defaultTitlePosition;
