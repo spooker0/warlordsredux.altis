@@ -1,79 +1,62 @@
 class CfgFunctions {
-	class MRTM {
+	class APS {
 		class Default {
-			file = "scripts\MRTM";
-			class onChar {};
-			class onSliderChanged {};
-			class openMenu {};
-			class settingsInit {};
-			class settingsMenu {};
-			class updateSettings {};
-			class updateViewDistance {};
+			file = "scripts\APS";
+			class active {};
+			class defineVehicles {};
+			class firedProjectile {};
+			class getDirection {};
+			class getMaxAmmo {};
+			class hasCharges {};
+			class lagProtection {};
+			class lagProtectionServer {};
+			class misguideMissile {};
+			class projectileStateUpdate {};
+			class rearmAPS {};
+			class registerVehicle {};
+			class relDir2 {};
+			class report {};
+			class sead {};
+			class setupProjectiles {};
+			class serverHandleAPS {};
 		};
-		class Debug {
-			file = "scripts\MRTMDebug";
-			class execCode {};
-			class openDebugMenu {};
-			class setReturnValue {};
+	};
+	class DIS {
+		class Default {
+			file = "scripts\DIS";
+			class frag {};
+			class maneuver {};
+			class missileCamera {};
+			class startMissileCamera {};
+		};
+	};
+	class FXR {
+		class Default {
+			file = "scripts\FXR";
+			class closeReportMenu {};
+			class openReportMenu {};
 		};
 	};
 	class GFE {
 		class Default {
-			file = "scripts\GF_Earplugs";
+			file = "scripts\GFE";
 			class credits {};
 			class earplugs {};
 		};
 	};
-	class APS {
+	class MRTM {
 		class Default {
-			file = "scripts\APS\Scripts";
-			class defineVehicles {};
-		};
-		class APS {
-			file = "scripts\APS\Scripts\APS";
-			class lagProtection {};
-			class lagProtectionServer {};
-			class projectileStateUpdate {};
-			class setupProjectiles {};
-			class firedProjectile {};
-			class serverHandleAPS {};
-		};
-		class Management {
-			file = "scripts\APS\Scripts\Management";
-			class rearmAPS {};
-			class registerVehicle {};
-		};
-		class Misc {
-			file = "scripts\APS\Scripts\Misc";
-			class active {};
-			class getDirection {};
-			class hasCharges {};
-			class misguideMissile {};
-			class relDir2 {};
-			class getMaxAmmo {};
-		};
-		class Report {
-			file = "scripts\APS\Scripts\Report";
-			class report {};
-		};
-	};
-	class DIS {
-		class SAM {
-			file = "scripts\DIS";
-			class check {};
-			class frag {};
-			class maneuver {};
-			class missileCamera {};
-			class onSamFired {};
-			class registerLauncher {};
-			class startMissileCamera {};
-		};
-	};
-	class Fxr {
-		class Default {
-			file = "scripts\Fxr";
-			class openReportMenu {};
-			class closeReportMenu {};
+			file = "scripts\MRTM";
+			class execCode {};
+			class onChar {};
+			class onSliderChanged {};
+			class openDebugMenu {};
+			class openMenu {};
+			class setReturnValue {};
+			class settingsInit {};
+			class settingsMenu {};
+			class updateSettings {};
+			class updateViewDistance {};
 		};
 	};
 	class POLL {
@@ -86,7 +69,7 @@ class CfgFunctions {
 	};
 	class SQD {
 		class Default {
-			file = "scripts\Squads";
+			file = "scripts\SQD";
 			class client {};
 			class initClient {};
 			class initServer {};
@@ -142,10 +125,10 @@ class CfgFunctions {
 			class attachVehicle {};
 			class catapultAction {};
 			class catapultActionEligibility {};
-			class controlGunnerAction {};
-			class controlGunnerEligibility {};
 			class claimAction {};
 			class claimEligibility {};
+			class controlGunnerAction {};
+			class controlGunnerEligibility {};
 			class dazzlerAction {};
 			class dazzlerToggle {};
 			class dazzlerUpdate {};
@@ -329,6 +312,8 @@ class CfgFunctions {
 			class missionEndHandle {};
 			class newAssetHandle {};
 			class parsePurchaseList {};
+			class prepareSectorHQ {};
+			class protectSectorHQ {};
 			class reloadOverride {};
 			class scriptCollector {};
 			class slingloadInit {};
@@ -367,7 +352,7 @@ class CfgFunctions {
 			class targetResetHandleServer {};
 			class targetSelectionHandleServer {};
 			class updateVehicleList {};
-			class WLAC {};
+			class wlac {};
 			class zoneRestrictionHandleServer {};
 		};
 		class ServerSector {

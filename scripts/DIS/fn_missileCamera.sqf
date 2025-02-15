@@ -1,33 +1,35 @@
-#include "SAM.inc"
+#include "constants.inc"
 
 params ["_projectile", "_unit"];
 
 private _originalPipViewDistance = getPiPViewDistance;
 setPiPViewDistance viewDistance;
 
-"APS_Camera" cutRsc ["RscTitleDisplayEmpty", "PLAIN", -1, false, true];
+"APS_Camera" cutRsc ["RscTitleDisplayEmpty", "PLAIN", -1, true, true];
 
 private _display = uiNamespace getVariable "RscTitleDisplayEmpty";
 
 private _pictureSize = 1.5;
 
+private _defaultTitlePosition = [safezoneX + 0.2, safezoneY + 0.1, 0.4 * _pictureSize, 0.05];
+private _defaultPicturePosition = [safezoneX + 0.2, safeZoneY + 0.15, 0.4 * _pictureSize, 0.4 * _pictureSize];
+
 private _titleBar = _display ctrlCreate ["RscText", -1];
-_titleBar ctrlSetPosition [safezoneX + 0.2, safezoneY + 0.1, 0.4 * _pictureSize, 0.05];
+_titleBar ctrlSetPosition _defaultTitlePosition;
 _titleBar ctrlSetBackgroundColor [0, 0, 0, 0.9];
 _titleBar ctrlSetTextColor [1, 1, 1, 1];
 _titleBar ctrlSetText "Missile Camera";
 _titleBar ctrlCommit 0;
 
 private _pictureControl = _display ctrlCreate ["RscPicture", -1];
-_pictureControl ctrlSetPosition [safezoneX + 0.2, safeZoneY + 0.15, 0.4 * _pictureSize, 0.4 * _pictureSize];
+_pictureControl ctrlSetPosition _defaultPicturePosition;
 _pictureControl ctrlSetText "#(argb,512,512,1)r2t(rtt1,1.0)";
 _pictureControl ctrlCommit 0;
 
-private _camera = "camera" camCreate (position _projectile); 
+private _camera = "camera" camCreate (position _projectile);
 _camera cameraEffect ["Internal", "BACK TOP", "rtt1"];
 
-private _visionMode = (_unit currentVisionMode []) # 0;
-"rtt1" setPiPEffect [_visionMode];
+"rtt1" setPiPEffect [currentVisionMode player];
 
 uiNamespace setVariable ["APS_Camera_Cam", _camera];
 
@@ -42,6 +44,28 @@ _camera camCommit 0;
 
 _camera attachTo [_projectile];
 
+[_camera, _titleBar, _pictureControl, _defaultTitlePosition, _defaultPicturePosition] spawn {
+    params ["_camera", "_titleBar", "_pictureControl", "_defaultTitlePosition", "_defaultPicturePosition"];
+    private _opticsMode = false;
+    while { !isNull _camera } do {
+        if (inputAction "opticsMode" > 0) then {
+            waitUntil {inputAction "opticsMode" == 0};
+            _opticsMode = !_opticsMode;
+
+            if (_opticsMode) then {
+                _titleBar ctrlSetPosition [safeZoneX / 2, safeZoneY / 2 - 0.05, 1 - safeZoneX, 0.05];
+                _pictureControl ctrlSetPosition [safeZoneX / 2, safeZoneY / 2, 1 - safeZoneX, 1 - safeZoneY];
+            } else {
+                _titleBar ctrlSetPosition _defaultTitlePosition;
+                _pictureControl ctrlSetPosition _defaultPicturePosition;
+            };
+
+            _titleBar ctrlCommit 0;
+            _pictureControl ctrlCommit 0;
+        };
+    };
+};
+
 while { !_stop } do {
     sleep 0.5;
 
@@ -52,6 +76,8 @@ while { !_stop } do {
     private _disconnected = unitIsUAV _unit && isNull (getConnectedUAV player);
 
     _stop = isNull _projectile || !alive _projectile || _isDestroyed || _expired || _disconnected;
+
+    "rtt1" setPiPEffect [currentVisionMode player];
 
     if (!_stop) then {
         _lastKnownPosition = _projectilePosition;

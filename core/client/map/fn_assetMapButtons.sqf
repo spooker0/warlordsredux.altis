@@ -15,7 +15,7 @@ private _asset = WL_AssetActionTarget;
 WL_ActionTarget = WL_AssetActionTarget;
 
 private _titleBar = _dialog ctrlCreate ["RscStructuredText", -1];
-_titleBar ctrlSetPosition [_offsetX, _offsetY - 0.05, 0.4, 0.05];
+_titleBar ctrlSetPosition [_offsetX, _offsetY - 0.05, 0.5, 0.05];
 _titleBar ctrlSetBackgroundColor [0.3, 0.3, 0.3, 1];
 _titleBar ctrlSetTextColor [0.7, 0.7, 1, 1];
 private _assetName = [WL_AssetActionTarget] call WL2_fnc_getAssetTypeName;
@@ -204,7 +204,7 @@ private _fastTravelSquadmateExecute = {
     ]
 ] call WL2_fnc_addTargetMapButton;
 
-// Fast Travel Sector HQ
+// Fast Travel Stronghold Button
 private _fastTravelSectorHQExecute = {
     params ["_asset"];
     private _findSector = (BIS_WL_sectorsArray # 2) select {
@@ -214,7 +214,7 @@ private _fastTravelSectorHQExecute = {
     [5, ""] spawn WL2_fnc_executeFastTravel;
 };
 [
-    "FAST TRAVEL SECTOR HQ",
+    "FAST TRAVEL STRONGHOLD",
     _fastTravelSectorHQExecute,
     true,
     "fastTravelSectorHQ",
@@ -226,21 +226,21 @@ private _fastTravelSectorHQExecute = {
 ] call WL2_fnc_addTargetMapButton;
 
 #if WL_SECTOR_HQ_DEBUG
-// Fast Travel Sector HQ Test
+// Fast Travel Stronghold Test
 private _fastTravelSectorHQTestExecute = {
     params ["_asset"];
     private _findSector = (BIS_WL_sectorsArray # 2) select {
         (_x getVariable ["WL_sectorHQ", objNull]) == _asset
     };
     BIS_WL_targetSector = (_findSector # 0);
-    systemChat "Testing Sector HQ spawns. Force respawn to end test.";
+    systemChat "Testing Sector Stronghold spawns. Force respawn to end test.";
     while { alive player } do {
         [5, ""] spawn WL2_fnc_executeFastTravel;
         sleep 3;
     };
 };
 [
-    "SECTOR HQ SPAWN TEST",
+    "STRONGHOLD SPAWN TEST",
     _fastTravelSectorHQTestExecute,
     true,
     "fastTravelSectorHQ",
@@ -267,7 +267,7 @@ private _fastTravelSectorHQTestExecute = {
         private _deltaX = _mouseX - _originalMouseX;
         private _deltaY = _mouseY - _originalMouseY;
 
-        if (_deltaX < 0 || _deltaX > 0.4 || _deltaY < -0.05 || _deltaY > _menuHeight) then {
+        if (_deltaX < 0 || _deltaX > 0.5 || _deltaY < -0.05 || _deltaY > _menuHeight) then {
             _keepDialog = inputMouse 0 == 0 && inputMouse 1 == 0;
         };
     };

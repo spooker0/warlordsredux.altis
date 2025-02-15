@@ -110,7 +110,7 @@ WLT_notifications = 0;
 // Debug code
 0 spawn {
     private _tasks = missionNamespace getVariable ["WLT_tasks", createHashMap];
-    while {!BIS_WL_missionEnd} do {
+    while { !BIS_WL_missionEnd } do {
         {
             private _task = _x;
             if !(taskState _task in ["Succeeded", "Assigned"]) then {

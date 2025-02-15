@@ -53,7 +53,7 @@ if !(isDedicated) then {
 0 spawn WL2_fnc_zoneRestrictionHandleServer;
 0 spawn WL2_fnc_incomePayoff;
 0 spawn WL2_fnc_garbageCollector;
-0 spawn WL2_fnc_WLAC;
+0 spawn WL2_fnc_wlac;
 call WL2_fnc_processRunways;
 
 0 spawn WL2_fnc_cleanupCarrier;
@@ -95,6 +95,12 @@ call WL2_fnc_processRunways;
 		};
 	};
 } forEach BIS_WL_competingSides;
+
+#if WL_ZEUS_ENABLED == 0
+{
+	deleteVehicle _x;
+} forEach (allMissionObjects "ModuleCurator_F");
+#endif
 
 if !(["(EU) #11", serverName] call BIS_fnc_inString) then {
 	0 spawn {

@@ -256,7 +256,7 @@ private _fastTravelArr = [
 		"SectorHQFT",
 		0,
 		[],
-		"Fast Travel to Sector HQ",
+		"Fast Travel to Sector Stronghold",
 		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
 		""
 	], [
@@ -284,7 +284,7 @@ private _fastTravelArr = [
 		"BuySectorHQ",
 		3000,
 		[],
-		"Purchase Sector HQ",
+		"Purchase Sector Stronghold",
 		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
 		""
 	]
