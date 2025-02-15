@@ -21,11 +21,11 @@ private _sectorBuilding = _buildings # 0;
 
 private _sectorName = _currentSector getVariable ["BIS_WL_name", "sector"];
 private _sectorBuildingType = getText (configFile >> "CfgVehicles" >> typeOf _sectorBuilding >> "displayName");
-private _message = format ["Are you sure you want to create a Sector HQ in %1 from: %2?", _sectorName, _sectorBuildingType];
+private _message = format ["Are you sure you want to create a Sector Stronghold in %1 from: %2?", _sectorName, _sectorBuildingType];
 if (_hasOldSectorBuilding) then {
-    _message = format ["%1<br/><br/><t color='#ff0000'>This will replace the current sector HQ.</t>", _message];
+    _message = format ["%1<br/><br/><t color='#ff0000'>This will replace the current Sector Stronghold.</t>", _message];
 };
-private _result = [_message, "Create Sector HQ", "Create", "Cancel"] call BIS_fnc_guiMessage;
+private _result = [_message, "Create Sector Stronghold", "Create", "Cancel"] call BIS_fnc_guiMessage;
 
 if (!_result) exitWith {
     playSoundUI ["AddItemFailed"];
@@ -52,7 +52,7 @@ private _sectorHQTextMarker = createMarkerLocal [_markerTextName, _sectorBuildin
 _sectorHQTextMarker setMarkerShapeLocal "ICON";
 _sectorHQTextMarker setMarkerTypeLocal "loc_Ruin";
 _sectorHQTextMarker setMarkerColorLocal "colorCivilian";
-_sectorHQTextMarker setMarkerText "HQ";
+_sectorHQTextMarker setMarkerText "STRONGHOLD";
 
 _currentSector setVariable ["WL_sectorHQ", _sectorBuilding, true];
 _currentSector setVariable ["WL_sectorHQMarker", _sectorHQMarker, true];

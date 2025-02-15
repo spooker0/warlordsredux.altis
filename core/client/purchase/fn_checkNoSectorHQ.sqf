@@ -11,7 +11,7 @@ if (count _findCurrentSector == 0) exitWith {
 // private _currentSector = _findCurrentSector # 0;
 // private _sectorHQ = _currentSector getVariable ["WL_sectorHQ", objNull];
 // if (!isNull _sectorHQ) exitWith {
-//     [false, "Sector already has a sector HQ."];
+//     [false, "Sector already has a Sector Stronghold."];
 // };
 
 private _buildings = nearestObjects [player, ["House", "Building"], 50, true];
@@ -36,7 +36,7 @@ private _minBound = _buildingBounds # 0;
 private _maxBound = _buildingBounds # 1;
 private _buildingArea = (_maxBound # 0 - _minBound # 0) * (_maxBound # 1 - _minBound # 1);
 if (_buildingArea < 100) exitWith {
-    [false, "The building you are nearest to is too small to be a Sector HQ."];
+    [false, "The building you are nearest to is too small to be a Sector Stronghold."];
 };
 
 [true, ""];
