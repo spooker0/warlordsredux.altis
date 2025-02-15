@@ -4,10 +4,10 @@ private _firedPosition = getPosATL _gunner;
 private _minDistSqr = getMissionConfigValue ["BIS_WL_minAPSDist", 400];
 private _maxDistSqr = getMissionConfigValue ["BIS_WL_maxAPSDist", 1600];
 
-private _apsProjectileConfig = APS_ProjectileMap get (typeOf _projectile);
-private _projectileAPSType = _apsProjectileConfig # 0;
-private _projectileAPSConsumption = _apsProjectileConfig # 1;
-private _dazzleable = _apsProjectileConfig # 2;
+private _apsProjectileConfig = APS_projectileConfig getOrDefault [typeOf _projectile, createHashMap];
+private _projectileAPSType = _apsProjectileConfig getOrDefault ["aps", 10];
+private _projectileAPSConsumption = _apsProjectileConfig getOrDefault ["consumption", 1];
+private _dazzleable = _apsProjectileConfig getOrDefault ["dazzleable", false];
 private _isGuided = _projectileAPSType < 3;		// if stoppable by APS, always dazzleable by dazzler
 
 private _radius = if (_dazzleable) then {125} else {sqrt _maxDistSqr};

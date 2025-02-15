@@ -65,7 +65,7 @@ addMissionEventHandler ["Draw3D", {
 			};
 		};
 		private _size = if (_isInMySquad) then { 0.04 } else { 0.03 };
-		private _levelDisplay = player getVariable ["WL_playerLevel", "Recruit"];
+		private _levelDisplay = _x getVariable ["WL_playerLevel", "Recruit"];
 		private _displayName = format ["%1 [%2]", name _x, _levelDisplay];
 
 		drawIcon3D [

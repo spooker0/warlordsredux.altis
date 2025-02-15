@@ -1,3 +1,5 @@
+if (!hasInterface) exitWith {};
+
 while { !BIS_WL_missionEnd } do {
     waitUntil {
         sleep 0.001;

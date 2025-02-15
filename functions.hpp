@@ -16,6 +16,7 @@ class CfgFunctions {
 			class registerVehicle {};
 			class relDir2 {};
 			class report {};
+			class sead {};
 			class setupProjectiles {};
 			class serverHandleAPS {};
 		};
@@ -23,12 +24,9 @@ class CfgFunctions {
 	class DIS {
 		class Default {
 			file = "scripts\DIS";
-			class check {};
 			class frag {};
 			class maneuver {};
 			class missileCamera {};
-			class onSamFired {};
-			class registerLauncher {};
 			class startMissileCamera {};
 		};
 	};
