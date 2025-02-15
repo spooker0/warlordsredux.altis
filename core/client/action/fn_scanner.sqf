@@ -84,6 +84,12 @@ private _scannedObjects = _vehiclesInRadius select {
     _assetSide reportRemoteTarget [_x, 10];
 } forEach _scannedObjects;
 
+{
+    _x setVariable ["WL_lastSpotted", player, 2];
+} forEach (_scannedObjects select {
+    _x getVariable ["BIS_WL_ownerAsset", "123"] != "123"
+});
+
 if (getConnectedUAV player == _asset || vehicle player == _asset) then {
     if (_awacs) then {
         if (_iteration % 8 == 0) then {
