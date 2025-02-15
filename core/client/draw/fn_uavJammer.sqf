@@ -68,15 +68,8 @@ private _side = side _owner;
             systemChat (localize "STR_A3_UAV_jammed");
 
             // Effect
-            if (getPosATL _asset # 2 > 1) then {
-                _asset setDamage (damage _asset + 0.1);
-            } else {
-                if (isAutonomous _asset) then {
-                    [_asset, false] remoteExec ["setAutonomous", 0];
-                };
-                if (!isNull _controller) then {
-                    _controller connectTerminalToUAV objNull;
-                };
+            if (getPosATL _asset # 2 <= 1 && !isNull _controller) then {
+                _controller connectTerminalToUAV objNull;
             };
         };
 

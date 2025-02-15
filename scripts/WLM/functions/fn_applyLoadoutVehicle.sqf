@@ -89,5 +89,5 @@ if (_eligibleFreeRearm) then {
     [toUpper localize "STR_A3_WL_popup_asset_rearmed"] spawn WL2_fnc_smoothText;
 } else {
     private _regularRearmTimer = _asset getVariable ["BIS_WL_nextRearm", 0];
-    _asset setVariable ["WLM_ineligibleForRearmTimer", _regularRearmTimer];
+    _asset setVariable ["WLM_ineligibleForRearmTimer", _regularRearmTimer, true];
 };

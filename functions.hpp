@@ -351,6 +351,7 @@ class CfgFunctions {
 			class setupNewWarlord {};
 			class targetResetHandleServer {};
 			class targetSelectionHandleServer {};
+			class uavJammed {};
 			class updateVehicleList {};
 			class wlac {};
 			class zoneRestrictionHandleServer {};

@@ -230,6 +230,13 @@ addMissionEventHandler ["Draw3D", {
                         _lockedUav setVariable ["BIS_WL_spectrumJammed", true, true];
                         _lockedUav setVariable ["WL_lastHitter", player, 2];
 
+                        // Effect
+                        if (getPosATL _lockedUav # 2 > 1) then {
+                            [_lockedUav, player] remoteExec ["WL2_fnc_uavJammed", 2];
+                        } else {
+                            [_lockedUav, false] remoteExec ["setAutonomous", 0];
+                        };
+
                         playSoundUI ["a3\sounds_f_decade\assets\props\linkterminal_01_node_1_f\terminal_captured.wss", 1, 1, true];
 
                         _lockStatus = 0;

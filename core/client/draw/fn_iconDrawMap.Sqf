@@ -94,8 +94,7 @@ if (!isNull WL_SectorActionTarget && isNull BIS_WL_highlightedSector && WL_Secto
 private _scannerUnits = vehicles select {
 	alive _x &&
 	isEngineOn _x &&
-	((_x getVariable ["WL_scannerOn", false]) || (_x getVariable ["WL_awacsOn", false])) &&
-	local _x
+	_x getVariable ["WL_scannerOn", false]
 };
 
 private _hasAWACSMap = missionNamespace getVariable ["WL2_hasAWACS", createHashMap];
