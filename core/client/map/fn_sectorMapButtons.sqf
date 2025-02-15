@@ -15,7 +15,7 @@ private _sector = WL_SectorActionTarget;
 WL_ActionTarget = WL_SectorActionTarget;
 
 private _titleBar = _display ctrlCreate ["RscStructuredText", -1];
-_titleBar ctrlSetPosition [_offsetX, _offsetY - 0.05, 0.4, 0.05];
+_titleBar ctrlSetPosition [_offsetX, _offsetY - 0.05, 0.5, 0.05];
 _titleBar ctrlSetBackgroundColor [0.3, 0.3, 0.3, 1];
 _titleBar ctrlSetTextColor [0.7, 0.7, 1, 1];
 private _sectorName = _sector getVariable ["BIS_WL_name", "Sector"];
@@ -41,14 +41,14 @@ private _fastTravelSeizedExecute = {
     ]
 ] call WL2_fnc_addTargetMapButton;
 
-// Fast Travel Sector HQ
+// Fast Travel Stronghold
 private _fastTravelSectorHQExecute = {
     params ["_sector"];
     BIS_WL_targetSector = _sector;
     [5, ""] spawn WL2_fnc_executeFastTravel;
 };
 [
-    "FAST TRAVEL SECTOR HQ",
+    "FAST TRAVEL STRONGHOLD",
     _fastTravelSectorHQExecute,
     true,
     "fastTravelSectorHQTarget",
@@ -160,7 +160,7 @@ private _scanExecute = {
         private _deltaX = _mouseX - _originalMouseX;
         private _deltaY = _mouseY - _originalMouseY;
 
-        if (_deltaX < 0 || _deltaX > 0.4 || _deltaY < -0.05 || _deltaY > _menuHeight) then {
+        if (_deltaX < 0 || _deltaX > 0.5 || _deltaY < -0.05 || _deltaY > _menuHeight) then {
             _keepDialog = inputMouse 0 == 0 && inputMouse 1 == 0;
         };
     };
