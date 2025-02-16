@@ -106,13 +106,14 @@ if (_asset isKindOf "Man") then {
 		// HMD missile alert system
 		_asset addEventHandler ["IncomingMissile", {
 			params ["_target", "_ammo", "_vehicle", "_instigator", "_missile"];
+			if (isNull _missile) exitWith {};
 			private _incomingMissiles = _target getVariable ["WL_incomingMissiles", []];
-			_incomingMissiles pushBack _missile;
+			_incomingMissiles pushBackUnique _missile;
 			_incomingMissiles = _incomingMissiles select {
-				alive _x;
+				!(isNull _x) && alive _x;
 			};
-			_target setVariable ["WL_incomingMissiles", _incomingMissiles, true];
-			_target setVariable ["WL_incomingLauncherLastKnown", _vehicle, true];
+			_target setVariable ["WL_incomingMissiles", _incomingMissiles, owner _target];
+			_target setVariable ["WL_incomingLauncherLastKnown", _vehicle, owner _target];
 		}];
 	};
 
