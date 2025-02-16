@@ -33,7 +33,7 @@ if (isPlayer _unit && _unit isKindOf "Man" && _unit != _responsiblePlayer) then 
 };
 
 if (!isNull _responsiblePlayer && { isPlayer _responsiblePlayer }) then {
-    _unit setVariable ["WL_lastHitter", objNull, true];
+    _unit setVariable ["WL_lastHitter", objNull];
 
     // must be sync calls, type info may disappear in next frame
     [_unit, _responsiblePlayer] call WL2_fnc_killRewardHandle;
