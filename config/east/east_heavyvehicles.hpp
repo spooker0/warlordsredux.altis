@@ -8,35 +8,73 @@ class HeavyVehicles {
         requirements[] = {};
     }; // "MSE-3 Marid"
 
-    class O_APC_Wheeled_02_rcws_v2_m_F {
-        aps = 2;
+    class O_LT_01_AT_F {
+        aps = 1;
         capValue = 3;
-        cost = 2600;
-        description = "MSE-3M Marid is a variant of the MSE-3 Marid armed with a 30mm autocannon.";
-        killReward = 300;
-        name = "MSE-3M Marid Autocannon";
-        rearm = 500;
+        cost = 1500;
+        killReward = 240;
+        name = "AWC Nyx (AT)";
+        rearm = 300;
         requirements[] = {};
-        spawn = "O_APC_Wheeled_02_rcws_v2_F";
-        variant = 1;
+        spawn = "I_LT_01_AT_F";
+        textures[] = {
+            "Img\camo\nyx01.jpg",
+            "Img\camo\nyx02.jpg",
+            "a3\Armor_F\Data\camonet_CSAT_HEX_Green_CO.paa",
+            "A3\Armor_F\Data\cage_csat_green_CO.paa"
+        };
 
         class Gunner: WLTurretDefaults {
             addMagazines[] = {
-                "250Rnd_30mm_HE_shells_Tracer_Red",
-                "250Rnd_30mm_APDS_shells_Tracer_Red"
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles"
             };
             addWeapons[] = {
-                "gatling_30mm"
+                "missiles_Firefist"
             };
+            reloadOverride = 6;
             removeMagazines[] = {
-                "96Rnd_40mm_G_belt"
+                "100Rnd_127x99_mag_Tracer_Red"
             };
             removeWeapons[] = {
-                "GMG_40mm"
+                "HMG_127"
             };
             turret[] = { 0 };
         };
     };
+
+    // class O_APC_Wheeled_02_rcws_v2_m_F {
+    //     aps = 2;
+    //     capValue = 3;
+    //     cost = 2600;
+    //     description = "MSE-3M Marid is a variant of the MSE-3 Marid armed with a 30mm autocannon.";
+    //     killReward = 300;
+    //     name = "MSE-3M Marid Autocannon";
+    //     rearm = 500;
+    //     requirements[] = {};
+    //     spawn = "O_APC_Wheeled_02_rcws_v2_F";
+    //     variant = 1;
+
+    //     class Gunner: WLTurretDefaults {
+    //         addMagazines[] = {
+    //             "250Rnd_30mm_HE_shells_Tracer_Red",
+    //             "250Rnd_30mm_APDS_shells_Tracer_Red"
+    //         };
+    //         addWeapons[] = {
+    //             "gatling_30mm"
+    //         };
+    //         removeMagazines[] = {
+    //             "96Rnd_40mm_G_belt"
+    //         };
+    //         removeWeapons[] = {
+    //             "GMG_40mm"
+    //         };
+    //         turret[] = { 0 };
+    //     };
+    // };
 
     class O_APC_Tracked_02_recon_F {
         aps = 2;

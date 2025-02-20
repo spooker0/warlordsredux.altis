@@ -45,7 +45,7 @@ private _currentLoadoutMags = _currentLoadout getOrDefault ["magazines", []];
 private _requiredLevel = (_customization getOrDefault ["level", 0]) max (_currentLoadout getOrDefault ["level", 0]);
 private _playerLevel = ["getLevel"] call WLC_fnc_getLevelInfo;
 if (_requiredLevel <= _playerLevel) then {
-    profileNamespace setVariable [format ["WLC_%1_Ammo", _selectedType], _selection];
+    profileNamespace setVariable [format ["WLC_%1_%2_Ammo", _selectedType, BIS_WL_playerSide], _selection];
 } else {
     playSoundUI ["AddItemFailed"];
 };

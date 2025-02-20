@@ -35,9 +35,15 @@ private _savedLoadoutHandled = FALSE;
 				_data = _sortedArray # _index
 			};
 
+			if (_category == "Infantry") then {
+				private _buildABear = ["BuildABear", 300, [], "Customized Unit", "\A3\Data_F_Warlords\Data\preview_loadout.jpg", "Buy infantry with your customized loadout."];
+				_data insert [0, [_buildABear]];
+			};
+
 			if (_category == "Gear") then {
 				_data pushBack ["Arsenal", (getMissionConfigValue ["BIS_WL_arsenalCost", 1000]), [], (localize "STR_A3_Arsenal"), "\A3\Data_F_Warlords\Data\preview_arsenal.jpg", localize "STR_A3_WL_arsenal_open"];
 				_data pushBack ["Customization", 0, [], "Customization", "\A3\Data_F_Warlords\Data\preview_arsenal.jpg", "Customization menu for respawn loadout."];
+				_data pushBack ["BuyGlasses", 1000, [], "Buy AR Glasses", "\A3\Data_F_Warlords\Data\preview_arsenal.jpg", "Buy AR glasses."];
 			};
 
 			if (_category == "Gear" && !_lastLoadoutHandled) then {
@@ -253,7 +259,7 @@ private _fastTravelArr = [
 		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
 		""
 	], [
-		"SectorHQFT",
+		"StrongholdFT",
 		0,
 		[],
 		"Fast Travel to Sector Stronghold",
@@ -281,8 +287,8 @@ private _fastTravelArr = [
 		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
 		"Buy a deployable sleeping bag that respawns you at its location."
 	], [
-		"BuySectorHQ",
-		3000,
+		"BuyStronghold",
+		500,
 		[],
 		"Purchase Sector Stronghold",
 		"\A3\Data_F_Warlords\Data\preview_ft_conflict.jpg",
@@ -290,9 +296,9 @@ private _fastTravelArr = [
 	]
 ];
 
-#if WL_SECTOR_HQ_ENABLE == 0
+#if WL_STRONGHOLD_ENABLE == 0
 _fastTravelArr = _fastTravelArr select {
-	!(_x # 0 in ["SectorHQFT", "BuySectorHQ"])
+	!(_x # 0 in ["StrongholdFT", "BuyStronghold"])
 };
 #endif
 

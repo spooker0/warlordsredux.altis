@@ -328,7 +328,7 @@ private _squadActionId = player addAction[_squadActionText, {
 }, [], -100, false, false, "", ""];
 player setUserActionText [_squadActionId, _squadActionText, "<img size='2' image='\a3\ui_f\data\igui\cfg\simpletasks\types\meet_ca.paa'/>"];
 
-0 spawn WL2_fnc_factionBasedClientInit;
+[] spawn WL2_fnc_factionBasedClientInit;
 0 spawn WL2_fnc_captureList;
 0 spawn WL2_fnc_mineLimitHint;
 
@@ -390,3 +390,5 @@ if (!isServer) then {
 0 spawn WLT_fnc_init;
 
 0 spawn WL2_fnc_updateLevelDisplay;
+
+removeGoggles player;

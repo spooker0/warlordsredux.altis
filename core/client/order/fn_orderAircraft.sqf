@@ -16,7 +16,7 @@ if !(visibleMap) then {
 BIS_WL_targetSector = objNull;
 private _selectionBefore = BIS_WL_currentSelection;
 BIS_WL_currentSelection = WL_ID_SELECTION_ORDERING_AIRCRAFT;
-BIS_WL_orderedAssetRequirements = _requirements;
+WL_orderingClass = _orderedClass;
 WL_MapBusy pushBack "orderAircraft";
 sleep 0.25;
 

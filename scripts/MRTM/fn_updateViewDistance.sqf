@@ -7,6 +7,12 @@
 _dist = 0;
 _exit = false;
 
+if (player getVariable ["WL_ViewRangeReduced", false]) then {
+	_dist = 150;
+	setViewDistance _dist;
+	_exit = true;
+};
+
 if (!_exit && {!((UAVControl getConnectedUAV player # 1) isEqualTo "")}) then {
 	setViewDistance (profileNamespace getVariable ["MRTM_drones", 4000]);
 	_dist = (profileNamespace getVariable ["MRTM_drones", 4000]);
@@ -32,6 +38,7 @@ if (!_exit && {(vehicle player) isKindOf "Air"}) then {
 };
 
 if (profileNamespace getVariable ["MRTM_syncObjects", true]) then {
-	setObjectViewDistance [_dist, 100];
+	private _shadowDistance = getObjectViewDistance # 1;
+	setObjectViewDistance [_dist, _shadowDistance];
 	profileNamespace setVariable ["MRTM_objects", _dist];
 };

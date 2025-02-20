@@ -122,7 +122,7 @@ class RemoteControl {
         killReward = 400;
         name = "MQ-4R Greyhawk (Recon)";
         rearm = 300;
-        requirements[] = {"A"};
+        requirements[] = {"H"};
         spawn = "B_UAV_02_dynamicLoadout_F";
     }; // "Greyhawk"
 
@@ -131,7 +131,7 @@ class RemoteControl {
         hasHMD = 1;
         killReward = 600;
         rearm = 300;
-        requirements[] = {"A"};
+        requirements[] = {"H"};
     }; // "Greyhawk"
 
     class B_T_UAV_03_dynamicLoadout_F {

@@ -18,13 +18,13 @@ _itemCostDisplay ctrlSetStructuredText parseText format ["<t size='1.2'>%1<br/>%
 private _sumCost = 0;
 {
     private _customizationList = missionNamespace getVariable [format ["WLC_%1_%2", _x, BIS_WL_playerSide], createHashMap];
-    private _customization = profileNamespace getVariable [format ["WLC_%1", _x], ""];
+    private _customization = profileNamespace getVariable [format ["WLC_%1_%2", _x, BIS_WL_playerSide], ""];
     private _customizationMap = _customizationList getOrDefault [_customization, createHashMap];
     private _cost = _customizationMap getOrDefault ["cost", 0];
     _sumCost = _sumCost + _cost;
 
     if (_x in ["Primary", "Secondary", "Launcher"]) then {
-        private _customizationAmmo = profileNamespace getVariable [format ["WLC_%1_Ammo", _x], ""];
+        private _customizationAmmo = profileNamespace getVariable [format ["WLC_%1_%2_Ammo", _x, BIS_WL_playerSide], ""];
         private _loadouts = _customizationMap getOrDefault ["loadouts", createHashMap];
         private _loadout = _loadouts getOrDefault [_customizationAmmo, createHashMap];
         private _loadoutCost = _loadout getOrDefault ["cost", 0];

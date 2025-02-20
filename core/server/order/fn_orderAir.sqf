@@ -73,4 +73,3 @@ _asset setVehiclePosition [_spawnPos, [], 0, "CAN_COLLIDE"];
 _asset setDir _dir;
 
 [_asset, _sender, _orderedClass] call WL2_fnc_processOrder;
-[_asset] remoteExec ["WL2_fnc_catapultAction", 0];

@@ -1,5 +1,5 @@
 if ([_x] call WL2_fnc_isScannerMunition) exitWith {
-	"\A3\ui_f\data\IGUI\RscCustomInfo\Sensors\Targets\missile_ca.paa";
+	"\A3\ui_f\data\IGUI\RscCustomInfo\Sensors\Targets\missileAlt_ca.paa";
 };
 
 private _vt = typeOf (vehicle _x);

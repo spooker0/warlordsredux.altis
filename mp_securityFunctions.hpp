@@ -28,8 +28,8 @@ class CfgRemoteExec {
 		class WL2_fnc_killRewardHandle {allowedTargets = 2;};
 		class WL2_fnc_lagMessageHandler {allowedTargets = 2;};
 		class WL2_fnc_pingFix {allowedTargets = 1;};
-		class WL2_fnc_prepareSectorHQ {allowedTargets = 0;};
-		class WL2_fnc_protectSectorHQ {allowedTargets = 0;};
+		class WL2_fnc_prepareStronghold {allowedTargets = 0;};
+		class WL2_fnc_protectStronghold {allowedTargets = 0;};
 		class WL2_fnc_radarOperateAction {allowedTargets = 1;};
 		class WL2_fnc_radarRotateAction {allowedTargets = 1;};
 		class WL2_fnc_rearmAction {allowedTargets = 1;};

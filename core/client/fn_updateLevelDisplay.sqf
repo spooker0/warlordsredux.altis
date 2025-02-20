@@ -8,10 +8,19 @@ private _allDone = true;
 	};
 } forEach _finalTutorialTasks;
 
-private _levelDisplay = if (!_allDone) then {
-	"Recruit"
+private _uid = getPlayerUID player;
+private _isAdmin = _uid in (getArray (missionConfigFile >> "adminIDs"));
+private _isPollster = _uid in (getArray (missionConfigFile >> "pollstersIDs"));
+private _isDev = _isAdmin || _isPollster;
+
+private _levelDisplay = if (_isDev) then {
+	"Developer"
 } else {
-	private _playerLevel = ["getLevel"] call WLC_fnc_getLevelInfo;
-	format ["Level %1", _playerLevel];
+	if (!_allDone) then {
+		"Recruit"
+	} else {
+		private _playerLevel = ["getLevel"] call WLC_fnc_getLevelInfo;
+		format ["Level %1", _playerLevel];
+	};
 };
 player setVariable ["WL_playerLevel", _levelDisplay, true];

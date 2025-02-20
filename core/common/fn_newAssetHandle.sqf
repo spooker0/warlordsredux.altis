@@ -331,6 +331,10 @@ if (_asset isKindOf "Man") then {
 		[_asset] remoteExec ["WL2_fnc_vehicleLockAction", 0, true];
 	};
 
+	if (_asset isKindOf "Plane") then {
+		[_asset] remoteExec ["WL2_fnc_catapultAction", 0];
+	};
+
 	if (profileNamespace getVariable ["MRTM_spawnEmpty", false]) then {
 		if (typeOf _asset != "B_supplyCrate_F" && {typeOf _asset != "O_supplyCrate_F"}) then {
 			if !((typeOf _asset) in (getArray (missionConfigFile >> "logisticsConfig" >> "cargoTypes" >> "Cargo"))) then {

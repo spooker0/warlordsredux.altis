@@ -1,19 +1,22 @@
 private _tentActionText = "<t color='#ff0000'>Place Fast Travel Tent</t>";
 
 private _backpack = if (side group player == west) then {
-    "B_RadioBag_01_mtp_F"
+    "B_Carryall_mcamo"
 } else {
-    "B_RadioBag_01_ghex_F"
+    "B_Carryall_ocamo"
 };
 
+private _oldBackpackItems = backpackItems player;
 player addBackpack _backpack;
+{
+    player addItemToBackpack _x;
+} forEach _oldBackpackItems;
 
 private _actionId = player addAction [
     _tentActionText,
     {
         params ["_target", "_caller", "_actionId", "_arguments"];
         _target removeAction _actionId;
-        removeBackpack player;
 
         private _deploymentResult = ["Land_TentA_F", "Land_TentA_F", [0, 3, 0], 8, true] call WL2_fnc_deployment;
 
@@ -54,7 +57,7 @@ private _actionId = player addAction [
     true,
     true,
     "",
-    "_this == player && vehicle player == player && typeof (unitBackpack player) in ['B_RadioBag_01_mtp_F', 'B_RadioBag_01_ghex_F']"
+    "_this == player && vehicle player == player && typeof (unitBackpack player) in ['B_Carryall_mcamo', 'B_Carryall_ocamo']"
 ];
 
 player setUserActionText [_actionId, _tentActionText, "<img size='2' image='\A3\ui_f\data\map\mapcontrol\Tourism_CA.paa'/>"];

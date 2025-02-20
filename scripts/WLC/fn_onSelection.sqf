@@ -45,7 +45,7 @@ _variantDisplay ctrlRemoveAllEventHandlers "LBSelChanged";
 _loadoutDisplay ctrlRemoveAllEventHandlers "LBSelChanged";
 
 if (_lbCurSel <= 0) exitWith {
-    profileNamespace setVariable [format ["WLC_%1", _type], ""];
+    profileNamespace setVariable [format ["WLC_%1_%2", _type, BIS_WL_playerSide], ""];
 };
 
 private _getItemTooltip = {
@@ -71,7 +71,7 @@ private _customizationData = _control lbData _lbCurSel;
 private _selectedValue = _control lbValue _lbCurSel;
 private _playerLevel = ["getLevel"] call WLC_fnc_getLevelInfo;
 if (_selectedValue <= _playerLevel) then {
-    profileNamespace setVariable [format ["WLC_%1", _type], _customizationData];
+    profileNamespace setVariable [format ["WLC_%1_%2", _type, BIS_WL_playerSide], _customizationData];
 };
 
 private _customizationList = missionNamespace getVariable [format ["WLC_%1_%2", _type, BIS_WL_playerSide], createHashMap];
@@ -93,7 +93,7 @@ if (_type in ["Primary", "Secondary", "Launcher"]) then {
     _weaponDisplayTooltip ctrlSetTooltip ([_actualClass] call WLM_fnc_getMagazineTooltip);
 
     lbClear _variantDisplay;
-    private _selectedVariant = profileNamespace getVariable [format ["WLC_%1_Attach", _type], ""];
+    private _selectedVariant = profileNamespace getVariable [format ["WLC_%1_%2_Attach", _type, BIS_WL_playerSide], ""];
     private _variantIndex = -1;
     private _variants = _customization getOrDefault ["variants", createHashMap];
 
@@ -120,7 +120,7 @@ if (_type in ["Primary", "Secondary", "Launcher"]) then {
     _loadoutDisplay ctrlShow true;
     lbClear _loadoutDisplay;
 
-    private _selectedLoadout = profileNamespace getVariable [format ["WLC_%1_Ammo", _type], ""];
+    private _selectedLoadout = profileNamespace getVariable [format ["WLC_%1_%2_Ammo", _type, BIS_WL_playerSide], ""];
     private _loadoutIndex = 0;
     private _loadouts = _customization getOrDefault ["loadouts", createHashMap];
 

@@ -76,7 +76,7 @@ private _sumCost = 0;
     _select lbSortBy ["VALUE", false];
 
     _select lbSetCurSel 0;
-    private _customizationData = profileNamespace getVariable [format ["WLC_%1", _type], ""];
+    private _customizationData = profileNamespace getVariable [format ["WLC_%1_%2", _type, BIS_WL_playerSide], ""];
     if (_customizationData != "") then {
         for "_index" from 0 to lbSize _select - 1 do {
             private _class = _select lbData _index;

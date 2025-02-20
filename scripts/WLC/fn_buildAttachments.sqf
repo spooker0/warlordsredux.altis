@@ -40,4 +40,4 @@ private _currentVariantAttachments = _currentVariant getOrDefault ["attachments"
     _attachmentPic ctrlCommit 0;
 } forEach (_currentVariantAttachments + _attachments);
 
-profileNamespace setVariable [format ["WLC_%1_Attach", _selectedType], _selection];
+profileNamespace setVariable [format ["WLC_%1_%2_Attach", _selectedType, BIS_WL_playerSide], _selection];

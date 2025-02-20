@@ -12,6 +12,6 @@ private _windowHitPointNames = _allHitPointNames select { "glass" in toLower _x 
     _sectorBuilding setHitPointDamage [_x, 1];
 } forEach _windowHitPointNames;
 
-[_sectorBuilding, true] remoteExec ["WL2_fnc_protectSectorHQ", 0, true];
+[_sectorBuilding, true] remoteExec ["WL2_fnc_protectStronghold", 0, true];
 
 forceHitPointsDamageSync _sectorBuilding;

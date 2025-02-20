@@ -10,7 +10,7 @@ private _children = _unit getVariable ["WL2_children", []];
 } forEach _children;
 
 private _responsiblePlayer = [_killer, _instigator] call WL2_fnc_handleInstigator;
-if (isNull _responsiblePlayer) then {
+if (isNull _responsiblePlayer || { _responsiblePlayer == _unit }) then {
     private _lastHitter = _unit getVariable ["WL_lastHitter", objNull];
     _responsiblePlayer = _lastHitter;
 };

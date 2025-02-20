@@ -4,6 +4,12 @@ params ["_asset", "_actionId", "_awacs", "_iteration"];
 
 private _scannerOn = _asset getVariable ["WL_scannerOn", false];
 
+if (_scannerOn && local _asset) then {
+    (driver _asset) action ["ActiveSensorsOn", _asset];
+} else {
+    (driver _asset) action ["ActiveSensorsOff", _asset];
+};
+
 private _actionColor = if (_scannerOn) then {
     "#4bff58";
 } else {

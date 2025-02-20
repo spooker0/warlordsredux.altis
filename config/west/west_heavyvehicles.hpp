@@ -27,6 +27,44 @@ class HeavyVehicles {
         // };
     }; // "IFV-6c Panther"
 
+    class B_LT_01_AT_F {
+        aps = 1;
+        capValue = 3;
+        cost = 1500;
+        killReward = 240;
+        name = "AWC Nyx (AT)";
+        rearm = 300;
+        requirements[] = {};
+        spawn = "I_LT_01_AT_F";
+        textures[] = {
+            "A3\armor_f_tank\lt_01\data\lt_01_main_olive_co.paa",
+            "A3\armor_f_tank\lt_01\data\lt_01_at_olive_co.paa",
+            "a3\Armor_F\Data\camonet_NATO_Desert_CO.paa",
+            "A3\Armor_F_Tank\AFV_Wheeled_01\Data\afv_wheeled_01_EXT3_sand_CO.paa"
+        };
+
+        class Gunner: WLTurretDefaults {
+            addMagazines[] = {
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles",
+                "2Rnd_127mm_Firefist_missiles"
+            };
+            addWeapons[] = {
+                "missiles_Firefist"
+            };
+            reloadOverride = 6;
+            removeMagazines[] = {
+                "100Rnd_127x99_mag_Tracer_Red"
+            };
+            removeWeapons[] = {
+                "HMG_127"
+            };
+            turret[] = { 0 };
+        };
+    };
+
     class B_APC_Tracked_01_CRV_F {
         aps = 2;
         capValue = 2;

@@ -42,19 +42,19 @@ private _fastTravelSeizedExecute = {
 ] call WL2_fnc_addTargetMapButton;
 
 // Fast Travel Stronghold
-private _fastTravelSectorHQExecute = {
+private _fastTravelStrongholdExecute = {
     params ["_sector"];
     BIS_WL_targetSector = _sector;
     [5, ""] spawn WL2_fnc_executeFastTravel;
 };
 [
     "FAST TRAVEL STRONGHOLD",
-    _fastTravelSectorHQExecute,
+    _fastTravelStrongholdExecute,
     true,
-    "fastTravelSectorHQTarget",
+    "fastTravelStrongholdTarget",
     [
         0,
-        "SectorHQFT",
+        "StrongholdFT",
         "Fast Travel"
     ]
 ] call WL2_fnc_addTargetMapButton;

@@ -1,4 +1,6 @@
-_magazineTypes = [
+params [["_unit", player]];
+
+private _magazineTypes = [
 	"1Rnd_SmokeRed_Grenade_shell",
 	"1Rnd_SmokeGreen_Grenade_shell",
 	"1Rnd_SmokeBlue_Grenade_shell",
@@ -16,32 +18,32 @@ _magazineTypes = [
 ];
 
 {
-	player removeMagazines _x;
+	_unit removeMagazines _x;
 } forEach _magazineTypes;
 
 switch (side group player) do {
 	case west: {
-		player linkItem "B_UavTerminal";
-		player addMagazineGlobal "Laserbatteries";
-		player addWeaponGlobal "Laserdesignator";
+		_unit linkItem "B_UavTerminal";
+		_unit addMagazineGlobal "Laserbatteries";
+		_unit addWeaponGlobal "Laserdesignator";
 	};
 	case east: {
-		player linkItem "O_UavTerminal";
-		player addMagazineGlobal "Laserbatteries";
-		player addWeaponGlobal "Laserdesignator_02";
+		_unit linkItem "O_UavTerminal";
+		_unit addMagazineGlobal "Laserbatteries";
+		_unit addWeaponGlobal "Laserdesignator_02";
 	};
 	case independent: {
-		player linkItem "I_UavTerminal";
-		player addMagazineGlobal "Laserbatteries";
-		player addWeaponGlobal "Laserdesignator_03";
+		_unit linkItem "I_UavTerminal";
+		_unit addMagazineGlobal "Laserbatteries";
+		_unit addWeaponGlobal "Laserdesignator_03";
 	};
 };
 
 {
-	player removeMagazines _x;
+	_unit removeMagazines _x;
 } forEach _magazineTypes;
 
-player linkItem "Integrated_NVG_TI_0_F";
-player addPrimaryWeaponItem "muzzle_snds_H";
-player addPrimaryWeaponItem "muzzle_snds_M";
-player addMagazines ["SmokeShell", 1];
+_unit linkItem "Integrated_NVG_TI_0_F";
+_unit addPrimaryWeaponItem "muzzle_snds_H";
+_unit addPrimaryWeaponItem "muzzle_snds_M";
+_unit addMagazines ["SmokeShell", 1];
