@@ -205,32 +205,32 @@ private _fastTravelSquadmateExecute = {
 ] call WL2_fnc_addTargetMapButton;
 
 // Fast Travel Stronghold Button
-private _fastTravelSectorHQExecute = {
+private _fastTravelStrongholdExecute = {
     params ["_asset"];
     private _findSector = (BIS_WL_sectorsArray # 2) select {
-        (_x getVariable ["WL_sectorHQ", objNull]) == _asset
+        (_x getVariable ["WL_stronghold", objNull]) == _asset
     };
     BIS_WL_targetSector = (_findSector # 0);
     [5, ""] spawn WL2_fnc_executeFastTravel;
 };
 [
     "FAST TRAVEL STRONGHOLD",
-    _fastTravelSectorHQExecute,
+    _fastTravelStrongholdExecute,
     true,
-    "fastTravelSectorHQ",
+    "fastTravelStronghold",
     [
         0,
-        "SectorHQFT",
+        "StrongholdFT",
         "Fast Travel"
     ]
 ] call WL2_fnc_addTargetMapButton;
 
-#if WL_SECTOR_HQ_DEBUG
+#if WL_STRONGHOLD_DEBUG
 // Fast Travel Stronghold Test
-private _fastTravelSectorHQTestExecute = {
+private _fastTravelStrongholdTestExecute = {
     params ["_asset"];
     private _findSector = (BIS_WL_sectorsArray # 2) select {
-        (_x getVariable ["WL_sectorHQ", objNull]) == _asset
+        (_x getVariable ["WL_stronghold", objNull]) == _asset
     };
     BIS_WL_targetSector = (_findSector # 0);
     systemChat "Testing Sector Stronghold spawns. Force respawn to end test.";
@@ -241,12 +241,12 @@ private _fastTravelSectorHQTestExecute = {
 };
 [
     "STRONGHOLD SPAWN TEST",
-    _fastTravelSectorHQTestExecute,
+    _fastTravelStrongholdTestExecute,
     true,
-    "fastTravelSectorHQ",
+    "fastTravelStronghold",
     [
         0,
-        "SectorHQFT",
+        "StrongholdFT",
         "Fast Travel"
     ]
 ] call WL2_fnc_addTargetMapButton;

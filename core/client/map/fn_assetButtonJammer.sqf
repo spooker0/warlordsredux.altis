@@ -20,5 +20,5 @@ private _jammerText = if (_jammerActivated) then {
         "OFF"
     };
 };
-private _buttonText = format ["JAMMER: <t color='%1'>%2</t>", _jammerColor, _jammerText];
+private _buttonText = format ["EW NETWORK: <t color='%1'>%2</t>", _jammerColor, _jammerText];
 _buttonText;

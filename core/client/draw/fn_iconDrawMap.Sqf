@@ -97,6 +97,13 @@ private _scannerUnits = vehicles select {
 	_x getVariable ["WL_scannerOn", false]
 };
 
+private _mySideColor = switch (_side) do {
+	case west: { [0, 0.3, 0.6, 0.9] };
+	case east: { [0.5, 0, 0, 0.9] };
+	case independent: { [0, 0.6, 0, 0.9] };
+	default { [1, 1, 1, 0] };
+};
+
 private _hasAWACSMap = missionNamespace getVariable ["WL2_hasAWACS", createHashMap];
 private _scale = 6.4 * worldSize / 8192 * ctrlMapScale _m;
 {
@@ -113,6 +120,14 @@ private _scale = 6.4 * worldSize / 8192 * ctrlMapScale _m;
 			_size,
 			_size,
 			getDirVisual _x
+		];
+		_m drawEllipse [
+			_assetPos,
+			_scanRadius,
+			_scanRadius,
+			0,
+			_mySideColor,
+			""
 		];
 	} else {
 		_m drawEllipse [
@@ -136,19 +151,18 @@ _allScannedObjects = _allScannedObjects arrayIntersect _allScannedObjects; // el
 {
 	if (isNull _x) then { continue; };
 	private _size = call WL2_fnc_iconSize * 1.2;
+	private _objToColor = if ([_x] call WL2_fnc_isScannerMunition) then {
+		getShotParents _x # 0;
+	} else {
+		_x
+	};
 	_m drawIcon [
 		call WL2_fnc_iconType,
-		switch ([_x] call WL2_fnc_getAssetSide) do {
+		switch ([_objToColor] call WL2_fnc_getAssetSide) do {
 			case west: { [0, 0.3, 0.6, 0.9] };
 			case east: { [0.5, 0, 0, 0.9] };
 			case independent: { [0, 0.6, 0, 0.9] };
-			default {
-				if ([_x] call WL2_fnc_isScannerMunition) then {
-					[1, 1, 1, 1]
-				} else {
-					[1, 1, 1, 0]
-				};
-			};
+			default { [1, 1, 1, 1] };
 		},
 		call WL2_fnc_getPos,
 		_size,

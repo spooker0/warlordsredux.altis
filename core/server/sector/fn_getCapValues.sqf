@@ -71,14 +71,14 @@ private _eligibleEntitiesInArea = _allInArea select {
 
 private _vehicleCapValueList = serverNamespace getVariable "WL2_cappingValues";
 private _disallowManList = ["B_UAV_AI", "O_UAV_AI", "I_UAV_AI"];
-private _sectorHQMarker = _sector getVariable ["WL_sectorHQMarker", ""];
+private _strongholdMarker = _sector getVariable ["WL_strongholdMarker", ""];
 private _sideCapValues = createHashMap;
 {
 	private _unit = _x;
 	private _side = side group _unit;
 
 	private _points = if (_unit isKindOf "Man" && !(typeOf _unit in _disallowManList)) then {
-		if (_unit inArea _sectorHQMarker) then {
+		if (_unit inArea _strongholdMarker) then {
 			5;
 		} else {
 			1;

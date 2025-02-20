@@ -8,13 +8,7 @@ if (count _findCurrentSector == 0) exitWith {
     [false, localize "STR_A3_WL_menu_arsenal_restr1"];
 };
 
-// private _currentSector = _findCurrentSector # 0;
-// private _sectorHQ = _currentSector getVariable ["WL_sectorHQ", objNull];
-// if (!isNull _sectorHQ) exitWith {
-//     [false, "Sector already has a Sector Stronghold."];
-// };
-
-private _buildings = nearestObjects [player, ["House", "Building"], 50, true];
+private _buildings = nearestObjects [player, ["House", "Building"], 20, true];
 _buildings = _buildings select {
     (_x getVariable ["BIS_WL_ownerAsset", "123"]) == "123"
 };
@@ -26,9 +20,9 @@ if (count _buildings == 0) exitWith {
 private _sectorBuilding = _buildings # 0;
 
 private _buildingBounds = boundingBoxReal _sectorBuilding;
-private _sectorHQRadius = _buildingBounds # 2;
+private _strongholdRadius = _buildingBounds # 2;
 private _distanceToSectorBuilding = player distance2D _sectorBuilding;
-if (_distanceToSectorBuilding > _sectorHQRadius) exitWith {
+if (_distanceToSectorBuilding > _strongholdRadius) exitWith {
     [false, "You are not in or near a building."];
 };
 

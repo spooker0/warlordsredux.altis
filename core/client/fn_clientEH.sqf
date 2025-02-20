@@ -33,7 +33,7 @@ addMissionEventHandler ["HandleChatMessage", {
 
 		if (_text == "!lowfps") then {
 			0 spawn {
-				private _messageTemplate = "Client FPS: %1\nClient FPS Min: %2\nEntities Count: %3\nScripts[1]: %4\nScripts[2]: %5\nScripts[3]: %6";
+				private _messageTemplate = "Client Script Collector";
 				private _message = [_messageTemplate] call WL2_fnc_scriptCollector;
 				[_message] call WL2_fnc_lagMessageDisplay;
 			};

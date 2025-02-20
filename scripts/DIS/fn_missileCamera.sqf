@@ -46,18 +46,29 @@ _camera attachTo [_projectile];
 
 [_camera, _titleBar, _pictureControl, _defaultTitlePosition, _defaultPicturePosition] spawn {
     params ["_camera", "_titleBar", "_pictureControl", "_defaultTitlePosition", "_defaultPicturePosition"];
-    private _opticsMode = false;
+    private _opticsMode = 0;
     while { !isNull _camera } do {
         if (inputAction "opticsMode" > 0) then {
             waitUntil {inputAction "opticsMode" == 0};
-            _opticsMode = !_opticsMode;
+            _opticsMode = (_opticsMode + 1) % 3;
 
-            if (_opticsMode) then {
-                _titleBar ctrlSetPosition [safeZoneX / 2, safeZoneY / 2 - 0.05, 1 - safeZoneX, 0.05];
-                _pictureControl ctrlSetPosition [safeZoneX / 2, safeZoneY / 2, 1 - safeZoneX, 1 - safeZoneY];
-            } else {
-                _titleBar ctrlSetPosition _defaultTitlePosition;
-                _pictureControl ctrlSetPosition _defaultPicturePosition;
+            switch (_opticsMode) do {
+                case 0: {
+                    _titleBar ctrlShow true;
+                    _pictureControl ctrlShow true;
+                    _titleBar ctrlSetPosition _defaultTitlePosition;
+                    _pictureControl ctrlSetPosition _defaultPicturePosition;
+                };
+                case 1: {
+                    _titleBar ctrlShow true;
+                    _pictureControl ctrlShow true;
+                    _titleBar ctrlSetPosition [safeZoneX / 2, safeZoneY / 2 - 0.05, 1 - safeZoneX, 0.05];
+                    _pictureControl ctrlSetPosition [safeZoneX / 2, safeZoneY / 2, 1 - safeZoneX, 1 - safeZoneY];
+                };
+                case 2: {
+                    _titleBar ctrlShow false;
+                    _pictureControl ctrlShow false;
+                };
             };
 
             _titleBar ctrlCommit 0;

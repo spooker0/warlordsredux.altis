@@ -128,7 +128,7 @@ class RemoteControl {
         killReward = 400;
         name = "K40R (Recon)";
         rearm = 300;
-        requirements[] = {"A"};
+        requirements[] = {"H"};
         spawn = "O_UAV_02_dynamicLoadout_F";
     };
 
@@ -137,7 +137,7 @@ class RemoteControl {
         hasHMD = 1;
         killReward = 600;
         rearm = 300;
-        requirements[] = {"A"};
+        requirements[] = {"H"};
 
         class Pilot: WLTurretDefaults {
             addMagazines[] = {
@@ -160,8 +160,34 @@ class RemoteControl {
         hasHMD = 1;
         killReward = 600;
         rearm = 300;
-        requirements[] = {"A"};
+        requirements[] = {"H"};
     }; // "K40 Ababil-3"
+
+    class O_UAV_03_dynamicLoadout_F {
+        cost = 11000;
+        hasHMD = 1;
+        killReward = 600;
+        name = "MQ-12 Falcon";
+        rearm = 600;
+        requirements[] = {"H"};
+        spawn = "B_T_UAV_03_dynamicLoadout_F";
+        textures[] = {
+            "Img\camo\falcon01.jpg",
+            "Img\camo\falcon02.jpg"
+        };
+
+        class Pilot: WLTurretDefaults {
+            turret[] = { -1 };
+            removeMagazines[] = {
+                "120Rnd_CMFlare_Chaff_Magazine"
+            };
+            removeWeapons[] = {};
+            addMagazines[] = {
+                "240Rnd_CMFlare_Chaff_Magazine"
+            };
+            addWeapons[] = {};
+        };
+    };
 
     // class B_Ship_MRLS_01_F {
     //     cost = 30000;

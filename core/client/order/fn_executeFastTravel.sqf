@@ -59,12 +59,12 @@ switch (_fastTravelMode) do {
         };
 	};
 	case 5: {
-		private _sectorHQ = BIS_WL_targetSector getVariable ["WL_sectorHQ", objNull];
-		private _posArr = _sectorHQ buildingPos -1;
+		private _stronghold = BIS_WL_targetSector getVariable ["WL_stronghold", objNull];
+		private _posArr = _stronghold buildingPos -1;
 		_destination = if (count _posArr > 0) then {
 			selectRandom _posArr;
 		} else {
-			getPosATL _sectorHQ;
+			getPosATL _stronghold;
 		};
 	};
 };

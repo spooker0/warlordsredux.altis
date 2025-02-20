@@ -57,12 +57,18 @@ if (_action == "equip") exitWith {
 	(-_cost) call WL2_fnc_fundsDatabaseWrite;
 };
 
-if (_action == "buySectorHQ") exitWith {
-	private _cost = 3000;
+if (_action == "buyStronghold") exitWith {
+	private _cost = 500;
 	private _hasFunds = playerFunds >= _cost;
 	if (_hasFunds) then {
 		(-_cost) call WL2_fnc_fundsDatabaseWrite;
 	};
+};
+
+if (_action == "revived") exitWith {
+	private _reward = 50;
+	_reward call WL2_fnc_fundsDatabaseWrite;
+	[objNull, _reward, "Revived Teammate"] remoteExec ["WL2_fnc_killRewardClient", _sender];
 };
 
 if (_action == "lastLoadout") exitWith {
@@ -236,6 +242,11 @@ if (_action == "targetReset") exitWith {
 
 if (_action == "orderAI") exitWith {
 	_cost = ((serverNamespace getVariable "WL2_costs") getOrDefault [_param1, 150]);
+	(-_cost) call WL2_fnc_fundsDatabaseWrite;
+};
+
+if (_action == "buildABear") exitWith {
+	_cost = 300;
 	(-_cost) call WL2_fnc_fundsDatabaseWrite;
 };
 

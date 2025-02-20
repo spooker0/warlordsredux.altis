@@ -49,7 +49,7 @@ addMissionEventHandler ["Map", {
 				};
 
 				private _selectableBuildings = ((BIS_WL_sectorsArray # 0) apply {
-					_x getVariable ["WL_sectorHQ", objNull]
+					_x getVariable ["WL_stronghold", objNull]
 				}) select {
 					!isNull _x &&
 					(_x distance2D _pos) < _radius

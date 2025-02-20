@@ -18,11 +18,41 @@ if (typeName _requirements == "STRING") then {
     _requirements = call compile _requirements;
 };
 switch (_className) do {
+    case "BuildABear": {
+        private _asset = (group player) createUnit [typeof player, getPosATL player, [], 2, "NONE"];
+        _asset setVehiclePosition [getPosATL player, [], 0, "CAN_COLLIDE"];
+        _asset setVariable ["BIS_WL_ownerAsset", getPlayerUID player, [2, clientOwner]];
+        [player, "buildABear"] remoteExec ["WL2_fnc_handleClientRequest", 2];
+        [_asset, player] spawn WL2_fnc_newAssetHandle;
+        player setVariable ["BIS_WL_isOrdering", false, [2, clientOwner]];
+
+        [_asset] call WL2_fnc_factionBasedClientInit;
+        [_asset, [], true] spawn WLC_fnc_onRespawn;
+
+        [_asset] spawn {
+            params ["_asset"];
+            private _assetReady = false;
+            waitUntil {
+                sleep 1;
+                _assetReady = _asset getVariable ["WL_spawnedAsset", false];
+                _assetReady || !alive _asset;
+            };
+            _asset setSkill 1;
+            _asset disableAI "SUPPRESSION";
+            _asset disableAI "AIMINGERROR";
+        };
+    };
     case "Arsenal": {if (isNull (findDisplay 602)) then {"RequestMenu_close" call WL2_fnc_setupUI; [player, "orderArsenal"] remoteExec ["WL2_fnc_handleClientRequest", 2]} else {playSound "AddItemFailed"}};
     case "Customization": {
         "RequestMenu_close" call WL2_fnc_setupUI;
         0 spawn WLC_fnc_buildMenu;
         ["TaskCustomization"] call WLT_fnc_taskComplete;
+    };
+    case "BuyGlasses": {
+        "RequestMenu_close" call WL2_fnc_setupUI;
+        [player, "equip", 1000] remoteExec ["WL2_fnc_handleClientRequest", 2];
+        player addGoggles "G_Tactical_Clear";
+        player setVariable ["WL_hasGoggles", true, true];
     };
     case "LastLoadout": {"RequestMenu_close" call WL2_fnc_setupUI; [player, "lastLoadout"] remoteExec ["WL2_fnc_handleClientRequest", 2]};
     case "SaveLoadout": {"save" call WL2_fnc_orderSavedLoadout};
@@ -38,10 +68,10 @@ switch (_className) do {
         missionNamespace setVariable [_ftNextUseVar, serverTime + WL_FAST_TRAVEL_SQUAD_TIMER];
         ["TaskFastTravelSquad"] call WLT_fnc_taskComplete;
     };
-    case "BuySectorHQ": {
-        0 spawn WL2_fnc_orderSectorHQ;
+    case "BuyStronghold": {
+        0 spawn WL2_fnc_orderStronghold;
     };
-    case "SectorHQFT": {
+    case "StrongholdFT": {
         5 spawn WL2_fnc_orderFastTravel;
     };
     case "FundsTransfer": {

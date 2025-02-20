@@ -33,4 +33,4 @@ private _claimActionID = _asset addAction [
 	false
 ];
 
-_asset setUserActionText [_claimActionID, "<t color = '#ff4b4b'>Claim Vehicle</t>", "<img size='2' color='#ff4b4b' image='\a3\ui_f\data\IGUI\Cfg\Actions\Obsolete\ui_action_cancel_ca'/>"];
+_asset setUserActionText [_claimActionID, "<t color = '#ff4b4b'>Claim Vehicle</t>", "<img size='2' color='#ff4b4b' image='\A3\ui_f\data\map\markers\handdrawn\flag_CA'/>"];

@@ -244,7 +244,7 @@ class CfgFunctions {
 			class orderLastLoadout {};
 			class orderNaval {};
 			class orderSavedLoadout {};
-			class orderSectorHQ {};
+			class orderStronghold {};
 			class orderSectorScan {};
 			class orderVehicle {};
 			class requestPurchase {};
@@ -254,7 +254,7 @@ class CfgFunctions {
 			class checkAlliedPlayers {};
 			class checkAssetLimit {};
 			class checkBuyRespawn {};
-			class checkCarrierHeavy {};
+			class checkCarrierLimits {};
 			class checkCommTower {};
 			class checkDead {};
 			class checkFastTravelRespawn {};
@@ -270,14 +270,14 @@ class CfgFunctions {
 			class checkIsOrdering {};
 			class checkLastLoadout {};
 			class checkNearbyEnemies {};
-			class checkNoSectorHQ {};
+			class checkNoStronghold {};
 			class checkParadropCooldown {};
 			class checkPlayerInVehicle {};
 			class checkRequirements {};
 			class checkResetSectorTimer {};
 			class checkResetVehicle {};
 			class checkSavedLoadout {};
-			class checkSectorHQFT {};
+			class checkStrongholdFT {};
 			class checkSelectedUnits {};
 			class checkSurrender {};
 			class checkTargetEnemyBase {};
@@ -312,8 +312,8 @@ class CfgFunctions {
 			class missionEndHandle {};
 			class newAssetHandle {};
 			class parsePurchaseList {};
-			class prepareSectorHQ {};
-			class protectSectorHQ {};
+			class prepareStronghold {};
+			class protectStronghold {};
 			class reloadOverride {};
 			class scriptCollector {};
 			class slingloadInit {};
@@ -380,7 +380,6 @@ class CfgFunctions {
 			class buildAmmo {};
 			class buildAttachments {};
 			class buildMenu {};
-			class clientEquip {};
 			class getLevelInfo {};
 			class init {};
 			class levelUp {};

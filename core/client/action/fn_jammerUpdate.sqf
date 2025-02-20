@@ -9,12 +9,12 @@ private _actionColor = if (_isActive) then {
 };
 
 private _actionText = if (_isActive) then {
-    "JAMMER: ON";
+    "EW NETWORK: ON";
 } else {
     if (_isActivating) then {
-        localize "STR_A3_jammer_activating";
+        "EW NETWORK: ACTIVATING...";
     } else {
-        "JAMMER: OFF";
+        "EW NETWORK: OFF";
     };
 };
 

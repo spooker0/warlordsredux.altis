@@ -1,5 +1,9 @@
 params ["_customText", "_unitType"];
 
+if (_customText == "Revived Teammate") then {
+	WLT_stats set ["Revives", (WLT_stats getOrDefault ["Revives", 0]) + 1];
+};
+
 private _spawnTypeMap = missionNamespace getVariable ["WL2_spawnClass", createHashMap];
 private _spawnUnitType = _spawnTypeMap getOrDefault [_unitType, _unitType];
 

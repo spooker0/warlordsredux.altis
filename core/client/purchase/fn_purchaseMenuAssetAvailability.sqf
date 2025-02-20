@@ -220,18 +220,18 @@ if (_ret) then {
 				[WL2_fnc_checkTent]
 			]
 		};
-		case "BuySectorHQ": {
+		case "BuyStronghold": {
 			[
 				[WL2_fnc_checkPlayerInVehicle],
 				[WL2_fnc_checkNearbyEnemies],
-				[WL2_fnc_checkNoSectorHQ]
+				[WL2_fnc_checkNoStronghold]
 			]
 		};
-		case "SectorHQFT": {
+		case "StrongholdFT": {
 			[
 				[WL2_fnc_checkPlayerInVehicle],
 				[WL2_fnc_checkNearbyEnemies],
-				[WL2_fnc_checkSectorHQFT]
+				[WL2_fnc_checkStrongholdFT]
 			]
 		};
 		case "ResetVehicle": {
@@ -241,6 +241,9 @@ if (_ret) then {
 			]
 		};
 		case "Customization": {
+			[]
+		};
+		case "BuyGlasses": {
 			[]
 		};
 		case "SwitchToGreen": {
@@ -256,7 +259,7 @@ if (_ret) then {
 				private _assetConditions = [
 					[WL2_fnc_checkRequirements, [_sector, _requirements]],
 					[WL2_fnc_checkInfantryAvailable, [_class]],
-					[WL2_fnc_checkCarrierHeavy, [_sector, _category]],
+					[WL2_fnc_checkCarrierLimits, [_sector, _category]],
 					[WL2_fnc_checkAssetLimit],
 					[WL2_fnc_checkNearbyEnemies],
 					[WL2_fnc_checkPlayerInVehicle, [_requirements]],

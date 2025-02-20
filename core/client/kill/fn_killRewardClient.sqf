@@ -40,7 +40,7 @@ uiNamespace setVariable ["WL_killRewardMap", _killRewardMap];
 
 WAS_score = true;
 
-if (profileNamespace getVariable ["MRTM_playKillSound", true]) then {
+if (profileNamespace getVariable ["MRTM_playKillSound", true] && _customColor == "#228b22") then {
 	playSoundUI ["AddItemOK", 1, 1];
 };
 

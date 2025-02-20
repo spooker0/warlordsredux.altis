@@ -40,15 +40,24 @@ switch (BIS_WL_currentSelection) do {
         BIS_WL_selection_dimSectors = true;
     };
     case WL_ID_SELECTION_ORDERING_AIRCRAFT: {
-        BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 2) select {
-            BIS_WL_orderedAssetRequirements isEqualTo (BIS_WL_orderedAssetRequirements arrayIntersect (_x getVariable "BIS_WL_services"))
+        private _airfieldSectors = (BIS_WL_sectorsArray # 2) select {
+            "A" in (_x getVariable "BIS_WL_services");
         };
+
+        private _categoryMap = missionNamespace getVariable ["WL2_categories", createHashMap];
+        if (_categoryMap getOrDefault [WL_orderingClass, ""] == "RemoteControl") then {
+            _airfieldSectors = _airfieldSectors select {
+                count (_x getVariable ["WL_aircraftCarrier", []]) == 0;
+            };
+        };
+
+        BIS_WL_selection_availableSectors = _airfieldSectors;
         BIS_WL_selection_showLinks = false;
         BIS_WL_selection_dimSectors = true;
     };
-    case WL_ID_SELECTION_FAST_TRAVEL_HQ: {
+    case WL_ID_SELECTION_FAST_TRAVEL_STRONGHOLD: {
         BIS_WL_selection_availableSectors = (BIS_WL_sectorsArray # 2) select {
-            !isNull (_x getVariable ["WL_sectorHQ", objNull])
+            !isNull (_x getVariable ["WL_stronghold", objNull])
         };
         BIS_WL_selection_showLinks = false;
         BIS_WL_selection_dimSectors = true;
