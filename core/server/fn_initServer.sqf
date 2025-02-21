@@ -50,7 +50,6 @@ if !(isDedicated) then {
 0 spawn WL2_fnc_detectNewPlayers;
 ["server", true] call WL2_fnc_updateSectorArrays;
 0 spawn WL2_fnc_targetSelectionHandleServer;
-0 spawn WL2_fnc_zoneRestrictionHandleServer;
 0 spawn WL2_fnc_incomePayoff;
 0 spawn WL2_fnc_garbageCollector;
 0 spawn WL2_fnc_wlac;

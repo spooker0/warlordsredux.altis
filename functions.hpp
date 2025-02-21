@@ -117,7 +117,6 @@ class CfgFunctions {
 			class updateLevelDisplay {};
 			class wasMain {};
 			class welcome {};
-			class zoneRestrictionHandleClient {};
 		};
 		class ClientAction {
 			file = "core\client\action";
@@ -354,7 +353,6 @@ class CfgFunctions {
 			class uavJammed {};
 			class updateVehicleList {};
 			class wlac {};
-			class zoneRestrictionHandleServer {};
 		};
 		class ServerSector {
 			file = "core\server\sector";

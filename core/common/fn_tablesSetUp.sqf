@@ -10,7 +10,6 @@ private _texturesHashMap = createHashMap;
 private _variantHashMap = createHashMap;
 private _categoryHashMap = createHashMap;
 
-private _structureHashMap = createHashMap;
 private _capValueHashMap = createHashMap;
 private _apsHashMap = createHashMap;
 private _garbageCollectHashMap = createHashMap;
@@ -51,7 +50,6 @@ private _requisitionPresets = BIS_WL_purchaseListTemplate;
 				private _requisitionKillReward = getNumber (_x >> "killReward");
 				private _requisitionTextures = getArray (_x >> "textures");
 
-				private _requisitionStructure = getNumber (_x >> "killReward");
 				private _requisitionCapValue = getNumber (_x >> "capValue");
 				private _requisitionAps = getNumber (_x >> "aps");
 
@@ -105,10 +103,6 @@ private _requisitionPresets = BIS_WL_purchaseListTemplate;
 
 				if (count _requisitionTextures > 0) then {
 					_texturesHashMap set [_requisitonName, _requisitionTextures];
-				};
-
-				if (_requisitionStructure != 0) then {
-					_structureHashMap set [_requisitonName, true];
 				};
 
 				if (_requisitionCapValue != 0) then {
@@ -225,7 +219,6 @@ missionNamespace setVariable ["WL2_aps", _apsHashMap];
 missionNamespace setVariable ["WL2_textures", _texturesHashMap];
 
 missionNamespace setVariable ["WL2_demolishable", _demolishableHashMap];
-missionNamespace setVariable ["WL2_structure", _structureHashMap];
 
 missionNamespace setVariable ["WL2_loadable", _loadableHashMap];
 missionNamespace setVariable ["WL2_flagOffsets", _flagOffsetHashMap];

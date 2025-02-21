@@ -15,6 +15,12 @@ if (_isInCarrierSector) then {
 	_asset setVehiclePosition [_pos, [], 0, "CAN_COLLIDE"];
 };
 
+private _demolishableHashMap = missionNamespace getVariable ["WL2_demolishable", createHashMap];
+if (_demolishableHashMap getOrDefault [_orderedClass, false]) then {
+	private _height = getPosASL _asset # 2;
+	_asset setPosASL [_posX, _posY, _height];
+};
+
 _asset setDamage 0;
 _asset lock true;
 _asset enableWeaponDisassembly false;

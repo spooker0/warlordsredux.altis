@@ -12,7 +12,7 @@ params [
 ];
 
 private _ret = true;
-private _tooltip = "";
+private _tooltip = [];
 private _DLCOwned = true;
 private _DLCTooltip = "";
 

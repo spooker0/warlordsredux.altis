@@ -392,3 +392,54 @@ if (!isServer) then {
 0 spawn WL2_fnc_updateLevelDisplay;
 
 removeGoggles player;
+
+0 spawn {
+	private _soundId = -1;
+	while { !BIS_WL_missionEnd } do {
+		sleep 0.5;
+
+		private _findCurrentSector = (BIS_WL_allSectors - (BIS_WL_sectorsArray # 3)) select {
+			player inArea (_x getVariable "objectAreaComplete")
+		};
+
+		if (count _findCurrentSector == 0) then {
+			"Restrict" cutText ["", "PLAIN"];
+			player setVariable ["WL_zoneRestrictKillTime", -1];
+
+			if (_soundId != -1) then {
+				stopSound _soundId;
+			};
+
+			continue;
+		};
+
+		if (player getVariable ["WL_zoneRestrictKillTime", -1] == -1) then {
+			player setVariable ["WL_zoneRestrictKillTime", serverTime + 80];
+		};
+
+		if (_soundId == -1 || count (soundParams _soundId) == 0) then {
+			_soundId = playSoundUI ["air_raid"];
+		};
+
+		private _restrictDisplay = uiNamespace getVariable ["RscWLZoneRestrictionDisplay", displayNull];
+		if (isNull _restrictDisplay) then {
+			"Restrict" cutRsc ["RscWLZoneRestrictionDisplay", "PLAIN", -1, true, true];
+		};
+
+		private _restrictTimer = _restrictDisplay displayCtrl 9000;
+		private _timeRemaining = (player getVariable "WL_zoneRestrictKillTime") - serverTime;
+		_restrictTimer ctrlSetText format ["%1", round _timeRemaining];
+
+		if (_timeRemaining < 0) then {
+			(vehicle player) setDamage 1;
+			player setDamage 1;
+
+			if (_soundId != -1) then {
+				stopSound _soundId;
+			};
+
+			"Restrict" cutText ["", "PLAIN"];
+			player setVariable ["WL_zoneRestrictKillTime", -1];
+		};
+	};
+};

@@ -20,14 +20,9 @@ switch (_fastTravelMode) do {
 		_destination = selectRandom ([BIS_WL_targetSector, 0, true] call WL2_fnc_findSpawnPositions);
 	};
 	case 1: {
-		_destination = ([_marker, 0, true] call WL2_fnc_findSpawnPositions) select {
-			private _pos = _x;
-			BIS_WL_allSectors findIf {
-				_pos inArea ((_x getVariable "BIS_WL_markers") # 2)
-			} == -1
-		};
-		_destination = if (count _destination > 0) then {
-			selectRandom _destination;
+		private _spawnPositions = [_marker, 0, true] call WL2_fnc_findSpawnPositions;
+		_destination = if (count _spawnPositions > 0) then {
+			selectRandom _spawnPositions;
 		} else {
 			markerPos _marker;
 		};

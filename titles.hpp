@@ -596,4 +596,63 @@ class RscTitles {
 			};
 		};
 	};
+
+	class RscWLZoneRestrictionDisplay {
+		idd = -1;
+		duration = 1000000000;
+		fadein = 0;
+		fadeout = 0;
+		name = "RscWLZoneRestrictionDisplay";
+		onLoad = "uiNamespace setVariable ['RscWLZoneRestrictionDisplay', _this select 0];";
+		class controlsBackground {
+			class RscWLZoneRestrictionDisplay_Cover: RscText {
+				idc = -1;
+				type = CT_STATIC;
+				style = ST_CENTER;
+				x = safezoneX;
+				y = safezoneY;
+				w = safezoneW;
+				h = safezoneH;
+				font = "EtelkaNarrowMediumPro";
+				sizeEx = 1;
+				colorBackground[] = {0, 0, 0, 0.5};
+				colorText[] = {0, 0, 0, 0.3};
+				text = "";
+				lineSpacing = 0;
+			};
+		};
+		class controls {
+			class RscWLZoneRestrictionDisplay_Text: RscText {
+				idc = -1;
+				type = CT_STATIC;
+				style = ST_CENTER;
+				x = 0;
+				y = 0;
+				w = 1;
+				h = 0.2;
+				font = "EtelkaNarrowMediumPro";
+				sizeEx = 0.1;
+				colorBackground[] = {0, 0, 0, 0};
+				colorText[] = {1, 1, 1, 1};
+				text = "YOU ARE TRESPASSING! TURN AROUND OR DIE!";
+				lineSpacing = 0;
+			};
+			class RscWLZoneRestrictionDisplay_Time: RscText {
+				idc = 9000;
+				type = CT_STATIC;
+				style = ST_CENTER;
+				x = 0;
+				y = -0.4;
+				w = 1;
+				h = 1;
+				font = "EtelkaNarrowMediumPro";
+				sizeEx = 0.5;
+				colorBackground[] = {0, 0, 0, 0};
+				colorText[] = {1, 0, 0, 1};
+				text = "";
+				shadow = 0;
+				lineSpacing = 0;
+			};
+		};
+	};
 };

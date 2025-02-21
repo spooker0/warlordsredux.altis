@@ -89,19 +89,6 @@ waitUntil {!isNil "BIS_WL_base1" && {!isNil "BIS_WL_base2"}};
 		[_sector] remoteExec ['WL2_fnc_sectorRevealHandle', [0, -2] select isDedicated];
 	};
 
-	_zoneRestrictionTrg1 = createTrigger ["EmptyDetector", _sectorPos, false];
-	_zoneRestrictionTrg2 = createTrigger ["EmptyDetector", _sectorPos, false];
-	_sector setVariable ["BIS_WL_zoneRestrictionTrgs", [_zoneRestrictionTrg1, _zoneRestrictionTrg2]];
-	{
-		_handledSide = BIS_WL_competingSides # _forEachIndex;
-		if (_handledSide in (_sector getVariable "BIS_WL_previousOwners")) then {
-			deleteVehicle _x;
-		} else {
-			_x enableSimulation false;
-			_x setVariable ["BIS_WL_handledSide", _handledSide];
-		};
-	} forEach [_zoneRestrictionTrg1, _zoneRestrictionTrg2];
-
 	_area = _sector getVariable "objectArea";
 	_area set [4, 38];
 	_area params ["_a", "_b", "_angle", "_isRectangle"];

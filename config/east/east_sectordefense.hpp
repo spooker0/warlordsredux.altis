@@ -1,10 +1,10 @@
 class SectorDefense {
     class Land_Razorwire_F {
         cost = 50;
+        demolishable = 1;
         killReward = 30;
         offset[] = {0, 5, 0};
         requirements[] = {};
-        structure = 1;
     };  // "Razor Wire Fence"
 
     class Land_BagFence_Round_F {
@@ -21,8 +21,15 @@ class SectorDefense {
         killReward = 30;
         offset[] = {0, 5, 0};
         requirements[] = {};
-        structure = 1;
     };  // "Tank barrier"
+
+    class Land_HBarrier_5_F {
+        cost = 50;
+        demolishable = 1;
+        killReward = 30;
+        offset[] = {0, 3, 0};
+        requirements[] = {};
+    }; // "H-barrier"
 
     class Land_HBarrierWall6_F {
         cost = 60;
@@ -30,16 +37,15 @@ class SectorDefense {
         killReward = 30;
         offset[] = {0, 3, 0};
         requirements[] = {};
-        structure = 1;
     }; // "H-barrier wall"
 
     class CamoNet_OPFOR_big_F {
         cost = 100;
+        demolishable = 1;
         garbageCollect = 1;
         killReward = 30;
         offset[] = {0, 6, 0};
         requirements[] = {};
-        structure = 1;
     };  // "Camouflage Vehicle Cover (Hex)"
 
     class O_HMG_01_F {
@@ -70,11 +76,11 @@ class SectorDefense {
 
     class Land_IRMaskingCover_01_F {
         cost = 200;
+        demolishable = 1;
         garbageCollect = 1;
         killReward = 30;
         offset[] = {0, 8, 0};
         requirements[] = {};
-        structure = 1;
     };  // "IR Masking Tent (Large)"
 
     class O_HMG_01_high_F {
@@ -237,7 +243,6 @@ class SectorDefense {
         name = "Jamming Tower";
         offset[] = {0, 6, 0};
         requirements[] = {};
-        structure = 1;
     };
 
     class O_Mortar_01_F {
