@@ -19,3 +19,10 @@ class CfgDebriefing
 
 	class BlockScreen {};
 };
+
+class CfgDebriefingSections {
+	class CfgWLEndScreen {
+		title = "End Results";
+		variable = "WL_endScreen";
+	};
+};
