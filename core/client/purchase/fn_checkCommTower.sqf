@@ -6,15 +6,8 @@ if (_class != "Land_Communication_F") exitWith {
     [true, ""];
 };
 
-private _allJammerMarkers = allMapMarkers select {
-    _x find "BIS_WL_jammerMarkerOuter_" == 0;
-};
-private _allJammers = _allJammerMarkers apply {
-    objectFromNetId (_x regexReplace ["BIS_WL_jammerMarkerOuter_", ""]);
-};
-private _allTowersOnTeam = _allJammers select {
-    typeOf _x == "Land_Communication_F"
-    && _x getVariable ["BIS_WL_ownerAssetSide", sideUnknown] == BIS_WL_playerSide
+private _allTowersOnTeam = ("Land_Communication_F" allObjects 0) select {
+    [_x] call WL2_fnc_getAssetSide != BIS_WL_playerSide
 };
 private _jammersNear = _allTowersOnTeam select { player distance _x < (WL_JAMMER_RANGE_OUTER * 2) };
 

@@ -135,6 +135,117 @@ _unit addBackpack _largestBackpack;
 
 private _itemsToAdd = [];
 
+_itemsToAdd append (items _unit);
+
+// Primary
+private _primary = _equipment getOrDefault ["Primary", createHashMap];
+private _primaryWeapon = _primary getOrDefault ["item", ""];
+private _primaryMagazines = _primary getOrDefault ["magazines", []];
+private _primaryAttachments = _primary getOrDefault ["attachments", []];
+
+if (_primaryWeapon != "") then {
+    {
+        _unit removeMagazines _x;
+    } forEach (compatibleMagazines (primaryWeapon _unit));
+    _unit removeWeapon (primaryWeapon _unit);
+
+    if (count _primaryMagazines > 0) then {
+        private _firstMag = _primaryMagazines # 0;
+        _unit addMagazine _firstMag;
+
+        _unit addWeapon _primaryWeapon;
+        _primaryMagazines deleteAt 0;
+
+        {
+            _itemsToAdd pushBack _x;
+        } forEach _primaryMagazines;
+    } else {
+        _unit addWeapon _primaryWeapon;
+    };
+
+    {
+        _unit addPrimaryWeaponItem _x;
+    } forEach _primaryAttachments;
+} else {
+    private _compatibleMagazines = compatibleMagazines (primaryWeapon _unit);
+    {
+        if (_x in _compatibleMagazines) then {
+            _itemsToAdd pushBack _x;
+        };
+    } forEach (itemsWithMagazines _unit);
+};
+
+// Secondary
+private _secondary = _equipment getOrDefault ["Secondary", createHashMap];
+private _secondaryWeapon = _secondary getOrDefault ["item", ""];
+private _secondaryMagazines = _secondary getOrDefault ["magazines", []];
+private _secondaryAttachments = _secondary getOrDefault ["attachments", []];
+
+if (_secondaryWeapon != "") then {
+    {
+        _unit removeMagazines _x;
+    } forEach (compatibleMagazines (handgunWeapon _unit));
+    _unit removeWeapon (handgunWeapon _unit);
+
+    if (_secondaryWeapon != "none") then {
+        if (count _secondaryMagazines > 0) then {
+            private _firstMag = _secondaryMagazines # 0;
+            _unit addMagazine _firstMag;
+
+            _unit addWeapon _secondaryWeapon;
+            _secondaryMagazines deleteAt 0;
+            {
+                _itemsToAdd pushBack _x;
+            } forEach _secondaryMagazines;
+        } else {
+            _unit addWeapon _secondaryWeapon;
+        };
+
+        {
+            _unit addHandgunItem _x;
+        } forEach _secondaryAttachments;
+    };
+} else {
+    private _compatibleMagazines = compatibleMagazines (handgunWeapon _unit);
+    {
+        if (_x in _compatibleMagazines) then {
+            _itemsToAdd pushBack _x;
+        };
+    } forEach (itemsWithMagazines _unit);
+};
+
+// Launcher
+private _launcher = _equipment getOrDefault ["Launcher", createHashMap];
+private _launcherWeapon = _launcher getOrDefault ["item", ""];
+private _launcherMagazines = _launcher getOrDefault ["magazines", []];
+
+if (_launcherWeapon != "") then {
+    {
+        _unit removeMagazines _x;
+    } forEach (compatibleMagazines (secondaryWeapon _unit));
+    _unit removeWeapon (secondaryWeapon _unit);
+
+    if (count _launcherMagazines > 0) then {
+        private _firstMag = _launcherMagazines # 0;
+        _unit addMagazine _firstMag;
+        _unit addWeapon _launcherWeapon;
+
+        _launcherMagazines deleteAt 0;
+        {
+            _itemsToAdd pushBack _x;
+        } forEach _launcherMagazines;
+    } else {
+        _unit addWeapon _launcherWeapon;
+    };
+} else {
+    private _compatibleMagazines = compatibleMagazines (secondaryWeapon _unit);
+    {
+        if (_x in _compatibleMagazines) then {
+            _itemsToAdd pushBack _x;
+        };
+    } forEach (itemsWithMagazines _unit);
+};
+
 // Uniform
 private _uniform = _equipment getOrDefault ["Uniform", createHashMap];
 private _uniformItem = _uniform getOrDefault ["item", uniform _unit];
@@ -152,87 +263,6 @@ private _helmet = _equipment getOrDefault ["Helmet", createHashMap];
 private _helmetItem = _helmet getOrDefault ["item", headgear _unit];
 removeHeadgear _unit;
 _unit addHeadgear _helmetItem;
-
-// Primary
-private _primary = _equipment getOrDefault ["Primary", createHashMap];
-private _primaryWeapon = _primary getOrDefault ["item", primaryWeapon _unit];
-private _primaryMagazines = _primary getOrDefault ["magazines", []];
-private _primaryAttachments = _primary getOrDefault ["attachments", []];
-
-{
-    _unit removeMagazines _x;
-} forEach (compatibleMagazines (primaryWeapon _unit));
-_unit removeWeapon (primaryWeapon _unit);
-
-if (count _primaryMagazines > 0) then {
-    private _firstMag = _primaryMagazines # 0;
-    _unit addMagazine _firstMag;
-
-    _unit addWeapon _primaryWeapon;
-    _primaryMagazines deleteAt 0;
-
-    {
-        _itemsToAdd pushBack _x;
-    } forEach _primaryMagazines;
-} else {
-    _unit addWeapon _primaryWeapon;
-};
-
-{
-    _unit addPrimaryWeaponItem _x;
-} forEach _primaryAttachments;
-
-// Secondary
-private _secondary = _equipment getOrDefault ["Secondary", createHashMap];
-private _secondaryWeapon = _secondary getOrDefault ["item", handgunWeapon _unit];
-private _secondaryMagazines = _secondary getOrDefault ["magazines", []];
-private _secondaryAttachments = _secondary getOrDefault ["attachments", []];
-
-{
-    _unit removeMagazines _x;
-} forEach (compatibleMagazines (handgunWeapon _unit));
-_unit removeWeapon (handgunWeapon _unit);
-
-if (_secondaryWeapon != "none") then {
-    if (count _secondaryMagazines > 0) then {
-        private _firstMag = _secondaryMagazines # 0;
-        _unit addMagazine _firstMag;
-
-        _unit addWeapon _secondaryWeapon;
-        _secondaryMagazines deleteAt 0;
-        {
-            _itemsToAdd pushBack _x;
-        } forEach _secondaryMagazines;
-    } else {
-        _unit addWeapon _secondaryWeapon;
-    };
-
-    {
-        _unit addHandgunItem _x;
-    } forEach _secondaryAttachments;
-};
-
-// Launcher
-private _launcher = _equipment getOrDefault ["Launcher", createHashMap];
-private _launcherWeapon = _launcher getOrDefault ["item", secondaryWeapon _unit];
-private _launcherMagazines = _launcher getOrDefault ["magazines", []];
-{
-    _unit removeMagazines _x;
-} forEach (compatibleMagazines (secondaryWeapon _unit));
-_unit removeWeapon (secondaryWeapon _unit);
-
-if (count _launcherMagazines > 0) then {
-    private _firstMag = _launcherMagazines # 0;
-    _unit addMagazine _firstMag;
-    _unit addWeapon _launcherWeapon;
-
-    _launcherMagazines deleteAt 0;
-    {
-        _itemsToAdd pushBack _x;
-    } forEach _launcherMagazines;
-} else {
-    _unit addWeapon _launcherWeapon;
-};
 
 // Finish loading
 private _addItemInOrder = {
