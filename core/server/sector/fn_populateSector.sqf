@@ -190,11 +190,11 @@ while {_i < _garrisonSize} do {
 	sleep 0.001;
 };
 
-{
-	private _infantryUnit = _x;
-	{
-		_x reveal [_infantryUnit, 4];
-	} forEach _infantryGroups
-} forEach _infantryUnits;
+// {
+// 	private _infantryUnit = _x;
+// 	{
+// 		_x reveal [_infantryUnit, 4];
+// 	} forEach _infantryGroups
+// } forEach _infantryUnits;
 
 [_infantryUnits, _sector] spawn WL2_fnc_assetRelevanceCheck;
