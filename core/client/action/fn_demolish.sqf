@@ -100,3 +100,5 @@ while { alive _asset } do {
 
     sleep _sleepTime;
 };
+
+deleteVehicle _lightPoint;
