@@ -466,7 +466,7 @@ addMissionEventHandler ["Draw3D", {
 
         private _friendlyNetwork = _sideVehicles select {
             private _distance = _vehicle distance _x;
-            private _activated = _x getVariable ["BIS_WL_jammerActivated", false] && isEngineOn _x;
+            private _activated = _x getVariable ["WL_ewNetActive", false] && isEngineOn _x;
             private _inJamRange = _distance < WL_JAMMER_RANGE_OUTER;
 
             private _scannerRange = _x getVariable ["WL_scanRadius", 0];

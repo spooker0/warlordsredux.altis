@@ -8,22 +8,18 @@ private _side = side _owner;
 [_asset, _side] spawn {
     params ["_asset", "_side"];
     while { alive _asset } do {
-        private _allJammerMarkers = allMapMarkers select {
-            _x find "BIS_WL_jammerMarkerOuter_" == 0;
+        private _activeVehicles = vehicles select {
+            alive _x &&
+            isEngineOn _x
         };
-        private _allJammers = _allJammerMarkers apply {
-            objectFromNetId (_x regexReplace ["BIS_WL_jammerMarkerOuter_", ""]);
-        };
-        private _enemyJammers = _allJammers select {
-            private _jammerOwnerSide = _x getVariable ["BIS_WL_ownerAssetSide", sideUnknown];
-            _jammerOwnerSide != _side;
+        private _enemyJammers = _activeVehicles + ("Land_Communication_F" allObjects 0) select {
+            [_x] call WL2_fnc_getAssetSide != _side
         };
         private _enemyJammersActive = _enemyJammers select {
-            _x getVariable ["BIS_WL_jammerActivated", false];
+            _x getVariable ["WL_ewNetActive", false];
         };
-
         private _enemyJammersActivating = _enemyJammers select {
-            _x getVariable ["BIS_WL_jammerActivating", false];
+            _x getVariable ["WL_ewNetActivating", false];
         };
 
         private _jammersInRange = _enemyJammersActive select {

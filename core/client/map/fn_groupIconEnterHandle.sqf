@@ -110,6 +110,18 @@ private _scanCooldownText = [
 	_linebreak
 ];
 
+private _enemyCaptureText = if (_revealed) then {
+	private _previousOwners = _sector getVariable "BIS_WL_previousOwners";
+	private _enemyCanCapture = BIS_WL_enemySide in _previousOwners || _sector == WL_TARGET_ENEMY;
+	if (_enemyCanCapture) then {
+		"<t color='#ff4b4b'>Vulnerable to enemy capture.</t><br/>"
+	} else {
+		""
+	}
+} else {
+	""
+};
+
 private _sectorInfoText = [
 	_sector getVariable ["BIS_WL_name", "Sector"],
 	_linebreak,
@@ -136,7 +148,8 @@ private _sectorInfoText = [
 		format ["<t color='%1'>%2%3</t> %4<br/>", _color, floor (_percentage * 100), "%", _captureScoreText]
 	} else {
 		""
-	}
+	},
+	_enemyCaptureText
 ];
 
 _sectorInfoBox ctrlSetStructuredText parseText format [

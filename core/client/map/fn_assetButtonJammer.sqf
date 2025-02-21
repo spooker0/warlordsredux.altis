@@ -1,7 +1,7 @@
 params ["_asset"];
 
-private _jammerActivated = _asset getVariable ["BIS_WL_jammerActivated", false] && isEngineOn _asset;
-private _jammerActivating = _asset getVariable ["BIS_WL_jammerActivating", false] && isEngineOn _asset;
+private _jammerActivated = _asset getVariable ["WL_ewNetActive", false] && isEngineOn _asset;
+private _jammerActivating = _asset getVariable ["WL_ewNetActivating", false] && isEngineOn _asset;
 private _jammerColor = if (_jammerActivated) then {
     "#4bff58"
 } else {

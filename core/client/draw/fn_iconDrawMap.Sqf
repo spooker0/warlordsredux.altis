@@ -1,3 +1,5 @@
+#include "..\..\warlords_constants.inc"
+
 params ["_m"];
 
 private _side = BIS_WL_playerSide;
@@ -91,10 +93,39 @@ if (!isNull WL_SectorActionTarget && isNull BIS_WL_highlightedSector && WL_Secto
 	} forEach (((list _revealTrigger) - (missionNamespace getVariable [format ["BIS_WL_ownedVehicles_%1", getPlayerUID player], []])) select {(side group _x != _side) && {(alive _x) && {((side group _x) in BIS_WL_sidesArray)}}});
 } forEach BIS_WL_currentlyScannedSectors;
 
-private _scannerUnits = vehicles select {
+private _activeVehicles = vehicles select {
 	alive _x &&
-	isEngineOn _x &&
-	_x getVariable ["WL_scannerOn", false]
+	isEngineOn _x
+};
+
+private _ewNetworkUnits = _activeVehicles + ("Land_Communication_F" allObjects 0) select {
+	_x getVariable ["WL_ewNetActive", false] ||
+	_x getVariable ["WL_ewNetActivating", false]
+};
+
+{
+	if (isNull _x) then { continue; };
+	private _assetPos = _x modelToWorldVisual [0, 0, 0];
+	private _assetSide = [_x] call WL2_fnc_getAssetSide;
+	private _assetColor = switch (_assetSide) do {
+		case west: { [0, 0.3, 0.6, 0.9] };
+		case east: { [0.5, 0, 0, 0.9] };
+		case independent: { [0, 0.6, 0, 0.9] };
+		default { [1, 1, 1, 0] };
+	};
+	_m drawEllipse [
+		_assetPos,
+		WL_JAMMER_RANGE_OUTER,
+		WL_JAMMER_RANGE_OUTER,
+		0,
+		_assetColor,
+		""
+	];
+} forEach _ewNetworkUnits;
+
+private _scannerUnits = _activeVehicles select {
+	_x getVariable ["WL_scannerOn", false] &&
+	([_x] call WL2_fnc_getAssetSide) == _side
 };
 
 private _mySideColor = switch (_side) do {

@@ -160,15 +160,13 @@ if (_asset isKindOf "Man") then {
 		case "O_T_Truck_03_device_ghex_F";
 		case "O_Truck_03_device_F": {
 			_asset setVariable ["BIS_WL_dazzlerActivated", false, true];
-			_asset setVariable ["BIS_WL_jammerActivated", false, true];
+			_asset setVariable ["WL_ewNetActive", false, true];
 
 			[_asset] remoteExec ["WL2_fnc_dazzlerAction", 0, true];
 			[_asset] remoteExec ["WL2_fnc_jammerAction", 0, true];
-
-			[_asset, _side] call WL2_fnc_drawJammerCircle;
 		};
 		case "Land_Communication_F": {
-			_asset setVariable ["BIS_WL_jammerActivated", false, true];
+			_asset setVariable ["WL_ewNetActive", false, true];
 
 			// reduce height for demolish action
 			private _assetPos = getPosATL _asset;
@@ -177,8 +175,6 @@ if (_asset isKindOf "Man") then {
 			// too hardy otherwise, start off at 10% health
 			_asset setDamage 0.9;
 			[_asset] remoteExec ["WL2_fnc_jammerAction", 0, true];
-
-			[_asset, _side] call WL2_fnc_drawJammerCircle;
 		};
 
 		// Logistics
@@ -450,8 +446,6 @@ if (_asset isKindOf "Man") then {
 	} forEach _assetAppearanceDefaults;
 };
 
-if (!isNull _owner) then {
-	[_asset] remoteExec ["WL2_fnc_removeAction", 0, true];
-};
+[_asset] remoteExec ["WL2_fnc_removeAction", 0, true];
 
 _asset setVariable ["WL_spawnedAsset", true, true];

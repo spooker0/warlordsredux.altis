@@ -106,6 +106,7 @@ class CfgFunctions {
 			class prompt {};
 			class rappel {};
 			class repackMagazines {};
+			class restrictedArea {};
 			class revive {};
 			class rita {};
 			class spectator {};
@@ -160,7 +161,6 @@ class CfgFunctions {
 		class ClientDraw {
 			file = "core\client\draw";
 			class drawAssetName {};
-			class drawJammerCircle {};
 			class getDir {};
 			class getPos {};
 			class helmetInterface {};
@@ -180,7 +180,6 @@ class CfgFunctions {
 			class setupUI {};
 			class smoothText {};
 			class uavJammer {};
-			class updateJammerMarkers {};
 		};
 		class ClientKill {
 			file = "core\client\kill";
