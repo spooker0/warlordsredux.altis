@@ -23,11 +23,6 @@ private _i = 0;
 	_mrkrArea setMarkerBrushLocal "Solid";
 	_mrkrArea setMarkerAlphaLocal 1;
 	_mrkrArea setMarkerSizeLocal [(_area # 0), (_area # 1)];
-
-	_mrkrAreaBig = createMarkerLocal [format ["BIS_WL_sectorMarker_%1_areaBig", _forEachIndex], _sectorPos];
-	_mrkrAreaBig setMarkerShapeLocal "ELLIPSE";
-	_mrkrAreaBig setMarkerBrushLocal "SolidBorder";
-	_mrkrAreaBig setMarkerAlphaLocal 1;
 } forEach BIS_WL_allSectors;
 
 {
@@ -37,14 +32,11 @@ private _i = 0;
 	_revealedBy = _sector getVariable ["BIS_WL_revealedBy", []];
 	_sectorPos = position _sector;
 
-	_mrkrAreaBig = format ["BIS_WL_sectorMarker_%1_areaBig", _forEachIndex];
 	_mrkrArea = format ["BIS_WL_sectorMarker_%1_area", _forEachIndex];
-
-	_mrkrAreaBig setMarkerColorLocal "ColorBrown";
 
 	_mrkrMain = createMarkerLocal [format ["BIS_WL_sectorMarker_%1_main", _forEachIndex], _sectorPos];
 
-	_sector setVariable ["BIS_WL_markers", [_mrkrMain, _mrkrArea, _mrkrAreaBig]];
+	_sector setVariable ["BIS_WL_markers", [_mrkrMain, _mrkrArea]];
 
 	if !(BIS_WL_playerSide in _revealedBy) then {
 		_mrkrMain setMarkerTypeLocal "u_installation";

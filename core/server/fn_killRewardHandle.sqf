@@ -6,7 +6,7 @@ private _assetActualType = _unit getVariable ["WL2_orderedClass", typeOf _unit];
 private _killRewardMap = serverNamespace getVariable ["WL2_killRewards", createHashMap];
 private _killReward = _killRewardMap getOrDefault [_assetActualType, 0];
 
-if ((_unit isKindOf "Building") && !(_unit getVariable ["WL_structure", false])) exitWith {false};
+if (_unit isKindOf "Building" && _killReward == 0) exitWith {};
 
 private _killerSide = side group _responsibleLeader;
 private _unitSide = [_unit] call WL2_fnc_getAssetSide;

@@ -408,11 +408,6 @@ if (_asset isKindOf "Man") then {
 		[_asset] remoteExec ["WL2_fnc_demolish", 0, true];
 	};
 
-	private _structure = missionNamespace getVariable ["WL2_structure", createHashMap];
-	if (_structure getOrDefault [typeOf _asset, false]) then {
-		_asset setVariable ["WL_structure", true, 2];
-	};
-
 	private _parachuteCount = count ((backpackCargo _asset) select {_x == "B_Parachute"});
 	if (_parachuteCount > 0) then {
 		_asset addEventHandler ["GetOut", {

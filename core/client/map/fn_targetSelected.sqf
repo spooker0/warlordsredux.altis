@@ -39,9 +39,9 @@ if (_side != BIS_WL_playerSide) exitWith {
 	};
 };
 
+private _markers = _sector getVariable "BIS_WL_markers";
 if (_selected) then {
-	((_sector getVariable "BIS_WL_markers") # 2) setMarkerSizeLocal [0, 0];
-	((_sector getVariable "BIS_WL_markers") # 1) setMarkerBrushLocal "Border";
+	(_markers # 1) setMarkerBrushLocal "Border";
 	"BIS_WL_targetFriendly" setMarkerPosLocal position _sector;
 	"BIS_WL_targetFriendly" setMarkerAlphaLocal 1;
 
@@ -55,16 +55,8 @@ if (_selected) then {
 		};
 	};
 } else {
+	(_markers # 1) setMarkerBrushLocal "Solid";
+
 	"BIS_WL_targetFriendly" setMarkerAlphaLocal 0;
 	"BIS_WL_targetEnemy" setMarkerDirLocal 0;
-
-	_sector spawn {
-		params ["_sector"];
-		_t = serverTime + 3;
-		waitUntil {serverTime > _t || {BIS_WL_playerSide in (_sector getVariable "BIS_WL_previousOwners")}};
-		if (!(BIS_WL_playerSide in (_sector getVariable "BIS_WL_previousOwners"))) then {
-			_borderWidth = _sector getVariable ["BIS_WL_borderWidth", 0];
-			((_sector getVariable "BIS_WL_markers") # 2) setMarkerSizeLocal [_borderWidth, _borderWidth];
-		};
-	};
 };

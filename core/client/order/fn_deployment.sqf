@@ -69,7 +69,7 @@ private _originalPosition = getPosATL _asset;
         player inArea (_x getVariable "objectAreaComplete") && count (_x getVariable ["WL_aircraftCarrier", []]) > 0
     }) > 0;
 
-    private _boundingBoxHeight = (boundingBoxReal _asset) # 0 # 2;
+    private _boundingBoxHeight = (getModelInfo _asset # 3) # 2;
     while { !(isNull _asset) && !(BIS_WL_spacePressed) && !(BIS_WL_backspacePressed) } do {
         private _assetHeight = if (_isInCarrierSector) then {
             getPosASL player # 2;

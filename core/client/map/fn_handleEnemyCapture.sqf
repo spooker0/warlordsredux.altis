@@ -38,6 +38,9 @@ while {(_sector getVariable "BIS_WL_owner") == _playerSide} do {
 
 			_captureProgress = _sector getVariable ["BIS_WL_captureProgress", 0];
 		};
+	} else {
+		_marker setMarkerBrushLocal "Border";
+		_marker setMarkerColorLocal BIS_WL_colorMarkerFriendly;
 	};
 	sleep 5;
 };
