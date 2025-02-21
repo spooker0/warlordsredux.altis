@@ -327,6 +327,7 @@ class CfgFunctions {
 			class assetRelevanceCheck {};
 			class attachDetach {};
 			class calcImbalance {};
+			class calculateEndResults {};
 			class changeSectorOwnership {};
 			class createUAVCrew {};
 			class createVehicleCorrectly {};

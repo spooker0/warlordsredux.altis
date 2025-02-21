@@ -24,6 +24,19 @@ if (_action == "orderAsset") exitWith {
 	if (_hasFunds) then {
 		(-_cost) call WL2_fnc_fundsDatabaseWrite;
 
+		private _stats = missionNamespace getVariable ["WL_stats", createHashMap];
+		private _orderedClassStats = _stats getOrDefault [_orderedClass, createHashMap];
+		private _side = side group _sender;
+		if (_side == west) then {
+			private _existingValue = _orderedClassStats getOrDefault ["westBuys", 0];
+			_orderedClassStats set ["westBuys", _existingValue + 1];
+		} else {
+			private _existingValue = _orderedClassStats getOrDefault ["eastBuys", 0];
+			_orderedClassStats set ["eastBuys", _existingValue + 1];
+		};
+		_stats set [_orderedClass, _orderedClassStats];
+		missionNamespace setVariable ["WL_stats", _stats];
+
 		switch (_orderType) do {
 			case "air" : {
 				[_sender, _position, _orderedClass, _cost] spawn WL2_fnc_orderAir;
