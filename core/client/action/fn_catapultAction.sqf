@@ -29,6 +29,7 @@ private _catapultActionID = _asset addAction [
             private _direction = getDir _asset;
 
             _asset setAirplaneThrottle 1;
+            _asset flyInHeight 500;
 
             private _velocity = 0;
 
