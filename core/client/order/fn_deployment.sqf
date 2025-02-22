@@ -51,13 +51,6 @@ private _turretOverridesForVehicle = _turretOverrides getOrDefault [_orderedClas
 	};
 } forEach _turretOverridesForVehicle;
 
-{
-    _asset setObjectMaterial [_forEachIndex, "A3\Structures_F\Data\test_default_super.rvmat"];
-} forEach (getObjectMaterials _asset);
-{
-    _asset setObjectTexture [_forEachIndex, "#(rgb,8,8,3)color(0.5,0.8,0.9,0.3)"];
-} forEach (getObjectTextures _asset);
-
 [player, "assembly"] call WL2_fnc_hintHandle;
 
 BIS_WL_spacePressed = false;

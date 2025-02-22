@@ -9,7 +9,7 @@ if (_event == "init") then {
 		if (isNil _varName) then {
 			missionNamespace setVariable [_varName, false]
 		};
-	} forEach ["assembly", "maintenance", "targetResetVoting", "forfeitVoting"];
+	} forEach ["assembly", "placeCharge", "maintenance", "targetResetVoting", "forfeitVoting"];
 
 	_hintText = "";
 	_lastHint = "";
@@ -23,6 +23,12 @@ if (_event == "init") then {
 			private _rotateClockwiseText = format ["<t align = 'left'>[ %1 ]</t><t align = 'right' color = '#4bff58'>%2</t>", (actionKeysNames "nextAction") regexReplace ["""", ""], "Rotate Right"];
 			private _cancelText = format ["<t align = 'left'>[ %1 ]</t><t align = 'right' color = '#ff4b4b'>%2</t>", localize "STR_dik_back", localize "STR_ca_cancel"];
 			_hintText = _hintText + format ["<t size = '1.2' shadow = '0'>%1<br/>%2<br/>%3<br/>%4<br/>%5<br/></t>", _assembleText, _lockPositionText, _rotateCounterClockwiseText, _rotateClockwiseText, _cancelText];
+		};
+
+		if (BIS_WL_showHint_placeCharge) then {
+			private _placeChargeText = format ["<t align = 'left'>[ %1 ]</t><t align = 'right' color = '#4bff58'>%2</t>", localize "STR_dik_space", "Place Charge"];
+			private _cancelText = format ["<t align = 'left'>[ %1 ]</t><t align = 'right' color = '#ff4b4b'>%2</t>", localize "STR_dik_back", localize "STR_ca_cancel"];
+			_hintText = _hintText + format ["<t size = '1.2' shadow = '0'>%1<br/>%2</t>", _placeChargeText, _cancelText];
 		};
 
 		if (BIS_WL_showHint_targetResetVoting) then {
