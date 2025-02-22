@@ -18,7 +18,6 @@ params ["_asset"];
     },
     {
         params ["_target", "_caller", "_actionId", "_arguments"];
-
         private _charge = createVehicle ["DemoCharge_F", getPosATL _target, [], 0, "FLY"];
         _charge allowDamage false;
 
@@ -112,8 +111,7 @@ params ["_asset"];
         _charge setObjectScale 3;
         _charge setVariable ["WL_demolishable", _target, true];
 
-        private _targetChildren = _target getVariable ["WL2_children", []];
-        _targetChildren pushBack _charge;
+        private _targetChildren = [_charge];
         _target setVariable ["WL2_children", _targetChildren, true];
 
         [
