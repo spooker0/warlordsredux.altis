@@ -18,7 +18,11 @@ private _titleBar = _dialog ctrlCreate ["RscStructuredText", -1];
 _titleBar ctrlSetPosition [_offsetX, _offsetY - 0.05, 0.5, 0.05];
 _titleBar ctrlSetBackgroundColor [0.3, 0.3, 0.3, 1];
 _titleBar ctrlSetTextColor [0.7, 0.7, 1, 1];
-private _assetName = [WL_AssetActionTarget] call WL2_fnc_getAssetTypeName;
+private _assetName = if (isPlayer _asset) then {
+    name _asset;
+} else {
+    [WL_AssetActionTarget] call WL2_fnc_getAssetTypeName;
+};
 _titleBar ctrlSetStructuredText parseText format ["<t align='center' font='PuristaBold'>%1</t>", toUpper _assetName];
 _titleBar ctrlCommit 0;
 

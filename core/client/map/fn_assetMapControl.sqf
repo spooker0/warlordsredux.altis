@@ -16,7 +16,7 @@ addMissionEventHandler ["Map", {
 
 	if (_mapIsOpened) then {
 		MAP_CONTROL = addMissionEventHandler ["EachFrame", {
-			private _map = (uiNamespace getVariable ["BIS_WL_mapControl", controlNull]);
+			private _map = uiNamespace getVariable ["BIS_WL_mapControl", controlNull];
 
 			if (visibleMap) then {
 				private _ctrlMap = ctrlParent _map;
@@ -67,7 +67,11 @@ addMissionEventHandler ["Map", {
 						1 call WL2_fnc_purchaseMenuGetUIScale,
 						format [
 							"Click for options:<br/><t color='#ff4b4b'>%1</t>",
-							[WL_AssetActionTarget] call WL2_fnc_getAssetTypeName
+							if (isPlayer WL_AssetActionTarget) then {
+								name WL_AssetActionTarget
+							} else {
+								[WL_AssetActionTarget] call WL2_fnc_getAssetTypeName
+							}
 						]
 					];
 					_ctrlAssetInfoBox ctrlShow true;
