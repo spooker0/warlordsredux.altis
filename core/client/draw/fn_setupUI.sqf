@@ -333,36 +333,7 @@ if (_displayClass == "OSD") then {
 			private _purchase_category = _display displayCtrl 100;
 
 			private _assetDetails = (_control lbData _selectedIndex) splitString "|||";
-			_assetDetails params [
-				"_className",
-				"_requirements",
-				"_displayName",
-				"_picture",
-				"_text",
-				"_offset"
-			];
-
-			_requirements = call compile _requirements;
-			private _category = WL_REQUISITION_CATEGORIES # ((lbCurSel _purchase_category) max 0);
-			private _cost = _control lbValue _selectedIndex;
-			if (isNil "_cost") then {
-				_cost = 0;
-			};
-
-			private _purchaseDetails = [_className, _requirements, _displayName, _picture, _text, _offset, _cost, _category];
-			private _availability = _purchaseDetails call WL2_fnc_purchaseMenuAssetAvailability;
-			if (_availability # 0) then {
-				_purchaseDetails call WL2_fnc_triggerPurchase;
-				playSound "AddItemOK";
-
-				private _tasksRequireUIList = ["FundsTransfer"];
-				if !(_className in _tasksRequireUIList) then {
-					"RequestMenu_close" call WL2_fnc_setupUI;
-				};
-			} else {
-				systemChat format ["Invalid buy action: %1", (_availability # 1) joinString ", "];
-				playSound "AddItemFailed";
-			};
+			_assetDetails call WL2_fnc_purchaseFromMenu;
 		}];
 
 		_purchase_request ctrlAddEventHandler ["MouseEnter", {
@@ -399,22 +370,13 @@ if (_displayClass == "OSD") then {
 			};
 		}];
 		_purchase_request ctrlAddEventHandler ["ButtonClick", {
-			if (uiNamespace getVariable ["BIS_WL_purchaseMenuItemAffordable", false]) then {
-				playSound "AddItemOK";
-				_display = uiNamespace getVariable ["BIS_WL_purchaseMenuDisplay", displayNull];
-				_purchase_category = _display displayCtrl 100;
-				_category = WL_REQUISITION_CATEGORIES # ((lbCurSel _purchase_category) max 0);
-				_purchase_items = _display displayCtrl 101;
-				_curSel = (lbCurSel _purchase_items) max 0;
-				_assetDetails = (_purchase_items lbData _curSel) splitString "|||";
-				_cost = _purchase_items lbValue lbCurSel _purchase_items;
-				_assetDetails set [6, _cost];
-				_assetDetails set [7, _category];
-
-				_assetDetails call WL2_fnc_triggerPurchase;
-			} else {
-				playSound "AddItemFailed";
-			};
+			private _display = uiNamespace getVariable ["BIS_WL_purchaseMenuDisplay", displayNull];
+			private _purchase_category = _display displayCtrl 100;
+			private _category = WL_REQUISITION_CATEGORIES # ((lbCurSel _purchase_category) max 0);
+			private _purchase_items = _display displayCtrl 101;
+			private _curSel = (lbCurSel _purchase_items) max 0;
+			private _assetDetails = (_purchase_items lbData _curSel) splitString "|||";
+			_assetDetails call WL2_fnc_purchaseFromMenu;
 		}];
 
 		_purchase_transfer_slider ctrlAddEventHandler ["SliderPosChanged", {

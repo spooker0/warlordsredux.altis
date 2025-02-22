@@ -284,6 +284,7 @@ class CfgFunctions {
 			class checkTent {};
 			class checkTentAction {};
 			class checkUAVLimit {};
+			class purchaseFromMenu {};
 			class purchaseMenuAssetAvailability {};
 			class purchaseMenuGetUIScale {};
 			class purchaseMenuHandleDLC {};

@@ -40,7 +40,7 @@ if (_class isKindOf "Man") then {
 			player setVariable ["BIS_WL_isOrdering", false, [2, clientOwner]];
 		} else {
 			playSound "assemble_target";
-			[player, "orderAsset", "vehicle", [_pos # 0, _pos # 1, 0], _orderedClass, direction player] remoteExec ["WL2_fnc_handleClientRequest", 2];
+			[player, "orderAsset", "vehicle", [_pos # 0, _pos # 1, 0], _orderedClass, _deploymentResult # 3] remoteExec ["WL2_fnc_handleClientRequest", 2];
 		};
 	} else {
 		"Canceled" call WL2_fnc_announcer;

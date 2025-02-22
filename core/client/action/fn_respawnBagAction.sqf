@@ -36,7 +36,7 @@ private _actionId = player addAction [
         private _pos = _deploymentResult # 1;
 
         private _freshTent = createVehicle ["Land_TentA_F", _pos, [], 0, "NONE"];
-        _freshTent setDir (direction player);
+        _freshTent setDir (_deploymentResult # 3);
         _freshTent setVehiclePosition [_pos, [], 0, "CAN_COLLIDE"];
 
         private _newPos = getPosATL _freshTent;

@@ -122,7 +122,7 @@ switch (_className) do {
 
             if (_deploymentResult # 0) then {
                 private _position =  _deploymentResult # 1;
-                private _direction = direction player;
+                private _direction = _deploymentResult # 3;
                 private _uid = getPlayerUID player;
                 private _nearbyEntities = [_class, ATLToASL _position, _direction, _uid, []] call WL2_fnc_grieferCheck;
                 if (count _nearbyEntities > 0) then {
