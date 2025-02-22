@@ -51,7 +51,7 @@ private _deployActionId = _asset addAction [
                 };
 
                 private _position =  _deploymentResult # 1;
-                private _direction = direction player;
+                private _direction = _deploymentResult # 3;
                 private _class = typeOf _assetLoadedItem;
                 private _nearbyEntities = [_assetLoadedItemClass, AGLtoASL _position, _direction, "dontcheckuid", [_assetLoadedItem]] call WL2_fnc_grieferCheck;
 
@@ -73,7 +73,7 @@ private _deployActionId = _asset addAction [
 	true,
 	"",
 	"([_target, _this, false] call WL2_fnc_deployableEligibility) # 0",
-	30,
+	15,
 	false
 ];
 
