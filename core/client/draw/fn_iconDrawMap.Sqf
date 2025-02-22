@@ -293,6 +293,26 @@ private _draw = (ctrlMapScale _control) < 0.3;
 	];
 } forEach ((units player) select {(alive _x) && {(isNull objectParent _x) && {_x != player}}});
 
+private _allSquadmates = allPlayers select {
+	["areInSquad", [getPlayerID _x, getPlayerID player]] call SQD_fnc_client
+};
+private _squadLeader = _allSquadmates select {
+	["isSquadLeader", [getPlayerID _x]] call SQD_fnc_client;
+};
+
+if (count _squadLeader > 0) then {
+	_squadLeader = _squadLeader # 0;
+	_allSquadmates = _allSquadmates - [_squadLeader];
+	{
+		_m drawLine [
+			_squadLeader,
+			_x,
+			[0, 1, 1, 0.8],
+			6
+		];
+	} forEach _allSquadmates;
+};
+
 private _teamVariable = switch (_side) do {
 	case west: { "BIS_WL_westOwnedVehicles" };
 	case east: { "BIS_WL_eastOwnedVehicles" };
