@@ -1,5 +1,14 @@
 private _soundId = -1;
 
+private _endEffect = {
+    "Restrict" cutText ["", "PLAIN"];
+    player setVariable ["WL_zoneRestrictKillTime", -1];
+    if (_soundId != -1) then {
+        stopSound _soundId;
+        _soundId = -1;
+    };
+};
+
 while { !BIS_WL_missionEnd } do {
     sleep 0.5;
 
@@ -8,33 +17,22 @@ while { !BIS_WL_missionEnd } do {
     };
 
     if (count _findCurrentSector == 0) then {
-        "Restrict" cutText ["", "PLAIN"];
-        player setVariable ["WL_zoneRestrictKillTime", -1];
-        if (_soundId != -1) then {
-            stopSound _soundId;
-            _soundId = -1;
-        };
+        call _endEffect;
         continue;
     };
 
     private _currentSector = _findCurrentSector # 0;
     private _isCarrierSector = count (_currentSector getVariable ["WL_aircraftCarrier", []]) > 0;
 
-    private _alt = if (_isCarrierSector) then {
-        getPosASL player # 2;
+    private _altOk = if (_isCarrierSector) then {
+        private _heightASL = getPosASL player # 2;
+        _heightASL < 20 || _heightASL > 75;
     } else {
-        getPosATL player # 2;
+        getPosATL player # 2 > 50;
     };
 
-    if (_alt > 50) then {
-        "Restrict" cutText ["", "PLAIN"];
-        player setVariable ["WL_zoneRestrictKillTime", -1];
-
-        if (_soundId != -1) then {
-            stopSound _soundId;
-            _soundId = -1;
-        };
-
+    if (_altOk) then {
+        call _endEffect;
         continue;
     };
 
@@ -43,7 +41,7 @@ while { !BIS_WL_missionEnd } do {
     };
 
     if (_soundId == -1 || count (soundParams _soundId) == 0) then {
-        _soundId = playSoundUI ["air_raid"];
+        _soundId = playSoundUI ["air_raid", 3];
     };
 
     private _restrictDisplay = uiNamespace getVariable ["RscWLZoneRestrictionDisplay", displayNull];
@@ -58,13 +56,6 @@ while { !BIS_WL_missionEnd } do {
     if (_timeRemaining < 0) then {
         (vehicle player) setDamage 1;
         player setDamage 1;
-
-        if (_soundId != -1) then {
-            stopSound _soundId;
-            _soundId = -1;
-        };
-
-        "Restrict" cutText ["", "PLAIN"];
-        player setVariable ["WL_zoneRestrictKillTime", -1];
+        call _endEffect;
     };
 };

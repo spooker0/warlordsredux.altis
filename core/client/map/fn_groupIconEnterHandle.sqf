@@ -110,10 +110,12 @@ private _scanCooldownText = [
 	_linebreak
 ];
 
+private _sectorIsOwned = (_sector getVariable "BIS_WL_owner") == BIS_WL_playerSide;
+
 private _enemyCaptureText = if (_revealed) then {
 	private _previousOwners = _sector getVariable "BIS_WL_previousOwners";
 	private _enemyCanCapture = BIS_WL_enemySide in _previousOwners || _sector == WL_TARGET_ENEMY;
-	if (_enemyCanCapture) then {
+	if (_enemyCanCapture && _sectorIsOwned) then {
 		"<t color='#ff4b4b'>Vulnerable to enemy capture.</t><br/>"
 	} else {
 		""
@@ -164,7 +166,7 @@ WL_SectorActionTarget = _sector;
 call WL2_fnc_updateSelectionState;
 
 if !(_selectionActive || _votingActive) exitWith {
-	if ((_sector getVariable "BIS_WL_owner") == BIS_WL_playerSide) then {
+	if (_sectorIsOwned) then {
 		WL_CONTROL_MAP ctrlMapCursor ["Track", "HC_overFriendly"];
 	} else {
 		WL_CONTROL_MAP ctrlMapCursor ["Track", "HC_overEnemy"];

@@ -4,7 +4,6 @@ private _asset = createVehicleLocal [_class, AGLToASL (player modelToWorld _offs
 _asset setPhysicsCollisionFlag false;
 _asset enableSimulation false;
 
-// _asset setDir direction player;
 _asset setVectorDirAndUp [vectorDir player, vectorUp player];
 _asset attachTo [player];
 
@@ -84,6 +83,9 @@ private _originalPosition = getPosATL player;
     private _toggleLock = false;
     private _directionOffset = 0;
 
+    private _assetPos = player modelToWorldWorld _offset;
+    _asset setPosASL _assetPos;
+
     while { !(isNull _asset) && !(BIS_WL_spacePressed) && !(BIS_WL_backspacePressed) } do {
         detach _asset;
 
@@ -111,6 +113,7 @@ private _originalPosition = getPosATL player;
             _toggleLock = !_toggleLock;
             if (_toggleLock) then {
                 private _assetPos = _asset modelToWorld [0, 0, 0];
+                _asset setPosASL [_assetPos # 0, _assetPos # 1, 500];
                 _asset setVehiclePosition [_assetPos, [], 0, "CAN_COLLIDE"];
                 private _assetPosHeight = (getPosASL _asset) # 2;
                 _asset setPosASL [_assetPos # 0, _assetPos # 1, _assetPosHeight];
@@ -122,11 +125,6 @@ private _originalPosition = getPosATL player;
         };
 
         if (!_toggleLock) then {
-            private _assetPos = player modelToWorld _offset;
-            _asset setVehiclePosition [_assetPos, [], 0, "CAN_COLLIDE"];
-            private _assetPosHeight = (getPosASL _asset) # 2;
-            _asset setPosASL [_assetPos # 0, _assetPos # 1, _assetPosHeight];
-
             _asset attachTo [player];
             _asset setDir _directionOffset;
             _asset attachTo [player]; // twice, yes

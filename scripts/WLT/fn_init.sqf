@@ -1,6 +1,8 @@
 #include "constants.inc"
 
 if (isDedicated) exitWith {};
+WLT_stats = createHashMap;
+WLT_notifications = 0;
 
 sleep 8;
 
@@ -45,9 +47,6 @@ private _tasks = createHashMap;
 } forEach _tasksClasses;
 
 missionNamespace setVariable ["WLT_tasks", _tasks];
-WLT_stats = createHashMap;
-
-WLT_notifications = 0;
 
 ["INIT", true] call WLT_fnc_taskComplete;
 
