@@ -11,13 +11,15 @@ if !(_owner in _previousOwners) then {
 		private _relevantNeighbors = (synchronizedObjects _sector) select {(_x getVariable "BIS_WL_owner") == _owner};
 		private _neighborList = _relevantNeighbors apply {[_x distance2D _sector, _x]};
 		_neighborList sort true;
-		private _closestNeighborDistance = (_neighborList # 0) # 0;
-		private _reward = ((round (_closestNeighborDistance / 3)) min 1000) max 100;
-		{
-			private _uid = getPlayerUID _x;
-			_reward call WL2_fnc_fundsDatabaseWrite;
-			[objNull, _reward, localize "STR_A3_sector_captured"] remoteExec ["WL2_fnc_killRewardClient", _x];
-		} forEach (allPlayers select {side group _x == _owner});
+		if (count _neighborList > 0) then {
+			private _closestNeighborDistance = (_neighborList # 0) # 0;
+			private _reward = ((round (_closestNeighborDistance / 3)) min 1000) max 100;
+			{
+				private _uid = getPlayerUID _x;
+				_reward call WL2_fnc_fundsDatabaseWrite;
+				[objNull, _reward, localize "STR_A3_sector_captured"] remoteExec ["WL2_fnc_killRewardClient", _x];
+			} forEach (allPlayers select {side group _x == _owner});
+		};
 	};
 };
 

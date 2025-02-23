@@ -3,8 +3,8 @@
 #define WL_FACTION_THREE_ENABLED 0
 #define WLC_DEBUG 0
 #define WLT_DEBUG_MODE 0
-#define WL_AIRPORT_BASES 1
-#define WL_OVERRIDE_BASES 0
+#define WL_AIRPORT_BASES 0
+#define WL_OVERRIDE_BASES 1
 #define WL_BASE_SELECTION_DEBUG 0
 #define WL_SPECTATOR_ENABLED 0
 #define WL_STRONGHOLD_DEBUG 0
@@ -12,7 +12,7 @@
 
 // Live: 1
 #define WL_STRONGHOLD_ENABLE 1
-#define WL_STOP_TEAM_SWITCH 1
+#define WL_STOP_TEAM_SWITCH 0
 #define WLC_ENABLED 1
 
 // Live: do not change

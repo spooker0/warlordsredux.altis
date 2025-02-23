@@ -145,3 +145,25 @@ waitUntil {!isNil "BIS_WL_base1" && {!isNil "BIS_WL_base2"}};
 	_agent enableSimulationGlobal false;
 	_sector setVariable ["BIS_WL_agentGrp", _agentGrp, true];
 } forEach BIS_WL_allSectors;
+
+#if WL_OVERRIDE_BASES
+0 spawn {
+	sleep 5;
+	private _westSectors = BIS_WL_allSectors select {
+		_x getVariable ["BIS_WL_name", ""] in ["Poliakko", "Alikampos", "Lakka", "Lakka Factory"];
+	};
+	private _eastSectors = BIS_WL_allSectors select {
+		_x getVariable ["BIS_WL_name", ""] in ["Stavros", "Neochori", "Katalaki"];
+	};
+	{
+		_x setVariable ["BIS_WL_revealedBy", [west], true];
+		[_x] call WL2_fnc_sectorRevealHandle;
+		[_x, west] call WL2_fnc_changeSectorOwnership;
+	} forEach _westSectors;
+	{
+		_x setVariable ["BIS_WL_revealedBy", [east], true];
+		[_x] call WL2_fnc_sectorRevealHandle;
+		[_x, east] call WL2_fnc_changeSectorOwnership;
+	} forEach _eastSectors;
+};
+#endif

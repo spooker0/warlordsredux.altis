@@ -7,7 +7,6 @@ private _sectorSelectedTimestamp = missionNamespace getVariable [_sectorSelected
 private _targetResetVoting = missionNamespace getVariable [_targetResetVotingVar, 0];
 
 private _sectorResetTimeout = getMissionConfigValue ["BIS_WL_sectorResetTimeout", 300];
-private _targetResetVotingTime = WL_TARGET_RESET_VOTING_TIME;
 
 private _resetSectorTimerEnd = _sectorSelectedTimestamp + _sectorResetTimeout;
 if (serverTime < _resetSectorTimerEnd) exitWith {
@@ -15,7 +14,7 @@ if (serverTime < _resetSectorTimerEnd) exitWith {
     [false, format ["Reset Sector Timer: %1", _timeLeft]];
 };
 
-private _targetResetVotingEnd = _targetResetVoting + _targetResetVotingTime + 60;
+private _targetResetVotingEnd = _targetResetVoting + WL_TARGET_RESET_VOTING_TIME;
 if (serverTime < _targetResetVotingEnd) exitWith {
     private _timeLeft = [_targetResetVotingEnd - serverTime, "MM:SS"] call BIS_fnc_secondsToString;
     [false, format ["Target Reset Voting Timer: %1", _timeLeft]];
