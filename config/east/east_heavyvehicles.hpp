@@ -18,8 +18,8 @@ class HeavyVehicles {
         requirements[] = {};
         spawn = "I_LT_01_AT_F";
         textures[] = {
-            "img\camo\nyx01.jpg",
-            "img\camo\nyx02.jpg",
+            "src\img\camo\nyx01.jpg",
+            "src\img\camo\nyx02.jpg",
             "a3\Armor_F\Data\camonet_CSAT_HEX_Green_CO.paa",
             "A3\Armor_F\Data\cage_csat_green_CO.paa"
         };
